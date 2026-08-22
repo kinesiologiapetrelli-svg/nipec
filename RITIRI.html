@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#f1f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1310" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ritiri">
+<title>Ritiri in sospeso</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root{
+  --fondo:#f1f4ef;
+  --carta:#ffffff;
+  --riga:#dee4d9;
+  --riga-forte:#c2ccbc;
+  --inchiostro:#17211b;
+  --tenue:#5c6a61;
+  --verde:#146b4d;
+  --verde-chiaro:#e2efe8;
+  --verde-bordo:#a9cfbd;
+  --oro:#8a6a12;
+  --ombra:0 1px 2px rgba(23,33,27,.05), 0 10px 28px rgba(23,33,27,.07);
+  --sans:"Archivo", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --fondo:#0e1310;
+    --carta:#171d19;
+    --riga:#28312b;
+    --riga-forte:#3c4941;
+    --inchiostro:#e8efe9;
+    --tenue:#98a69d;
+    --verde:#57c99b;
+    --verde-chiaro:#1a2a22;
+    --verde-bordo:#2f5a48;
+    --oro:#d2a94a;
+    --ombra:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --fondo:#0e1310;
+  --carta:#171d19;
+  --riga:#28312b;
+  --riga-forte:#3c4941;
+  --inchiostro:#e8efe9;
+  --tenue:#98a69d;
+  --verde:#57c99b;
+  --verde-chiaro:#1a2a22;
+  --verde-bordo:#2f5a48;
+  --oro:#d2a94a;
+  --ombra:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--fondo);
+  color:var(--inchiostro);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.45;
+  -webkit-text-size-adjust:100%;
+  -webkit-tap-highlight-color:transparent;
+}
+.guscio{max-width:560px;margin:0 auto;padding:0 14px 96px}
+
+/* ---- testata fissa ---- */
+.testata{
+  position:sticky;top:0;z-index:20;
+  background:var(--fondo);
+  padding:16px 0 12px;
+  border-bottom:1px solid var(--riga);
+}
+.occhiello{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tenue);
+}
+.cifrone{
+  font-family:var(--serif);
+  font-size:clamp(38px,12vw,54px);
+  line-height:1;
+  font-weight:600;
+  letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;
+  margin:10px 0 2px;
+}
+.sotto-cifrone{font-size:13.5px;color:var(--tenue);font-variant-numeric:tabular-nums}
+.sotto-cifrone b{color:var(--verde);font-weight:600}
+.barra{
+  height:8px;border-radius:99px;background:var(--riga);
+  overflow:hidden;margin-top:12px;
+}
+.barra span{
+  display:block;height:100%;width:0;border-radius:99px;
+  background:var(--verde);
+  transition:width .45s cubic-bezier(.2,.7,.3,1);
+}
+
+/* ---- registri ---- */
+.registro{
+  background:var(--carta);
+  border:1px solid var(--riga);
+  border-radius:var(--r);
+  box-shadow:var(--ombra);
+  margin-top:18px;
+  overflow:hidden;
+}
+.registro > header{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  padding:13px 16px;
+  border-bottom:1px solid var(--riga);
+}
+.registro h2{
+  margin:0;font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+}
+.registro header .conto{
+  font-family:var(--mono);font-size:12.5px;color:var(--tenue);
+  font-variant-numeric:tabular-nums;
+}
+
+.voce{
+  display:flex;align-items:center;gap:13px;
+  width:100%;padding:13px 16px;
+  border:0;border-top:1px solid var(--riga);
+  background:transparent;color:inherit;font:inherit;text-align:left;
+  cursor:pointer;
+}
+.voce:first-of-type{border-top:0}
+.voce:hover{background:var(--verde-chiaro)}
+.voce:focus-visible{outline:2px solid var(--verde);outline-offset:-3px}
+
+.timbro{
+  flex:none;width:28px;height:28px;border-radius:9px;
+  border:1.5px solid var(--riga-forte);
+  background:var(--carta);
+  display:grid;place-items:center;
+  transition:background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.timbro svg{width:17px;height:17px;stroke:var(--carta);stroke-width:2.6;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:22;stroke-dashoffset:22;transition:stroke-dashoffset .28s ease .05s}
+.fatta .timbro{background:var(--verde);border-color:var(--verde)}
+.fatta .timbro svg{stroke-dashoffset:0}
+.voce:active .timbro{transform:scale(.9)}
+
+.nome{flex:1;min-width:0;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.data{display:block;font-size:11.5px;font-weight:400;color:var(--tenue);letter-spacing:.02em}
+.cifra{
+  flex:none;font-family:var(--mono);font-size:15px;font-weight:500;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.vuota .nome{color:var(--tenue);font-style:italic;font-weight:400}
+.vuota .timbro{border-style:dashed}
+.vuota .cifra{color:var(--riga-forte)}
+.fatta .nome{color:var(--tenue);text-decoration:line-through;text-decoration-color:var(--riga-forte)}
+.fatta .nome .data{text-decoration:none}
+.fatta .cifra{color:var(--tenue);text-decoration:line-through;text-decoration-color:var(--riga-forte)}
+
+/* ---- modifica ---- */
+.modifica .voce{cursor:default}
+.modifica .voce:hover{background:transparent}
+.campo{
+  flex:1;min-width:0;font:inherit;font-weight:500;color:inherit;
+  background:var(--fondo);border:1px solid var(--riga);border-radius:9px;
+  padding:8px 10px;
+}
+.campo.num{
+  flex:none;width:98px;text-align:right;
+  font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:14.5px;
+}
+.campo:focus{outline:2px solid var(--verde);outline-offset:-1px;border-color:transparent}
+.cestino{
+  flex:none;width:32px;height:32px;border-radius:9px;
+  border:1px solid var(--riga);background:var(--carta);color:var(--tenue);
+  display:grid;place-items:center;cursor:pointer;font-size:16px;line-height:1;
+}
+.cestino:hover{color:#b23b28;border-color:#b23b28}
+
+.aggiungi{
+  display:block;width:100%;padding:12px 16px;
+  border:0;border-top:1px dashed var(--riga-forte);
+  background:transparent;color:var(--verde);
+  font:inherit;font-size:14px;font-weight:600;text-align:left;cursor:pointer;
+}
+.aggiungi:hover{background:var(--verde-chiaro)}
+
+/* ---- bottoni testata ---- */
+.mini{
+  border:1px solid var(--riga);background:var(--carta);color:var(--tenue);
+  font:inherit;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 11px;border-radius:99px;cursor:pointer;
+}
+.mini:hover{color:var(--inchiostro);border-color:var(--riga-forte)}
+.mini[aria-pressed="true"]{background:var(--verde);border-color:var(--verde);color:#fff}
+:root[data-theme="dark"] .mini[aria-pressed="true"],
+:root:not([data-theme="light"]) .mini[aria-pressed="true"]{color:#0e1310}
+
+/* ---- chiusura ---- */
+.chiusura{
+  margin-top:20px;padding:16px;
+  border:1px solid var(--riga);border-radius:var(--r);
+  background:var(--carta);box-shadow:var(--ombra);
+}
+.chiusura dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:9px 12px;font-size:14px}
+.chiusura dt{color:var(--tenue)}
+.chiusura dd{margin:0;text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.chiusura .tot dt,.chiusura .tot dd{
+  padding-top:10px;border-top:1px solid var(--riga);font-weight:600;color:var(--inchiostro);
+}
+.azzera{
+  display:block;width:100%;margin-top:14px;padding:11px;
+  border:1px solid var(--riga);border-radius:10px;background:transparent;
+  color:var(--tenue);font:inherit;font-size:13px;cursor:pointer;
+}
+.azzera:hover{color:#b23b28;border-color:#b23b28}
+.nota{margin:14px 2px 0;font-size:12px;color:var(--tenue);line-height:1.6}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+<div class="guscio">
+
+  <header class="testata">
+    <div class="occhiello">
+      <span>Da ritirare</span>
+      <button class="mini" id="btn-modifica" aria-pressed="false">Modifica</button>
+    </div>
+    <div class="cifrone" id="mancante">€ 0,00</div>
+    <div class="sotto-cifrone" id="riepilogo"></div>
+    <div class="barra"><span id="avanzamento"></span></div>
+  </header>
+
+  <main id="registri"></main>
+
+  <section class="chiusura">
+    <dl>
+      <dt>Già ritirato</dt><dd id="c-fatto">—</dd>
+      <dt>Ancora da ritirare</dt><dd id="c-manca">—</dd>
+      <div></div><div></div>
+      <dt class="tot">Totale</dt><dd class="tot" id="c-tot">—</dd>
+    </dl>
+    <button class="azzera" id="btn-azzera">Azzera tutte le spunte</button>
+  </section>
+
+  <p class="nota">Le spunte restano salvate su questo telefono, in questo browser. Nessuno le vede, non escono da qui — se svuoti i dati del browser o apri la pagina da un altro dispositivo, riparti da zero.</p>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CHIAVE = "ritiri-v1";
+
+  var INIZIALE = {
+    v: 1,
+    registri: [
+      { id:"g1", titolo:"Persone", voci:[
+        { id:"lele",     nome:"Lele",          importo:2000 },
+        { id:"antonello",nome:"Antonello",     importo:3000 },
+        { id:"samantaha",nome:"Samantaha",     importo:1000 },
+        { id:"noemi",    nome:"Noemi",         importo:1000 },
+        { id:"giuliabs", nome:"Giulia BS",     importo:610  },
+        { id:"daniela",  nome:"Daniela Siena", importo:250  },
+        { id:"luigia",   nome:"Luigia",        importo:800  },
+        { id:"stella",   nome:"Stella",        importo:1000 },
+        { id:"antonella",nome:"Antonella",     importo:1200 },
+        { id:"rita",     nome:"Rita",          importo:1500 },
+        { id:"valentina",nome:"Valentina Trento",importo:1900 },
+        { id:"vuota1",  nome:"",              importo:0    },
+        { id:"vuota2",  nome:"",              importo:0    },
+        { id:"vuota3",  nome:"",              importo:0    }
+      ]},
+      { id:"g2", titolo:"Altro", voci:[
+        { id:"banca",    nome:"Banca",         importo:5000 },
+        { id:"vogue",    nome:"Vogue",         importo:800  },
+        { id:"settembre",nome:"Settembre",     importo:3000 }
+      ]}
+    ]
+  };
+
+  var euro = new Intl.NumberFormat("it-IT",{style:"currency",currency:"EUR"});
+  var giorno = new Intl.DateTimeFormat("it-IT",{day:"2-digit",month:"long"});
+
+  var stato = carica();
+  var inModifica = false;
+
+  function carica(){
+    try{
+      var grezzo = localStorage.getItem(CHIAVE);
+      if(grezzo){
+        var s = JSON.parse(grezzo);
+        if(s && Array.isArray(s.registri)) return s;
+      }
+    }catch(e){}
+    return JSON.parse(JSON.stringify(INIZIALE));
+  }
+
+  function salva(){
+    try{ localStorage.setItem(CHIAVE, JSON.stringify(stato)); }catch(e){}
+  }
+
+  function tutteLeVoci(){
+    return stato.registri.reduce(function(acc,r){ return acc.concat(r.voci); },[]);
+  }
+  function somma(voci){
+    return voci.reduce(function(t,v){ return t + (Number(v.importo)||0); },0);
+  }
+  function vuota(v){
+    return !v.nome && !Number(v.importo);
+  }
+  function nuovoId(){
+    return "v" + Math.random().toString(36).slice(2,9);
+  }
+
+  var registri  = document.getElementById("registri");
+  var mancante  = document.getElementById("mancante");
+  var riepilogo = document.getElementById("riepilogo");
+  var avanzam   = document.getElementById("avanzamento");
+
+  function disegna(){
+    registri.innerHTML = "";
+
+    stato.registri.forEach(function(reg){
+      var sez = document.createElement("section");
+      sez.className = "registro";
+
+      var aperte = reg.voci.filter(function(v){ return !v.fatta && !vuota(v); });
+      var cap = document.createElement("header");
+      var h = document.createElement("h2");
+      h.textContent = reg.titolo;
+      var conto = document.createElement("span");
+      conto.className = "conto";
+      conto.textContent = aperte.length
+        ? euro.format(somma(aperte)) + " · " + aperte.length + (aperte.length === 1 ? " voce" : " voci")
+        : "tutto ritirato";
+      cap.appendChild(h); cap.appendChild(conto);
+      sez.appendChild(cap);
+
+      reg.voci.forEach(function(voce){
+        sez.appendChild(inModifica ? rigaModifica(reg,voce) : riga(voce));
+      });
+
+      if(inModifica){
+        var piu = document.createElement("button");
+        piu.className = "aggiungi";
+        piu.type = "button";
+        piu.textContent = "+  Aggiungi una voce in " + reg.titolo;
+        piu.addEventListener("click", function(){
+          reg.voci.push({ id:nuovoId(), nome:"", importo:0 });
+          salva(); disegna();
+          var campi = sez.querySelectorAll(".campo");
+          if(campi.length) campi[campi.length-2].focus();
+        });
+        sez.appendChild(piu);
+      }
+
+      registri.appendChild(sez);
+    });
+
+    aggiornaTotali();
+  }
+
+  function riga(voce){
+    var bianca = !voce.nome && !Number(voce.importo);
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "voce" + (voce.fatta ? " fatta" : "") + (bianca ? " vuota" : "");
+    b.setAttribute("aria-pressed", voce.fatta ? "true" : "false");
+
+    var quando = voce.fatta && voce.data
+      ? "<span class='data'>ritirato il " + giorno.format(new Date(voce.data)) + "</span>"
+      : "";
+
+    b.innerHTML =
+      "<span class='timbro'><svg viewBox='0 0 24 24' aria-hidden='true'><path d='M4.5 12.5l5 5 10-11'/></svg></span>" +
+      "<span class='nome'></span>" +
+      "<span class='cifra'></span>";
+
+    var nome = b.querySelector(".nome");
+    nome.textContent = voce.nome || "tocca per scrivere";
+    if(quando) nome.insertAdjacentHTML("beforeend", quando);
+    b.querySelector(".cifra").textContent = euro.format(Number(voce.importo)||0);
+
+    b.addEventListener("click", function(){
+      if(bianca){ apriModifica(voce.id); return; }
+      voce.fatta = !voce.fatta;
+      voce.data = voce.fatta ? new Date().toISOString() : null;
+      salva();
+      disegna();
+    });
+    return b;
+  }
+
+  function rigaModifica(reg,voce){
+    var r = document.createElement("div");
+    r.className = "voce";
+
+    var nome = document.createElement("input");
+    nome.className = "campo";
+    nome.type = "text";
+    nome.value = voce.nome;
+    nome.placeholder = "nome";
+    nome.setAttribute("aria-label","Nome della voce");
+    nome.dataset.voce = voce.id;
+    nome.addEventListener("input", function(){ voce.nome = nome.value; salva(); });
+
+    var imp = document.createElement("input");
+    imp.className = "campo num";
+    imp.type = "text";
+    imp.inputMode = "decimal";
+    imp.value = String(voce.importo).replace(".",",");
+    imp.placeholder = "0";
+    imp.setAttribute("aria-label","Importo in euro");
+    imp.addEventListener("input", function(){
+      var n = parseFloat(imp.value.replace(/\./g,"").replace(",","."));
+      voce.importo = isNaN(n) ? 0 : n;
+      salva();
+      aggiornaTotali();
+    });
+
+    var via = document.createElement("button");
+    via.className = "cestino";
+    via.type = "button";
+    via.title = "Elimina " + (voce.nome || "questa voce");
+    via.setAttribute("aria-label","Elimina " + (voce.nome || "questa voce"));
+    via.textContent = "✕";
+    via.addEventListener("click", function(){
+      reg.voci = reg.voci.filter(function(x){ return x !== voce; });
+      salva(); disegna();
+    });
+
+    r.appendChild(nome); r.appendChild(imp); r.appendChild(via);
+    return r;
+  }
+
+  function aggiornaTotali(){
+    var voci   = tutteLeVoci();
+    var fatte  = voci.filter(function(v){ return v.fatta; });
+    var totale = somma(voci);
+    var preso  = somma(fatte);
+    var resta  = totale - preso;
+
+    mancante.textContent = euro.format(resta);
+    riepilogo.innerHTML = totale > 0
+      ? "già ritirato <b>" + euro.format(preso) + "</b> su " + euro.format(totale) +
+        " · " + fatte.length + " di " + voci.length + " voci"
+      : "nessuna voce in elenco";
+    avanzam.style.width = (totale > 0 ? (preso / totale) * 100 : 0) + "%";
+
+    document.getElementById("c-fatto").textContent = euro.format(preso);
+    document.getElementById("c-manca").textContent = euro.format(resta);
+    document.getElementById("c-tot").textContent   = euro.format(totale);
+  }
+
+  var btnMod = document.getElementById("btn-modifica");
+
+  function modalita(attiva){
+    inModifica = attiva;
+    btnMod.setAttribute("aria-pressed", attiva ? "true" : "false");
+    btnMod.textContent = attiva ? "Fatto" : "Modifica";
+    document.body.classList.toggle("modifica", attiva);
+    disegna();
+  }
+
+  function apriModifica(idVoce){
+    modalita(true);
+    var campo = registri.querySelector('.campo[data-voce="' + idVoce + '"]');
+    if(campo){ campo.focus(); campo.scrollIntoView({block:"center"}); }
+  }
+
+  btnMod.addEventListener("click", function(){ modalita(!inModifica); });
+
+  document.getElementById("btn-azzera").addEventListener("click", function(){
+    if(!confirm("Tolgo tutte le spunte? Gli importi restano come sono.")) return;
+    tutteLeVoci().forEach(function(v){ v.fatta = false; v.data = null; });
+    salva(); disegna();
+  });
+
+  disegna();
+})();
+</script>
+</body>
+</html>
