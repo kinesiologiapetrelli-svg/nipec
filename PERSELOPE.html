@@ -1,0 +1,833 @@
+<title>PERSELOPE</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+:root{
+  --carta:#ffffff;
+  --fondo:#f1f4f7;
+  --riga:#d9e2e9;
+  --riga-forte:#b9c8d4;
+  --inchiostro:#16222e;
+  --tenue:#5a6b79;
+  --blu:#1c6ea4;
+  --navy:#123a63;
+  --blu-tenue:#e6eff7;
+  --allerta:#a3432e;
+  --allerta-fondo:#faeae6;
+  --avviso:#8a6208;
+  --avviso-fondo:#f8efdb;
+  --ok:#1b6e52;
+  --ok-fondo:#e2f1ea;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+  --sans:"Archivo", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --carta:#16212c;
+    --fondo:#0d151d;
+    --riga:#26333f;
+    --riga-forte:#3a4b59;
+    --inchiostro:#e9f0f6;
+    --tenue:#9aaab8;
+    --blu:#5aa6d6;
+    --navy:#8ec8ea;
+    --blu-tenue:#152b3a;
+    --allerta:#e0917a;
+    --allerta-fondo:#2a1b17;
+    --avviso:#dcb264;
+    --avviso-fondo:#2a2211;
+    --ok:#63c19d;
+    --ok-fondo:#122a22;
+    --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --carta:#16212c;
+  --fondo:#0d151d;
+  --riga:#26333f;
+  --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6;
+  --tenue:#9aaab8;
+  --blu:#5aa6d6;
+  --navy:#8ec8ea;
+  --blu-tenue:#152b3a;
+  --allerta:#e0917a;
+  --allerta-fondo:#2a1b17;
+  --avviso:#dcb264;
+  --avviso-fondo:#2a2211;
+  --ok:#63c19d;
+  --ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--fondo);
+  color:var(--inchiostro);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+.foglio{max-width:53rem;margin:0 auto;padding:0 1.25rem 5rem}
+p{margin:0}
+code{font-family:var(--mono);font-size:.88em;word-break:break-word}
+:focus-visible{outline:2px solid var(--blu);outline-offset:3px;border-radius:.3rem}
+
+/* ---------- testata ---------- */
+.testata{
+  margin:0 -1.25rem 1.5rem;
+  padding:3rem 1.75rem 2.25rem;
+  background:var(--navy);
+  color:#fff;
+  border-radius:0 0 1.25rem 1.25rem;
+}
+:root[data-theme="dark"] .testata,
+:root:not([data-theme="light"]) .testata{background:#0a2137}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .testata{background:var(--navy)}}
+.marchio{display:flex;align-items:center;gap:.6rem;margin-bottom:1.75rem}
+.marchio svg{width:26px;height:26px}
+.marchio span{font-size:.7rem;letter-spacing:.3em;font-weight:600;opacity:.9;text-transform:uppercase}
+.testata .occhiello{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:#9fcbe8;font-weight:600;margin:0 0 .65rem;
+}
+.testata h1{
+  font-weight:700;font-size:clamp(2.4rem,8vw,3.9rem);line-height:1;
+  letter-spacing:.02em;margin:0;
+}
+.testata .tesi{
+  font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.5;
+  margin:1.1rem 0 0;max-width:40ch;color:#d5e6f2;
+}
+.tempi{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.tempi span{
+  font-size:.74rem;font-weight:500;padding:.32rem .6rem;border-radius:1.2rem;
+  border:1px solid rgba(255,255,255,.28);color:#d5e6f2;font-variant-numeric:tabular-nums;
+}
+.tempi b{color:#fff;font-weight:700;letter-spacing:.04em}
+
+/* ---------- indice ---------- */
+.indice{
+  position:sticky;top:0;z-index:20;margin:0 -1.25rem 1.5rem;
+  padding:.5rem 1.25rem;border-bottom:1px solid var(--riga);
+  background:color-mix(in srgb, var(--fondo) 90%, transparent);
+  backdrop-filter:blur(8px);
+  display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none;
+}
+.indice::-webkit-scrollbar{display:none}
+.indice a{
+  font-size:.79rem;font-weight:600;color:var(--tenue);text-decoration:none;
+  padding:.4rem .6rem;border-radius:.4rem;white-space:nowrap;
+}
+.indice a:hover{color:var(--blu);background:var(--blu-tenue)}
+
+/* ---------- pannello consegna ---------- */
+.pannello{
+  background:var(--carta);border:1px solid var(--riga);border-radius:.85rem;
+  padding:1rem 1.25rem;box-shadow:var(--ombra);margin-bottom:2.5rem;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.85rem 1.25rem;
+}
+.pannello .campo{flex:1 1 14rem}
+.pannello label{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--tenue);display:block;margin-bottom:.3rem;
+}
+.pannello input{
+  width:100%;font-family:var(--sans);font-size:1.05rem;font-weight:600;
+  color:var(--inchiostro);background:transparent;border:0;border-radius:0;
+  border-bottom:2px solid var(--riga-forte);padding:.2rem 0;
+}
+.pannello input:focus{outline:0;border-bottom-color:var(--blu)}
+.conta{font-size:.95rem;color:var(--tenue);font-variant-numeric:tabular-nums}
+.conta b{color:var(--blu);font-weight:700;font-size:1.15rem}
+.azzera{
+  font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--tenue);
+  background:transparent;border:1px solid var(--riga-forte);border-radius:.45rem;
+  padding:.45rem .8rem;cursor:pointer;
+}
+.azzera:hover{border-color:var(--allerta);color:var(--allerta)}
+
+/* ---------- titoli di sezione ---------- */
+.sezione{margin:3.25rem 0 1.5rem;scroll-margin-top:3.75rem}
+.sezione .fase-n{
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--blu);margin:0 0 .4rem;
+}
+.sezione h2{
+  font-size:1.35rem;font-weight:700;letter-spacing:-.01em;margin:0;
+  padding-bottom:.55rem;border-bottom:2px solid var(--blu);display:inline-block;
+}
+.sezione p{margin:.7rem 0 0;color:var(--tenue);font-size:.95rem;max-width:62ch}
+.etichetta{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--blu);margin:2rem 0 .6rem;
+}
+
+/* ---------- passi ---------- */
+.passi{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.passo{
+  display:grid;grid-template-columns:1.25rem 2.4rem 1fr;gap:.85rem;align-items:start;
+  background:var(--carta);border:1px solid var(--riga);border-radius:.7rem;
+  padding:.85rem 1.1rem;box-shadow:var(--ombra);
+}
+.spunta{display:block;margin-top:.2rem;cursor:pointer}
+.spunta input{position:absolute;opacity:0;width:0;height:0}
+.spunta .box{
+  display:block;width:1.15rem;height:1.15rem;border:2px solid var(--riga-forte);
+  border-radius:.25rem;position:relative;transition:background .12s,border-color .12s;
+}
+.spunta input:checked + .box{background:var(--blu);border-color:var(--blu)}
+.spunta input:checked + .box::after{
+  content:"";position:absolute;left:.3rem;top:.05rem;width:.28rem;height:.6rem;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg);
+}
+.spunta input:focus-visible + .box{outline:2px solid var(--blu);outline-offset:2px}
+.codice{
+  font-size:.75rem;font-weight:700;color:var(--blu);background:var(--blu-tenue);
+  border-radius:.35rem;padding:.2rem 0;text-align:center;margin-top:.1rem;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+.passo .testo{min-width:0}
+.passo b{font-weight:600;display:block}
+.passo .nota{display:block;color:var(--tenue);font-size:.9rem;margin-top:.2rem;max-width:60ch}
+.passo.fatto .testo{opacity:.45}
+.passo.fatto b{text-decoration:line-through;text-decoration-color:var(--riga-forte)}
+
+.avvertenza{
+  display:block;margin-top:.55rem;padding:.6rem .8rem;border-radius:.5rem;
+  background:var(--avviso-fondo);color:var(--inchiostro);font-size:.9rem;max-width:60ch;
+}
+.avvertenza .lbl{
+  display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--avviso);margin-bottom:.15rem;
+}
+.riquadro{
+  margin-top:.6rem;overflow-x:auto;background:var(--fondo);border:1px solid var(--riga);
+  border-radius:.5rem;
+}
+.riquadro pre{
+  margin:0;padding:.75rem .9rem;font-family:var(--mono);font-size:.75rem;line-height:1.8;
+  color:var(--inchiostro);
+}
+.riquadro pre b{color:var(--blu);font-weight:600}
+
+/* ---------- spina temporale (fase B) ---------- */
+.fase{display:grid;grid-template-columns:4.75rem 1fr;gap:1.5rem;padding-bottom:2rem}
+.orologio{position:relative;text-align:right;padding-top:.2rem}
+.orologio::after{
+  content:"";position:absolute;top:3.1rem;bottom:-2rem;right:1.55rem;width:2px;background:var(--riga);
+}
+.fase:last-of-type .orologio::after{display:none}
+.minuto{
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+  width:3.2rem;height:3.2rem;border-radius:50%;
+  background:var(--blu-tenue);border:2px solid var(--blu);font-variant-numeric:tabular-nums;
+}
+.minuto .n{font-size:1.25rem;font-weight:700;line-height:1;color:var(--navy)}
+.minuto .u{
+  font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blu);
+  font-weight:600;margin-top:.1rem;
+}
+.corpo{min-width:0}
+.corpo .capo{display:flex;align-items:flex-start;gap:.85rem}
+.corpo .capo .spunta{margin-top:.5rem}
+.corpo h3{font-size:1.3rem;font-weight:700;margin:.1rem 0 .2rem;letter-spacing:-.01em;text-wrap:balance}
+.corpo .scopo{font-family:var(--serif);font-style:italic;color:var(--tenue);margin:.35rem 0 0;max-width:58ch}
+.fase.fatto .corpo{opacity:.45}
+.battuta{
+  font-family:var(--serif);font-size:1.08rem;line-height:1.55;
+  border-left:3px solid var(--blu);background:var(--carta);
+  border-radius:0 .6rem .6rem 0;padding:.9rem 1.2rem;margin:.75rem 0 0;
+  max-width:58ch;box-shadow:var(--ombra);
+}
+.perno{
+  background:var(--blu-tenue);border:1px solid var(--blu);border-radius:.8rem;
+  padding:1rem 1.25rem;margin-top:.9rem;max-width:60ch;
+}
+.perno p{margin:0;font-weight:600;color:var(--navy)}
+
+/* ---------- rotture ---------- */
+.rotture{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.rotture li{
+  display:grid;grid-template-columns:3rem 1fr;gap:1rem;align-items:start;
+  border-left:3px solid var(--allerta);background:var(--carta);
+  border-radius:0 .6rem .6rem 0;padding:.85rem 1.1rem;box-shadow:var(--ombra);
+}
+.rotture .rif{
+  font-weight:700;color:var(--allerta);font-variant-numeric:tabular-nums;font-size:.95rem;
+}
+.rotture b{font-weight:600;display:block}
+.rotture .nota{display:block;color:var(--tenue);font-size:.9rem;margin-top:.15rem}
+
+/* ---------- schede ---------- */
+.schede{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr);align-items:start}
+@media(min-width:44rem){.schede.due{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.scheda{
+  min-width:0;
+  container-type:inline-size;
+  background:var(--carta);border:1px solid var(--riga);border-radius:.85rem;
+  padding:1.25rem 1.4rem 1.4rem;box-shadow:var(--ombra);
+}
+.scheda h3{font-size:1.1rem;font-weight:700;margin:0;letter-spacing:-.01em}
+.scheda .pagine{font-size:.74rem;color:var(--tenue);margin-top:.25rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.scheda p{margin-top:.75rem;font-size:.95rem;color:var(--tenue);max-width:62ch}
+.scheda p strong{color:var(--inchiostro);font-weight:600}
+.gettoni{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.85rem}
+.gettone{
+  font-size:.75rem;font-weight:600;padding:.28rem .6rem;border-radius:1rem;
+  background:var(--blu-tenue);color:var(--blu);
+}
+.gettone.neutro{background:transparent;border:1px solid var(--riga-forte);color:var(--tenue)}
+.gettone.verde{background:var(--ok-fondo);color:var(--ok)}
+.gettone.giallo{background:var(--avviso-fondo);color:var(--avviso)}
+.gettone.rosso{background:var(--allerta-fondo);color:var(--allerta)}
+dl.voci{margin:.9rem 0 0;display:grid;gap:.5rem}
+dl.voci > div{display:grid;grid-template-columns:1fr;gap:.05rem}
+@container (min-width:30rem){dl.voci > div{grid-template-columns:14rem 1fr;gap:.9rem}}
+dl.voci dt{font-size:.78rem;font-weight:700;color:var(--blu);letter-spacing:.04em;padding-top:.1rem}
+dl.voci dd{margin:0;font-size:.92rem;color:var(--tenue)}
+
+/* ---------- chiusura ---------- */
+.regola{
+  margin-top:1rem;padding:1.6rem 1.75rem;background:var(--navy);color:#fff;border-radius:1rem;
+}
+:root[data-theme="dark"] .regola,
+:root:not([data-theme="light"]) .regola{background:#0a2137}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .regola{background:var(--navy)}}
+.regola q{
+  display:block;font-family:var(--serif);font-size:clamp(1.2rem,3.6vw,1.6rem);
+  line-height:1.35;color:#fff;font-weight:600;quotes:"«" "»";
+}
+.regola p{font-family:var(--serif);font-size:1.02rem;line-height:1.5;margin:.9rem 0 0;max-width:54ch;color:#dceaf4}
+footer{
+  margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--riga);
+  color:var(--tenue);font-size:.82rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
+}
+
+@media (max-width:640px){
+  .fase{grid-template-columns:1fr;gap:.5rem}
+  .orologio{text-align:left}
+  .orologio::after{display:none}
+  .minuto{width:auto;height:auto;border-radius:1.5rem;flex-direction:row;gap:.4rem;padding:.3rem .8rem}
+  .minuto .u{margin-top:0}
+  .corpo h3{font-size:1.15rem}
+  .passo{grid-template-columns:1.25rem 2.4rem 1fr;padding:.8rem .9rem}
+}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .indice,.pannello,.azzera{display:none}
+  .testata,.regola{background:#fff !important;color:#000;border-bottom:2px solid #000;border-radius:0;padding-left:0;margin:0 0 1.5rem}
+  .testata h1{color:#000}
+  .testata .tesi,.regola p{color:#333}
+  .testata .occhiello,.marchio span{color:#555}
+  .marchio svg{filter:brightness(0)}
+  .tempi span{border-color:#999;color:#333}
+  .tempi b{color:#000}
+  .regola q{color:#000}
+  .fase,.passo,.scheda,.rotture li{page-break-inside:avoid}
+  .passo,.scheda,.battuta,.rotture li{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+
+<div class="foglio">
+
+  <header class="testata">
+    <div class="marchio">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.6"/>
+        <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round"/>
+        <circle cx="30" cy="15.36" r="5.4" fill="#d6ecfb"/>
+        <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#bcdcf2"/>
+        <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#e3f1fb"/>
+        <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#fff"/>
+      </svg>
+      <span>NIPEC · Sistema gestione clienti</span>
+    </div>
+    <p class="occhiello">La sequenza esatta · quattro fasi</p>
+    <h1>PERSELOPE</h1>
+    <p class="tesi">Da «ho deciso di dare la macchina a questo centro» a «il centro è vivo nel master». Le prime tre fasi si fanno tutte entro 24 ore.</p>
+    <div class="tempi">
+      <span><b>A</b> ufficio, il giorno prima · 25 min</span>
+      <span><b>B</b> in centro, la consegna · 20 min</span>
+      <span><b>C</b> in macchina · 5 min</span>
+      <span><b>D</b> dopo 30 giorni · 10 min</span>
+    </div>
+  </header>
+
+  <nav class="indice">
+    <a href="#sistema">Il sistema</a>
+    <a href="#fase-a">A · Ufficio</a>
+    <a href="#fase-b">B · Centro</a>
+    <a href="#fase-c">C · Macchina</a>
+    <a href="#fase-d">D · 30 giorni</a>
+    <a href="#rotture">Dove si rompe</a>
+    <a href="#fogli">I fogli</a>
+  </nav>
+
+  <div class="pannello">
+    <div class="campo">
+      <label for="centro">Consegna in corso</label>
+      <input type="text" id="centro" placeholder="Nome del centro" autocomplete="off" spellcheck="false">
+    </div>
+    <p class="conta"><b id="fatti">0</b> / <span id="totale">0</span> passi</p>
+    <button class="azzera" id="azzera" type="button">Nuovo centro</button>
+  </div>
+
+  <!-- ══════════ IL SISTEMA ══════════ -->
+  <div class="sezione" id="sistema">
+    <h2>Tre cartelle, nell'ordine in cui si usano</h2>
+    <p>Tutto quello che serve per dare a un'estetista, insieme alla macchina, uno strumento che le dice chi deve richiamare — e per farglielo usare davvero.</p>
+  </div>
+
+  <div class="schede">
+    <div class="scheda">
+      <h3>1 · PROCEDURA</h3>
+      <p class="pagine">NIPEC-Prima-Accensione.html</p>
+      <p>La consegna in 20 minuti: script verbatim per l'operativo, le sei obiezioni con la risposta già pronta, i cinque divieti. Si apre dal telefono in centro, oppure si stampa.</p>
+      <p><strong>La tesi:</strong> il cruscotto non si consegna, si accende. Tutto converge sul minuto 15 — la titolare chiama una cliente rossa mentre l'operativo è ancora lì. Se quello non succede, hai consegnato un file.</p>
+    </div>
+    <div class="scheda">
+      <h3>2 · FOGLI</h3>
+      <p class="pagine">Cruscotto Clienti · Master Centri</p>
+      <p>Il <strong>cruscotto</strong> si duplica per ogni centro: una riga per persona, il rosso si accende da solo. Il <strong>master</strong> è uno solo, tuo: una riga per centro, sei numeri di sintesi letti via IMPORTRANGE. Nessun nominativo, mai.</p>
+      <p>Il dettaglio delle pagine e delle colonne è in fondo a questa pagina.</p>
+    </div>
+    <div class="scheda">
+      <h3>3 · APP</h3>
+      <p class="pagine">_MODELLO · CENTRI</p>
+      <p>Un guscio: brand NIPEC, icona sul telefono, un pulsante che apre il foglio giusto. Non contiene dati e non ha login — <strong>la serratura è la condivisione del Google Foglio</strong>.</p>
+      <p>Un centro solo: duplichi <code>_MODELLO</code>. Tanti centri: compili <code>_centri.csv</code> e lanci <code>_genera-centri.py</code>.</p>
+    </div>
+    <div class="scheda">
+      <h3>L'ordine giusto, per un centro nuovo</h3>
+      <p class="pagine">Cinque mosse</p>
+      <dl class="voci">
+        <div><dt>1 · FOGLIO</dt><dd>Duplichi il cruscotto e lo condividi con la titolare.</dd></div>
+        <div><dt>2 · APP</dt><dd>Generi e pubblichi la sua app.</dd></div>
+        <div><dt>3 · CONSEGNA</dt><dd>Porti la macchina e fai la Prima Accensione.</dd></div>
+        <div><dt>4 · MASTER</dt><dd>Torni in ufficio e aggiungi la sua riga al master.</dd></div>
+        <div><dt>5 · A 30 GIORNI</dt><dd>Aprite il cruscotto insieme, al telefono.</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <!-- ══════════ FASE A ══════════ -->
+  <div class="sezione" id="fase-a">
+    <p class="fase-n">Fase A · circa 25 minuti</p>
+    <h2>In ufficio, il giorno prima</h2>
+    <p>Il foglio e l'app, prima di partire. Se arrivi al centro senza questa fase finita, la consegna non parte.</p>
+  </div>
+
+  <p class="etichetta">Il foglio</p>
+  <ul class="passi">
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A1"><span class="box"></span></label>
+      <span class="codice">A1</span>
+      <div class="testo"><b>Duplica il modello</b>
+        <span class="nota">Apri <code>PERSELOPE\2-FOGLI\NIPEC_Cruscotto_Clienti_CENTRO.xlsx</code> e salva una copia col nome del centro.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A2"><span class="box"></span></label>
+      <span class="codice">A2</span>
+      <div class="testo"><b>Caricala su Google Drive</b>
+        <span class="nota">Nella tua cartella dei centri.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A3"><span class="box"></span></label>
+      <span class="codice">A3</span>
+      <div class="testo"><b>Convertila in Foglio Google</b>
+        <span class="nota">Tasto destro sul file → Apri con → Google Fogli. Poi dentro: File → Salva come Foglio Google. Adesso hai due file: quello che serve è il <strong>Foglio Google</strong>, l'xlsx puoi cestinarlo.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A4"><span class="box"></span></label>
+      <span class="codice">A4</span>
+      <div class="testo"><b>Rinomina</b>
+        <span class="nota"><code>Cruscotto Clienti - &lt;Nome Centro&gt;</code></span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A5"><span class="box"></span></label>
+      <span class="codice">A5</span>
+      <div class="testo"><b>Compila il foglio IMPOSTAZIONI</b>
+        <span class="nota">Solo le celle gialle: nome centro, titolare, soglia richiamo (lascia 30), referente NIPEC. Se il centro fa solo epilazione, sistema la lista TRATTAMENTI a destra.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A6"><span class="box"></span></label>
+      <span class="codice">A6</span>
+      <div class="testo"><b>Togli la riga di esempio (Maria Rossi)</b>
+        <span class="nota">Sul foglio CLIENTI: clicca sul <strong>numero 6</strong> a sinistra — l'intestazione della riga — poi Ctrl+C. Clicca sul <strong>numero 5</strong>, poi Ctrl+V. La riga 5 diventa vuota e pulita, con le formule giuste.</span>
+        <span class="avvertenza"><span class="lbl">Attenzione</span>Non cancellare la riga intera: sballa i conteggi del RIEPILOGO.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A7"><span class="box"></span></label>
+      <span class="codice">A7</span>
+      <div class="testo"><b>Condividi con la titolare, come editor</b>
+        <span class="nota">Condividi → aggiungi la sua email → Editor.</span>
+        <span class="avvertenza"><span class="lbl">Attenzione</span>«Persone specifiche». <strong>Mai «Chiunque abbia il link»</strong>: là dentro ci sono i dati delle sue clienti.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A8"><span class="box"></span></label>
+      <span class="codice">A8</span>
+      <div class="testo"><b>Copia il link del foglio</b>
+        <span class="nota">Condividi → Copia link. Tienilo da parte: serve in A10 e poi in C3.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A9"><span class="box"></span></label>
+      <span class="codice">A9</span>
+      <div class="testo"><b>Segnati i due gid <span style="font-weight:400;color:var(--tenue)">(facoltativo, migliora l'app)</span></b>
+        <span class="nota">Clicca la scheda CLIENTI in basso e guarda l'indirizzo del browser: finisce con <code>#gid=NUMERO</code>. Segnati quel numero, poi ripeti sulla scheda RIEPILOGO.</span></div>
+    </li>
+  </ul>
+
+  <p class="etichetta">L'app</p>
+  <ul class="passi">
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A10"><span class="box"></span></label>
+      <span class="codice">A10</span>
+      <div class="testo"><b>Aggiungi la riga al CSV</b>
+        <span class="nota">In <code>PERSELOPE\3-APP\_MODELLO\_centri.csv</code>. <code>cartella</code> è il nome breve senza spazi (es. <code>bellezza-taranto</code>), <code>foglio</code> è il link di A8.</span>
+        <div class="riquadro"><pre>cartella;nome;citta;titolare;foglio;gidClienti;gidRiepilogo;referente;whatsapp</pre></div></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A11"><span class="box"></span></label>
+      <span class="codice">A11</span>
+      <div class="testo"><b>Lancia <code>_genera-centri.py</code></b>
+        <span class="nota">Trovi la cartella pronta in <code>PERSELOPE\3-APP\CENTRI\&lt;cartella&gt;\</code>. Senza Python: duplica <code>_MODELLO</code> a mano, cambia il blocco ⚙️ in <code>index.html</code>, e cancella dalla copia i tre file che iniziano per <code>_</code> e il LEGGIMI-GIORGIO.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A12"><span class="box"></span></label>
+      <span class="codice">A12</span>
+      <div class="testo"><b>Pubblica su Netlify</b>
+        <span class="nota"><code>app.netlify.com</code> → Add new site → Deploy manually. Trascina <strong>la cartella</strong>, non i file singoli.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A13"><span class="box"></span></label>
+      <span class="codice">A13</span>
+      <div class="testo"><b>Dai un nome pulito al sito</b>
+        <span class="nota">Site configuration → Change site name. Per esempio <code>cruscotto-bellezza-taranto</code>.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A14"><span class="box"></span></label>
+      <span class="codice">A14</span>
+      <div class="testo"><b>Prova il link dal tuo telefono</b>
+        <span class="nota">Deve aprirsi, e il pulsante <strong>I MIEI CLIENTI</strong> deve aprire il foglio.</span>
+        <span class="avvertenza"><span class="lbl">Attenzione</span>Adesso, non domani. Se scopri in centro che non funziona, hai bruciato la consegna.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="A15"><span class="box"></span></label>
+      <span class="codice">A15</span>
+      <div class="testo"><b>Salva l'indirizzo dove lo ritrovi</b>
+        <span class="nota">Scheda del centro, oppure bozza WhatsApp già pronta.</span></div>
+    </li>
+  </ul>
+
+  <!-- ══════════ FASE B ══════════ -->
+  <div class="sezione" id="fase-b">
+    <p class="fase-n">Fase B · 20 minuti</p>
+    <h2>In centro, giorno della consegna</h2>
+    <p>Si fa mentre la macchina si scalda. I minuti sono cumulativi: dove dovresti essere da quando hai cominciato. Gli script completi sono in <code>1-PROCEDURA\NIPEC-Prima-Accensione.html</code>.</p>
+  </div>
+
+  <article class="fase">
+    <div class="orologio"><div class="minuto"><span class="n">00</span><span class="u">min</span></div></div>
+    <div class="corpo">
+      <div class="capo">
+        <label class="spunta"><input type="checkbox" data-k="B00"><span class="box"></span></label>
+        <div><h3>L'aggancio</h3>
+          <p class="scopo">Non stai consegnando un file: le stai facendo vedere un buco che non sapeva di avere.</p></div>
+      </div>
+      <div class="battuta">«Quante clienti hai che non vedi da sei mesi?»</div>
+      <p class="scopo">Mai dire gestionale o software. Si dice <strong>rubrica</strong>.</p>
+    </div>
+  </article>
+
+  <article class="fase">
+    <div class="orologio"><div class="minuto"><span class="n">02</span><span class="u">min</span></div></div>
+    <div class="corpo">
+      <div class="capo">
+        <label class="spunta"><input type="checkbox" data-k="B02"><span class="box"></span></label>
+        <div><h3>L'icona</h3>
+          <p class="scopo">Se l'icona non gliela installi tu, quel link non viene riaperto.</p></div>
+      </div>
+      <p class="scopo">Le prendi il telefono <strong>tu</strong>. Apri il link, Aggiungi alla schermata Home, le mostri l'icona.</p>
+    </div>
+  </article>
+
+  <article class="fase">
+    <div class="orologio"><div class="minuto"><span class="n">05</span><span class="u">min</span></div></div>
+    <div class="corpo">
+      <div class="capo">
+        <label class="spunta"><input type="checkbox" data-k="B05"><span class="box"></span></label>
+        <div><h3>Le prime venti</h3>
+          <p class="scopo">Venti bastano. Quaranta righe rosse non motivano: paralizzano.</p></div>
+      </div>
+      <p class="scopo">Il tablet lo tieni tu, lei detta dall'agenda. Solo clienti viste negli ultimi sei mesi. <strong>Ti fermi a venti</strong>, anche se ne avrebbe altre trenta.</p>
+    </div>
+  </article>
+
+  <article class="fase">
+    <div class="orologio"><div class="minuto"><span class="n">15</span><span class="u">min</span></div></div>
+    <div class="corpo">
+      <div class="capo">
+        <label class="spunta"><input type="checkbox" data-k="B15"><span class="box"></span></label>
+        <div><h3>La prima telefonata</h3>
+          <p class="scopo">È il cuore della consegna. Tutto il resto serve ad arrivare qui.</p></div>
+      </div>
+      <p class="scopo">Apri RIEPILOGO, le fai leggere «Da richiamare». Le fai scegliere la più facile. Chiama <strong>lei</strong>, adesso, con te lì che stai zitto.</p>
+      <div class="perno"><p>Se esci senza che abbia chiamato qualcuno, hai consegnato un file. È l'unico passaggio che non si recupera con una telefonata dopo.</p></div>
+    </div>
+  </article>
+
+  <article class="fase">
+    <div class="orologio"><div class="minuto"><span class="n">18</span><span class="u">min</span></div></div>
+    <div class="corpo">
+      <div class="capo">
+        <label class="spunta"><input type="checkbox" data-k="B18"><span class="box"></span></label>
+        <div><h3>Il patto</h3>
+          <p class="scopo">Due caselle da aggiornare, non dieci.</p></div>
+      </div>
+      <p class="scopo">Appuntamento a 30 giorni fissato <strong>sulla sua agenda</strong> prima di uscire. La frase sulla privacy la dici tu per primo.</p>
+    </div>
+  </article>
+
+  <!-- ══════════ FASE C ══════════ -->
+  <div class="sezione" id="fase-c">
+    <p class="fase-n">Fase C · 5 minuti</p>
+    <h2>In macchina, prima di ripartire</h2>
+    <p>Senza questa fase il centro non esiste nel master — e tu non sai più niente di lui.</p>
+  </div>
+
+  <ul class="passi">
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="C1"><span class="box"></span></label>
+      <span class="codice">C1</span>
+      <div class="testo"><b>Apri il Foglio Google del MASTER CENTRI</b></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="C2"><span class="box"></span></label>
+      <span class="codice">C2</span>
+      <div class="testo"><b>Nuova riga</b>
+        <span class="nota">Centro, città, titolare, device, referente, data consegna. Da quella data partono i trenta giorni.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="C3"><span class="box"></span></label>
+      <span class="codice">C3</span>
+      <div class="testo"><b>Incolla il link nella colonna LINK FOGLIO</b>
+        <span class="nota">È il link copiato in A8.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="C4"><span class="box"></span></label>
+      <span class="codice">C4</span>
+      <div class="testo"><b>Clicca «Consenti accesso»</b>
+        <span class="nota">Le celle azzurre mostrano <code>#REF!</code> con quel pulsante. Cliccalo: succede una volta sola per centro.</span>
+        <span class="avvertenza"><span class="lbl">Attenzione</span>Se non lo clicchi, quel centro resta cieco nel master per sempre.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="C5"><span class="box"></span></label>
+      <span class="codice">C5</span>
+      <div class="testo"><b>Controlla la tua agenda</b>
+        <span class="nota">L'appuntamento a 30 giorni deve stare anche sulla <strong>tua</strong>, non solo sulla sua.</span></div>
+    </li>
+  </ul>
+
+  <!-- ══════════ FASE D ══════════ -->
+  <div class="sezione" id="fase-d">
+    <p class="fase-n">Fase D · 10 minuti</p>
+    <h2>Dopo 30 giorni</h2>
+    <p>Il contatto che tiene vivo il sistema. Si prepara in trenta secondi guardando il master.</p>
+  </div>
+
+  <ul class="passi">
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="D1"><span class="box"></span></label>
+      <span class="codice">D1</span>
+      <div class="testo"><b>Apri il master e guarda GIORNI FERMO</b>
+        <span class="nota">Dice da quanti giorni quel centro non aggiorna più il suo foglio.</span>
+        <div class="gettoni">
+          <span class="gettone verde">verde 0-14 · sta usando il sistema</span>
+          <span class="gettone giallo">giallo 15-30 · sta rallentando</span>
+          <span class="gettone rosso">rosso oltre 30 · ha smesso</span>
+        </div></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="D2"><span class="box"></span></label>
+      <span class="codice">D2</span>
+      <div class="testo"><b>Chiami</b>
+        <span class="nota">Non «come va?», ma: «apriamo il cruscotto e guardiamolo insieme».</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="D3"><span class="box"></span></label>
+      <span class="codice">D3</span>
+      <div class="testo"><b>Leggete insieme i due numeri</b>
+        <span class="nota">Quanti sono i DA RICHIAMARE, e qual è il semaforo peggiore.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="D4"><span class="box"></span></label>
+      <span class="codice">D4</span>
+      <div class="testo"><b>Concordate una azione</b>
+        <span class="nota">Una sola, per i prossimi trenta giorni.</span></div>
+    </li>
+    <li class="passo">
+      <label class="spunta"><input type="checkbox" data-k="D5"><span class="box"></span></label>
+      <span class="codice">D5</span>
+      <div class="testo"><b>Fissi il prossimo appuntamento</b>
+        <span class="nota">Prima di chiudere la telefonata, non dopo.</span></div>
+    </li>
+  </ul>
+
+  <!-- ══════════ ROTTURE ══════════ -->
+  <div class="sezione" id="rotture">
+    <h2>I quattro punti dove si rompe tutto</h2>
+    <p>Quattro passi su trenta. Sono questi.</p>
+  </div>
+
+  <ul class="rotture">
+    <li><span class="rif">A7</span>
+      <div><b>Condiviso con «chiunque abbia il link»</b>
+        <span class="nota">I dati delle sue clienti diventano aperti a chiunque.</span></div></li>
+    <li><span class="rif">A14</span>
+      <div><b>Link non provato prima</b>
+        <span class="nota">Consegna bruciata in centro, davanti alla titolare.</span></div></li>
+    <li><span class="rif">15'</span>
+      <div><b>Nessuna telefonata fatta davanti a te</b>
+        <span class="nota">Hai consegnato un file, non un sistema.</span></div></li>
+    <li><span class="rif">C4</span>
+      <div><b>«Consenti accesso» non cliccato</b>
+        <span class="nota">Centro invisibile nel master, per sempre.</span></div></li>
+  </ul>
+
+  <!-- ══════════ I FOGLI ══════════ -->
+  <div class="sezione" id="fogli">
+    <h2>I fogli, in breve</h2>
+    <p>Quello che devi sapere a memoria quando la titolare ti fa una domanda al telefono.</p>
+  </div>
+
+  <div class="schede due">
+    <div class="scheda">
+      <h3>Cruscotto Clienti · centro estetico</h3>
+      <p class="pagine">LEGGIMI · CLIENTI · RIEPILOGO · IMPOSTAZIONI</p>
+      <p>Una riga per persona. Le prime cinque colonne sono pensate per lo schermo del telefono; le altre scorrono a destra e si compilano da tablet o da PC alla reception.</p>
+      <div class="gettoni">
+        <span class="gettone">Nome</span><span class="gettone">Stato</span><span class="gettone">Ultimo contatto</span>
+        <span class="gettone">Giorni</span><span class="gettone">DA RICHIAMARE</span>
+      </div>
+      <p><strong>DA RICHIAMARE si accende da solo</strong> quando sono passati più giorni della soglia impostata (di default 30), oppure quando l'appuntamento è saltato e restano sedute da fare. Non si accende mai su «Persa» e «Percorso completato».</p>
+      <p><strong>Gli otto stati:</strong> Da contattare · Contattata · Consulenza fissata · Consulenza fatta · Percorso attivo · Percorso completato · Dormiente · Persa.</p>
+      <p><strong>Lei aggiorna due caselle sole:</strong> Ultimo contatto e Stato. Giallo = lo scrive lei, grigio = si calcola da solo.</p>
+    </div>
+
+    <div class="scheda">
+      <h3>Cruscotto Clienti · laser</h3>
+      <p class="pagine">LEGGIMI · CLIENTI · RIEPILOGO · INCENTIVI · IMPOSTAZIONI</p>
+      <p>Il laser non ha un ritmo generico, ha un orologio: ciclo di <strong>12 sedute</strong>, rientro tra il 21° e il 28° giorno, conferma a <strong>-7</strong> e il giorno prima, mantenimento ogni <strong>90 giorni</strong>. I quattro numeri stanno in IMPOSTAZIONI e comandano tutti gli avvisi.</p>
+      <p>La colonna che comanda è <strong>COSA FARE OGGI</strong>: si ordina per quella e si lavora dall'alto.</p>
+      <dl class="voci">
+        <div><dt>PRENDI APPUNTAMENTO</dt><dd>È uscita senza il prossimo. È il buco numero uno.</dd></div>
+        <div><dt>CHIAMA PER CONFERMA</dt><dd>Mancano sette giorni.</dd></div>
+        <div><dt>CONFERMA DOMANI</dt><dd>Appuntamento domani: manda l'orario.</dd></div>
+        <div><dt>APPUNTAMENTO SALTATO</dt><dd>La data è passata e non è venuta.</dd></div>
+        <div><dt>FUORI FINESTRA</dt><dd>Oltre 28 giorni e nessun appuntamento.</dd></div>
+        <div><dt>ULTIMA SEDUTA</dt><dd>Qui si propone il mantenimento o una zona nuova.</dd></div>
+        <div><dt>RICHIAMO MANTENIMENTO</dt><dd>Tre mesi: chiama e manda l'incentivo.</dd></div>
+        <div><dt>RECUPERA CON INCENTIVO</dt><dd>È una persa: si riaccende con un'offerta.</dd></div>
+      </dl>
+      <p><strong>Tre famiglie, tre lavori diversi:</strong> in ciclo è il fatturato di oggi, mantenimento è quello dell'anno prossimo, perse sono addormentate — non morte. Tre incentivi separati, uno per famiglia: se si somigliano, tanto vale averne uno solo.</p>
+      <p><strong>La regola d'oro:</strong> nessuna esce senza il prossimo appuntamento. Sotto il 90% il centro sta perdendo clienti.</p>
+    </div>
+  </div>
+
+  <div class="schede" style="margin-top:1rem">
+    <div class="scheda">
+      <h3>Master Centri</h3>
+      <p class="pagine">ISTRUZIONI · CENTRI — funziona solo come Foglio Google</p>
+      <p>Una riga per centro. Le colonne gialle le scrivi tu una volta sola; le azzurre si riempiono da sole leggendo il RIEPILOGO di quel centro. In Excel restano vuote: è normale, non è rotto.</p>
+      <div class="gettoni">
+        <span class="gettone neutro">Da richiamare</span><span class="gettone neutro">Persone</span>
+        <span class="gettone neutro">Nuovi 30 gg</span><span class="gettone neutro">Percorsi attivi</span>
+        <span class="gettone neutro">Da incassare €</span><span class="gettone neutro">Ultimo inserimento</span>
+      </div>
+      <p><strong>La colonna che conta è GIORNI FERMO</strong>, che la colonna STATO traduce in <span class="gettone verde">OK ≤ 14</span> <span class="gettone giallo">RALLENTA 15-30</span> <span class="gettone rosso">A RISCHIO &gt; 30</span> — un centro che smette di aggiornare è la disdetta vista con mesi di anticipo. I rossi sono la lista delle telefonate, già in ordine di priorità.</p>
+      <p>Se dopo la conversione le colonne azzurre restano vuote, incolla queste nella riga 6 e trascina in basso:</p>
+      <div class="riquadro"><pre>I6  =IF($H6="";"";IFERROR(IMPORTRANGE($H6;"RIEPILOGO!C5");""))     <b>da richiamare</b>
+J6  =IF($H6="";"";IFERROR(IMPORTRANGE($H6;"RIEPILOGO!C17");""))    <b>persone in archivio</b>
+K6  =IF($H6="";"";IFERROR(IMPORTRANGE($H6;"RIEPILOGO!C20");""))    <b>contatti nuovi 30 gg</b>
+L6  =IF($H6="";"";IFERROR(IMPORTRANGE($H6;"RIEPILOGO!C13");""))    <b>percorsi attivi</b>
+M6  =IF($H6="";"";IFERROR(IMPORTRANGE($H6;"RIEPILOGO!F5");""))     <b>da incassare</b>
+N6  =IF($H6="";"";IFERROR(IMPORTRANGE($H6;"RIEPILOGO!C26");""))    <b>ultimo inserimento</b></pre></div>
+      <p>In Google Fogli il separatore degli argomenti è il punto e virgola; in Excel è la virgola. Se copi da qui, usa il punto e virgola.</p>
+    </div>
+  </div>
+
+  <div class="regola">
+    <q>NIPEC non contatta mai le tue clienti</q>
+    <p>Nel master non entrano mai nomi di clienti dei centri. Solo numeri. È una scelta, non un limite tecnico: se quella promessa si rompe, si rompe l'adozione di tutto il sistema — molto prima di qualunque problema legale.</p>
+  </div>
+
+  <footer>
+    <span>NIPEC · Tecnologie Estetiche</span>
+    <span>PERSELOPE — la sequenza di consegna</span>
+    <span>Assistenza 351 846 6025</span>
+    <span>Questo è il ponte: quando DEMETRA 360 sarà in campo, i fogli si spengono.</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY = "perselope.consegna.v1";
+  var spunte = Array.prototype.slice.call(document.querySelectorAll(".spunta input"));
+  var nome   = document.getElementById("centro");
+  var fatti  = document.getElementById("fatti");
+  document.getElementById("totale").textContent = spunte.length;
+
+  function leggi(){
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; }
+  }
+  function scrivi(stato){
+    try { localStorage.setItem(KEY, JSON.stringify(stato)); } catch(e){}
+  }
+  function riga(input){ return input.closest(".passo") || input.closest(".fase"); }
+  function disegna(){
+    var n = 0;
+    spunte.forEach(function(s){
+      var r = riga(s);
+      if (r) r.classList.toggle("fatto", s.checked);
+      if (s.checked) n++;
+    });
+    fatti.textContent = n;
+  }
+
+  var stato = leggi();
+  spunte.forEach(function(s){ s.checked = !!stato[s.dataset.k]; });
+  if (stato._nome) nome.value = stato._nome;
+  disegna();
+
+  spunte.forEach(function(s){
+    s.addEventListener("change", function(){
+      stato[s.dataset.k] = s.checked;
+      scrivi(stato); disegna();
+    });
+  });
+  nome.addEventListener("input", function(){ stato._nome = nome.value; scrivi(stato); });
+
+  document.getElementById("azzera").addEventListener("click", function(){
+    if (!window.confirm("Azzero le spunte e ricomincio con un centro nuovo?")) return;
+    stato = {};
+    scrivi(stato);
+    spunte.forEach(function(s){ s.checked = false; });
+    nome.value = "";
+    disegna();
+    nome.focus();
+  });
+})();
+</script>
