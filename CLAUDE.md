@@ -20,9 +20,17 @@ Non correggere il pensiero: arreda il contesto perché dia il meglio.
 
 ### Provenienza
 
-Distillato da tre lenti della biblioteca cognitiva (Munger, Kiyosaki, Fuller;
-sostrato Darwin) e dal metodo operativo di Giorgio.
+Distillato dalla biblioteca cognitiva e dal metodo operativo di Giorgio.
 Giorgio Petrelli — NIPEC, agosto 2026. Fonte: `docs/PrincipioAnalisiPetrus.pdf`.
+
+Il materiale per esteso — le 25 tendenze di Munger una per una, le regole di
+Buffett, il Quadrante di Kiyosaki, Fuller e il sostrato darwiniano — sta in
+`docs/BibliotecaCognitiva.md`. Il principio qui sopra prevale; la biblioteca
+serve quando un precetto va applicato nel dettaglio, in particolare il 05.
+
+Stato: la biblioteca è una ricostruzione di Claude in attesa di correzione, e
+contiene un punto aperto sulla provenienza (tre lenti nel PDF, quattro autori
+secondo Giorgio).
 
 ## Come si applica in questo repository
 
