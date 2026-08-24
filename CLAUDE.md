@@ -72,6 +72,27 @@ In pratica:
 - **Sui numeri e sui ruoli**, precetto 08, quando il tema lo tocca: dove sta il
   denaro oggi, dove può spostarsi, cosa è asset e cosa è passività.
 
+## Memoria cognitiva
+
+L'indice di tutto il materiale — quale copia vale, quale è superata, cosa
+resta aperto — sta in `docs/INDICE.md`. Va letto prima di cercare un
+documento a mano.
+
+Tre livelli:
+
+- **Il principio** — questo file. I dodici precetti.
+- **La biblioteca** — `docs/BibliotecaCognitiva.md`: le fonti per esteso e le
+  tredici corde ancestrali del Protocollo Ponte, che sono la forma applicata
+  del precetto 05.
+- **Il profilo** — `docs/ProfiloCognitivo-MenteAPiuCanali.pdf`: da dove nasce
+  il principio. I dodici precetti sono i sei guardrail di quel profilo portati
+  fuori dalla testa e messi in un file. Il 12 è «uno entra, uno esce» più
+  «esternalizza l'esecutivo»; il 09 è la riga di chiusura del profilo.
+
+Conseguenza operativa: quando serve un promemoria, si crea una scadenza vera —
+non un'intenzione. Quando una cosa si ripete, si progetta il contesto che la
+ricorda al posto della persona.
+
 ## Contesto del repository
 
 - `PERSELOPE.html` — la sequenza di consegna in una pagina HTML: procedura,

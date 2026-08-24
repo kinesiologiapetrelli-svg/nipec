@@ -328,6 +328,50 @@ progettato bene ma non ritenuto — non ripetuto, non usato — muore comunque
 
 ---
 
+## Le 13 corde ancestrali — catalogo di Giorgio
+
+Materiale **canonico**, non ricostruito: è il catalogo del *Protocollo Ponte*
+(`nipec/ProtocolloPonte.html`, v1.3). È la forma applicata del precetto 05 —
+le tendenze lette come istinti in mismatch, con la leva accanto.
+
+Il motore è di tre domande, sempre le stesse:
+1. Quale corda ancestrale tira?
+2. Perché oggi sbaglia bersaglio?
+3. Come arredo il contesto perché tiri dalla parte giusta?
+
+| Corda | Ieri serviva a | Oggi sbaglia così | Leva |
+|---|---|---|---|
+| Avversione alla perdita | Non sprecare risorse scarse | Conti le perdite il doppio dei guadagni | Inquadra l'inazione come la vera perdita |
+| Riprova sociale | Copiare la tribù = sopravvivere | Aspetti che si muovano gli altri | Porta centri come il suo |
+| Autorità | Seguire il capo esperto salvava | Obbedisci al titolo a sproposito | Sii tu lo standard |
+| Reciprocità | Scambio di favori nella tribù | Un omaggio crea un obbligo sproporzionato | Prova / muletto gratis |
+| Ricompensa immediata | Mangia ora, il domani è incerto | Scegli il subito sul meglio | Primo passo piccolo, reversibile e datato |
+| Fame di novità | Esplorare per trovare risorse | Ti disperdi dietro ogni cosa che brilla | Un solo raccoglitore, un focus |
+| Status e rango | Rango = accesso a risorse | Consumi per apparire | Posiziona come status professionale |
+| Appartenenza | Isolamento = morte | Fedeltà a chi «c'è sempre» oltre la razionalità | Assistenza e muletto, non la macchina |
+| Vigilanza al pericolo | Temere il predatore vivido | Sopravvaluti i rischi vividi, sottovaluti i lenti | «Nessun vincolo, il rischio è nostro» |
+| Avversione al dubbio | Decidere in fretta salvava | Chiudi o rimandi pur di uscire dall'incertezza | Riduci l'attrito a un sì facile |
+| Minimo sforzo | Risparmiare energia era vitale | Resisti a imparare | Esternalizza l'onboarding |
+| Segnali di fitness | Bellezza = salute riproduttiva | Il mercato tira questa corda senza freni | È il cuore del business della cliente: nominalo |
+| Diffidenza dell'estraneo | L'estraneo minacciava la tribù | Diffidi di chi «vuole venderti qualcosa» | Entra da consulente, non da venditore |
+
+▸ **Ponte con le 25 di Munger** (accostamento mio, da correggere): perdita → 14 ·
+riprova sociale → 15 · autorità → 22 · reciprocità → 09 · novità → 06 ·
+status → 08 · appartenenza → 02 · pericolo → 18 · dubbio → 04 ·
+estraneo → 03. Tre corde non hanno corrispondente diretto in Munger e
+vengono dal sostrato evolutivo: **ricompensa immediata**, **minimo sforzo**,
+**segnali di fitness**.
+
+### Munger applicato: l'inversione
+
+Il documento `nipec/NIPEC-Munger-RibaltareAnalisi.pdf` è il precetto 02 messo
+al lavoro: invece di «come cresciamo», si chiede «come si garantisce un danno
+con certezza», e lo standard diventa la lista degli antidoti. Contiene la
+lettura per incentivi (titolare alta, dipendente bassa, noleggio nulla) e il
+Lollapalooza che ne consegue.
+
+---
+
 ## Bibliografia — da completare
 
 I precetti sono nati dai titoli che Giorgio ha letto e passato a Claude in una

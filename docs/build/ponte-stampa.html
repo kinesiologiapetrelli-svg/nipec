@@ -1,0 +1,330 @@
+<style>@media print{details{break-inside:avoid}details>*:not(summary){display:block!important}}</style><title>Protocollo Ponte</title>
+<style>
+  :root{
+    --ground:#eef2f6;--panel:#f9fbfd;--panel-2:#ffffff;
+    --ink:#12283f;--ink-soft:#41576e;--ink-faint:#7488a0;
+    --line:#d3dde8;--line-soft:#e4ebf2;
+    --brass:#9d6f1e;--brass-bright:#b78628;
+    --navy:#123a63;--navy-2:#1c6ea4;
+    --corda:#0f6b57;--mismatch:#a23b2f;--leva:#1c6ea4;
+    --shadow:0 1px 2px rgba(18,58,99,.05),0 18px 48px -20px rgba(18,58,99,.28);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  :root:not([data-theme="light"]){@media (prefers-color-scheme:dark){
+    --ground:#0c1c2e;--panel:#102439;--panel-2:#0f2135;
+    --ink:#e7eef6;--ink-soft:#a9bcd0;--ink-faint:#6c839c;
+    --line:#20344b;--line-soft:#182a3f;
+    --brass:#cfa04a;--brass-bright:#e0b566;--navy:#3b7fb8;--navy-2:#5aa0d4;
+    --corda:#3fae93;--mismatch:#e0806f;--leva:#5aa0d4;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 24px 60px -22px rgba(0,0,0,.7);
+  }}
+  :root[data-theme="dark"]{
+    --ground:#0c1c2e;--panel:#102439;--panel-2:#0f2135;
+    --ink:#e7eef6;--ink-soft:#a9bcd0;--ink-faint:#6c839c;
+    --line:#20344b;--line-soft:#182a3f;
+    --brass:#cfa04a;--brass-bright:#e0b566;--navy:#3b7fb8;--navy-2:#5aa0d4;
+    --corda:#3fae93;--mismatch:#e0806f;--leva:#5aa0d4;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 24px 60px -22px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;padding:clamp(18px,4vw,56px) 18px;display:flex;justify-content:center}
+  .wrap{width:100%;max-width:840px;display:flex;flex-direction:column;gap:22px}
+
+  header{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:clamp(26px,5vw,44px) clamp(24px,5vw,48px);position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;inset:0 0 auto auto;width:60%;height:100%;background:radial-gradient(120% 130% at 100% 0%,color-mix(in srgb,var(--navy) 9%,transparent),transparent 60%);pointer-events:none}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--brass);display:flex;align-items:center;gap:12px}
+  .eyebrow::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--brass),transparent)}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,6.5vw,48px);letter-spacing:-.01em;margin:16px 0 0;text-wrap:balance}
+  h1 em{color:var(--brass-bright);font-style:italic}
+  .sub{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:clamp(15px,2.5vw,18px);max-width:56ch;margin-top:14px}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:clamp(22px,4vw,36px) clamp(22px,5vw,44px)}
+  h2{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+
+  /* engine 3 questions */
+  .engine{display:grid;gap:12px}
+  .q{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line-soft)}
+  .q:first-child{border-top:none}
+  .q .n{font-family:var(--serif);font-size:22px;color:var(--brass);font-weight:600}
+  .q b{color:var(--ink)}
+  .q span.d{color:var(--ink-soft);font-size:14px}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .step{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .step .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:800}
+  .step h3{font-family:var(--serif);font-size:18px;font-weight:600;margin:6px 0 4px}
+  .step p{font-size:13px;color:var(--ink-soft)}
+
+  /* objection cards */
+  .obj{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px;background:var(--panel-2)}
+  .obj>summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:12px;font-weight:650;font-size:15.5px}
+  .obj>summary::-webkit-details-marker{display:none}
+  .obj>summary::before{content:"“";font-family:var(--serif);font-size:34px;line-height:0;color:var(--brass);transform:translateY(6px)}
+  .obj>summary::after{content:"+";margin-left:auto;color:var(--ink-faint);font-size:22px;font-weight:400}
+  .obj[open]>summary::after{content:"–"}
+  .obj[open]>summary{border-bottom:1px solid var(--line-soft)}
+  .obj .body{padding:6px 20px 20px}
+  .row{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:14px}
+  .row:first-child{border-top:none}
+  .tag{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;padding-top:2px}
+  .tag.c{color:var(--corda)} .tag.m{color:var(--mismatch)} .tag.l{color:var(--leva)}
+  .say{margin-top:12px;background:color-mix(in srgb,var(--navy) 6%,transparent);border-left:3px solid var(--brass);border-radius:0 10px 10px 0;padding:12px 16px;font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--ink)}
+  .say b{font-style:normal;font-family:var(--sans);display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);margin-bottom:5px}
+
+  footer{text-align:center;color:var(--ink-faint);font-size:12px;padding:6px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;font-size:12px;color:var(--ink-soft)}
+  .legend b{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:800}
+  .dotc{color:var(--corda)}.dotm{color:var(--mismatch)}.dotl{color:var(--leva)}
+
+  /* catalogo mismatch */
+  .cat-intro{color:var(--ink-soft);font-size:14px;margin:-6px 0 16px;max-width:62ch}
+  .cat-wrap{overflow-x:auto;border-radius:12px}
+  table.cat{width:100%;border-collapse:collapse;font-size:13.5px;min-width:600px}
+  table.cat th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);font-weight:800;padding:0 12px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  table.cat td{padding:12px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-soft)}
+  table.cat td:first-child{color:var(--ink);font-weight:600;font-family:var(--serif);font-size:15px;width:20%}
+  table.cat td.f{color:var(--leva);font-weight:600}
+  table.cat tr:last-child td{border-bottom:none}
+  table.cat tbody tr:hover td{background:color-mix(in srgb,var(--navy) 4%,transparent)}
+  .cords{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 12px}
+  .cords .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:800}
+  .cords .c{font-size:10px;letter-spacing:.04em;text-transform:uppercase;font-weight:700;color:var(--brass);background:color-mix(in srgb,var(--brass) 12%,transparent);border:1px solid color-mix(in srgb,var(--brass) 32%,transparent);border-radius:999px;padding:3px 9px}
+  /* tascabile */
+  .tasca-wrap{overflow-x:auto;border-radius:12px}
+  table.tasca{width:100%;border-collapse:collapse;font-size:13.5px;min-width:420px}
+  table.tasca td{padding:12px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  table.tasca td:first-child{width:30%;font-weight:650;color:var(--ink)}
+  table.tasca td.r{font-family:var(--serif);font-style:italic;color:var(--ink-soft)}
+  table.tasca tr:last-child td{border-bottom:none}
+  table.tasca tr:nth-child(even) td{background:color-mix(in srgb,var(--navy) 3%,transparent)}
+
+  @media (max-width:520px){.row{grid-template-columns:1fr;gap:3px}.q{grid-template-columns:1fr}}
+  @media print{
+    body{background:#fff;padding:0}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,header{box-shadow:none}header{break-inside:avoid}.obj{break-inside:avoid}.obj .body{display:block!important}
+    .tasca-card{break-before:page}table.tasca tr{break-inside:avoid}
+    @page{size:A4;margin:12mm}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">NIPEC · Script di Approccio</div>
+    <h1>Protocollo <em>Ponte</em></h1>
+    <p class="sub">Non convincere: instrada. Ogni obiezione è un istinto antico che sbaglia bersaglio. Capisci la corda, e progetta il contesto perché tiri dalla tua parte.</p>
+  </header>
+
+  <section class="card">
+    <h2>Il motore — 3 domande, sempre le stesse</h2>
+    <div class="engine">
+      <div class="q"><span class="n">1</span><div><b>Quale corda ancestrale tira?</b> <span class="d">— l'istinto che c'è sotto (perdita, tribù, autorità…)</span></div></div>
+      <div class="q"><span class="n">2</span><div><b>Perché oggi sbaglia bersaglio?</b> <span class="d">— il mismatch: mondo cambiato, istinto no</span></div></div>
+      <div class="q"><span class="n">3</span><div><b>Come arredo il contesto?</b> <span class="d">— la leva che fa tirare la stessa corda verso l'azione giusta</span></div></div>
+    </div>
+    <div class="legend">
+      <span><b class="dotc">● Corda</b> l'istinto</span>
+      <span><b class="dotm">● Mismatch</b> perché sbaglia oggi</span>
+      <span><b class="dotl">● Leva</b> cosa fai tu</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Catalogo dei mismatch — la mappa delle corde</h2>
+    <p class="cat-intro">Ogni "no", ogni acquisto d'impulso, ogni esitazione è una di queste corde che tira. Riconoscere <em>quale</em> è metà del lavoro: ti dice già quale leva usare.</p>
+    <div class="cat-wrap">
+      <table class="cat">
+        <thead><tr><th>Corda ancestrale</th><th>Ieri serviva a</th><th>Oggi sbaglia così (mismatch)</th><th>Nel tuo campo</th></tr></thead>
+        <tbody>
+          <tr><td>Avversione alla perdita</td><td>Non sprecare risorse scarse: perderle era letale</td><td>Ti aggrappi al vecchio, conti le perdite il doppio dei guadagni</td><td class="f">Non cambia device → inquadra l'inazione come la vera perdita</td></tr>
+          <tr><td>Riprova sociale</td><td>Copiare la tribù = sopravvivere</td><td>Aspetti che si muovano gli altri; segui mode e bolle</td><td class="f">"Aspetto a vedere" → porta centri come il suo</td></tr>
+          <tr><td>Autorità</td><td>Seguire il capo esperto salvava</td><td>Obbedisci al titolo anche a sproposito</td><td class="f">Si fida di chi certifica → sii tu lo standard NIPEC</td></tr>
+          <tr><td>Reciprocità</td><td>Scambio di favori dentro la tribù</td><td>Un omaggio crea un obbligo sproporzionato</td><td class="f">Prova / muletto gratis → nasce il senso di restituire</td></tr>
+          <tr><td>Ricompensa immediata</td><td>Mangia ora: il domani è incerto</td><td>Procrastini, ti indebiti, scegli il subito sul meglio</td><td class="f">"Ci penso" → primo passo piccolo, reversibile e datato</td></tr>
+          <tr><td>Fame di novità</td><td>Esplorare per trovare risorse nuove</td><td>Ti disperdi, rincorri ogni cosa che brilla</td><td class="f">Vale anche per te: un solo raccoglitore, un focus</td></tr>
+          <tr><td>Status e rango</td><td>Rango = accesso a risorse e partner</td><td>Consumi per apparire; invidia di chi sale</td><td class="f">Posiziona il device come status professionale</td></tr>
+          <tr><td>Appartenenza</td><td>Isolamento dalla tribù = morte</td><td>Sei fedele a chi "c'è sempre", oltre la razionalità</td><td class="f">Il tuo asset: assistenza + muletto, non la macchina</td></tr>
+          <tr><td>Vigilanza al pericolo</td><td>Temere il predatore vivido teneva vivi</td><td>Sopravvaluti rischi rari ma vividi; sottovaluti quelli lenti</td><td class="f">Sdrammatizza: "nessun vincolo, il rischio è nostro"</td></tr>
+          <tr><td>Avversione al dubbio</td><td>Decidere in fretta salvava la vita</td><td>Chiudi o rimandi pur di uscire dall'incertezza</td><td class="f">Riduci l'attrito a un sì facile</td></tr>
+          <tr><td>Minimo sforzo</td><td>Risparmiare energia era vitale</td><td>Resisti a imparare, eviti la fatica cognitiva</td><td class="f">"Non ho tempo per Demetra" → esternalizza l'onboarding</td></tr>
+          <tr><td>Segnali di fitness</td><td>Bellezza e giovinezza = salute riproduttiva</td><td>Il mercato tira questa corda a fondo, senza freni</td><td class="f">È il cuore del business della tua cliente: nominalo</td></tr>
+          <tr><td>Diffidenza dell'estraneo</td><td>L'estraneo era una minaccia per la tribù</td><td>Diffidi a priori di chi "vuole venderti qualcosa"</td><td class="f">Entra da consulente, non da venditore</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>I 6 passi</h2>
+    <div class="steps">
+      <div class="step"><div class="k">01</div><h3>Aggancio</h3><p>WhatsApp-first: apri sulla corda, non sul prodotto.</p></div>
+      <div class="step"><div class="k">02</div><h3>Diagnosi</h3><p>Domande, non pitch: fai emergere il problema vero.</p></div>
+      <div class="step"><div class="k">03</div><h3>Ponte</h3><p>Per ogni obiezione: corda → mismatch → leva.</p></div>
+      <div class="step"><div class="k">04</div><h3>Prova</h3><p>Far toccare (muletto/trial): scatta la dotazione.</p></div>
+      <div class="step"><div class="k">05</div><h3>Sistema</h3><p>Demetra + ritmo 24h→1 sett→30 gg: rinnovi l'asset-relazione.</p></div>
+      <div class="step"><div class="k">06</div><h3>Chiusura</h3><p>Raccomandazione netta + una domanda. Si decide.</p></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Le 12 obiezioni tipiche — con lo script</h2>
+
+    <details class="obj" open>
+      <summary>Costa troppo / non ho budget</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Avversione alla perdita</span><span class="c">Ricompensa immediata</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Sprecare risorse era letale: proteggere ciò che si ha viene prima di guadagnare.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Legge il canone come <em>perdita certa oggi</em>, non come strumento che produce incasso domani.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Sposta il confronto: non "500 vs zero", ma <b>6.000/anno vs il conto delle clienti perse</b> che ha calcolato lei. E togli la paura: <b>nessun vincolo, la fermi quando vuoi — il rischio è nostro</b>.</div></div>
+        <div class="say"><b>Cosa dici</b>«500 al mese fanno 6.000 l'anno. Prima hai scritto tu quanto perdi con le clienti che non tornano: quanto era? E comunque non ti lego a niente — se non rende, la fermi quando vuoi. Il rischio ce lo prendiamo noi. Facciamo il conto sul tuo listino?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Devo pensarci / ne parlo e ti dico</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Avversione al dubbio</span><span class="c">Ricompensa immediata</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Avversione al dubbio + coerenza: la mente rimanda per togliersi il disagio della decisione.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>"Ci penso" non riduce il rischio: lo congela. Il costo dell'attesa resta invisibile.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Rendi reversibile e piccolo il primo passo (prova, non acquisto) e dai una deadline vera. Riduci l'attrito a un sì facile.</div></div>
+        <div class="say"><b>Cosa dici</b>«Giusto pensarci — ma non a vuoto. Tienila in prova senza impegno fino a [data]: decidi sui risultati veri, non sulle mie parole. Ti va che te la porto [giorno]?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Ho già una macchina, mi trovo bene così</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Avversione alla perdita</span><span class="c">Diffidenza del nuovo</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Status quo + dotazione: ciò che possiedo vale di più solo perché è mio.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Difende lo strumento vecchio anche quando il mercato (Red Queen) è già andato avanti.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Non attaccare la sua scelta: affianca. Mostra il divario di risultato/servizio, e fai provare accanto alla sua.</div></div>
+        <div class="say"><b>Cosa dici</b>«Fai bene a tenerti ciò che funziona. Non ti chiedo di sostituire: mettiamola accanto per due settimane e guardi tu la differenza sui risultati. Se non ti convince, la ritiro io.»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>E chi mi dice che funziona davvero?</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Riprova sociale</span><span class="c">Autorità</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Riprova sociale + autorità: mi fido di chi è come me e di chi ha il titolo.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Aspetta la prova sociale prima di muoversi → resta ferma mentre altri partono.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Porta centri <em>come il suo</em> (non testimonial generici) + lo standard/metodo certificato NIPEC-Demetra. Tu sei l'autorità.</div></div>
+        <div class="say"><b>Cosa dici</b>«Non fidarti di me: fidati di [centro simile] a [città], stessa clientela della tua. E lavoriamo su standard certificati, non a occhio. Ti mostro i loro numeri?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Non ho tempo di imparare cose nuove (Demetra)</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Minimo sforzo</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Risparmio di energia: il cervello evita lo sforzo cognitivo non urgente.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Percepisce il gestionale come fatica in più, non come ciò che le <em>toglie</em> fatica.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Esternalizza tu l'onboarding (video muletto, setup fatto da noi). Il sistema ricorda al posto suo: meno lavoro, non più.</div></div>
+        <div class="say"><b>Cosa dici</b>«Non devi imparare niente: te lo configuriamo noi e c'è un video di due minuti per ogni cosa. Serve a toglierti lavoro, non a dartene. Partiamo dal tuo primo cliente insieme?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Le mie clienti non lo chiedono / non c'è richiesta</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Vigilanza al pericolo</span><span class="c">Riprova sociale</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Ti fidi di ciò che è già visibile davanti a te: quello che non vedi, non esiste.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>La domanda che non vedi non è domanda che non c'è: le clienti non chiedono ciò che non sanno di poter avere da te.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Non aspettare la richiesta: creala col risultato. Parti da 2-3 clienti fidate e la domanda nasce dal passaparola.</div></div>
+        <div class="say"><b>Cosa dici</b>«Le clienti non chiedono quello che non sanno di poter trovare qui. Non aspettiamo la richiesta: la creiamo. Scegli due clienti di fiducia, glielo facciamo provare, e da lì parte il passaparola. Chi ti viene in mente per prima?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Ho già provato altre macchine e non hanno reso</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Vigilanza al pericolo</span><span class="c">Avversione alla perdita</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Un brutto colpo insegna a evitare per sempre ciò che l'ha causato.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Generalizzi da un caso vivido: "macchina" ≠ "sistema". Il problema era il vuoto attorno — ti hanno lasciata sola.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Separa il passato dal presente: non è la macchina, è il metodo + assistenza + muletto che prima mancavano. E non rischi: nessun vincolo.</div></div>
+        <div class="say"><b>Cosa dici</b>«Fai bene a essere diffidente: ti hanno consegnato un ferro e ti hanno lasciata sola. Qui è l'opposto — conta il metodo e l'assistenza attorno, non la macchina. E non rischi: se non rende, la fermi. Ti mostro cosa cambia davvero?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Devo sentire mio marito / il commercialista / il socio</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Autorità</span><span class="c">Avversione al dubbio</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Le decisioni importanti passavano dal capo o dal consiglio della tribù.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Deleghi la scelta a chi non conosce il tuo mestiere — e spesso è un modo gentile di rimandare.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Dalle gli argomenti per convincere il terzo (il conto, il no-vincolo) e proponi la prova, che non ha bisogno di permesso.</div></div>
+        <div class="say"><b>Cosa dici</b>«Giustissimo parlarne. Ma per provare non serve permesso e non ti impegna a niente: intanto la porti, vedi i numeri veri, e quando ne parli con [lui] hai i dati in mano invece delle mie parole. Ti va?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Adesso non è il momento, magari dopo l'estate</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Ricompensa immediata</span><span class="c">Avversione al dubbio</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Rimandare lo sforzo quando non c'è pericolo immediato risparmiava energia.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>"Più avanti" non arriva mai; ogni mese di attesa è incasso perso, non risparmiato.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Rendi visibile il costo dell'attesa; parti piccolo ora così sei a regime quando conta.</div></div>
+        <div class="say"><b>Cosa dici</b>«Capisco. Ma "più avanti" ti costa: ogni mese che aspetti sono clienti che non tornano. Partiamo leggeri adesso, così a [stagione] sei già a regime invece che a zero. Iniziamo con la prova questa settimana?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Da un altro / online lo trovo a meno</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Effetto contrasto</span><span class="c">Avversione alla perdita</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Giudichi il valore per confronto immediato, non in assoluto.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Confronti il prezzo del ferro, non il sistema: il più economico senza assistenza ti costa di più quando si ferma.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Sposta il confronto da prezzo a <b>costo del fermo</b>: muletto e assistenza in giornata sono ciò che gli altri non danno.</div></div>
+        <div class="say"><b>Cosa dici</b>«Può darsi che il ferro costi meno. Ma il giorno che si ferma, chi ti porta il muletto in giornata? Il prezzo basso lo paghi quando la poltrona è ferma. Io ti vendo che non ti fermi mai. Ti spiego la differenza?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Non sono capace con la tecnologia, è complicato</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Minimo sforzo</span><span class="c">Vigilanza al pericolo</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>Evitare i compiti che rischiano una figuraccia davanti alla tribù.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Temi una difficoltà che non c'è: confondi "nuovo" con "difficile".</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Esternalizza: setup fatto da noi, video muletto di 2 minuti, primo cliente fatto insieme.</div></div>
+        <div class="say"><b>Cosa dici</b>«Non devi essere capace: te la configuriamo noi e per ogni cosa c'è un video di due minuti. Il primo cliente lo facciamo insieme. Se sai usare WhatsApp, sai usare questo. Partiamo dal primo?»</div>
+      </div>
+    </details>
+
+    <details open class="obj">
+      <summary>Non ti conosco, chi siete?</summary>
+      <div class="body">
+        <div class="cords"><span class="lbl">Corde</span><span class="c">Diffidenza dell'estraneo</span><span class="c">Autorità</span></div>
+        <div class="row"><span class="tag c">Corda</span><div>L'estraneo era una minaccia per la tribù: meglio diffidare.</div></div>
+        <div class="row"><span class="tag m">Mismatch</span><div>Diffidi a priori di chi "vuole venderti qualcosa", anche quando ti conviene.</div></div>
+        <div class="row"><span class="tag l">Leva</span><div>Entra da consulente, non da venditore: il test di 3 minuti al posto del pitch, prove di appartenenza (centri come lei), garanzia no-vincolo.</div></div>
+        <div class="say"><b>Cosa dici</b>«Fai bene a non fidarti di uno che non conosci. Per questo non ti chiedo di comprare niente: ti lascio un test di tre minuti e i numeri di centri come il tuo a [zona]. Decidi tu se vale il mio tempo. Ci stai?»</div>
+      </div>
+    </details>
+  </section>
+
+  <section class="card tasca-card">
+    <h2>Tascabile — la risposta secca</h2>
+    <p class="cat-intro">Da stampare e tenere accanto al telefono. Solo la frase: la spiegazione la sai già dal resto del playbook.</p>
+    <div class="tasca-wrap">
+      <table class="tasca">
+        <tbody>
+          <tr><td>Costa troppo</td><td class="r">«6.000 l'anno contro quanto perdi in clienti che non tornano. E se non rende, la fermi quando vuoi: il rischio è nostro.»</td></tr>
+          <tr><td>Ci penso / ti dico</td><td class="r">«Giusto pensarci, ma non a vuoto: tienila in prova senza impegno fino a [data] e decidi sui numeri, non sulle mie parole.»</td></tr>
+          <tr><td>Ho già una macchina</td><td class="r">«Non ti chiedo di sostituire: la mettiamo accanto due settimane, giudichi tu. Se non convince, la ritiro io.»</td></tr>
+          <tr><td>Chi mi dice che funziona</td><td class="r">«Non fidarti di me: fidati di [centro come il tuo] a [zona] e degli standard certificati. Ti mostro i loro numeri.»</td></tr>
+          <tr><td>Non ho tempo (Demetra)</td><td class="r">«Non devi imparare niente: configuriamo noi, video di due minuti, primo cliente insieme. Serve a toglierti lavoro.»</td></tr>
+          <tr><td>Le clienti non lo chiedono</td><td class="r">«Non chiedono ciò che non sanno di trovare qui. Due clienti fidate lo provano e parte il passaparola.»</td></tr>
+          <tr><td>Ho già provato, non rendono</td><td class="r">«Ti hanno lasciata sola con un ferro. Qui conta il metodo e l'assistenza. E non rischi: se non rende, la fermi.»</td></tr>
+          <tr><td>Devo sentire marito/commercialista</td><td class="r">«Per provare non serve permesso e non impegna. Poi ne parli con i numeri in mano, non con le mie parole.»</td></tr>
+          <tr><td>Non è il momento</td><td class="r">«"Più avanti" ti costa: ogni mese sono clienti perse. Partiamo leggeri ora, a [stagione] sei già a regime.»</td></tr>
+          <tr><td>Da un altro costa meno</td><td class="r">«Il ferro forse costa meno. Ma quando si ferma, chi ti dà il muletto in giornata? Io ti vendo che non ti fermi mai.»</td></tr>
+          <tr><td>Non sono capace / è complicato</td><td class="r">«Se sai usare WhatsApp, sai usare questo. Configuriamo noi, il primo cliente lo facciamo insieme.»</td></tr>
+          <tr><td>Non ti conosco</td><td class="r">«Per questo non ti chiedo di comprare: test di tre minuti e numeri di centri come il tuo. Decidi tu se vale il mio tempo.»</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>NIPEC · Protocollo Ponte — v1.3 · 12 obiezioni + tascabile · uso interno operatori</footer>
+</div>
