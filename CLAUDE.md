@@ -129,11 +129,25 @@ RUBRICHE/                    ← condivisa con nipecuarda@gmail.com (Editor)
 
 Ogni rubrica nuova va dentro `RUBRICHE/`: eredita la condivisione.
 
-**Come funziona, e qual è il limite.** L'app è un singolo HTML che si apre
-in locale (Chrome/Edge) e scrive con la File System Access API dentro
-`rubrica-nipec.json`. La sincronizzazione fra Giorgio e Uarda la fa **Google
-Drive per desktop**, non l'app: quindi serve Drive installato e la cartella
-sincronizzata in locale — vederla dal browser non basta.
+**Come si apre — la regola che è costata un pomeriggio.** L'app va aperta
+**sempre da `https://nipec-alert1.netlify.app/`**, mai col doppio clic su
+`RUBRICA NIPEC.html`. Aperta da `file://` il browser non ha un'origine a cui
+legare il permesso di scrittura: non lo chiede nemmeno, l'app **legge** i
+contatti ma non li salva, e non dà nessun errore. Sembra funzionare e il
+lavoro si perde. Il `.html` nella cartella serve solo come copia di scorta
+per ricaricare il sito su Netlify.
+
+Sintomo diagnostico: se dopo aver aggiunto un contatto la data di
+`rubrica-nipec.json` in Esplora file non cambia, l'app non sta scrivendo.
+Via di fuga sempre valida: `Dati → Esporta tutto (.json)`, che usa il
+download normale del browser e funziona anche quando il collegamento no.
+
+**Come funziona, e qual è il limite.** L'app è un singolo HTML che scrive con
+la File System Access API dentro `rubrica-nipec.json`. La sincronizzazione
+fra Giorgio e Uarda la fa **Google Drive per desktop**, non l'app: quindi
+serve Drive installato e la cartella sincronizzata in locale — vederla dal
+browser non basta. Servono entrambe le cose: l'indirizzo https per l'app, la
+cartella sincronizzata per i dati.
 
 **Il passaggio che blocca sempre:** Drive per desktop **non sincronizza
 «Condivisi con me»**. Chi riceve la condivisione deve fare tasto destro
