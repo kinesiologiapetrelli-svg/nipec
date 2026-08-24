@@ -1,0 +1,63 @@
+ALERT LASER — l'app
+Persefone By NIPEC
+
+
+COS'È
+Una app che si installa sulla schermata Home (telefono, tablet, PC) e ogni
+mattina dice alla titolare chi richiamare e in che ordine. Stesso motore
+delle formule del Cruscotto Clienti · laser: gli stessi otto avvisi, le
+stesse soglie.
+
+
+PUBBLICARLA (una volta sola, 2 minuti)
+1. app.netlify.com → Add new site → Deploy manually
+2. Trascina LA CARTELLA "APP-ALERT-LASER", non i file singoli
+3. Site configuration → Change site name → es. alert-laser-bellezza
+4. Apri il link dal tuo telefono e prova PRIMA di andare in centro
+
+
+INSTALLARLA SUL TELEFONO DELLA TITOLARE
+Android/Chrome: si apre il link, compare il pulsante "Installa" in alto.
+iPhone/Safari:  Condividi → Aggiungi alla schermata Home.
+PC:             icona "installa" nella barra degli indirizzi.
+L'icona la installi TU, davanti a lei. Se non gliela installi tu, quel
+link non viene riaperto.
+
+
+IL PRIMO GIRO, IN CENTRO
+1. Apri l'app, scrivi il nome del centro
+2. Setup → i sei numeri (di solito vanno bene così) e le tre offerte
+3. Rubrica → aggiungi le prime venti clienti. Venti bastano.
+4. Oggi → falle chiamare la prima, con te lì che stai zitto
+
+
+I DATI
+Stanno solo dentro il browser di quel dispositivo. Nessun account,
+nessuna password, nessun server. Non escono da lì.
+Cambio telefono / backup: NIPEC → Copia di sicurezza (file .json),
+poi Importa sul telefono nuovo.
+
+
+COME CONTROLLI SE LA USA, SENZA VEDERE LE SUE CLIENTI
+NIPEC → Il battito. Genera sei numeri e una data:
+  da richiamare ; persone ; nuove 30 gg ; in ciclo ; da incassare ; ultimo inserimento
+Nessun nome, nessun telefono, mai. Lei tocca "Manda a NIPEC" e ti arriva
+su WhatsApp; tu incolli la riga nel master, colonne I→N.
+Se il battito non arriva più, quel centro ha smesso: è la disdetta vista
+con mesi di anticipo.
+
+
+AGGIORNARE L'APP
+Modifichi index.html, POI apri sw.js e cambia il numero di VERSIONE
+("alert-laser-1" → "alert-laser-2"). Senza quel cambio, i telefoni già
+installati continuano a vedere la versione vecchia.
+
+
+FILE
+index.html               tutta l'app (grafica, motore, dati)
+manifest.webmanifest     nome, icone, si-installa-come-app
+sw.js                    il guscio offline
+icona-*.png              icone Android / maskable
+apple-touch-icon.png     icona iPhone
+
+Assistenza 351 846 6025
