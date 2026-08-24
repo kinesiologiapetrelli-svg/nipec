@@ -36,7 +36,20 @@ DEMETRA è un centro finalizzato al benessere del corpo e del viso, attraverso i
 
 Il primo traguardo è semplice e concreto: far lavorare il centro già nel primo mese. Con le clienti che hai già, è a portata di mano — bastano poche a percorso. Da lì, il centro va da solo.
 
-**Il numero, detto chiaro.** La macchina deve coprire i 500 € al mese. Il conto è una divisione: 500 diviso il valore mensile di un percorso ti dà quante clienti attive ti servono. Sono poche, e non sono poche *ogni mese*: ogni cliente resta con te per tutto il percorso, quindi le trovi una volta e continuano a contare. [inserire il numero sul listino DEMETRA]
+**Il numero, detto chiaro: due clienti.**
+
+Una cliente in percorso fa 7 trattamenti al mese. A 60 € sono 420 € al mese, a 80 € sono 560 €. Il noleggio è 500 €.
+
+| Clienti in percorso | Incasso al mese (a 60 €) | Dopo il noleggio |
+|---|---|---|
+| 1 | 420 € | −80 € |
+| **2** | **840 €** | **+340 €** |
+| 3 | 1.260 € | +760 € |
+| 5 | 2.100 € | +1.600 € |
+
+**Due clienti in percorso e la macchina è pagata**, anche al prezzo più basso del tuo listino. A listino pieno ne basta quasi una. Dalla terza in poi è tutto tuo.
+
+**Ma vanno rimpiazzate.** Un percorso da 10-12 trattamenti, a 7 al mese, finisce in sei o sette settimane. Non è come trovare due clienti una volta sola: ogni mese e mezzo quelle due hanno finito, e servono le successive. È esattamente per questo che le chiamate settimanali e i 2 reel non sono un di più — sono il rubinetto che tiene pieni i due posti. Se il rubinetto si chiude, il conto qui sopra smette di funzionare due mesi dopo, non subito: te ne accorgi tardi.
 
 **Le due date.** Il **10 settembre** guardiamo insieme che la partenza sia fatta — chiamate, app, messaggi, contenuti. Il **30 settembre** guardiamo i numeri del mese. Te le scrivo adesso così non sono una sorpresa: sono i due momenti in cui ci diciamo com'è andata davvero.
 

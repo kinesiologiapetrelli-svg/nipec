@@ -45,9 +45,9 @@ I dodici precetti sono verificati su **due originali indipendenti** di Giorgio
 3. **Date DEMETRA** — risolto il 24 agosto. Due verifiche distinte: il
    **10 settembre** le azioni (se la partenza non è fatta, la macchina
    rientra), il **30 settembre** il fatturato (500 €/mese). Entrambe le date
-   sono ora scritte anche nel piano di Egla. Resta da inserire, nel suo piano,
-   il numero di clienti attive che coprono i 500 €: serve il valore mensile di
-   un percorso DEMETRA.
+   sono ora scritte anche nel piano di Egla, insieme alla soglia: **due
+   clienti in percorso** coprono il noleggio (7 trattamenti al mese a 60-80 €
+   = 420-560 € per cliente). Chiuso.
 
 ## Come si rigenera
 
