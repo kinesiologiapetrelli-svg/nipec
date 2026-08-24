@@ -1,0 +1,57 @@
+NIPEC_Cruscotto_Clienti_LASER.xlsx
+Il foglio del laser, già fatto
+
+
+COME SI METTE IN OPERA (5 minuti, una volta per centro)
+1. Carica il file su Google Drive, nella tua cartella dei centri
+2. Tasto destro sul file → Apri con → Fogli Google
+3. Dentro: File → Salva come Foglio Google
+   Adesso hai due file. Quello che serve è il FOGLIO GOOGLE.
+   L'xlsx puoi cestinarlo.
+4. Rinomina: Cruscotto Clienti - <Nome Centro>
+5. IMPOSTAZIONI: controlla i sei numeri. Di solito vanno bene così.
+6. INCENTIVI: scrivi le tre offerte del centro.
+7. CLIENTI: seleziona le celle gialle della riga 5 (l'esempio) e cancellale.
+8. Condividi con la titolare come EDITOR, a "persone specifiche".
+   MAI "chiunque abbia il link": là dentro ci sono i dati delle sue clienti.
+
+
+I SEI FOGLI
+LEGGIMI        le regole, in una schermata
+OGGI           solo chi va chiamato, già in ordine. È quello che apre la mattina
+CLIENTI        la rubrica. Giallo = lo scrive lei, grigio = si calcola da solo
+RIEPILOGO      i numeri del centro. Il master legge C5, C13, C17, C20, C26 e F5
+INCENTIVI      le tre offerte: Laser 1 in ciclo, Laser 2 mantenimento, Laser 3 recupero
+IMPOSTAZIONI   i sei numeri dell'orologio del laser + l'ordine di lavoro degli avvisi
+
+
+PERCHÉ IN EXCEL SEMBRA VUOTO
+Il file esce senza valori in cache: le formule ci sono, ma i risultati
+compaiono al primo ricalcolo. Excel lo fa da solo quando apre il file,
+Google Fogli quando lo converte. Non è rotto.
+
+
+COSA NON SI TOCCA
+· La colonna B (COSA FARE OGGI) e tutte le grigie: sono formule.
+  Ci scrivi dentro e quella riga smette di avvisare, per sempre, senza dirlo.
+· Le colonne S e T sono nascoste apposta: lì c'è il ragionamento.
+· Le celle C5, C13, C17, C20, C26 e F5 del RIEPILOGO non si spostano:
+  è da lì che il master NIPEC legge i numeri di questo centro.
+
+
+DA DOVE ESCONO LE FORMULE
+formule.py     la sorgente unica: ogni formula scritta una volta sola
+foglio.py      costruisce il file .xlsx da quelle formule
+valuta.py      un piccolo valutatore di formule, per provarle davvero
+prova.py       i 19 casi (saltata ieri, dormiente da 7 mesi, sospesa...)
+verifica-formule.py  calcola le formule vere sui 19 casi e confronta
+
+Per rigenerare il file:
+   python3 foglio.py   (vedi in fondo a foglio.py la funzione costruisci)
+Per riverificare le formule:
+   python3 verifica-formule.py
+
+La stessa sorgente genera anche i blocchi di formule della pagina
+ALERT-LASER.html: pagina e foglio non possono divergere.
+
+Assistenza 351 846 6025

@@ -378,7 +378,8 @@ footer{
 .tab{width:100%;border-collapse:collapse;font-size:.88rem;min-width:34rem}
 .tab th{text-align:left;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--tenue);border-bottom:1px solid var(--riga-forte);padding:.45rem .5rem}
 .tab td{border-bottom:1px solid var(--riga);padding:.5rem .5rem;vertical-align:top}
-.tab .col{font-family:var(--mono);font-weight:700;color:var(--navy);white-space:nowrap}
+.col{font-family:var(--mono);font-size:.92em;font-weight:700;color:var(--navy);word-break:break-word}
+.tab .col{white-space:nowrap}
 .tab .nota{color:var(--tenue);font-size:.85rem}
 .tab tbody tr:hover{background:var(--blu-tenue)}
 .pallino{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;margin-right:.4rem;vertical-align:baseline}
@@ -504,6 +505,10 @@ footer{
   </div>
 
 
+  <div class="battuta">
+    <p><b>Il foglio esiste gi&agrave; fatto.</b> Sta in <span class="col">2-FOGLI/NIPEC_Cruscotto_Clienti_LASER.xlsx</span>: dentro ci sono tutte le formule di questa pagina, le tendine, i colori, i sei numeri e le tre offerte. Lo carichi su Drive, tasto destro &rarr; Apri con Fogli Google, poi <b>File &rarr; Salva come Foglio Google</b>, e hai finito. Questa pagina serve a capire cosa fa quel foglio &mdash; e a rimetterlo a posto il giorno che qualcuno ci scrive dentro.</p>
+  </div>
+
   <div class="sezione" id="impostazioni">
     <p class="fase-n">1</p>
     <h2>I sei numeri che comandano</h2>
@@ -580,6 +585,8 @@ F12  RECUPERA CON INCENTIVO</pre></div>
       <tr><td class="col">P</td><td>Ancora da fare &euro;</td><td><span class="pallino c"></span>formula</td><td class="nota">Le sedute che restano nel ciclo. &Egrave; il numero che sale al master.</td></tr>
       <tr><td class="col">Q</td><td>Inserita il</td><td><span class="pallino g"></span>lei</td><td class="nota">Data di primo inserimento: serve al conteggio dei nuovi contatti.</td></tr>
       <tr><td class="col">R</td><td>Note</td><td><span class="pallino g"></span>lei</td><td class="nota">Fototipo, farmaci, zone da evitare.</td></tr>
+      <tr><td class="col">S</td><td>avviso <em>(servizio)</em></td><td><span class="pallino c"></span>formula</td><td class="nota">Il ragionamento. Nascosta: non si guarda e non si tocca.</td></tr>
+      <tr><td class="col">T</td><td>ordine <em>(servizio)</em></td><td><span class="pallino c"></span>formula</td><td class="nota">La chiave con cui il foglio OGGI pesca le righe nell&rsquo;ordine giusto.</td></tr>
     </tbody>
   </table>
   </div>
@@ -606,18 +613,23 @@ F12  RECUPERA CON INCENTIVO</pre></div>
 
   <div class="sezione" id="motore">
     <p class="fase-n">3</p>
-    <h2>La formula che accende tutto</h2>
-    <p>Va in <b>B5</b> e si trascina in basso. &Egrave; una riga sola: incollala e basta, non spezzarla mai su pi&ugrave; righe o Fogli te la sparpaglia sulle celle sotto.</p>
+    <h2>Le due formule che accendono tutto</h2>
+    <p>Il ragionamento sta in <b>S</b>, una colonna di servizio nascosta in fondo. La colonna <b>B</b> &mdash; l&rsquo;unica che si legge &mdash; non fa altro che metterle davanti il numero d&rsquo;ordine. Due formule corte invece di un mostro solo: si leggono, e si correggono senza paura.</p>
   </div>
 
 <div class="formula">
-  <div class="capo"><span class="cella">CLIENTI!B5</span><span class="che">COSA FARE OGGI &mdash; poi trascina fino in fondo</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);st;$E5;attesa;AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi);avviso;IFS(AND(pross&lt;&gt;&quot;&quot;;pross&lt;oggi;OR(ult=&quot;&quot;;ult&lt;pross));&quot;APPUNTAMENTO SALTATO&quot;;AND(attesa;pross-oggi=1);&quot;CONFERMA DOMANI&quot;;AND(attesa;pross-oggi=IMPOSTAZIONI!$C$8);&quot;CHIAMA PER CONFERMA&quot;;attesa;&quot;&quot;;st=&quot;Sospesa&quot;;&quot;&quot;;st=&quot;Persa&quot;;&quot;RECUPERA CON INCENTIVO&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi&gt;=EDATE(ult;IMPOSTAZIONI!$C$10));&quot;RECUPERA CON INCENTIVO&quot;;st=&quot;Mantenimento&quot;;IF(AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;=IMPOSTAZIONI!$C$9);&quot;RICHIAMO MANTENIMENTO&quot;;&quot;&quot;);st=&quot;In ciclo&quot;;IFS(sed&gt;=IMPOSTAZIONI!$C$5;&quot;ULTIMA SEDUTA&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;IMPOSTAZIONI!$C$7);&quot;FUORI FINESTRA&quot;;1;&quot;PRENDI APPUNTAMENTO&quot;);st=&quot;Da contattare&quot;;&quot;PRENDI APPUNTAMENTO&quot;;1;&quot;&quot;);IF(avviso=&quot;&quot;;&quot;&quot;;IFERROR(MATCH(avviso;IMPOSTAZIONI!$F$5:$F$12;0);9)&amp;&quot; · &quot;&amp;avviso)))</code>
-  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);st;$E5;attesa;AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi);avviso;IFS(AND(pross&lt;&gt;&quot;&quot;;pross&lt;oggi;OR(ult=&quot;&quot;;ult&lt;pross));&quot;APPUNTAMENTO SALTATO&quot;;AND(attesa;pross-oggi=1);&quot;CONFERMA DOMANI&quot;;AND(attesa;pross-oggi=CONFERMA);&quot;CHIAMA PER CONFERMA&quot;;attesa;&quot;&quot;;st=&quot;Sospesa&quot;;&quot;&quot;;st=&quot;Persa&quot;;&quot;RECUPERA CON INCENTIVO&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi&gt;=EDATE(ult;DORMIENTE_MESI));&quot;RECUPERA CON INCENTIVO&quot;;st=&quot;Mantenimento&quot;;IF(AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;=MANTENIMENTO);&quot;RICHIAMO MANTENIMENTO&quot;;&quot;&quot;);st=&quot;In ciclo&quot;;IFS(sed&gt;=SEDUTE_CICLO;&quot;ULTIMA SEDUTA&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;RIENTRO_MAX);&quot;FUORI FINESTRA&quot;;1;&quot;PRENDI APPUNTAMENTO&quot;);st=&quot;Da contattare&quot;;&quot;PRENDI APPUNTAMENTO&quot;;1;&quot;&quot;);IF(avviso=&quot;&quot;;&quot;&quot;;IFERROR(MATCH(avviso;AVVISI;0);9)&amp;&quot; · &quot;&amp;avviso)))</code>
+  <div class="capo"><span class="cella">CLIENTI!S5</span><span class="che">Il ragionamento &mdash; undici domande in fila</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&lt;TODAY();OR($I5=&quot;&quot;;$I5&lt;$C5));&quot;APPUNTAMENTO SALTATO&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5-TODAY()=1);&quot;CONFERMA DOMANI&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5-TODAY()=IMPOSTAZIONI!$C$8);&quot;CHIAMA PER CONFERMA&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY());&quot;&quot;;IF($E5=&quot;Sospesa&quot;;&quot;&quot;;IF($E5=&quot;Persa&quot;;&quot;RECUPERA CON INCENTIVO&quot;;IF(AND($I5&lt;&gt;&quot;&quot;;TODAY()&gt;=EDATE($I5;IMPOSTAZIONI!$C$10));&quot;RECUPERA CON INCENTIVO&quot;;IF($E5=&quot;Mantenimento&quot;;IF(AND($I5&lt;&gt;&quot;&quot;;TODAY()-$I5&gt;=IMPOSTAZIONI!$C$9);&quot;RICHIAMO MANTENIMENTO&quot;;&quot;&quot;);IF($E5=&quot;In ciclo&quot;;IF(N($D5)&gt;=IMPOSTAZIONI!$C$5;&quot;ULTIMA SEDUTA&quot;;IF(AND($I5&lt;&gt;&quot;&quot;;TODAY()-$I5&gt;IMPOSTAZIONI!$C$7);&quot;FUORI FINESTRA&quot;;&quot;PRENDI APPUNTAMENTO&quot;));IF($E5=&quot;Da contattare&quot;;&quot;PRENDI APPUNTAMENTO&quot;;&quot;&quot;)))))))))))</code>
+  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&lt;TODAY();OR($I5=&quot;&quot;;$I5&lt;$C5));&quot;APPUNTAMENTO SALTATO&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5-TODAY()=1);&quot;CONFERMA DOMANI&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5-TODAY()=CONFERMA);&quot;CHIAMA PER CONFERMA&quot;;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY());&quot;&quot;;IF($E5=&quot;Sospesa&quot;;&quot;&quot;;IF($E5=&quot;Persa&quot;;&quot;RECUPERA CON INCENTIVO&quot;;IF(AND($I5&lt;&gt;&quot;&quot;;TODAY()&gt;=EDATE($I5;DORMIENTE_MESI));&quot;RECUPERA CON INCENTIVO&quot;;IF($E5=&quot;Mantenimento&quot;;IF(AND($I5&lt;&gt;&quot;&quot;;TODAY()-$I5&gt;=MANTENIMENTO);&quot;RICHIAMO MANTENIMENTO&quot;;&quot;&quot;);IF($E5=&quot;In ciclo&quot;;IF(N($D5)&gt;=SEDUTE_CICLO;&quot;ULTIMA SEDUTA&quot;;IF(AND($I5&lt;&gt;&quot;&quot;;TODAY()-$I5&gt;RIENTRO_MAX);&quot;FUORI FINESTRA&quot;;&quot;PRENDI APPUNTAMENTO&quot;));IF($E5=&quot;Da contattare&quot;;&quot;PRENDI APPUNTAMENTO&quot;;&quot;&quot;)))))))))))</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!B5</span><span class="che">COSA FARE OGGI &mdash; l&rsquo;avviso, gi&agrave; numerato</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($S5=&quot;&quot;;&quot;&quot;;IFERROR(MATCH($S5;IMPOSTAZIONI!$F$5:$F$12;0);9)&amp;&quot; · &quot;&amp;$S5)</code>
+  <code class="v-nomi">=IF($S5=&quot;&quot;;&quot;&quot;;IFERROR(MATCH($S5;AVVISI;0);9)&amp;&quot; · &quot;&amp;$S5)</code>
 </div>
 
   <div class="sezione">
-    <p class="etichetta">Come ragiona</p>
+    <p class="etichetta">Come ragiona la S</p>
     <h2>Undici domande, la prima che risponde vince</h2>
     <p>Non &egrave; l&rsquo;ordine di priorit&agrave;: &egrave; l&rsquo;ordine in cui la formula controlla. Una riga produce <b>un avviso solo</b>, sempre il primo che scatta.</p>
   </div>
@@ -636,7 +648,7 @@ F12  RECUPERA CON INCENTIVO</pre></div>
     <li class="passo"><span class="codice">11</span><span class="testo"><b>&Egrave; Da contattare?</b><span class="nota">&rarr; <b>PRENDI APPUNTAMENTO</b>. Una scheda nuova senza data non deve restare ferma.</span></span></li>
   </ol>
 
-  <div class="avvertenza"><span class="lbl">Da sapere</span> Le due conferme scattano al <b>giorno esatto</b> (&minus;7 e &minus;1), non su una finestra: cos&igrave; l&rsquo;avviso non resta acceso una settimana e la lista non mente mai. Se preferisci la finestra, nella formula cambia <span class="col">pross-oggi=CONFERMA</span> in <span class="col">pross-oggi&lt;=CONFERMA</span> &mdash; ma poi resta acceso sei giorni, anche dopo che hai chiamato.</div>
+  <div class="avvertenza"><span class="lbl">Da sapere</span> Le due conferme scattano al <b>giorno esatto</b> (&minus;7 e &minus;1), non su una finestra: cos&igrave; l&rsquo;avviso non resta acceso una settimana e la lista non mente mai. Se preferisci la finestra, nella formula cambia <span class="col">$C5-TODAY()=CONFERMA</span> in <span class="col">$C5-TODAY()&lt;=CONFERMA</span> &mdash; ma poi resta acceso sei giorni, anche dopo che hai chiamato.</div>
 
 
   <div class="sezione" id="avvisi">
@@ -729,8 +741,8 @@ F12  RECUPERA CON INCENTIVO</pre></div>
 
 <div class="formula">
   <div class="capo"><span class="cella">CLIENTI!F5</span><span class="che">Promemoria &mdash; il contorno dell&rsquo;avviso</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);TEXTJOIN(&quot; · &quot;;1;IF(AND(pross&lt;&gt;&quot;&quot;;pross=oggi);&quot;oggi in centro&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;sed+1&gt;=IMPOSTAZIONI!$C$5);&quot;ultima del ciclo — proponi mantenimento&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&lt;IMPOSTAZIONI!$C$6);&quot;rientro anticipato · meno di &quot;&amp;IMPOSTAZIONI!$C$6&amp;&quot; giorni&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&gt;IMPOSTAZIONI!$C$7);&quot;rientro oltre &quot;&amp;IMPOSTAZIONI!$C$7&amp;&quot; giorni&quot;;&quot;&quot;))))</code>
-  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);TEXTJOIN(&quot; · &quot;;1;IF(AND(pross&lt;&gt;&quot;&quot;;pross=oggi);&quot;oggi in centro&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;sed+1&gt;=SEDUTE_CICLO);&quot;ultima del ciclo — proponi mantenimento&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&lt;RIENTRO_MIN);&quot;rientro anticipato · meno di &quot;&amp;RIENTRO_MIN&amp;&quot; giorni&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&gt;RIENTRO_MAX);&quot;rientro oltre &quot;&amp;RIENTRO_MAX&amp;&quot; giorni&quot;;&quot;&quot;))))</code>
+  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;IF(LEN(IF(AND($C5&lt;&gt;&quot;&quot;;$C5=TODAY());&quot; · oggi in centro&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();N($D5)+1&gt;=IMPOSTAZIONI!$C$5);&quot; · ultima del ciclo, proponi il mantenimento&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&lt;IMPOSTAZIONI!$C$6);&quot; · rientro anticipato, meno di &quot;&amp;IMPOSTAZIONI!$C$6&amp;&quot; giorni&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&gt;IMPOSTAZIONI!$C$7);&quot; · rientro oltre &quot;&amp;IMPOSTAZIONI!$C$7&amp;&quot; giorni&quot;;&quot;&quot;))=0;&quot;&quot;;MID(IF(AND($C5&lt;&gt;&quot;&quot;;$C5=TODAY());&quot; · oggi in centro&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();N($D5)+1&gt;=IMPOSTAZIONI!$C$5);&quot; · ultima del ciclo, proponi il mantenimento&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&lt;IMPOSTAZIONI!$C$6);&quot; · rientro anticipato, meno di &quot;&amp;IMPOSTAZIONI!$C$6&amp;&quot; giorni&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&gt;IMPOSTAZIONI!$C$7);&quot; · rientro oltre &quot;&amp;IMPOSTAZIONI!$C$7&amp;&quot; giorni&quot;;&quot;&quot;);4;300)))</code>
+  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;IF(LEN(IF(AND($C5&lt;&gt;&quot;&quot;;$C5=TODAY());&quot; · oggi in centro&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();N($D5)+1&gt;=SEDUTE_CICLO);&quot; · ultima del ciclo, proponi il mantenimento&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&lt;RIENTRO_MIN);&quot; · rientro anticipato, meno di &quot;&amp;RIENTRO_MIN&amp;&quot; giorni&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&gt;RIENTRO_MAX);&quot; · rientro oltre &quot;&amp;RIENTRO_MAX&amp;&quot; giorni&quot;;&quot;&quot;))=0;&quot;&quot;;MID(IF(AND($C5&lt;&gt;&quot;&quot;;$C5=TODAY());&quot; · oggi in centro&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();N($D5)+1&gt;=SEDUTE_CICLO);&quot; · ultima del ciclo, proponi il mantenimento&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&lt;RIENTRO_MIN);&quot; · rientro anticipato, meno di &quot;&amp;RIENTRO_MIN&amp;&quot; giorni&quot;;&quot;&quot;)&amp;IF(AND($C5&lt;&gt;&quot;&quot;;$C5&gt;=TODAY();$I5&lt;&gt;&quot;&quot;;$C5-$I5&gt;RIENTRO_MAX);&quot; · rientro oltre &quot;&amp;RIENTRO_MAX&amp;&quot; giorni&quot;;&quot;&quot;);4;300)))</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">CLIENTI!J5</span><span class="che">Giorni dall&rsquo;ultima seduta</span><button class="copia" type="button">copia</button></div>
@@ -749,8 +761,13 @@ F12  RECUPERA CON INCENTIVO</pre></div>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">CLIENTI!M5</span><span class="che">Offerta da usare &mdash; pesca da INCENTIVI</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=IF($B5=&quot;&quot;;&quot;&quot;;IFS(REGEXMATCH($B5;&quot;RECUPERA CON INCENTIVO&quot;);INCENTIVI!$C$7;REGEXMATCH($B5;&quot;RICHIAMO MANTENIMENTO&quot;);INCENTIVI!$C$6;REGEXMATCH($B5;&quot;FUORI FINESTRA|ULTIMA SEDUTA&quot;);INCENTIVI!$C$5;1;&quot;&quot;))</code>
-  <code class="v-nomi">=IF($B5=&quot;&quot;;&quot;&quot;;IFS(REGEXMATCH($B5;&quot;RECUPERA CON INCENTIVO&quot;);INCENTIVI!$C$7;REGEXMATCH($B5;&quot;RICHIAMO MANTENIMENTO&quot;);INCENTIVI!$C$6;REGEXMATCH($B5;&quot;FUORI FINESTRA|ULTIMA SEDUTA&quot;);INCENTIVI!$C$5;1;&quot;&quot;))</code>
+  <code class="v-celle">=IF($S5=&quot;&quot;;&quot;&quot;;IF($S5=&quot;RECUPERA CON INCENTIVO&quot;;INCENTIVI!$C$7;IF($S5=&quot;RICHIAMO MANTENIMENTO&quot;;INCENTIVI!$C$6;IF(OR($S5=&quot;FUORI FINESTRA&quot;;$S5=&quot;ULTIMA SEDUTA&quot;);INCENTIVI!$C$5;&quot;&quot;))))</code>
+  <code class="v-nomi">=IF($S5=&quot;&quot;;&quot;&quot;;IF($S5=&quot;RECUPERA CON INCENTIVO&quot;;INCENTIVI!$C$7;IF($S5=&quot;RICHIAMO MANTENIMENTO&quot;;INCENTIVI!$C$6;IF(OR($S5=&quot;FUORI FINESTRA&quot;;$S5=&quot;ULTIMA SEDUTA&quot;);INCENTIVI!$C$5;&quot;&quot;))))</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!T5</span><span class="che">La chiave d&rsquo;ordine &mdash; avviso, poi chi ha lasciato di pi&ugrave;</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($S5=&quot;&quot;;&quot;&quot;;IFERROR(MATCH($S5;IMPOSTAZIONI!$F$5:$F$12;0);9)*100000000+(9999-MIN(9999;ROUND(N($O5)/100;0)))*10000+ROW())</code>
+  <code class="v-nomi">=IF($S5=&quot;&quot;;&quot;&quot;;IFERROR(MATCH($S5;AVVISI;0);9)*100000000+(9999-MIN(9999;ROUND(N($O5)/100;0)))*10000+ROW())</code>
 </div>
 
   <div class="avvertenza"><span class="lbl">Attenzione</span> Dopo aver incollato <b>J5</b> e <b>K5</b>, Fogli le formatta come date e ti fa vedere il 1899. Selezioni le due colonne e fai <b>Formato &rarr; Numero &rarr; Numero</b>.</div>
@@ -823,75 +840,65 @@ F12  RECUPERA CON INCENTIVO</pre></div>
 
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!C5</span><span class="che">DA RICHIAMARE &mdash; quante righe hanno un avviso acceso</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=SUMPRODUCT((CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;)*1)</code>
-  <code class="v-nomi">=SUMPRODUCT((CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;)*1)</code>
+  <code class="v-celle">=COUNTIF(CLIENTI!$S$5:$S$304;&quot;?*&quot;)</code>
+  <code class="v-nomi">=COUNTIF(CLIENTI!$S$5:$S$304;&quot;?*&quot;)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!C7</span><span class="che">Copertura appuntamento &mdash; formato percentuale</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=IFERROR(COUNTIFS(CLIENTI!$E$5:$E;&quot;In ciclo&quot;;CLIENTI!$C$5:$C;&quot;&gt;=&quot;&amp;TODAY())/COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;);&quot;&quot;)</code>
-  <code class="v-nomi">=IFERROR(COUNTIFS(CLIENTI!$E$5:$E;&quot;In ciclo&quot;;CLIENTI!$C$5:$C;&quot;&gt;=&quot;&amp;TODAY())/COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;);&quot;&quot;)</code>
+  <code class="v-celle">=IFERROR(COUNTIFS(CLIENTI!$E$5:$E$304;&quot;In ciclo&quot;;CLIENTI!$C$5:$C$304;&quot;&gt;=&quot;&amp;TODAY())/COUNTIF(CLIENTI!$E$5:$E$304;&quot;In ciclo&quot;);&quot;&quot;)</code>
+  <code class="v-nomi">=IFERROR(COUNTIFS(CLIENTI!$E$5:$E$304;&quot;In ciclo&quot;;CLIENTI!$C$5:$C$304;&quot;&gt;=&quot;&amp;TODAY())/COUNTIF(CLIENTI!$E$5:$E$304;&quot;In ciclo&quot;);&quot;&quot;)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!C8</span><span class="che">Dormienti oltre i mesi impostati</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=SUMPRODUCT((CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;=EDATE(TODAY();-IMPOSTAZIONI!$C$10)))</code>
-  <code class="v-nomi">=SUMPRODUCT((CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;=EDATE(TODAY();-DORMIENTE_MESI)))</code>
+  <code class="v-celle">=SUMPRODUCT((CLIENTI!$A$5:$A$304&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I$304&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I$304&lt;=EDATE(TODAY();-IMPOSTAZIONI!$C$10)))</code>
+  <code class="v-nomi">=SUMPRODUCT((CLIENTI!$A$5:$A$304&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I$304&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I$304&lt;=EDATE(TODAY();-DORMIENTE_MESI)))</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!C13</span><span class="che">Percorsi attivi &mdash; in ciclo</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;)</code>
-  <code class="v-nomi">=COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;)</code>
+  <code class="v-celle">=COUNTIF(CLIENTI!$E$5:$E$304;&quot;In ciclo&quot;)</code>
+  <code class="v-nomi">=COUNTIF(CLIENTI!$E$5:$E$304;&quot;In ciclo&quot;)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!C17</span><span class="che">Persone in rubrica</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=COUNTA(CLIENTI!$A$5:$A)</code>
-  <code class="v-nomi">=COUNTA(CLIENTI!$A$5:$A)</code>
+  <code class="v-celle">=COUNTA(CLIENTI!$A$5:$A$304)</code>
+  <code class="v-nomi">=COUNTA(CLIENTI!$A$5:$A$304)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!C20</span><span class="che">Contatti nuovi negli ultimi 30 giorni</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=COUNTIFS(CLIENTI!$Q$5:$Q;&quot;&gt;=&quot;&amp;TODAY()-30;CLIENTI!$Q$5:$Q;&quot;&lt;=&quot;&amp;TODAY())</code>
-  <code class="v-nomi">=COUNTIFS(CLIENTI!$Q$5:$Q;&quot;&gt;=&quot;&amp;TODAY()-30;CLIENTI!$Q$5:$Q;&quot;&lt;=&quot;&amp;TODAY())</code>
+  <code class="v-celle">=COUNTIFS(CLIENTI!$Q$5:$Q$304;&quot;&gt;=&quot;&amp;TODAY()-30;CLIENTI!$Q$5:$Q$304;&quot;&lt;=&quot;&amp;TODAY())</code>
+  <code class="v-nomi">=COUNTIFS(CLIENTI!$Q$5:$Q$304;&quot;&gt;=&quot;&amp;TODAY()-30;CLIENTI!$Q$5:$Q$304;&quot;&lt;=&quot;&amp;TODAY())</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!C26</span><span class="che">Ultimo inserimento &mdash; formato data</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=IFERROR(MAX(CLIENTI!$Q$5:$Q);&quot;&quot;)</code>
-  <code class="v-nomi">=IFERROR(MAX(CLIENTI!$Q$5:$Q);&quot;&quot;)</code>
+  <code class="v-celle">=IFERROR(MAX(CLIENTI!$Q$5:$Q$304);&quot;&quot;)</code>
+  <code class="v-nomi">=IFERROR(MAX(CLIENTI!$Q$5:$Q$304);&quot;&quot;)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!F5</span><span class="che">Da incassare &euro; &mdash; sale al master</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=SUM(CLIENTI!$P$5:$P)</code>
-  <code class="v-nomi">=SUM(CLIENTI!$P$5:$P)</code>
+  <code class="v-celle">=SUM(CLIENTI!$P$5:$P$304)</code>
+  <code class="v-nomi">=SUM(CLIENTI!$P$5:$P$304)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!F6</span><span class="che">Gi&agrave; incassato &euro; &mdash; tutto il centro</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=SUM(CLIENTI!$O$5:$O)</code>
-  <code class="v-nomi">=SUM(CLIENTI!$O$5:$O)</code>
+  <code class="v-celle">=SUM(CLIENTI!$O$5:$O$304)</code>
+  <code class="v-nomi">=SUM(CLIENTI!$O$5:$O$304)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">RIEPILOGO!F7</span><span class="che">Valore medio per cliente &euro;</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=IFERROR(SUM(CLIENTI!$O$5:$O)/COUNTA(CLIENTI!$A$5:$A);0)</code>
-  <code class="v-nomi">=IFERROR(SUM(CLIENTI!$O$5:$O)/COUNTA(CLIENTI!$A$5:$A);0)</code>
+  <code class="v-celle">=IFERROR(SUM(CLIENTI!$O$5:$O$304)/COUNTA(CLIENTI!$A$5:$A$304);0)</code>
+  <code class="v-nomi">=IFERROR(SUM(CLIENTI!$O$5:$O$304)/COUNTA(CLIENTI!$A$5:$A$304);0)</code>
 </div>
 
   <div class="sezione">
     <p class="etichetta">Il quadro della giornata</p>
     <h2>Quanti per ogni avviso</h2>
-    <p>Due formule sole, in <b>B30</b> e <b>C30</b>: si espandono da sole sulle otto righe e restano in ordine di lavoro.</p>
+    <p>In <b>B30:B37</b> i nomi degli avvisi, presi da IMPOSTAZIONI con <span class="col">=IMPOSTAZIONI!F5</span> e trascinati in basso. Accanto, il conteggio: cos&igrave; l&rsquo;elenco resta sempre nell&rsquo;ordine di lavoro che hai deciso l&agrave;.</p>
   </div>
 
 <div class="formula">
-  <div class="capo"><span class="cella">RIEPILOGO!B30</span><span class="che">I nomi degli otto avvisi</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=ARRAYFORMULA(IMPOSTAZIONI!$F$5:$F$12)</code>
-  <code class="v-nomi">=ARRAYFORMULA(AVVISI)</code>
-</div>
-<div class="formula">
-  <div class="capo"><span class="cella">RIEPILOGO!C30</span><span class="che">Quante clienti per avviso</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=ARRAYFORMULA(IF(IMPOSTAZIONI!$F$5:$F$12=&quot;&quot;;&quot;&quot;;COUNTIF(CLIENTI!$B$5:$B;&quot;*&quot;&amp;IMPOSTAZIONI!$F$5:$F$12&amp;&quot;*&quot;)))</code>
-  <code class="v-nomi">=ARRAYFORMULA(IF(AVVISI=&quot;&quot;;&quot;&quot;;COUNTIF(CLIENTI!$B$5:$B;&quot;*&quot;&amp;AVVISI&amp;&quot;*&quot;)))</code>
-</div>
-<div class="formula">
-  <div class="capo"><span class="cella">RIEPILOGO!E30</span><span class="che">Le cinque clienti che hanno lasciato di pi&ugrave;</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=ARRAY_CONSTRAIN(SORT(FILTER(HSTACK(CLIENTI!$A$5:$A;CLIENTI!$O$5:$O);CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;);2;0);5;2)</code>
-  <code class="v-nomi">=ARRAY_CONSTRAIN(SORT(FILTER(HSTACK(CLIENTI!$A$5:$A;CLIENTI!$O$5:$O);CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;);2;0);5;2)</code>
+  <div class="capo"><span class="cella">RIEPILOGO!C30</span><span class="che">Quante clienti per avviso &mdash; una per riga, da C30 a C37</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=COUNTIF(CLIENTI!$S$5:$S$304;$B30)</code>
+  <code class="v-nomi">=COUNTIF(CLIENTI!$S$5:$S$304;$B30)</code>
 </div>
 
   <div class="battuta">
@@ -902,13 +909,18 @@ F12  RECUPERA CON INCENTIVO</pre></div>
   <div class="sezione" id="oggi">
     <p class="fase-n">9</p>
     <h2>Il foglio OGGI</h2>
-    <p>Un foglio nuovo, una formula sola in <b>A5</b>. Tira fuori solo le righe con un avviso acceso, gi&agrave; ordinate: la titolare apre questo dal telefono e lavora dall&rsquo;alto senza toccare la rubrica.</p>
+    <p>Un foglio nuovo. In <b>G5</b> (colonna nascosta) la chiave, in <b>A5</b> il nome: le due si trascinano in basso per una trentina di righe, e A5 si trascina anche a destra. Tira fuori solo le righe con un avviso acceso, gi&agrave; in ordine di lavoro. La titolare apre questo, la mattina, e non tocca mai la rubrica.</p>
   </div>
 
 <div class="formula">
-  <div class="capo"><span class="cella">OGGI!A5</span><span class="che">La lista del giorno, gi&agrave; in ordine</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=IFERROR(SORT(FILTER(CLIENTI!$A$5:$H;CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;);2;1);&quot;Niente da fare oggi&quot;)</code>
-  <code class="v-nomi">=IFERROR(SORT(FILTER(CLIENTI!$A$5:$H;CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;);2;1);&quot;Niente da fare oggi&quot;)</code>
+  <div class="capo"><span class="cella">OGGI!G5</span><span class="che">La chiave: pesca la riga pi&ugrave; urgente non ancora presa</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IFERROR(SMALL(CLIENTI!$T$5:$T$304;ROW()-4);&quot;&quot;)</code>
+  <code class="v-nomi">=IFERROR(SMALL(CLIENTI!$T$5:$T$304;ROW()-4);&quot;&quot;)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">OGGI!A5</span><span class="che">Il nome &mdash; poi trascina a destra per le altre colonne</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($G5=&quot;&quot;;&quot;&quot;;IFERROR(INDEX(CLIENTI!A$5:A$304;MATCH($G5;CLIENTI!$T$5:$T$304;0));&quot;&quot;))</code>
+  <code class="v-nomi">=IF($G5=&quot;&quot;;&quot;&quot;;IFERROR(INDEX(CLIENTI!A$5:A$304;MATCH($G5;CLIENTI!$T$5:$T$304;0));&quot;&quot;))</code>
 </div>
 
   <div class="avvertenza"><span class="lbl">Perch&eacute; conviene</span> Ordinare la rubrica a mano &egrave; il modo pi&ugrave; veloce per rovinarla: basta selezionare una colonna sola invece della riga intera e i nomi si staccano dai dati. Con il foglio OGGI non si ordina mai niente.</div>
@@ -917,23 +929,23 @@ F12  RECUPERA CON INCENTIVO</pre></div>
   <div class="sezione" id="colori">
     <p class="fase-n">10</p>
     <h2>I colori e la tendina</h2>
-    <p>Formattazione condizionale su <b>A5:R1000</b> del foglio CLIENTI, regola &laquo;la formula personalizzata &egrave;&raquo;. Tre regole, in quest&rsquo;ordine.</p>
+    <p>Formattazione condizionale su <b>A5:R304</b> del foglio CLIENTI, regola &laquo;la formula personalizzata &egrave;&raquo;. Il numero davanti all&rsquo;avviso <em>&egrave;</em> gi&agrave; la priorit&agrave;: alle regole basta leggere quello.</p>
   </div>
 
 <div class="formula">
   <div class="capo"><span class="cella">Regola 1 · rosso</span><span class="che">Le due cose che si spengono stasera</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=REGEXMATCH($B5;&quot;CONFERMA DOMANI|APPUNTAMENTO SALTATO&quot;)</code>
-  <code class="v-nomi">=REGEXMATCH($B5;&quot;CONFERMA DOMANI|APPUNTAMENTO SALTATO&quot;)</code>
+  <code class="v-celle">=OR(LEFT($B5;1)=&quot;1&quot;;LEFT($B5;1)=&quot;2&quot;;LEFT($B5;1)=&quot;3&quot;)</code>
+  <code class="v-nomi">=OR(LEFT($B5;1)=&quot;1&quot;;LEFT($B5;1)=&quot;2&quot;;LEFT($B5;1)=&quot;3&quot;)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">Regola 2 · giallo</span><span class="che">Gli appuntamenti che mancano</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=REGEXMATCH($B5;&quot;CHIAMA PER CONFERMA|PRENDI APPUNTAMENTO|FUORI FINESTRA&quot;)</code>
-  <code class="v-nomi">=REGEXMATCH($B5;&quot;CHIAMA PER CONFERMA|PRENDI APPUNTAMENTO|FUORI FINESTRA&quot;)</code>
+  <code class="v-celle">=OR(LEFT($B5;1)=&quot;4&quot;;LEFT($B5;1)=&quot;5&quot;)</code>
+  <code class="v-nomi">=OR(LEFT($B5;1)=&quot;4&quot;;LEFT($B5;1)=&quot;5&quot;)</code>
 </div>
 <div class="formula">
   <div class="capo"><span class="cella">Regola 3 · verde</span><span class="che">Le occasioni: upsell, mantenimento, recupero</span><button class="copia" type="button">copia</button></div>
-  <code class="v-celle">=REGEXMATCH($B5;&quot;ULTIMA SEDUTA|RICHIAMO MANTENIMENTO|RECUPERA CON INCENTIVO&quot;)</code>
-  <code class="v-nomi">=REGEXMATCH($B5;&quot;ULTIMA SEDUTA|RICHIAMO MANTENIMENTO|RECUPERA CON INCENTIVO&quot;)</code>
+  <code class="v-celle">=OR(LEFT($B5;1)=&quot;6&quot;;LEFT($B5;1)=&quot;7&quot;;LEFT($B5;1)=&quot;8&quot;)</code>
+  <code class="v-nomi">=OR(LEFT($B5;1)=&quot;6&quot;;LEFT($B5;1)=&quot;7&quot;;LEFT($B5;1)=&quot;8&quot;)</code>
 </div>
 
   <div class="sezione">
@@ -946,7 +958,7 @@ Colonna C   &egrave; una data valida       (rifiuta il testo)
 Colonna I   &egrave; una data valida       (rifiuta il testo)
 Colonna D   &egrave; un numero, tra 0 e SEDUTE_CICLO</pre></div>
 
-  <div class="avvertenza"><span class="lbl">Attenzione</span> Nelle formule i booleani sono scritti <b>1</b> e <b>0</b> invece di VERO e FALSO, e il separatore degli argomenti &egrave; il <b>punto e virgola</b>. In Google Fogli in italiano funzionano cos&igrave; senza sorprese; se le porti in Excel, virgola e VERO/FALSO.</div>
+  <div class="avvertenza"><span class="lbl">Attenzione</span> Qui il separatore degli argomenti &egrave; il <b>punto e virgola</b>, come vuole Google Fogli in italiano. In Excel &egrave; la <b>virgola</b> &mdash; e il file gi&agrave; pronto ce l&rsquo;ha cos&igrave;, quindi non devi convertire niente a mano.</div>
 
 
   <div class="sezione" id="rotture">
