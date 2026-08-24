@@ -135,6 +135,12 @@ in locale (Chrome/Edge) e scrive con la File System Access API dentro
 Drive per desktop**, non l'app: quindi serve Drive installato e la cartella
 sincronizzata in locale — vederla dal browser non basta.
 
+**Il passaggio che blocca sempre:** Drive per desktop **non sincronizza
+«Condivisi con me»**. Chi riceve la condivisione deve fare tasto destro
+sulla cartella → *Organizza* → *Aggiungi scorciatoia a Drive* → *Il mio
+Drive*. Finché non lo fa, la cartella sul suo computer non esiste e l'app
+non può aprirla. Istruzioni complete in `PER UARDA - primo avvio.txt`.
+
 Conseguenza da non dimenticare: **non è lavoro simultaneo.** Drive non
 fonde le modifiche, tiene l'ultima versione. Chi apre preme sempre prima
 `Dati → Ricarica dal file`, e ci si avvisa su WhatsApp («entro io» / «ho
