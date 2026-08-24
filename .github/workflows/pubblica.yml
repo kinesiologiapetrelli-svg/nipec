@@ -1,0 +1,41 @@
+# Pubblica il sito da sé: appena qualcosa cambia sul ramo principale,
+# GitHub rimette online le pagine e l'app. Nessun trascinamento, nessun clic.
+name: Pubblica le pagine
+
+on:
+  push:
+    branches: [claude/persefore-y6fpo8]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pagine
+  cancel-in-progress: false
+
+jobs:
+  pubblica:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.online.outputs.page_url }}
+    steps:
+      - name: Prendi i file
+        uses: actions/checkout@v4
+
+      - name: Accendi le Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Prepara il pacchetto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Mettilo online
+        id: online
+        uses: actions/deploy-pages@v4
