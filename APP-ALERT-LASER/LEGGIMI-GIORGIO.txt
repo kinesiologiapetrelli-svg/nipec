@@ -26,23 +26,33 @@ link non viene riaperto.
 
 IL PRIMO GIRO, IN CENTRO
 1. Apri l'app, scrivi il nome del centro
-2. Setup → i sei numeri (di solito vanno bene così) e le tre offerte
-3. Rubrica → aggiungi le prime venti clienti. Venti bastano.
-4. Oggi → falle chiamare la prima, con te lì che stai zitto
+2. Il mio centro -> MISURA LA SVEGLIA. E' il passaggio che decide se
+   l'app sopravvive: senza quel promemoria nel suo calendario, l'icona
+   si spegne in due settimane. Fallo tu, davanti a lei.
+3. Il mio centro -> i sei numeri (controlla quante sedute fa un ciclo
+   da lei: di serie sono 8) e le tre offerte
+4. Clienti -> aggiungi le prime venti. Bastano: servono a far partire.
+5. Oggi -> falle chiamare la prima, con te li' che stai zitto
 
 
 I DATI
 Stanno solo dentro il browser di quel dispositivo. Nessun account,
 nessuna password, nessun server. Non escono da lì.
-Cambio telefono / backup: NIPEC → Copia di sicurezza (file .json),
-poi Importa sul telefono nuovo.
+Cambio telefono / backup: Il mio centro -> Salva una copia (file .json),
+poi Importa sul telefono nuovo. L'app glielo ricorda da sola ogni
+trenta giorni.
+
+L'APP MOSTRA SOLO TRE TELEFONATE AL GIORNO
+Non e' un limite tecnico: e' una scelta. Venti righe rosse in fila non
+si organizzano, si evitano. Le altre stanno dietro "Vedi tutte", e le
+apre lei se se la sente.
 
 
 COME CONTROLLI SE LA USA, SENZA VEDERE LE SUE CLIENTI
-NIPEC → Il battito. Genera sei numeri e una data:
+Il mio centro -> I numeri per NIPEC. Genera sei numeri e una data:
   da richiamare ; persone ; nuove 30 gg ; in ciclo ; da incassare ; ultimo inserimento
 Nessun nome, nessun telefono, mai. Lei tocca "Manda a NIPEC" e ti arriva
-su WhatsApp; tu incolli la riga nel master, colonne I→N.
+su WhatsApp; tu incolli la riga nel master, colonne I->N.
 Se il battito non arriva più, quel centro ha smesso: è la disdetta vista
 con mesi di anticipo.
 

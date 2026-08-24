@@ -24,21 +24,22 @@ function caricaDemo() {
     { nome: "Offerta Laser 2", testo: "richiamo di mantenimento a 39 € invece di 60", scade: f(30) },
     { nome: "Offerta Laser 3", testo: "tre sedute al prezzo di due, per ripartire", scade: f(15) }
   ];
+  S.imp.sedute = 8;              /* il ciclo vero, non quello vecchio da 12 */
   var righe = [
-    ["Anna Ferri",       "3391112201", "ascelle", "In ciclo",      11, 45, g(23), f(1)],
-    ["Bea Conti",        "3391112202", "inguine", "In ciclo",       5, 70, g(21), f(7)],
-    ["Chiara Neri",      "3391112203", "gambe",   "In ciclo",       6, 90, g(30), g(2)],
-    ["Daniela Russo",    "3391112204", "ascelle", "In ciclo",       3, 45, g(2),  ""],
-    ["Elena Vitale",     "3391112205", "inguine", "In ciclo",       7, 70, g(34), ""],
-    ["Federica Sala",    "3391112206", "gambe",   "In ciclo",      12, 90, g(12), ""],
-    ["Giulia Marino",    "3391112207", "ascelle", "Mantenimento",  12, 45, g(95), ""],
-    ["Ilaria Costa",     "3391112208", "gambe",   "Persa",          4, 90, g(150), ""],
-    ["Laura Greco",      "3391112209", "inguine", "In ciclo",       4, 70, g(210), ""],
-    ["Martina Bruno",    "3391112210", "gambe",   "Sospesa",        5, 90, g(60), ""],
-    ["Nadia Fontana",    "3391112211", "ascelle", "In ciclo",       8, 45, g(20), f(12)],
-    ["Paola Ricci",      "3391112212", "inguine", "In ciclo",       2, 70, g(24), o],
-    ["Sara De Luca",     "3391112213", "gambe",   "In ciclo",      10, 90, g(22), f(3)],
-    ["Valentina Longo",  "3391112214", "ascelle", "Mantenimento",  12, 45, g(40), ""]
+    ["Anna Ferri",       "3391112201", "ascelle", "In ciclo",       7, 45, g(23), f(1)],
+    ["Bea Conti",        "3391112202", "inguine", "In ciclo",       3, 70, g(21), f(7)],
+    ["Chiara Neri",      "3391112203", "gambe",   "In ciclo",       4, 90, g(30), g(2)],
+    ["Daniela Russo",    "3391112204", "ascelle", "In ciclo",       2, 45, g(2),  ""],
+    ["Elena Vitale",     "3391112205", "inguine", "In ciclo",       5, 70, g(34), ""],
+    ["Federica Sala",    "3391112206", "gambe",   "In ciclo",       8, 90, g(12), ""],
+    ["Giulia Marino",    "3391112207", "ascelle", "Mantenimento",   8, 45, g(95), ""],
+    ["Ilaria Costa",     "3391112208", "gambe",   "Persa",          3, 90, g(150), ""],
+    ["Laura Greco",      "3391112209", "inguine", "In ciclo",       3, 70, g(210), ""],
+    ["Martina Bruno",    "3391112210", "gambe",   "Sospesa",        4, 90, g(60), ""],
+    ["Nadia Fontana",    "3391112211", "ascelle", "In ciclo",       6, 45, g(20), f(12)],
+    ["Paola Ricci",      "3391112212", "inguine", "In ciclo",       1, 70, g(24), o],
+    ["Sara De Luca",     "3391112213", "gambe",   "In ciclo",       7, 90, g(22), f(3)],
+    ["Valentina Longo",  "3391112214", "ascelle", "Mantenimento",   8, 45, g(40), ""]
   ];
   S.clienti = righe.map(function (r, i) {
     return { id: "demo" + i, nome: r[0], tel: r[1], zona: r[2], stato: r[3],
@@ -91,7 +92,7 @@ def genera():
            '<button class="btn" type="button" data-az="prova">Ricarica la demo da capo</button>')
     cambia("'<button class=\"btn\" type=\"button\" data-vai=\"prova\">Carica tre clienti di prova</button>' +",
            "'<button class=\"btn\" type=\"button\" data-vai=\"prova\">Ricarica la demo</button>' +")
-    cambia("<p style=\"margin-bottom:.7rem\">La rubrica sta solo su questo dispositivo, dentro il browser. Nessun account, nessun server. Se cambi telefono, portala con la copia di sicurezza.</p>",
+    cambia("<p style=\"margin-bottom:.7rem\">Stanno solo su questo telefono. Nessuno le vede, nemmeno noi. Ma se perdi il telefono le perdi: <b>salva una copia ogni tanto</b>, e tienila dove vuoi tu.</p>",
            "<p style=\"margin-bottom:.7rem\"><b>Questa è la copia dimostrativa.</b> Le clienti qui dentro sono inventate e servono a far vedere come funziona. Puoi combinarci quello che vuoi: si rimette a posto con un pulsante.</p>")
 
     # la demo si carica prima che parta l'ultimo blocco di codice

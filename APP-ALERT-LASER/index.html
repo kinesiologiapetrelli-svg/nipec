@@ -67,7 +67,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 /* ---------- barra viste ---------- */
 .barra{
   position:fixed; left:0; right:0; bottom:0; z-index:30;
-  display:grid; grid-template-columns:repeat(5,1fr);
+  display:grid; grid-template-columns:repeat(4,1fr);
   background:color-mix(in srgb, var(--carta) 94%, transparent);
   backdrop-filter:blur(10px); border-top:1px solid var(--riga);
   padding-bottom:env(safe-area-inset-bottom);
@@ -86,7 +86,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 @media(min-width:56rem){
   body{padding-bottom:2rem;padding-top:0}
-  .barra{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(5,auto);justify-content:center;gap:.4rem;border-top:0;border-bottom:1px solid var(--riga)}
+  .barra{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(4,auto);justify-content:center;gap:.4rem;border-top:0;border-bottom:1px solid var(--riga)}
   .barra button{flex-direction:row;padding:.7rem 1.1rem;font-size:.8rem}
 }
 
@@ -242,19 +242,15 @@ dialog .piede{padding:.8rem 1rem;border-top:1px solid var(--riga);display:flex;g
   </button>
   <button type="button" data-vista="rubrica">
     <svg viewBox="0 0 24 24"><path d="M4 4h13a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4z"/><path d="M4 8H2M4 12H2M4 16H2"/><circle cx="12" cy="11" r="2.4"/><path d="M8.5 17c.6-1.7 2-2.4 3.5-2.4s2.9.7 3.5 2.4"/></svg>
-    Rubrica
+    Clienti
   </button>
   <button type="button" data-vista="numeri">
     <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
-    Numeri
-  </button>
-  <button type="button" data-vista="nipec">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-    NIPEC
+    Come va
   </button>
   <button type="button" data-vista="setup">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
-    Setup
+    Il mio centro
   </button>
 </nav>
 
@@ -269,7 +265,7 @@ dialog .piede{padding:.8rem 1rem;border-top:1px solid var(--riga);display:flex;g
   <!-- ====================== RUBRICA ====================== -->
   <section class="vista" id="v-rubrica" hidden>
     <div class="cerca">
-      <input type="search" id="cerca" placeholder="Cerca nome o zona" autocomplete="off">
+      <input type="search" id="cerca" placeholder="Cerca una cliente" autocomplete="off">
       <button class="btn pieno" type="button" id="nuova">+ Nuova</button>
     </div>
     <div class="filtri" id="filtri"></div>
@@ -281,9 +277,9 @@ dialog .piede{padding:.8rem 1rem;border-top:1px solid var(--riga);display:flex;g
     <div id="numeri-corpo"></div>
   </section>
 
-  <!-- ======================= NIPEC ======================= -->
+  <!-- ============ dentro "Il mio centro" ============ -->
   <section class="vista" id="v-nipec" hidden>
-    <div class="titolo"><h2>Il battito</h2></div>
+    <div class="titolo"><h2>I numeri per NIPEC</h2></div>
     <div class="patto">
       <h3>Cosa esce da questo dispositivo</h3>
       <p>Sei numeri e una data. <b>Nessun nome, nessun telefono, nessuna cliente</b> — mai. La rubrica resta qui dentro anche quando mandi il battito.</p>
@@ -357,6 +353,29 @@ var AVVISI = [
 
 var STATI = ["Da contattare", "In ciclo", "Mantenimento", "Sospesa", "Persa"];
 
+/* ============ COME SI DICE ============
+   A sinistra il codice che usa il motore, il foglio e il battito.
+   A destra le parole che legge la titolare. Se una parola qui dentro
+   ha bisogno di essere spiegata, è la parola sbagliata. */
+var ETICHETTA = {
+  "CONFERMA DOMANI":        "Conferma per domani",
+  "CHIAMA PER CONFERMA":    "Ricordale la data",
+  "APPUNTAMENTO SALTATO":   "Non è venuta: richiamala",
+  "PRENDI APPUNTAMENTO":    "Fissa il prossimo",
+  "FUORI FINESTRA":         "È in ritardo: rimettila in agenda",
+  "ULTIMA SEDUTA":          "Ha finito: proponile il mantenimento",
+  "RICHIAMO MANTENIMENTO":  "Sono passati tre mesi",
+  "RECUPERA CON INCENTIVO": "È sparita: riportala con un'offerta"
+};
+var ETICHETTA_STATO = {
+  "Da contattare": "Nuova, mai venuta",
+  "In ciclo":      "Sta facendo il ciclo",
+  "Mantenimento":  "Ha finito il ciclo",
+  "Sospesa":       "In pausa",
+  "Persa":         "Sparita"
+};
+function comeSiDice(codice) { return ETICHETTA[codice] || codice; }
+
 /* quale delle tre offerte serve a quale avviso */
 var FAMIGLIA = {
   "FUORI FINESTRA": 0, "ULTIMA SEDUTA": 0,
@@ -384,14 +403,14 @@ var COPIONE = {
 };
 
 var PERCHE = {
-  "CONFERMA DOMANI": "Domani ha l'appuntamento. Se non lo confermi oggi, non lo confermi più.",
-  "CHIAMA PER CONFERMA": "Mancano sette giorni esatti. È l'avviso che si spegne da solo domani.",
-  "APPUNTAMENTO SALTATO": "La data è passata e non risulta venuta. Ogni giorno che passa la recuperi meno.",
-  "PRENDI APPUNTAMENTO": "È uscita senza il prossimo appuntamento. È il buco numero uno.",
-  "FUORI FINESTRA": "Oltre la finestra di rientro: la ricrescita è fuori fase, va rimessa in riga.",
-  "ULTIMA SEDUTA": "Ha finito il ciclo. È il momento in cui vale di più: mantenimento o zona nuova.",
-  "RICHIAMO MANTENIMENTO": "Tre mesi dall'ultima seduta. È il fatturato dell'anno prossimo.",
-  "RECUPERA CON INCENTIVO": "Persa o ferma da mesi. Non è morta, è addormentata: si riaccende con un'offerta."
+  "CONFERMA DOMANI": "Domani tocca a lei. Se non glielo confermi oggi, non glielo confermi più.",
+  "CHIAMA PER CONFERMA": "Manca una settimana. Un messaggio adesso e non se lo dimentica.",
+  "APPUNTAMENTO SALTATO": "Non è venuta. Più giorni passano, meno torna.",
+  "PRENDI APPUNTAMENTO": "È uscita senza fissare la volta dopo. È così che si perdono le clienti.",
+  "FUORI FINESTRA": "Ha aspettato troppo. Se non rientra adesso, le sedute già fatte rendono meno.",
+  "ULTIMA SEDUTA": "Ha finito il ciclo. È il momento in cui vale di più: il mantenimento, o una zona nuova.",
+  "RICHIAMO MANTENIMENTO": "Sono tre mesi dall'ultima volta. Una chiamata adesso vale un anno di sedute.",
+  "RECUPERA CON INCENTIVO": "Non si fa vedere da mesi. Non è persa: è addormentata."
 };
 
 var VUOTO = {
@@ -400,7 +419,7 @@ var VUOTO = {
   referente: { nome: "NIPEC", whatsapp: "" },
   prefisso: "39",
   foglio: { url: "", gidClienti: "", gidRiepilogo: "" },
-  imp: { sedute: 12, rientroMin: 21, rientroMax: 28, conferma: 7, mantenimento: 90, dormienteMesi: 6 },
+  imp: { sedute: 8, rientroMin: 21, rientroMax: 28, conferma: 7, mantenimento: 90, dormienteMesi: 6 },
   offerte: [
     { nome: "Offerta Laser 1", testo: "", scade: "" },
     { nome: "Offerta Laser 2", testo: "", scade: "" },
@@ -409,7 +428,8 @@ var VUOTO = {
   copione: {},
   clienti: [],
   allineato: "",
-  battito: ""
+  battito: "",
+  ultimaCopia: ""
 };
 
 /* ------------------------------ stato ------------------------------ */
@@ -613,7 +633,8 @@ var vista = "oggi";
 function vaiA(v) {
   vista = v;
   ["oggi", "rubrica", "numeri", "nipec", "setup"].forEach(function (n) {
-    $("#v-" + n).hidden = (n !== v);
+    /* "Il mio centro" mostra due sezioni insieme: le impostazioni e i numeri per NIPEC */
+    $("#v-" + n).hidden = (v === "setup") ? (n !== "setup" && n !== "nipec") : (n !== v);
   });
   document.querySelectorAll(".barra button").forEach(function (b) {
     b.setAttribute("aria-current", String(b.dataset.vista === v));
@@ -634,18 +655,20 @@ function disegna() {
   if (vista === "oggi") disegnaOggi(righe);
   if (vista === "rubrica") disegnaRubrica();
   if (vista === "numeri") disegnaNumeri();
-  if (vista === "nipec") disegnaNipec();
-  if (vista === "setup") disegnaSetup();
+  if (vista === "setup") { disegnaSetup(); disegnaNipec(); }
 }
 
 /* ------------------------- vista OGGI ------------------------- */
+var mostraTutte = false;   /* la lista lunga si apre solo se la chiede lei */
+
 function disegnaOggi(righe) {
   var cont = $("#oggi-lista"), o = oggiISO();
+  var avvisoCopia = promemoriaCopia();
 
   if (!S.clienti.length) {
     cont.innerHTML =
-      '<div class="vuoto"><b>La rubrica è vuota</b>' +
-      '<p>Comincia dalle clienti che hai visto negli ultimi sei mesi. Venti bastano: quaranta righe rosse non motivano, paralizzano.</p>' +
+      '<div class="vuoto"><b>Non hai ancora nessuna cliente</b>' +
+      '<p>Comincia da quelle che hai visto negli ultimi sei mesi. <b>Venti bastano</b>: servono a far partire la cosa, le altre le aggiungi mano a mano.</p>' +
       '<div class="azioni" style="justify-content:center;margin-top:1rem">' +
       '<button class="btn pieno" type="button" data-vai="nuova">Aggiungi la prima</button>' +
       '<button class="btn" type="button" data-vai="prova">Carica tre clienti di prova</button>' +
@@ -656,12 +679,26 @@ function disegnaOggi(righe) {
 
   if (!righe.length) {
     cont.innerHTML =
-      '<div class="vuoto"><b>Niente da fare oggi</b>' +
-      '<p>Nessuna è uscita senza il prossimo appuntamento, nessuna conferma in scadenza. È il giorno che vuoi vedere.</p></div>';
+      avvisoCopia +
+      '<div class="vuoto"><b>Per oggi hai finito</b>' +
+      '<p>Nessuna è uscita senza il prossimo appuntamento, nessuna conferma da fare. È il giorno che vuoi vedere.</p></div>' +
+      fattoQuestoMese();
   } else {
-    var testa = '<div class="titolo"><h2>' + righe.length + (righe.length === 1 ? " telefonata" : " telefonate") +
-      '</h2><span class="spiega">dall\'alto verso il basso</span></div>';
-    cont.innerHTML = testa + righe.map(function (x) { return carta(x, o); }).join("");
+    /* Tre per volta. Una lista di venti fallimenti non si organizza: si evita. */
+    var quante = mostraTutte ? righe.length : Math.min(3, righe.length);
+    var mostrate = righe.slice(0, quante);
+    var valore = mostrate.reduce(function (t, x) { return t + lasciato(x.c); }, 0);
+    var testa = '<div class="titolo"><h2>' + quante + (quante === 1 ? " telefonata" : " telefonate") + '</h2>' +
+      (valore ? '<span class="spiega">valgono <b style="color:var(--ok)">' + euro(valore) + "</b></span>" : "") + "</div>";
+    var coda = "";
+    if (righe.length > quante) {
+      coda = '<p class="info" style="text-align:center;margin-top:.9rem">Ce ne sono altre ' + (righe.length - quante) +
+        '. <button class="btn muto" type="button" data-az="tutte">Vedi tutte</button></p>';
+    } else if (mostraTutte && righe.length > 3) {
+      coda = '<p class="info" style="text-align:center;margin-top:.9rem">' +
+        '<button class="btn muto" type="button" data-az="poche">Torna alle prime tre</button></p>';
+    }
+    cont.innerHTML = avvisoCopia + testa + mostrate.map(function (x) { return carta(x, o); }).join("") + coda + fattoQuestoMese();
   }
 
   var rin = listaOggi(true).length - righe.length;
@@ -670,6 +707,21 @@ function disegnaOggi(righe) {
       (rin === 1 ? " rinviata a domani. " : " rinviate a domani. ") +
       '<button class="btn muto" type="button" data-az="sblocca">Rimettile in lista</button></p>'
     : "";
+}
+
+/* Il sistema misura il buco. Questo misura il rattoppo: senza premio
+   nessuna abitudine sta in piedi. */
+function fattoQuestoMese() {
+  var o = oggiISO(), dal = piuGiorni(o, -30);
+  var salvate = S.clienti.filter(function (c) {
+    return c.ultima && c.ultima >= dal && c.prossimo && gg(c.prossimo, o) >= 0;
+  });
+  if (salvate.length < 1) return "";
+  var vale = salvate.reduce(function (t, c) { return t + (+c.prezzo || 0); }, 0);
+  return '<div class="nota-ok" style="margin-top:1.2rem;text-align:center">' +
+    "<b>Negli ultimi trenta giorni hai tenuto in agenda " + salvate.length +
+    (salvate.length === 1 ? " cliente" : " clienti") + ".</b>" +
+    (vale ? " Sono " + euro(vale) + " di sedute già fissate." : "") + "</div>";
 }
 
 function carta(x, o) {
@@ -690,10 +742,10 @@ function carta(x, o) {
 
   return '<article class="carta g' + x.r + '" data-id="' + c.id + '">' +
     '<div class="alto"><h3><button type="button" data-az="scheda">' + esc(c.nome) + "</button></h3>" +
-    '<span class="gettone ' + (x.r <= 3 ? "rosso" : x.r <= 5 ? "giallo" : "verde") + '">' + esc(av) + '</span></div>' +
+    '<span class="gettone ' + (x.r <= 3 ? "rosso" : x.r <= 5 ? "giallo" : "verde") + '">' + esc(comeSiDice(av)) + '</span></div>' +
     '<p class="info">' + pezzi.join(" · ") + "</p>" +
     (x.prom ? '<p class="prom">' + esc(x.prom) + "</p>" : "") +
-    '<details class="copione"><summary>Cosa dire</summary>' +
+    '<details class="copione"><summary>Cosa le dico</summary>' +
     '<p>' + esc(msg) + "</p>" +
     '<p class="info" style="font-style:normal;background:none;padding:.2rem 0 0">' + esc(PERCHE[av] || "") + "</p>" +
     "</details>" +
@@ -702,7 +754,7 @@ function carta(x, o) {
     (wa ? '<a class="btn" href="' + esc(wa) + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
     '<button class="btn" type="button" data-az="venuta">È venuta</button>' +
     '<button class="btn" type="button" data-az="prenota">Prenota</button>' +
-    '<button class="btn muto" type="button" data-az="rinvia">Rinvia</button>' +
+    '<button class="btn muto" type="button" data-az="rinvia">Non oggi</button>' +
     "</div></article>";
 }
 
@@ -713,7 +765,8 @@ function disegnaRubrica() {
   var voci = ["Tutte"].concat(STATI);
   f.innerHTML = voci.map(function (v) {
     var n = v === "Tutte" ? S.clienti.length : S.clienti.filter(function (c) { return c.stato === v; }).length;
-    return '<button type="button" data-filtro="' + esc(v) + '" aria-pressed="' + (filtro === v) + '">' + esc(v) + " " + n + "</button>";
+    var testo = v === "Tutte" ? "Tutte" : (ETICHETTA_STATO[v] || v);
+    return '<button type="button" data-filtro="' + esc(v) + '" aria-pressed="' + (filtro === v) + '">' + esc(testo) + " " + n + "</button>";
   }).join("");
 
   var o = oggiISO();
@@ -725,8 +778,8 @@ function disegnaRubrica() {
   }).sort(function (a, b) { return String(a.nome).localeCompare(String(b.nome), "it"); });
 
   if (!lista.length) {
-    $("#rubrica-lista").innerHTML = '<div class="vuoto"><b>Nessuna scheda</b><p>' +
-      (S.clienti.length ? "Nessuna cliente con questo filtro." : "La rubrica è ancora vuota.") + "</p></div>";
+    $("#rubrica-lista").innerHTML = '<div class="vuoto"><b>Nessuna</b><p>' +
+      (S.clienti.length ? "Nessuna cliente in questo gruppo." : "Non hai ancora nessuna cliente.") + "</p></div>";
     return;
   }
   $("#rubrica-lista").innerHTML = '<div class="elenco">' + lista.map(function (c) {
@@ -737,7 +790,7 @@ function disegnaRubrica() {
     return '<button class="voce" type="button" data-scheda="' + c.id + '">' +
       '<span class="t"><b>' + esc(c.nome) + "</b>" +
       '<span class="s"> · ' + sotto.join(" · ") + "</span></span>" +
-      (av ? '<span class="gettone ' + (rango(av) <= 3 ? "rosso" : rango(av) <= 5 ? "giallo" : "verde") + '">' + esc(av) + "</span>" : "") +
+      (av ? '<span class="gettone ' + (rango(av) <= 3 ? "rosso" : rango(av) <= 5 ? "giallo" : "verde") + '">' + esc(comeSiDice(av)) + "</span>" : "") +
       "</button>";
   }).join("") + "</div>";
 }
@@ -769,32 +822,33 @@ function disegnaNumeri() {
   var male = n.copertura !== null && n.copertura < 0.9;
 
   var html =
-    '<div class="titolo"><h2>Il centro, in numeri</h2><span class="spiega">aggiornati adesso</span></div>' +
+    '<div class="titolo"><h2>Come sta andando</h2><span class="spiega">adesso</span></div>' +
     '<div class="griglia">' +
-    dato(n.daRichiamare, "da richiamare", "telefonate in lista oggi", n.daRichiamare ? "rosso" : "verde") +
-    dato(cop, "copertura appuntamento", "quante in ciclo hanno già la prossima data", male ? "rosso" : "verde",
+    dato(n.daRichiamare, "da chiamare", "quante ti aspettano oggi", n.daRichiamare ? "rosso" : "verde") +
+    dato(cop, "escono col prossimo", "quante hanno già la data della volta dopo", male ? "rosso" : "verde",
       '<div class="sbarra' + (male ? " male" : "") + '"><i style="width:' + Math.round((n.copertura || 0) * 100) + '%"></i></div>') +
-    dato(n.inCiclo, "in ciclo", "percorsi attivi", "blu") +
-    dato(n.persone, "in rubrica", "schede totali") +
-    dato(n.dormienti, "dormienti", "ferme da oltre " + S.imp.dormienteMesi + " mesi", n.dormienti ? "rosso" : "") +
-    dato(n.nuovi30, "nuove in 30 gg", "contatti entrati questo mese") +
-    dato(euro(n.incassato), "già lasciati", "da tutte le clienti in rubrica", "verde") +
-    dato(euro(n.daIncassare), "ancora da fare", "sedute che restano nei cicli aperti", "blu") +
-    dato(euro(n.medio), "media per cliente", "quanto lascia una cliente") +
+    dato(n.inCiclo, "stanno facendo il ciclo", "clienti attive adesso", "blu") +
+    dato(n.persone, "clienti in tutto", "quante ne hai in memoria") +
+    dato(n.dormienti, "sparite", "non si vedono da oltre " + S.imp.dormienteMesi + " mesi", n.dormienti ? "rosso" : "") +
+    dato(n.nuovi30, "nuove questo mese", "entrate negli ultimi 30 giorni") +
+    dato(euro(n.incassato), "hanno speso", "in tutto, da quando le segui", "verde") +
+    dato(euro(n.daIncassare), "devono ancora fare", "sedute che restano da fare", "blu") +
+    dato(euro(n.medio), "spesa media", "quanto lascia una cliente") +
     "</div>";
 
-  html += '<div class="titolo"><h2>Quante per avviso</h2><span class="spiega">in ordine di lavoro</span></div><div class="elenco">' +
+  html += '<div class="titolo"><h2>Cosa c\'è da fare</h2><span class="spiega">in ordine</span></div><div class="elenco">' +
     n.perAvviso.map(function (r, i) {
       return '<div class="voce" style="cursor:default">' +
         '<span class="q" style="color:var(--' + (i < 3 ? "allerta" : i < 5 ? "avviso" : "ok") + ')">' + r.q + "</span>" +
-        '<span class="t">' + esc(r.av) + '<span class="s"> · ' + esc(PERCHE[r.av]) + "</span></span></div>";
+        '<span class="t">' + esc(comeSiDice(r.av)) + '<span class="s"> · ' + esc(PERCHE[r.av]) + "</span></span></div>";
     }).join("") + "</div>";
 
   if (male) {
-    html += '<div class="nota-allerta" style="margin-top:1rem"><b>Sotto il 90%.</b> Il centro sta perdendo clienti senza accorgersene: ' +
-      (n.inCiclo - Math.round((n.copertura || 0) * n.inCiclo)) + " in ciclo non hanno il prossimo appuntamento in agenda.</div>";
+    html += '<div class="nota-allerta" style="margin-top:1rem"><b>' +
+      (n.inCiclo - Math.round((n.copertura || 0) * n.inCiclo)) +
+      " clienti sono uscite senza fissare la volta dopo.</b> Sono quelle che si perdono senza accorgersene: basta una telefonata a testa.</div>";
   } else if (n.copertura !== null) {
-    html += '<div class="nota-ok" style="margin-top:1rem"><b>Copertura sopra il 90%.</b> È l\'unico indicatore che dice se il sistema è vivo.</div>';
+    html += '<div class="nota-ok" style="margin-top:1rem"><b>Quasi tutte escono con la data della volta dopo.</b> Continua così: è la cosa che tiene in piedi il centro.</div>';
   }
   $("#numeri-corpo").innerHTML = html;
 }
@@ -1004,21 +1058,28 @@ function scriviPercorso(p, v) {
 
 function disegnaSetup() {
   var h = "";
+  h += '<div class="titolo"><h2>Ti ricordo io</h2><span class="spiega">la cosa più importante di questa pagina</span></div>' +
+    '<div class="riquadro"><h3>Un promemoria ogni mattina</h3>' +
+    '<p style="margin-bottom:.7rem">Metto una sveglia nel calendario del tuo telefono. Quando suona, apri e fai le prime tre telefonate. ' +
+    (S.sveglia ? "<b>Impostata per le " + esc(S.sveglia) + ".</b>" : "<b>Non ce l\'hai ancora.</b>") + "</p>" +
+    '<div class="azioni"><button class="btn pieno" type="button" data-az="sveglia">' +
+    (S.sveglia ? "Cambia l\'ora" : "Mettimi la sveglia") + "</button></div></div>";
+
   h += '<div class="titolo"><h2>Il centro</h2></div><div class="riquadro">' +
     campo("Nome del centro", "centro") +
     campo("Prefisso telefonico", "prefisso", "text", "Serve per i link WhatsApp. In Italia: 39.") +
     "</div>";
 
-  h += '<div class="titolo"><h2>L\'orologio del laser</h2><span class="spiega">gli stessi sei numeri del foglio IMPOSTAZIONI</span></div><div class="riquadro">' +
+  h += '<div class="titolo"><h2>Come lavori tu</h2><span class="spiega">se non sai cosa sono, lasciali così</span></div><div class="riquadro">' +
     '<div class="due">' +
-    campo("Sedute per ciclo", "imp.sedute", "number", "", 'min="1" max="60"') +
-    campo("Dormiente dopo (mesi)", "imp.dormienteMesi", "number", "", 'min="1" max="36"') +
-    campo("Rientro da (giorni)", "imp.rientroMin", "number", "", 'min="1" max="120"') +
-    campo("Rientro entro (giorni)", "imp.rientroMax", "number", "", 'min="1" max="180"') +
-    campo("Conferma quanti giorni prima", "imp.conferma", "number", "", 'min="1" max="30"') +
-    campo("Mantenimento ogni (giorni)", "imp.mantenimento", "number", "", 'min="7" max="365"') +
+    campo("Quante sedute fa un ciclo", "imp.sedute", "number", "", 'min="1" max="60"') +
+    campo("Dopo quanti mesi la consideri sparita", "imp.dormienteMesi", "number", "", 'min="1" max="36"') +
+    campo("Torna non prima di (giorni)", "imp.rientroMin", "number", "", 'min="1" max="120"') +
+    campo("Torna non oltre (giorni)", "imp.rientroMax", "number", "", 'min="1" max="180"') +
+    campo("Le ricordi la data quanti giorni prima", "imp.conferma", "number", "", 'min="1" max="30"') +
+    campo("Richiamo di mantenimento ogni (giorni)", "imp.mantenimento", "number", "", 'min="7" max="365"') +
     "</div>" +
-    '<p class="aiuto">Se cambi un numero qui, cambialo anche nel foglio IMPOSTAZIONI: le due rubriche devono ragionare uguale.</p>' +
+    '<p class="aiuto">Sono i numeri del tuo protocollo. Se il tuo referente NIPEC te li ha già impostati, non toccarli.</p>' +
     "</div>";
 
   h += '<div class="titolo"><h2>Le tre offerte</h2><span class="spiega">una per famiglia</span></div>';
@@ -1042,16 +1103,17 @@ function disegnaSetup() {
     campo("WhatsApp del referente", "referente.whatsapp", "tel", "Il numero a cui arriva il battito. Solo numeri, col prefisso.") +
     "</div>";
 
-  h += '<div class="titolo"><h2>Cosa dire</h2><span class="spiega">i messaggi degli otto avvisi</span></div>' +
+  h += '<div class="titolo"><h2>Cosa scrivo alle clienti</h2><span class="spiega">i messaggi già pronti</span></div>' +
     '<div class="riquadro"><p style="margin-bottom:.7rem">Puoi riscriverli con le tue parole. Restano dentro: <b>{nome}</b>, <b>{prossimo}</b>, <b>{giorni}</b>, <b>{offerta}</b>, <b>{zona}</b>.</p>' +
     AVVISI.map(function (a) {
       if (!S.copione[a]) S.copione[a] = COPIONE[a];
-      return areaCampo(a, "copione." + a, "");
+      return areaCampo(comeSiDice(a), "copione." + a, "");
     }).join("") + "</div>";
 
-  h += '<div class="titolo"><h2>I dati</h2></div><div class="riquadro">' +
-    '<p style="margin-bottom:.7rem">La rubrica sta solo su questo dispositivo, dentro il browser. Nessun account, nessun server. Se cambi telefono, portala con la copia di sicurezza.</p>' +
+  h += '<div class="titolo"><h2>Le tue clienti</h2></div><div class="riquadro">' +
+    '<p style="margin-bottom:.7rem">Stanno solo su questo telefono. Nessuno le vede, nemmeno noi. Ma se perdi il telefono le perdi: <b>salva una copia ogni tanto</b>, e tienila dove vuoi tu.</p>' +
     '<div class="azioni">' +
+    '<button class="btn pieno" type="button" data-az="copia">Salva una copia</button>' +
     '<button class="btn" type="button" data-az="prova">Carica tre clienti di prova</button>' +
     '<button class="btn rischio" type="button" data-az="azzera">Cancella tutto</button>' +
     "</div></div>";
@@ -1084,25 +1146,27 @@ function schedaCliente(id) {
   var c = id ? trova(id) : { id: "", nome: "", tel: "", zona: "", stato: "Da contattare", sedute: 0, ultima: "", prossimo: "", prezzo: S.clienti.length ? (+S.clienti[S.clienti.length - 1].prezzo || 0) : 0, inserita: oggiISO(), note: "" };
   if (!c) return;
   var v = function (k) { return esc(c[k] == null ? "" : c[k]); };
+  var nuova = !id;
   var dentro =
-    '<div class="campo"><label for="s-nome">Nome e cognome</label><input id="s-nome" value="' + v("nome") + '"></div>' +
-    '<div class="due">' +
-    '<div class="campo"><label for="s-tel">Telefono</label><input id="s-tel" type="tel" value="' + v("tel") + '"></div>' +
-    '<div class="campo"><label for="s-zona">Zona</label><input id="s-zona" value="' + v("zona") + '"></div>' +
-    "</div>" +
-    '<div class="campo"><label for="s-stato">Stato</label><select id="s-stato">' +
-    STATI.map(function (s) { return '<option' + (c.stato === s ? " selected" : "") + ">" + esc(s) + "</option>"; }).join("") +
+    '<div class="campo"><label for="s-nome">Come si chiama</label><input id="s-nome" value="' + v("nome") + '" placeholder="Nome e cognome"></div>' +
+    '<div class="campo"><label for="s-tel">Telefono</label><input id="s-tel" type="tel" value="' + v("tel") + '" placeholder="senza spazi"></div>' +
+    (nuova ? '<p class="info" style="margin:.2rem 0 .8rem">Basta questo. Il resto lo aggiungi quando serve.</p>' +
+             '<details class="copione"><summary>Vuoi mettere anche il resto?</summary><div style="margin-top:.7rem">' : "") +
+    '<div class="campo"><label for="s-zona">Zona che tratti</label><input id="s-zona" value="' + v("zona") + '"></div>' +
+    '<div class="campo"><label for="s-stato">A che punto è</label><select id="s-stato">' +
+    STATI.map(function (s) { return '<option value="' + esc(s) + '"' + (c.stato === s ? " selected" : "") + ">" + esc(ETICHETTA_STATO[s] || s) + "</option>"; }).join("") +
     "</select></div>" +
     '<div class="due">' +
-    '<div class="campo"><label for="s-sedute">Sedute fatte</label><input id="s-sedute" type="number" min="0" max="99" value="' + (+c.sedute || 0) + '"></div>' +
+    '<div class="campo"><label for="s-sedute">Sedute già fatte</label><input id="s-sedute" type="number" min="0" max="99" value="' + (+c.sedute || 0) + '"></div>' +
     '<div class="campo"><label for="s-prezzo">Prezzo a seduta €</label><input id="s-prezzo" type="number" min="0" step="1" value="' + (+c.prezzo || 0) + '"></div>' +
     "</div>" +
     '<div class="due">' +
     '<div class="campo"><label for="s-ultima">Ultima seduta</label><input id="s-ultima" type="date" value="' + v("ultima") + '"></div>' +
-    '<div class="campo"><label for="s-prossimo">Prossimo appuntamento</label><input id="s-prossimo" type="date" value="' + v("prossimo") + '"></div>' +
+    '<div class="campo"><label for="s-prossimo">Quando torna</label><input id="s-prossimo" type="date" value="' + v("prossimo") + '"></div>' +
     "</div>" +
     '<div class="campo"><label for="s-note">Note</label><textarea id="s-note">' + v("note") + "</textarea>" +
-    '<div class="aiuto">Fototipo, farmaci, zone da evitare.</div></div>';
+    '<div class="aiuto">Fototipo, farmaci, zone da evitare.</div></div>' +
+    (nuova ? "</div></details>" : "");
 
   var bottoni = [{ testo: "Annulla" }];
   if (id) bottoni.push({
@@ -1130,7 +1194,7 @@ function schedaCliente(id) {
       salva(); disegna(); avvisa(id ? "Scheda aggiornata." : "Cliente aggiunta.");
     }
   });
-  apri(id ? c.nome : "Nuova cliente", dentro, bottoni);
+  apri(id ? c.nome : "Aggiungi una cliente", dentro, bottoni);
 }
 
 function segnaVenuta(id) {
@@ -1181,6 +1245,54 @@ function prenota(id) {
   ]);
 }
 
+/* La sveglia. L'app non può chiamarla: il suo calendario sì.
+   Un evento che si ripete ogni mattina, senza server e senza permessi. */
+function sveglia(ora) {
+  var d = new Date(), pad = function (x) { return (x < 10 ? "0" : "") + x; };
+  var oggi = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+  var stamp = oggi + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00";
+  var hm = (ora || "09:30").replace(":", "") + "00";
+  var testo = [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//NIPEC//ALERT LASER//IT", "CALSCALE:GREGORIAN",
+    "BEGIN:VEVENT",
+    "UID:alertlaser-" + oggi + "-" + Math.floor(Math.random() * 100000) + "@nipec",
+    "DTSTAMP:" + stamp,
+    "DTSTART:" + oggi + "T" + hm,
+    "DURATION:PT10M",
+    "RRULE:FREQ=DAILY",
+    "SUMMARY:Chi devo chiamare oggi",
+    "DESCRIPTION:Apri ALERT LASER e guarda le prime tre. " + location.href,
+    "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY", "DESCRIPTION:Chi devo chiamare oggi", "END:VALARM",
+    "END:VEVENT", "END:VCALENDAR"
+  ].join("\r\n");
+  scarica("promemoria-alert-laser.ics", testo, "text/calendar;charset=utf-8");
+}
+
+function chiediSveglia() {
+  apri("Ti ricordo io", 
+    '<p style="font-size:.92rem;color:var(--tenue);margin-bottom:.9rem">' +
+    'Metto un promemoria nel calendario del tuo telefono che suona <b>tutte le mattine</b>. ' +
+    'Quando suona, apri l\'app e fai le prime tre telefonate. Si toglie quando vuoi, dal calendario.</p>' +
+    '<div class="campo"><label for="sv-ora">A che ora</label><input id="sv-ora" type="time" value="09:30"></div>',
+    [{ testo: "Annulla" },
+     { testo: "Mettilo", classe: "pieno", fai: function () {
+         sveglia($("#sv-ora").value || "09:30");
+         S.sveglia = $("#sv-ora").value || "09:30"; salva();
+         avvisa("Aprilo e conferma: entra nel calendario.");
+       } }]);
+}
+
+/* Se la rubrica vive solo qui e non c'è una copia da un mese, glielo dico. */
+function promemoriaCopia() {
+  if (S.clienti.length < 5) return "";
+  var g = S.ultimaCopia ? gg(oggiISO(), S.ultimaCopia) : null;
+  if (g !== null && g < 30) return "";
+  return '<div class="nota-allerta" style="margin-bottom:1rem">' +
+    "<b>Le tue clienti stanno solo su questo telefono.</b> " +
+    (g === null ? "Non hai mai fatto una copia." : "L'ultima copia è di " + g + " giorni fa.") +
+    ' <button class="btn" type="button" data-az="copia" style="margin-top:.5rem">Salvane una adesso</button></div>';
+}
+
 function datiProva() {
   var o = oggiISO();
   var p = [
@@ -1223,6 +1335,15 @@ document.addEventListener("click", function (e) {
   if (az === "rinvia") {
     var c = trova(id);
     if (c) { c.rinviato = piuGiorni(oggiISO(), 1); salva(); disegna(); avvisa("Rinviata a domani."); }
+    return;
+  }
+  if (az === "tutte") { mostraTutte = true; disegna(); return; }
+  if (az === "poche") { mostraTutte = false; disegna(); window.scrollTo(0, 0); return; }
+  if (az === "sveglia") return chiediSveglia();
+  if (az === "copia") {
+    scarica("le-mie-clienti-" + oggiISO() + ".json", JSON.stringify(S, null, 1), "application/json");
+    S.ultimaCopia = oggiISO(); salva(); disegna();
+    avvisa("Copia salvata. Tienila da parte.");
     return;
   }
   if (az === "sblocca") {
@@ -1276,8 +1397,9 @@ $("#esporta-csv").addEventListener("click", function () {
   avvisa("CSV esportato.");
 });
 $("#esporta-json").addEventListener("click", function () {
-  scarica("alert-laser-copia-" + oggiISO() + ".json", JSON.stringify(S, null, 1), "application/json");
-  avvisa("Copia di sicurezza scaricata.");
+  scarica("le-mie-clienti-" + oggiISO() + ".json", JSON.stringify(S, null, 1), "application/json");
+  S.ultimaCopia = oggiISO(); salva();
+  avvisa("Copia salvata. Tienila da parte.");
 });
 $("#file-import").addEventListener("change", function (e) {
   var f = e.target.files && e.target.files[0];
@@ -1336,9 +1458,9 @@ document.addEventListener("visibilitychange", function () { if (!document.hidden
 function benvenuto() {
   apri("Benvenuta", 
     '<p style="font-size:.92rem;color:var(--tenue);margin-bottom:.9rem">' +
-    'Questa è la rubrica del laser. Ogni mattina ti dice <b>chi richiamare</b> e in che ordine. ' +
-    'I dati restano su questo dispositivo: nessun account, nessuna password.</p>' +
-    '<div class="campo"><label for="b-centro">Come si chiama il centro</label><input id="b-centro" placeholder="Es. Bellezza Taranto"></div>',
+    'Ogni mattina ti dice <b>chi chiamare</b>, e in che ordine. Niente password e niente account: ' +
+    'le tue clienti restano su questo telefono.</p>' +
+    '<div class="campo"><label for="b-centro">Come si chiama il tuo centro</label><input id="b-centro" placeholder="Es. Bellezza Taranto"></div>',
     [{
       testo: "Cominciamo", classe: "pieno", fai: function () {
         S.centro = $("#b-centro").value.trim();
