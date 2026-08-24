@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="NIPEC">
+  <title>NIPEC</title>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+  <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+  <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+  <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+  <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+  <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+</svg>

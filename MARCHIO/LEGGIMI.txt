@@ -1,0 +1,59 @@
+MARCHIO NIPEC — un logo solo, per tutto
+Sistema 5.0 · Direzione B · Il Metodo
+
+
+L'IDEA
+L'anello si apre in orbita: un processo che continua. Il nodo avanza —
+il metodo che va avanti con te. Le tre barre salgono: dal segno statico
+alla crescita.
+
+
+QUALE FILE, DOVE
+nipec-logo-orizzontale.svg        fondo chiaro, dai 28 px di altezza in su.
+                                  È il logo primario: carta intestata,
+                                  copertine, preventivi, sito.
+nipec-logo-orizzontale-negativo   lo stesso su fondo scuro o su foto.
+nipec-logo-verticale(-negativo)   quando lo spazio è alto e stretto:
+                                  vetrofanie, roll-up, adesivi macchina.
+nipec-logo-compatto(-negativo)    emblema + NIPEC, senza coda. Sotto i
+                                  28 px la coda non si legge: qui non c'è.
+                                  È quello delle testate delle pagine.
+nipec-emblema(-negativo)          solo emblema: icone, timbri, favicon,
+                                  spazi quadrati. Non contiene testo,
+                                  quindi si apre uguale ovunque.
+
+Icone dell'app (PNG, emblema bianco su fondo blu): stanno in
+APP-ALERT-LASER/. Stessa geometria di questi file, stessi colori.
+
+
+COLORI
+Blu NIPEC      #1C6EA4    l'anello, gli accenti
+Blu profondo   #123A63    il nodo, la parola NIPEC, i fondi scuri
+Blu chiaro     #5AA6D6    la barra bassa, il nodo in negativo
+Grigio         #8E9295    testi secondari su stampa
+Inchiostro     #17222E    il testo
+
+
+REGOLE, POCHE
+· Zona di rispetto: intorno al logo lascia libero almeno lo spazio di
+  mezzo emblema. Niente ci entra dentro.
+· Misura minima: 28 px di altezza per le versioni con la coda,
+  16 px per il compatto, 16 px per l'emblema.
+· Il logo non si ricolora, non si allunga, non si mette in obliquo,
+  non prende ombre.
+· Su fondo scuro si usa il negativo, non il positivo schiarito.
+· Su foto: solo negativo, e solo su una zona uniforme.
+
+
+IL TESTO DENTRO GLI SVG
+"NIPEC" e "TECNOLOGIE ESTETICHE" sono testo vero, in font Archivo. Sul
+web va da sé (le pagine caricano Archivo). Per la stampa o per chi non
+ha il font, apri il file in un programma vettoriale e converti il testo
+in tracciati prima di mandarlo in tipografia. L'emblema non ha testo:
+quello è sempre sicuro.
+
+
+DA DOVE ESCE
+Tutti questi file nascono da una sola definizione della geometria.
+Se il marchio va ritoccato, si ritocca lì e si rigenera tutto: pagine,
+app e icone restano allineate da sole.
