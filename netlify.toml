@@ -1,0 +1,30 @@
+# Netlify: quale cartella è il sito.
+# Senza questa riga Netlify pubblica la radice del repo, dove non c'è
+# nessun index.html — e risponde "Page not found".
+#
+# Così l'indirizzo nudo (nipecalert.netlify.app) È l'app dei centri:
+# nessun percorso da ricordare, niente da spiegare alla titolare.
+
+[build]
+  publish = "APP-ALERT-LASER"
+  command = ""
+
+# L'app è una pagina sola: qualunque indirizzo sbagliato torna a casa
+# invece di mostrare un errore. I file veri (sw.js, icone, manifest)
+# vengono serviti prima, quindi questa regola non li tocca.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Il guscio offline non va messo in cache dai server intermedi: se no
+# i telefoni già installati non si accorgono delle versioni nuove.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "no-cache"
