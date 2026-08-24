@@ -9,8 +9,22 @@ il foglio già fatto e l'app che la titolare si mette sul telefono.
 | **`PERSELOPE.html`** | La sequenza di consegna, quattro fasi. Le prime tre si fanno entro 24 ore. | Pagina singola: si trascina su Netlify, oppure si stampa. |
 | **`ALERT-LASER.html`** | Il motore degli avvisi del cruscotto laser: le formule esatte, riga per riga, con il pulsante «copia». | Pagina singola. |
 | **`2-FOGLI/`** | Il **Cruscotto Clienti · laser** già fatto: sei fogli, tendine, colori, i sei numeri dentro. | Carichi su Drive → Apri con Fogli Google → File → Salva come Foglio Google. |
-| **`APP-ALERT-LASER/`** | **L'app.** Ogni mattina dice chi richiamare e in che ordine. Si installa sulla schermata Home e funziona offline. | Si trascina su Netlify **la cartella intera**: senza `manifest`, `sw.js` e le icone non si installa. |
+| **`APP-ALERT-LASER/`** | **L'app dei centri.** Ogni mattina dice chi richiamare e in che ordine. Si installa sulla schermata Home e funziona offline. Parte vuota. | Si trascina su Netlify **la cartella intera**: senza `manifest`, `sw.js` e le icone non si installa. |
+| **`APP-ALERT-LASER-DEMO/`** | **La copia dimostrativa.** Stessa app, già piena di quattordici clienti finte che accendono tutti e otto gli avvisi. Serve a far vedere il sistema in trenta secondi. | Generata da `APP-ALERT-LASER/_genera-demo.py`: non si modifica a mano. |
 | **`MARCHIO/`** | Il marchio NIPEC 5.0: orizzontale, verticale, compatto ed emblema, in positivo e negativo. | `LEGGIMI.txt` dice quale file va dove. |
+
+## Online
+
+Le pagine e le due app si pubblicano da sole a ogni modifica del ramo principale
+(`.github/workflows/pubblica.yml` → GitHub Pages).
+
+- **App dei centri** — https://kinesiologiapetrelli-svg.github.io/nipec/APP-ALERT-LASER/
+- **Demo** — https://kinesiologiapetrelli-svg.github.io/nipec/APP-ALERT-LASER-DEMO/
+
+Sono due indirizzi diversi, quindi **due archivi separati**: l'app tiene la rubrica
+nel browser, legata all'indirizzo da cui è stata aperta. La demo non può sporcare
+una rubrica vera, e cambiare indirizzo a lavoro iniziato significa perdere i dati —
+si sposta solo passando da NIPEC → Copia di sicurezza.
 
 ## L'orologio del laser
 

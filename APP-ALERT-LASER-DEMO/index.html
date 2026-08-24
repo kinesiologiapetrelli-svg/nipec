@@ -1,0 +1,1399 @@
+<!doctype html>
+<html lang="it" data-tema="chiaro">
+<head>
+<meta charset="utf-8">
+<title>ALERT LASER · DEMO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#123a63">
+<meta name="color-scheme" content="light">
+<meta name="description" content="La rubrica del laser che dice chi richiamare oggi.">
+<link rel="icon" href="icona-192.png" type="image/png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Laser DEMO">
+<style>
+:root{
+  color-scheme:light;
+  --carta:#ffffff; --fondo:#f1f4f7; --riga:#d9e2e9; --riga-forte:#b9c8d4;
+  --inchiostro:#17222e; --tenue:#5a6b79; --blu:#1c6ea4; --navy:#123a63; --blu-tenue:#e6eff7;
+  --allerta:#a3432e; --allerta-fondo:#faeae6; --avviso:#8a6208; --avviso-fondo:#f8efdb;
+  --ok:#1b6e52; --ok-fondo:#e2f1ea;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+  --sans:"Archivo","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --barra:4.4rem;
+}
+@media (prefers-color-scheme:dark){:root:not([data-tema="chiaro"]){
+  --carta:#16212c; --fondo:#0d151d; --riga:#26333f; --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6; --tenue:#9aaab8; --blu:#5aa6d6; --navy:#8ec8ea; --blu-tenue:#152b3a;
+  --allerta:#e0917a; --allerta-fondo:#2a1b17; --avviso:#dcb264; --avviso-fondo:#2a2211;
+  --ok:#63c19d; --ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--fondo); color:var(--inchiostro); font-family:var(--sans); font-size:16px;
+  line-height:1.5; -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
+  padding-bottom:calc(var(--barra) + env(safe-area-inset-bottom));
+  overscroll-behavior-y:contain;
+}
+:focus-visible{outline:2px solid var(--blu); outline-offset:2px; border-radius:.35rem}
+h1,h2,h3,p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+
+/* ---------- testata ---------- */
+.capo{
+  position:sticky; top:0; z-index:30; background:var(--navy); color:#fff;
+  padding:calc(.7rem + env(safe-area-inset-top)) 1rem .7rem;
+  display:flex; align-items:center; gap:.7rem;
+}
+.capo svg{width:26px;height:26px;flex:none}
+.capo .chi{flex:1;min-width:0}
+.capo .titolo-app{font-size:1.06rem;font-weight:700;letter-spacing:.12em;line-height:1.15}
+.capo .firma{font-size:.66rem;letter-spacing:.14em;opacity:.75;margin-top:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.capo .firma b{font-weight:700;opacity:.95}
+.nastro{background:#e0917a;color:#2a1b17;font-weight:700;letter-spacing:.1em;border-radius:.25rem;padding:.05rem .3rem;margin-right:.3rem}
+.capo .data{font-size:.75rem;opacity:.8}
+.capo .data::first-letter{text-transform:uppercase}
+#installa{
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;
+  font-size:.74rem;font-weight:700;border-radius:1.2rem;padding:.35rem .7rem;cursor:pointer;white-space:nowrap;
+}
+
+/* ---------- barra viste ---------- */
+.barra{
+  position:fixed; left:0; right:0; bottom:0; z-index:30;
+  display:grid; grid-template-columns:repeat(5,1fr);
+  background:color-mix(in srgb, var(--carta) 94%, transparent);
+  backdrop-filter:blur(10px); border-top:1px solid var(--riga);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.barra button{
+  background:none;border:0;cursor:pointer;padding:.55rem .2rem .5rem;
+  display:flex;flex-direction:column;align-items:center;gap:.15rem;
+  font-size:.66rem;font-weight:600;letter-spacing:.03em;color:var(--tenue);position:relative;
+}
+.barra button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.barra button[aria-current="true"]{color:var(--blu)}
+.barra .conta{
+  position:absolute;top:.25rem;left:50%;margin-left:.35rem;
+  background:var(--allerta);color:#fff;font-size:.6rem;font-weight:700;line-height:1;
+  border-radius:1rem;padding:.15rem .3rem;min-width:1.05rem;text-align:center;
+}
+@media(min-width:56rem){
+  body{padding-bottom:2rem;padding-top:0}
+  .barra{position:sticky;top:0;bottom:auto;grid-template-columns:repeat(5,auto);justify-content:center;gap:.4rem;border-top:0;border-bottom:1px solid var(--riga)}
+  .barra button{flex-direction:row;padding:.7rem 1.1rem;font-size:.8rem}
+}
+
+/* ---------- impianto ---------- */
+main{max-width:46rem;margin:0 auto;padding:1rem}
+.vista[hidden]{display:none}
+.titolo{margin:1.6rem 0 .7rem;display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+.titolo:first-child{margin-top:.4rem}
+.titolo h2{font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
+.titolo .spiega{font-size:.82rem;color:var(--tenue)}
+.vuoto{
+  text-align:center;padding:2.5rem 1.2rem;color:var(--tenue);
+  background:var(--carta);border:1px dashed var(--riga-forte);border-radius:1rem;
+}
+.vuoto b{display:block;color:var(--inchiostro);font-size:1.05rem;margin-bottom:.3rem}
+
+/* ---------- carte ---------- */
+.carta{
+  background:var(--carta);border:1px solid var(--riga);border-left:4px solid var(--riga-forte);
+  border-radius:.85rem;padding:.85rem .9rem;box-shadow:var(--ombra);margin-bottom:.7rem;
+}
+.carta.g1,.carta.g2,.carta.g3{border-left-color:var(--allerta)}
+.carta.g4,.carta.g5{border-left-color:var(--avviso)}
+.carta.g6,.carta.g7,.carta.g8{border-left-color:var(--ok)}
+.carta .alto{display:flex;align-items:flex-start;gap:.6rem;flex-wrap:wrap}
+.carta h3{font-size:1.05rem;font-weight:700;flex:1;min-width:8rem;letter-spacing:-.01em}
+.carta h3 button{all:unset;cursor:pointer;display:block}
+.carta h3 button:hover{color:var(--blu)}
+.carta h3 button:focus-visible{outline:2px solid var(--blu);outline-offset:3px;border-radius:.3rem}
+.gettone{
+  font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:.22rem .5rem;border-radius:1rem;background:var(--blu-tenue);color:var(--navy);white-space:nowrap;
+}
+.gettone.rosso{background:var(--allerta-fondo);color:var(--allerta)}
+.gettone.giallo{background:var(--avviso-fondo);color:var(--avviso)}
+.gettone.verde{background:var(--ok-fondo);color:var(--ok)}
+.gettone.neutro{background:transparent;border:1px solid var(--riga-forte);color:var(--tenue)}
+.info{font-size:.82rem;color:var(--tenue);margin-top:.35rem}
+.info b{color:var(--inchiostro);font-weight:600}
+.prom{font-size:.82rem;color:var(--avviso);background:var(--avviso-fondo);border-radius:.4rem;padding:.25rem .5rem;margin-top:.45rem;display:inline-block}
+.copione{margin-top:.55rem}
+.copione summary{font-size:.78rem;font-weight:600;color:var(--blu);cursor:pointer;list-style:none}
+.copione summary::-webkit-details-marker{display:none}
+.copione summary::before{content:"› ";font-weight:700}
+.copione[open] summary::before{content:"⌄ "}
+.copione p{
+  font-family:var(--serif);font-style:italic;font-size:.92rem;color:var(--inchiostro);
+  background:var(--blu-tenue);border-radius:.5rem;padding:.6rem .7rem;margin-top:.4rem;
+}
+.azioni{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.btn{
+  font-size:.8rem;font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap;
+  border:1px solid var(--riga-forte);background:var(--carta);color:var(--inchiostro);
+  border-radius:.5rem;padding:.42rem .7rem;display:inline-flex;align-items:center;gap:.3rem;
+}
+.btn:hover{border-color:var(--blu);color:var(--blu)}
+.btn.pieno{background:var(--blu);border-color:var(--blu);color:#fff}
+.btn.pieno:hover{opacity:.9;color:#fff}
+.btn.muto{color:var(--tenue);border-style:dashed}
+.btn.rischio{color:var(--allerta);border-color:var(--allerta)}
+.btn[disabled]{opacity:.4;pointer-events:none}
+
+/* ---------- numeri ---------- */
+.griglia{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr))}
+.dato{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;padding:.8rem .9rem;box-shadow:var(--ombra)}
+.dato .n{font-size:1.85rem;font-weight:700;line-height:1.05;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.dato .e{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--tenue);margin-top:.2rem}
+.dato .p{font-size:.78rem;color:var(--tenue);margin-top:.3rem}
+.dato.rosso .n{color:var(--allerta)} .dato.verde .n{color:var(--ok)} .dato.blu .n{color:var(--blu)}
+.sbarra{height:.4rem;border-radius:1rem;background:var(--riga);overflow:hidden;margin-top:.5rem}
+.sbarra i{display:block;height:100%;background:var(--ok)}
+.sbarra.male i{background:var(--allerta)}
+.elenco{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;overflow:hidden;box-shadow:var(--ombra)}
+.elenco .voce{display:flex;align-items:center;gap:.6rem;padding:.6rem .85rem;border-bottom:1px solid var(--riga);cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;width:100%;text-align:left}
+.elenco .voce:last-child{border-bottom:0}
+.elenco .voce:hover{background:var(--blu-tenue)}
+.elenco .voce .q{font-weight:700;font-variant-numeric:tabular-nums;min-width:1.6rem;text-align:right}
+.elenco .voce .t{flex:1;min-width:0;font-size:.86rem}
+.elenco .voce .s{font-size:.76rem;color:var(--tenue)}
+
+/* ---------- moduli ---------- */
+.campo{margin-bottom:.8rem}
+.campo label{display:block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--tenue);margin-bottom:.25rem}
+.campo input,.campo select,.campo textarea{
+  width:100%;background:var(--carta);border:1px solid var(--riga-forte);border-radius:.5rem;
+  padding:.55rem .6rem;font-size:1rem;
+}
+.campo textarea{min-height:4.5rem;resize:vertical;font-size:.92rem;line-height:1.45}
+.campo .aiuto{font-size:.76rem;color:var(--tenue);margin-top:.25rem}
+.due{display:grid;gap:.8rem;grid-template-columns:1fr 1fr}
+.riquadro{background:var(--carta);border:1px solid var(--riga);border-radius:.85rem;padding:1rem;box-shadow:var(--ombra);margin-bottom:.9rem}
+.riquadro h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+.riquadro p{font-size:.86rem;color:var(--tenue)}
+.riquadro p+p{margin-top:.5rem}
+.patto{background:var(--navy);color:#fff;border-radius:.85rem;padding:1rem 1.1rem;margin-bottom:.9rem}
+.patto h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.patto p{font-size:.86rem;color:#d5e6f2}
+.patto code{font-family:var(--mono);font-size:.78rem;display:block;background:rgba(0,0,0,.25);border-radius:.4rem;padding:.5rem .6rem;margin-top:.6rem;word-break:break-all;color:#fff}
+.nota-allerta{background:var(--allerta-fondo);color:var(--allerta);border-radius:.6rem;padding:.6rem .75rem;font-size:.84rem;margin-bottom:.8rem}
+.nota-ok{background:var(--ok-fondo);color:var(--ok);border-radius:.6rem;padding:.6rem .75rem;font-size:.84rem;margin-bottom:.8rem}
+.cerca{display:flex;gap:.5rem;margin-bottom:.7rem}
+.cerca input{flex:1;background:var(--carta);border:1px solid var(--riga-forte);border-radius:.6rem;padding:.55rem .7rem}
+.filtri{display:flex;gap:.35rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none}
+.filtri::-webkit-scrollbar{display:none}
+.filtri button{
+  background:var(--carta);border:1px solid var(--riga-forte);color:var(--tenue);border-radius:1.2rem;
+  padding:.3rem .7rem;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap;
+}
+.filtri button[aria-pressed="true"]{background:var(--blu);border-color:var(--blu);color:#fff}
+dialog{
+  border:0;border-radius:1rem;padding:0;background:var(--carta);color:var(--inchiostro);
+  width:min(30rem,calc(100vw - 1.5rem));box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+dialog::backdrop{background:rgba(6,18,30,.55)}
+dialog .testa{padding:.9rem 1rem;border-bottom:1px solid var(--riga);display:flex;align-items:center;gap:.6rem}
+dialog .testa h3{flex:1;font-size:1rem;font-weight:700}
+dialog .dentro{padding:1rem;max-height:70vh;overflow:auto}
+dialog .piede{padding:.8rem 1rem;border-top:1px solid var(--riga);display:flex;gap:.5rem;justify-content:flex-end;flex-wrap:wrap}
+.chiudi{background:none;border:0;font-size:1.5rem;line-height:1;color:var(--tenue);cursor:pointer;padding:0 .2rem}
+.brindisi{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--barra) + 1rem + env(safe-area-inset-bottom));
+  background:var(--navy);color:#fff;padding:.6rem 1rem;border-radius:2rem;font-size:.85rem;font-weight:600;
+  box-shadow:0 8px 30px rgba(0,0,0,.3);z-index:60;opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.brindisi.si{opacity:1}
+@media(min-width:56rem){.brindisi{bottom:1.5rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="capo">
+  <svg viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#5AA6D6"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#9CCBE8"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#FFFFFF"/>
+  </svg>
+  <div class="chi">
+    <div class="titolo-app">ALERT LASER</div>
+    <div class="firma"><span class="nastro">DEMO</span> Persefone <b>By NIPEC</b></div>
+  </div>
+  <div class="data" id="capo-data"></div>
+  <button id="installa" hidden type="button">Installa</button>
+</header>
+
+<nav class="barra" aria-label="Sezioni">
+  <button type="button" data-vista="oggi" aria-current="true">
+    <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5-2 6-2 6h18s-2-1-2-6a7 7 0 0 0-7-7z"/><path d="M10.3 21a2 2 0 0 0 3.4 0"/></svg>
+    Oggi<span class="conta" id="conta-oggi" hidden>0</span>
+  </button>
+  <button type="button" data-vista="rubrica">
+    <svg viewBox="0 0 24 24"><path d="M4 4h13a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4z"/><path d="M4 8H2M4 12H2M4 16H2"/><circle cx="12" cy="11" r="2.4"/><path d="M8.5 17c.6-1.7 2-2.4 3.5-2.4s2.9.7 3.5 2.4"/></svg>
+    Rubrica
+  </button>
+  <button type="button" data-vista="numeri">
+    <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+    Numeri
+  </button>
+  <button type="button" data-vista="nipec">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    NIPEC
+  </button>
+  <button type="button" data-vista="setup">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+    Setup
+  </button>
+</nav>
+
+<main>
+
+  <!-- ======================= OGGI ======================= -->
+  <section class="vista" id="v-oggi">
+    <div id="oggi-lista"></div>
+    <div id="oggi-rinviate"></div>
+  </section>
+
+  <!-- ====================== RUBRICA ====================== -->
+  <section class="vista" id="v-rubrica" hidden>
+    <div class="cerca">
+      <input type="search" id="cerca" placeholder="Cerca nome o zona" autocomplete="off">
+      <button class="btn pieno" type="button" id="nuova">+ Nuova</button>
+    </div>
+    <div class="filtri" id="filtri"></div>
+    <div id="rubrica-lista"></div>
+  </section>
+
+  <!-- ====================== NUMERI ======================= -->
+  <section class="vista" id="v-numeri" hidden>
+    <div id="numeri-corpo"></div>
+  </section>
+
+  <!-- ======================= NIPEC ======================= -->
+  <section class="vista" id="v-nipec" hidden>
+    <div class="titolo"><h2>Il battito</h2></div>
+    <div class="patto">
+      <h3>Cosa esce da questo dispositivo</h3>
+      <p>Sei numeri e una data. <b>Nessun nome, nessun telefono, nessuna cliente</b> — mai. La rubrica resta qui dentro anche quando mandi il battito.</p>
+      <code id="battito-riga">&nbsp;</code>
+    </div>
+    <div class="azioni" style="margin-bottom:1rem">
+      <button class="btn pieno" type="button" id="battito-wa">Manda a NIPEC</button>
+      <button class="btn" type="button" id="battito-copia">Copia la riga</button>
+    </div>
+    <div id="battito-stato"></div>
+
+    <div class="titolo"><h2>Il Foglio Google</h2><span class="spiega">l'archivio, quando serve dal PC</span></div>
+    <div id="foglio-corpo"></div>
+
+    <div class="titolo"><h2>Portare i dati fuori e dentro</h2></div>
+    <div class="riquadro">
+      <h3>Esporta la rubrica</h3>
+      <p>Un CSV con le colonne nell'ordine del foglio CLIENTI: si incolla nel Foglio Google, oppure si tiene come copia di sicurezza.</p>
+      <div class="azioni">
+        <button class="btn pieno" type="button" id="esporta-csv">Esporta CSV</button>
+        <button class="btn" type="button" id="esporta-json">Copia di sicurezza</button>
+      </div>
+    </div>
+    <div class="riquadro">
+      <h3>Importa</h3>
+      <p>Un CSV con le stesse colonne (anche esportato dal Foglio), oppure una copia di sicurezza .json.</p>
+      <div class="azioni">
+        <label class="btn" for="file-import">Scegli un file…</label>
+        <input type="file" id="file-import" accept=".csv,.json,text/csv,application/json" hidden>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SETUP ======================= -->
+  <section class="vista" id="v-setup" hidden>
+    <div id="setup-corpo"></div>
+  </section>
+
+</main>
+
+<div class="brindisi" id="brindisi" role="status" aria-live="polite"></div>
+
+<dialog id="dlg">
+  <form method="dialog">
+    <div class="testa"><h3 id="dlg-titolo">&nbsp;</h3><button class="chiudi" type="submit" value="annulla" aria-label="Chiudi">&times;</button></div>
+    <div class="dentro" id="dlg-dentro"></div>
+    <div class="piede" id="dlg-piede"></div>
+  </form>
+</dialog>
+
+<script>
+"use strict";
+/* =====================================================================
+   ALERT LASER — la rubrica del laser che dice chi richiamare oggi.
+   Stesso motore delle formule del Cruscotto Clienti · laser: se cambi
+   una soglia qui, cambiala anche nel foglio IMPOSTAZIONI.
+   ===================================================================== */
+
+var CHIAVE = "alertlaser.demo.v1";
+
+var AVVISI = [
+  "CONFERMA DOMANI",
+  "CHIAMA PER CONFERMA",
+  "APPUNTAMENTO SALTATO",
+  "PRENDI APPUNTAMENTO",
+  "FUORI FINESTRA",
+  "ULTIMA SEDUTA",
+  "RICHIAMO MANTENIMENTO",
+  "RECUPERA CON INCENTIVO"
+];
+
+var STATI = ["Da contattare", "In ciclo", "Mantenimento", "Sospesa", "Persa"];
+
+/* quale delle tre offerte serve a quale avviso */
+var FAMIGLIA = {
+  "FUORI FINESTRA": 0, "ULTIMA SEDUTA": 0,
+  "RICHIAMO MANTENIMENTO": 1,
+  "RECUPERA CON INCENTIVO": 2
+};
+
+var COPIONE = {
+  "CONFERMA DOMANI":
+    "Ciao {nome}, ti confermo l'appuntamento di domani. Ricordati: stasera rasa la zona, domani niente crema e niente deodorante. A domani!",
+  "CHIAMA PER CONFERMA":
+    "Ciao {nome}, ti ricordo che il {prossimo} tocca a te. Da adesso niente ceretta e niente sole sulla zona: solo rasoio.",
+  "APPUNTAMENTO SALTATO":
+    "Ciao {nome}, non ci siamo viste il {prossimo}. Ti rimetto in agenda in settimana così non perdiamo il ritmo del ciclo: quando ti va meglio?",
+  "PRENDI APPUNTAMENTO":
+    "Ciao {nome}, ti fisso già il prossimo? Siamo nella finestra giusta, tra il {rientroMin}° e il {rientroMax}° giorno.",
+  "FUORI FINESTRA":
+    "Ciao {nome}, sono passati {giorni} giorni dall'ultima seduta. Rientriamo questa settimana così non buttiamo via il lavoro fatto — {offerta}.",
+  "ULTIMA SEDUTA":
+    "Ciao {nome}, hai finito il ciclo. Ti tengo il risultato con un richiamo ogni tre mesi, oppure partiamo con una zona nuova? {offerta}",
+  "RICHIAMO MANTENIMENTO":
+    "Ciao {nome}, sono passati tre mesi dall'ultima seduta: ti fisso il richiamo di mantenimento? {offerta}",
+  "RECUPERA CON INCENTIVO":
+    "Ciao {nome}, ti ho tenuto da parte una cosa per rientrare: {offerta}."
+};
+
+var PERCHE = {
+  "CONFERMA DOMANI": "Domani ha l'appuntamento. Se non lo confermi oggi, non lo confermi più.",
+  "CHIAMA PER CONFERMA": "Mancano sette giorni esatti. È l'avviso che si spegne da solo domani.",
+  "APPUNTAMENTO SALTATO": "La data è passata e non risulta venuta. Ogni giorno che passa la recuperi meno.",
+  "PRENDI APPUNTAMENTO": "È uscita senza il prossimo appuntamento. È il buco numero uno.",
+  "FUORI FINESTRA": "Oltre la finestra di rientro: la ricrescita è fuori fase, va rimessa in riga.",
+  "ULTIMA SEDUTA": "Ha finito il ciclo. È il momento in cui vale di più: mantenimento o zona nuova.",
+  "RICHIAMO MANTENIMENTO": "Tre mesi dall'ultima seduta. È il fatturato dell'anno prossimo.",
+  "RECUPERA CON INCENTIVO": "Persa o ferma da mesi. Non è morta, è addormentata: si riaccende con un'offerta."
+};
+
+var VUOTO = {
+  versione: 1,
+  centro: "",
+  referente: { nome: "NIPEC", whatsapp: "" },
+  prefisso: "39",
+  foglio: { url: "", gidClienti: "", gidRiepilogo: "" },
+  imp: { sedute: 12, rientroMin: 21, rientroMax: 28, conferma: 7, mantenimento: 90, dormienteMesi: 6 },
+  offerte: [
+    { nome: "Offerta Laser 1", testo: "", scade: "" },
+    { nome: "Offerta Laser 2", testo: "", scade: "" },
+    { nome: "Offerta Laser 3", testo: "", scade: "" }
+  ],
+  copione: {},
+  clienti: [],
+  allineato: "",
+  battito: ""
+};
+
+/* ------------------------------ stato ------------------------------ */
+var S = carica();
+
+function carica() {
+  var s;
+  try { s = JSON.parse(localStorage.getItem(CHIAVE)); } catch (e) { s = null; }
+  if (!s || typeof s !== "object") s = {};
+  var base = JSON.parse(JSON.stringify(VUOTO));
+  return fondi(base, s);
+}
+function fondi(base, sopra) {
+  Object.keys(sopra).forEach(function (k) {
+    var v = sopra[k];
+    if (v && typeof v === "object" && !Array.isArray(v) && base[k] && typeof base[k] === "object" && !Array.isArray(base[k])) {
+      fondi(base[k], v);
+    } else if (v !== undefined && v !== null) {
+      base[k] = v;
+    }
+  });
+  return base;
+}
+function salva() {
+  try {
+    localStorage.setItem(CHIAVE, JSON.stringify(S));
+  } catch (e) {
+    avvisa("Memoria piena: esporta una copia di sicurezza.");
+  }
+}
+
+/* ------------------------------ date ------------------------------- */
+function oggiISO() {
+  var d = new Date();
+  return iso(d);
+}
+function iso(d) {
+  return d.getFullYear() + "-" + due(d.getMonth() + 1) + "-" + due(d.getDate());
+}
+function due(n) { return (n < 10 ? "0" : "") + n; }
+function data(s) {
+  if (!s) return null;
+  var p = String(s).slice(0, 10).split("-");
+  if (p.length !== 3) return null;
+  var d = new Date(+p[0], +p[1] - 1, +p[2], 12, 0, 0);
+  return isNaN(d.getTime()) ? null : d;
+}
+/* giorni da b ad a: gg("2026-08-25","2026-08-24") = 1 */
+function gg(a, b) {
+  var x = data(a), y = data(b);
+  if (!x || !y) return null;
+  return Math.round((x - y) / 86400000);
+}
+function piuGiorni(s, n) {
+  var d = data(s);
+  if (!d) return "";
+  d.setDate(d.getDate() + n);
+  return iso(d);
+}
+/* stesso comportamento di EDATE: il giorno si accorcia se il mese è corto */
+function piuMesi(s, m) {
+  var d = data(s);
+  if (!d) return "";
+  var giorno = d.getDate();
+  var t = new Date(d.getFullYear(), d.getMonth() + m + 1, 0, 12, 0, 0);
+  d.setFullYear(d.getFullYear(), d.getMonth() + m, Math.min(giorno, t.getDate()));
+  return iso(d);
+}
+function bello(s) {
+  var d = data(s);
+  if (!d) return "—";
+  return due(d.getDate()) + "/" + due(d.getMonth() + 1) + "/" + String(d.getFullYear()).slice(2);
+}
+function lungo(s) {
+  var d = data(s);
+  if (!d) return "";
+  return d.toLocaleDateString("it-IT", { weekday: "long", day: "numeric", month: "long" });
+}
+
+/* ---------------------------- il motore ---------------------------- */
+/* Identica alla formula di CLIENTI!B5: la prima domanda che risponde vince. */
+function avvisoDi(c, oggi) {
+  if (!c || !c.nome) return null;
+  var imp = S.imp;
+  var pross = c.prossimo || "";
+  var ult = c.ultima || "";
+  var sed = +c.sedute || 0;
+  var st = c.stato || "";
+  var attesa = pross && gg(pross, oggi) >= 0;
+
+  if (pross && gg(pross, oggi) < 0 && (!ult || gg(ult, pross) < 0)) return "APPUNTAMENTO SALTATO";
+  if (attesa && gg(pross, oggi) === 1) return "CONFERMA DOMANI";
+  if (attesa && gg(pross, oggi) === +imp.conferma) return "CHIAMA PER CONFERMA";
+  if (attesa) return null;
+  if (st === "Sospesa") return null;
+  if (st === "Persa") return "RECUPERA CON INCENTIVO";
+  if (ult && gg(oggi, piuMesi(ult, +imp.dormienteMesi)) >= 0) return "RECUPERA CON INCENTIVO";
+  if (st === "Mantenimento") return (ult && gg(oggi, ult) >= +imp.mantenimento) ? "RICHIAMO MANTENIMENTO" : null;
+  if (st === "In ciclo") {
+    if (sed >= +imp.sedute) return "ULTIMA SEDUTA";
+    if (ult && gg(oggi, ult) > +imp.rientroMax) return "FUORI FINESTRA";
+    return "PRENDI APPUNTAMENTO";
+  }
+  if (st === "Da contattare") return "PRENDI APPUNTAMENTO";
+  return null;
+}
+
+/* il contorno: quello che devi sapere ma non è l'azione di oggi */
+function promemoria(c, oggi) {
+  var imp = S.imp, out = [];
+  var pross = c.prossimo || "", ult = c.ultima || "", sed = +c.sedute || 0;
+  if (pross && gg(pross, oggi) === 0) out.push("oggi in centro");
+  if (pross && gg(pross, oggi) >= 0) {
+    if (sed + 1 >= +imp.sedute) out.push("ultima del ciclo — proponi il mantenimento");
+    if (ult && gg(pross, ult) < +imp.rientroMin) out.push("rientro anticipato · meno di " + imp.rientroMin + " giorni");
+    if (ult && gg(pross, ult) > +imp.rientroMax) out.push("rientro oltre " + imp.rientroMax + " giorni");
+  }
+  return out.join(" · ");
+}
+
+function rango(av) { var i = AVVISI.indexOf(av); return i < 0 ? 9 : i + 1; }
+function lasciato(c) { return (+c.sedute || 0) * (+c.prezzo || 0); }
+function daFare(c) { return Math.max(0, (+S.imp.sedute - (+c.sedute || 0))) * (+c.prezzo || 0); }
+function euro(n) { return (Math.round(n) || 0).toLocaleString("it-IT") + " €"; }
+
+/* la lista del giorno, già in ordine di lavoro */
+function listaOggi(includiRinviate) {
+  var o = oggiISO(), fuori = [];
+  var righe = S.clienti.map(function (c) {
+    var av = avvisoDi(c, o);
+    return av ? { c: c, av: av, r: rango(av), prom: promemoria(c, o) } : null;
+  }).filter(Boolean).filter(function (x) {
+    if (!includiRinviate && x.c.rinviato && gg(x.c.rinviato, o) > 0) { fuori.push(x); return false; }
+    return true;
+  });
+  righe.sort(function (a, b) {
+    if (a.r !== b.r) return a.r - b.r;                 // prima l'ordine di lavoro
+    return lasciato(b.c) - lasciato(a.c);              // poi chi ha lasciato di più
+  });
+  righe.rinviate = fuori;
+  return righe;
+}
+</script>
+
+<script>
+"use strict";
+/* ===================== utilità di pagina ===================== */
+function $(s, r) { return (r || document).querySelector(s); }
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+var timerBrindisi;
+function avvisa(t) {
+  var b = $("#brindisi");
+  b.textContent = t;
+  b.classList.add("si");
+  clearTimeout(timerBrindisi);
+  timerBrindisi = setTimeout(function () { b.classList.remove("si"); }, 2600);
+}
+function nomeBreve(n) { return String(n || "").trim().split(/\s+/)[0] || ""; }
+function telPulito(t) { return String(t || "").replace(/[^0-9]/g, "").replace(/^0+/, ""); }
+function idNuovo() { return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+function offertaPer(av) {
+  var i = FAMIGLIA[av];
+  if (i === undefined) return null;
+  return S.offerte[i] || null;
+}
+function testoOfferta(av) {
+  var o = offertaPer(av);
+  if (!o) return "";
+  var t = o.testo ? o.testo : o.nome;
+  if (o.scade) t += " (valida fino al " + bello(o.scade) + ")";
+  return t;
+}
+function messaggio(c, av) {
+  var mod = (S.copione && S.copione[av]) || COPIONE[av] || "";
+  var o = oggiISO();
+  return mod
+    .replace(/\{nome\}/g, nomeBreve(c.nome))
+    .replace(/\{prossimo\}/g, bello(c.prossimo))
+    .replace(/\{ultima\}/g, bello(c.ultima))
+    .replace(/\{giorni\}/g, c.ultima ? gg(o, c.ultima) : "—")
+    .replace(/\{zona\}/g, c.zona || "")
+    .replace(/\{centro\}/g, S.centro || "")
+    .replace(/\{rientroMin\}/g, S.imp.rientroMin)
+    .replace(/\{rientroMax\}/g, S.imp.rientroMax)
+    .replace(/\{offerta\}/g, testoOfferta(av));
+}
+function linkWA(tel, testo) {
+  var n = telPulito(tel);
+  if (!n) return "";
+  if (n.length <= 11 && S.prefisso) n = telPulito(S.prefisso) + n;
+  return "https://wa.me/" + n + "?text=" + encodeURIComponent(testo);
+}
+
+/* ===================== navigazione ===================== */
+var vista = "oggi";
+function vaiA(v) {
+  vista = v;
+  ["oggi", "rubrica", "numeri", "nipec", "setup"].forEach(function (n) {
+    $("#v-" + n).hidden = (n !== v);
+  });
+  document.querySelectorAll(".barra button").forEach(function (b) {
+    b.setAttribute("aria-current", String(b.dataset.vista === v));
+  });
+  window.scrollTo(0, 0);
+  disegna();
+}
+
+/* ===================== disegno ===================== */
+function disegna() {
+  var righe = listaOggi(false);
+  $("#capo-data").textContent = lungo(oggiISO());
+  var badge = $("#conta-oggi");
+  badge.textContent = righe.length;
+  badge.hidden = righe.length === 0;
+  document.title = (righe.length ? "(" + righe.length + ") " : "") + "ALERT LASER";
+
+  if (vista === "oggi") disegnaOggi(righe);
+  if (vista === "rubrica") disegnaRubrica();
+  if (vista === "numeri") disegnaNumeri();
+  if (vista === "nipec") disegnaNipec();
+  if (vista === "setup") disegnaSetup();
+}
+
+/* ------------------------- vista OGGI ------------------------- */
+function disegnaOggi(righe) {
+  var cont = $("#oggi-lista"), o = oggiISO();
+
+  if (!S.clienti.length) {
+    cont.innerHTML =
+      '<div class="vuoto"><b>La rubrica è vuota</b>' +
+      '<p>Comincia dalle clienti che hai visto negli ultimi sei mesi. Venti bastano: quaranta righe rosse non motivano, paralizzano.</p>' +
+      '<div class="azioni" style="justify-content:center;margin-top:1rem">' +
+      '<button class="btn pieno" type="button" data-vai="nuova">Aggiungi la prima</button>' +
+      '<button class="btn" type="button" data-vai="prova">Ricarica la demo</button>' +
+      '</div></div>';
+    $("#oggi-rinviate").innerHTML = "";
+    return;
+  }
+
+  if (!righe.length) {
+    cont.innerHTML =
+      '<div class="vuoto"><b>Niente da fare oggi</b>' +
+      '<p>Nessuna è uscita senza il prossimo appuntamento, nessuna conferma in scadenza. È il giorno che vuoi vedere.</p></div>';
+  } else {
+    var testa = '<div class="titolo"><h2>' + righe.length + (righe.length === 1 ? " telefonata" : " telefonate") +
+      '</h2><span class="spiega">dall\'alto verso il basso</span></div>';
+    cont.innerHTML = testa + righe.map(function (x) { return carta(x, o); }).join("");
+  }
+
+  var rin = listaOggi(true).length - righe.length;
+  $("#oggi-rinviate").innerHTML = rin > 0
+    ? '<p class="info" style="text-align:center;margin-top:1rem">' + rin +
+      (rin === 1 ? " rinviata a domani. " : " rinviate a domani. ") +
+      '<button class="btn muto" type="button" data-az="sblocca">Rimettile in lista</button></p>'
+    : "";
+}
+
+function carta(x, o) {
+  var c = x.c, av = x.av, tel = telPulito(c.tel);
+  var pezzi = [];
+  pezzi.push("<b>" + (+c.sedute || 0) + "/" + S.imp.sedute + "</b> sedute");
+  if (c.zona) pezzi.push(esc(c.zona));
+  if (c.ultima) pezzi.push("ultima " + gg(o, c.ultima) + " gg fa");
+  else pezzi.push("mai venuta");
+  if (c.prossimo) {
+    var d = gg(c.prossimo, o);
+    pezzi.push(d === 0 ? "<b>oggi</b>" : d === 1 ? "<b>domani</b>" : d > 0 ? "fra " + d + " gg" : "era il " + bello(c.prossimo));
+  }
+  if (lasciato(c)) pezzi.push("<b>" + euro(lasciato(c)) + "</b> lasciati");
+
+  var msg = messaggio(c, av);
+  var wa = linkWA(c.tel, msg);
+
+  return '<article class="carta g' + x.r + '" data-id="' + c.id + '">' +
+    '<div class="alto"><h3><button type="button" data-az="scheda">' + esc(c.nome) + "</button></h3>" +
+    '<span class="gettone ' + (x.r <= 3 ? "rosso" : x.r <= 5 ? "giallo" : "verde") + '">' + esc(av) + '</span></div>' +
+    '<p class="info">' + pezzi.join(" · ") + "</p>" +
+    (x.prom ? '<p class="prom">' + esc(x.prom) + "</p>" : "") +
+    '<details class="copione"><summary>Cosa dire</summary>' +
+    '<p>' + esc(msg) + "</p>" +
+    '<p class="info" style="font-style:normal;background:none;padding:.2rem 0 0">' + esc(PERCHE[av] || "") + "</p>" +
+    "</details>" +
+    '<div class="azioni">' +
+    (tel ? '<a class="btn pieno" href="tel:' + esc(c.tel) + '">Chiama</a>' : '<button class="btn" type="button" disabled>Nessun numero</button>') +
+    (wa ? '<a class="btn" href="' + esc(wa) + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
+    '<button class="btn" type="button" data-az="venuta">È venuta</button>' +
+    '<button class="btn" type="button" data-az="prenota">Prenota</button>' +
+    '<button class="btn muto" type="button" data-az="rinvia">Rinvia</button>' +
+    "</div></article>";
+}
+
+/* ------------------------ vista RUBRICA ------------------------ */
+var filtro = "Tutte", cerca = "";
+function disegnaRubrica() {
+  var f = $("#filtri");
+  var voci = ["Tutte"].concat(STATI);
+  f.innerHTML = voci.map(function (v) {
+    var n = v === "Tutte" ? S.clienti.length : S.clienti.filter(function (c) { return c.stato === v; }).length;
+    return '<button type="button" data-filtro="' + esc(v) + '" aria-pressed="' + (filtro === v) + '">' + esc(v) + " " + n + "</button>";
+  }).join("");
+
+  var o = oggiISO();
+  var q = cerca.trim().toLowerCase();
+  var lista = S.clienti.filter(function (c) {
+    if (filtro !== "Tutte" && c.stato !== filtro) return false;
+    if (!q) return true;
+    return (c.nome + " " + (c.zona || "") + " " + (c.tel || "")).toLowerCase().indexOf(q) >= 0;
+  }).sort(function (a, b) { return String(a.nome).localeCompare(String(b.nome), "it"); });
+
+  if (!lista.length) {
+    $("#rubrica-lista").innerHTML = '<div class="vuoto"><b>Nessuna scheda</b><p>' +
+      (S.clienti.length ? "Nessuna cliente con questo filtro." : "La rubrica è ancora vuota.") + "</p></div>";
+    return;
+  }
+  $("#rubrica-lista").innerHTML = '<div class="elenco">' + lista.map(function (c) {
+    var av = avvisoDi(c, o);
+    var sotto = [(+c.sedute || 0) + "/" + S.imp.sedute];
+    if (c.zona) sotto.push(esc(c.zona));
+    sotto.push(c.prossimo ? "prossimo " + bello(c.prossimo) : (c.stato || ""));
+    return '<button class="voce" type="button" data-scheda="' + c.id + '">' +
+      '<span class="t"><b>' + esc(c.nome) + "</b>" +
+      '<span class="s"> · ' + sotto.join(" · ") + "</span></span>" +
+      (av ? '<span class="gettone ' + (rango(av) <= 3 ? "rosso" : rango(av) <= 5 ? "giallo" : "verde") + '">' + esc(av) + "</span>" : "") +
+      "</button>";
+  }).join("") + "</div>";
+}
+
+/* ------------------------- vista NUMERI ------------------------- */
+function numeri() {
+  var o = oggiISO(), n = {};
+  var cl = S.clienti.filter(function (c) { return c.nome; });
+  n.persone = cl.length;
+  n.daRichiamare = listaOggi(true).length;
+  n.inCiclo = cl.filter(function (c) { return c.stato === "In ciclo"; }).length;
+  var conApp = cl.filter(function (c) { return c.stato === "In ciclo" && c.prossimo && gg(c.prossimo, o) >= 0; }).length;
+  n.copertura = n.inCiclo ? conApp / n.inCiclo : null;
+  n.dormienti = cl.filter(function (c) { return c.ultima && gg(o, piuMesi(c.ultima, +S.imp.dormienteMesi)) >= 0; }).length;
+  n.nuovi30 = cl.filter(function (c) { return c.inserita && gg(o, c.inserita) <= 30 && gg(o, c.inserita) >= 0; }).length;
+  n.incassato = cl.reduce(function (s, c) { return s + lasciato(c); }, 0);
+  n.daIncassare = cl.reduce(function (s, c) { return s + daFare(c); }, 0);
+  n.medio = cl.length ? n.incassato / cl.length : 0;
+  n.ultimoInserimento = cl.reduce(function (m, c) { return (c.inserita && (!m || c.inserita > m)) ? c.inserita : m; }, "");
+  n.perAvviso = AVVISI.map(function (a) {
+    return { av: a, q: cl.filter(function (c) { return avvisoDi(c, o) === a; }).length };
+  });
+  return n;
+}
+
+function disegnaNumeri() {
+  var n = numeri();
+  var cop = n.copertura === null ? "—" : Math.round(n.copertura * 100) + "%";
+  var male = n.copertura !== null && n.copertura < 0.9;
+
+  var html =
+    '<div class="titolo"><h2>Il centro, in numeri</h2><span class="spiega">aggiornati adesso</span></div>' +
+    '<div class="griglia">' +
+    dato(n.daRichiamare, "da richiamare", "telefonate in lista oggi", n.daRichiamare ? "rosso" : "verde") +
+    dato(cop, "copertura appuntamento", "quante in ciclo hanno già la prossima data", male ? "rosso" : "verde",
+      '<div class="sbarra' + (male ? " male" : "") + '"><i style="width:' + Math.round((n.copertura || 0) * 100) + '%"></i></div>') +
+    dato(n.inCiclo, "in ciclo", "percorsi attivi", "blu") +
+    dato(n.persone, "in rubrica", "schede totali") +
+    dato(n.dormienti, "dormienti", "ferme da oltre " + S.imp.dormienteMesi + " mesi", n.dormienti ? "rosso" : "") +
+    dato(n.nuovi30, "nuove in 30 gg", "contatti entrati questo mese") +
+    dato(euro(n.incassato), "già lasciati", "da tutte le clienti in rubrica", "verde") +
+    dato(euro(n.daIncassare), "ancora da fare", "sedute che restano nei cicli aperti", "blu") +
+    dato(euro(n.medio), "media per cliente", "quanto lascia una cliente") +
+    "</div>";
+
+  html += '<div class="titolo"><h2>Quante per avviso</h2><span class="spiega">in ordine di lavoro</span></div><div class="elenco">' +
+    n.perAvviso.map(function (r, i) {
+      return '<div class="voce" style="cursor:default">' +
+        '<span class="q" style="color:var(--' + (i < 3 ? "allerta" : i < 5 ? "avviso" : "ok") + ')">' + r.q + "</span>" +
+        '<span class="t">' + esc(r.av) + '<span class="s"> · ' + esc(PERCHE[r.av]) + "</span></span></div>";
+    }).join("") + "</div>";
+
+  if (male) {
+    html += '<div class="nota-allerta" style="margin-top:1rem"><b>Sotto il 90%.</b> Il centro sta perdendo clienti senza accorgersene: ' +
+      (n.inCiclo - Math.round((n.copertura || 0) * n.inCiclo)) + " in ciclo non hanno il prossimo appuntamento in agenda.</div>";
+  } else if (n.copertura !== null) {
+    html += '<div class="nota-ok" style="margin-top:1rem"><b>Copertura sopra il 90%.</b> È l\'unico indicatore che dice se il sistema è vivo.</div>';
+  }
+  $("#numeri-corpo").innerHTML = html;
+}
+
+function dato(n, e, p, cl, extra) {
+  return '<div class="dato ' + (cl || "") + '"><div class="n">' + esc(n) + '</div><div class="e">' + esc(e) + "</div>" +
+    (p ? '<div class="p">' + esc(p) + "</div>" : "") + (extra || "") + "</div>";
+}
+</script>
+
+<script>
+"use strict";
+/* ======================= vista NIPEC ======================= */
+function battito() {
+  var n = numeri(), o = oggiISO();
+  return {
+    riga: [n.daRichiamare, n.persone, n.nuovi30, n.inCiclo, Math.round(n.daIncassare),
+           n.ultimoInserimento || ""].join(";"),
+    testo: "NIPEC · " + (S.centro || "centro senza nome") + " · battito del " + bello(o) +
+      "\nda richiamare " + n.daRichiamare +
+      " · in rubrica " + n.persone +
+      " · nuove 30 gg " + n.nuovi30 +
+      " · in ciclo " + n.inCiclo +
+      " · da incassare " + euro(n.daIncassare) +
+      " · ultimo inserimento " + (n.ultimoInserimento ? bello(n.ultimoInserimento) : "—") +
+      " · copertura " + (n.copertura === null ? "—" : Math.round(n.copertura * 100) + "%") +
+      "\n\nda incollare nel master (colonne I→N):\n" +
+      [n.daRichiamare, n.persone, n.nuovi30, n.inCiclo, Math.round(n.daIncassare), n.ultimoInserimento || ""].join(";")
+  };
+}
+
+function disegnaNipec() {
+  var b = battito();
+  $("#battito-riga").textContent = b.riga;
+
+  var giorni = S.battito ? gg(oggiISO(), S.battito) : null;
+  var st = "";
+  if (giorni === null) {
+    st = '<div class="riquadro"><p>Non hai ancora mandato nessun battito. Il primo si manda il giorno della consegna, poi uno al mese basta e avanza.</p></div>';
+  } else if (giorni > 35) {
+    st = '<div class="nota-allerta"><b>Ultimo battito ' + giorni + ' giorni fa.</b> Da fuori, un centro che smette di mandare il battito sembra un centro che ha smesso di usare la rubrica.</div>';
+  } else {
+    st = '<div class="nota-ok">Ultimo battito ' + (giorni === 0 ? "oggi" : giorni === 1 ? "ieri" : giorni + " giorni fa") + ".</div>";
+  }
+  $("#battito-stato").innerHTML = st;
+
+  var f = S.foglio || {};
+  var corpo;
+  if (f.url) {
+    var base = f.url.split("#")[0];
+    corpo = '<div class="riquadro"><h3>' + esc(S.centro || "Il tuo foglio") + "</h3>" +
+      '<p>La rubrica di questa app resta su questo dispositivo. Il Foglio è la copia grande: si apre dal PC, si condivide, si stampa.</p>' +
+      '<div class="azioni">' +
+      '<a class="btn pieno" href="' + esc(base + (f.gidClienti ? "#gid=" + encodeURIComponent(f.gidClienti) : "")) + '" target="_blank" rel="noopener">Apri la rubrica</a>' +
+      (f.gidRiepilogo ? '<a class="btn" href="' + esc(base + "#gid=" + encodeURIComponent(f.gidRiepilogo)) + '" target="_blank" rel="noopener">Apri il riepilogo</a>' : "") +
+      "</div></div>";
+  } else {
+    corpo = '<div class="riquadro"><p>Nessun Foglio collegato. Puoi lavorare benissimo senza — la rubrica di questa app basta a sé stessa. Se vuoi collegarlo, il link si mette in <b>Setup</b>.</p></div>';
+  }
+
+  var all = S.allineato ? gg(oggiISO(), S.allineato) : null;
+  if (f.url && all !== null && all > 21) {
+    corpo += '<div class="nota-allerta"><b>App e Foglio non si parlano da ' + all + ' giorni.</b> ' +
+      'Due copie della stessa rubrica divergono in fretta: quella vera è questa, il Foglio è la copia. Esporta il CSV e riallineali.</div>';
+  } else if (all !== null) {
+    corpo += '<p class="info">Ultimo allineamento col Foglio: ' + (all === 0 ? "oggi" : all + " giorni fa") + ".</p>";
+  }
+  $("#foglio-corpo").innerHTML = corpo;
+}
+
+/* ------------------------------ CSV ------------------------------ */
+var COLONNE = ["Nome", "COSA FARE OGGI", "Prossimo appuntamento", "Sedute fatte", "Stato", "Promemoria",
+  "Telefono", "Zona", "Ultima seduta", "Giorni dall'ultima", "Giorni al prossimo", "Sedute",
+  "Offerta da usare", "Prezzo a seduta", "Valore lasciato", "Ancora da fare", "Inserita il", "Note"];
+
+function cellaCSV(v) {
+  var s = String(v == null ? "" : v);
+  return /[";\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+function faiCSV() {
+  var o = oggiISO();
+  var righe = [COLONNE.join(";")];
+  S.clienti.forEach(function (c) {
+    var av = avvisoDi(c, o);
+    righe.push([
+      c.nome, av ? rango(av) + " · " + av : "", c.prossimo || "", +c.sedute || 0, c.stato || "",
+      promemoria(c, o), c.tel || "", c.zona || "", c.ultima || "",
+      c.ultima ? gg(o, c.ultima) : "", c.prossimo ? gg(c.prossimo, o) : "",
+      (+c.sedute || 0) + "/" + S.imp.sedute, av ? (offertaPer(av) ? offertaPer(av).nome : "") : "",
+      +c.prezzo || 0, lasciato(c), daFare(c), c.inserita || "", c.note || ""
+    ].map(cellaCSV).join(";"));
+  });
+  return "﻿" + righe.join("\r\n");
+}
+function leggiCSV(testo) {
+  var t = testo.replace(/^﻿/, "");
+  var righe = [], campo = "", riga = [], q = false;
+  for (var i = 0; i < t.length; i++) {
+    var ch = t[i];
+    if (q) {
+      if (ch === '"' && t[i + 1] === '"') { campo += '"'; i++; }
+      else if (ch === '"') q = false;
+      else campo += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === ";" || ch === ",") { riga.push(campo); campo = ""; }
+    else if (ch === "\n") { riga.push(campo); righe.push(riga); riga = []; campo = ""; }
+    else if (ch !== "\r") campo += ch;
+  }
+  if (campo || riga.length) { riga.push(campo); righe.push(riga); }
+  return righe.filter(function (r) { return r.some(function (c) { return String(c).trim(); }); });
+}
+function normalizzaData(s) {
+  s = String(s || "").trim();
+  if (!s) return "";
+  var m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return m[1] + "-" + m[2] + "-" + m[3];
+  m = s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);
+  if (m) {
+    var a = m[3].length === 2 ? "20" + m[3] : m[3];
+    return a + "-" + due(+m[2]) + "-" + due(+m[1]);
+  }
+  return "";
+}
+function importaCSV(testo) {
+  var righe = leggiCSV(testo);
+  if (righe.length < 2) { avvisa("Il file non contiene righe."); return; }
+  var testa = righe[0].map(function (h) { return String(h).trim().toLowerCase(); });
+  function col() {
+    for (var i = 0; i < arguments.length; i++) {
+      var k = testa.indexOf(String(arguments[i]).toLowerCase());
+      if (k >= 0) return k;
+    }
+    return -1;
+  }
+  var iN = col("nome"), iP = col("prossimo appuntamento", "prossimo"), iS = col("sedute fatte"),
+      iSt = col("stato"), iT = col("telefono"), iZ = col("zona"), iU = col("ultima seduta", "ultima"),
+      iPr = col("prezzo a seduta", "prezzo"), iI = col("inserita il", "inserita"), iNo = col("note");
+  if (iN < 0) { avvisa("Manca la colonna Nome."); return; }
+
+  var nuovi = 0, aggiornati = 0;
+  righe.slice(1).forEach(function (r) {
+    var nome = String(r[iN] || "").trim();
+    if (!nome) return;
+    var esistente = S.clienti.filter(function (c) { return c.nome.toLowerCase() === nome.toLowerCase(); })[0];
+    var c = esistente || { id: idNuovo(), nome: nome, inserita: oggiISO() };
+    if (iP >= 0) c.prossimo = normalizzaData(r[iP]);
+    if (iS >= 0) c.sedute = parseInt(String(r[iS]).replace(/\D/g, ""), 10) || 0;
+    if (iSt >= 0 && STATI.indexOf(String(r[iSt]).trim()) >= 0) c.stato = String(r[iSt]).trim();
+    if (iT >= 0) c.tel = String(r[iT] || "").trim();
+    if (iZ >= 0) c.zona = String(r[iZ] || "").trim();
+    if (iU >= 0) c.ultima = normalizzaData(r[iU]);
+    if (iPr >= 0) c.prezzo = parseFloat(String(r[iPr]).replace(/[^\d,.-]/g, "").replace(",", ".")) || 0;
+    if (iI >= 0 && normalizzaData(r[iI])) c.inserita = normalizzaData(r[iI]);
+    if (iNo >= 0) c.note = String(r[iNo] || "").trim();
+    if (!c.stato) c.stato = "Da contattare";
+    if (esistente) aggiornati++; else { S.clienti.push(c); nuovi++; }
+  });
+  S.allineato = oggiISO();
+  salva(); disegna();
+  avvisa(nuovi + " nuove, " + aggiornati + " aggiornate.");
+}
+function scarica(nome, testo, tipo) {
+  var b = new Blob([testo], { type: tipo || "text/plain;charset=utf-8" });
+  var u = URL.createObjectURL(b);
+  var a = document.createElement("a");
+  a.href = u; a.download = nome;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
+}
+function negliAppunti(t, detto) {
+  function bene() { avvisa(detto || "Copiato."); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(bene, function () { manuale(t, bene); });
+  } else manuale(t, bene);
+}
+function manuale(t, poi) {
+  var a = document.createElement("textarea");
+  a.value = t; a.style.position = "fixed"; a.style.opacity = "0";
+  document.body.appendChild(a); a.select();
+  try { document.execCommand("copy"); poi(); } catch (e) { window.prompt("Copia:", t); }
+  document.body.removeChild(a);
+}
+</script>
+
+<script>
+"use strict";
+/* ======================= vista SETUP ======================= */
+function campo(etichetta, percorso, tipo, aiuto, extra) {
+  var v = leggiPercorso(percorso);
+  return '<div class="campo"><label for="f-' + esc(percorso) + '">' + esc(etichetta) + "</label>" +
+    '<input id="f-' + esc(percorso) + '" type="' + (tipo || "text") + '" data-campo="' + esc(percorso) + '" value="' + esc(v == null ? "" : v) + '" ' + (extra || "") + ">" +
+    (aiuto ? '<div class="aiuto">' + aiuto + "</div>" : "") + "</div>";
+}
+function areaCampo(etichetta, percorso, aiuto) {
+  return '<div class="campo"><label for="f-' + esc(percorso) + '">' + esc(etichetta) + "</label>" +
+    '<textarea id="f-' + esc(percorso) + '" data-campo="' + esc(percorso) + '">' + esc(leggiPercorso(percorso) || "") + "</textarea>" +
+    (aiuto ? '<div class="aiuto">' + aiuto + "</div>" : "") + "</div>";
+}
+function leggiPercorso(p) {
+  return p.split(".").reduce(function (o, k) { return (o == null) ? undefined : o[k]; }, S);
+}
+function scriviPercorso(p, v) {
+  var parti = p.split("."), ultimo = parti.pop();
+  var o = parti.reduce(function (a, k) { if (a[k] == null) a[k] = {}; return a[k]; }, S);
+  o[ultimo] = v;
+}
+
+function disegnaSetup() {
+  var h = "";
+  h += '<div class="titolo"><h2>Il centro</h2></div><div class="riquadro">' +
+    campo("Nome del centro", "centro") +
+    campo("Prefisso telefonico", "prefisso", "text", "Serve per i link WhatsApp. In Italia: 39.") +
+    "</div>";
+
+  h += '<div class="titolo"><h2>L\'orologio del laser</h2><span class="spiega">gli stessi sei numeri del foglio IMPOSTAZIONI</span></div><div class="riquadro">' +
+    '<div class="due">' +
+    campo("Sedute per ciclo", "imp.sedute", "number", "", 'min="1" max="60"') +
+    campo("Dormiente dopo (mesi)", "imp.dormienteMesi", "number", "", 'min="1" max="36"') +
+    campo("Rientro da (giorni)", "imp.rientroMin", "number", "", 'min="1" max="120"') +
+    campo("Rientro entro (giorni)", "imp.rientroMax", "number", "", 'min="1" max="180"') +
+    campo("Conferma quanti giorni prima", "imp.conferma", "number", "", 'min="1" max="30"') +
+    campo("Mantenimento ogni (giorni)", "imp.mantenimento", "number", "", 'min="7" max="365"') +
+    "</div>" +
+    '<p class="aiuto">Se cambi un numero qui, cambialo anche nel foglio IMPOSTAZIONI: le due rubriche devono ragionare uguale.</p>' +
+    "</div>";
+
+  h += '<div class="titolo"><h2>Le tre offerte</h2><span class="spiega">una per famiglia</span></div>';
+  ["Per chi è in ciclo — rientri e zone nuove", "Per il mantenimento a " + S.imp.mantenimento + " giorni", "Per le perse e le addormentate"]
+    .forEach(function (a, i) {
+      h += '<div class="riquadro"><h3>' + esc(S.offerte[i].nome || "Offerta " + (i + 1)) + "</h3>" +
+        '<p style="margin-bottom:.6rem">' + esc(a) + "</p>" +
+        campo("Come si chiama", "offerte." + i + ".nome") +
+        areaCampo("Cosa dice", "offerte." + i + ".testo", "Finisce dentro il messaggio WhatsApp al posto di {offerta}.") +
+        campo("Valida fino al", "offerte." + i + ".scade", "date") +
+        "</div>";
+    });
+
+  h += '<div class="titolo"><h2>Il Foglio Google</h2><span class="spiega">facoltativo</span></div><div class="riquadro">' +
+    campo("Link del Foglio", "foglio.url", "url", "Condividi → Copia link, dal Foglio del centro.") +
+    '<div class="due">' + campo("gid CLIENTI", "foglio.gidClienti") + campo("gid RIEPILOGO", "foglio.gidRiepilogo") + "</div>" +
+    '<p class="aiuto">I gid stanno in fondo all\'indirizzo quando apri quella scheda: <b>#gid=123456</b>.</p></div>';
+
+  h += '<div class="titolo"><h2>NIPEC</h2><span class="spiega">dove va il battito</span></div><div class="riquadro">' +
+    campo("Referente", "referente.nome") +
+    campo("WhatsApp del referente", "referente.whatsapp", "tel", "Il numero a cui arriva il battito. Solo numeri, col prefisso.") +
+    "</div>";
+
+  h += '<div class="titolo"><h2>Cosa dire</h2><span class="spiega">i messaggi degli otto avvisi</span></div>' +
+    '<div class="riquadro"><p style="margin-bottom:.7rem">Puoi riscriverli con le tue parole. Restano dentro: <b>{nome}</b>, <b>{prossimo}</b>, <b>{giorni}</b>, <b>{offerta}</b>, <b>{zona}</b>.</p>' +
+    AVVISI.map(function (a) {
+      if (!S.copione[a]) S.copione[a] = COPIONE[a];
+      return areaCampo(a, "copione." + a, "");
+    }).join("") + "</div>";
+
+  h += '<div class="titolo"><h2>I dati</h2></div><div class="riquadro">' +
+    '<p style="margin-bottom:.7rem"><b>Questa è la copia dimostrativa.</b> Le clienti qui dentro sono inventate e servono a far vedere come funziona. Puoi combinarci quello che vuoi: si rimette a posto con un pulsante.</p>' +
+    '<div class="azioni">' +
+    '<button class="btn" type="button" data-az="prova">Ricarica la demo da capo</button>' +
+    '<button class="btn rischio" type="button" data-az="azzera">Cancella tutto</button>' +
+    "</div></div>";
+
+  h += '<p class="info" style="text-align:center;margin:1.5rem 0">ALERT LASER · NIPEC Tecnologie Estetiche<br>Assistenza 351 846 6025</p>';
+  $("#setup-corpo").innerHTML = h;
+}
+
+/* ======================= finestrelle ======================= */
+function apri(titolo, dentro, bottoni) {
+  var d = $("#dlg");
+  $("#dlg-titolo").textContent = titolo;
+  $("#dlg-dentro").innerHTML = dentro;
+  $("#dlg-piede").innerHTML = (bottoni || []).map(function (b, i) {
+    return '<button class="btn ' + (b.classe || "") + '" type="button" data-piede="' + i + '">' + esc(b.testo) + "</button>";
+  }).join("");
+  $("#dlg-piede").querySelectorAll("[data-piede]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      var b = bottoni[+el.dataset.piede];
+      if (!b.fai || b.fai() !== false) d.close();
+    });
+  });
+  if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open", "");
+  var primo = $("#dlg-dentro input, #dlg-dentro select, #dlg-dentro textarea");
+  if (primo && !("ontouchstart" in window)) primo.focus();
+}
+function trova(id) { return S.clienti.filter(function (c) { return c.id === id; })[0]; }
+
+function schedaCliente(id) {
+  var c = id ? trova(id) : { id: "", nome: "", tel: "", zona: "", stato: "Da contattare", sedute: 0, ultima: "", prossimo: "", prezzo: S.clienti.length ? (+S.clienti[S.clienti.length - 1].prezzo || 0) : 0, inserita: oggiISO(), note: "" };
+  if (!c) return;
+  var v = function (k) { return esc(c[k] == null ? "" : c[k]); };
+  var dentro =
+    '<div class="campo"><label for="s-nome">Nome e cognome</label><input id="s-nome" value="' + v("nome") + '"></div>' +
+    '<div class="due">' +
+    '<div class="campo"><label for="s-tel">Telefono</label><input id="s-tel" type="tel" value="' + v("tel") + '"></div>' +
+    '<div class="campo"><label for="s-zona">Zona</label><input id="s-zona" value="' + v("zona") + '"></div>' +
+    "</div>" +
+    '<div class="campo"><label for="s-stato">Stato</label><select id="s-stato">' +
+    STATI.map(function (s) { return '<option' + (c.stato === s ? " selected" : "") + ">" + esc(s) + "</option>"; }).join("") +
+    "</select></div>" +
+    '<div class="due">' +
+    '<div class="campo"><label for="s-sedute">Sedute fatte</label><input id="s-sedute" type="number" min="0" max="99" value="' + (+c.sedute || 0) + '"></div>' +
+    '<div class="campo"><label for="s-prezzo">Prezzo a seduta €</label><input id="s-prezzo" type="number" min="0" step="1" value="' + (+c.prezzo || 0) + '"></div>' +
+    "</div>" +
+    '<div class="due">' +
+    '<div class="campo"><label for="s-ultima">Ultima seduta</label><input id="s-ultima" type="date" value="' + v("ultima") + '"></div>' +
+    '<div class="campo"><label for="s-prossimo">Prossimo appuntamento</label><input id="s-prossimo" type="date" value="' + v("prossimo") + '"></div>' +
+    "</div>" +
+    '<div class="campo"><label for="s-note">Note</label><textarea id="s-note">' + v("note") + "</textarea>" +
+    '<div class="aiuto">Fototipo, farmaci, zone da evitare.</div></div>';
+
+  var bottoni = [{ testo: "Annulla" }];
+  if (id) bottoni.push({
+    testo: "Elimina", classe: "rischio", fai: function () {
+      if (!confirm("Cancello la scheda di " + c.nome + "? Non si torna indietro.")) return false;
+      S.clienti = S.clienti.filter(function (x) { return x.id !== id; });
+      salva(); disegna(); avvisa("Scheda cancellata.");
+    }
+  });
+  bottoni.push({
+    testo: "Salva", classe: "pieno", fai: function () {
+      var nome = $("#s-nome").value.trim();
+      if (!nome) { avvisa("Serve almeno il nome."); return false; }
+      c.nome = nome;
+      c.tel = $("#s-tel").value.trim();
+      c.zona = $("#s-zona").value.trim();
+      c.stato = $("#s-stato").value;
+      c.sedute = parseInt($("#s-sedute").value, 10) || 0;
+      c.prezzo = parseFloat($("#s-prezzo").value) || 0;
+      c.ultima = $("#s-ultima").value;
+      c.prossimo = $("#s-prossimo").value;
+      c.note = $("#s-note").value.trim();
+      if (!id) { c.id = idNuovo(); c.inserita = oggiISO(); S.clienti.push(c); }
+      c.rinviato = "";
+      salva(); disegna(); avvisa(id ? "Scheda aggiornata." : "Cliente aggiunta.");
+    }
+  });
+  apri(id ? c.nome : "Nuova cliente", dentro, bottoni);
+}
+
+function segnaVenuta(id) {
+  var c = trova(id); if (!c) return;
+  var quando = oggiISO();
+  var proposta = piuGiorni(quando, Math.round((+S.imp.rientroMin + +S.imp.rientroMax) / 2));
+  var dentro =
+    '<div class="campo"><label for="v-data">È venuta il</label><input id="v-data" type="date" value="' + esc(quando) + '"></div>' +
+    '<div class="campo"><label for="v-sedute">Sedute fatte, adesso</label><input id="v-sedute" type="number" min="0" max="99" value="' + ((+c.sedute || 0) + 1) + '"></div>' +
+    '<div class="campo"><label for="v-prossimo">Prossimo appuntamento</label><input id="v-prossimo" type="date" value="' + esc(proposta) + '">' +
+    '<div class="aiuto">Proposto dentro la finestra: tra il ' + S.imp.rientroMin + "° e il " + S.imp.rientroMax + "° giorno. <b>Non farla uscire senza.</b></div></div>";
+  apri("È venuta — " + c.nome, dentro, [
+    { testo: "Annulla" },
+    {
+      testo: "Registra", classe: "pieno", fai: function () {
+        c.ultima = $("#v-data").value || quando;
+        c.sedute = parseInt($("#v-sedute").value, 10) || 0;
+        c.prossimo = $("#v-prossimo").value || "";
+        if (c.stato === "Da contattare" || c.stato === "Persa" || c.stato === "Sospesa") c.stato = "In ciclo";
+        c.rinviato = "";
+        salva(); disegna();
+        avvisa(c.prossimo ? "Registrata, con il prossimo in agenda." : "Registrata — ma è uscita senza il prossimo.");
+      }
+    }
+  ]);
+}
+
+function prenota(id) {
+  var c = trova(id); if (!c) return;
+  var base = c.ultima || oggiISO();
+  var proposta = piuGiorni(base, Math.round((+S.imp.rientroMin + +S.imp.rientroMax) / 2));
+  if (gg(proposta, oggiISO()) < 0) proposta = piuGiorni(oggiISO(), 3);
+  var dentro = '<div class="campo"><label for="p-data">Prossimo appuntamento</label><input id="p-data" type="date" value="' + esc(proposta) + '">' +
+    '<div class="aiuto">Ultima seduta: ' + bello(c.ultima) + ". Finestra buona: dal " + bello(piuGiorni(base, +S.imp.rientroMin)) +
+    " al " + bello(piuGiorni(base, +S.imp.rientroMax)) + ".</div></div>";
+  apri("Prenota — " + c.nome, dentro, [
+    { testo: "Annulla" },
+    {
+      testo: "Metti in agenda", classe: "pieno", fai: function () {
+        var d = $("#p-data").value;
+        if (!d) { avvisa("Serve una data."); return false; }
+        c.prossimo = d;
+        if (c.stato === "Da contattare" || c.stato === "Persa") c.stato = "In ciclo";
+        c.rinviato = "";
+        salva(); disegna(); avvisa("In agenda per il " + bello(d) + ".");
+      }
+    }
+  ]);
+}
+
+function datiProva() {
+  var o = oggiISO();
+  var p = [
+    { nome: "Anna Ferri", tel: "3391112233", zona: "ascelle", stato: "In ciclo", sedute: 11, prezzo: 45, ultima: piuGiorni(o, -23), prossimo: piuGiorni(o, 1) },
+    { nome: "Chiara Neri", tel: "3392223344", zona: "inguine", stato: "In ciclo", sedute: 4, prezzo: 70, ultima: piuGiorni(o, -34), prossimo: "" },
+    { nome: "Marta Sala", tel: "3393334455", zona: "gambe", stato: "Mantenimento", sedute: 12, prezzo: 90, ultima: piuGiorni(o, -97), prossimo: "" }
+  ];
+  p.forEach(function (x) {
+    x.id = idNuovo(); x.inserita = o; x.note = "cliente di prova";
+    S.clienti.push(x);
+  });
+  salva(); disegna();
+  avvisa("Tre clienti di prova caricate.");
+}
+</script>
+
+<script>
+"use strict";
+/* ================= la rubrica finta della DEMO =================
+   Nessuna di queste persone esiste. Le date sono relative a oggi,
+   cosi' la demo e' sempre "viva" qualunque giorno la apri. */
+function caricaDemo() {
+  var o = oggiISO(), g = function (n) { return piuGiorni(o, -n); }, f = function (n) { return piuGiorni(o, n); };
+  S.centro = "Centro Dimostrativo";
+  S.prefisso = "39";
+  S.offerte = [
+    { nome: "Offerta Laser 1", testo: "seduta di rientro a metà prezzo", scade: f(20) },
+    { nome: "Offerta Laser 2", testo: "richiamo di mantenimento a 39 € invece di 60", scade: f(30) },
+    { nome: "Offerta Laser 3", testo: "tre sedute al prezzo di due, per ripartire", scade: f(15) }
+  ];
+  var righe = [
+    ["Anna Ferri",       "3391112201", "ascelle", "In ciclo",      11, 45, g(23), f(1)],
+    ["Bea Conti",        "3391112202", "inguine", "In ciclo",       5, 70, g(21), f(7)],
+    ["Chiara Neri",      "3391112203", "gambe",   "In ciclo",       6, 90, g(30), g(2)],
+    ["Daniela Russo",    "3391112204", "ascelle", "In ciclo",       3, 45, g(2),  ""],
+    ["Elena Vitale",     "3391112205", "inguine", "In ciclo",       7, 70, g(34), ""],
+    ["Federica Sala",    "3391112206", "gambe",   "In ciclo",      12, 90, g(12), ""],
+    ["Giulia Marino",    "3391112207", "ascelle", "Mantenimento",  12, 45, g(95), ""],
+    ["Ilaria Costa",     "3391112208", "gambe",   "Persa",          4, 90, g(150), ""],
+    ["Laura Greco",      "3391112209", "inguine", "In ciclo",       4, 70, g(210), ""],
+    ["Martina Bruno",    "3391112210", "gambe",   "Sospesa",        5, 90, g(60), ""],
+    ["Nadia Fontana",    "3391112211", "ascelle", "In ciclo",       8, 45, g(20), f(12)],
+    ["Paola Ricci",      "3391112212", "inguine", "In ciclo",       2, 70, g(24), o],
+    ["Sara De Luca",     "3391112213", "gambe",   "In ciclo",      10, 90, g(22), f(3)],
+    ["Valentina Longo",  "3391112214", "ascelle", "Mantenimento",  12, 45, g(40), ""]
+  ];
+  S.clienti = righe.map(function (r, i) {
+    return { id: "demo" + i, nome: r[0], tel: r[1], zona: r[2], stato: r[3],
+             sedute: r[4], prezzo: r[5], ultima: r[6], prossimo: r[7],
+             inserita: piuGiorni(o, -(200 - i * 9)), note: "", rinviato: "" };
+  });
+  S.battito = ""; S.allineato = "";
+  salva();
+  disegna();
+}
+</script>
+
+<script>
+"use strict";
+/* ======================= collegamenti ======================= */
+document.querySelectorAll(".barra button").forEach(function (b) {
+  b.addEventListener("click", function () { vaiA(b.dataset.vista); });
+});
+
+document.addEventListener("click", function (e) {
+  var t = e.target.closest("[data-az], [data-scheda], [data-vai], [data-filtro]");
+  if (!t) return;
+
+  if (t.dataset.filtro) { filtro = t.dataset.filtro; disegnaRubrica(); return; }
+  if (t.dataset.scheda) { schedaCliente(t.dataset.scheda); return; }
+  if (t.dataset.vai === "nuova") { schedaCliente(null); return; }
+  if (t.dataset.vai === "prova") { caricaDemo(); return; }
+
+  var az = t.dataset.az;
+  var carta = t.closest("[data-id]");
+  var id = carta ? carta.dataset.id : null;
+
+  if (az === "venuta") return segnaVenuta(id);
+  if (az === "prenota") return prenota(id);
+  if (az === "scheda") return schedaCliente(id);
+  if (az === "rinvia") {
+    var c = trova(id);
+    if (c) { c.rinviato = piuGiorni(oggiISO(), 1); salva(); disegna(); avvisa("Rinviata a domani."); }
+    return;
+  }
+  if (az === "sblocca") {
+    S.clienti.forEach(function (x) { x.rinviato = ""; });
+    salva(); disegna(); return;
+  }
+  if (az === "prova") return caricaDemo();
+  if (az === "azzera") {
+    if (!confirm("Cancello tutto: rubrica, impostazioni, offerte. Sicuro?")) return;
+    if (!confirm("Davvero? Se non hai una copia di sicurezza, non si torna indietro.")) return;
+    S = JSON.parse(JSON.stringify(VUOTO));
+    salva(); vaiA("oggi"); avvisa("Tutto azzerato.");
+    return;
+  }
+});
+
+/* campi di Setup: si salvano appena li lasci */
+document.addEventListener("change", function (e) {
+  var el = e.target.closest("[data-campo]");
+  if (!el) return;
+  var v = el.value;
+  if (el.type === "number") v = parseFloat(v) || 0;
+  scriviPercorso(el.dataset.campo, v);
+  salva();
+  if (el.dataset.campo.indexOf("imp.") === 0 || el.dataset.campo === "centro") disegna();
+});
+
+$("#cerca").addEventListener("input", function (e) { cerca = e.target.value; disegnaRubrica(); });
+$("#nuova").addEventListener("click", function () { schedaCliente(null); });
+
+$("#battito-copia").addEventListener("click", function () {
+  negliAppunti(battito().riga, "Riga copiata: incollala nel master.");
+  S.battito = oggiISO(); salva(); disegnaNipec();
+});
+$("#battito-wa").addEventListener("click", function () {
+  var b = battito();
+  var n = telPulito(S.referente && S.referente.whatsapp);
+  if (!n) {
+    negliAppunti(b.testo, "Manca il WhatsApp del referente: battito copiato.");
+  } else {
+    if (n.length <= 11 && S.prefisso) n = telPulito(S.prefisso) + n;
+    window.open("https://wa.me/" + n + "?text=" + encodeURIComponent(b.testo), "_blank", "noopener");
+  }
+  S.battito = oggiISO(); salva(); disegnaNipec();
+});
+
+$("#esporta-csv").addEventListener("click", function () {
+  scarica("rubrica-" + (S.centro || "centro").toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + oggiISO() + ".csv",
+    faiCSV(), "text/csv;charset=utf-8");
+  S.allineato = oggiISO(); salva(); disegnaNipec();
+  avvisa("CSV esportato.");
+});
+$("#esporta-json").addEventListener("click", function () {
+  scarica("alert-laser-copia-" + oggiISO() + ".json", JSON.stringify(S, null, 1), "application/json");
+  avvisa("Copia di sicurezza scaricata.");
+});
+$("#file-import").addEventListener("change", function (e) {
+  var f = e.target.files && e.target.files[0];
+  if (!f) return;
+  var lettore = new FileReader();
+  lettore.onload = function () {
+    var testo = String(lettore.result || "");
+    if (/\.json$/i.test(f.name)) {
+      try {
+        var dati = JSON.parse(testo);
+        if (!dati || !Array.isArray(dati.clienti)) throw new Error("no");
+        if (!confirm("Sostituisco tutto con questa copia di sicurezza?")) return;
+        S = fondi(JSON.parse(JSON.stringify(VUOTO)), dati);
+        salva(); vaiA("oggi"); avvisa("Copia ripristinata.");
+      } catch (err) { avvisa("Il file .json non è una copia valida."); }
+    } else {
+      importaCSV(testo);
+    }
+    e.target.value = "";
+  };
+  lettore.readAsText(f, "utf-8");
+});
+
+/* ======================= installazione ======================= */
+var invito = null;
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault();
+  invito = e;
+  $("#installa").hidden = false;
+});
+$("#installa").addEventListener("click", function () {
+  if (!invito) return;
+  invito.prompt();
+  invito.userChoice.then(function () { invito = null; $("#installa").hidden = true; });
+});
+window.addEventListener("appinstalled", function () {
+  $("#installa").hidden = true;
+  avvisa("Installata. Adesso sta sulla schermata Home.");
+});
+
+if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () { /* offline: pazienza */ });
+  });
+}
+
+/* ================= il giorno cambia da solo ================= */
+var giornoInCorso = oggiISO();
+function seCambiaGiorno() {
+  if (oggiISO() !== giornoInCorso) { giornoInCorso = oggiISO(); disegna(); }
+}
+setInterval(seCambiaGiorno, 60000);
+document.addEventListener("visibilitychange", function () { if (!document.hidden) { seCambiaGiorno(); disegna(); } });
+
+/* ======================= primo avvio ======================= */
+function benvenuto() {
+  apri("Benvenuta", 
+    '<p style="font-size:.92rem;color:var(--tenue);margin-bottom:.9rem">' +
+    'Questa è la rubrica del laser. Ogni mattina ti dice <b>chi richiamare</b> e in che ordine. ' +
+    'I dati restano su questo dispositivo: nessun account, nessuna password.</p>' +
+    '<div class="campo"><label for="b-centro">Come si chiama il centro</label><input id="b-centro" placeholder="Es. Bellezza Taranto"></div>',
+    [{
+      testo: "Cominciamo", classe: "pieno", fai: function () {
+        S.centro = $("#b-centro").value.trim();
+        salva(); disegna();
+        if (!S.clienti.length) setTimeout(function () { schedaCliente(null); }, 350);
+      }
+    }]);
+}
+
+AVVISI.forEach(function (a) { if (!S.copione[a]) S.copione[a] = COPIONE[a]; });
+salva();
+vaiA("oggi");
+if (!S.clienti.length) caricaDemo();
+</script>
+</body>
+</html>
