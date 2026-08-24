@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="it" data-theme="light">
+<title>RADIOGRAFIA</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+
+:root{
+  --carta:#ffffff;
+  --fondo:#f1f4f7;
+  --riga:#d9e2e9;
+  --riga-forte:#b9c8d4;
+  --inchiostro:#17222e;
+  --tenue:#5a6b79;
+  --blu:#1c6ea4;
+  --navy:#123a63;
+  --blu-tenue:#e6eff7;
+  --allerta:#a3432e;
+  --allerta-fondo:#faeae6;
+  --avviso:#8a6208;
+  --avviso-fondo:#f8efdb;
+  --ok:#1b6e52;
+  --ok-fondo:#e2f1ea;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+  --sans:"Archivo", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --carta:#16212c;
+    --fondo:#0d151d;
+    --riga:#26333f;
+    --riga-forte:#3a4b59;
+    --inchiostro:#e9f0f6;
+    --tenue:#9aaab8;
+    --blu:#5aa6d6;
+    --navy:#8ec8ea;
+    --blu-tenue:#152b3a;
+    --allerta:#e0917a;
+    --allerta-fondo:#2a1b17;
+    --avviso:#dcb264;
+    --avviso-fondo:#2a2211;
+    --ok:#63c19d;
+    --ok-fondo:#122a22;
+    --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --carta:#16212c;
+  --fondo:#0d151d;
+  --riga:#26333f;
+  --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6;
+  --tenue:#9aaab8;
+  --blu:#5aa6d6;
+  --navy:#8ec8ea;
+  --blu-tenue:#152b3a;
+  --allerta:#e0917a;
+  --allerta-fondo:#2a1b17;
+  --avviso:#dcb264;
+  --avviso-fondo:#2a2211;
+  --ok:#63c19d;
+  --ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--fondo);
+  color:var(--inchiostro);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+.foglio{max-width:53rem;margin:0 auto;padding:0 1.25rem 5rem}
+p{margin:0}
+code{font-family:var(--mono);font-size:.88em;word-break:break-word}
+:focus-visible{outline:2px solid var(--blu);outline-offset:3px;border-radius:.3rem}
+
+/* ---------- testata ---------- */
+.testata{
+  margin:0 -1.25rem 1.5rem;
+  padding:3rem 1.75rem 2.25rem;
+  background:var(--navy);
+  color:#fff;
+  border-radius:0 0 1.25rem 1.25rem;
+}
+:root[data-theme="dark"] .testata,
+:root:not([data-theme="light"]) .testata{background:#0a2137}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .testata{background:var(--navy)}}
+.marchio{display:flex;align-items:center;gap:.6rem;margin-bottom:1.75rem}
+.marchio svg{width:26px;height:26px}
+.marchio span{font-size:.7rem;letter-spacing:.3em;font-weight:600;opacity:.9;text-transform:uppercase}
+.testata .occhiello{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:#9fcbe8;font-weight:600;margin:0 0 .65rem;
+}
+.testata h1{
+  font-weight:700;font-size:clamp(2.4rem,8vw,3.9rem);line-height:1;
+  letter-spacing:.02em;margin:0;
+}
+.testata .tesi{
+  font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.5;
+  margin:1.1rem 0 0;max-width:40ch;color:#d5e6f2;
+}
+.tempi{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.tempi span{
+  font-size:.74rem;font-weight:500;padding:.32rem .6rem;border-radius:1.2rem;
+  border:1px solid rgba(255,255,255,.28);color:#d5e6f2;font-variant-numeric:tabular-nums;
+}
+.tempi b{color:#fff;font-weight:700;letter-spacing:.04em}
+
+/* ---------- indice ---------- */
+.indice{
+  position:sticky;top:0;z-index:20;margin:0 -1.25rem 1.5rem;
+  padding:.5rem 1.25rem;border-bottom:1px solid var(--riga);
+  background:color-mix(in srgb, var(--fondo) 90%, transparent);
+  backdrop-filter:blur(8px);
+  display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none;
+}
+.indice::-webkit-scrollbar{display:none}
+.indice a{
+  font-size:.79rem;font-weight:600;color:var(--tenue);text-decoration:none;
+  padding:.4rem .6rem;border-radius:.4rem;white-space:nowrap;
+}
+.indice a:hover{color:var(--blu);background:var(--blu-tenue)}
+
+/* ---------- pannello consegna ---------- */
+.pannello{
+  background:var(--carta);border:1px solid var(--riga);border-radius:.85rem;
+  padding:1rem 1.25rem;box-shadow:var(--ombra);margin-bottom:2.5rem;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.85rem 1.25rem;
+}
+.pannello .campo{flex:1 1 14rem}
+.pannello label{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--tenue);display:block;margin-bottom:.3rem;
+}
+.pannello input{
+  width:100%;font-family:var(--sans);font-size:1.05rem;font-weight:600;
+  color:var(--inchiostro);background:transparent;border:0;border-radius:0;
+  border-bottom:2px solid var(--riga-forte);padding:.2rem 0;
+}
+.pannello input:focus{outline:0;border-bottom-color:var(--blu)}
+.conta{font-size:.95rem;color:var(--tenue);font-variant-numeric:tabular-nums}
+.conta b{color:var(--blu);font-weight:700;font-size:1.15rem}
+.azzera{
+  font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--tenue);
+  background:transparent;border:1px solid var(--riga-forte);border-radius:.45rem;
+  padding:.45rem .8rem;cursor:pointer;
+}
+.azzera:hover{border-color:var(--allerta);color:var(--allerta)}
+
+/* ---------- titoli di sezione ---------- */
+.sezione{margin:3.25rem 0 1.5rem;scroll-margin-top:3.75rem}
+.sezione .fase-n{
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--blu);margin:0 0 .4rem;
+}
+.sezione h2{
+  font-size:1.35rem;font-weight:700;letter-spacing:-.01em;margin:0;
+  padding-bottom:.55rem;border-bottom:2px solid var(--blu);display:inline-block;
+}
+.sezione p{margin:.7rem 0 0;color:var(--tenue);font-size:.95rem;max-width:62ch}
+.etichetta{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--blu);margin:2rem 0 .6rem;
+}
+
+/* ---------- passi ---------- */
+.passi{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.passo{
+  display:grid;grid-template-columns:1.25rem 2.4rem 1fr;gap:.85rem;align-items:start;
+  background:var(--carta);border:1px solid var(--riga);border-radius:.7rem;
+  padding:.85rem 1.1rem;box-shadow:var(--ombra);
+}
+.spunta{display:block;margin-top:.2rem;cursor:pointer}
+.spunta input{position:absolute;opacity:0;width:0;height:0}
+.spunta .box{
+  display:block;width:1.15rem;height:1.15rem;border:2px solid var(--riga-forte);
+  border-radius:.25rem;position:relative;transition:background .12s,border-color .12s;
+}
+.spunta input:checked + .box{background:var(--blu);border-color:var(--blu)}
+.spunta input:checked + .box::after{
+  content:"";position:absolute;left:.3rem;top:.05rem;width:.28rem;height:.6rem;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg);
+}
+.spunta input:focus-visible + .box{outline:2px solid var(--blu);outline-offset:2px}
+.codice{
+  font-size:.75rem;font-weight:700;color:var(--blu);background:var(--blu-tenue);
+  border-radius:.35rem;padding:.2rem 0;text-align:center;margin-top:.1rem;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+.passo .testo{min-width:0}
+.passo b{font-weight:600;display:block}
+.passo .nota{display:block;color:var(--tenue);font-size:.9rem;margin-top:.2rem;max-width:60ch}
+.passo.fatto .testo{opacity:.45}
+.passo.fatto b{text-decoration:line-through;text-decoration-color:var(--riga-forte)}
+
+.avvertenza{
+  display:block;margin-top:.55rem;padding:.6rem .8rem;border-radius:.5rem;
+  background:var(--avviso-fondo);color:var(--inchiostro);font-size:.9rem;max-width:60ch;
+}
+.avvertenza .lbl{
+  display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--avviso);margin-bottom:.15rem;
+}
+.riquadro{
+  margin-top:.6rem;overflow-x:auto;background:var(--fondo);border:1px solid var(--riga);
+  border-radius:.5rem;
+}
+.riquadro pre{
+  margin:0;padding:.75rem .9rem;font-family:var(--mono);font-size:.75rem;line-height:1.8;
+  color:var(--inchiostro);
+}
+.riquadro pre b{color:var(--blu);font-weight:600}
+
+/* ---------- spina temporale (fase B) ---------- */
+.fase{display:grid;grid-template-columns:4.75rem 1fr;gap:1.5rem;padding-bottom:2rem}
+.orologio{position:relative;text-align:right;padding-top:.2rem}
+.orologio::after{
+  content:"";position:absolute;top:3.1rem;bottom:-2rem;right:1.55rem;width:2px;background:var(--riga);
+}
+.fase:last-of-type .orologio::after{display:none}
+.minuto{
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+  width:3.2rem;height:3.2rem;border-radius:50%;
+  background:var(--blu-tenue);border:2px solid var(--blu);font-variant-numeric:tabular-nums;
+}
+.minuto .n{font-size:1.25rem;font-weight:700;line-height:1;color:var(--navy)}
+.minuto .u{
+  font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blu);
+  font-weight:600;margin-top:.1rem;
+}
+.corpo{min-width:0}
+.corpo .capo{display:flex;align-items:flex-start;gap:.85rem}
+.corpo .capo .spunta{margin-top:.5rem}
+.corpo h3{font-size:1.3rem;font-weight:700;margin:.1rem 0 .2rem;letter-spacing:-.01em;text-wrap:balance}
+.corpo .scopo{font-family:var(--serif);font-style:italic;color:var(--tenue);margin:.35rem 0 0;max-width:58ch}
+.fase.fatto .corpo{opacity:.45}
+.battuta{
+  font-family:var(--serif);font-size:1.08rem;line-height:1.55;
+  border-left:3px solid var(--blu);background:var(--carta);
+  border-radius:0 .6rem .6rem 0;padding:.9rem 1.2rem;margin:.75rem 0 0;
+  max-width:58ch;box-shadow:var(--ombra);
+}
+.perno{
+  background:var(--blu-tenue);border:1px solid var(--blu);border-radius:.8rem;
+  padding:1rem 1.25rem;margin-top:.9rem;max-width:60ch;
+}
+.perno p{margin:0;font-weight:600;color:var(--navy)}
+
+/* ---------- rotture ---------- */
+.rotture{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.rotture li{
+  display:grid;grid-template-columns:3rem 1fr;gap:1rem;align-items:start;
+  border-left:3px solid var(--allerta);background:var(--carta);
+  border-radius:0 .6rem .6rem 0;padding:.85rem 1.1rem;box-shadow:var(--ombra);
+}
+.rotture .rif{
+  font-weight:700;color:var(--allerta);font-variant-numeric:tabular-nums;font-size:.95rem;
+}
+.rotture b{font-weight:600;display:block}
+.rotture .nota{display:block;color:var(--tenue);font-size:.9rem;margin-top:.15rem}
+
+/* ---------- schede ---------- */
+.schede{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr);align-items:start}
+@media(min-width:44rem){.schede.due{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.scheda{
+  min-width:0;
+  container-type:inline-size;
+  background:var(--carta);border:1px solid var(--riga);border-radius:.85rem;
+  padding:1.25rem 1.4rem 1.4rem;box-shadow:var(--ombra);
+}
+.scheda h3{font-size:1.1rem;font-weight:700;margin:0;letter-spacing:-.01em}
+.scheda .pagine{font-size:.74rem;color:var(--tenue);margin-top:.25rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.scheda p{margin-top:.75rem;font-size:.95rem;color:var(--tenue);max-width:62ch}
+.scheda p strong{color:var(--inchiostro);font-weight:600}
+.gettoni{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.85rem}
+.gettone{
+  font-size:.75rem;font-weight:600;padding:.28rem .6rem;border-radius:1rem;
+  background:var(--blu-tenue);color:var(--blu);
+}
+.gettone.neutro{background:transparent;border:1px solid var(--riga-forte);color:var(--tenue)}
+.gettone.verde{background:var(--ok-fondo);color:var(--ok)}
+.gettone.giallo{background:var(--avviso-fondo);color:var(--avviso)}
+.gettone.rosso{background:var(--allerta-fondo);color:var(--allerta)}
+dl.voci{margin:.9rem 0 0;display:grid;gap:.5rem}
+dl.voci > div{display:grid;grid-template-columns:1fr;gap:.05rem}
+@container (min-width:30rem){dl.voci > div{grid-template-columns:14rem 1fr;gap:.9rem}}
+dl.voci dt{font-size:.78rem;font-weight:700;color:var(--blu);letter-spacing:.04em;padding-top:.1rem}
+dl.voci dd{margin:0;font-size:.92rem;color:var(--tenue)}
+
+/* ---------- chiusura ---------- */
+.regola{
+  margin-top:1rem;padding:1.6rem 1.75rem;background:var(--navy);color:#fff;border-radius:1rem;
+}
+:root[data-theme="dark"] .regola,
+:root:not([data-theme="light"]) .regola{background:#0a2137}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .regola{background:var(--navy)}}
+.regola q{
+  display:block;font-family:var(--serif);font-size:clamp(1.2rem,3.6vw,1.6rem);
+  line-height:1.35;color:#fff;font-weight:600;quotes:"«" "»";
+}
+.regola p{font-family:var(--serif);font-size:1.02rem;line-height:1.5;margin:.9rem 0 0;max-width:54ch;color:#dceaf4}
+footer{
+  margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--riga);
+  color:var(--tenue);font-size:.82rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
+}
+
+@media (max-width:640px){
+  .fase{grid-template-columns:1fr;gap:.5rem}
+  .orologio{text-align:left}
+  .orologio::after{display:none}
+  .minuto{width:auto;height:auto;border-radius:1.5rem;flex-direction:row;gap:.4rem;padding:.3rem .8rem}
+  .minuto .u{margin-top:0}
+  .corpo h3{font-size:1.15rem}
+  .passo{grid-template-columns:1.25rem 2.4rem 1fr;padding:.8rem .9rem}
+}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .indice,.pannello,.azzera{display:none}
+  .testata,.regola{background:#fff !important;color:#000;border-bottom:2px solid #000;border-radius:0;padding-left:0;margin:0 0 1.5rem}
+  .testata h1{color:#000}
+  .testata .tesi,.regola p{color:#333}
+  .testata .occhiello,.marchio span{color:#555}
+  .marchio svg{filter:brightness(0)}
+  .tempi span{border-color:#999;color:#333}
+  .tempi b{color:#000}
+  .regola q{color:#000}
+  .fase,.passo,.scheda,.rotture li{page-break-inside:avoid}
+  .passo,.scheda,.battuta,.rotture li{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+
+/* ---------- il marchio, uno solo ---------- */
+.marchio svg{height:1.75rem;width:auto;flex:none}
+.marchio span{border-left:1px solid rgba(255,255,255,.28);padding-left:.75rem}
+
+/* ---------- tabelle ---------- */
+.scorre{overflow-x:auto;margin-top:1rem;-webkit-overflow-scrolling:touch}
+.tab{width:100%;border-collapse:collapse;font-size:.88rem;min-width:36rem}
+.tab th{text-align:left;font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+  color:var(--tenue);border-bottom:1px solid var(--riga-forte);padding:.5rem .55rem;vertical-align:bottom}
+.tab td{border-bottom:1px solid var(--riga);padding:.55rem;vertical-align:top}
+.tab tbody tr:hover{background:var(--blu-tenue)}
+.tab .zona{font-weight:700;color:var(--navy);white-space:nowrap}
+.tab .n{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+
+/* ---------- i modelli mentali ---------- */
+.modello{
+  background:var(--carta);border:1px solid var(--riga);border-left:3px solid var(--blu);
+  border-radius:.8rem;padding:1rem 1.1rem;box-shadow:var(--ombra);margin-bottom:.7rem;
+}
+.modello h3{font-size:1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.1rem}
+.modello .eng{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);font-weight:600}
+.modello p{margin-top:.6rem;font-size:.93rem}
+.modello .mossa{
+  margin-top:.7rem;padding-top:.65rem;border-top:1px dashed var(--riga-forte);
+  font-size:.9rem;
+}
+.modello .mossa b{color:var(--ok);font-weight:700}
+.modello.contro{border-left-color:var(--allerta)}
+.modello.contro .mossa b{color:var(--allerta)}
+
+/* ---------- fonti ---------- */
+.fonti{font-size:.82rem;color:var(--tenue);margin-top:1rem}
+.fonti a{color:var(--blu)}
+.fonti li{margin-bottom:.35rem}
+.incerto{
+  display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--avviso-fondo);color:var(--avviso);border-radius:.25rem;padding:.1rem .35rem;margin-left:.35rem;
+  vertical-align:middle;
+}
+.dato-forte{
+  display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--ok-fondo);color:var(--ok);border-radius:.25rem;padding:.1rem .35rem;margin-left:.35rem;
+  vertical-align:middle;
+}
+</style>
+
+<div class="foglio">
+
+  <header class="testata">
+    <div class="marchio">
+      <svg xmlns="http://www.w3.org/2000/svg" class="logo" viewBox="0 0 340 100" role="img" aria-label="NIPEC">
+        <title>NIPEC</title>
+        <g>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.6"/>
+          <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round"/>
+          <circle cx="30" cy="15.36" r="5.4" fill="#5AA6D6"/>
+          <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+          <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#9CCBE8"/>
+          <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#FFFFFF"/>
+        </g>
+        <text x="128" y="68" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#FFFFFF">NIPEC</text>
+      </svg>
+      <span>Studio interno · non divulgare</span>
+    </div>
+    <p class="occhiello">Chi compra le nostre macchine · griglia di Munger</p>
+    <h1>RADIOGRAFIA</h1>
+    <p class="tesi">L&rsquo;estetista italiana vista con i modelli mentali, non con le impressioni. Nord, centro e sud &mdash; e perch&eacute; lo stesso sistema attecchisce in un posto e muore nell&rsquo;altro.</p>
+    <div class="tempi">
+      <span><b>146</b> mila imprese</span>
+      <span><b>10</b> miliardi</span>
+      <span>spesa famiglie <b>&minus;31%</b> al Sud</span>
+      <span>laser <b>+13,1%</b> l&rsquo;anno</span>
+    </div>
+  </header>
+
+  <nav class="indice" aria-label="Sezioni">
+    <a href="#metodo">Il metodo</a>
+    <a href="#numeri">I numeri</a>
+    <a href="#tre-italie">Le tre Italie</a>
+    <a href="#munger">La griglia</a>
+    <a href="#lollapalooza">Lollapalooza</a>
+    <a href="#inversione">Inversione</a>
+    <a href="#lacune">Le lacune</a>
+    <a href="#dieci">Le dieci telefonate</a>
+  </nav>
+
+
+  <div class="sezione" id="metodo">
+    <p class="fase-n">1</p>
+    <h2>Perch&eacute; Munger, e non un sondaggio</h2>
+    <p>Un sondaggio ti dice cosa le persone <em>dicono</em>. La griglia di Munger prova a capire cosa le persone <em>fanno</em>, e perch&eacute; &mdash; incrociando discipline che di solito non si parlano: psicologia, economia, biologia delle abitudini, teoria degli incentivi.</p>
+  </div>
+
+  <div class="schede due">
+    <article class="scheda">
+      <h3>Il reticolo</h3>
+      <p class="pagine">latticework of mental models</p>
+      <p>Nessun modello singolo spiega un comportamento. Si guarda lo stesso fatto da pi&ugrave; discipline e si tiene quello che <strong>regge da tutte le angolazioni</strong>. Un&rsquo;idea che funziona solo dal punto di vista del marketing, di solito, non funziona.</p>
+    </article>
+    <article class="scheda">
+      <h3>Gli incentivi, prima di tutto</h3>
+      <p class="pagine">«mostrami l&rsquo;incentivo e ti dir&ograve; il risultato»</p>
+      <p>Prima di chiedersi se una persona &egrave; brava o pigra, si guarda <strong>cosa guadagna e cosa perde</strong> facendo la cosa che vogliamo. Quasi sempre la risposta &egrave; l&igrave;, e non nel carattere.</p>
+    </article>
+    <article class="scheda">
+      <h3>Invertire, sempre invertire</h3>
+      <p class="pagine">invert, always invert</p>
+      <p>Non &laquo;come faccio a farglielo usare&raquo;, ma <strong>&laquo;come farei se volessi garantire che non lo usi&raquo;</strong>. La lista che esce &egrave; pi&ugrave; onesta, e di solito descrive quello che stiamo gi&agrave; facendo.</p>
+    </article>
+    <article class="scheda">
+      <h3>Lollapalooza</h3>
+      <p class="pagine">quando le forze convergono</p>
+      <p>I comportamenti forti non nascono da una causa sola: nascono quando <strong>tre o quattro spinte tirano nella stessa direzione</strong> insieme. Vale per l&rsquo;adozione e vale, identico, per l&rsquo;abbandono.</p>
+    </article>
+  </div>
+
+  <div class="battuta">
+    <p><b>La regola che ho seguito scrivendo.</b> Ogni affermazione qui dentro &egrave; marcata: <span class="dato-forte">dato</span> quando viene da una fonte pubblica citata in fondo, <span class="incerto">ipotesi</span> quando &egrave; un ragionamento mio da verificare. Non ho riempito i buchi con la prosa: dove non so, c&rsquo;&egrave; scritto che non so, e come scoprirlo.</p>
+  </div>
+
+  <div class="sezione" id="numeri">
+    <p class="fase-n">2</p>
+    <h2>Il terreno, in cifre</h2>
+    <p>Quello che si sa con ragionevole certezza sul settore in cui vendiamo.</p>
+  </div>
+
+  <div class="scorre">
+  <table class="tab">
+    <thead><tr><th>Cosa</th><th>Quanto</th><th>Perch&eacute; ci riguarda</th></tr></thead>
+    <tbody>
+      <tr><td>Imprese estetica e benessere</td><td class="n">~146.000</td><td class="nota">Circa 300.000 addetti, oltre 10 miliardi di fatturato. Un mercato grande e frammentatissimo: pochissime hanno una struttura, quasi tutte sono una persona sola con le mani occupate.</td></tr>
+      <tr><td>Dove stanno</td><td class="n">NO 28% · NE 19,7%<br>Centro 21,3% · Sud 22,6%</td><td class="nota">Il Nord pesa quasi la met&agrave;. Ma il Sud da solo vale pi&ugrave; del Centro come numero di insegne.</td></tr>
+      <tr><td>Crescita aperture</td><td class="n">+29,3% in 5 anni<br>(prov. Padova)</td><td class="nota">Dato locale, ma indicativo: al Nord la concorrenza &egrave; aumentata in modo brutale. Chi apre oggi ha bisogno di distinguersi, non di lavorare di pi&ugrave;.</td></tr>
+      <tr><td>Spesa media famiglia</td><td class="n">NO 24,2k · NE 23,8k<br>Centro 22,2k · Sud 16,7k</td><td class="nota">La famiglia del Mezzogiorno spende circa il <b>31% in meno</b> di quella del Nord-Ovest. Non &egrave; un dettaglio: &egrave; il prezzo del pacchetto.</td></tr>
+      <tr><td>Reddito disponibile</td><td class="n">Nord +30% sul Sud</td><td class="nota">L&rsquo;ultimo quinto di reddito &egrave; al 24,4% nel Nord-Ovest contro l&rsquo;8,9% al Sud. Al Sud il pacchetto da mille euro semplicemente non esiste come acquisto d&rsquo;impulso.</td></tr>
+      <tr><td>Laser e IPL, mercato macchine</td><td class="n">+13,1% l&rsquo;anno<br>fino al 2030</td><td class="nota">Il vento &egrave; a favore: vendiamo dentro l&rsquo;unico segmento che cresce a doppia cifra. Oltre 500 milioni previsti entro il 2027.</td></tr>
+      <tr><td>Quota prenotazioni laser</td><td class="n">26% nazionale<br>28% al Nord</td><td class="nota">L&rsquo;epilazione laser &egrave; ormai un trattamento di massa, non di nicchia.</td></tr>
+      <tr><td>No-show senza automazione</td><td class="n">15&ndash;30%</td><td class="nota">Una cliente su quattro non si presenta. Con i promemoria automatici le assenze calano del 20&ndash;25%. <b>&Egrave; il numero che giustifica da solo tutto il nostro sistema.</b></td></tr>
+      <tr><td>Prenotazioni fuori orario</td><td class="n">oltre il 40%</td><td class="nota">Quasi met&agrave; delle richieste arriva quando il centro &egrave; chiuso. Chi risponde solo in negozio perde met&agrave; delle occasioni.</td></tr>
+      <tr><td>Sedute per ciclo, secondo il mercato</td><td class="n">6&ndash;8 donne<br>8&ndash;10 uomini</td><td class="nota"><b>Attenzione: il nostro cruscotto parte da 12.</b> Vedi il riquadro qui sotto.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="avvertenza"><span class="lbl">Da correggere</span>
+    Il cruscotto ha <b>12 sedute</b> come valore di partenza, mentre i protocolli pubblicati parlano di <b>6&ndash;8 sedute</b> per le donne. Il numero &egrave; modificabile in IMPOSTAZIONI, ma i valori di partenza restano: nessuno li cambia. Con 12, l&rsquo;avviso <b>ULTIMA SEDUTA</b> &mdash; cio&egrave; il momento in cui si propone il mantenimento, quello che vale di pi&ugrave; &mdash; arriva quattro sedute troppo tardi, quando la cliente ha gi&agrave; smesso di venire. <b>Va deciso device per device e messo come valore di partenza giusto.</b>
+  </div>
+
+  <div class="sezione">
+    <p class="etichetta">Onest&agrave; intellettuale</p>
+    <h2>Quello che non sappiamo</h2>
+    <p>Ho cercato e non ho trovato dati pubblici affidabili su questi punti. Sono esattamente i punti che decidono se il nostro sistema attecchisce.</p>
+  </div>
+
+  <ul class="rotture">
+    <li><span class="rif">?</span><span><b>Et&agrave; e percorso formativo della titolare tipo</b><span class="nota">Nessuna statistica pubblica seria. Sappiamo solo che la qualifica richiede 900 ore di formazione regionale o un diploma professionale, e che basta la licenza media. Quindi: <b>non possiamo dare per scontata dimestichezza con strumenti gestionali</b>, ma nemmeno il contrario.</span></span></li>
+    <li><span class="rif">?</span><span><b>Quante usano gi&agrave; un gestionale, e quale</b><span class="nota">I fornitori di software raccontano una crescita, ma nessuno pubblica quote di mercato. &Egrave; il dato che cambia tutto: se ne ha gi&agrave; uno, noi siamo il secondo, e il secondo perde sempre.</span></span></li>
+    <li><span class="rif">?</span><span><b>Dove tiene l&rsquo;agenda oggi</b><span class="nota">Carta, telefono, Treatwell, quaderno. Non lo sappiamo, e <b>&egrave; la domanda pi&ugrave; importante di tutto il progetto.</b></span></span></li>
+    <li><span class="rif">?</span><span><b>Quanto incassa davvero per seduta, per area</b><span class="nota">I prezzi pubblicati (100&ndash;400 &euro; a seduta) vengono da cliniche e catene, non dal centro estetico di quartiere. Nella nostra colonna &laquo;prezzo a seduta&raquo; questo numero &egrave; il cuore del calcolo dei soldi.</span></span></li>
+  </ul>
+
+  <div class="sezione" id="tre-italie">
+    <p class="fase-n">3</p>
+    <h2>Le tre Italie</h2>
+    <p>Non &egrave; folklore: sono tre economie diverse, con tre clientele diverse, che comprano lo stesso trattamento per motivi diversi. Il device &egrave; identico. <b>Il sistema che gli sta intorno non pu&ograve; esserlo.</b></p>
+  </div>
+
+  <div class="scorre">
+  <table class="tab">
+    <thead><tr><th></th><th>Nord</th><th>Centro</th><th>Sud e isole</th></tr></thead>
+    <tbody>
+      <tr><td class="zona">Il terreno</td>
+        <td>Quasi met&agrave; delle insegne. Aperture in forte crescita.<span class="dato-forte">dato</span></td>
+        <td>Un quinto delle insegne. Mercato maturo, meno turbolento.<span class="dato-forte">dato</span></td>
+        <td>Un quarto delle insegne, con la spesa familiare pi&ugrave; bassa d&rsquo;Italia.<span class="dato-forte">dato</span></td></tr>
+      <tr><td class="zona">Il problema che sente</td>
+        <td>&laquo;Ne hanno aperti altri tre in due anni.&raquo; Concorrenza.<span class="incerto">ipotesi</span></td>
+        <td>&laquo;Lavoro tanto e guadagno uguale.&raquo; Margine.<span class="incerto">ipotesi</span></td>
+        <td>&laquo;Le clienti spariscono e tornano a giugno.&raquo; Continuit&agrave;.<span class="incerto">ipotesi</span></td></tr>
+      <tr><td class="zona">Come compra la cliente</td>
+        <td>Pacchetto intero, pi&ugrave; disposta al prezzo pieno.</td>
+        <td>Pacchetto, con attenzione al rapporto qualit&agrave;-prezzo.</td>
+        <td>Spesso <b>seduta per seduta</b> o a rate: il pacchetto grande &egrave; un ostacolo, non un&rsquo;offerta.<span class="incerto">ipotesi</span></td></tr>
+      <tr><td class="zona">Stagionalit&agrave;</td>
+        <td>Pi&ugrave; distribuita sull&rsquo;anno.</td>
+        <td>Media, con picco primaverile.</td>
+        <td>Picco estivo violento, poi vuoto. <b>Il ciclo laser 21&ndash;28 giorni combatte contro l&rsquo;abitudine stagionale.</b><span class="incerto">ipotesi</span></td></tr>
+      <tr><td class="zona">Cosa la fa fidare</td>
+        <td>Recensioni, risultati, professionalit&agrave; dimostrata.</td>
+        <td>Il misto: qualcuno che la conosce, pi&ugrave; le prove.</td>
+        <td><b>Il passaparola e la persona.</b> Si compra da chi ci si fida, non da chi ha il sito migliore.<span class="incerto">ipotesi</span></td></tr>
+      <tr><td class="zona">Rischio per il nostro sistema</td>
+        <td><b>Essere il secondo strumento.</b> Se ha gi&agrave; un gestionale, la nostra app diventa doppio lavoro e muore in dieci giorni.</td>
+        <td>Indifferenza: &laquo;bello, poi lo guardo&raquo;. Muore per tiepidezza.</td>
+        <td>Essere <b>il primo sistema in assoluto</b>: nessuna abitudine da rompere, ma neanche nessuna abitudine su cui appoggiarsi.</td></tr>
+      <tr><td class="zona">La leva giusta</td>
+        <td>&laquo;Ti fa <b>ripartire chi &egrave; sparita</b>, mentre gli altri rincorrono clienti nuove.&raquo;</td>
+        <td>&laquo;Ti fa vedere <b>quanto vale</b> ogni cliente che non richiami.&raquo;</td>
+        <td>&laquo;Le tue clienti <b>non spariscono pi&ugrave;</b> da settembre a maggio.&raquo;</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="battuta">
+    <p><b>La conseguenza commerciale, in una frase.</b> Al <b>Nord</b> la domanda da fare per prima &egrave; &laquo;<em>cosa usi adesso per l&rsquo;agenda?</em>&raquo;: se ha gi&agrave; qualcosa, o ci integriamo o non partiamo. Al <b>Sud</b> quella domanda non serve, ma serve tutto il resto: siamo il primo sistema che quella persona abbia mai usato, e chi arriva per primo deve <b>insegnare</b>, non consegnare.</p>
+  </div>
+
+  <div class="avvertenza"><span class="lbl">Attenzione a come si usa questa tabella</span>
+    Le colonne &laquo;problema&raquo;, &laquo;come compra&raquo; e &laquo;cosa la fa fidare&raquo; sono <b>ipotesi ragionate, non dati</b>: derivano dai numeri su reddito e spesa, non da interviste. Servono a costruire le domande giuste, non a decidere per l&rsquo;interlocutore. Una titolare di Lecce con quarant&rsquo;anni di mestiere pu&ograve; essere pi&ugrave; organizzata di una di Monza aperta l&rsquo;anno scorso: <b>la geografia sposta le probabilit&agrave;, non la persona che hai davanti.</b>
+  </div>
+
+  <div class="sezione" id="munger">
+    <p class="fase-n">4</p>
+    <h2>La griglia: dodici forze che decidono</h2>
+    <p>Le tendenze psicologiche che Munger elenca, tradotte una per una in quello che succede davvero in un centro estetico &mdash; e nella mossa che ne consegue. Le prime otto lavorano <span style="color:var(--ok);font-weight:600">a favore</span>, le ultime quattro <span style="color:var(--allerta);font-weight:600">contro</span>.</p>
+  </div>
+
+  <article class="modello">
+    <p class="eng">Incentive-caused bias</p>
+    <h3>Gli incentivi comandano tutto</h3>
+    <p>Oggi lei viene pagata per <b>fare la seduta</b>, non per richiamare chi non torna. La telefonata di recupero &egrave; fatica immediata contro guadagno incerto e lontano. Ecco perch&eacute; non la fa: non &egrave; pigrizia, &egrave; aritmetica.</p>
+    <p class="mossa"><b>La mossa:</b> spostare il guadagno dentro il gesto. L&rsquo;avviso non deve dire &laquo;chiama Anna&raquo;, deve dire <b>&laquo;chiama Anna &mdash; vale 450 &euro;&raquo;</b>. Il numero non &egrave; un abbellimento: &egrave; l&rsquo;incentivo reso visibile nel momento della scelta.</p>
+  </article>
+
+  <article class="modello">
+    <p class="eng">Deprival-superreaction · loss aversion</p>
+    <h3>Perdere brucia il doppio di guadagnare</h3>
+    <p>&laquo;Puoi acquisire dieci clienti nuove&raquo; la lascia tiepida. &laquo;<b>Stai perdendo undici clienti che hai gi&agrave; pagato per acquisire</b>&raquo; la fa sedere. La stessa informazione, girata dalla parte della perdita, pesa due volte tanto.</p>
+    <p class="mossa"><b>La mossa:</b> ogni schermata e ogni frase di vendita si dicono al negativo. Non &laquo;copertura appuntamento 50%&raquo;, ma <b>&laquo;met&agrave; delle tue clienti &egrave; uscita senza il prossimo appuntamento&raquo;</b>.</p>
+  </article>
+
+  <article class="modello">
+    <p class="eng">Reason-respecting tendency</p>
+    <h3>Il &laquo;perch&eacute;&raquo; raddoppia l&rsquo;obbedienza</h3>
+    <p>Le persone eseguono molto di pi&ugrave; se ricevono una ragione, anche breve. &laquo;Aggiorna la data&raquo; funziona poco. <b>&laquo;Aggiorna la data, se no domani il sistema non sa chi chiamare&raquo;</b> funziona.</p>
+    <p class="mossa"><b>La mossa:</b> nessun comando nudo nell&rsquo;app. Ogni richiesta porta con s&eacute; mezza riga di conseguenza. Costa venti parole e cambia il tasso di esecuzione.</p>
+  </article>
+
+  <article class="modello">
+    <p class="eng">Authority-misinfluence tendency</p>
+    <h3>Il tecnico che consegna &egrave; l&rsquo;autorit&agrave;</h3>
+    <p>Chi porta la macchina, la accende e la fa funzionare diventa, per quella persona, <b>l&rsquo;esperto</b>. Quello che dice nei primi venti minuti pesa pi&ugrave; di qualunque manuale mandato dopo.</p>
+    <p class="mossa"><b>La mossa:</b> tutto quello che conta si dice <b>in presenza, il giorno della consegna</b>. Un PDF mandato la settimana dopo non ha autorit&agrave;: &egrave; carta. &Egrave; il motivo per cui la Prima Accensione funziona.</p>
+  </article>
+
+  <article class="modello">
+    <p class="eng">Commitment and consistency</p>
+    <h3>Il primo gesto fatto davanti a te vale mesi</h3>
+    <p>Chi compie un&rsquo;azione pubblica tende a restare coerente con quell&rsquo;azione. <b>La titolare che chiama una cliente davanti al tecnico</b> non ha ricevuto un file: ha cominciato una cosa. Questa &egrave; la ragione psicologica per cui la telefonata al minuto 15 non &egrave; sostituibile.</p>
+    <p class="mossa"><b>La mossa:</b> tenerla come regola non negoziabile, e aggiungerne una seconda: farle <b>dire ad alta voce quando la user&agrave;</b> &mdash; &laquo;ogni mattina mentre scaldo la macchina&raquo;. L&rsquo;impegno detto vale pi&ugrave; dell&rsquo;impegno pensato.</p>
+  </article>
+
+  <article class="modello">
+    <p class="eng">Social proof</p>
+    <h3>Guarda cosa fa quella come lei</h3>
+    <p>Nel dubbio, si copia il simile. Non il centro modello di Milano: <b>il centro a venti chilometri, con la stessa macchina, la stessa dimensione</b>.</p>
+    <p class="mossa"><b>La mossa:</b> il battito mensile ti d&agrave; gi&agrave; i numeri, in forma anonima. Da l&igrave; esce la frase pi&ugrave; efficace che possiamo dire: <b>&laquo;i centri che lo usano davvero recuperano in media X clienti al mese&raquo;</b> &mdash; ma solo quando avremo i numeri veri. Inventarli sarebbe sabotaggio.</p>
+  </article>
+
+  <article class="modello">
+    <p class="eng">Reciprocation tendency</p>
+    <h3>Il sistema regalato crea un debito</h3>
+    <p>Diamo uno strumento che nessun concorrente d&agrave;, gratis, insieme alla macchina. Questo genera un obbligo implicito &mdash; e l&rsquo;obbligo si onora, se qualcuno viene a riscuoterlo con garbo.</p>
+    <p class="mossa"><b>La mossa:</b> la telefonata a 30 giorni non &egrave; assistenza, &egrave; <b>riscossione gentile del debito</b>: &laquo;te l&rsquo;ho montato io, apriamolo insieme&raquo;. Senza quella chiamata il debito si estingue da solo.</p>
+  </article>
+
+  <article class="modello">
+    <p class="eng">Curiosity · liking tendency</p>
+    <h3>Si compra dalla persona</h3>
+    <p>Vale ovunque e <b>al Sud in modo pi&ugrave; marcato</b><span class="incerto">ipotesi</span>: il rapporto precede il prodotto. Chi si &egrave; fidato di te per una macchina da ventimila euro si fider&agrave; anche del cruscotto, se glielo chiedi tu.</p>
+    <p class="mossa"><b>La mossa:</b> il cruscotto non si presenta come software. Si presenta come <b>una cosa tua</b>: &laquo;questa l&rsquo;ho fatta fare apposta per i centri come il tuo&raquo;. Fa una differenza sproporzionata.</p>
+  </article>
+
+  <article class="modello contro">
+    <p class="eng">Inconsistency-avoidance · l&rsquo;abitudine</p>
+    <h3>Contro · L&rsquo;agenda che ha gi&agrave;</h3>
+    <p>La forza pi&ugrave; potente del gruppo, e ci &egrave; contro. Un&rsquo;abitudine di anni non si sostituisce chiedendo di aggiungerne un&rsquo;altra accanto. <b>Nessuno tiene due agende.</b> Dopo dieci giorni una muore, e non sar&agrave; quella vecchia.</p>
+    <p class="mossa"><b>La mossa:</b> non chiedere mai di ricopiare. O l&rsquo;app diventa il posto dove <b>fissa</b> l&rsquo;appuntamento, o si aggancia a quello che usa gi&agrave;, o accettiamo che serva solo a <b>chi non ha niente</b> &mdash; ed &egrave; una scelta legittima, ma va fatta consapevolmente.</p>
+  </article>
+
+  <article class="modello contro">
+    <p class="eng">Simple pain-avoiding psychological denial</p>
+    <h3>Contro · La lista che fa male non si apre</h3>
+    <p>Davanti a una schermata che elenca venti fallimenti, la mente umana non si organizza: <b>evita</b>. Non &egrave; svogliatezza, &egrave; difesa. Lo avevi gi&agrave; scritto tu: <em>quaranta righe rosse paralizzano</em>. Ma l&rsquo;app oggi le mostra tutte.</p>
+    <p class="mossa"><b>La mossa:</b> <b>tre al giorno, mai di pi&ugrave;.</b> Il resto dietro un &laquo;vedi tutte&raquo; che deve scegliere lei. Una lista chiudibile &egrave; una lista che si apre.</p>
+  </article>
+
+  <article class="modello contro">
+    <p class="eng">Excessive self-regard · overoptimism</p>
+    <h3>Contro · &laquo;Le mie clienti tornano da sole&raquo;</h3>
+    <p>Ognuno crede di stare sopra la media, e ricorda le clienti tornate molto meglio di quelle sparite &mdash; sono quelle che ha visto. Le altre <b>sono invisibili per costruzione</b>.</p>
+    <p class="mossa"><b>La mossa:</b> non contraddirla mai a parole: perde chi discute. Si contraddice con la sua agenda in mano: <b>&laquo;quante ne hai che non vedi da sei mesi?&raquo;</b>, e poi si sta zitti. Il numero lo dice lei, e quando lo dice lei diventa vero.</p>
+  </article>
+
+  <article class="modello contro">
+    <p class="eng">Availability-misweighing tendency</p>
+    <h3>Contro · Conta solo quello che si vede</h3>
+    <p>La cliente sparita non &egrave; un evento: &egrave; un <b>non-evento</b>. Non fa rumore, non lascia una sedia vuota che si nota, non si presenta il luned&igrave;. Per questo si perdono clienti per anni senza accorgersene: manca lo stimolo.</p>
+    <p class="mossa"><b>La mossa:</b> &egrave; esattamente il mestiere del sistema &mdash; <b>rendere visibile un&rsquo;assenza</b>. Ma se il sistema non la chiama mai, l&rsquo;assenza resta invisibile come prima. <b>Senza notifica, tutto il resto &egrave; teoria.</b></p>
+  </article>
+
+  <div class="sezione" id="lollapalooza">
+    <p class="fase-n">5</p>
+    <h2>Lollapalooza: quando le forze si sommano</h2>
+    <p>I comportamenti forti non hanno una causa: ne hanno quattro che spingono insieme. Ecco le due convergenze che contano per noi &mdash; e sono l&rsquo;una il rovescio dell&rsquo;altra.</p>
+  </div>
+
+  <div class="schede due">
+    <article class="scheda" style="border-left:3px solid var(--ok)">
+      <h3>La convergenza che fa attecchire</h3>
+      <p class="pagine">tutto nello stesso quarto d&rsquo;ora</p>
+      <p><strong>Autorit&agrave;</strong> (il tecnico che ha montato la macchina) + <strong>reciprocit&agrave;</strong> (uno strumento in regalo) + <strong>impegno pubblico</strong> (chiama una cliente davanti a lui) + <strong>ricompensa immediata</strong> (quella cliente fissa un appuntamento) = un&rsquo;abitudine che parte.</p>
+      <p>&Egrave; il motivo per cui la Prima Accensione funziona: <strong>non &egrave; una consegna, &egrave; una coincidenza organizzata di quattro forze.</strong> Chi la salta consegna un file.</p>
+    </article>
+    <article class="scheda" style="border-left:3px solid var(--allerta)">
+      <h3>La convergenza che uccide</h3>
+      <p class="pagine">in dieci giorni, senza rumore</p>
+      <p><strong>Doppio inserimento</strong> (ha gi&agrave; un&rsquo;agenda) + <strong>nessun innesco</strong> (l&rsquo;app non chiama mai) + <strong>lista che cresce</strong> (senso di colpa) + <strong>nessuna ricompensa</strong> (fai la cosa giusta e non succede niente) = icona spenta.</p>
+      <p><strong>Nessuno di questi quattro, da solo, sarebbe fatale.</strong> Tutti e quattro insieme sono la fine, e oggi ci sono tutti e quattro.</p>
+    </article>
+  </div>
+
+  <div class="sezione" id="inversione">
+    <p class="fase-n">6</p>
+    <h2>Inversione: come garantire il fallimento</h2>
+    <p>La domanda di Munger, applicata a noi. <em>Se volessi essere sicuro che nessuna estetista usi il sistema, cosa farei?</em> La risposta &egrave; imbarazzante, perch&eacute; descrive quasi tutto quello che abbiamo costruito oggi.</p>
+  </div>
+
+  <ol class="passi">
+    <li class="passo"><span class="codice">1</span><span class="testo"><b>Le chiederei di ricopiare gli appuntamenti che ha gi&agrave; scritto altrove</b><span class="nota">Fatto. Nessuna difesa possibile: &egrave; il difetto pi&ugrave; grave del sistema.</span></span></li>
+    <li class="passo"><span class="codice">2</span><span class="testo"><b>Non la avviserei mai di aprire l&rsquo;app</b><span class="nota">Fatto: zero notifiche. L&rsquo;app aspetta di essere ricordata da chi ha bisogno di essere ricordato.</span></span></li>
+    <li class="passo"><span class="codice">3</span><span class="testo"><b>Le mostrerei tutti i suoi fallimenti in una lista sola</b><span class="nota">Fatto: nessun limite di righe, mentre la nostra stessa procedura dice che venti bastano.</span></span></li>
+    <li class="passo"><span class="codice">4</span><span class="testo"><b>Userei parole che non usa</b><span class="nota">Fatto: &laquo;Setup&raquo;, &laquo;fuori finestra&raquo;, &laquo;copertura appuntamento&raquo;, &laquo;incentivo&raquo;, &laquo;battito&raquo;. E una scheda intera che porta il nome del fornitore invece di dire cosa fa.</span></span></li>
+    <li class="passo"><span class="codice">5</span><span class="testo"><b>Le chiederei nove informazioni per aggiungere una cliente</b><span class="nota">Fatto. Il giorno della consegna le riempite in due; la ventunesima cliente la aggiunge da sola, tra due appuntamenti, e nove campi sono un muro.</span></span></li>
+    <li class="passo"><span class="codice">6</span><span class="testo"><b>Non le farei mai vedere che sta migliorando</b><span class="nota">Fatto: nessun progresso, nessuna striscia, nessun &laquo;questo mese hai recuperato tre clienti&raquo;. Il sistema misura il buco, mai il rattoppo.</span></span></li>
+    <li class="passo"><span class="codice">7</span><span class="testo"><b>Metterei i suoi dati in un posto solo, senza copia</b><span class="nota">Fatto: se perde il telefono, perde la rubrica. Nessun avviso, nessun promemoria di sicurezza. <b>Questa un giorno diventa una telefonata molto sgradevole.</b></span></span></li>
+  </ol>
+
+  <div class="battuta">
+    <p><b>Sette su sette.</b> Non &egrave; un caso e non &egrave; incompetenza: &egrave; quello che succede quando si costruisce uno strumento partendo da <b>chi lo capisce</b> invece che da <b>chi lo deve usare</b>. Il motore &mdash; gli otto avvisi, l&rsquo;ordine di lavoro, il calcolo del valore &mdash; &egrave; giusto e non si tocca. Tutto quello che gli sta sopra &egrave; stato disegnato per Giorgio, non per la titolare.</p>
+  </div>
+
+  <div class="sezione" id="lacune">
+    <p class="fase-n">7</p>
+    <h2>Le lacune, in ordine di gravit&agrave;</h2>
+    <p>Ordinate per quanto pesano sull&rsquo;adozione, non per quanto costa sistemarle.</p>
+  </div>
+
+  <div class="scorre">
+  <table class="tab">
+    <thead><tr><th>#</th><th>La lacuna</th><th>Cosa la chiude</th><th>Costo</th></tr></thead>
+    <tbody>
+      <tr><td class="zona">1</td><td><b>Il doppio inserimento</b><br><span class="nota">Ha gi&agrave; un&rsquo;agenda. Noi ne chiediamo una seconda.</span></td>
+          <td class="nota">Prima capire cosa usa (le dieci telefonate qui sotto). Poi decidere: diventare l&rsquo;agenda, agganciarsi alla sua, o dichiarare che serviamo solo chi non ha niente.</td><td class="nota">Una decisione, poi settimane</td></tr>
+      <tr><td class="zona">2</td><td><b>Nessun innesco</b><br><span class="nota">L&rsquo;app non chiama mai. L&rsquo;icona si spegne in due settimane.</span></td>
+          <td class="nota">Notifica giornaliera: &laquo;Buongiorno. Oggi 3 telefonate, 1.240 &euro;&raquo;. Su Android funziona; su iPhone serve che l&rsquo;app sia installata sulla Home &mdash; motivo in pi&ugrave; perch&eacute; l&rsquo;icona la installi il tecnico.</td><td class="nota">Un giorno</td></tr>
+      <tr><td class="zona">3</td><td><b>La lista senza freno</b><br><span class="nota">Mostra tutto: venti fallimenti in fila.</span></td>
+          <td class="nota">Tre al giorno. Il resto dietro &laquo;vedi tutte&raquo;. Chiuderne tre &egrave; un traguardo; venti &egrave; una condanna.</td><td class="nota">Due ore</td></tr>
+      <tr><td class="zona">4</td><td><b>Le parole sbagliate</b><br><span class="nota">Setup, fuori finestra, copertura, incentivo, battito.</span></td>
+          <td class="nota">Dizionario e riscrittura. Regola: <b>ogni avviso &egrave; un verbo</b>, mai uno stato. &laquo;&Egrave; in ritardo&raquo;, non &laquo;fuori finestra&raquo;.</td><td class="nota">Mezza giornata</td></tr>
+      <tr><td class="zona">5</td><td><b>Nessuna ricompensa</b><br><span class="nota">Fa la cosa giusta e non succede niente.</span></td>
+          <td class="nota">Quando la lista arriva a zero, dirglielo. Ogni mese: &laquo;hai recuperato 4 clienti, 1.800 &euro;&raquo;. La cifra recuperata &egrave; gi&agrave; calcolabile con quello che abbiamo.</td><td class="nota">Mezza giornata</td></tr>
+      <tr><td class="zona">6</td><td><b>Dati su un telefono solo</b><br><span class="nota">Lo perde, perde tutto.</span></td>
+          <td class="nota">Promemoria automatico ogni 30 giorni, e la copia mandata a se stessa su WhatsApp con un tocco.</td><td class="nota">Due ore</td></tr>
+      <tr><td class="zona">7</td><td><b>Nove campi per una cliente</b></td>
+          <td class="nota">Due campi: nome e telefono. Il resto si chiede quando serve, non prima.</td><td class="nota">Due ore</td></tr>
+      <tr><td class="zona">8</td><td><b>Le 12 sedute di partenza</b><br><span class="nota">Il mercato dice 6&ndash;8.</span></td>
+          <td class="nota">Valore di partenza corretto per protocollo e per device. &Egrave; una riga di configurazione, ma sposta di quattro sedute il momento in cui si propone il mantenimento.</td><td class="nota">Dieci minuti</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="sezione" id="dieci">
+    <p class="fase-n">8</p>
+    <h2>Le dieci telefonate</h2>
+    <p>Tutta la met&agrave; incerta di questo documento si risolve cos&igrave;: <b>dieci clienti gi&agrave; tuoi, cinque domande, venti minuti in tutto.</b> Non &egrave; una ricerca di mercato: &egrave; smettere di indovinare. Prima di scrivere una riga di codice nuova, si fa questo.</p>
+  </div>
+
+  <div class="riquadro"><pre>1  <b>Dove segni gli appuntamenti?</b>
+   Fatti dire la marca, o fatti mandare la foto della pagina.
+   &Egrave; LA domanda: decide se il nostro sistema pu&ograve; esistere.
+
+2  <b>Quante clienti hai che non vedi da pi&ugrave; di sei mesi?</b>
+   Non serve il numero esatto. Serve il silenzio prima della risposta.
+
+3  <b>Quando una finisce il ciclo, cosa succede dopo?</b>
+   Se risponde &laquo;niente&raquo; o &laquo;dipende&raquo;, l&rsquo;avviso ULTIMA SEDUTA
+   vale da solo il prezzo della macchina.
+
+4  <b>Quante sedute fa un ciclo, da te?</b>
+   Serve a tarare il valore di partenza. Se dicono 6-8 e noi
+   partiamo da 12, il nostro avviso pi&ugrave; redditizio arriva tardi.
+
+5  <b>Se ti mandassi un messaggio ogni mattina con chi chiamare,
+   lo leggeresti o ti darebbe fastidio?</b>
+   Risponde alla lacuna numero 2 senza aver costruito niente.</pre></div>
+
+  <div class="battuta">
+    <p><b>Come si leggono le risposte.</b> Se sette su dieci hanno un gestionale, il nostro posto non &egrave; sostituirlo: &egrave; <b>fare quello che quello non fa</b>, cio&egrave; dire chi richiamare. Se sette su dieci hanno un quaderno, allora l&rsquo;app deve diventare l&rsquo;agenda, e va costruita l&rsquo;agenda. <b>Sono due prodotti diversi</b>, e oggi stiamo scommettendo sul secondo senza aver verificato.</p>
+  </div>
+
+  <div class="regola">
+    <q>La geografia sposta le probabilit&agrave;, non la persona che hai davanti.</q>
+    <p>Questo documento serve a preparare le domande giuste prima di entrare in un centro. Non a decidere cosa pensa la titolare prima che apra bocca: quello &egrave; il modo pi&ugrave; veloce per sbagliare consegna.</p>
+  </div>
+
+  <div class="sezione">
+    <p class="etichetta">Da dove vengono i numeri</p>
+    <h2>Fonti</h2>
+  </div>
+
+  <ul class="fonti">
+    <li>Numero di imprese, addetti e distribuzione territoriale del settore benessere &mdash; <a href="https://www.confartigianato.it/category/categorie/benessere/">Confartigianato Imprese, area Benessere</a> e Osservatorio Nazionale Estetica e Benessere, ripresi da <a href="https://www.styloo.app/bellezza-e-benessere-tutti-i-numeri-del-settore/">Styloo</a> e <a href="https://ilmiobusinessplan.com/blogs/news/estetista-italia">ilmiobusinessplan.com</a>.</li>
+    <li>Crescita delle aperture in provincia di Padova &mdash; <a href="https://www.confartigianatopadova.it/centri-estetici-a-padova-boom-di-nuove-aperture-in-cinque-anni-293-di-imprese-nel-settore/">Confartigianato Padova</a>.</li>
+    <li>Spesa media delle famiglie e divari territoriali &mdash; ISTAT, ripresa da <a href="https://tg24.sky.it/economia/2025/01/29/reddito-disponibile-famiglie-dati-istat">Sky TG24</a>, <a href="https://www.avvenire.it/economia/lavoro/cresce-il-gap-territoriale-il-reddito-al-sud-e-la-meta-di-quello-del-nord_84867">Avvenire</a> e <a href="https://demografica.adnkronos.com/famiglia/consumi-italia-milano-foggia-divario-spesa-famiglie-2025/">Demografica Adnkronos</a>.</li>
+    <li>Mercato dei dispositivi laser e IPL, crescita al 2030 &mdash; <a href="https://www.adnkronos.com/mercato-italiano-degli-apparecchi-elettrici-per-la-depilazione-laser-e-ipl-crescera-del-131-allanno-fino-al-2030_31Jf6VueHb5JvPEta0igX8">Adnkronos</a>; quota di prenotazioni per trattamento &mdash; <a href="https://ilmiobusinessplan.com/blogs/news/mercato-trattamenti-estetici">ilmiobusinessplan.com</a>.</li>
+    <li>No-show, prenotazioni fuori orario ed effetto dei promemoria automatici &mdash; <a href="https://panema.it/software-appuntamenti-estetista-addio-no-show-nel-2026/">Panema</a> e <a href="https://www.igrandisoft.it/digitalizzazione-centri-estetici/">iGrandiSoft</a>. <b>Attenzione:</b> sono fornitori di gestionali, quindi parte interessata. I numeri vanno presi come ordine di grandezza, non come misura.</li>
+    <li>Sedute per ciclo e prezzi &mdash; <a href="https://www.equipe-estetica.it/medicina-estetica/epilazione-laser/">Equipe Estetica</a> e <a href="https://centrielha.it/blog/quanto-costa-la-depilazione-laser-guida-completa-ai-prezzi/">Elha</a>. Sono cliniche e catene: i prezzi del centro di quartiere sono verosimilmente pi&ugrave; bassi.</li>
+    <li>Requisiti professionali per l&rsquo;esercizio dell&rsquo;attivit&agrave; &mdash; <a href="https://formazionelavoro.regione.emilia-romagna.it/formazione-regolamentata/approfondimenti/profili-regolamentati/profili/estetista">Regione Emilia-Romagna</a>.</li>
+    <li>Le tendenze psicologiche usate nella griglia &mdash; Charles T. Munger, <em>The Psychology of Human Misjudgment</em> (1995, rivista 2005), raccolta in <em>Poor Charlie&rsquo;s Almanack</em>.</li>
+  </ul>
+
+
+  <footer>
+    <span>NIPEC · Tecnologie Estetiche</span>
+    <span>RADIOGRAFIA &mdash; studio interno, agosto 2026</span>
+    <span>Assistenza 351 846 6025</span>
+  </footer>
+</div>
