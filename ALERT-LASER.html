@@ -396,8 +396,17 @@ footer{
 :root[data-theme="dark"] .avviso .dice,:root:not([data-theme="light"]) .avviso .dice{color:var(--blu)}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .avviso .dice{color:var(--navy)}}
 
+/* ---------- rimando ---------- */
+.rimando{
+  display:inline-flex;align-items:center;gap:.45rem;margin-top:1.5rem;
+  font-size:.85rem;font-weight:600;text-decoration:none;color:var(--blu);
+  border:1px solid var(--riga-forte);border-radius:1.2rem;padding:.35rem .8rem;
+}
+.rimando:hover{border-color:var(--blu);background:var(--blu-tenue)}
+.rimando .freccia{font-weight:400}
+
 @media print{
-  .varianti,.copia{display:none}
+  .varianti,.copia,.rimando{display:none}
   .formula,.tab tbody tr:hover{box-shadow:none;background:transparent}
   .formula code{font-size:8pt}
   .avviso,.formula,.scorre{page-break-inside:avoid}
@@ -947,6 +956,8 @@ Colonna D   &egrave; un numero, tra 0 e SEDUTE_CICLO</pre></div>
     <q>Nessuna esce senza il prossimo appuntamento.</q>
     <p>&Egrave; l&rsquo;unica regola del laser. Tutte le formule di questa pagina servono a rendere visibile chi &egrave; uscita senza &mdash; e a farla richiamare oggi, non il mese prossimo.</p>
   </div>
+
+  <a class="rimando" href="PERSELOPE.html"><span class="freccia">&larr;</span> PERSELOPE &mdash; la sequenza di consegna</a>
 
   <footer>
     <span>NIPEC · Tecnologie Estetiche</span>
