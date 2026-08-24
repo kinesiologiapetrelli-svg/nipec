@@ -42,8 +42,12 @@ I dodici precetti sono verificati su **due originali indipendenti** di Giorgio
    Giorgio.
 2. **Provenienza** — il PDF cita tre lenti più Darwin, Giorgio ne indica
    quattro con Buffett. Da decidere.
-3. **Date DEMETRA** — il piano interno dà la conseguenza sia al 10 sia al 30
-   settembre, e il 10 settembre non compare nel piano di Egla.
+3. **Date DEMETRA** — risolto il 24 agosto. Due verifiche distinte: il
+   **10 settembre** le azioni (se la partenza non è fatta, la macchina
+   rientra), il **30 settembre** il fatturato (500 €/mese). Entrambe le date
+   sono ora scritte anche nel piano di Egla. Resta da inserire, nel suo piano,
+   il numero di clienti attive che coprono i 500 €: serve il valore mensile di
+   un percorso DEMETRA.
 
 ## Come si rigenera
 

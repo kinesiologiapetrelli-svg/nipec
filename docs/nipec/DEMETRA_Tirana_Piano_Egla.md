@@ -22,6 +22,7 @@ DEMETRA è un centro finalizzato al benessere del corpo e del viso, attraverso i
 |------|-----------|
 | **entro 30 agosto** | Chiudi la preparazione: protocolli e app pronti. |
 | **1 settembre – entro 5 settembre** | Si parte: il centro apre ufficialmente. |
+| **entro il 10 settembre** | La partenza è fatta: hai chiamato tutte le clienti, le hai inserite nell'app, hai scritto a tutte l'apertura e hai avviato i contenuti. È la data che conta: da qui in poi il centro cammina da solo. |
 | **ogni settimana** | Chiama tutte le clienti · inseriscile nell'app · scrivi a tutte l'apertura (mail + messaggio + contatto personale). 2 reel + 1 post: fai vedere il metodo, i percorsi, i risultati. |
 
 ## A chi scrivere e come vendere
@@ -34,6 +35,10 @@ DEMETRA è un centro finalizzato al benessere del corpo e del viso, attraverso i
 ## Il primo obiettivo
 
 Il primo traguardo è semplice e concreto: far lavorare il centro già nel primo mese. Con le clienti che hai già, è a portata di mano — bastano poche a percorso. Da lì, il centro va da solo.
+
+**Il numero, detto chiaro.** La macchina deve coprire i 500 € al mese. Il conto è una divisione: 500 diviso il valore mensile di un percorso ti dà quante clienti attive ti servono. Sono poche, e non sono poche *ogni mese*: ogni cliente resta con te per tutto il percorso, quindi le trovi una volta e continuano a contare. [inserire il numero sul listino DEMETRA]
+
+**Le due date.** Il **10 settembre** guardiamo insieme che la partenza sia fatta — chiamate, app, messaggi, contenuti. Il **30 settembre** guardiamo i numeri del mese. Te le scrivo adesso così non sono una sorpresa: sono i due momenti in cui ci diciamo com'è andata davvero.
 
 ## La verità, tra amici
 
