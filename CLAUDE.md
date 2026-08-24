@@ -84,7 +84,7 @@ Tre livelli:
 - **La biblioteca** — `docs/BibliotecaCognitiva.md`: le fonti per esteso e le
   tredici corde ancestrali del Protocollo Ponte, che sono la forma applicata
   del precetto 05.
-- **Il profilo** — `docs/ProfiloCognitivo-MenteAPiuCanali.pdf`: da dove nasce
+- **Il profilo** — `docs/ProfiloCognitivo.md`: da dove nasce
   il principio. I dodici precetti sono i sei guardrail di quel profilo portati
   fuori dalla testa e messi in un file. Il 12 è «uno entra, uno esce» più
   «esternalizza l'esecutivo»; il 09 è la riga di chiusura del profilo.
@@ -92,6 +92,10 @@ Tre livelli:
 Conseguenza operativa: quando serve un promemoria, si crea una scadenza vera —
 non un'intenzione. Quando una cosa si ripete, si progetta il contesto che la
 ricorda al posto della persona.
+
+**Regola di ingresso.** Un documento che arriva come PDF o HTML va anche
+trascritto in `.md`. Il PDF resta come archivio e provenienza, ma non è
+memoria: non viene letto all'avvio di una sessione. Solo il Markdown lo è.
 
 ## Contesto del repository
 
