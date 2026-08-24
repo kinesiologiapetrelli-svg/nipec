@@ -55,3 +55,33 @@ La stessa sorgente genera anche i blocchi di formule della pagina
 ALERT-LASER.html: pagina e foglio non possono divergere.
 
 Assistenza 351 846 6025
+
+
+IL COLLAUDO — due minuti, la prima volta che lo converti
+Le formule sono state provate riga per riga sulla logica: diciannove
+casi, dal "saltato ieri" alla "dormiente da sette mesi", tutti giusti.
+Ma un foglio si fida solo quando lo si vede calcolare. Fallo la prima
+volta, poi mai piu'.
+
+Subito dopo aver salvato come Foglio Google, sulla riga 5 di CLIENTI
+scrivi una cliente finta e guarda la colonna COSA FARE OGGI:
+
+  Prossimo appuntamento = domani     ->  1 · CONFERMA DOMANI
+  Prossimo appuntamento = vuoto,
+  Stato = In ciclo, Ultima seduta = un mese fa
+                                     ->  5 · FUORI FINESTRA
+  Ultima seduta = ieri, Stato = In ciclo,
+  Prossimo appuntamento = vuoto      ->  4 · PRENDI APPUNTAMENTO
+  Stato = Sospesa                    ->  (vuoto, nessun avviso)
+
+Poi apri il foglio OGGI: quella stessa cliente deve comparire li',
+in ordine. E il RIEPILOGO deve dire "1" alla voce DA RICHIAMARE.
+
+Se una di queste quattro non torna, fermati e chiama: e' un problema
+del foglio, non tuo. Se tornano tutte, il motore gira e puoi cancellare
+la riga di prova e cominciare davvero.
+
+
+SE LE CELLE AZZURRE RESTANO VUOTE IN EXCEL
+E' normale. Il foglio e' fatto per vivere come Foglio Google: alcune
+funzioni Excel le calcola solo dopo la conversione. Non e' rotto.
