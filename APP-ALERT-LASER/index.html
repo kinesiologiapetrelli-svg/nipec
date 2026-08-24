@@ -196,6 +196,34 @@ main{max-width:46rem;margin:0 auto;padding:1rem}
   padding:.3rem .7rem;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap;
 }
 .filtri button[aria-pressed="true"]{background:var(--blu);border-color:var(--blu);color:#fff}
+
+/* ---------- la striscia dei giorni ---------- */
+.giorni{display:flex;gap:.4rem;overflow-x:auto;padding:.1rem .1rem .7rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.giorni::-webkit-scrollbar{display:none}
+.giorni button{
+  flex:none;background:var(--carta);border:1px solid var(--riga-forte);border-radius:.7rem;
+  padding:.45rem .6rem;cursor:pointer;text-align:center;min-width:3.4rem;line-height:1.15;
+}
+.giorni button .gs{display:block;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);font-weight:700}
+.giorni button .gn{display:block;font-size:1.05rem;font-weight:700}
+.giorni button .gp{display:block;font-size:.6rem;color:var(--blu);font-weight:700;margin-top:.1rem;min-height:.75rem}
+.giorni button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy)}
+.giorni button[aria-pressed="true"] .gs,.giorni button[aria-pressed="true"] .gn{color:#fff}
+.giorni button[aria-pressed="true"] .gp{color:#9fcbe8}
+
+/* ---------- l'appuntamento ---------- */
+.appunt{
+  display:flex;align-items:center;gap:.75rem;background:var(--carta);border:1px solid var(--riga);
+  border-radius:.75rem;padding:.7rem .8rem;box-shadow:var(--ombra);margin-bottom:.5rem;
+}
+.appunt .ora{
+  font-weight:700;font-size:1rem;color:var(--navy);font-variant-numeric:tabular-nums;
+  min-width:3.1rem;text-align:center;
+}
+.appunt .chi{flex:1;min-width:0}
+.appunt .chi b{display:block;font-size:.98rem;font-weight:700}
+.appunt .chi span{font-size:.8rem;color:var(--tenue)}
+.appunt .fatta{color:var(--ok)}
 dialog{
   border:0;border-radius:1rem;padding:0;background:var(--carta);color:var(--inchiostro);
   width:min(30rem,calc(100vw - 1.5rem));box-shadow:0 20px 60px rgba(0,0,0,.35);
@@ -663,7 +691,15 @@ var mostraTutte = false;   /* la lista lunga si apre solo se la chiede lei */
 
 function disegnaOggi(righe) {
   var cont = $("#oggi-lista"), o = oggiISO();
+  if (!giornoScelto || gg(giornoScelto, o) < 0 || gg(giornoScelto, o) > 6) giornoScelto = o;
   var avvisoCopia = promemoriaCopia();
+  var agenda = S.clienti.length ? strisciaGiorni() + bloccoAgenda() : "";
+  /* le telefonate si fanno oggi: negli altri giorni si guarda solo l'agenda */
+  if (giornoScelto !== o) {
+    cont.innerHTML = avvisoCopia + agenda;
+    $("#oggi-rinviate").innerHTML = "";
+    return;
+  }
 
   if (!S.clienti.length) {
     cont.innerHTML =
@@ -679,9 +715,9 @@ function disegnaOggi(righe) {
 
   if (!righe.length) {
     cont.innerHTML =
-      avvisoCopia +
-      '<div class="vuoto"><b>Per oggi hai finito</b>' +
-      '<p>Nessuna è uscita senza il prossimo appuntamento, nessuna conferma da fare. È il giorno che vuoi vedere.</p></div>' +
+      avvisoCopia + agenda +
+      '<div class="vuoto"><b>Nessuno da chiamare</b>' +
+      '<p>Nessuna è uscita senza fissare la volta dopo, nessuna conferma da fare. È il giorno che vuoi vedere.</p></div>' +
       fattoQuestoMese();
   } else {
     /* Tre per volta. Una lista di venti fallimenti non si organizza: si evita. */
@@ -698,7 +734,7 @@ function disegnaOggi(righe) {
       coda = '<p class="info" style="text-align:center;margin-top:.9rem">' +
         '<button class="btn muto" type="button" data-az="poche">Torna alle prime tre</button></p>';
     }
-    cont.innerHTML = avvisoCopia + testa + mostrate.map(function (x) { return carta(x, o); }).join("") + coda + fattoQuestoMese();
+    cont.innerHTML = avvisoCopia + agenda + testa + mostrate.map(function (x) { return carta(x, o); }).join("") + coda + fattoQuestoMese();
   }
 
   var rin = listaOggi(true).length - righe.length;
@@ -922,7 +958,7 @@ function disegnaNipec() {
 /* ------------------------------ CSV ------------------------------ */
 var COLONNE = ["Nome", "COSA FARE OGGI", "Prossimo appuntamento", "Sedute fatte", "Stato", "Promemoria",
   "Telefono", "Zona", "Ultima seduta", "Giorni dall'ultima", "Giorni al prossimo", "Sedute",
-  "Offerta da usare", "Prezzo a seduta", "Valore lasciato", "Ancora da fare", "Inserita il", "Note"];
+  "Offerta da usare", "Prezzo a seduta", "Valore lasciato", "Ancora da fare", "Inserita il", "Note", "Ora"];
 
 function cellaCSV(v) {
   var s = String(v == null ? "" : v);
@@ -938,7 +974,7 @@ function faiCSV() {
       promemoria(c, o), c.tel || "", c.zona || "", c.ultima || "",
       c.ultima ? gg(o, c.ultima) : "", c.prossimo ? gg(c.prossimo, o) : "",
       (+c.sedute || 0) + "/" + S.imp.sedute, av ? (offertaPer(av) ? offertaPer(av).nome : "") : "",
-      +c.prezzo || 0, lasciato(c), daFare(c), c.inserita || "", c.note || ""
+      +c.prezzo || 0, lasciato(c), daFare(c), c.inserita || "", c.note || "", c.ora || ""
     ].map(cellaCSV).join(";"));
   });
   return "﻿" + righe.join("\r\n");
@@ -985,7 +1021,8 @@ function importaCSV(testo) {
   }
   var iN = col("nome"), iP = col("prossimo appuntamento", "prossimo"), iS = col("sedute fatte"),
       iSt = col("stato"), iT = col("telefono"), iZ = col("zona"), iU = col("ultima seduta", "ultima"),
-      iPr = col("prezzo a seduta", "prezzo"), iI = col("inserita il", "inserita"), iNo = col("note");
+      iPr = col("prezzo a seduta", "prezzo"), iI = col("inserita il", "inserita"), iNo = col("note"),
+      iOra = col("ora");
   if (iN < 0) { avvisa("Manca la colonna Nome."); return; }
 
   var nuovi = 0, aggiornati = 0;
@@ -1003,6 +1040,7 @@ function importaCSV(testo) {
     if (iPr >= 0) c.prezzo = parseFloat(String(r[iPr]).replace(/[^\d,.-]/g, "").replace(",", ".")) || 0;
     if (iI >= 0 && normalizzaData(r[iI])) c.inserita = normalizzaData(r[iI]);
     if (iNo >= 0) c.note = String(r[iNo] || "").trim();
+    if (iOra >= 0) c.ora = String(r[iOra] || "").trim();
     if (!c.stato) c.stato = "Da contattare";
     if (esistente) aggiornati++; else { S.clienti.push(c); nuovi++; }
   });
@@ -1142,6 +1180,54 @@ function apri(titolo, dentro, bottoni) {
 }
 function trova(id) { return S.clienti.filter(function (c) { return c.id === id; })[0]; }
 
+/* ============ L'AGENDA ============
+   L'app non si aggancia a nient'altro: quello che c'è scritto qui è
+   l'unica agenda. Quindi deve saper dire anche CHI VIENE, non solo
+   chi chiamare. */
+var giornoScelto = "";
+
+function appuntamentiDi(giorno) {
+  return S.clienti.filter(function (c) { return c.nome && c.prossimo === giorno; })
+    .sort(function (a, b) { return String(a.ora || "99:99").localeCompare(String(b.ora || "99:99")); });
+}
+
+function strisciaGiorni() {
+  var o = oggiISO(), fuori = "";
+  for (var i = 0; i < 7; i++) {
+    var g = piuGiorni(o, i), d = data(g), q = appuntamentiDi(g).length;
+    var nome = i === 0 ? "oggi" : i === 1 ? "domani" : d.toLocaleDateString("it-IT", { weekday: "short" });
+    fuori += '<button type="button" data-giorno="' + g + '" aria-pressed="' + (g === giornoScelto) + '">' +
+      '<span class="gs">' + esc(nome) + '</span><span class="gn">' + d.getDate() + "</span>" +
+      '<span class="gp">' + (q ? q + (q === 1 ? " app." : " app.") : "") + "</span></button>";
+  }
+  return '<div class="giorni">' + fuori + "</div>";
+}
+
+function bloccoAgenda() {
+  var o = oggiISO();
+  var lista = appuntamentiDi(giornoScelto);
+  var quando = giornoScelto === o ? "oggi" : giornoScelto === piuGiorni(o, 1) ? "domani" : "il " + bello(giornoScelto);
+  if (!lista.length) {
+    return '<div class="titolo"><h2>In centro ' + esc(quando) + '</h2></div>' +
+      '<p class="info" style="margin-bottom:1.2rem">Nessun appuntamento. ' +
+      '<button class="btn muto" type="button" data-az="nuovo-app">Segnane uno</button></p>';
+  }
+  return '<div class="titolo"><h2>In centro ' + esc(quando) + '</h2><span class="spiega">' + lista.length +
+    (lista.length === 1 ? " cliente" : " clienti") + '</span></div>' +
+    lista.map(function (c) {
+      var venuta = c.ultima === giornoScelto;
+      return '<div class="appunt" data-id="' + c.id + '">' +
+        '<div class="ora' + (venuta ? " fatta" : "") + '">' + esc(c.ora || "—") + "</div>" +
+        '<div class="chi"><b>' + esc(c.nome) + "</b><span>" +
+        (c.zona ? esc(c.zona) + " · " : "") + (+c.sedute || 0) + "/" + S.imp.sedute + " sedute" +
+        (venuta ? " · <b class=\"fatta\">fatta</b>" : "") + "</span></div>" +
+        (venuta ? "" : '<button class="btn" type="button" data-az="venuta">È venuta</button>') +
+        "</div>";
+    }).join("") +
+    '<p class="info" style="margin:.6rem 0 1.4rem;text-align:center">' +
+    '<button class="btn muto" type="button" data-az="nuovo-app">Aggiungi un appuntamento</button></p>';
+}
+
 function schedaCliente(id) {
   var c = id ? trova(id) : { id: "", nome: "", tel: "", zona: "", stato: "Da contattare", sedute: 0, ultima: "", prossimo: "", prezzo: S.clienti.length ? (+S.clienti[S.clienti.length - 1].prezzo || 0) : 0, inserita: oggiISO(), note: "" };
   if (!c) return;
@@ -1163,6 +1249,7 @@ function schedaCliente(id) {
     '<div class="due">' +
     '<div class="campo"><label for="s-ultima">Ultima seduta</label><input id="s-ultima" type="date" value="' + v("ultima") + '"></div>' +
     '<div class="campo"><label for="s-prossimo">Quando torna</label><input id="s-prossimo" type="date" value="' + v("prossimo") + '"></div>' +
+    '<div class="campo"><label for="s-ora">A che ora</label><input id="s-ora" type="time" value="' + v("ora") + '"></div>' +
     "</div>" +
     '<div class="campo"><label for="s-note">Note</label><textarea id="s-note">' + v("note") + "</textarea>" +
     '<div class="aiuto">Fototipo, farmaci, zone da evitare.</div></div>' +
@@ -1188,6 +1275,7 @@ function schedaCliente(id) {
       c.prezzo = parseFloat($("#s-prezzo").value) || 0;
       c.ultima = $("#s-ultima").value;
       c.prossimo = $("#s-prossimo").value;
+      c.ora = $("#s-ora").value;
       c.note = $("#s-note").value.trim();
       if (!id) { c.id = idNuovo(); c.inserita = oggiISO(); S.clienti.push(c); }
       c.rinviato = "";
@@ -1204,8 +1292,11 @@ function segnaVenuta(id) {
   var dentro =
     '<div class="campo"><label for="v-data">È venuta il</label><input id="v-data" type="date" value="' + esc(quando) + '"></div>' +
     '<div class="campo"><label for="v-sedute">Sedute fatte, adesso</label><input id="v-sedute" type="number" min="0" max="99" value="' + ((+c.sedute || 0) + 1) + '"></div>' +
-    '<div class="campo"><label for="v-prossimo">Prossimo appuntamento</label><input id="v-prossimo" type="date" value="' + esc(proposta) + '">' +
-    '<div class="aiuto">Proposto dentro la finestra: tra il ' + S.imp.rientroMin + "° e il " + S.imp.rientroMax + "° giorno. <b>Non farla uscire senza.</b></div></div>";
+    '<div class="due">' +
+    '<div class="campo"><label for="v-prossimo">Quando torna</label><input id="v-prossimo" type="date" value="' + esc(proposta) + '"></div>' +
+    '<div class="campo"><label for="v-ora">A che ora</label><input id="v-ora" type="time" value="' + esc(c.ora || S.oraSolita || "10:00") + '"></div>' +
+    "</div>" +
+    '<p class="aiuto"><b>Non farla uscire senza la prossima data.</b> È la cosa che tiene in piedi tutto il resto.</p>';
   apri("È venuta — " + c.nome, dentro, [
     { testo: "Annulla" },
     {
@@ -1213,6 +1304,8 @@ function segnaVenuta(id) {
         c.ultima = $("#v-data").value || quando;
         c.sedute = parseInt($("#v-sedute").value, 10) || 0;
         c.prossimo = $("#v-prossimo").value || "";
+        c.ora = c.prossimo ? ($("#v-ora").value || "") : "";
+        if (c.ora) S.oraSolita = c.ora;
         if (c.stato === "Da contattare" || c.stato === "Persa" || c.stato === "Sospesa") c.stato = "In ciclo";
         c.rinviato = "";
         salva(); disegna();
@@ -1227,9 +1320,12 @@ function prenota(id) {
   var base = c.ultima || oggiISO();
   var proposta = piuGiorni(base, Math.round((+S.imp.rientroMin + +S.imp.rientroMax) / 2));
   if (gg(proposta, oggiISO()) < 0) proposta = piuGiorni(oggiISO(), 3);
-  var dentro = '<div class="campo"><label for="p-data">Prossimo appuntamento</label><input id="p-data" type="date" value="' + esc(proposta) + '">' +
-    '<div class="aiuto">Ultima seduta: ' + bello(c.ultima) + ". Finestra buona: dal " + bello(piuGiorni(base, +S.imp.rientroMin)) +
-    " al " + bello(piuGiorni(base, +S.imp.rientroMax)) + ".</div></div>";
+  var dentro = '<div class="due">' +
+    '<div class="campo"><label for="p-data">Quando torna</label><input id="p-data" type="date" value="' + esc(proposta) + '"></div>' +
+    '<div class="campo"><label for="p-ora">A che ora</label><input id="p-ora" type="time" value="' + esc(c.ora || S.oraSolita || "10:00") + '"></div>' +
+    "</div>" +
+    '<p class="aiuto">Ultima seduta: ' + bello(c.ultima) + ". Va bene dal " + bello(piuGiorni(base, +S.imp.rientroMin)) +
+    " al " + bello(piuGiorni(base, +S.imp.rientroMax)) + ".</p>";
   apri("Prenota — " + c.nome, dentro, [
     { testo: "Annulla" },
     {
@@ -1237,9 +1333,12 @@ function prenota(id) {
         var d = $("#p-data").value;
         if (!d) { avvisa("Serve una data."); return false; }
         c.prossimo = d;
+        c.ora = $("#p-ora").value || "";
+        if (c.ora) S.oraSolita = c.ora;
         if (c.stato === "Da contattare" || c.stato === "Persa") c.stato = "In ciclo";
         c.rinviato = "";
-        salva(); disegna(); avvisa("In agenda per il " + bello(d) + ".");
+        giornoScelto = d;
+        salva(); disegna(); avvisa("Segnata: " + bello(d) + (c.ora ? " alle " + c.ora : "") + ".");
       }
     }
   ]);
@@ -1293,6 +1392,25 @@ function promemoriaCopia() {
     ' <button class="btn" type="button" data-az="copia" style="margin-top:.5rem">Salvane una adesso</button></div>';
 }
 
+/* Dall'agenda: scelgo la cliente, poi la data. Il contrario di come
+   funziona la lista delle telefonate, ma è come ragiona lei. */
+function scegliCliente() {
+  if (!S.clienti.length) { schedaCliente(null); return; }
+  var elenco = S.clienti.slice().sort(function (a, b) {
+    return String(a.nome).localeCompare(String(b.nome), "it");
+  });
+  apri("Chi viene?",
+    '<div class="campo"><label for="sc-chi">Scegli la cliente</label><select id="sc-chi">' +
+    elenco.map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.nome) + "</option>"; }).join("") +
+    "</select></div>" +
+    '<p class="info">Se è una cliente nuova, chiudi e usa il pulsante <b>+ Nuova</b> in Clienti.</p>',
+    [{ testo: "Annulla" },
+     { testo: "Avanti", classe: "pieno", fai: function () {
+         var id = $("#sc-chi").value;
+         setTimeout(function () { prenota(id); }, 250);
+       } }]);
+}
+
 function datiProva() {
   var o = oggiISO();
   var p = [
@@ -1317,7 +1435,7 @@ document.querySelectorAll(".barra button").forEach(function (b) {
 });
 
 document.addEventListener("click", function (e) {
-  var t = e.target.closest("[data-az], [data-scheda], [data-vai], [data-filtro]");
+  var t = e.target.closest("[data-az], [data-scheda], [data-vai], [data-filtro], [data-giorno]");
   if (!t) return;
 
   if (t.dataset.filtro) { filtro = t.dataset.filtro; disegnaRubrica(); return; }
@@ -1337,6 +1455,8 @@ document.addEventListener("click", function (e) {
     if (c) { c.rinviato = piuGiorni(oggiISO(), 1); salva(); disegna(); avvisa("Rinviata a domani."); }
     return;
   }
+  if (t.dataset.giorno) { giornoScelto = t.dataset.giorno; disegna(); return; }
+  if (az === "nuovo-app") return scegliCliente();
   if (az === "tutte") { mostraTutte = true; disegna(); return; }
   if (az === "poche") { mostraTutte = false; disegna(); window.scrollTo(0, 0); return; }
   if (az === "sveglia") return chiediSveglia();

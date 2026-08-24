@@ -26,9 +26,9 @@ function caricaDemo() {
   ];
   S.imp.sedute = 8;              /* il ciclo vero, non quello vecchio da 12 */
   var righe = [
-    ["Anna Ferri",       "3391112201", "ascelle", "In ciclo",       7, 45, g(23), f(1)],
-    ["Bea Conti",        "3391112202", "inguine", "In ciclo",       3, 70, g(21), f(7)],
-    ["Chiara Neri",      "3391112203", "gambe",   "In ciclo",       4, 90, g(30), g(2)],
+    ["Anna Ferri",       "3391112201", "ascelle", "In ciclo",       7, 45, g(23), f(1),  "09:30"],
+    ["Bea Conti",        "3391112202", "inguine", "In ciclo",       3, 70, g(21), f(7),  "16:00"],
+    ["Chiara Neri",      "3391112203", "gambe",   "In ciclo",       4, 90, g(30), g(2),  "11:00"],
     ["Daniela Russo",    "3391112204", "ascelle", "In ciclo",       2, 45, g(2),  ""],
     ["Elena Vitale",     "3391112205", "inguine", "In ciclo",       5, 70, g(34), ""],
     ["Federica Sala",    "3391112206", "gambe",   "In ciclo",       8, 90, g(12), ""],
@@ -36,14 +36,14 @@ function caricaDemo() {
     ["Ilaria Costa",     "3391112208", "gambe",   "Persa",          3, 90, g(150), ""],
     ["Laura Greco",      "3391112209", "inguine", "In ciclo",       3, 70, g(210), ""],
     ["Martina Bruno",    "3391112210", "gambe",   "Sospesa",        4, 90, g(60), ""],
-    ["Nadia Fontana",    "3391112211", "ascelle", "In ciclo",       6, 45, g(20), f(12)],
-    ["Paola Ricci",      "3391112212", "inguine", "In ciclo",       1, 70, g(24), o],
-    ["Sara De Luca",     "3391112213", "gambe",   "In ciclo",       7, 90, g(22), f(3)],
+    ["Nadia Fontana",    "3391112211", "ascelle", "In ciclo",       6, 45, g(20), f(12), "15:30"],
+    ["Paola Ricci",      "3391112212", "inguine", "In ciclo",       1, 70, g(24), o,     "10:00"],
+    ["Sara De Luca",     "3391112213", "gambe",   "In ciclo",       7, 90, g(22), f(3),  "17:45"],
     ["Valentina Longo",  "3391112214", "ascelle", "Mantenimento",   8, 45, g(40), ""]
   ];
   S.clienti = righe.map(function (r, i) {
     return { id: "demo" + i, nome: r[0], tel: r[1], zona: r[2], stato: r[3],
-             sedute: r[4], prezzo: r[5], ultima: r[6], prossimo: r[7],
+             sedute: r[4], prezzo: r[5], ultima: r[6], prossimo: r[7], ora: r[8] || "",
              inserita: piuGiorni(o, -(200 - i * 9)), note: "", rinviato: "" };
   });
   S.battito = ""; S.allineato = "";
