@@ -106,6 +106,42 @@ disattiva i tre pulsanti e mostra un avviso. I `gid` sono i numeri dopo
 Condivisione dei fogli: **sempre "Persone specifiche"**, mai "Chiunque abbia
 il link".
 
+### La rubrica NIPEC (l'app «alert»)
+
+Non è il cruscotto di un centro: è la rubrica interna NIPEC, 1005 contatti.
+Ogni lunedì dice **chi chiamare**, in ordine di priorità P1→P5
+(P1 noleggio attivo freddo da 4 mesi · P2 cliente perso 6 mesi–5 anni ·
+P3 contatto caldo fermo da 1 mese · P4 chi ha comprato la macchina, target
+DEMETRA · P5 richiesta info vecchia di 1 anno).
+
+Posizione unica, dal 24-08-2026 — `Drive → 4 · CLIENTI E CENTRI → RUBRICHE`:
+
+```
+RUBRICHE/                    ← condivisa con nipecuarda@gmail.com (Editor)
+├── NIPEC/
+│   ├── RUBRICA NIPEC.html   l'app (134 KB)
+│   ├── rubrica-nipec.json   i dati, 1005 contatti
+│   ├── LEGGIMI - come si usa.txt
+│   ├── DA-CARICARE-SU-NETLIFY/
+│   └── _vecchie-versioni/
+└── MAJA/
+```
+
+Ogni rubrica nuova va dentro `RUBRICHE/`: eredita la condivisione.
+
+**Come funziona, e qual è il limite.** L'app è un singolo HTML che si apre
+in locale (Chrome/Edge) e scrive con la File System Access API dentro
+`rubrica-nipec.json`. La sincronizzazione fra Giorgio e Uarda la fa **Google
+Drive per desktop**, non l'app: quindi serve Drive installato e la cartella
+sincronizzata in locale — vederla dal browser non basta.
+
+Conseguenza da non dimenticare: **non è lavoro simultaneo.** Drive non
+fonde le modifiche, tiene l'ultima versione. Chi apre preme sempre prima
+`Dati → Ricarica dal file`, e ci si avvisa su WhatsApp («entro io» / «ho
+finito»). Se servirà davvero il lavoro a due in contemporanea, l'unica
+strada è cambiare il magazzino dei dati (Foglio Google o un piccolo
+backend), non aggiustare l'app.
+
 ---
 
 ## 4. Stile delle consegne
