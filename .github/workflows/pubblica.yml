@@ -26,10 +26,11 @@ jobs:
       - name: Prendi i file
         uses: actions/checkout@v4
 
-      - name: Accendi le Pages
+      # Le Pages vanno accese a mano una volta sola, dal proprietario:
+      # Impostazioni del repo -> Pagine -> Source: GitHub Actions.
+      # Da lì in poi ci pensa questo flusso, a ogni modifica.
+      - name: Leggi la configurazione delle Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Prepara il pacchetto
         uses: actions/upload-pages-artifact@v3
