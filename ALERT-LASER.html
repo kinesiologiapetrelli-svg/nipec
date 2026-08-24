@@ -1,0 +1,1015 @@
+<title>ALERT LASER</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+
+:root{
+  --carta:#ffffff;
+  --fondo:#f1f4f7;
+  --riga:#d9e2e9;
+  --riga-forte:#b9c8d4;
+  --inchiostro:#16222e;
+  --tenue:#5a6b79;
+  --blu:#1c6ea4;
+  --navy:#123a63;
+  --blu-tenue:#e6eff7;
+  --allerta:#a3432e;
+  --allerta-fondo:#faeae6;
+  --avviso:#8a6208;
+  --avviso-fondo:#f8efdb;
+  --ok:#1b6e52;
+  --ok-fondo:#e2f1ea;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+  --sans:"Archivo", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --carta:#16212c;
+    --fondo:#0d151d;
+    --riga:#26333f;
+    --riga-forte:#3a4b59;
+    --inchiostro:#e9f0f6;
+    --tenue:#9aaab8;
+    --blu:#5aa6d6;
+    --navy:#8ec8ea;
+    --blu-tenue:#152b3a;
+    --allerta:#e0917a;
+    --allerta-fondo:#2a1b17;
+    --avviso:#dcb264;
+    --avviso-fondo:#2a2211;
+    --ok:#63c19d;
+    --ok-fondo:#122a22;
+    --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --carta:#16212c;
+  --fondo:#0d151d;
+  --riga:#26333f;
+  --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6;
+  --tenue:#9aaab8;
+  --blu:#5aa6d6;
+  --navy:#8ec8ea;
+  --blu-tenue:#152b3a;
+  --allerta:#e0917a;
+  --allerta-fondo:#2a1b17;
+  --avviso:#dcb264;
+  --avviso-fondo:#2a2211;
+  --ok:#63c19d;
+  --ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--fondo);
+  color:var(--inchiostro);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+.foglio{max-width:53rem;margin:0 auto;padding:0 1.25rem 5rem}
+p{margin:0}
+code{font-family:var(--mono);font-size:.88em;word-break:break-word}
+:focus-visible{outline:2px solid var(--blu);outline-offset:3px;border-radius:.3rem}
+
+/* ---------- testata ---------- */
+.testata{
+  margin:0 -1.25rem 1.5rem;
+  padding:3rem 1.75rem 2.25rem;
+  background:var(--navy);
+  color:#fff;
+  border-radius:0 0 1.25rem 1.25rem;
+}
+:root[data-theme="dark"] .testata,
+:root:not([data-theme="light"]) .testata{background:#0a2137}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .testata{background:var(--navy)}}
+.marchio{display:flex;align-items:center;gap:.6rem;margin-bottom:1.75rem}
+.marchio svg{width:26px;height:26px}
+.marchio span{font-size:.7rem;letter-spacing:.3em;font-weight:600;opacity:.9;text-transform:uppercase}
+.testata .occhiello{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:#9fcbe8;font-weight:600;margin:0 0 .65rem;
+}
+.testata h1{
+  font-weight:700;font-size:clamp(2.4rem,8vw,3.9rem);line-height:1;
+  letter-spacing:.02em;margin:0;
+}
+.testata .tesi{
+  font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.5;
+  margin:1.1rem 0 0;max-width:40ch;color:#d5e6f2;
+}
+.tempi{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.tempi span{
+  font-size:.74rem;font-weight:500;padding:.32rem .6rem;border-radius:1.2rem;
+  border:1px solid rgba(255,255,255,.28);color:#d5e6f2;font-variant-numeric:tabular-nums;
+}
+.tempi b{color:#fff;font-weight:700;letter-spacing:.04em}
+
+/* ---------- indice ---------- */
+.indice{
+  position:sticky;top:0;z-index:20;margin:0 -1.25rem 1.5rem;
+  padding:.5rem 1.25rem;border-bottom:1px solid var(--riga);
+  background:color-mix(in srgb, var(--fondo) 90%, transparent);
+  backdrop-filter:blur(8px);
+  display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none;
+}
+.indice::-webkit-scrollbar{display:none}
+.indice a{
+  font-size:.79rem;font-weight:600;color:var(--tenue);text-decoration:none;
+  padding:.4rem .6rem;border-radius:.4rem;white-space:nowrap;
+}
+.indice a:hover{color:var(--blu);background:var(--blu-tenue)}
+
+/* ---------- pannello consegna ---------- */
+.pannello{
+  background:var(--carta);border:1px solid var(--riga);border-radius:.85rem;
+  padding:1rem 1.25rem;box-shadow:var(--ombra);margin-bottom:2.5rem;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.85rem 1.25rem;
+}
+.pannello .campo{flex:1 1 14rem}
+.pannello label{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--tenue);display:block;margin-bottom:.3rem;
+}
+.pannello input{
+  width:100%;font-family:var(--sans);font-size:1.05rem;font-weight:600;
+  color:var(--inchiostro);background:transparent;border:0;border-radius:0;
+  border-bottom:2px solid var(--riga-forte);padding:.2rem 0;
+}
+.pannello input:focus{outline:0;border-bottom-color:var(--blu)}
+.conta{font-size:.95rem;color:var(--tenue);font-variant-numeric:tabular-nums}
+.conta b{color:var(--blu);font-weight:700;font-size:1.15rem}
+.azzera{
+  font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--tenue);
+  background:transparent;border:1px solid var(--riga-forte);border-radius:.45rem;
+  padding:.45rem .8rem;cursor:pointer;
+}
+.azzera:hover{border-color:var(--allerta);color:var(--allerta)}
+
+/* ---------- titoli di sezione ---------- */
+.sezione{margin:3.25rem 0 1.5rem;scroll-margin-top:3.75rem}
+.sezione .fase-n{
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--blu);margin:0 0 .4rem;
+}
+.sezione h2{
+  font-size:1.35rem;font-weight:700;letter-spacing:-.01em;margin:0;
+  padding-bottom:.55rem;border-bottom:2px solid var(--blu);display:inline-block;
+}
+.sezione p{margin:.7rem 0 0;color:var(--tenue);font-size:.95rem;max-width:62ch}
+.etichetta{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--blu);margin:2rem 0 .6rem;
+}
+
+/* ---------- passi ---------- */
+.passi{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.passo{
+  display:grid;grid-template-columns:1.25rem 2.4rem 1fr;gap:.85rem;align-items:start;
+  background:var(--carta);border:1px solid var(--riga);border-radius:.7rem;
+  padding:.85rem 1.1rem;box-shadow:var(--ombra);
+}
+.spunta{display:block;margin-top:.2rem;cursor:pointer}
+.spunta input{position:absolute;opacity:0;width:0;height:0}
+.spunta .box{
+  display:block;width:1.15rem;height:1.15rem;border:2px solid var(--riga-forte);
+  border-radius:.25rem;position:relative;transition:background .12s,border-color .12s;
+}
+.spunta input:checked + .box{background:var(--blu);border-color:var(--blu)}
+.spunta input:checked + .box::after{
+  content:"";position:absolute;left:.3rem;top:.05rem;width:.28rem;height:.6rem;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg);
+}
+.spunta input:focus-visible + .box{outline:2px solid var(--blu);outline-offset:2px}
+.codice{
+  font-size:.75rem;font-weight:700;color:var(--blu);background:var(--blu-tenue);
+  border-radius:.35rem;padding:.2rem 0;text-align:center;margin-top:.1rem;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+.passo .testo{min-width:0}
+.passo b{font-weight:600;display:block}
+.passo .nota{display:block;color:var(--tenue);font-size:.9rem;margin-top:.2rem;max-width:60ch}
+.passo.fatto .testo{opacity:.45}
+.passo.fatto b{text-decoration:line-through;text-decoration-color:var(--riga-forte)}
+
+.avvertenza{
+  display:block;margin-top:.55rem;padding:.6rem .8rem;border-radius:.5rem;
+  background:var(--avviso-fondo);color:var(--inchiostro);font-size:.9rem;max-width:60ch;
+}
+.avvertenza .lbl{
+  display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--avviso);margin-bottom:.15rem;
+}
+.riquadro{
+  margin-top:.6rem;overflow-x:auto;background:var(--fondo);border:1px solid var(--riga);
+  border-radius:.5rem;
+}
+.riquadro pre{
+  margin:0;padding:.75rem .9rem;font-family:var(--mono);font-size:.75rem;line-height:1.8;
+  color:var(--inchiostro);
+}
+.riquadro pre b{color:var(--blu);font-weight:600}
+
+/* ---------- spina temporale (fase B) ---------- */
+.fase{display:grid;grid-template-columns:4.75rem 1fr;gap:1.5rem;padding-bottom:2rem}
+.orologio{position:relative;text-align:right;padding-top:.2rem}
+.orologio::after{
+  content:"";position:absolute;top:3.1rem;bottom:-2rem;right:1.55rem;width:2px;background:var(--riga);
+}
+.fase:last-of-type .orologio::after{display:none}
+.minuto{
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+  width:3.2rem;height:3.2rem;border-radius:50%;
+  background:var(--blu-tenue);border:2px solid var(--blu);font-variant-numeric:tabular-nums;
+}
+.minuto .n{font-size:1.25rem;font-weight:700;line-height:1;color:var(--navy)}
+.minuto .u{
+  font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blu);
+  font-weight:600;margin-top:.1rem;
+}
+.corpo{min-width:0}
+.corpo .capo{display:flex;align-items:flex-start;gap:.85rem}
+.corpo .capo .spunta{margin-top:.5rem}
+.corpo h3{font-size:1.3rem;font-weight:700;margin:.1rem 0 .2rem;letter-spacing:-.01em;text-wrap:balance}
+.corpo .scopo{font-family:var(--serif);font-style:italic;color:var(--tenue);margin:.35rem 0 0;max-width:58ch}
+.fase.fatto .corpo{opacity:.45}
+.battuta{
+  font-family:var(--serif);font-size:1.08rem;line-height:1.55;
+  border-left:3px solid var(--blu);background:var(--carta);
+  border-radius:0 .6rem .6rem 0;padding:.9rem 1.2rem;margin:.75rem 0 0;
+  max-width:58ch;box-shadow:var(--ombra);
+}
+.perno{
+  background:var(--blu-tenue);border:1px solid var(--blu);border-radius:.8rem;
+  padding:1rem 1.25rem;margin-top:.9rem;max-width:60ch;
+}
+.perno p{margin:0;font-weight:600;color:var(--navy)}
+
+/* ---------- rotture ---------- */
+.rotture{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.rotture li{
+  display:grid;grid-template-columns:3rem 1fr;gap:1rem;align-items:start;
+  border-left:3px solid var(--allerta);background:var(--carta);
+  border-radius:0 .6rem .6rem 0;padding:.85rem 1.1rem;box-shadow:var(--ombra);
+}
+.rotture .rif{
+  font-weight:700;color:var(--allerta);font-variant-numeric:tabular-nums;font-size:.95rem;
+}
+.rotture b{font-weight:600;display:block}
+.rotture .nota{display:block;color:var(--tenue);font-size:.9rem;margin-top:.15rem}
+
+/* ---------- schede ---------- */
+.schede{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr);align-items:start}
+@media(min-width:44rem){.schede.due{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.scheda{
+  min-width:0;
+  container-type:inline-size;
+  background:var(--carta);border:1px solid var(--riga);border-radius:.85rem;
+  padding:1.25rem 1.4rem 1.4rem;box-shadow:var(--ombra);
+}
+.scheda h3{font-size:1.1rem;font-weight:700;margin:0;letter-spacing:-.01em}
+.scheda .pagine{font-size:.74rem;color:var(--tenue);margin-top:.25rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.scheda p{margin-top:.75rem;font-size:.95rem;color:var(--tenue);max-width:62ch}
+.scheda p strong{color:var(--inchiostro);font-weight:600}
+.gettoni{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.85rem}
+.gettone{
+  font-size:.75rem;font-weight:600;padding:.28rem .6rem;border-radius:1rem;
+  background:var(--blu-tenue);color:var(--blu);
+}
+.gettone.neutro{background:transparent;border:1px solid var(--riga-forte);color:var(--tenue)}
+.gettone.verde{background:var(--ok-fondo);color:var(--ok)}
+.gettone.giallo{background:var(--avviso-fondo);color:var(--avviso)}
+.gettone.rosso{background:var(--allerta-fondo);color:var(--allerta)}
+dl.voci{margin:.9rem 0 0;display:grid;gap:.5rem}
+dl.voci > div{display:grid;grid-template-columns:1fr;gap:.05rem}
+@container (min-width:30rem){dl.voci > div{grid-template-columns:14rem 1fr;gap:.9rem}}
+dl.voci dt{font-size:.78rem;font-weight:700;color:var(--blu);letter-spacing:.04em;padding-top:.1rem}
+dl.voci dd{margin:0;font-size:.92rem;color:var(--tenue)}
+
+/* ---------- chiusura ---------- */
+.regola{
+  margin-top:1rem;padding:1.6rem 1.75rem;background:var(--navy);color:#fff;border-radius:1rem;
+}
+:root[data-theme="dark"] .regola,
+:root:not([data-theme="light"]) .regola{background:#0a2137}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .regola{background:var(--navy)}}
+.regola q{
+  display:block;font-family:var(--serif);font-size:clamp(1.2rem,3.6vw,1.6rem);
+  line-height:1.35;color:#fff;font-weight:600;quotes:"«" "»";
+}
+.regola p{font-family:var(--serif);font-size:1.02rem;line-height:1.5;margin:.9rem 0 0;max-width:54ch;color:#dceaf4}
+footer{
+  margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--riga);
+  color:var(--tenue);font-size:.82rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;
+}
+
+@media (max-width:640px){
+  .fase{grid-template-columns:1fr;gap:.5rem}
+  .orologio{text-align:left}
+  .orologio::after{display:none}
+  .minuto{width:auto;height:auto;border-radius:1.5rem;flex-direction:row;gap:.4rem;padding:.3rem .8rem}
+  .minuto .u{margin-top:0}
+  .corpo h3{font-size:1.15rem}
+  .passo{grid-template-columns:1.25rem 2.4rem 1fr;padding:.8rem .9rem}
+}
+
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .indice,.pannello,.azzera{display:none}
+  .testata,.regola{background:#fff !important;color:#000;border-bottom:2px solid #000;border-radius:0;padding-left:0;margin:0 0 1.5rem}
+  .testata h1{color:#000}
+  .testata .tesi,.regola p{color:#333}
+  .testata .occhiello,.marchio span{color:#555}
+  .marchio svg{filter:brightness(0)}
+  .tempi span{border-color:#999;color:#333}
+  .tempi b{color:#000}
+  .regola q{color:#000}
+  .fase,.passo,.scheda,.rotture li{page-break-inside:avoid}
+  .passo,.scheda,.battuta,.rotture li{box-shadow:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+
+/* ---------- interruttore varianti ---------- */
+.varianti{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+#spiega-var{flex:1 1 18rem;font-size:.86rem;line-height:1.45}
+.varianti .lbl{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--tenue)}
+.varianti button{
+  font:inherit;font-size:.82rem;font-weight:600;padding:.35rem .8rem;border-radius:1.2rem;cursor:pointer;
+  border:1px solid var(--riga-forte);background:transparent;color:var(--tenue);
+}
+.varianti button[aria-pressed="true"]{background:var(--blu);border-color:var(--blu);color:#fff}
+
+/* ---------- formule ---------- */
+.formula{margin:.9rem 0 0;border:1px solid var(--riga);border-radius:.7rem;background:var(--carta);box-shadow:var(--ombra);overflow:hidden}
+.formula .capo{display:flex;align-items:center;gap:.6rem;padding:.45rem .65rem;background:var(--blu-tenue);border-bottom:1px solid var(--riga)}
+.formula .cella{font-family:var(--mono);font-size:.76rem;font-weight:700;color:var(--navy);background:var(--carta);border:1px solid var(--riga-forte);border-radius:.3rem;padding:.1rem .4rem;white-space:nowrap}
+.formula .che{font-size:.78rem;color:var(--tenue);flex:1;min-width:0}
+.copia{
+  font:inherit;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  border:1px solid var(--riga-forte);background:var(--carta);color:var(--tenue);
+  border-radius:1rem;padding:.2rem .65rem;cursor:pointer;white-space:nowrap;
+}
+.copia:hover{border-color:var(--blu);color:var(--blu)}
+.copia.fatto{border-color:var(--ok);color:var(--ok)}
+.formula code{display:block;padding:.7rem .75rem;font-size:.76rem;line-height:1.65;white-space:pre-wrap;word-break:break-word;color:var(--inchiostro)}
+:root[data-var="nomi"] .v-celle{display:none}
+:root:not([data-var="nomi"]) .v-nomi{display:none}
+
+/* ---------- tabelle ---------- */
+.scorre{overflow-x:auto;margin-top:1rem;-webkit-overflow-scrolling:touch}
+.tab{width:100%;border-collapse:collapse;font-size:.88rem;min-width:34rem}
+.tab th{text-align:left;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--tenue);border-bottom:1px solid var(--riga-forte);padding:.45rem .5rem}
+.tab td{border-bottom:1px solid var(--riga);padding:.5rem .5rem;vertical-align:top}
+.tab .col{font-family:var(--mono);font-weight:700;color:var(--navy);white-space:nowrap}
+.tab .nota{color:var(--tenue);font-size:.85rem}
+.tab tbody tr:hover{background:var(--blu-tenue)}
+.pallino{display:inline-block;width:.55rem;height:.55rem;border-radius:50%;margin-right:.4rem;vertical-align:baseline}
+.pallino.g{background:#e8c33d;border:1px solid #b8952a}
+.pallino.c{background:var(--riga-forte);border:1px solid var(--tenue)}
+
+/* ---------- avvisi ---------- */
+.avviso{border-left:3px solid var(--riga-forte)}
+.avviso .rango{
+  display:inline-flex;align-items:center;justify-content:center;width:1.5rem;height:1.5rem;border-radius:50%;
+  background:var(--navy);color:#fff;font-size:.8rem;font-weight:700;margin-right:.5rem;flex:none;
+}
+.avviso h3{display:flex;align-items:center;font-size:1rem;letter-spacing:.02em}
+.avviso.rosso{border-left-color:var(--allerta)} .avviso.rosso .rango{background:var(--allerta)}
+.avviso.giallo{border-left-color:var(--avviso)} .avviso.giallo .rango{background:var(--avviso)}
+.avviso.verde{border-left-color:var(--ok)} .avviso.verde .rango{background:var(--ok)}
+.avviso dl{margin:.85rem 0 0;display:grid;grid-template-columns:5.4rem 1fr;gap:.4rem .7rem;font-size:.88rem}
+.avviso dt{font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--tenue);padding-top:.15rem}
+.avviso dd{margin:0;min-width:0}
+.avviso .dice{font-family:var(--serif);font-style:italic;color:var(--navy)}
+:root[data-theme="dark"] .avviso .dice,:root:not([data-theme="light"]) .avviso .dice{color:var(--blu)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .avviso .dice{color:var(--navy)}}
+
+@media print{
+  .varianti,.copia{display:none}
+  .formula,.tab tbody tr:hover{box-shadow:none;background:transparent}
+  .formula code{font-size:8pt}
+  .avviso,.formula,.scorre{page-break-inside:avoid}
+}
+</style>
+
+<div class="foglio">
+
+  <header class="testata">
+    <div class="marchio">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.6"/>
+        <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round"/>
+        <circle cx="30" cy="15.36" r="5.4" fill="#d6ecfb"/>
+        <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#bcdcf2"/>
+        <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#e3f1fb"/>
+        <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#fff"/>
+      </svg>
+      <span>NIPEC · Cruscotto Clienti · laser</span>
+    </div>
+    <p class="occhiello">Il motore degli avvisi · le formule esatte</p>
+    <h1>ALERT LASER</h1>
+    <p class="tesi">Stessa struttura dell&rsquo;alert NIPEC, tarata sull&rsquo;orologio del laser. Una sola colonna da leggere &mdash; <b>COSA FARE OGGI</b> &mdash; e sotto, sei numeri che comandano tutto.</p>
+    <div class="tempi">
+      <span><b>12</b> sedute</span>
+      <span>rientro <b>21&ndash;28</b> gg</span>
+      <span>conferma <b>&minus;7</b> e <b>&minus;1</b></span>
+      <span>mantenimento <b>90</b> gg</span>
+      <span>dormiente <b>6</b> mesi</span>
+      <span><b>3</b> offerte</span>
+    </div>
+  </header>
+
+  <nav class="indice" aria-label="Sezioni">
+    <a href="#impostazioni">1 · I numeri</a>
+    <a href="#rubrica">2 · La rubrica</a>
+    <a href="#motore">3 · La formula</a>
+    <a href="#avvisi">4 · Gli otto avvisi</a>
+    <a href="#calcolate">5 · Le altre colonne</a>
+    <a href="#soldi">6 · I soldi</a>
+    <a href="#offerte">7 · Le offerte</a>
+    <a href="#riepilogo">8 · Riepilogo</a>
+    <a href="#oggi">9 · Foglio OGGI</a>
+    <a href="#colori">10 · Colori</a>
+    <a href="#rotture">Dove si rompe</a>
+  </nav>
+
+  <div class="pannello">
+    <div class="varianti">
+      <span class="lbl">Formule con</span>
+      <button type="button" data-var="celle" aria-pressed="true">celle</button>
+      <button type="button" data-var="nomi" aria-pressed="false">nomi</button>
+    </div>
+    <p class="conta" id="spiega-var">Riferimenti diretti a IMPOSTAZIONI: funzionano appena incollate, senza preparare niente.</p>
+  </div>
+
+
+  <div class="sezione">
+    <p class="etichetta">Come sta in piedi</p>
+    <h2>Tre fogli, un solo numero da guardare</h2>
+    <p>Il centro ha il laser: il ritmo non &egrave; generico, &egrave; un orologio. Il cruscotto non serve a schedare le clienti, serve a dire ogni mattina <b>chi chiamare per prima</b>. Tutto quello che sta qui sotto produce quell&rsquo;unica colonna.</p>
+  </div>
+
+  <div class="schede due">
+    <article class="scheda">
+      <h3>CLIENTI &mdash; la rubrica</h3>
+      <p class="pagine">una riga per persona</p>
+      <p>Non si dice gestionale, non si dice software: si dice <strong>rubrica</strong>. La titolare tocca sette caselle gialle, le grigie si calcolano da sole.</p>
+    </article>
+    <article class="scheda">
+      <h3>IMPOSTAZIONI &mdash; i sei numeri</h3>
+      <p class="pagine">l&rsquo;orologio del laser</p>
+      <p>Ciclo, finestra di rientro, conferme, mantenimento, dormienza. <strong>Cambi il numero l&igrave;, cambiano tutti gli avvisi.</strong> Nessuna soglia scritta dentro una formula.</p>
+    </article>
+    <article class="scheda">
+      <h3>COSA FARE OGGI &mdash; l&rsquo;uscita</h3>
+      <p class="pagine">colonna B · l&rsquo;unica che si legge</p>
+      <p>Otto avvisi, uno solo per riga, gi&agrave; numerato in ordine di lavoro. Si ordina per quella colonna e si lavora dall&rsquo;alto.</p>
+    </article>
+    <article class="scheda">
+      <h3>INCENTIVI &mdash; le tre offerte</h3>
+      <p class="pagine">Laser 1 · Laser 2 · Laser 3</p>
+      <p>Una per famiglia: chi &egrave; in ciclo, chi &egrave; in mantenimento, chi si &egrave; addormentata. Il cruscotto scrive da solo quale usare.</p>
+    </article>
+  </div>
+
+
+  <div class="sezione" id="impostazioni">
+    <p class="fase-n">1</p>
+    <h2>I sei numeri che comandano</h2>
+    <p>Foglio <b>IMPOSTAZIONI</b>. Sono celle gialle: si scrivono una volta, si cambiano quando cambia il protocollo. Nessun altro posto va toccato.</p>
+  </div>
+
+  <div class="scorre">
+  <table class="tab">
+    <thead><tr><th>Cella</th><th>Nome</th><th>Valore</th><th>Cosa decide</th></tr></thead>
+    <tbody>
+      <tr><td class="col">C5</td><td class="col">SEDUTE_CICLO</td><td>12</td><td class="nota">Quante sedute fa un ciclo completo. Arrivata a 12 scatta <b>ULTIMA SEDUTA</b>.</td></tr>
+      <tr><td class="col">C6</td><td class="col">RIENTRO_MIN</td><td>21</td><td class="nota">Prima di 21 giorni la ricrescita non &egrave; pronta: se prenoti prima, il promemoria te lo dice.</td></tr>
+      <tr><td class="col">C7</td><td class="col">RIENTRO_MAX</td><td>28</td><td class="nota">Oltre 28 giorni senza appuntamento la cliente &egrave; <b>FUORI FINESTRA</b>: il ciclo si sfalsa.</td></tr>
+      <tr><td class="col">C8</td><td class="col">CONFERMA</td><td>7</td><td class="nota">Giorni di anticipo della prima telefonata di conferma. La seconda &egrave; sempre il giorno prima.</td></tr>
+      <tr><td class="col">C9</td><td class="col">MANTENIMENTO</td><td>90</td><td class="nota">Ogni quanti giorni si richiama chi ha finito il ciclo.</td></tr>
+      <tr><td class="col">C10</td><td class="col">DORMIENTE_MESI</td><td>6</td><td class="nota">Dopo quanti <b>mesi</b> di silenzio una cliente &egrave; addormentata e passa alle offerte di recupero.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="avvertenza"><span class="lbl">Attenzione</span> C10 &egrave; in <b>mesi</b>, non in giorni: la formula usa EDATE, cos&igrave; &laquo;sei mesi&rdquo; resta sei mesi veri anche a febbraio.</div>
+
+  <div class="sezione">
+    <p class="etichetta">Sempre in IMPOSTAZIONI</p>
+    <h2>La lista degli avvisi, in ordine di lavoro</h2>
+    <p>In <b>F5:F12</b>, uno per riga. La posizione nella lista <em>&egrave;</em> la priorit&agrave;: la formula legge la riga con MATCH e ci scrive davanti il numero. Vuoi cambiare l&rsquo;ordine di lavoro? Sposti una riga e tutto il centro si riordina, formule comprese.</p>
+  </div>
+
+  <div class="riquadro"><pre>F5   CONFERMA DOMANI          <b>&larr; si spegne stasera</b>
+F6   CHIAMA PER CONFERMA      <b>&larr; si spegne stasera</b>
+F7   APPUNTAMENTO SALTATO
+F8   PRENDI APPUNTAMENTO
+F9   FUORI FINESTRA
+F10  ULTIMA SEDUTA
+F11  RICHIAMO MANTENIMENTO
+F12  RECUPERA CON INCENTIVO</pre></div>
+
+  <div class="battuta">
+    <p><b>La regola dell&rsquo;ordine:</b> prima quello che oggi si spegne da solo, poi quello che resta acceso finch&eacute; non lo chiudi. Le due conferme durano un giorno solo: se scendono in fondo alla lista, si perdono. Tutto il resto ti aspetta.</p>
+  </div>
+
+  <div class="sezione">
+    <p class="etichetta">Una volta sola, se vuoi</p>
+    <h2>Gli intervalli denominati</h2>
+    <p>Le formule qui sotto esistono in due versioni identiche: con le <b>celle</b> (funzionano subito) o con i <b>nomi</b> (si leggono). Per usare i nomi: <b>Dati &rarr; Intervalli denominati</b>, e crei le sette voci della tabella sopra pi&ugrave; <span class="col">AVVISI</span> = <span class="col">IMPOSTAZIONI!$F$5:$F$12</span>. Poi tocchi l&rsquo;interruttore in alto.</p>
+  </div>
+
+
+  <div class="sezione" id="rubrica">
+    <p class="fase-n">2</p>
+    <h2>Com&rsquo;&egrave; fatta la rubrica</h2>
+    <p>Foglio <b>CLIENTI</b>: intestazioni sulla <b>riga 4</b>, i dati partono dalla <b>riga 5</b>. Le prime cinque colonne sono pensate per lo schermo del telefono; le altre scorrono a destra e si compilano dal tablet alla reception.</p>
+  </div>
+
+  <div class="scorre">
+  <table class="tab">
+    <thead><tr><th>Col</th><th>Intestazione</th><th>Chi la scrive</th><th></th></tr></thead>
+    <tbody>
+      <tr><td class="col">A</td><td>Nome</td><td><span class="pallino g"></span>lei</td><td class="nota">Nome e cognome. Riga vuota = nessun avviso.</td></tr>
+      <tr><td class="col">B</td><td><b>COSA FARE OGGI</b></td><td><span class="pallino c"></span>formula</td><td class="nota">L&rsquo;unica colonna che si legge. Si ordina per questa.</td></tr>
+      <tr><td class="col">C</td><td>Prossimo appuntamento</td><td><span class="pallino g"></span>lei</td><td class="nota">Data. Vuota = qualcuno deve chiamarla.</td></tr>
+      <tr><td class="col">D</td><td>Sedute fatte</td><td><span class="pallino g"></span>lei</td><td class="nota">Numero. Si alza di uno ogni volta che viene.</td></tr>
+      <tr><td class="col">E</td><td>Stato</td><td><span class="pallino g"></span>lei</td><td class="nota">Elenco a tendina, cinque voci.</td></tr>
+      <tr><td class="col">F</td><td>Promemoria</td><td><span class="pallino c"></span>formula</td><td class="nota">Il contorno: oggi in centro, ultima del ciclo, rientro storto.</td></tr>
+      <tr><td class="col">G</td><td>Telefono</td><td><span class="pallino g"></span>lei</td><td class="nota">Formato testo, se no perdi lo zero.</td></tr>
+      <tr><td class="col">H</td><td>Zona</td><td><span class="pallino g"></span>lei</td><td class="nota">Ascelle, inguine, gambe&hellip; Una riga per zona se i cicli sono separati.</td></tr>
+      <tr><td class="col">I</td><td>Ultima seduta</td><td><span class="pallino g"></span>lei</td><td class="nota">Data. &Egrave; il perno di met&agrave; degli avvisi.</td></tr>
+      <tr><td class="col">J</td><td>Giorni dall&rsquo;ultima</td><td><span class="pallino c"></span>formula</td><td class="nota">Formato <b>numero</b>, non data.</td></tr>
+      <tr><td class="col">K</td><td>Giorni al prossimo</td><td><span class="pallino c"></span>formula</td><td class="nota">Negativo = appuntamento gi&agrave; passato.</td></tr>
+      <tr><td class="col">L</td><td>Sedute</td><td><span class="pallino c"></span>formula</td><td class="nota">Scritto <b>8/12</b>: si legge al telefono senza contare.</td></tr>
+      <tr><td class="col">M</td><td>Offerta da usare</td><td><span class="pallino c"></span>formula</td><td class="nota">Pesca da INCENTIVI la famiglia giusta.</td></tr>
+      <tr><td class="col">N</td><td>Prezzo a seduta &euro;</td><td><span class="pallino g"></span>lei</td><td class="nota">L&rsquo;unico numero di soldi che si scrive a mano.</td></tr>
+      <tr><td class="col">O</td><td>Valore lasciato &euro;</td><td><span class="pallino c"></span>formula</td><td class="nota">Quanto ha gi&agrave; speso quella cliente.</td></tr>
+      <tr><td class="col">P</td><td>Ancora da fare &euro;</td><td><span class="pallino c"></span>formula</td><td class="nota">Le sedute che restano nel ciclo. &Egrave; il numero che sale al master.</td></tr>
+      <tr><td class="col">Q</td><td>Inserita il</td><td><span class="pallino g"></span>lei</td><td class="nota">Data di primo inserimento: serve al conteggio dei nuovi contatti.</td></tr>
+      <tr><td class="col">R</td><td>Note</td><td><span class="pallino g"></span>lei</td><td class="nota">Fototipo, farmaci, zone da evitare.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="sezione">
+    <p class="etichetta">Colonna E</p>
+    <h2>I cinque stati</h2>
+    <p>Convalida dati sulla colonna E, elenco di voci: sono cinque perch&eacute; il laser ha cinque situazioni vere, non otto.</p>
+  </div>
+
+  <div class="gettoni">
+    <span class="gettone">Da contattare</span>
+    <span class="gettone verde">In ciclo</span>
+    <span class="gettone">Mantenimento</span>
+    <span class="gettone neutro">Sospesa</span>
+    <span class="gettone rosso">Persa</span>
+  </div>
+  <p class="nota" style="margin-top:.8rem;color:var(--tenue);font-size:.9rem;max-width:62ch"><b>Sospesa</b> &egrave; l&rsquo;unico stato che spegne tutti gli avvisi: gravidanza, farmaci fotosensibilizzanti, abbronzatura. Non &egrave; una persa &mdash; &egrave; una che non si tocca finch&eacute; non torna lei.</p>
+
+  <div class="battuta">
+    <p><b>Il gesto quotidiano, tre caselle.</b> La cliente viene: alzi <b>Sedute fatte</b> di uno, metti <b>Ultima seduta</b> a oggi, e fissi il <b>Prossimo appuntamento</b> prima che esca dalla porta. Se fai le prime due e salti la terza, domattina te la ritrovi in cima alla lista.</p>
+  </div>
+
+
+  <div class="sezione" id="motore">
+    <p class="fase-n">3</p>
+    <h2>La formula che accende tutto</h2>
+    <p>Va in <b>B5</b> e si trascina in basso. &Egrave; una riga sola: incollala e basta, non spezzarla mai su pi&ugrave; righe o Fogli te la sparpaglia sulle celle sotto.</p>
+  </div>
+
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!B5</span><span class="che">COSA FARE OGGI &mdash; poi trascina fino in fondo</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);st;$E5;attesa;AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi);avviso;IFS(AND(pross&lt;&gt;&quot;&quot;;pross&lt;oggi;OR(ult=&quot;&quot;;ult&lt;pross));&quot;APPUNTAMENTO SALTATO&quot;;AND(attesa;pross-oggi=1);&quot;CONFERMA DOMANI&quot;;AND(attesa;pross-oggi=IMPOSTAZIONI!$C$8);&quot;CHIAMA PER CONFERMA&quot;;attesa;&quot;&quot;;st=&quot;Sospesa&quot;;&quot;&quot;;st=&quot;Persa&quot;;&quot;RECUPERA CON INCENTIVO&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi&gt;=EDATE(ult;IMPOSTAZIONI!$C$10));&quot;RECUPERA CON INCENTIVO&quot;;st=&quot;Mantenimento&quot;;IF(AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;=IMPOSTAZIONI!$C$9);&quot;RICHIAMO MANTENIMENTO&quot;;&quot;&quot;);st=&quot;In ciclo&quot;;IFS(sed&gt;=IMPOSTAZIONI!$C$5;&quot;ULTIMA SEDUTA&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;IMPOSTAZIONI!$C$7);&quot;FUORI FINESTRA&quot;;1;&quot;PRENDI APPUNTAMENTO&quot;);st=&quot;Da contattare&quot;;&quot;PRENDI APPUNTAMENTO&quot;;1;&quot;&quot;);IF(avviso=&quot;&quot;;&quot;&quot;;IFERROR(MATCH(avviso;IMPOSTAZIONI!$F$5:$F$12;0);9)&amp;&quot; · &quot;&amp;avviso)))</code>
+  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);st;$E5;attesa;AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi);avviso;IFS(AND(pross&lt;&gt;&quot;&quot;;pross&lt;oggi;OR(ult=&quot;&quot;;ult&lt;pross));&quot;APPUNTAMENTO SALTATO&quot;;AND(attesa;pross-oggi=1);&quot;CONFERMA DOMANI&quot;;AND(attesa;pross-oggi=CONFERMA);&quot;CHIAMA PER CONFERMA&quot;;attesa;&quot;&quot;;st=&quot;Sospesa&quot;;&quot;&quot;;st=&quot;Persa&quot;;&quot;RECUPERA CON INCENTIVO&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi&gt;=EDATE(ult;DORMIENTE_MESI));&quot;RECUPERA CON INCENTIVO&quot;;st=&quot;Mantenimento&quot;;IF(AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;=MANTENIMENTO);&quot;RICHIAMO MANTENIMENTO&quot;;&quot;&quot;);st=&quot;In ciclo&quot;;IFS(sed&gt;=SEDUTE_CICLO;&quot;ULTIMA SEDUTA&quot;;AND(ult&lt;&gt;&quot;&quot;;oggi-ult&gt;RIENTRO_MAX);&quot;FUORI FINESTRA&quot;;1;&quot;PRENDI APPUNTAMENTO&quot;);st=&quot;Da contattare&quot;;&quot;PRENDI APPUNTAMENTO&quot;;1;&quot;&quot;);IF(avviso=&quot;&quot;;&quot;&quot;;IFERROR(MATCH(avviso;AVVISI;0);9)&amp;&quot; · &quot;&amp;avviso)))</code>
+</div>
+
+  <div class="sezione">
+    <p class="etichetta">Come ragiona</p>
+    <h2>Undici domande, la prima che risponde vince</h2>
+    <p>Non &egrave; l&rsquo;ordine di priorit&agrave;: &egrave; l&rsquo;ordine in cui la formula controlla. Una riga produce <b>un avviso solo</b>, sempre il primo che scatta.</p>
+  </div>
+
+  <ol class="passi">
+    <li class="passo"><span class="codice">1</span><span class="testo"><b>La riga &egrave; vuota?</b><span class="nota">Niente nome, niente avviso. Cos&igrave; le righe in bianco non sporcano i conteggi.</span></span></li>
+    <li class="passo"><span class="codice">2</span><span class="testo"><b>L&rsquo;appuntamento &egrave; passato e non risulta venuta?</b><span class="nota">Data passata <em>e</em> ultima seduta pi&ugrave; vecchia di quella data &rarr; <b>APPUNTAMENTO SALTATO</b>. Se invece l&rsquo;ultima seduta coincide, vuol dire che &egrave; venuta: la formula lo capisce e scende.</span></span></li>
+    <li class="passo"><span class="codice">3</span><span class="testo"><b>&Egrave; domani?</b><span class="nota">&rarr; <b>CONFERMA DOMANI</b>.</span></span></li>
+    <li class="passo"><span class="codice">4</span><span class="testo"><b>Mancano esattamente sette giorni?</b><span class="nota">&rarr; <b>CHIAMA PER CONFERMA</b>.</span></span></li>
+    <li class="passo"><span class="codice">5</span><span class="testo"><b>Ha comunque un appuntamento futuro?</b><span class="nota">Allora oggi non si tocca: casella vuota. &Egrave; il filtro che tiene corta la lista.</span></span></li>
+    <li class="passo"><span class="codice">6</span><span class="testo"><b>&Egrave; Sospesa?</b><span class="nota">Silenzio totale, per scelta clinica.</span></span></li>
+    <li class="passo"><span class="codice">7</span><span class="testo"><b>&Egrave; Persa?</b><span class="nota">&rarr; <b>RECUPERA CON INCENTIVO</b>.</span></span></li>
+    <li class="passo"><span class="codice">8</span><span class="testo"><b>Sono passati pi&ugrave; di sei mesi dall&rsquo;ultima seduta?</b><span class="nota">&rarr; <b>RECUPERA CON INCENTIVO</b>, qualunque sia lo stato scritto. &Egrave; il controllo che scova le addormentate che nessuno ha mai marcato come perse.</span></span></li>
+    <li class="passo"><span class="codice">9</span><span class="testo"><b>&Egrave; in Mantenimento?</b><span class="nota">Da 90 giorni in su &rarr; <b>RICHIAMO MANTENIMENTO</b>. Prima di 90, riposa: nessun avviso.</span></span></li>
+    <li class="passo"><span class="codice">10</span><span class="testo"><b>&Egrave; In ciclo, senza appuntamento?</b><span class="nota">Tre casi in cascata: ha finito le 12 &rarr; <b>ULTIMA SEDUTA</b>; &egrave; ferma da pi&ugrave; di 28 giorni &rarr; <b>FUORI FINESTRA</b>; in tutti gli altri casi &rarr; <b>PRENDI APPUNTAMENTO</b>.</span></span></li>
+    <li class="passo"><span class="codice">11</span><span class="testo"><b>&Egrave; Da contattare?</b><span class="nota">&rarr; <b>PRENDI APPUNTAMENTO</b>. Una scheda nuova senza data non deve restare ferma.</span></span></li>
+  </ol>
+
+  <div class="avvertenza"><span class="lbl">Da sapere</span> Le due conferme scattano al <b>giorno esatto</b> (&minus;7 e &minus;1), non su una finestra: cos&igrave; l&rsquo;avviso non resta acceso una settimana e la lista non mente mai. Se preferisci la finestra, nella formula cambia <span class="col">pross-oggi=CONFERMA</span> in <span class="col">pross-oggi&lt;=CONFERMA</span> &mdash; ma poi resta acceso sei giorni, anche dopo che hai chiamato.</div>
+
+
+  <div class="sezione" id="avvisi">
+    <p class="fase-n">4</p>
+    <h2>Gli otto avvisi</h2>
+    <p>Numerati come escono nella colonna B. Il numero non &egrave; decorativo: &egrave; quello che fa funzionare l&rsquo;ordinamento alfabetico.</p>
+  </div>
+
+  <div class="schede due">
+    <article class="scheda avviso rosso">
+      <h3><span class="rango">1</span>CONFERMA DOMANI</h3>
+      <dl>
+        <dt>Si accende</dt><dd>Domani ha l&rsquo;appuntamento.</dd>
+        <dt>Cosa fai</dt><dd>Messaggio con l&rsquo;orario, adesso. Ricordale di radere la zona e di non mettere creme n&eacute; deodorante.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Ciao Anna, ti confermo domani alle 15:30. Rasa stasera, e domani niente crema sulla zona.&raquo;</dd>
+        <dt>Si spegne</dt><dd>Da solo, dopodomani. Se non lo fai oggi, non lo fai pi&ugrave;.</dd>
+      </dl>
+    </article>
+    <article class="scheda avviso rosso">
+      <h3><span class="rango">2</span>CHIAMA PER CONFERMA</h3>
+      <dl>
+        <dt>Si accende</dt><dd>Mancano sette giorni esatti.</dd>
+        <dt>Cosa fai</dt><dd>Telefonata breve: conferma la data e ricordale che nei sette giorni prima non si fa ceretta e non si prende sole.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Ti ricordo che il 3 tocca a te: da adesso niente ceretta, solo rasoio.&raquo;</dd>
+        <dt>Si spegne</dt><dd>Da solo domani. Se salti, ti resta la conferma del giorno prima.</dd>
+      </dl>
+    </article>
+    <article class="scheda avviso rosso">
+      <h3><span class="rango">3</span>APPUNTAMENTO SALTATO</h3>
+      <dl>
+        <dt>Si accende</dt><dd>La data &egrave; passata e nessuno ha aggiornato la riga.</dd>
+        <dt>Cosa fai</dt><dd>Chiami oggi e la rimetti in agenda dentro la finestra. Ogni giorno che passa il ciclo si sfalsa.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Non ti abbiamo vista gioved&igrave;. Ti rimetto entro la settimana, se no perdiamo il ritmo del ciclo.&raquo;</dd>
+        <dt>Si spegne</dt><dd>Quando scrivi la nuova data in <b>Prossimo appuntamento</b>.</dd>
+      </dl>
+    </article>
+    <article class="scheda avviso giallo">
+      <h3><span class="rango">4</span>PRENDI APPUNTAMENTO</h3>
+      <dl>
+        <dt>Si accende</dt><dd>&Egrave; uscita senza il prossimo appuntamento.</dd>
+        <dt>Cosa fai</dt><dd>&Egrave; il buco numero uno. Non &egrave; una telefonata: &egrave; un errore di reception da chiudere subito.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Ti fisso gi&agrave; il prossimo cos&igrave; sei tranquilla: siamo intorno al 20.&raquo;</dd>
+        <dt>Si spegne</dt><dd>Quando metti la data. Finch&eacute; non la metti resta acceso tutti i giorni.</dd>
+      </dl>
+    </article>
+    <article class="scheda avviso giallo">
+      <h3><span class="rango">5</span>FUORI FINESTRA</h3>
+      <dl>
+        <dt>Si accende</dt><dd>Pi&ugrave; di 28 giorni dall&rsquo;ultima, nessun appuntamento.</dd>
+        <dt>Cosa fai</dt><dd>Recupero: la ricrescita &egrave; fuori fase, va rimessa in riga. Qui parte l&rsquo;<b>Offerta Laser 1</b>.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Sei fuori dai 28 giorni: rientriamo questa settimana, cos&igrave; non buttiamo via le sedute fatte.&raquo;</dd>
+        <dt>Si spegne</dt><dd>Con una data in agenda.</dd>
+      </dl>
+    </article>
+    <article class="scheda avviso verde">
+      <h3><span class="rango">6</span>ULTIMA SEDUTA</h3>
+      <dl>
+        <dt>Si accende</dt><dd>Ha completato le 12 sedute e non ha altro in agenda.</dd>
+        <dt>Cosa fai</dt><dd>Non &egrave; una chiusura, &egrave; un bivio: mantenimento oppure zona nuova. Il momento in cui il cliente vale di pi&ugrave;.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Hai finito le ascelle. Ti tengo il risultato con un richiamo ogni tre mesi, o partiamo con l&rsquo;inguine?&raquo;</dd>
+        <dt>Si spegne</dt><dd>Sposti lo stato su <b>Mantenimento</b>, o apri una riga nuova per la zona nuova.</dd>
+      </dl>
+    </article>
+    <article class="scheda avviso verde">
+      <h3><span class="rango">7</span>RICHIAMO MANTENIMENTO</h3>
+      <dl>
+        <dt>Si accende</dt><dd>Novanta giorni dall&rsquo;ultima seduta, stato Mantenimento.</dd>
+        <dt>Cosa fai</dt><dd>Chiami e mandi l&rsquo;<b>Offerta Laser 2</b>. &Egrave; il fatturato dell&rsquo;anno prossimo.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Sono tre mesi: ti tengo il richiamo di mantenimento gioved&igrave;?&raquo;</dd>
+        <dt>Si spegne</dt><dd>Con l&rsquo;appuntamento fissato.</dd>
+      </dl>
+    </article>
+    <article class="scheda avviso verde">
+      <h3><span class="rango">8</span>RECUPERA CON INCENTIVO</h3>
+      <dl>
+        <dt>Si accende</dt><dd>&Egrave; marcata Persa, oppure non si sente da pi&ugrave; di sei mesi.</dd>
+        <dt>Cosa fai</dt><dd>Non sono morte, sono addormentate. Si riaccendono con l&rsquo;<b>Offerta Laser 3</b>, non con un &laquo;come va?&raquo;.</dd>
+        <dt>Le dici</dt><dd class="dice">&laquo;Ti ho tenuto da parte una cosa per rientrare: valida fino a fine mese.&raquo;</dd>
+        <dt>Si spegne</dt><dd>Quando prenota. Se dice no due volte, cambia stato e falla sparire dalla lista.</dd>
+      </dl>
+    </article>
+  </div>
+
+
+  <div class="sezione" id="calcolate">
+    <p class="fase-n">5</p>
+    <h2>Le altre colonne che si calcolano</h2>
+    <p>Tutte in riga 5, tutte da trascinare in basso. Nessuna di queste va mai scritta a mano.</p>
+  </div>
+
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!F5</span><span class="che">Promemoria &mdash; il contorno dell&rsquo;avviso</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);TEXTJOIN(&quot; · &quot;;1;IF(AND(pross&lt;&gt;&quot;&quot;;pross=oggi);&quot;oggi in centro&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;sed+1&gt;=IMPOSTAZIONI!$C$5);&quot;ultima del ciclo — proponi mantenimento&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&lt;IMPOSTAZIONI!$C$6);&quot;rientro anticipato · meno di &quot;&amp;IMPOSTAZIONI!$C$6&amp;&quot; giorni&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&gt;IMPOSTAZIONI!$C$7);&quot;rientro oltre &quot;&amp;IMPOSTAZIONI!$C$7&amp;&quot; giorni&quot;;&quot;&quot;))))</code>
+  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;LET(oggi;TODAY();pross;$C5;ult;$I5;sed;N($D5);TEXTJOIN(&quot; · &quot;;1;IF(AND(pross&lt;&gt;&quot;&quot;;pross=oggi);&quot;oggi in centro&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;sed+1&gt;=SEDUTE_CICLO);&quot;ultima del ciclo — proponi mantenimento&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&lt;RIENTRO_MIN);&quot;rientro anticipato · meno di &quot;&amp;RIENTRO_MIN&amp;&quot; giorni&quot;;&quot;&quot;);IF(AND(pross&lt;&gt;&quot;&quot;;pross&gt;=oggi;ult&lt;&gt;&quot;&quot;;pross-ult&gt;RIENTRO_MAX);&quot;rientro oltre &quot;&amp;RIENTRO_MAX&amp;&quot; giorni&quot;;&quot;&quot;))))</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!J5</span><span class="che">Giorni dall&rsquo;ultima seduta</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($I5=&quot;&quot;;&quot;&quot;;TODAY()-$I5)</code>
+  <code class="v-nomi">=IF($I5=&quot;&quot;;&quot;&quot;;TODAY()-$I5)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!K5</span><span class="che">Giorni al prossimo appuntamento</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($C5=&quot;&quot;;&quot;&quot;;$C5-TODAY())</code>
+  <code class="v-nomi">=IF($C5=&quot;&quot;;&quot;&quot;;$C5-TODAY())</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!L5</span><span class="che">Sedute &mdash; scritto 8/12</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;N($D5)&amp;&quot;/&quot;&amp;IMPOSTAZIONI!$C$5)</code>
+  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;N($D5)&amp;&quot;/&quot;&amp;SEDUTE_CICLO)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!M5</span><span class="che">Offerta da usare &mdash; pesca da INCENTIVI</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($B5=&quot;&quot;;&quot;&quot;;IFS(REGEXMATCH($B5;&quot;RECUPERA CON INCENTIVO&quot;);INCENTIVI!$C$7;REGEXMATCH($B5;&quot;RICHIAMO MANTENIMENTO&quot;);INCENTIVI!$C$6;REGEXMATCH($B5;&quot;FUORI FINESTRA|ULTIMA SEDUTA&quot;);INCENTIVI!$C$5;1;&quot;&quot;))</code>
+  <code class="v-nomi">=IF($B5=&quot;&quot;;&quot;&quot;;IFS(REGEXMATCH($B5;&quot;RECUPERA CON INCENTIVO&quot;);INCENTIVI!$C$7;REGEXMATCH($B5;&quot;RICHIAMO MANTENIMENTO&quot;);INCENTIVI!$C$6;REGEXMATCH($B5;&quot;FUORI FINESTRA|ULTIMA SEDUTA&quot;);INCENTIVI!$C$5;1;&quot;&quot;))</code>
+</div>
+
+  <div class="avvertenza"><span class="lbl">Attenzione</span> Dopo aver incollato <b>J5</b> e <b>K5</b>, Fogli le formatta come date e ti fa vedere il 1899. Selezioni le due colonne e fai <b>Formato &rarr; Numero &rarr; Numero</b>.</div>
+
+  <div class="battuta">
+    <p><b>Perch&eacute; il promemoria &egrave; separato dall&rsquo;avviso.</b> Una cliente pu&ograve; avere l&rsquo;ultima seduta del ciclo <em>domani</em>: l&rsquo;azione di oggi resta &laquo;confermale l&rsquo;orario&raquo;, ma tu devi arrivare l&igrave; sapendo che &egrave; il giorno in cui si propone il mantenimento. Un&rsquo;azione sola in colonna B, il contesto in colonna F.</p>
+  </div>
+
+
+  <div class="sezione" id="soldi">
+    <p class="fase-n">6</p>
+    <h2>Quanti soldi lascia ogni cliente</h2>
+    <p>Un solo numero scritto a mano &mdash; il <b>prezzo a seduta</b> in colonna N &mdash; e il foglio calcola due cose diverse che non vanno mai confuse: quello che <b>ha gi&agrave; lasciato</b> e quello che <b>&egrave; ancora in ballo</b>.</p>
+  </div>
+
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!O5</span><span class="che">Valore lasciato &euro; &mdash; sedute fatte &times; prezzo</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;N($D5)*N($N5))</code>
+  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;N($D5)*N($N5))</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">CLIENTI!P5</span><span class="che">Ancora da fare &euro; &mdash; sedute che restano nel ciclo</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IF($A5=&quot;&quot;;&quot;&quot;;MAX(0;(IMPOSTAZIONI!$C$5-N($D5))*N($N5)))</code>
+  <code class="v-nomi">=IF($A5=&quot;&quot;;&quot;&quot;;MAX(0;(SEDUTE_CICLO-N($D5))*N($N5)))</code>
+</div>
+
+  <div class="schede due">
+    <article class="scheda">
+      <h3>Valore lasciato</h3>
+      <p class="pagine">colonna O · guarda indietro</p>
+      <p>&Egrave; il metro con cui decidi <strong>chi richiamare per primo a parit&agrave; di avviso</strong>. Una da 900&nbsp;&euro; che sparisce vale nove volte una da 100&nbsp;&euro;.</p>
+    </article>
+    <article class="scheda">
+      <h3>Ancora da fare</h3>
+      <p class="pagine">colonna P · guarda avanti</p>
+      <p>Sedute che mancano al ciclo, a prezzo pieno. Sommato su tutto il centro &egrave; il numero che sale al <strong>master NIPEC</strong> come &laquo;da incassare&raquo;.</p>
+    </article>
+  </div>
+
+  <div class="avvertenza"><span class="lbl">Se lei vende a pacchetto</span> Se il centro incassa tutto in anticipo, il prezzo a seduta si ricava dividendo: pacchetto 12 sedute a 720&nbsp;&euro; &rarr; N = 60. Il foglio continua a dirti quanto vale erogato e quanto resta da erogare, che &egrave; l&rsquo;informazione che serve al telefono.</div>
+
+
+  <div class="sezione" id="offerte">
+    <p class="fase-n">7</p>
+    <h2>Le tre offerte</h2>
+    <p>Foglio <b>INCENTIVI</b>, intestazioni in riga 4, tre righe e basta. La colonna M della rubrica pesca da qui: se rinomini un&rsquo;offerta, il cruscotto la segue da solo.</p>
+  </div>
+
+  <div class="scorre">
+  <table class="tab">
+    <thead><tr><th></th><th>B · Famiglia</th><th>C · Nome</th><th>D · Cosa contiene</th><th>E · Valida fino a</th></tr></thead>
+    <tbody>
+      <tr><td class="col">5</td><td>In ciclo</td><td class="col">Offerta Laser 1</td><td class="nota">Rientro: per chi &egrave; fuori finestra, per chi ha finito e passa a una zona nuova.</td><td class="nota">data</td></tr>
+      <tr><td class="col">6</td><td>Mantenimento</td><td class="col">Offerta Laser 2</td><td class="nota">Il richiamo a 90 giorni. Deve costare poco e fissarsi in agenda subito.</td><td class="nota">data</td></tr>
+      <tr><td class="col">7</td><td>Persa</td><td class="col">Offerta Laser 3</td><td class="nota">Recupero delle addormentate: &egrave; l&rsquo;unica che pu&ograve; essere aggressiva.</td><td class="nota">data</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="battuta">
+    <p><b>Tre famiglie, tre lavori diversi.</b> In ciclo &egrave; il fatturato di oggi, mantenimento &egrave; quello dell&rsquo;anno prossimo, le perse sono addormentate &mdash; non morte. Se le tre offerte si somigliano, tanto vale averne una sola: la differenza la fa il fatto che siano tre <em>promesse diverse</em>.</p>
+  </div>
+
+
+  <div class="sezione" id="riepilogo">
+    <p class="fase-n">8</p>
+    <h2>Il RIEPILOGO</h2>
+    <p>Le celle <b>C5, C13, C17, C20, C26, F5</b> stanno dove stanno perch&eacute; il <b>master centri</b> le legge da l&igrave; con IMPORTRANGE. Non spostarle: se le muovi, il centro diventa cieco nel master.</p>
+  </div>
+
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C5</span><span class="che">DA RICHIAMARE &mdash; quante righe hanno un avviso acceso</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=SUMPRODUCT((CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;)*1)</code>
+  <code class="v-nomi">=SUMPRODUCT((CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;)*1)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C7</span><span class="che">Copertura appuntamento &mdash; formato percentuale</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IFERROR(COUNTIFS(CLIENTI!$E$5:$E;&quot;In ciclo&quot;;CLIENTI!$C$5:$C;&quot;&gt;=&quot;&amp;TODAY())/COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;);&quot;&quot;)</code>
+  <code class="v-nomi">=IFERROR(COUNTIFS(CLIENTI!$E$5:$E;&quot;In ciclo&quot;;CLIENTI!$C$5:$C;&quot;&gt;=&quot;&amp;TODAY())/COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;);&quot;&quot;)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C8</span><span class="che">Dormienti oltre i mesi impostati</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=SUMPRODUCT((CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;=EDATE(TODAY();-IMPOSTAZIONI!$C$10)))</code>
+  <code class="v-nomi">=SUMPRODUCT((CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;&gt;&quot;&quot;)*(CLIENTI!$I$5:$I&lt;=EDATE(TODAY();-DORMIENTE_MESI)))</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C13</span><span class="che">Percorsi attivi &mdash; in ciclo</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;)</code>
+  <code class="v-nomi">=COUNTIF(CLIENTI!$E$5:$E;&quot;In ciclo&quot;)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C17</span><span class="che">Persone in rubrica</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=COUNTA(CLIENTI!$A$5:$A)</code>
+  <code class="v-nomi">=COUNTA(CLIENTI!$A$5:$A)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C20</span><span class="che">Contatti nuovi negli ultimi 30 giorni</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=COUNTIFS(CLIENTI!$Q$5:$Q;&quot;&gt;=&quot;&amp;TODAY()-30;CLIENTI!$Q$5:$Q;&quot;&lt;=&quot;&amp;TODAY())</code>
+  <code class="v-nomi">=COUNTIFS(CLIENTI!$Q$5:$Q;&quot;&gt;=&quot;&amp;TODAY()-30;CLIENTI!$Q$5:$Q;&quot;&lt;=&quot;&amp;TODAY())</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C26</span><span class="che">Ultimo inserimento &mdash; formato data</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IFERROR(MAX(CLIENTI!$Q$5:$Q);&quot;&quot;)</code>
+  <code class="v-nomi">=IFERROR(MAX(CLIENTI!$Q$5:$Q);&quot;&quot;)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!F5</span><span class="che">Da incassare &euro; &mdash; sale al master</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=SUM(CLIENTI!$P$5:$P)</code>
+  <code class="v-nomi">=SUM(CLIENTI!$P$5:$P)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!F6</span><span class="che">Gi&agrave; incassato &euro; &mdash; tutto il centro</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=SUM(CLIENTI!$O$5:$O)</code>
+  <code class="v-nomi">=SUM(CLIENTI!$O$5:$O)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!F7</span><span class="che">Valore medio per cliente &euro;</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IFERROR(SUM(CLIENTI!$O$5:$O)/COUNTA(CLIENTI!$A$5:$A);0)</code>
+  <code class="v-nomi">=IFERROR(SUM(CLIENTI!$O$5:$O)/COUNTA(CLIENTI!$A$5:$A);0)</code>
+</div>
+
+  <div class="sezione">
+    <p class="etichetta">Il quadro della giornata</p>
+    <h2>Quanti per ogni avviso</h2>
+    <p>Due formule sole, in <b>B30</b> e <b>C30</b>: si espandono da sole sulle otto righe e restano in ordine di lavoro.</p>
+  </div>
+
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!B30</span><span class="che">I nomi degli otto avvisi</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=ARRAYFORMULA(IMPOSTAZIONI!$F$5:$F$12)</code>
+  <code class="v-nomi">=ARRAYFORMULA(AVVISI)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!C30</span><span class="che">Quante clienti per avviso</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=ARRAYFORMULA(IF(IMPOSTAZIONI!$F$5:$F$12=&quot;&quot;;&quot;&quot;;COUNTIF(CLIENTI!$B$5:$B;&quot;*&quot;&amp;IMPOSTAZIONI!$F$5:$F$12&amp;&quot;*&quot;)))</code>
+  <code class="v-nomi">=ARRAYFORMULA(IF(AVVISI=&quot;&quot;;&quot;&quot;;COUNTIF(CLIENTI!$B$5:$B;&quot;*&quot;&amp;AVVISI&amp;&quot;*&quot;)))</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">RIEPILOGO!E30</span><span class="che">Le cinque clienti che hanno lasciato di pi&ugrave;</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=ARRAY_CONSTRAIN(SORT(FILTER(HSTACK(CLIENTI!$A$5:$A;CLIENTI!$O$5:$O);CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;);2;0);5;2)</code>
+  <code class="v-nomi">=ARRAY_CONSTRAIN(SORT(FILTER(HSTACK(CLIENTI!$A$5:$A;CLIENTI!$O$5:$O);CLIENTI!$A$5:$A&lt;&gt;&quot;&quot;);2;0);5;2)</code>
+</div>
+
+  <div class="battuta">
+    <p><b>La regola d&rsquo;oro, misurata.</b> <span class="col">C7</span> &egrave; la percentuale di clienti in ciclo che hanno gi&agrave; il prossimo appuntamento in agenda. Sotto il <b>90%</b> il centro sta perdendo clienti senza accorgersene: non serve altro indicatore per capire se il sistema &egrave; vivo.</p>
+  </div>
+
+
+  <div class="sezione" id="oggi">
+    <p class="fase-n">9</p>
+    <h2>Il foglio OGGI</h2>
+    <p>Un foglio nuovo, una formula sola in <b>A5</b>. Tira fuori solo le righe con un avviso acceso, gi&agrave; ordinate: la titolare apre questo dal telefono e lavora dall&rsquo;alto senza toccare la rubrica.</p>
+  </div>
+
+<div class="formula">
+  <div class="capo"><span class="cella">OGGI!A5</span><span class="che">La lista del giorno, gi&agrave; in ordine</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=IFERROR(SORT(FILTER(CLIENTI!$A$5:$H;CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;);2;1);&quot;Niente da fare oggi&quot;)</code>
+  <code class="v-nomi">=IFERROR(SORT(FILTER(CLIENTI!$A$5:$H;CLIENTI!$B$5:$B&lt;&gt;&quot;&quot;);2;1);&quot;Niente da fare oggi&quot;)</code>
+</div>
+
+  <div class="avvertenza"><span class="lbl">Perch&eacute; conviene</span> Ordinare la rubrica a mano &egrave; il modo pi&ugrave; veloce per rovinarla: basta selezionare una colonna sola invece della riga intera e i nomi si staccano dai dati. Con il foglio OGGI non si ordina mai niente.</div>
+
+
+  <div class="sezione" id="colori">
+    <p class="fase-n">10</p>
+    <h2>I colori e la tendina</h2>
+    <p>Formattazione condizionale su <b>A5:R1000</b> del foglio CLIENTI, regola &laquo;la formula personalizzata &egrave;&raquo;. Tre regole, in quest&rsquo;ordine.</p>
+  </div>
+
+<div class="formula">
+  <div class="capo"><span class="cella">Regola 1 · rosso</span><span class="che">Le due cose che si spengono stasera</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=REGEXMATCH($B5;&quot;CONFERMA DOMANI|APPUNTAMENTO SALTATO&quot;)</code>
+  <code class="v-nomi">=REGEXMATCH($B5;&quot;CONFERMA DOMANI|APPUNTAMENTO SALTATO&quot;)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">Regola 2 · giallo</span><span class="che">Gli appuntamenti che mancano</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=REGEXMATCH($B5;&quot;CHIAMA PER CONFERMA|PRENDI APPUNTAMENTO|FUORI FINESTRA&quot;)</code>
+  <code class="v-nomi">=REGEXMATCH($B5;&quot;CHIAMA PER CONFERMA|PRENDI APPUNTAMENTO|FUORI FINESTRA&quot;)</code>
+</div>
+<div class="formula">
+  <div class="capo"><span class="cella">Regola 3 · verde</span><span class="che">Le occasioni: upsell, mantenimento, recupero</span><button class="copia" type="button">copia</button></div>
+  <code class="v-celle">=REGEXMATCH($B5;&quot;ULTIMA SEDUTA|RICHIAMO MANTENIMENTO|RECUPERA CON INCENTIVO&quot;)</code>
+  <code class="v-nomi">=REGEXMATCH($B5;&quot;ULTIMA SEDUTA|RICHIAMO MANTENIMENTO|RECUPERA CON INCENTIVO&quot;)</code>
+</div>
+
+  <div class="sezione">
+    <p class="etichetta">Convalida dati</p>
+    <h2>Le tendine</h2>
+  </div>
+
+  <div class="riquadro"><pre>Colonna E   elenco di voci   <b>Da contattare, In ciclo, Mantenimento, Sospesa, Persa</b>
+Colonna C   &egrave; una data valida       (rifiuta il testo)
+Colonna I   &egrave; una data valida       (rifiuta il testo)
+Colonna D   &egrave; un numero, tra 0 e SEDUTE_CICLO</pre></div>
+
+  <div class="avvertenza"><span class="lbl">Attenzione</span> Nelle formule i booleani sono scritti <b>1</b> e <b>0</b> invece di VERO e FALSO, e il separatore degli argomenti &egrave; il <b>punto e virgola</b>. In Google Fogli in italiano funzionano cos&igrave; senza sorprese; se le porti in Excel, virgola e VERO/FALSO.</div>
+
+
+  <div class="sezione" id="rotture">
+    <p class="etichetta">Manutenzione</p>
+    <h2>I quattro punti dove si rompe</h2>
+    <p>Non sono bug: sono i quattro modi in cui un cruscotto laser smette di dire la verit&agrave;.</p>
+  </div>
+
+  <ul class="rotture">
+    <li><span class="rif">I</span><span><b>Ultima seduta non aggiornata</b><span class="nota">Met&agrave; degli avvisi pende da quella data. Se lei segna solo il prossimo appuntamento, il foglio vede gente ferma da mesi che invece viene ogni tre settimane.</span></span></li>
+    <li><span class="rif">C</span><span><b>Prossimo appuntamento vuoto per abitudine</b><span class="nota">La lista si riempie di PRENDI APPUNTAMENTO e diventa rumore. A quel punto nessuno la guarda pi&ugrave;: &egrave; cos&igrave; che muoiono questi fogli.</span></span></li>
+    <li><span class="rif">B</span><span><b>Qualcuno scrive dentro la colonna B</b><span class="nota">Basta una cella sovrascritta a mano e quella riga non produce pi&ugrave; avvisi, per sempre, senza dirlo. Proteggi la colonna: <b>Dati &rarr; Proteggi fogli e intervalli</b>.</span></span></li>
+    <li><span class="rif">F5</span><span><b>Righe aggiunte sopra la 5 o celle spostate in IMPOSTAZIONI</b><span class="nota">Le soglie si sfilano e gli avvisi cambiano tutti insieme senza motivo apparente. Se aggiungi righe, aggiungile <em>in fondo</em>.</span></span></li>
+  </ul>
+
+  <div class="regola">
+    <q>Nessuna esce senza il prossimo appuntamento.</q>
+    <p>&Egrave; l&rsquo;unica regola del laser. Tutte le formule di questa pagina servono a rendere visibile chi &egrave; uscita senza &mdash; e a farla richiamare oggi, non il mese prossimo.</p>
+  </div>
+
+  <footer>
+    <span>NIPEC · Tecnologie Estetiche</span>
+    <span>ALERT LASER &mdash; il motore degli avvisi</span>
+    <span>Assistenza 351 846 6025</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY = "alertlaser.variante";
+  var radice = document.documentElement;
+  var bottoni = Array.prototype.slice.call(document.querySelectorAll(".varianti button"));
+  var spiega = document.getElementById("spiega-var");
+  var testi = {
+    celle: "Riferimenti diretti a IMPOSTAZIONI: funzionano appena incollate, senza preparare niente.",
+    nomi:  "Servono gli intervalli denominati (Dati \u2192 Intervalli denominati). Si leggono meglio, si sbagliano meno."
+  };
+
+  function metti(v){
+    radice.setAttribute("data-var", v);
+    bottoni.forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.var === v)); });
+    if (spiega) spiega.textContent = testi[v];
+    try { localStorage.setItem(KEY, v); } catch(e){}
+  }
+
+  var salvata = "celle";
+  try { salvata = localStorage.getItem(KEY) || "celle"; } catch(e){}
+  metti(salvata === "nomi" ? "nomi" : "celle");
+
+  bottoni.forEach(function(b){
+    b.addEventListener("click", function(){ metti(b.dataset.var); });
+  });
+
+  document.querySelectorAll(".formula .copia").forEach(function(b){
+    b.addEventListener("click", function(){
+      var scatola = b.closest(".formula");
+      var v = radice.getAttribute("data-var") === "nomi" ? ".v-nomi" : ".v-celle";
+      var testo = scatola.querySelector(v).textContent;
+      function riuscito(){
+        b.textContent = "copiata";
+        b.classList.add("fatto");
+        setTimeout(function(){ b.textContent = "copia"; b.classList.remove("fatto"); }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(testo).then(riuscito, function(){ manuale(testo, riuscito); });
+      } else {
+        manuale(testo, riuscito);
+      }
+    });
+  });
+
+  function manuale(testo, poi){
+    var t = document.createElement("textarea");
+    t.value = testo;
+    t.setAttribute("readonly", "");
+    t.style.position = "fixed";
+    t.style.opacity = "0";
+    document.body.appendChild(t);
+    t.select();
+    try { document.execCommand("copy"); poi(); } catch(e){ window.prompt("Copia la formula:", testo); }
+    document.body.removeChild(t);
+  }
+})();
+</script>
