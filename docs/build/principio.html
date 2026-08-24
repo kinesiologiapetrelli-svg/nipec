@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Principio di Analisi Petrus</title>
+<style>
+:root{
+  --carta:#ffffff; --fondo:#f1f4f7; --riga:#d9e2e9; --riga-forte:#b9c8d4;
+  --inchiostro:#16222e; --tenue:#5a6b79; --blu:#1c6ea4; --navy:#123a63;
+  --blu-tenue:#e6eff7;
+  --sans:"Archivo","Liberation Sans",ui-sans-serif,system-ui,sans-serif;
+  --serif:"Source Serif 4","Liberation Serif",Georgia,serif;
+}
+@page{ size:A4; margin:14mm 13mm; }
+*{ box-sizing:border-box; }
+body{ margin:0; font-family:var(--serif); color:var(--inchiostro);
+      font-size:10.6pt; line-height:1.45; background:var(--carta); }
+
+.occhiello{ font-family:var(--sans); font-size:7.2pt; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--tenue); font-weight:600; }
+
+h1{ font-family:var(--sans); font-size:30pt; line-height:1.04; margin:.28em 0 0;
+  color:var(--navy); font-weight:700; letter-spacing:-.015em; }
+h1 span{ display:block; color:var(--blu); }
+
+.sottotitolo{ font-size:12pt; color:var(--tenue); margin:.7em 0 0; max-width:34em;
+  font-style:italic; }
+
+.barra{ height:3px; background:var(--navy); width:64px; margin:14px 0 0; }
+
+.precetti{ margin-top:20px; border-top:1px solid var(--riga); }
+.p{ display:flex; gap:13px; padding:7.6px 0; border-bottom:1px solid var(--riga);
+    break-inside:avoid; }
+.n{ font-family:var(--sans); font-size:8.6pt; font-weight:700; color:var(--blu);
+    background:var(--blu-tenue); border-radius:3px; min-width:26px; height:20px;
+    display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.t{ flex:1; }
+.t b{ font-family:var(--sans); font-weight:600; color:var(--navy); }
+
+.piede{ margin-top:18px; padding-top:11px; border-top:2px solid var(--navy);
+  display:flex; justify-content:space-between; gap:22px; align-items:flex-end; }
+.piede p{ margin:0; font-size:8.4pt; color:var(--tenue); max-width:38em; }
+.firma{ font-family:var(--sans); font-size:8.4pt; text-align:right;
+  color:var(--navy); font-weight:600; line-height:1.5; white-space:nowrap; }
+.lenti{ font-family:var(--sans); font-size:7.2pt; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--blu); margin-top:7px; font-weight:600; }
+</style>
+</head>
+<body>
+
+<div class="occhiello">NIPEC · Sistema operativo di analisi</div>
+<h1>Principio di Analisi<span>Petrus</span></h1>
+<p class="sottotitolo">Dodici precetti da leggere prima di ogni decisione.
+Non correggere il pensiero: arreda il contesto perché dia il meglio.</p>
+<div class="barra"></div>
+
+<div class="precetti">
+  <div class="p"><div class="n">01</div><div class="t"><b>Parti sempre da chi hai davanti:</b> bisogni, valori, paure — prima della mossa.</div></div>
+  <div class="p"><div class="n">02</div><div class="t"><b>Inverti.</b> Chiediti come fallisce, non solo come riesce, ed evita il disastro.</div></div>
+  <div class="p"><div class="n">03</div><div class="t"><b>Ragiona con più modelli mentali</b> — psicologia, biologia evolutiva, probabilità, fisica, economia. Mai un martello solo.</div></div>
+  <div class="p"><div class="n">04</div><div class="t"><b>Cerca il Lollapalooza:</b> dove più forze convergono e si moltiplicano.</div></div>
+  <div class="p"><div class="n">05</div><div class="t"><b>Filtra ogni scelta con le 25 tendenze psicologiche</b> — incentivi, riprova sociale, avversione alla perdita, autorità. Sono adattamenti evolutivi in mismatch: leggile, non moralizzarle.</div></div>
+  <div class="p"><div class="n">06</div><div class="t"><b>Fatti verificati prima delle opinioni.</b></div></div>
+  <div class="p"><div class="n">07</div><div class="t"><b>Strategia prima della tattica:</b> prima il perché, poi gli strumenti.</div></div>
+  <div class="p"><div class="n">08</div><div class="t"><b>Leggi denaro e ruoli col Quadrante E/S/B/I:</b> dove sta, dove può spostarsi. Asset contro passività.</div></div>
+  <div class="p"><div class="n">09</div><div class="t"><b>Fai più con meno.</b> Cerca la sinergia di sistema; progetta il contesto invece di predicare.</div></div>
+  <div class="p"><div class="n">10</div><div class="t"><b>Pensa agli effetti di secondo e terzo ordine e ai trade-off obbligati:</b> «e poi cosa succede?» Nessuna ottimizzazione totale.</div></div>
+  <div class="p"><div class="n">11</div><div class="t"><b>Chiudi ogni analisi in una raccomandazione netta</b> più una domanda.</div></div>
+  <div class="p"><div class="n">12</div><div class="t"><b>Aiuta a chiudere e a esternalizzare,</b> non ad aprire.</div></div>
+</div>
+
+<div class="piede">
+  <div>
+    <p><b>Provenienza.</b> Distillato dalla biblioteca cognitiva e dal metodo
+    operativo di Giorgio. Il materiale per esteso — le 25 tendenze una per una,
+    le regole sul capitale, il Quadrante E/S/B/I, la sinergia di sistema — sta
+    nella Biblioteca Cognitiva NIPEC.</p>
+    <div class="lenti">Munger · Buffett · Kiyosaki · Fuller</div>
+  </div>
+  <div class="firma">Giorgio Petrelli<br>NIPEC · agosto 2026</div>
+</div>
+
+</body>
+</html>
