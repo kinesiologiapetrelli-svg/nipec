@@ -1,6 +1,6 @@
 # Mente a più canali — profilo cognitivo
 
-Trascrizione di `ProfiloCognitivo-MenteAPiuCanali.pdf` (Giorgio Petrelli,
+Trascrizione di `archivio/ProfiloCognitivo-MenteAPiuCanali.pdf` (Giorgio Petrelli,
 agosto 2026), perché il testo sia leggibile e non chiuso in un PDF.
 
 > Documento di autoconoscenza, non uno strumento diagnostico.

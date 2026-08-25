@@ -4,21 +4,21 @@
 questi libri li ha letti. È il magazzino da cui il Principio è distillato, e
 serve a far ragionare noi due con gli stessi principi.
 
-Il principio (`../CLAUDE.md`) è la sintesi operativa e **prevale**. Questo file
+Il principio (`../../CLAUDE.md`) è la sintesi operativa e **prevale**. Questo file
 è l'indice; il contenuto sta nei file per autore.
 
 ## Le cinque lenti
 
 | Lente | File | Regge i precetti | Copia verificata |
 |---|---|---|---|
-| **Munger** — il giudizio | `biblioteca/Munger.md` | 02 · 04 · 05 | sì · *Almanacco del povero Charlie* |
-| **Buffett** — il capitale | `biblioteca/Buffett.md` | 02 · 06 · 07 · 08 · 12 | no — da chiarire |
-| **Kiyosaki** — denaro e ruoli | `biblioteca/Kiyosaki.md` | 08 · 09 · 10 | sì · *Guida agli investimenti*, *Manifesto del capitalismo* |
-| **Fuller** — il sistema | `biblioteca/Fuller.md` | 09 · 10 | sì · *Manuale operativo per Nave Spaziale Terra* |
-| **Gardner** — le menti multiple | `biblioteca/Gardner.md` | 01 · 03 · 09 | sì · *Educazione e sviluppo della mente* |
+| **Munger** — il giudizio | `lenti/Munger.md` | 02 · 04 · 05 | sì · *Almanacco del povero Charlie* |
+| **Buffett** — il capitale | `lenti/Buffett.md` | 02 · 06 · 07 · 08 · 12 | no — da chiarire |
+| **Kiyosaki** — denaro e ruoli | `lenti/Kiyosaki.md` | 08 · 09 · 10 | sì · *Guida agli investimenti*, *Manifesto del capitalismo* |
+| **Fuller** — il sistema | `lenti/Fuller.md` | 09 · 10 | sì · *Manuale operativo per Nave Spaziale Terra* |
+| **Gardner** — le menti multiple | `lenti/Gardner.md` | 01 · 03 · 09 | sì · *Educazione e sviluppo della mente* |
 
 **Come si usano insieme — e cosa fare quando si contraddicono:**
-`biblioteca/RegoleDiRagionamento.md`. È il file operativo: senza quello, cinque
+`lenti/RegoleDiRagionamento.md`. È il file operativo: senza quello, cinque
 lenti separate sono cinque martelli invece di uno.
 
 ## Avvertenza di stato
@@ -39,7 +39,7 @@ ricostruzione: viene dal Protocollo Ponte.
 
 ### Munger applicato: l'inversione
 
-Il documento `nipec/NIPEC-Munger-RibaltareAnalisi.md` è il precetto 02 messo al
+Il documento `../nipec/NIPEC-Munger-RibaltareAnalisi.md` è il precetto 02 messo al
 lavoro sul campo NIPEC: invece di «come cresciamo», si chiede «come si
 garantisce un danno con certezza», e lo standard diventa la lista degli
 antidoti. Contiene la lettura per incentivi — titolare alta, dipendente bassa,
@@ -96,7 +96,7 @@ progettato bene ma non ritenuto — non ripetuto, non usato — muore comunque
 Titoli **dichiarati da Giorgio** il 25 agosto 2026 e **verificati in foto**
 sullo scaffale. Non più ipotesi.
 
-**Kiyosaki** — undici volumi, elencati in `biblioteca/Kiyosaki.md`.
+**Kiyosaki** — undici volumi, elencati in `lenti/Kiyosaki.md`.
 
 **Munger** — *Almanacco del povero Charlie. L'essenziale saggezza del «socio»
 di Warren Buffett*, Apogeo. Contiene *The Psychology of Human Misjudgment*.

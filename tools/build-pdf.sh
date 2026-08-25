@@ -19,26 +19,27 @@ render() { # $1 = html di partenza, $2 = pdf di arrivo
 }
 
 echo "Principio di Analisi Petrus"
-render docs/build/principio.html docs/PrincipioAnalisiPetrus-v1.pdf
+render docs/build/principio.html docs/petrus/PrincipioAnalisiPetrus.pdf
 
 echo "Biblioteca cognitiva"
-python3 tools/md2html.py docs/BibliotecaCognitiva.md \
+python3 tools/md2html.py docs/petrus/BibliotecaCognitiva.md \
   docs/build/biblioteca.html "Biblioteca cognitiva NIPEC" >/dev/null
-render docs/build/biblioteca.html docs/BibliotecaCognitiva.pdf
+render docs/build/biblioteca.html docs/petrus/BibliotecaCognitiva.pdf
 
 echo "Biblioteca completa (indice + regole + cinque lenti)"
 {
-  cat docs/BibliotecaCognitiva.md
-  for f in docs/biblioteca/RegoleDiRagionamento.md docs/biblioteca/SchedaOperativa.md \
-           docs/biblioteca/Munger.md \
-           docs/biblioteca/Buffett.md docs/biblioteca/Kiyosaki.md \
-           docs/biblioteca/Fuller.md docs/biblioteca/Gardner.md; do
+  cat docs/petrus/BibliotecaCognitiva.md
+  for f in docs/petrus/lenti/RegoleDiRagionamento.md docs/petrus/lenti/MappaConcetti.md \
+           docs/petrus/lenti/SchedaOperativa.md \
+           docs/petrus/lenti/Munger.md \
+           docs/petrus/lenti/Buffett.md docs/petrus/lenti/Kiyosaki.md \
+           docs/petrus/lenti/Fuller.md docs/petrus/lenti/Gardner.md; do
     printf '\n\n---\n\n'
     cat "$f"
   done
 } > docs/build/biblioteca-completa.md
 python3 tools/md2html.py docs/build/biblioteca-completa.md \
   docs/build/biblioteca-completa.html "Biblioteca cognitiva NIPEC — completa" >/dev/null
-render docs/build/biblioteca-completa.html docs/BibliotecaCognitiva-completa.pdf
+render docs/build/biblioteca-completa.html docs/petrus/BibliotecaCognitiva-completa.pdf
 
 echo "Fatto."

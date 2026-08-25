@@ -27,9 +27,9 @@ Non correggere il pensiero: arreda il contesto perché dia il meglio.
 ### Provenienza
 
 Distillato dalla biblioteca cognitiva e dal metodo operativo di Giorgio.
-Giorgio Petrelli — NIPEC, agosto 2026. Fonte: `docs/PrincipioAnalisiPetrus.pdf`.
+Giorgio Petrelli — NIPEC, agosto 2026. Fonte: `docs/petrus/archivio/PrincipioAnalisiPetrus.pdf`.
 
-Il materiale per esteso sta in `docs/BibliotecaCognitiva.md` e in
+Il materiale per esteso sta in `docs/petrus/BibliotecaCognitiva.md` e in
 `docs/biblioteca/`. Il principio qui sopra prevale; la biblioteca serve quando
 un precetto va applicato nel dettaglio, in particolare il 05.
 
@@ -75,21 +75,24 @@ In pratica:
 
 ## Memoria cognitiva
 
-L'indice di tutto il materiale — quale copia vale, quale è superata, cosa
-resta aperto — sta in `docs/INDICE.md`. Va letto prima di cercare un
-documento a mano.
+**All'inizio di ogni sessione si legge `docs/petrus/CONTINUITA.md`**: dice dove
+eravamo rimasti, cosa è già deciso e cosa è ancora aperto. Poi, se serve
+cercare un documento, l'indice completo sta in `docs/INDICE.md` — non si cerca
+a mano.
+
+Due cartelle: `docs/petrus/` è il metodo, `docs/nipec/` è l'operativo.
 
 Tre livelli:
 
 - **Il principio** — questo file. I dodici precetti.
-- **La biblioteca** — `docs/BibliotecaCognitiva.md`: indice delle cinque lenti
+- **La biblioteca** — `docs/petrus/BibliotecaCognitiva.md`: indice delle cinque lenti
   (Munger, Buffett, Kiyosaki, Fuller, Gardner), una per file in
   `docs/biblioteca/`, più le tredici corde ancestrali del Protocollo Ponte che
   sono la forma applicata del precetto 05.
-  **`docs/biblioteca/RegoleDiRagionamento.md` è il file operativo**: dice quale
+  **`docs/petrus/lenti/RegoleDiRagionamento.md` è il file operativo**: dice quale
   lente risponde a quale domanda e cosa fare quando due si contraddicono. Va
   letto prima di applicare una lente sola.
-- **Il profilo** — `docs/ProfiloCognitivo.md`: da dove nasce
+- **Il profilo** — `docs/petrus/ProfiloCognitivo.md`: da dove nasce
   il principio. I dodici precetti sono i sei guardrail di quel profilo portati
   fuori dalla testa e messi in un file. Il 12 è «uno entra, uno esce» più
   «esternalizza l'esecutivo»; il 09 è la riga di chiusura del profilo.

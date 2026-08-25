@@ -34,7 +34,7 @@ Massima operativa di Fuller, che è di fatto una riformulazione del precetto 09:
 > non cambi mai le cose combattendo la realtà esistente; per cambiare qualcosa,
 > costruisci un modello nuovo che renda obsoleto quello vecchio.
 
-▸ Uso operativo: è la giustificazione del `CLAUDE.md` stesso. Un'istruzione
+▸ Uso operativo: è la giustificazione del `../../../CLAUDE.md` stesso. Un'istruzione
 ripetuta a ogni sessione combatte la realtà; un file letto in automatico la
 rende obsoleta.
 

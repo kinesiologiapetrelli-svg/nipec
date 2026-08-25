@@ -9,45 +9,56 @@ Mappa di cosa c'è e di quale copia vale. Due regole.
    il suo contenuto non è memoria. Il testo in Markdown sì. Quando entra un
    documento nuovo, se ne trascrive il contenuto.
 
-## Il principio e la sua memoria
+## La struttura
+
+| Cartella | Cosa contiene |
+|---|---|
+| `../CLAUDE.md` | **La fonte del principio.** Dodici precetti, identità, regole d'uso |
+| `petrus/` | Il metodo: continuità, profilo, biblioteca, lenti |
+| `petrus/lenti/` | Una lente per autore, più le regole di combinazione |
+| `petrus/archivio/` | Originali e versioni superate. Archivio, non memoria |
+| `nipec/` | L'operativo: dossier, protocolli, piani, copy, numeri |
+
+## Petrus — il metodo
 
 | Cosa | File | Stato |
 |---|---|---|
 | I dodici precetti | `../CLAUDE.md` | **Fonte.** Si aggiorna qui e solo qui |
-| Principio, stampabile | `PrincipioAnalisiPetrus-v1.pdf` | Generato dalla fonte |
-| Principio, PDF di agosto | `PrincipioAnalisiPetrus.pdf` | Originale di Giorgio, concorde |
-| Principio, versione anteriore | `PrincipioAnalisiPetrus-v0-superato.pdf` / `.html` | **Superata** — manca la lettura evolutiva del 05, i trade-off del 10, la biologia evolutiva del 03 |
-| File di direttive | `DirettivaPetrus-originale.md` | Originale di Giorgio, concorde |
-| La biblioteca, indice | `BibliotecaCognitiva.md` · `.pdf` | Indice delle cinque lenti + le 13 corde (canoniche) |
-| **Regole di ragionamento** | `biblioteca/RegoleDiRagionamento.md` | **Il file operativo:** quale lente per quale domanda, e chi vince quando si contraddicono |
-| **Scheda operativa** | `biblioteca/SchedaOperativa.md` | Le lenti applicate a NIPEC, alla vita di Giorgio e al lavoro fra i due cervelli |
-| Lente · Munger | `biblioteca/Munger.md` | Metodo + le 25 tendenze · copia verificata |
-| Lente · Kiyosaki | `biblioteca/Kiyosaki.md` | 11 volumi · copia verificata |
-| Lente · Fuller | `biblioteca/Fuller.md` | Copia verificata |
-| Lente · Gardner | `biblioteca/Gardner.md` | **Autore emerso dalle foto**, assente da entrambe le provenienze |
-| Lente · Buffett | `biblioteca/Buffett.md` | Dichiarato, **nessuna copia verificata** |
-| Il profilo cognitivo | `ProfiloCognitivo.md` · PDF originale | **Testo leggibile** + originale. Spiega da dove nasce il principio |
+| **Continuità fra le chat** | `petrus/CONTINUITA.md` | **Si legge a ogni sessione:** decisioni ferme, fronti aperti, cosa non prometto |
+| Principio, stampabile | `petrus/PrincipioAnalisiPetrus.pdf` | Generato dalla fonte · provenienza a cinque lenti |
+| Biblioteca, indice | `petrus/BibliotecaCognitiva.md` · `.pdf` | Le cinque lenti + le 13 corde di Giorgio |
+| Biblioteca, tutto in un PDF | `petrus/BibliotecaCognitiva-completa.pdf` | Indice, regole, mappa, scheda, cinque lenti |
+| Il profilo cognitivo | `petrus/ProfiloCognitivo.md` | Da dove nasce il principio |
+| **Regole di ragionamento** | `petrus/lenti/RegoleDiRagionamento.md` | Quale lente per quale domanda, e chi vince quando si contraddicono |
+| **Mappa dei concetti** | `petrus/lenti/MappaConcetti.md` | Si entra dalla domanda, non dall'autore |
+| **Scheda operativa** | `petrus/lenti/SchedaOperativa.md` | NIPEC · la vita di Giorgio · il lavoro fra i due cervelli |
+| Lente · Munger | `petrus/lenti/Munger.md` | Metodo e 25 tendenze · copia verificata |
+| Lente · Kiyosaki | `petrus/lenti/Kiyosaki.md` | 11 volumi · copia verificata |
+| Lente · Fuller | `petrus/lenti/Fuller.md` | Copia verificata |
+| Lente · Gardner | `petrus/lenti/Gardner.md` | Emerso dalle foto, assente da entrambe le provenienze |
+| Lente · Buffett | `petrus/lenti/Buffett.md` | Dichiarato, nessuna copia verificata |
 
 I dodici precetti sono verificati su **due originali indipendenti** di Giorgio
-— il PDF di agosto e il file di direttive — che concordano nella sostanza.
+— il PDF di agosto e il file di direttive, entrambi in `petrus/archivio/` — che
+concordano nella sostanza.
 
-## Materiale operativo — `nipec/`
+## NIPEC — l'operativo
 
 | Cosa | File | Stato |
 |---|---|---|
-| Script di approccio, 12 obiezioni | `nipec/ProtocolloPonte.md` | **Testo leggibile**, tutti e 12 gli script |
-| Script di approccio, sorgente | `nipec/ProtocolloPonte.html` | **Fonte** da cui si genera il PDF |
-| Protocollo Ponte, stampabile | `nipec/ProtocolloPonte-v1.3-COMPLETO.pdf` | **Da usare.** 10 pagine, 12 script su 12 |
-| Protocollo Ponte, export originale | `nipec/ProtocolloPonte-v1.3-ORIGINALE.pdf` | **Difettoso:** le fisarmoniche sono stampate chiuse, contiene 1 script su 12 |
-| Protocollo Ponte, versione anteriore | `nipec/ProtocolloPonte-v1.0-superato.pdf` | **Superata** — senza il catalogo delle corde |
-| Munger applicato, inversione | `nipec/NIPEC-Munger-RibaltareAnalisi.md` · PDF | **Testo leggibile** + originale |
-| Copy laser a noleggio | `nipec/CopyLaserNoleggio.md` | Corrente · versione definitiva 24 agosto |
-| Storico e crescita, previsione | `nipec/StoricoCrescita-previsione.pdf` | **Corrente** — reali gen-ago, da settembre Italia €14k/mese e Albania €7k/mese, nuove macchine incluse |
-| Storico e crescita, run-rate | `nipec/StoricoCrescita-runrate-superato.pdf` | **Superata** — annualizzava gen-giu |
-| Standard NIPEC, dossier | `nipec/Dossier_Progetto_NIPEC_IT.md` · `_AL.md` | Corrente, italiano e albanese |
-| DEMETRA Tirana, dieci reel | `nipec/DEMETRA_Tirana_10_Reel.md` | Corrente |
-| DEMETRA Tirana, piano di Egla | `nipec/DEMETRA_Tirana_Piano_Egla.md` | Corrente |
-| DEMETRA Tirana, controllo interno | `nipec/DEMETRA_Tirana_Piano_Uarda_INTERNO.md` | Corrente · non si mostra a Egla |
+| Script di approccio, 12 obiezioni | `nipec/ProtocolloPonte.md` | Testo leggibile, 12 script su 12 |
+| Protocollo Ponte, sorgente | `nipec/ProtocolloPonte.html` | **Fonte** da cui si genera il PDF |
+| Protocollo Ponte, stampabile | `nipec/ProtocolloPonte-v1.3-COMPLETO.pdf` | **Da usare.** 10 pagine |
+| Protocollo Ponte, export originale | `nipec/ProtocolloPonte-v1.3-ORIGINALE.pdf` | **Difettoso:** 1 script su 12, fisarmoniche stampate chiuse |
+| Protocollo Ponte, anteriore | `nipec/ProtocolloPonte-v1.0-superato.pdf` | **Superata** |
+| Munger applicato, inversione | `nipec/NIPEC-Munger-RibaltareAnalisi.md` · PDF | Corrente |
+| Copy laser a noleggio | `nipec/CopyLaserNoleggio.md` | Corrente · definitivo 24 agosto |
+| Storico e crescita, previsione | `nipec/StoricoCrescita-previsione.pdf` | **Corrente** — reali gen-ago, poi Italia €14k e Albania €7k |
+| Storico e crescita, run-rate | `nipec/StoricoCrescita-runrate-superato.pdf` | **Superata** |
+| Standard NIPEC, dossier | `nipec/Dossier_Progetto_NIPEC_IT.md` e `_AL.md` | Corrente, italiano e albanese |
+| DEMETRA, dieci reel | `nipec/DEMETRA_Tirana_10_Reel.md` | Corrente |
+| DEMETRA, piano di Egla | `nipec/DEMETRA_Tirana_Piano_Egla.md` | Corrente · con date e soglia |
+| DEMETRA, controllo interno | `nipec/DEMETRA_Tirana_Piano_Uarda_INTERNO.md` | Corrente · non si mostra a Egla |
 
 ## Punti aperti
 
