@@ -72,7 +72,8 @@ Guardrail 1 — prima di aprirne un altro, se ne chiude uno.
 
 | Fronte | Da quando | Cosa serve |
 |---|---|---|
-| **Targa e manuale per Tiziana Maya** | 24 ago | Consegna **giovedì 27**. Sapere se la targa è ordinata o da fare |
+| **Manuale per Tiziana Maya** | 24 ago | Consegna **giovedì 27**. Targa **fatta** il 25 ago. Resta il manuale |
+| **Piano aggiornato da mandare a Egla** | 25 ago | Il centro apre l'1 settembre: il piano con le due date e la soglia va nelle sue mani prima, non dopo |
 | **Testi dei libri** | 25 ago | I file (EPUB, PDF, foto delle pagine). Senza, niente lettura capitolo per capitolo, niente estratto sulla vendita, niente workflow |
 | **Storico e crescita da trascrivere** | 24 ago | `../nipec/StoricoCrescita-previsione.pdf` è solo PDF: i numeri non sono memoria |
 | **Buffett: dichiarato, nessuna copia** | 25 ago | Chiarire se è letto direttamente o attraverso l'Almanacco di Munger |
