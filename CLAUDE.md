@@ -29,14 +29,15 @@ Non correggere il pensiero: arreda il contesto perché dia il meglio.
 Distillato dalla biblioteca cognitiva e dal metodo operativo di Giorgio.
 Giorgio Petrelli — NIPEC, agosto 2026. Fonte: `docs/PrincipioAnalisiPetrus.pdf`.
 
-Il materiale per esteso — le 25 tendenze di Munger una per una, le regole di
-Buffett, il Quadrante di Kiyosaki, Fuller e il sostrato darwiniano — sta in
-`docs/BibliotecaCognitiva.md`. Il principio qui sopra prevale; la biblioteca
-serve quando un precetto va applicato nel dettaglio, in particolare il 05.
+Il materiale per esteso sta in `docs/BibliotecaCognitiva.md` e in
+`docs/biblioteca/`. Il principio qui sopra prevale; la biblioteca serve quando
+un precetto va applicato nel dettaglio, in particolare il 05.
 
-Stato: la biblioteca è una ricostruzione in attesa di correzione, e contiene un
-punto aperto sulla provenienza (tre lenti nel PDF, quattro autori secondo
-Giorgio).
+Stato al 25 agosto 2026: la bibliografia è verificata sulle copie fotografate.
+Gli autori sono **cinque**, non tre né quattro — le foto hanno fatto emergere
+**Gardner**, che non compariva né nel PDF né nell'elenco dettato, ed è la lente
+che regge il precetto 03. Restano da chiarire due voci: Buffett (dichiarato,
+nessuna copia vista) e Darwin (nel PDF, mai nominato da Giorgio).
 
 **Fonte unica.** Questo file è la fonte del principio: se il principio cambia,
 si aggiorna qui e solo qui. Il PDF in `docs/` è il distillato stampato — vale
@@ -81,9 +82,13 @@ documento a mano.
 Tre livelli:
 
 - **Il principio** — questo file. I dodici precetti.
-- **La biblioteca** — `docs/BibliotecaCognitiva.md`: le fonti per esteso e le
-  tredici corde ancestrali del Protocollo Ponte, che sono la forma applicata
-  del precetto 05.
+- **La biblioteca** — `docs/BibliotecaCognitiva.md`: indice delle cinque lenti
+  (Munger, Buffett, Kiyosaki, Fuller, Gardner), una per file in
+  `docs/biblioteca/`, più le tredici corde ancestrali del Protocollo Ponte che
+  sono la forma applicata del precetto 05.
+  **`docs/biblioteca/RegoleDiRagionamento.md` è il file operativo**: dice quale
+  lente risponde a quale domanda e cosa fare quando due si contraddicono. Va
+  letto prima di applicare una lente sola.
 - **Il profilo** — `docs/ProfiloCognitivo.md`: da dove nasce
   il principio. I dodici precetti sono i sei guardrail di quel profilo portati
   fuori dalla testa e messi in un file. Il 12 è «uno entra, uno esce» più

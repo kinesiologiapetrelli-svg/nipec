@@ -26,4 +26,18 @@ python3 tools/md2html.py docs/BibliotecaCognitiva.md \
   docs/build/biblioteca.html "Biblioteca cognitiva NIPEC" >/dev/null
 render docs/build/biblioteca.html docs/BibliotecaCognitiva.pdf
 
+echo "Biblioteca completa (indice + regole + cinque lenti)"
+{
+  cat docs/BibliotecaCognitiva.md
+  for f in docs/biblioteca/RegoleDiRagionamento.md docs/biblioteca/Munger.md \
+           docs/biblioteca/Buffett.md docs/biblioteca/Kiyosaki.md \
+           docs/biblioteca/Fuller.md docs/biblioteca/Gardner.md; do
+    printf '\n\n---\n\n'
+    cat "$f"
+  done
+} > docs/build/biblioteca-completa.md
+python3 tools/md2html.py docs/build/biblioteca-completa.md \
+  docs/build/biblioteca-completa.html "Biblioteca cognitiva NIPEC — completa" >/dev/null
+render docs/build/biblioteca-completa.html docs/BibliotecaCognitiva-completa.pdf
+
 echo "Fatto."

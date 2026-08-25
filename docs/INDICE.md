@@ -18,7 +18,13 @@ Mappa di cosa c'è e di quale copia vale. Due regole.
 | Principio, PDF di agosto | `PrincipioAnalisiPetrus.pdf` | Originale di Giorgio, concorde |
 | Principio, versione anteriore | `PrincipioAnalisiPetrus-v0-superato.pdf` / `.html` | **Superata** — manca la lettura evolutiva del 05, i trade-off del 10, la biologia evolutiva del 03 |
 | File di direttive | `DirettivaPetrus-originale.md` | Originale di Giorgio, concorde |
-| La biblioteca | `BibliotecaCognitiva.md` · `.pdf` | Parte canonica (le 13 corde), parte ricostruita da correggere |
+| La biblioteca, indice | `BibliotecaCognitiva.md` · `.pdf` | Indice delle cinque lenti + le 13 corde (canoniche) |
+| **Regole di ragionamento** | `biblioteca/RegoleDiRagionamento.md` | **Il file operativo:** quale lente per quale domanda, e chi vince quando si contraddicono |
+| Lente · Munger | `biblioteca/Munger.md` | Metodo + le 25 tendenze · copia verificata |
+| Lente · Kiyosaki | `biblioteca/Kiyosaki.md` | 11 volumi · copia verificata |
+| Lente · Fuller | `biblioteca/Fuller.md` | Copia verificata |
+| Lente · Gardner | `biblioteca/Gardner.md` | **Autore emerso dalle foto**, assente da entrambe le provenienze |
+| Lente · Buffett | `biblioteca/Buffett.md` | Dichiarato, **nessuna copia verificata** |
 | Il profilo cognitivo | `ProfiloCognitivo.md` · PDF originale | **Testo leggibile** + originale. Spiega da dove nasce il principio |
 
 I dodici precetti sono verificati su **due originali indipendenti** di Giorgio
@@ -47,11 +53,14 @@ I dodici precetti sono verificati su **due originali indipendenti** di Giorgio
 0. **Storico e crescita** — `nipec/StoricoCrescita-previsione.pdf` è ancora
    solo PDF: i numeri non sono in Markdown, quindi non sono memoria. Da
    trascrivere.
-1. **Bibliografia** — i titoli reali dei libri non sono ancora arrivati. La
-   sezione in `BibliotecaCognitiva.md` contiene ipotesi, non dichiarazioni di
-   Giorgio.
-2. **Provenienza** — il PDF cita tre lenti più Darwin, Giorgio ne indica
-   quattro con Buffett. Da decidere.
+1. **Bibliografia** — chiusa il 25 agosto: titoli dettati da Giorgio e
+   verificati sulle foto dello scaffale.
+2. **Provenienza** — aperta, e più larga di prima. Gli autori con copia
+   verificata sono Munger, Kiyosaki, Fuller e **Gardner**. Restano da chiarire:
+   **Buffett** (dichiarato da Giorgio, nessun volume visto — forse letto
+   attraverso l'Almanacco di Munger) e **Darwin** (citato nel PDF come
+   sostrato, mai nominato da Giorgio, nessuna copia). Da decidere se il PDF va
+   ristampato a cinque lenti.
 3. **Date DEMETRA** — risolto il 24 agosto. Due verifiche distinte: il
    **10 settembre** le azioni (se la partenza non è fatta, la macchina
    rientra), il **30 settembre** il fatturato (500 €/mese). Entrambe le date
