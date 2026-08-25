@@ -20,6 +20,7 @@ Mappa di cosa c'è e di quale copia vale. Due regole.
 | File di direttive | `DirettivaPetrus-originale.md` | Originale di Giorgio, concorde |
 | La biblioteca, indice | `BibliotecaCognitiva.md` · `.pdf` | Indice delle cinque lenti + le 13 corde (canoniche) |
 | **Regole di ragionamento** | `biblioteca/RegoleDiRagionamento.md` | **Il file operativo:** quale lente per quale domanda, e chi vince quando si contraddicono |
+| **Scheda operativa** | `biblioteca/SchedaOperativa.md` | Le lenti applicate a NIPEC, alla vita di Giorgio e al lavoro fra i due cervelli |
 | Lente · Munger | `biblioteca/Munger.md` | Metodo + le 25 tendenze · copia verificata |
 | Lente · Kiyosaki | `biblioteca/Kiyosaki.md` | 11 volumi · copia verificata |
 | Lente · Fuller | `biblioteca/Fuller.md` | Copia verificata |

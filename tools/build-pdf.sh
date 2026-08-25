@@ -29,7 +29,8 @@ render docs/build/biblioteca.html docs/BibliotecaCognitiva.pdf
 echo "Biblioteca completa (indice + regole + cinque lenti)"
 {
   cat docs/BibliotecaCognitiva.md
-  for f in docs/biblioteca/RegoleDiRagionamento.md docs/biblioteca/Munger.md \
+  for f in docs/biblioteca/RegoleDiRagionamento.md docs/biblioteca/SchedaOperativa.md \
+           docs/biblioteca/Munger.md \
            docs/biblioteca/Buffett.md docs/biblioteca/Kiyosaki.md \
            docs/biblioteca/Fuller.md docs/biblioteca/Gardner.md; do
     printf '\n\n---\n\n'
