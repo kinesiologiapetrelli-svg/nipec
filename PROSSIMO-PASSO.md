@@ -1,4 +1,4 @@
-# Dove eravamo — 24 agosto, sera
+# Dove eravamo — 25 agosto, mattina
 
 Da riprendere domani. Tutto quello che c'è scritto qui è deciso, non da discutere:
 serve solo a non ripartire da capo.
@@ -16,33 +16,27 @@ serve solo a non ripartire da capo.
 
 Provate a browser: 61 verifiche sull'app, 18 sulla demo.
 
-## Il prossimo pezzo: i tre pulsanti delle offerte
+## I tre pulsanti delle offerte — FATTI il 25 mattina
 
-Come nell'alert NIPEC. In fondo a **Oggi**, tre pulsanti — uno per offerta:
-`Offerta Laser 1`, `Offerta Laser 2`, `Offerta Laser 3`.
+In fondo a **Oggi**, tre pulsanti con accanto **quante clienti aspettano quell'offerta
+adesso**. Si preme, l'app propone chi (già spuntate), si conferma e parte il giro:
+una chat WhatsApp per volta, con il pannello «2 di 5» in cima finché non ha finito.
 
-Come deve funzionare:
+- il testo del messaggio esce da `Il mio centro → Le tue offerte`: nel codice non c'è
+  una parola scritta a mano
+- l'app **si ricorda a chi l'ha già mandata** e non la rispunta la volta dopo
+- un'offerta senza testo non parte e dice dove scriverlo
 
-1. Preme il pulsante dell'offerta.
-2. L'app propone **a chi mandarla**, già filtrato per famiglia:
-   - Laser 1 → chi è in ritardo o ha finito il ciclo
-   - Laser 2 → chi è in mantenimento da tre mesi
-   - Laser 3 → le sparite
-3. Sceglie una o più clienti.
-4. Si apre **WhatsApp** con il messaggio già scritto: testo dell'offerta + scadenza,
-   presi da `Il mio centro → le tre offerte`. Nessun testo scritto a mano nel codice.
-5. Insieme al testo va **il post** (l'immagine dell'offerta).
+Provata a browser: 22 verifiche.
 
-### Le due cose da decidere prima di scrivere codice
+### Le due decisioni, come le ho risolte in attesa di risposta
 
-- **Il post.** WhatsApp da link (`wa.me`) porta solo testo: non si allega un'immagine.
-  Due strade: *(a)* l'immagine sta online e nel messaggio va il link — semplice, funziona
-  ovunque; *(b)* la condivisione nativa del telefono (`navigator.share` con file) che
-  allega davvero la foto — più bello, ma funziona solo su telefono e non su tutti.
-  **Serve una risposta da Giorgio: chi fa le immagini delle offerte e dove stanno.**
-- **Mandare a più clienti insieme.** WhatsApp apre una chat per volta: dieci clienti sono
-  dieci aperture. Va bene così (è anche più sano), ma va detto chiaramente nell'interfaccia,
-  con un contatore «3 di 10 mandate».
+- **Il post.** Ho aggiunto un campo facoltativo **«Link della foto»** per ogni offerta:
+  se c'è, il link parte insieme al testo. Funziona ovunque e non blocca niente.
+  **Resta da decidere se vale la pena fare la condivisione nativa** (`navigator.share`,
+  allega davvero il file) — è più bella ma va solo da telefono. Serve sapere da Giorgio
+  chi fa le immagini e dove stanno.
+- **Più clienti insieme.** Fatto una per volta, col contatore. Da confermare che vada bene.
 
 ## Le lacune ancora aperte (dalla RADIOGRAFIA)
 

@@ -225,6 +225,34 @@ main{max-width:46rem;margin:0 auto;padding:1rem}
 .appunt .chi b{display:block;font-size:.98rem;font-weight:700}
 .appunt .chi span{font-size:.8rem;color:var(--tenue)}
 .appunt .fatta{color:var(--ok)}
+
+/* ---------- le tre offerte ---------- */
+.offerte{display:grid;gap:.5rem;margin-bottom:1rem}
+.offerta{
+  display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;cursor:pointer;
+  background:var(--carta);border:1px solid var(--riga);border-left:3px solid var(--blu);
+  border-radius:.75rem;padding:.75rem .85rem;box-shadow:var(--ombra);font:inherit;color:inherit;
+}
+.offerta:hover{border-color:var(--blu)}
+.offerta .quante{
+  background:var(--blu);color:#fff;font-weight:700;font-size:.95rem;border-radius:.55rem;
+  min-width:2.1rem;height:2.1rem;display:flex;align-items:center;justify-content:center;flex:none;
+}
+.offerta .quante.zero{background:var(--riga);color:var(--tenue)}
+.offerta .testo{flex:1;min-width:0}
+.offerta .testo b{display:block;font-size:.95rem;font-weight:700}
+.offerta .testo span{font-size:.8rem;color:var(--tenue)}
+.offerta.vuota{opacity:.55;border-left-color:var(--riga-forte)}
+.scelta{display:flex;align-items:center;gap:.6rem;padding:.5rem .2rem;border-bottom:1px solid var(--riga)}
+.scelta:last-child{border-bottom:0}
+.scelta input{width:1.2rem;height:1.2rem;flex:none;accent-color:var(--blu)}
+.scelta .n{flex:1;min-width:0;font-size:.92rem}
+.scelta .n span{display:block;font-size:.76rem;color:var(--tenue)}
+.avanzamento{
+  background:var(--blu-tenue);border-radius:.7rem;padding:.8rem .9rem;margin-bottom:1rem;
+  border:1px solid var(--riga);
+}
+.avanzamento b{display:block;font-size:.95rem;margin-bottom:.5rem}
 dialog{
   border:0;border-radius:1rem;padding:0;background:var(--carta);color:var(--inchiostro);
   width:min(30rem,calc(100vw - 1.5rem));box-shadow:0 20px 60px rgba(0,0,0,.35);
@@ -450,9 +478,9 @@ var VUOTO = {
   foglio: { url: "", gidClienti: "", gidRiepilogo: "" },
   imp: { sedute: 8, rientroMin: 21, rientroMax: 28, conferma: 7, mantenimento: 90, dormienteMesi: 6 },
   offerte: [
-    { nome: "Offerta Laser 1", testo: "", scade: "" },
-    { nome: "Offerta Laser 2", testo: "", scade: "" },
-    { nome: "Offerta Laser 3", testo: "", scade: "" }
+    { nome: "Offerta Laser 1", testo: "", scade: "", foto: "" },
+    { nome: "Offerta Laser 2", testo: "", scade: "", foto: "" },
+    { nome: "Offerta Laser 3", testo: "", scade: "", foto: "" }
   ],
   copione: {},
   clienti: [],
@@ -697,7 +725,7 @@ function disegnaOggi(righe) {
   var agenda = S.clienti.length ? strisciaGiorni() + bloccoAgenda() : "";
   /* le telefonate si fanno oggi: negli altri giorni si guarda solo l'agenda */
   if (giornoScelto !== o) {
-    cont.innerHTML = avvisoCopia + agenda;
+    cont.innerHTML = bloccoInvio() + avvisoCopia + agenda;
     $("#oggi-rinviate").innerHTML = "";
     return;
   }
@@ -716,10 +744,10 @@ function disegnaOggi(righe) {
 
   if (!righe.length) {
     cont.innerHTML =
-      avvisoCopia + agenda +
+      bloccoInvio() + avvisoCopia + agenda +
       '<div class="vuoto"><b>Nessuno da chiamare</b>' +
       '<p>Nessuna è uscita senza fissare la volta dopo, nessuna conferma da fare. È il giorno che vuoi vedere.</p></div>' +
-      fattoQuestoMese();
+      bloccoOfferte() + fattoQuestoMese();
   } else {
     /* Tre per volta. Una lista di venti fallimenti non si organizza: si evita. */
     var quante = mostraTutte ? righe.length : Math.min(3, righe.length);
@@ -735,7 +763,9 @@ function disegnaOggi(righe) {
       coda = '<p class="info" style="text-align:center;margin-top:.9rem">' +
         '<button class="btn muto" type="button" data-az="poche">Torna alle prime tre</button></p>';
     }
-    cont.innerHTML = avvisoCopia + agenda + testa + mostrate.map(function (x) { return carta(x, o); }).join("") + coda + fattoQuestoMese();
+    cont.innerHTML = bloccoInvio() + avvisoCopia + agenda + testa +
+      mostrate.map(function (x) { return carta(x, o); }).join("") + coda +
+      bloccoOfferte() + fattoQuestoMese();
   }
 
   var rin = listaOggi(true).length - righe.length;
@@ -1127,8 +1157,10 @@ function disegnaSetup() {
       h += '<div class="riquadro"><h3>' + esc(S.offerte[i].nome || "Offerta " + (i + 1)) + "</h3>" +
         '<p style="margin-bottom:.6rem">' + esc(a) + "</p>" +
         campo("Come si chiama", "offerte." + i + ".nome") +
-        areaCampo("Cosa dice", "offerte." + i + ".testo", "Finisce dentro il messaggio WhatsApp al posto di {offerta}.") +
+        areaCampo("Cosa dice", "offerte." + i + ".testo", "È il messaggio che parte su WhatsApp. Scrivilo come lo diresti a voce.") +
         campo("Valida fino al", "offerte." + i + ".scade", "date") +
+        campo("Link della foto", "offerte." + i + ".foto", "url",
+              "Facoltativo. Se hai la locandina dell&rsquo;offerta caricata da qualche parte, incolla qui il link: parte insieme al messaggio.") +
         "</div>";
     });
 
@@ -1395,6 +1427,121 @@ function promemoriaCopia() {
 
 /* Dall'agenda: scelgo la cliente, poi la data. Il contrario di come
    funziona la lista delle telefonate, ma è come ragiona lei. */
+/* ============ LE TRE OFFERTE ============
+   Un pulsante per famiglia. L'app sa già a chi va quell'offerta, perché
+   è lo stesso avviso che ha acceso stamattina. Il testo esce da
+   "Il mio centro": qui dentro non c'è una parola scritta a mano. */
+var FAMIGLIE = [
+  { i: 0, nome: "chi è in ritardo o ha finito il ciclo", avvisi: ["FUORI FINESTRA", "ULTIMA SEDUTA"] },
+  { i: 1, nome: "chi è in mantenimento da tre mesi",     avvisi: ["RICHIAMO MANTENIMENTO"] },
+  { i: 2, nome: "le clienti sparite",                    avvisi: ["RECUPERA CON INCENTIVO"] }
+];
+
+function candidate(fam) {
+  var o = oggiISO();
+  return S.clienti.filter(function (c) {
+    return c.nome && telPulito(c.tel) && fam.avvisi.indexOf(avvisoDi(c, o)) >= 0;
+  }).sort(function (a, b) { return lasciato(b) - lasciato(a); });
+}
+
+function testoOffertaPer(c, i) {
+  var of = S.offerte[i] || {};
+  var corpo = (of.testo || of.nome || "").trim();
+  var m = "Ciao " + nomeBreve(c.nome) + ", " + (corpo || "ho una cosa per te") + ".";
+  if (of.scade) m += " Valida fino al " + bello(of.scade) + ".";
+  if (of.foto) m += "\n" + of.foto;
+  return m;
+}
+
+function bloccoOfferte() {
+  if (!S.clienti.length) return "";
+  var righe = FAMIGLIE.map(function (fam) {
+    var q = candidate(fam).length;
+    var of = S.offerte[fam.i] || {};
+    return '<button class="offerta' + (q ? "" : " vuota") + '" type="button" data-offerta="' + fam.i + '">' +
+      '<span class="quante' + (q ? "" : " zero") + '">' + q + "</span>" +
+      '<span class="testo"><b>' + esc(of.nome || "Offerta " + (fam.i + 1)) + "</b>" +
+      "<span>" + (q ? "da mandare a " + esc(fam.nome) : "nessuna, per adesso") + "</span></span>" +
+      "</button>";
+  }).join("");
+  return '<div class="titolo"><h2>Le tue offerte</h2><span class="spiega">a chi serve, adesso</span></div>' +
+    '<div class="offerte">' + righe + "</div>";
+}
+
+/* Chi la riceve: già spuntate quelle che hanno l'avviso giusto. */
+function apriOfferta(i) {
+  var fam = FAMIGLIE[i], lista = candidate(fam), of = S.offerte[i] || {};
+  if (!of.testo) {
+    apri(of.nome || "Offerta " + (i + 1),
+      '<p style="font-size:.92rem">Questa offerta non ha ancora un testo. Scrivilo in <b>Il mio centro</b>, ' +
+      'sotto <b>Le tue offerte</b>: quello che scrivi lì è il messaggio che parte.</p>',
+      [{ testo: "Va bene", classe: "pieno" }]);
+    return;
+  }
+  if (!lista.length) {
+    apri(of.nome, '<p style="font-size:.92rem">Adesso non c\'è nessuna cliente che aspetta questa offerta. ' +
+      "Torna quando qualcuna sarà " + esc(fam.nome) + ".</p>", [{ testo: "Va bene", classe: "pieno" }]);
+    return;
+  }
+  var dentro = '<p style="font-size:.88rem;color:var(--tenue);margin-bottom:.8rem">' +
+    "Sono " + lista.length + (lista.length === 1 ? " cliente che aspetta" : " clienti che aspettano") +
+    " questa offerta. Togli la spunta a chi non vuoi.</p>" +
+    lista.map(function (c) {
+      var sped = c.ultimaOfferta && c.ultimaOfferta.i === i ? c.ultimaOfferta.data : "";
+      return '<label class="scelta"><input type="checkbox" value="' + esc(c.id) + '"' + (sped ? "" : " checked") + ">" +
+        '<span class="n">' + esc(c.nome) +
+        "<span>" + (+c.sedute || 0) + "/" + S.imp.sedute + " sedute · " + euro(lasciato(c)) + " spesi" +
+        (sped ? " · <b>già mandata il " + bello(sped) + "</b>" : "") + "</span></span></label>";
+    }).join("") +
+    '<p class="aiuto" style="margin-top:.8rem">WhatsApp apre una chat per volta: te le faccio passare una a una.</p>';
+  apri(of.nome, dentro, [
+    { testo: "Annulla" },
+    { testo: "Comincia", classe: "pieno", fai: function () {
+        var scelte = [];
+        $("#dlg-dentro").querySelectorAll("input:checked").forEach(function (x) { scelte.push(x.value); });
+        if (!scelte.length) { avvisa("Non hai scelto nessuna."); return false; }
+        invio = { i: i, ids: scelte, fatte: 0 };
+        disegna();
+      } }]);
+}
+
+/* Il pannello che resta in cima finché non ha finito il giro. */
+var invio = null;
+
+function bloccoInvio() {
+  if (!invio) return "";
+  var of = S.offerte[invio.i] || {};
+  var c = trova(invio.ids[invio.fatte]);
+  if (!c) { invio = null; return ""; }
+  return '<div class="avanzamento">' +
+    "<b>" + esc(of.nome) + " · " + (invio.fatte + 1) + " di " + invio.ids.length + "</b>" +
+    '<p class="info" style="margin-bottom:.6rem">Adesso tocca a <b>' + esc(c.nome) + "</b>.</p>" +
+    '<div class="azioni">' +
+    '<button class="btn pieno" type="button" data-az="manda">Manda a ' + esc(nomeBreve(c.nome)) + "</button>" +
+    '<button class="btn muto" type="button" data-az="salta">Salta</button>' +
+    '<button class="btn muto" type="button" data-az="basta">Basta così</button>' +
+    "</div></div>";
+}
+
+function mandaOfferta(salta) {
+  if (!invio) return;
+  var c = trova(invio.ids[invio.fatte]);
+  if (c && !salta) {
+    var link = linkWA(c.tel, testoOffertaPer(c, invio.i));
+    if (link) window.open(link, "_blank", "noopener");
+    c.ultimaOfferta = { i: invio.i, data: oggiISO() };
+  }
+  invio.fatte++;
+  if (invio.fatte >= invio.ids.length) {
+    var quante = invio.ids.length;
+    invio = null;
+    salva(); disegna();
+    avvisa("Finito: " + quante + (quante === 1 ? " offerta mandata." : " offerte mandate."));
+    return;
+  }
+  salva(); disegna();
+}
+
 function scegliCliente() {
   if (!S.clienti.length) { schedaCliente(null); return; }
   var elenco = S.clienti.slice().sort(function (a, b) {
@@ -1478,7 +1625,7 @@ document.querySelectorAll(".barra button").forEach(function (b) {
 });
 
 document.addEventListener("click", function (e) {
-  var t = e.target.closest("[data-az], [data-scheda], [data-vai], [data-filtro], [data-giorno]");
+  var t = e.target.closest("[data-az], [data-scheda], [data-vai], [data-filtro], [data-giorno], [data-offerta]");
   if (!t) return;
 
   if (t.dataset.filtro) { filtro = t.dataset.filtro; disegnaRubrica(); return; }
@@ -1499,7 +1646,11 @@ document.addEventListener("click", function (e) {
     return;
   }
   if (t.dataset.giorno) { giornoScelto = t.dataset.giorno; disegna(); return; }
+  if (t.dataset.offerta) return apriOfferta(+t.dataset.offerta);
   if (az === "nuovo-app") return scegliCliente();
+  if (az === "manda") return mandaOfferta(false);
+  if (az === "salta") return mandaOfferta(true);
+  if (az === "basta") { invio = null; disegna(); return; }
   if (az === "tutte") { mostraTutte = true; disegna(); return; }
   if (az === "poche") { mostraTutte = false; disegna(); window.scrollTo(0, 0); return; }
   if (az === "sveglia") return chiediSveglia();
