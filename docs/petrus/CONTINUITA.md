@@ -75,7 +75,6 @@ Guardrail 1 — prima di aprirne un altro, se ne chiude uno.
 | **Manuale per Tiziana Maya** | 24 ago | Consegna **giovedì 27**. Targa **fatta** il 25 ago. Resta il manuale |
 | **Piano aggiornato da mandare a Egla** | 25 ago | Il centro apre l'1 settembre: il piano con le due date e la soglia va nelle sue mani prima, non dopo |
 | **Testi dei libri** | 25 ago | I file (EPUB, PDF, foto delle pagine). Senza, niente lettura capitolo per capitolo, niente estratto sulla vendita, niente workflow |
-| **Storico e crescita da trascrivere** | 24 ago | `../nipec/StoricoCrescita-previsione.pdf` è solo PDF: i numeri non sono memoria |
 | **Buffett: dichiarato, nessuna copia** | 25 ago | Chiarire se è letto direttamente o attraverso l'Almanacco di Munger |
 | **Darwin: nel PDF, mai nominato** | 25 ago | Decidere se resta sostrato o esce |
 | **Il PDF del Principio va ristampato?** | 25 ago | Ora le lenti sono cinque; la provenienza stampata ne cita tre |
@@ -83,6 +82,12 @@ Guardrail 1 — prima di aprirne un altro, se ne chiude uno.
 ---
 
 ## I fronti chiusi
+
+**25 ago · Storico e crescita.** Trascritto in `../nipec/StoricoCrescita.md`:
+tutte le tabelle 2021-2026, l'economia del device e la proiezione delle sei
+macchine da settembre. Con tre osservazioni scritte in fondo al file — su
+tutte, che **il 2026 è calcolato con due basi diverse nello stesso documento**
+(run-rate nel §01, previsione nel §02 e §07): da uniformare prima di mostrarlo.
 
 **25 ago · Biblioteca cognitiva.** Cinque lenti, una per file in
 `lenti/`, più le regole di combinazione, la mappa dei concetti e la scheda

@@ -53,7 +53,8 @@ concordano nella sostanza.
 | Protocollo Ponte, anteriore | `nipec/ProtocolloPonte-v1.0-superato.pdf` | **Superata** |
 | Munger applicato, inversione | `nipec/NIPEC-Munger-RibaltareAnalisi.md` · PDF | Corrente |
 | Copy laser a noleggio | `nipec/CopyLaserNoleggio.md` | Corrente · definitivo 24 agosto |
-| Storico e crescita, previsione | `nipec/StoricoCrescita-previsione.pdf` | **Corrente** — reali gen-ago, poi Italia €14k e Albania €7k |
+| Storico e crescita, numeri | `nipec/StoricoCrescita.md` | **Testo leggibile** — tutte le tabelle 2021-2026 |
+| Storico e crescita, originale | `nipec/StoricoCrescita-previsione.pdf` | **Corrente** — reali gen-ago, poi Italia €14k e Albania €7k |
 | Storico e crescita, run-rate | `nipec/StoricoCrescita-runrate-superato.pdf` | **Superata** |
 | Standard NIPEC, dossier | `nipec/Dossier_Progetto_NIPEC_IT.md` e `_AL.md` | Corrente, italiano e albanese |
 | DEMETRA, dieci reel | `nipec/DEMETRA_Tirana_10_Reel.md` | Corrente |
@@ -62,9 +63,11 @@ concordano nella sostanza.
 
 ## Punti aperti
 
-0. **Storico e crescita** — `nipec/StoricoCrescita-previsione.pdf` è ancora
-   solo PDF: i numeri non sono in Markdown, quindi non sono memoria. Da
-   trascrivere.
+0. **Storico e crescita** — trascritto il 25 agosto in `nipec/StoricoCrescita.md`.
+   Resta **una cosa da uniformare**: il 2026 è calcolato con due basi diverse
+   nello stesso documento — run-rate annualizzato nel §01, previsione
+   gennaio-agosto più settembre in avanti nel §02 e §07. Due numeri non
+   confrontabili sotto lo stesso anno.
 1. **Bibliografia** — chiusa il 25 agosto: titoli dettati da Giorgio e
    verificati sulle foto dello scaffale.
 2. **Provenienza** — aperta, e più larga di prima. Gli autori con copia
