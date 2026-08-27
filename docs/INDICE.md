@@ -46,6 +46,8 @@ concordano nella sostanza.
 
 | Cosa | File | Stato |
 |---|---|---|
+| **Contratto vendita AFRODITE** | `nipec/contratti/Contratto-1-Vendita-Afrodite.md` · PDF | Bozza · €15.000+IVA, riserva di proprietà. **Da validare da un legale** |
+| **Contratto noleggio AFRODITE** | `nipec/contratti/Contratto-2-Noleggio-Afrodite.md` · PDF | Bozza · €500/mese, full kasko. **Da validare da un legale** |
 | **PERSELOPE, la sequenza di consegna** | `nipec/PERSELOPE.md` | **Testo leggibile** — quattro fasi, i 4 punti di rottura, i tre fogli |
 | PERSELOPE, sorgente | `../PERSELOPE.html` | La pagina originale, in radice |
 | Script di approccio, 12 obiezioni | `nipec/ProtocolloPonte.md` | Testo leggibile, 12 script su 12 |

@@ -42,4 +42,11 @@ python3 tools/md2html.py docs/build/biblioteca-completa.md \
   docs/build/biblioteca-completa.html "Biblioteca cognitiva NIPEC — completa" >/dev/null
 render docs/build/biblioteca-completa.html docs/petrus/BibliotecaCognitiva-completa.pdf
 
+echo "Contratti"
+for c in Contratto-1-Vendita-Afrodite Contratto-2-Noleggio-Afrodite; do
+  python3 tools/md2html.py "docs/nipec/contratti/$c.md" \
+    "docs/build/$c.html" "$c" >/dev/null
+  render "docs/build/$c.html" "docs/nipec/contratti/$c.pdf"
+done
+
 echo "Fatto."

@@ -72,7 +72,7 @@ Guardrail 1 — prima di aprirne un altro, se ne chiude uno.
 
 | Fronte | Da quando | Cosa serve |
 |---|---|---|
-| **Manuale per Tiziana Maya** | 24 ago | Consegna **giovedì 27**. Targa **fatta** il 25 ago. Resta il manuale |
+| **Contratti Tiziana Maya** | 25 ago | Due bozze pronte. Servono i dati anagrafici, l'anticipo, il numero e l'importo delle rate — e la validazione di un legale prima della firma |
 | **Piano aggiornato da mandare a Egla** | 25 ago | Il centro apre l'1 settembre: il piano con le due date e la soglia va nelle sue mani prima, non dopo |
 | **Testi dei libri** | 25 ago | I file (EPUB, PDF, foto delle pagine). Senza, niente lettura capitolo per capitolo, niente estratto sulla vendita, niente workflow |
 | **Buffett: dichiarato, nessuna copia** | 25 ago | Chiarire se è letto direttamente o attraverso l'Almanacco di Munger |
@@ -82,6 +82,13 @@ Guardrail 1 — prima di aprirne un altro, se ne chiude uno.
 ---
 
 ## I fronti chiusi
+
+**25 ago · Tiziana Maya, targa e manuale.** Entrambi fatti e stampati. Consegna
+giovedì 27. Restano i due contratti, che sono un fronte a parte.
+
+**25 ago · Le società.** Chi vende e noleggia è **PHD SYSTEM S.R.L.**, Via
+Rovetta 29, 25080 Padenghe sul Garda (BS), P. IVA 04696530981. È il ramo che lo
+Storico di crescita esclude dai conti («escluso il ramo PHD»).
 
 **25 ago · Storico e crescita.** Trascritto in `../nipec/StoricoCrescita.md`:
 tutte le tabelle 2021-2026, l'economia del device e la proiezione delle sei
