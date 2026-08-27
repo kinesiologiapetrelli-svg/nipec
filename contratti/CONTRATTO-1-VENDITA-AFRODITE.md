@@ -77,6 +77,9 @@ e) il presente contratto è concluso tra operatori economici nell'esercizio dell
 | **Importo di ciascuna rata** | € …………………… (IVA inclusa) | |
 | Decorrenza prima rata | il ……… / ……… / ………… | |
 | Scadenza rate successive | giorno …………… di ogni mese | |
+| **Deposito cauzionale** | € …………………… (non produttivo di interessi) | alla firma |
+
+2.2-bis Il **deposito cauzionale** è infruttifero e viene **integralmente restituito** all'Acquirente al pagamento dell'ultima rata, ovvero, in caso di risoluzione, secondo l'Art. 4.5.
 
 2.3 Modalità di pagamento: ☐ Bonifico bancario ☐ Addebito SEPA SDD ☐ Altro ……………………
 IBAN del Venditore: ……………………………………………………………………………………
@@ -109,7 +112,17 @@ IBAN del Venditore: ……………………………………………………
 
 4.3 Le Parti convengono espressamente, ai sensi dell'**art. 1456 c.c.**, che il contratto si risolve di diritto, su comunicazione scritta del Venditore, in caso di: (i) inadempimento di cui all'Art. 4.2; (ii) violazione della riserva di proprietà (Art. 3.3); (iii) uso non conforme accertato ai sensi dell'Art. 7; (iv) utilizzo del dispositivo da parte di operatore non certificato; (v) manomissione o intervento tecnico da parte di soggetti non autorizzati.
 
-4.4 In caso di risoluzione, il Venditore ha diritto alla **restituzione immediata** del dispositivo a spese dell'Acquirente e, ai sensi dell'art. 1526 c.c., trattiene a titolo di equo compenso per l'uso una somma pari al **……… %** delle rate riscosse, salvo il risarcimento del maggior danno.
+4.4 In caso di risoluzione, il Venditore ha diritto alla **restituzione immediata** del dispositivo a spese dell'Acquirente.
+
+4.5 Ai sensi e per gli effetti dell'**art. 1526 c.c.**, le Parti convengono espressamente il seguente criterio di equo compenso per l'uso: **le rate corrisposte dall'Acquirente si intendono imputate a titolo di canone di noleggio**, nella misura di **€ 500,00 mensili oltre IVA** per ogni mese, anche parziale, di effettivo possesso del dispositivo, a decorrere dalla data di consegna e fino alla data di effettiva riconsegna.
+
+4.6 Operata l'imputazione di cui all'Art. 4.5:
+- l'**eventuale eccedenza** delle rate corrisposte rispetto ai canoni così maturati è **restituita** all'Acquirente;
+- l'**eventuale differenza a debito** è dovuta dall'Acquirente al Venditore entro 15 giorni dalla riconsegna.
+
+4.7 Il **deposito cauzionale** di cui all'Art. 2.2-bis è **restituito integralmente** all'Acquirente entro 30 giorni dalla riconsegna, **a condizione che il dispositivo sia restituito integro**, completo di tutti gli accessori e in normale stato d'uso. In presenza di danni, mancanze o interventi non autorizzati, il Venditore **trattiene dalla cauzione l'importo del danno**, quantificato in contraddittorio o, in mancanza, sulla base del Listino di cui all'Allegato C e di perizia tecnica; se il danno eccede la cauzione, la differenza resta a carico dell'Acquirente.
+
+4.8 Lo stato del dispositivo è verificato in contraddittorio mediante **Verbale di Riconsegna**, redatto sul modello dell'Allegato A. Resta salvo in ogni caso il risarcimento del maggior danno.
 
 ---
 
@@ -117,7 +130,7 @@ IBAN del Venditore: ……………………………………………………
 
 5.1 Consegna presso la sede operativa dell'Acquirente entro il ……… / ……… / ………… , salvo cause non imputabili al Venditore.
 
-5.2 Spese di trasporto e installazione: ☐ a carico del Venditore ☐ a carico dell'Acquirente, pari a € ……………
+5.2 Le spese di **trasporto, consegna e installazione** sono **integralmente a carico del Venditore** e si intendono comprese nel prezzo di cui all'Art. 2.1.
 
 5.3 L'Acquirente predispone a propria cura e spese il **luogo di installazione a norma** (impianto elettrico conforme, messa a terra, spazi, aerazione, alimentazione dedicata ……… V / ……… A).
 
@@ -131,7 +144,7 @@ IBAN del Venditore: ……………………………………………………
 
 | Tappa | Contenuto | Modalità |
 |---|---|---|
-| **T0** | Consegna pratica e addestramento in sede | in presenza |
+| **T0** | **Giornata di formazione con Beauty Trainer NIPEC presso il centro dell'Acquirente** — consegna pratica, addestramento sull'uso e sui protocolli | in presenza, **inclusa nel prezzo** |
 | **T+7** | Sessione di verifica e correzione | videocall |
 | **T+21** | Approfondimento protocolli | online |
 | **T+45** | Esame finale (test 20 domande, soglia 80%) | online |
@@ -142,8 +155,16 @@ IBAN del Venditore: ……………………………………………………
 
 6.4 **L'uso del dispositivo è riservato a operatori in possesso di Certificato in corso di validità.** L'uso da parte di operatore non certificato costituisce uso non conforme ai sensi dell'Art. 7 e fa decadere la garanzia sui danni conseguenti.
 
-6.5 Formazione inclusa nel prezzo: ☐ Sì ☐ No, corrispettivo € …………………
-Formazione di operatori aggiuntivi: € ………………… per operatore.
+6.5 **Formazione inclusa nel prezzo.** Il corrispettivo di cui all'Art. 2.1 comprende **una giornata di formazione in presenza** presso la sede operativa dell'Acquirente, erogata da un **Beauty Trainer NIPEC**, estesa a tutti gli operatori del centro presenti in tale giornata, oltre alle sessioni T+7, T+21 e all'esame T+45.
+
+6.6 **Sessioni di approfondimento (facoltative, a pagamento).** Su richiesta dell'Acquirente il Venditore eroga sessioni di approfondimento alle seguenti condizioni:
+
+| Formula | Corrispettivo (oltre IVA) |
+|---|---|
+| Sessione di approfondimento — **per singolo operatore** | **€ 150,00** |
+| Sessione di approfondimento — **per centro** (tutti gli operatori) | **€ 250,00** |
+
+6.7 Eventuali giornate di formazione in presenza ulteriori rispetto a quella inclusa all'Art. 6.5 sono concordate per iscritto e fatturate a parte, oltre alle spese di trasferta.
 
 ---
 
@@ -159,7 +180,7 @@ Formazione di operatori aggiuntivi: € ………………… per operatore.
 
 ### Art. 8 — Garanzia
 
-8.1 Il Venditore garantisce il dispositivo esente da difetti di conformità e vizi per **24 mesi** dalla consegna (☐ 12 mesi, se ricondizionato), ai sensi degli artt. 1490 e ss. c.c.
+8.1 Il Venditore garantisce il dispositivo esente da difetti di conformità e vizi per **12 (dodici) mesi** dalla data di consegna risultante dal Verbale di cui all'Art. 5.4, ai sensi degli artt. 1490 e ss. c.c.
 
 8.2 **A pena di decadenza**, i vizi devono essere denunciati per iscritto (PEC o raccomandata) entro **8 giorni** dalla scoperta, ai sensi dell'art. 1495 c.c.
 
@@ -183,7 +204,15 @@ Formazione di operatori aggiuntivi: € ………………… per operatore.
 
 9.2 I relativi prezzi sono indicati nel **Listino Ricambi e Consumabili (Allegato C)**, aggiornabile annualmente dal Venditore con preavviso di 30 giorni.
 
-9.3 Prezzo del tubo manipolo cavitazione alla data odierna: **€ …………………** oltre IVA.
+9.3 Prezzi in vigore alla data di sottoscrizione:
+
+| Ricambio / consumabile | Prezzo (oltre IVA) |
+|---|---|
+| **Tubo manipolo** (cavitazione / vacuum) | **€ 200,00** |
+| **Manipolo** (cad.) | **€ 300,00** |
+| Gel conduttivo | come da Allegato C |
+
+9.4 I prezzi di cui all'Art. 9.3 sono impegnativi per **12 mesi** dalla sottoscrizione; successivamente valgono i prezzi del Listino aggiornato (Allegato C).
 
 ---
 
@@ -262,7 +291,7 @@ Luogo e data ………………………………………, ……… / ……�
 ### Approvazione specifica delle clausole (artt. 1341 e 1342 c.c.)
 
 L'Acquirente dichiara di aver letto e di approvare specificamente, previa attenta rilettura, le seguenti clausole:
-**Art. 2.4** (interessi di mora e spese) – **Art. 2.5** (divieto di sospensione dei pagamenti) – **Art. 3** (riserva di proprietà, divieti di disposizione, obbligo assicurativo) – **Art. 4** (decadenza dal beneficio del termine, clausola risolutiva espressa, equo compenso per l'uso) – **Art. 7** (uso conforme e presidio mensile) – **Art. 8** (termini e limiti di garanzia, decadenza per denuncia tardiva, esclusioni) – **Art. 9** (oneri per consumabili e parti di usura) – **Art. 11** (responsabilità dell'Acquirente) – **Art. 12** (limitazione di responsabilità) – **Art. 14.2** (foro esclusivo di Brescia).
+**Art. 2.4** (interessi di mora e spese) – **Art. 2.5** (divieto di sospensione dei pagamenti) – **Art. 3** (riserva di proprietà, divieti di disposizione, obbligo assicurativo) – **Art. 4** (decadenza dal beneficio del termine, clausola risolutiva espressa, imputazione delle rate a canone di noleggio, trattenuta sulla cauzione per danni) – **Art. 7** (uso conforme e presidio mensile) – **Art. 8** (termini e limiti di garanzia, decadenza per denuncia tardiva, esclusioni) – **Art. 9** (oneri per consumabili e parti di usura) – **Art. 11** (responsabilità dell'Acquirente) – **Art. 12** (limitazione di responsabilità) – **Art. 14.2** (foro esclusivo di Brescia).
 
 Luogo e data ………………………………………, ……… / ……… / …………
 
