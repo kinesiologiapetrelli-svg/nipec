@@ -84,7 +84,7 @@ Guardrail 1 — prima di aprirne un altro, se ne chiude uno.
 
 | Fronte | Da quando | Cosa serve |
 |---|---|---|
-| **Contratti Tiziana Maya** | 25 ago | Due bozze pronte. Servono i dati anagrafici, l'anticipo, il numero e l'importo delle rate — e la validazione di un legale prima della firma |
+| **Contratti Tiziana Maya** | 25 ago | **Consegna spostata a oggi 25 ago.** I due PDF si stampano con gli spazi in bianco e si compilano a mano in loco. Restano da sistemare dopo: validazione legale e data certa per la riserva di proprietà |
 | **Piano aggiornato da mandare a Egla** | 25 ago | Il centro apre l'1 settembre: il piano con le due date e la soglia va nelle sue mani prima, non dopo |
 | **Testi dei libri** | 25 ago | I file (EPUB, PDF, foto delle pagine). Senza, niente lettura capitolo per capitolo, niente estratto sulla vendita, niente workflow |
 | **Buffett: dichiarato, nessuna copia** | 25 ago | Chiarire se è letto direttamente o attraverso l'Almanacco di Munger |
