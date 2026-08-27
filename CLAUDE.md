@@ -107,6 +107,6 @@ memoria: non viene letto all'avvio di una sessione. Solo il Markdown lo è.
 
 ## Contesto del repository
 
-- `PERSELOPE.html` — la sequenza di consegna in una pagina HTML: procedura,
-  fogli, app; l'ordine giusto per un centro nuovo, i quattro punti dove si
-  rompe tutto, i cruscotti clienti (centro estetico, laser) e il Master Centri.
+- `PERSELOPE.html` — la sequenza di consegna, pagina originale in radice.
+  Il testo leggibile sta in `docs/nipec/PERSELOPE.md`: quattro fasi, i quattro
+  punti dove si rompe tutto, i cruscotti clienti e il Master Centri.

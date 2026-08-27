@@ -46,6 +46,8 @@ concordano nella sostanza.
 
 | Cosa | File | Stato |
 |---|---|---|
+| **PERSELOPE, la sequenza di consegna** | `nipec/PERSELOPE.md` | **Testo leggibile** — quattro fasi, i 4 punti di rottura, i tre fogli |
+| PERSELOPE, sorgente | `../PERSELOPE.html` | La pagina originale, in radice |
 | Script di approccio, 12 obiezioni | `nipec/ProtocolloPonte.md` | Testo leggibile, 12 script su 12 |
 | Protocollo Ponte, sorgente | `nipec/ProtocolloPonte.html` | **Fonte** da cui si genera il PDF |
 | Protocollo Ponte, stampabile | `nipec/ProtocolloPonte-v1.3-COMPLETO.pdf` | **Da usare.** 10 pagine |
