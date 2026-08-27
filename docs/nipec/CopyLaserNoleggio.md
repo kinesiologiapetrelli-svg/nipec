@@ -61,6 +61,22 @@ messaggio suo.
   sbagliato.
 - **La chiusura è una scelta fra due sì.** Entrambe le opzioni sono contatto.
 
+## L'IVA, nel copy
+
+Nel messaggio si scrive **«500 € al mese»**, senza «+ IVA». È la prassi B2B:
+il destinatario ha partita IVA, per lui l'imposta è detraibile e il costo reale
+è 500. Nei **contratti e nelle quotazioni** invece l'importo va sempre esteso —
+imponibile, IVA, totale.
+
+Due avvertenze che costano nulla e tolgono l'unico rischio:
+
+1. **Quando fai il conto davanti a lei, usa il numero ivato: €610.** Le nove
+   clienti a 60 € coprono 540 e non bastano: a quel prezzo ne servono **undici**
+   (11 × 60 = 660). Se il conto lo rifà il suo commercialista e trova il buco,
+   perdi più di quanto avresti perso scrivendo tre parole in più.
+2. **Se il destinatario non ha partita IVA**, il prezzo va indicato comprensivo
+   di imposta: lì la prassi B2B non vale.
+
 ## Le tre cose da non rimettere dentro
 
 1. **«Il primo laser al mondo gestito da intelligenza artificiale.»** La

@@ -37,10 +37,17 @@ Come si ragiona insieme sta in `lenti/RegoleDiRagionamento.md`.
 
 Cose stabilite, da non rimettere in discussione a ogni sessione.
 
-**25 agosto · I prezzi sono al netto dell'IVA.** Il noleggio è **€500 + IVA =
-€610/mese**; la vendita AFRODITE è **€15.000 + IVA = €18.300**. Vale come
-default per i preventivi e per il copy: quando si scrive «500 al mese» si
-intende imponibile, e nel contratto il totale va scritto per esteso.
+**25 agosto · I prezzi sono sempre al netto dell'IVA.** Il noleggio è **€500 +
+IVA = €610/mese**; la vendita AFRODITE è **€15.000 + IVA = €18.300**.
+
+Dove si scrive «+ IVA» e dove no, per scelta di Giorgio:
+
+- **Contratti e quotazioni: sì**, sempre, con imponibile, IVA e totale distinti.
+- **Promozioni e messaggi commerciali: no.** Si scrive «500 € al mese» e basta.
+
+Non è un'omissione: verso un'azienda con partita IVA il prezzo si intende per
+prassi al netto, e per lei l'IVA è detraibile — il costo reale resta 500. La
+scrittura estesa serve dove l'importo diventa obbligazione.
 
 **25 agosto · La memoria è il repository.** Questa sessione non ha strumenti di
 memoria. Ciò che deve durare va in un file, e in Markdown: un PDF o un HTML nel
