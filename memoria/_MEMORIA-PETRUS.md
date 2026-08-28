@@ -498,3 +498,93 @@ IVA lato cliente (reverse charge 22%, autofattura TD17) — non è costo suo, ma
 se il cliente è forfettario. **La residenza deve restare SOSTANZIALE** (>183gg, centro
 interessi vitali in Albania, no stabile organizzazione in Italia). Attenzione ai legami
 Italia (NIPEC, immobili, famiglia).
+
+---
+
+## 15. AFRODITE / MULTISHAPE VS++ — PARAMETRI UFFICIALI
+Fonte: `Multishape manuale d'uso nuovo.pdf` (manuale del costruttore, Drive).
+**Questa è la fonte autorevole: prevale su ogni scheda commerciale.**
+
+### Tabella di trattamento (RF + vacuum)
+| Zona | Manipolo | Livello RF | Livello vacuum | Minuti |
+|---|---|---|---|---|
+| Addome | Grande | 2-3 | 2-3 | 10-25 |
+| Coscia e polpaccio | Grande | 2-3 | 2-3 | 10-25 |
+| Anca | Grande o medio | 2-3 | 2-3 | 10-20 |
+| Braccia | Medio | 2-3 | 2-3 | 10-20 |
+| Petto | Grande o medio | 2-3 | 2-3 | 10-20 |
+| Schiena | Grande | 3-4 | 3-4 | 10-20 |
+| Viso | Piccolo | 2-3 | 1-2 | 5-15 |
+| Collo | Piccolo o medio | 2-3 | 1-2 | 5-10 |
+
+### Specifiche
+- **Cavitazione U.F.D.**: 36 KHz ±10%, max 50W. 4 modalità — Continua · Pulsazione 1
+  (100ms on / 100ms off) · Pulsazione 2 (160ms on / 90ms off) · Auto (cicla ogni 5 sec).
+  Timer base 25 min, max 30.
+- **RF**: 1.2 MHz, bipolare e multipolare, max 50W.
+- **Vacuum**: max 350 mmHg. Pulsazione 2 / 3 / 5 / 7 Hz.
+  **Super pulsazione 10 / 12 / 15 Hz solo su manipolo GRANDE e MEDIO** (sul piccolo non esiste).
+  Timer base 15 min, max 30.
+- **LED**: rosso 630nm, blu 430nm.
+- Schermo touch **15"**. Consumo max 900W. Classe 1, Tipo BF. 220V/50Hz o 110V/60Hz.
+- Condizioni di lavoro: 22–28 °C, umidità ≥20%.
+
+### Regole d'uso del costruttore
+- **Partire sempre da livelli bassi** di RF e vacuum e salire gradualmente.
+- Lozione ad alta frequenza **solo dove tocca il manipolo, senza esagerare**: l'eccesso
+  **intasa l'ugello** (è il guasto n°1 già noto sul campo).
+- Manipolo sempre **ben aderente alla pelle**, altrimenti rischio di scosse.
+- Mai su labbra e occhi. Pulizia manipoli dopo ogni uso; controllo filtro dell'aria.
+
+### Controindicazioni ufficiali (11)
+Gravidanza e allattamento · ferite o lesioni nell'area · infiammazioni acute e malattie
+infettive · acne cistica o acuta nell'area · **filler dermico nell'area** · cheloidi ·
+herpes simplex, diabete, epilessia · angiotelettasia acuta, emofilia · tumori maligni ·
+**tessuto mammario o protesi mammarie** · **impianti attivi (pacemaker, defibrillatori) o
+impianti metallici nell'area**.
+
+### ⚠️ DISCREPANZA DA RISOLVERE
+La memoria `prospect-vasto-dimagrimento` (e la proposta commerciale che ne è derivata)
+riporta **cavitazione 1 MHz** e **display 10,2"**. Il manuale del costruttore dice
+**36 KHz** e **15 pollici**. La proposta commerciale è quella che circola dai clienti:
+**va verificata prima di inviarne altre.**
+
+---
+
+## 16. PROTOCOLLO DEMETRA AFRODITE — bozza dettata da Giorgio (27 ago 2026)
+
+Sequenza dettata, **da trasformare in protocollo eseguibile**:
+apertura supino · analisi del piede · analisi gamba più corta · analisi rotazione caviglia
+bloccata · dedurre maggior compressione e ritenzione idrica nella zona critica · correzione
+e aperture linfatiche come da manuale · apertura neurolinfatici sottocostali · svuotamento
+colon · bioenergetica viso · togliere la correzione · verificare che sia bilanciato ·
+macchina con manipolo piccolo circolatorio.
+**Ramo GAMBE:** prono, ultrasuoni 8 min per parte, poi rimodellamento RF + vacuum micropulsato.
+**Ramo VENTRE:** supino, ultrasuoni 10 min, poi rimodellamento RF + vacuum micropulsato.
+**Chiusura:** massaggio total body 10 min.
+
+**Valutazione (Petrus):** l'apertura kinesiologica è il vero fossato competitivo — il
+concorrente copia la macchina, non la valutazione. Ma la bozza ha quattro buchi:
+1. **non eseguibile da un sostituibile** (i passi 2-11 presuppongono formazione kinesiologica);
+2. **lessico sanitario** ("analisi", "correzione", "svuotamento colon") in bocca a chi opera
+   sotto L.1/1990 — stesso errore già stanato su Demetra 360 e sulla campagna di lancio;
+3. **tempi 75-80 min**, al limite dei 90 di Demetra → rischio che l'operatrice tagli proprio
+   la valutazione, cioè il fossato, perché è la parte senza macchina e senza risultato visibile;
+4. **nessuna controindicazione e nessun ramo "se il ri-test non è bilanciato"**.
+Manca inoltre la **misurazione** (cm su 3 punti + foto a seduta 1, 5, 10), necessaria per
+la promessa −4/8 cm e per la retention alla 5ª seduta.
+
+**Nota critica:** il "manipolo piccolo circolatorio" del passo 12 è fuori tabella — sul
+manuale il piccolo è viso/collo con vacuum 1-2.
+
+**Nota critica 2:** le manualità linfatiche **non esistono scritte da nessuna parte**.
+Il MANUALE OPERATIVO Demetra indica solo le stazioni (inguinali, poplitee, addominali) e
+i tre tipi di manualità (linfatiche, Snelling, drenanti finali): sono titoli, non gesti.
+Vanno dettate da Giorgio.
+
+**Nota 3:** i 6 protocolli ufficiali Demetra (Metabolic Reset, Cellulite Break, Body Sculpt,
+Drain & Detox, Fat Attack, Gluteus Lift) **non contengono alcuna valutazione kinesiologica**.
+Questo non è una variante: è un settimo protocollo, nuovo.
+
+**Decisione aperta:** il ri-test finale è **bloccante** (niente macchina se non è bilanciato)
+o solo da registrare in scheda?
