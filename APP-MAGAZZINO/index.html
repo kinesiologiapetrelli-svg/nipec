@@ -206,13 +206,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input id="q-mag" type="search" placeholder="Cerca codice, attribuzione o descrizione" autocomplete="off">
       </div>
-      <div class="riga-bot">
-        <button class="mini" data-filtro="tutti" type="button">Tutti</button>
-        <button class="mini vuoto" data-filtro="scorta" type="button">Sotto scorta</button>
-        <button class="mini vuoto" data-filtro="zero" type="button">Esauriti</button>
-        <button class="mini vuoto" data-filtro="Italia" type="button">Italia</button>
-        <button class="mini vuoto" data-filtro="Albania" type="button">Albania</button>
-      </div>
+      <div class="riga-bot" id="filtri"></div>
     </div>
     <div class="scheda" id="lista-mag"></div>
   </section>
@@ -256,6 +250,17 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
     <div class="scheda">
       <h2>Anagrafica articoli</h2>
       <div id="lista-art"></div>
+    </div>
+    <div class="scheda">
+      <h2>Sedi</h2>
+      <p class="tenue">Dove si trovano fisicamente le macchine. Roma e Padenghe stanno sotto Italia, Tirana sotto Albania.</p>
+      <div id="lista-sedi"></div>
+      <label for="nuova-sede">Aggiungi una sede</label>
+      <div class="due">
+        <input id="nuova-sede" placeholder="Es. Durazzo" autocomplete="off">
+        <select id="nuova-sede-paese"><option value="Italia">Italia</option><option value="Albania">Albania</option></select>
+      </div>
+      <div class="riga-bot"><button class="mini" id="add-sede" type="button">Aggiungi sede</button></div>
     </div>
     <div class="scheda">
       <h2>Magazzini</h2>
@@ -311,7 +316,7 @@ var VUOTO = {
   magazzini: [{ id: "m1", nome: "Magazzino principale" }],
   articoli: [],
   movimenti: [],
-  cfg: { magazzinoAttivo: "m1", tema: "auto",
+  cfg: { magazzinoAttivo: "m1", tema: "auto", sediExtra: [],
           sync: { url: "", parola: "", attivo: false, ultimo: "" } }
 };
 
@@ -342,9 +347,74 @@ function carica() {
   }
   if (!base.magazzini.length) base.magazzini = [{ id: "m1", nome: "Magazzino principale" }];
   if (!trovaMag(base.cfg.magazzinoAttivo, base)) base.cfg.magazzinoAttivo = base.magazzini[0].id;
+  if (!Array.isArray(base.cfg.sediExtra)) base.cfg.sediExtra = [];
+  /* chi ha gia' scritto "Roma" o "Tirana" nel campo libero se la ritrova come sede */
+  var noti = { roma: "Italia", padenghe: "Italia", tirana: "Albania" };
+  base.articoli.forEach(function (a) {
+    if (a.sede) return;
+    var p = String(a.posizione || "").trim().toLowerCase();
+    if (noti[p]) { a.sede = p.charAt(0).toUpperCase() + p.slice(1); a.paese = a.paese || noti[p]; a.posizione = ""; }
+  });
   return base;
 }
 function trovaMag(id, st) { return (st || S).magazzini.filter(function (m) { return m.id === id; })[0]; }
+
+/* ------------------------------ sedi ------------------------------ */
+/* Le sedi non hanno una tabella loro sul foglio: quelle di base sono qui dentro,
+   le altre si deducono dagli articoli. Così una sede nuova inserita da Giorgio
+   compare anche ad Alice appena arriva l'articolo, senza toccare lo script Google. */
+var SEDI_BASE = [
+  { nome: "Roma", paese: "Italia" },
+  { nome: "Padenghe", paese: "Italia" },
+  { nome: "Tirana", paese: "Albania" }
+];
+var PAESI = ["Italia", "Albania"];
+function sedi() {
+  var out = [], visti = {};
+  function agg(nome, paese) {
+    nome = String(nome || "").trim();
+    if (!nome) return;
+    var k = nome.toLowerCase();
+    if (visti[k]) { if (!visti[k].paese && paese) visti[k].paese = paese; return; }
+    visti[k] = { nome: nome, paese: paese || "" };
+    out.push(visti[k]);
+  }
+  SEDI_BASE.forEach(function (x) { agg(x.nome, x.paese); });
+  (S.cfg.sediExtra || []).forEach(function (x) { agg(x.nome, x.paese); });
+  S.articoli.forEach(function (a) { agg(a.sede, a.paese); });
+  return out.sort(function (x, y) {
+    var px = PAESI.indexOf(x.paese), py = PAESI.indexOf(y.paese);
+    if (px !== py) return (px < 0 ? 99 : px) - (py < 0 ? 99 : py);
+    return x.nome.localeCompare(y.nome);
+  });
+}
+function sediDi(paese) { return sedi().filter(function (x) { return x.paese === paese; }); }
+function paeseDiSede(nome) {
+  var t = sedi().filter(function (x) { return x.nome.toLowerCase() === String(nome || "").toLowerCase(); })[0];
+  return t ? t.paese : "";
+}
+/* select con le sedi raggruppate per paese — è "la spunta" che si usa ovunque */
+function selectSede(idEl, scelta) {
+  var h = '<select id="' + idEl + '"><option value="">— nessuna sede —</option>';
+  PAESI.forEach(function (p) {
+    var el = sediDi(p);
+    if (!el.length) return;
+    h += '<optgroup label="' + esc(p) + '">' + el.map(function (x) {
+      return '<option value="' + esc(x.nome) + '"' +
+        (String(scelta || "").toLowerCase() === x.nome.toLowerCase() ? " selected" : "") +
+        ">" + esc(x.nome) + "</option>";
+    }).join("") + "</optgroup>";
+  });
+  var altre = sedi().filter(function (x) { return PAESI.indexOf(x.paese) < 0; });
+  if (altre.length) {
+    h += '<optgroup label="Senza paese">' + altre.map(function (x) {
+      return '<option value="' + esc(x.nome) + '"' +
+        (String(scelta || "").toLowerCase() === x.nome.toLowerCase() ? " selected" : "") +
+        ">" + esc(x.nome) + "</option>";
+    }).join("") + "</optgroup>";
+  }
+  return h + "</select>";
+}
 function salva() {
   try { localStorage.setItem(CHIAVE, JSON.stringify(S)); return true; }
   catch (e) {
@@ -599,7 +669,7 @@ function disegna() {
   disegnaSelettoreMag();
   var sotto = articoliDelMag().filter(function (a) { return statoScorta(a) !== "ok"; }).length;
   var p = $("#p-scorta"); p.textContent = sotto; p.hidden = sotto === 0;
-  if (vista === "magazzino") disegnaMagazzino();
+  if (vista === "magazzino") { disegnaFiltri(); disegnaMagazzino(); }
   if (vista === "prelievo") disegnaRicerca("pre");
   if (vista === "carico") disegnaRicerca("car");
   if (vista === "numeri") disegnaNumeri();
@@ -618,15 +688,29 @@ $("#sel-mag").addEventListener("change", function () {
 
 /* ---------------------------- vista MAGAZZINO ---------------------------- */
 var filtro = "tutti";
-document.querySelectorAll("[data-filtro]").forEach(function (b) {
-  b.addEventListener("click", function () {
-    filtro = b.dataset.filtro; spostaId = null;
-    document.querySelectorAll("[data-filtro]").forEach(function (x) {
-      x.className = "mini" + (x.dataset.filtro === filtro ? "" : " vuoto");
-    });
-    disegnaMagazzino();
+/* I filtri si ricostruiscono a ogni disegno: le sedi cambiano quando arrivano
+   articoli nuovi dagli altri dispositivi, e la riga deve seguirle. */
+function disegnaFiltri() {
+  var voci = [["tutti", "Tutti"], ["scorta", "Sotto scorta"], ["zero", "Esauriti"]];
+  PAESI.forEach(function (p) {
+    if (!sediDi(p).length && !S.articoli.filter(function (a) { return a.paese === p; }).length) return;
+    voci.push(["paese:" + p, p]);
+    sediDi(p).forEach(function (x) { voci.push(["sede:" + x.nome, "· " + x.nome]); });
   });
-});
+  sedi().filter(function (x) { return PAESI.indexOf(x.paese) < 0; })
+        .forEach(function (x) { voci.push(["sede:" + x.nome, x.nome]); });
+  if (!voci.filter(function (v) { return v[0] === filtro; }).length) filtro = "tutti";
+  $("#filtri").innerHTML = voci.map(function (v) {
+    return '<button class="mini' + (v[0] === filtro ? "" : " vuoto") +
+      '" data-filtro="' + esc(v[0]) + '" type="button">' + esc(v[1]) + "</button>";
+  }).join("");
+  $("#filtri").querySelectorAll("[data-filtro]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      filtro = b.dataset.filtro; spostaId = null;
+      disegnaFiltri(); disegnaMagazzino();
+    });
+  });
+}
 $("#q-mag").addEventListener("input", disegnaMagazzino);
 
 var apertoId = null;
@@ -637,12 +721,9 @@ var spostaId = null;
    così fra sei mesi si sa non solo dov'è, ma da dove è arrivato e quando. */
 function formSposta(a) {
   return '<div style="margin:.6rem 0 .2rem">' +
-    '<label for="s-dove">Nuova posizione</label>' +
-    '<input id="s-dove" value="' + esc(a.posizione || "") + '" placeholder="Es. Scaffale A3 · Furgone · Centro di Taranto" autocomplete="off">' +
-    '<div class="due"><div><label for="s-paese">Paese</label><select id="s-paese">' +
-      ["", "Italia", "Albania"].map(function (x) {
-        return '<option value="' + x + '"' + ((a.paese || "") === x ? " selected" : "") + ">" + (x || "—") + "</option>";
-      }).join("") + "</select></div>" +
+    '<label for="s-sede">Sede di destinazione</label>' + selectSede("s-sede", a.sede) +
+    '<div class="due"><div><label for="s-dove">Dettaglio (facoltativo)</label>' +
+    '<input id="s-dove" value="' + esc(a.posizione || "") + '" placeholder="Es. Scaffale A3 · furgone" autocomplete="off"></div>' +
     '<div><label for="s-data">Data</label><input id="s-data" type="date" value="' + oggiISO() + '"></div></div>' +
     '<div class="riga-bot"><button class="mini" id="s-ok" type="button">Registra lo spostamento</button>' +
     '<button class="mini vuoto" id="s-no" type="button">Annulla</button></div></div>';
@@ -652,7 +733,9 @@ function disegnaMagazzino() {
     var st = statoScorta(a);
     if (filtro === "scorta") return st !== "ok";
     if (filtro === "zero") return st === "zero";
-    if (filtro === "Italia" || filtro === "Albania") return a.paese === filtro;
+    if (filtro.indexOf("paese:") === 0) return a.paese === filtro.slice(6);
+    if (filtro.indexOf("sede:") === 0)
+      return String(a.sede || "").toLowerCase() === filtro.slice(5).toLowerCase();
     return true;
   }).sort(function (a, b) {
     return String(a.descrizione || "").localeCompare(String(b.descrizione || ""));
@@ -690,22 +773,28 @@ function disegnaMagazzino() {
     if (sk) sk.addEventListener("click", function (ev) {
       ev.stopPropagation();
       var a = articolo(spostaId);
+      var sede = c.querySelector("#s-sede").value;
       var dove = c.querySelector("#s-dove").value.trim();
-      var paese = c.querySelector("#s-paese").value;
-      if (!dove) { avvisa("Scrivi dove si trova adesso."); return; }
+      var paese = paeseDiSede(sede);
+      if (!sede) { avvisa("Scegli la sede di destinazione."); return; }
       var ms = {
         id: id(), articoloId: a.id, tipo: "spostamento", qta: 0,
         data: c.querySelector("#s-data").value || oggiISO(),
-        da: a.posizione || "", a: dove, paeseDa: a.paese || "", paeseA: paese
+        da: dovEtichetta(a), a: dove ? sede + " · " + dove : sede,
+        paeseDa: a.paese || "", paeseA: paese
       };
       S.movimenti.push(ms); segna("movimenti", ms);
-      a.posizione = dove; a.paese = paese; segna("articoli", a);
+      a.sede = sede; a.posizione = dove; a.paese = paese; segna("articoli", a);
       spostaId = null; salva(); disegna();
       avvisa("Spostamento registrato.");
     });
   }
 }
 
+/* una sola etichetta per "dove sta": sede, piu' il dettaglio se c'e' */
+function dovEtichetta(a) {
+  return [a.sede || "", a.posizione || ""].filter(Boolean).join(" · ");
+}
 function rigaArticolo(a) {
   var g = giacenza(a.id), st = statoScorta(a);
   var pill = st === "zero" ? '<span class="pill ko">esaurito</span>'
@@ -715,7 +804,8 @@ function rigaArticolo(a) {
       (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
     '<div class="des">' + esc(a.descrizione || "(senza descrizione)") + "</div>" +
     '<div class="sotto">' + (a.categoria ? esc(a.categoria) + " · " : "") + pill +
-      (a.paese ? ' <span class="pill paese">' + esc(a.paese) + "</span>" : "") +
+      (a.sede ? ' <span class="pill paese">' + esc(a.sede) + "</span>" : "") +
+      (a.paese ? ' <span class="pill dove">' + esc(a.paese) + "</span>" : "") +
       (a.posizione ? ' <span class="pill dove">' + esc(a.posizione) + "</span>" : "") +
       "</div></div>" +
     '<div class="q"><b>' + g + "</b><span class=\"u\">" + esc(a.unita || "pz") + "</span></div></div>";
@@ -728,8 +818,9 @@ function dettaglio(a) {
   var h = '<div style="padding:.2rem 0 .8rem">' +
     (a.foto ? '<div class="fbox"><img class="fgrande" src="' + a.foto + '" alt="Foto di ' + esc(a.descrizione) + '"></div>' : "") +
     '<div class="dove-ora"><b>Dove si trova ora:</b> ' +
-      (a.posizione ? esc(a.posizione) : "<i>non indicata</i>") +
-      (a.paese ? " · " + esc(a.paese) : "") + "</div>" +
+      (a.sede ? esc(a.sede) : "<i>sede non assegnata</i>") +
+      (a.posizione ? " · " + esc(a.posizione) : "") +
+      (a.paese ? " (" + esc(a.paese) + ")" : "") + "</div>" +
     '<div class="riga-bot"><button class="mini" data-prelievo="' + esc(a.id) + '" type="button">Preleva</button>' +
       '<button class="mini vuoto" data-sposta="' + esc(a.id) + '" type="button">Sposta</button></div>' +
     (spostaId === a.id ? formSposta(a) : "") +
@@ -913,11 +1004,8 @@ function disegnaSetup() {
     '<div><label for="a-min">Scorta minima</label><input id="a-min" type="number" min="0" inputmode="numeric" value="' + esc(a ? a.scortaMin : "") + '"></div></div>' +
     '<div class="due"><div><label for="a-prz">Prezzo acquisto €</label><input id="a-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a ? a.prezzoAcquisto : "") + '"></div>' +
     '<div><label for="a-forn">Fornitore</label><input id="a-forn" value="' + esc(a ? a.fornitore : "") + '" autocomplete="off"></div></div>' +
-    '<div class="due"><div><label for="a-paese">Location (paese)</label><select id="a-paese">' +
-      ["", "Italia", "Albania"].map(function (x) {
-        return '<option value="' + x + '"' + ((a && a.paese || "") === x ? " selected" : "") + ">" + (x || "—") + "</option>";
-      }).join("") + "</select></div>" +
-    '<div><label for="a-pos">Dove si trova ora</label><input id="a-pos" value="' + esc(a ? a.posizione : "") + '" placeholder="Es. Scaffale A3" autocomplete="off"></div></div>' +
+    '<div class="due"><div><label for="a-sede">Sede (location)</label>' + selectSede("a-sede", a ? a.sede : "") + "</div>" +
+    '<div><label for="a-pos">Dettaglio (facoltativo)</label><input id="a-pos" value="' + esc(a ? a.posizione : "") + '" placeholder="Es. Scaffale A3" autocomplete="off"></div></div>' +
     '<label>Foto dell\'articolo</label>' +
     '<div class="fbox" id="a-foto-box"></div>' +
     '<div class="riga-bot">' +
@@ -973,15 +1061,17 @@ function disegnaSetup() {
       descrizione: des, categoria: $("#a-cat").value.trim(),
       unita: $("#a-uni").value.trim() || "pz", scortaMin: $("#a-min").value,
       prezzoAcquisto: $("#a-prz").value, fornitore: $("#a-forn").value.trim(),
-      paese: $("#a-paese").value, posizione: $("#a-pos").value.trim(),
+      sede: $("#a-sede").value, paese: paeseDiSede($("#a-sede").value),
+      posizione: $("#a-pos").value.trim(),
       foto: fotoBozza || ""
     };
     if (a) {
-      /* se qui dentro cambia la posizione, lo spostamento va tracciato lo stesso */
-      if ((a.posizione || "") !== dati.posizione && dati.posizione) {
+      /* se qui dentro cambia la sede, lo spostamento va tracciato lo stesso */
+      if ((a.sede || "") !== dati.sede && dati.sede) {
         var mz = {
           id: id(), articoloId: a.id, tipo: "spostamento", qta: 0, data: oggiISO(),
-          da: a.posizione || "", a: dati.posizione, paeseDa: a.paese || "", paeseA: dati.paese
+          da: dovEtichetta(a), a: [dati.sede, dati.posizione].filter(Boolean).join(" · "),
+          paeseDa: a.paese || "", paeseA: dati.paese
         };
         S.movimenti.push(mz); segna("movimenti", mz);
       }
@@ -1028,6 +1118,15 @@ function disegnaSetup() {
   $("#peso").innerHTML = "Spazio usato: <b>" + kb(pesoTot) + "</b> · foto: <b>" + conFoto + "</b>" +
     (pesoTot > 3500000 ? ' — <span style="color:var(--allerta)">vicino al limite, togli qualche foto</span>' : "");
 
+  $("#lista-sedi").innerHTML = sedi().map(function (x) {
+    var n = S.articoli.filter(function (a) {
+      return String(a.sede || "").toLowerCase() === x.nome.toLowerCase();
+    }).length;
+    return '<div class="mov"><span><b>' + esc(x.nome) + "</b>" +
+      (x.paese ? ' <span class="pill dove">' + esc(x.paese) + "</span>" : "") + "</span>" +
+      '<span class="q">' + n + " art.</span></div>";
+  }).join("") || '<div class="tenue">Nessuna sede.</div>';
+
   $("#lista-magazzini").innerHTML = S.magazzini.map(function (m) {
     var n = S.articoli.filter(function (x) { return x.magazzinoId === m.id; }).length;
     return '<div class="mov"><span><b>' + esc(m.nome) + "</b></span>" +
@@ -1064,6 +1163,17 @@ $("#sy-stop").addEventListener("click", function () {
 });
 $("#stato-sync").addEventListener("click", function () { sincronizza(true); });
 
+$("#add-sede").addEventListener("click", function () {
+  var n = $("#nuova-sede").value.trim(), pa = $("#nuova-sede-paese").value;
+  if (!n) { avvisa("Dai un nome alla sede."); return; }
+  if (sedi().filter(function (x) { return x.nome.toLowerCase() === n.toLowerCase(); }).length) {
+    avvisa("Questa sede c'e' gia'."); return;
+  }
+  S.cfg.sediExtra.push({ nome: n, paese: pa });
+  $("#nuova-sede").value = ""; salva(); disegna();
+  avvisa("Sede aggiunta. Diventa visibile agli altri quando le assegni un articolo.");
+});
+
 $("#add-mag").addEventListener("click", function () {
   var n = $("#nuovo-mag").value.trim();
   if (!n) { avvisa("Dai un nome al magazzino."); return; }
@@ -1086,14 +1196,14 @@ $("#esporta").addEventListener("click", function () {
 $("#csv").addEventListener("click", function () {
   var r = [["data", "tipo", "attribuzione", "codice", "descrizione", "quantita", "unita",
             "destinazione_o_fornitore", "causale_o_n_acquisto", "prezzo", "nota",
-            "paese", "posizione_attuale"]];
+            "sede", "paese", "posizione_attuale"]];
   S.movimenti.slice().sort(function (a, b) { return a.data.localeCompare(b.data); }).forEach(function (v) {
     var a = articolo(v.articoloId); if (!a) return;
     r.push([v.data, v.tipo, a.attribuzione || "", a.codice || "", a.descrizione || "", v.qta, a.unita || "pz",
             v.tipo === "entrata" ? (v.fornitore || "") : (v.destinazione || ""),
             v.tipo === "entrata" ? (v.numeroAcquisto || "") : (v.causale || ""),
             v.prezzo || "", v.nota || (v.tipo === "spostamento" ? "da " + (v.da || "?") + " a " + (v.a || "?") : ""),
-            a.paese || "", a.posizione || ""]);
+            a.sede || "", a.paese || "", a.posizione || ""]);
   });
   var csv = r.map(function (riga) {
     return riga.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(";");
