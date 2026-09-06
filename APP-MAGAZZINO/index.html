@@ -252,6 +252,11 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 
   <section id="v-setup" hidden>
     <div class="scheda">
+      <h2>Controllo</h2>
+      <p class="tenue">Se qualcosa non torna, manda uno screenshot di questa scheda.</p>
+      <div id="controllo"></div>
+    </div>
+    <div class="scheda">
       <h2 id="tit-art">Nuovo articolo</h2>
       <div id="form-art"></div>
     </div>
@@ -311,6 +316,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 <script>
 "use strict";
 var CHIAVE = "magazzino-nipec-v1";
+var VERSIONE = "6 set 2026 · 5";
 var VUOTO = {
   magazzini: [{ id: "m1", nome: "Magazzino principale" }],
   articoli: [],
@@ -1332,6 +1338,45 @@ function disegnaNumeri() {
       (a.scortaMin ? " / " + a.scortaMin : "") + "</span></div>";
   }).join("") : '<div class="vuoto-msg">Nessun articolo sotto scorta.</div>';
 }
+/* Una fotografia in italiano di quello che l'app ha davvero in pancia.
+   Serve per non tirare a indovinare quando qualcosa "non funziona". */
+function disegnaControllo() {
+  function r(et, v) {
+    return '<div class="mov"><span>' + et + '</span><span class="q">' + v + "</span></div>";
+  }
+  var mv = S.movimenti, ann = mv.filter(function (v) { return v.eliminato; }).length;
+  var pezzi = S.articoli.reduce(function (t, a) { return t + giacenza(a.id); }, 0);
+  var inCoda = Object.keys(coda.articoli).length + Object.keys(coda.movimenti).length +
+               Object.keys(coda.magazzini).length;
+
+  var perSede = {}, senza = 0;
+  S.articoli.forEach(function (a) {
+    sediArticolo(a.id).forEach(function (x) {
+      if (!x.sede) senza += x.qta;
+      else perSede[x.sede] = (perSede[x.sede] || 0) + x.qta;
+    });
+  });
+  var righeSede = Object.keys(perSede).sort().map(function (n) {
+    return r(esc(n), perSede[n] + " pz");
+  }).join("");
+
+  var c = S.cfg.sync;
+  var quando = c.ultimo ? new Date(c.ultimo).toLocaleString("it-IT") : "mai";
+
+  $("#controllo").innerHTML =
+    r("<b>Versione dell'app</b>", "<b>" + VERSIONE + "</b>") +
+    r("Collegamento al foglio", c.attivo ? "acceso" : "spento") +
+    r("Ultimo scambio col foglio", quando) +
+    r("Da inviare", inCoda ? '<b style="color:var(--avviso)">' + inCoda + "</b>" : "niente") +
+    r("Articoli", S.articoli.length) +
+    r("Movimenti", mv.length + (ann ? " (" + ann + " annullati)" : "")) +
+    r("Pezzi in totale", pezzi) +
+    righeSede +
+    (senza ? r('<b style="color:var(--avviso)">Senza sede</b>',
+               '<b style="color:var(--avviso)">' + senza + " pz</b>") : "") +
+    (!righeSede && !senza ? '<div class="tenue" style="padding:.5rem 0">Nessun pezzo in giacenza.</div>' : "");
+}
+
 function tile(n, e) { return '<div class="tile"><div class="n">' + n + '</div><div class="e">' + e + "</div></div>"; }
 
 /* ------------------------------ DATI ------------------------------ */
@@ -1459,6 +1504,8 @@ function disegnaSetup() {
     : "Collegato" + (S.cfg.sync.ultimo ? " · ultimo scambio " + itData(S.cfg.sync.ultimo.slice(0, 10)) +
         " alle " + S.cfg.sync.ultimo.slice(11, 16) : "") +
       (q ? ' · <b style="color:var(--avviso)">' + q + " da inviare</b>" : " · tutto inviato");
+
+  disegnaControllo();
 
   var pesoTot = pesoMemoria(), conFoto = S.articoli.filter(function (x) { return x.foto; }).length;
   $("#peso").innerHTML = "Spazio usato: <b>" + kb(pesoTot) + "</b> · foto: <b>" + conFoto + "</b>" +
