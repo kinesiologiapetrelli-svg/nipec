@@ -316,7 +316,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 <script>
 "use strict";
 var CHIAVE = "magazzino-nipec-v1";
-var VERSIONE = "6 set 2026 · 5";
+var VERSIONE = "6 set 2026 · 6";
 var VUOTO = {
   magazzini: [{ id: "m1", nome: "Magazzino principale" }],
   articoli: [],
@@ -353,6 +353,32 @@ function carica() {
   if (!base.magazzini.length) base.magazzini = [{ id: "m1", nome: "Magazzino principale" }];
   if (!trovaMag(base.cfg.magazzinoAttivo, base)) base.cfg.magazzinoAttivo = base.magazzini[0].id;
   if (!Array.isArray(base.cfg.sediExtra)) base.cfg.sediExtra = [];
+  /* Recupero dei dati tornati dal foglio quando lo script era ancora quello
+     vecchio: le colonne sede/sedeDa/sedeA non esistevano e venivano buttate,
+     ma per gli spostamenti l'informazione e' sopravvissuta nelle vecchie
+     colonne "da" e "a". Da li' la rimetto a posto. */
+  function ripulisci(x) {
+    x = String(x || "").split(" · ")[0].trim();
+    return x.toLowerCase() === "senza sede" ? "" : x;
+  }
+  base.movimenti.forEach(function (v) {
+    if (v.tipo !== "spostamento") return;
+    if (!v.sedeA && v.a) v.sedeA = ripulisci(v.a);
+    if (!v.sedeDa && v.da) v.sedeDa = ripulisci(v.da);
+    if (!v.sede && v.sedeA) v.sede = v.sedeA;
+  });
+  /* Il foglio a volte restituisce la data come istante ISO invece che come
+     giorno: presa cosi' com'e' sarebbe il giorno prima. La riporto al giorno. */
+  base.movimenti.forEach(function (v) {
+    var d = String(v.data || "");
+    if (d.length > 10 && d.indexOf("T") === 10) {
+      var t = new Date(d);
+      if (!isNaN(t)) {
+        v.data = t.getFullYear() + "-" +
+          ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
+      }
+    }
+  });
   /* chi ha gia' scritto "Roma" o "Tirana" nel campo libero se la ritrova come sede */
   var noti = { roma: "Italia", padenghe: "Italia", tirana: "Albania" };
   base.articoli.forEach(function (a) {
