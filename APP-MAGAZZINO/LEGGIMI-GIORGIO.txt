@@ -81,9 +81,23 @@ quanto spazio stai usando e quante foto hai: se ti avvicini al limite
 te lo dice in rosso.
 
 
-LA COSA IMPORTANTE — LA COPIA DI SICUREZZA
+MAGAZZINO CONDIVISO CON UARDA E ALICE
 
-I dati stanno SOLO sul dispositivo dove usi l'app. Non sono nel cloud,
+Di suo, l'app tiene i dati dentro il telefono di chi la usa: tre persone
+collegate al solito link avrebbero tre magazzini separati.
+
+Per lavorare tutti sullo STESSO magazzino c'è il riquadro "Magazzino
+condiviso" dentro DATI: si collega a un Foglio Google sul tuo Drive, e da
+quel momento tu, Uarda e Alice vedete e aggiornate le stesse giacenze.
+
+Come si mette in piedi: sta tutto in ISTRUZIONI-CONDIVISIONE.txt.
+Si fa una volta sola, dieci minuti.
+
+
+LA COPIA DI SICUREZZA
+
+Finché NON hai collegato il foglio, i dati stanno SOLO sul dispositivo
+dove usi l'app. Non sono nel cloud,
 non sono su un server, non li vede nessun altro.
 
 Vuol dire che se cambi telefono, pulisci il browser o si rompe il

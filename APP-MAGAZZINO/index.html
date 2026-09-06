@@ -171,6 +171,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
   </div>
   <div class="dx">
     <select id="sel-mag" aria-label="Magazzino"></select>
+    <button id="stato-sync" type="button" title="Stato del collegamento" hidden>•</button>
     <button id="installa" hidden type="button">Installa</button>
   </div>
 </header>
@@ -266,6 +267,20 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
       </div>
     </div>
     <div class="scheda">
+      <h2>Magazzino condiviso</h2>
+      <p class="tenue">Collega l'app al Foglio Google sul Drive. Chi ha lo stesso indirizzo e la stessa parola vede e aggiorna lo <b>stesso</b> magazzino.</p>
+      <label for="sy-url">Indirizzo dello script</label>
+      <input id="sy-url" placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
+      <label for="sy-par">Parola d'ordine</label>
+      <input id="sy-par" autocomplete="off">
+      <div class="riga-bot">
+        <button class="mini" id="sy-attiva" type="button">Attiva e collega</button>
+        <button class="mini vuoto" id="sy-ora" type="button">Sincronizza adesso</button>
+        <button class="mini vuoto" id="sy-stop" type="button">Scollega</button>
+      </div>
+      <p class="tenue" id="sy-stato"></p>
+    </div>
+    <div class="scheda">
       <h2>Copia di sicurezza</h2>
       <p class="tenue">I dati stanno solo su questo dispositivo. Esporta ogni tanto: se cambi telefono o pulisci il browser, senza copia si perde tutto.</p>
       <p class="tenue" id="peso"></p>
@@ -296,7 +311,8 @@ var VUOTO = {
   magazzini: [{ id: "m1", nome: "Magazzino principale" }],
   articoli: [],
   movimenti: [],
-  cfg: { magazzinoAttivo: "m1", tema: "auto" }
+  cfg: { magazzinoAttivo: "m1", tema: "auto",
+          sync: { url: "", parola: "", attivo: false, ultimo: "" } }
 };
 
 /* ------------------------------ stato ------------------------------ */
@@ -310,7 +326,19 @@ function carica() {
     if (Array.isArray(s[k])) base[k] = s[k];
   });
   if (s.cfg && typeof s.cfg === "object") {
-    Object.keys(s.cfg).forEach(function (k) { base.cfg[k] = s.cfg[k]; });
+    Object.keys(s.cfg).forEach(function (k) {
+      if (k === "sync" && s.cfg.sync && typeof s.cfg.sync === "object") {
+        Object.keys(s.cfg.sync).forEach(function (j) { base.cfg.sync[j] = s.cfg.sync[j]; });
+      } else base.cfg[k] = s.cfg[k];
+    });
+  }
+  /* Il magazzino predefinito deve avere un id DIVERSO su ogni telefono: se fosse
+     sempre "m1", collegando il secondo dispositivo il suo "Magazzino principale"
+     vuoto sovrascriverebbe quello vero di chi ha collegato per primo. */
+  if (!Array.isArray(s.magazzini) || !s.magazzini.length) {
+    base.magazzini = [{ id: "m" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+                        nome: "Magazzino principale", nuovo: true }];
+    base.cfg.magazzinoAttivo = base.magazzini[0].id;
   }
   if (!base.magazzini.length) base.magazzini = [{ id: "m1", nome: "Magazzino principale" }];
   if (!trovaMag(base.cfg.magazzinoAttivo, base)) base.cfg.magazzinoAttivo = base.magazzini[0].id;
@@ -349,6 +377,129 @@ function avvisa(t) {
 }
 function num(v) { var n = parseFloat(String(v).replace(",", ".")); return isFinite(n) ? n : 0; }
 
+/* ====================== magazzino condiviso ======================
+   I dati veri stanno in un Foglio Google sul Drive di Giorgio. Qui teniamo una
+   copia locale (così l'app funziona anche senza rete) e una CODA di quello che
+   non è ancora arrivato al foglio.
+   Non si manda mai "tutto lo stato": si mandano solo le righe cambiate. Se Alice
+   registra un'uscita mentre Giorgio registra un'entrata, il foglio le tiene
+   tutte e due — con un salvataggio totale una delle due sparirebbe. */
+var CHIAVE_CODA = CHIAVE + "-coda";
+var coda = caricaCoda();
+function caricaCoda() {
+  var c = null;
+  try { c = JSON.parse(localStorage.getItem(CHIAVE_CODA)); } catch (e) { c = null; }
+  if (!c || typeof c !== "object") c = {};
+  ["articoli", "movimenti", "magazzini"].forEach(function (t) { if (!c[t]) c[t] = {}; });
+  return c;
+}
+function salvaCoda() {
+  try { localStorage.setItem(CHIAVE_CODA, JSON.stringify(coda)); } catch (e) { /* pazienza */ }
+}
+function inCoda() {
+  return Object.keys(coda.articoli).length + Object.keys(coda.movimenti).length +
+         Object.keys(coda.magazzini).length;
+}
+function segna(tipo, oggetto) {
+  if (!oggetto || !oggetto.id) return;
+  oggetto.agg = new Date().toISOString();
+  coda[tipo][oggetto.id] = 1;
+  salvaCoda();
+  programmaSync();
+}
+
+var statoSync = "spento", timerSync = null, inCorso = false;
+function mostraStato() {
+  var b = $("#stato-sync");
+  if (!S.cfg.sync.attivo || !S.cfg.sync.url) { b.hidden = true; return; }
+  b.hidden = false;
+  var n = inCoda();
+  var testo = { ok: "✓ in linea", invio: "… invio", offline: "⚠ da inviare", errore: "⚠ errore" }[statoSync] || "•";
+  b.textContent = n && statoSync !== "ok" ? testo + " (" + n + ")" : testo;
+  b.style.opacity = statoSync === "ok" ? ".85" : "1";
+}
+function programmaSync() {
+  if (!S.cfg.sync.attivo || !S.cfg.sync.url) { mostraStato(); return; }
+  clearTimeout(timerSync);
+  timerSync = setTimeout(function () { sincronizza(); }, 900);
+  statoSync = "offline"; mostraStato();
+}
+function sincronizza(manuale, finito) {
+  if (inCorso) return;
+  var c = S.cfg.sync;
+  if (!c.attivo || !c.url) { if (finito) finito(false, "collegamento non attivo"); return; }
+  inCorso = true; statoSync = "invio"; mostraStato();
+
+  var corpo = { token: c.parola };
+  ["articoli", "movimenti", "magazzini"].forEach(function (t) {
+    corpo[t] = Object.keys(coda[t]).map(function (id) {
+      return S[t].filter(function (x) { return x.id === id; })[0];
+    }).filter(Boolean);
+  });
+  var mandati = JSON.parse(JSON.stringify(coda));
+
+  /* text/plain di proposito: con application/json il browser farebbe una
+     richiesta di controllo che Apps Script non sa gestire e fallirebbe tutto. */
+  fetch(c.url, {
+    method: "POST", redirect: "follow",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(corpo)
+  }).then(function (r) { return r.json(); }).then(function (risposta) {
+    inCorso = false;
+    if (!risposta || risposta.errore) {
+      statoSync = "errore"; mostraStato();
+      if (manuale) avvisa("Il foglio dice: " + ((risposta && risposta.errore) || "risposta vuota"));
+      if (finito) finito(false, (risposta && risposta.errore) || "risposta vuota");
+      return;
+    }
+    /* tolgo dalla coda solo quello che ho davvero mandato */
+    ["articoli", "movimenti", "magazzini"].forEach(function (t) {
+      Object.keys(mandati[t]).forEach(function (id) { delete coda[t][id]; });
+    });
+    salvaCoda();
+    fondiRemoto(risposta);
+    S.cfg.sync.ultimo = new Date().toISOString();
+    statoSync = "ok"; salva(); mostraStato(); disegna();
+    if (manuale) avvisa("Magazzino aggiornato.");
+    if (finito) finito(true);
+  }).catch(function (e) {
+    inCorso = false; statoSync = "offline"; mostraStato();
+    if (manuale) avvisa("Non riesco a raggiungere il foglio. Riprovo più tardi.");
+    if (finito) finito(false, e.message);
+  });
+}
+function fondiRemoto(r) {
+  ["magazzini", "articoli"].forEach(function (t) {
+    if (!Array.isArray(r[t])) return;
+    r[t].forEach(function (remoto) {
+      if (!remoto || !remoto.id) return;
+      var i = -1;
+      for (var k = 0; k < S[t].length; k++) if (S[t][k].id === remoto.id) { i = k; break; }
+      /* se la riga è ancora in coda, la mia versione è più fresca: non la tocco */
+      if (coda[t][remoto.id]) return;
+      if (i < 0) S[t].push(remoto);
+      else if (!S[t][i].agg || String(remoto.agg) >= String(S[t][i].agg)) S[t][i] = remoto;
+    });
+  });
+  if (Array.isArray(r.movimenti)) {
+    var visti = {};
+    S.movimenti.forEach(function (m) { visti[m.id] = 1; });
+    r.movimenti.forEach(function (m) {
+      if (m && m.id && !visti[m.id]) S.movimenti.push(m);   /* i movimenti si sommano, non si sostituiscono */
+    });
+  }
+  if (!trovaMag(S.cfg.magazzinoAttivo)) S.cfg.magazzinoAttivo = S.magazzini[0].id;
+  /* primo collegamento da un telefono vuoto: mi porto sul magazzino che ha roba dentro */
+  var mio = trovaMag(S.cfg.magazzinoAttivo);
+  var quanti = function (mid) {
+    return S.articoli.filter(function (a) { return a.magazzinoId === mid; }).length;
+  };
+  if (mio && mio.nuovo && !quanti(mio.id)) {
+    var pieno = S.magazzini.filter(function (m) { return quanti(m.id) > 0; })[0];
+    if (pieno) S.cfg.magazzinoAttivo = pieno.id;
+  }
+}
+
 /* ------------------------------ foto ------------------------------ */
 /* Le foto pesano: le rimpiccioliamo a 640px lato lungo e le salviamo in JPEG.
    Una foto da 4 MB del telefono diventa ~40 KB, se no la memoria si riempie subito. */
@@ -360,14 +511,22 @@ function comprimiFoto(file, cb) {
     var im = new Image();
     im.onload = function () {
       try {
-        var max = 640, sc = Math.min(1, max / Math.max(im.width, im.height));
-        var c = document.createElement("canvas");
-        c.width = Math.max(1, Math.round(im.width * sc));
-        c.height = Math.max(1, Math.round(im.height * sc));
-        var x = c.getContext("2d");
-        x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height);
-        x.drawImage(im, 0, 0, c.width, c.height);
-        cb(c.toDataURL("image/jpeg", 0.62));
+        /* Una cella del Foglio Google tiene 50.000 caratteri: se la foto è più
+           pesante non arriverebbe mai nel magazzino condiviso. Quindi si scende
+           di qualità finché non ci sta. */
+        var prove = [[640, 0.62], [480, 0.5], [360, 0.45]], u = "";
+        for (var k = 0; k < prove.length; k++) {
+          var max = prove[k][0], sc = Math.min(1, max / Math.max(im.width, im.height));
+          var c = document.createElement("canvas");
+          c.width = Math.max(1, Math.round(im.width * sc));
+          c.height = Math.max(1, Math.round(im.height * sc));
+          var x = c.getContext("2d");
+          x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height);
+          x.drawImage(im, 0, 0, c.width, c.height);
+          u = c.toDataURL("image/jpeg", prove[k][1]);
+          if (u.length < 45000) break;
+        }
+        cb(u);
       } catch (e) { avvisa("Non riesco a ridurre l'immagine."); }
     };
     im.onerror = function () { avvisa("Immagine non leggibile."); };
@@ -534,12 +693,13 @@ function disegnaMagazzino() {
       var dove = c.querySelector("#s-dove").value.trim();
       var paese = c.querySelector("#s-paese").value;
       if (!dove) { avvisa("Scrivi dove si trova adesso."); return; }
-      S.movimenti.push({
+      var ms = {
         id: id(), articoloId: a.id, tipo: "spostamento", qta: 0,
         data: c.querySelector("#s-data").value || oggiISO(),
         da: a.posizione || "", a: dove, paeseDa: a.paese || "", paeseA: paese
-      });
-      a.posizione = dove; a.paese = paese;
+      };
+      S.movimenti.push(ms); segna("movimenti", ms);
+      a.posizione = dove; a.paese = paese; segna("articoli", a);
       spostaId = null; salva(); disegna();
       avvisa("Spostamento registrato.");
     });
@@ -664,19 +824,22 @@ function legaForm(k) {
     if (k === "pre") {
       var g = giacenza(a.id);
       if (q > g) { avvisa("In magazzino ce ne sono solo " + g + "."); return; }
-      S.movimenti.push({
+      var mu = {
         id: id(), articoloId: a.id, tipo: "uscita", qta: q, data: $("#p-data").value || oggiISO(),
         destinazione: $("#p-dest").value.trim(), causale: $("#p-caus").value, nota: $("#p-nota").value.trim()
-      });
+      };
+      S.movimenti.push(mu); segna("movimenti", mu);
       avvisa("Uscita registrata: " + q + " " + (a.unita || "pz") + ".");
     } else {
       var prz = $("#c-prz").value, forn = $("#c-forn").value.trim();
-      S.movimenti.push({
+      var me = {
         id: id(), articoloId: a.id, tipo: "entrata", qta: q, data: $("#c-data").value || oggiISO(),
         fornitore: forn, numeroAcquisto: $("#c-nacq").value.trim(), prezzo: prz, nota: $("#c-nota").value.trim()
-      });
+      };
+      S.movimenti.push(me); segna("movimenti", me);
       if (prz) a.prezzoAcquisto = prz;
       if (forn) a.fornitore = forn;
+      if (prz || forn) segna("articoli", a);
       avvisa("Entrata registrata: " + q + " " + (a.unita || "pz") + ".");
     }
     salva(); scelto[k] = null; disegnaRicerca(k); disegna();
@@ -780,7 +943,7 @@ function disegnaSetup() {
   $("#a-scatta").addEventListener("click", function () { $("#a-file-cam").click(); });
   $("#a-carica").addEventListener("click", function () { $("#a-file-gal").click(); });
   $("#a-togli").addEventListener("click", function () {
-    fotoBozza = ""; if (a) { a.foto = ""; salva(); } mostraFoto(); avvisa("Foto tolta.");
+    fotoBozza = ""; if (a) { a.foto = ""; segna("articoli", a); salva(); } mostraFoto(); avvisa("Foto tolta.");
   });
   ["#a-file-cam", "#a-file-gal"].forEach(function (sel) {
     $(sel).addEventListener("change", function () {
@@ -792,6 +955,7 @@ function disegnaSetup() {
         if (a) {
           a.foto = dataUrl;
           if (!salva()) { a.foto = prima; fotoBozza = prima; mostraFoto(); return; }
+          segna("articoli", a);
           avvisa("Foto salvata (" + kb(dataUrl.length) + ").");
         } else {
           avvisa("Foto pronta: adesso aggiungi l'articolo.");
@@ -815,17 +979,22 @@ function disegnaSetup() {
     if (a) {
       /* se qui dentro cambia la posizione, lo spostamento va tracciato lo stesso */
       if ((a.posizione || "") !== dati.posizione && dati.posizione) {
-        S.movimenti.push({
+        var mz = {
           id: id(), articoloId: a.id, tipo: "spostamento", qta: 0, data: oggiISO(),
           da: a.posizione || "", a: dati.posizione, paeseDa: a.paese || "", paeseA: dati.paese
-        });
+        };
+        S.movimenti.push(mz); segna("movimenti", mz);
       }
       Object.keys(dati).forEach(function (k) { a[k] = dati[k]; });
+      segna("articoli", a);
       avvisa("Articolo aggiornato.");
     }
     else {
       dati.id = id(); dati.magazzinoId = S.cfg.magazzinoAttivo;
-      S.articoli.push(dati); avvisa("Articolo aggiunto.");
+      S.articoli.push(dati); segna("articoli", dati);
+      var mm = trovaMag(S.cfg.magazzinoAttivo);
+      if (mm && mm.nuovo) { delete mm.nuovo; segna("magazzini", mm); }
+      avvisa("Articolo aggiunto.");
     }
     modifica = null; fotoBozza = ""; salva(); disegna();
   });
@@ -846,6 +1015,15 @@ function disegnaSetup() {
     });
   });
 
+  $("#sy-url").value = S.cfg.sync.url || "";
+  $("#sy-par").value = S.cfg.sync.parola || "";
+  var q = inCoda();
+  $("#sy-stato").innerHTML = !S.cfg.sync.attivo
+    ? "Non collegato: i dati restano solo su questo dispositivo."
+    : "Collegato" + (S.cfg.sync.ultimo ? " · ultimo scambio " + itData(S.cfg.sync.ultimo.slice(0, 10)) +
+        " alle " + S.cfg.sync.ultimo.slice(11, 16) : "") +
+      (q ? ' · <b style="color:var(--avviso)">' + q + " da inviare</b>" : " · tutto inviato");
+
   var pesoTot = pesoMemoria(), conFoto = S.articoli.filter(function (x) { return x.foto; }).length;
   $("#peso").innerHTML = "Spazio usato: <b>" + kb(pesoTot) + "</b> · foto: <b>" + conFoto + "</b>" +
     (pesoTot > 3500000 ? ' — <span style="color:var(--allerta)">vicino al limite, togli qualche foto</span>' : "");
@@ -856,10 +1034,41 @@ function disegnaSetup() {
       '<span class="q">' + n + " art.</span></div>";
   }).join("");
 }
+$("#sy-attiva").addEventListener("click", function () {
+  var u = $("#sy-url").value.trim(), pw = $("#sy-par").value.trim();
+  if (!u || u.indexOf("http") !== 0) { avvisa("Manca l'indirizzo dello script."); return; }
+  if (!pw) { avvisa("Manca la parola d'ordine."); return; }
+  S.cfg.sync.url = u; S.cfg.sync.parola = pw; S.cfg.sync.attivo = true;
+  /* alla prima connessione mando tutto quello che ho già, così il foglio parte pieno */
+  ["articoli", "movimenti", "magazzini"].forEach(function (t) {
+    S[t].forEach(function (o) {
+      if (!o || !o.id) return;
+      /* un magazzino predefinito ancora vuoto non va spedito: sporcherebbe
+         l'elenco di chi si collega dopo, senza aggiungere niente */
+      if (t === "magazzini" && o.nuovo &&
+          !S.articoli.filter(function (a) { return a.magazzinoId === o.id; }).length) return;
+      coda[t][o.id] = 1;
+    });
+  });
+  salvaCoda(); salva();
+  avvisa("Collego…");
+  sincronizza(true, function (ok, err) {
+    if (!ok) { S.cfg.sync.attivo = false; salva(); avvisa("Non collegato: " + (err || "controlla indirizzo e parola")); }
+    disegna();
+  });
+});
+$("#sy-ora").addEventListener("click", function () { sincronizza(true); });
+$("#sy-stop").addEventListener("click", function () {
+  S.cfg.sync.attivo = false; salva(); statoSync = "spento"; mostraStato(); disegna();
+  avvisa("Scollegato. I dati restano su questo dispositivo.");
+});
+$("#stato-sync").addEventListener("click", function () { sincronizza(true); });
+
 $("#add-mag").addEventListener("click", function () {
   var n = $("#nuovo-mag").value.trim();
   if (!n) { avvisa("Dai un nome al magazzino."); return; }
-  S.magazzini.push({ id: id(), nome: n });
+  var mg = { id: id(), nome: n };
+  S.magazzini.push(mg); segna("magazzini", mg);
   $("#nuovo-mag").value = ""; salva(); disegna(); avvisa("Magazzino aggiunto.");
 });
 
@@ -938,4 +1147,11 @@ if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
 /* ------------------------------ avvio ------------------------------ */
 applicaTema();
 vaiA("magazzino");
+mostraStato();
+if (S.cfg.sync.attivo && S.cfg.sync.url) sincronizza();
+/* quando il telefono torna in linea o l'app torna in primo piano, si riallinea */
+window.addEventListener("online", function () { programmaSync(); });
+document.addEventListener("visibilitychange", function () {
+  if (!document.hidden && S.cfg.sync.attivo) sincronizza();
+});
 </script>

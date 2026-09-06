@@ -1,0 +1,105 @@
+MAGAZZINO UNICO — come collegare Giorgio, Uarda e Alice
+========================================================
+
+L'app da sola tiene i dati dentro il telefono. Per vedere e lavorare
+tutti sullo STESSO magazzino serve un posto solo dove stanno i dati:
+un Foglio Google sul tuo Drive.
+
+Lo fai UNA volta tu. Poi Uarda e Alice devono solo incollare due cose.
+
+
+PARTE 1 — IL FOGLIO (10 minuti, la fai solo tu)
+
+1. Vai su drive.google.com → Nuovo → Foglio Google.
+   Chiamalo:  MAGAZZINO NIPEC — dati
+   (Non devi creare nessuna colonna: le fa lo script da solo.)
+
+2. Nel foglio: menu Estensioni → Apps Script.
+
+3. Si apre l'editor con dentro "function myFunction() {}".
+   Cancella TUTTO quello che c'è.
+
+4. Apri il file GOOGLE-SCRIPT.gs che ti ho dato, copia tutto e incolla lì.
+
+5. Nella terza riga trovi:
+
+       var PAROLA = "CAMBIAMI-CON-UNA-TUA";
+
+   Mettici una parola tua, per esempio  nipec2026brescia
+   Segnatela: serve a tutti e tre.
+
+6. Salva (icona del dischetto).
+
+7. In alto a destra: Distribuisci → Nuova distribuzione.
+   - Clicca l'ingranaggio accanto a "Seleziona tipo" → App web
+   - Descrizione:            magazzino
+   - Esegui come:            Me (il tuo indirizzo)
+   - Chi ha accesso:         Chiunque
+   - Distribuisci
+
+8. Google ti chiede di autorizzare. Dirà "app non verificata": è normale,
+   lo script è tuo. Clicca Avanzate → Vai a … (non sicuro) → Consenti.
+
+9. Ti dà un indirizzo lungo che finisce con  /exec
+   COPIALO. È quello che serve all'app.
+
+
+PARTE 2 — COLLEGARE L'APP (1 minuto, ognuno sul suo telefono)
+
+10. Apri l'app → finestra DATI → riquadro "Magazzino condiviso".
+11. Incolla l'indirizzo che finisce con /exec
+12. Scrivi la parola d'ordine (la stessa per tutti)
+13. Premi "Attiva e collega".
+
+    In alto a destra compare ✓ in linea.
+    Se dice "da inviare" con un numero, vuol dire che manca la rete:
+    non si perde niente, riparte da solo appena torna il segnale.
+
+14. Il PRIMO che si collega manda al foglio tutto quello che ha già.
+    Gli altri, collegandosi, se lo ritrovano.
+
+
+PARTE 3 — DARLO A UARDA E ALICE
+
+Mandagli tre cose su WhatsApp:
+   • il link dell'app (quello di Netlify)
+   • l'indirizzo che finisce con /exec
+   • la parola d'ordine
+
+Loro aprono il link, fanno "Aggiungi a schermata Home", poi i punti 10-13.
+
+Se vuoi che vedano anche il foglio, condividilo dal Drive come fai
+di solito. Non è necessario per far funzionare l'app.
+
+
+COSE DA SAPERE, DETTE PRIMA
+
+• L'indirizzo /exec è la chiave. Chi ce l'ha entra nel magazzino.
+  Non metterlo in chat di gruppo e non pubblicarlo. Per le giacenze
+  di magazzino va bene così; non ci metterei dati dei clienti.
+
+• Se cambi lo script, non basta salvare: devi fare
+  Distribuisci → Gestisci distribuzioni → matita → Versione: nuova → Distribuisci.
+  Altrimenti Google continua a usare la versione vecchia.
+
+• Non si manda mai "tutto lo stato": l'app manda solo le righe cambiate.
+  Se Alice registra un'uscita mentre tu registri un'entrata, il foglio
+  tiene tutte e due. Con un salvataggio totale una delle due sparirebbe.
+
+• Le foto vengono ridotte fin sotto i 45.000 caratteri perché una cella
+  del foglio ne tiene 50.000. Se una foto è troppo pesante, l'app scende
+  di qualità da sola finché ci sta.
+
+• Il foglio è anche la tua copia di sicurezza: ce l'hai sul Drive, lo apri
+  quando vuoi e ci fai sopra i tuoi conti.
+
+
+UNA COSA CHE NON HO POTUTO PROVARE IO
+
+Il motore di sincronizzazione l'ho provato per davvero: due dispositivi
+diversi collegati allo stesso magazzino, uno preleva 2 pezzi e l'altro
+se li ritrova, con la giacenza che scende da 6 a 4.
+
+Ma l'ho provato contro una copia dello script, non contro Google:
+per pubblicare uno script su Apps Script serve il TUO account, e io non
+ce l'ho. Se al punto 13 qualcosa non torna, dimmi cosa scrive e lo sistemo.
