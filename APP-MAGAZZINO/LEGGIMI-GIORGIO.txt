@@ -37,6 +37,26 @@ DATI        Qui crei gli articoli: numero di attribuzione, numero di codice,
             si cambia magazzino dal menu in alto a destra.
 
 
+LA FOTO DELL'ARTICOLO
+
+Su ogni articolo, in DATI, ci sono due bottoni:
+
+  SCATTA FOTO      dal telefono apre direttamente la fotocamera
+  CARICA IMMAGINE  prende un JPEG che hai già (galleria o computer)
+
+La foto viene rimpicciolita da sola: una da 4 MB del telefono diventa
+circa 40 KB. Se non lo facesse, dopo venti articoli la memoria sarebbe
+piena.
+
+La miniatura compare nell'elenco del magazzino e — la cosa che serve
+davvero — anche in PRELIEVO e CARICO: chi va a prendere il pezzo vede
+subito se è quello giusto, senza leggere il codice.
+
+"TOGLI FOTO" la rimuove. In DATI, sotto la copia di sicurezza, vedi
+quanto spazio stai usando e quante foto hai: se ti avvicini al limite
+te lo dice in rosso.
+
+
 LA COSA IMPORTANTE — LA COPIA DI SICUREZZA
 
 I dati stanno SOLO sul dispositivo dove usi l'app. Non sono nel cloud,

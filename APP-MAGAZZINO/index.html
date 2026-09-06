@@ -110,6 +110,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 .voce .q{margin-left:auto;text-align:right;flex:none}
 .voce .q b{font-size:1.3rem;font-variant-numeric:tabular-nums;line-height:1}
 .voce .q .u{font-size:.7rem;color:var(--tenue);display:block}
+/* ---------- foto ---------- */
+.fmini{width:46px;height:46px;flex:none;border-radius:.5rem;object-fit:cover;
+       background:var(--blu-tenue);border:1px solid var(--riga)}
+.fbox{margin-top:.5rem}
+.fgrande{width:100%;max-height:260px;object-fit:contain;border-radius:.7rem;
+       background:var(--blu-tenue);border:1px solid var(--riga);display:block}
+.fvuota{display:flex;align-items:center;justify-content:center;height:96px;border-radius:.7rem;
+       background:var(--blu-tenue);color:var(--tenue);font-size:.82rem;border:1px dashed var(--riga-forte)}
 .pill{display:inline-block;padding:.1rem .45rem;border-radius:1rem;font-size:.66rem;font-weight:700}
 .pill.ko{background:var(--allerta-fondo);color:var(--allerta)}
 .pill.warn{background:var(--avviso-fondo);color:var(--avviso)}
@@ -235,7 +243,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 
   <section id="v-setup" hidden>
     <div class="scheda">
-      <h2>Nuovo articolo</h2>
+      <h2 id="tit-art">Nuovo articolo</h2>
       <div id="form-art"></div>
     </div>
     <div class="scheda">
@@ -254,6 +262,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
     <div class="scheda">
       <h2>Copia di sicurezza</h2>
       <p class="tenue">I dati stanno solo su questo dispositivo. Esporta ogni tanto: se cambi telefono o pulisci il browser, senza copia si perde tutto.</p>
+      <p class="tenue" id="peso"></p>
       <div class="riga-bot">
         <button class="mini" id="esporta" type="button">Esporta copia</button>
         <button class="mini vuoto" id="importa-btn" type="button">Importa copia</button>
@@ -303,8 +312,11 @@ function carica() {
 }
 function trovaMag(id, st) { return (st || S).magazzini.filter(function (m) { return m.id === id; })[0]; }
 function salva() {
-  try { localStorage.setItem(CHIAVE, JSON.stringify(S)); }
-  catch (e) { avvisa("Memoria piena: esporta una copia di sicurezza."); }
+  try { localStorage.setItem(CHIAVE, JSON.stringify(S)); return true; }
+  catch (e) {
+    avvisa("Memoria piena. Esporta una copia e togli qualche foto.");
+    return false;
+  }
 }
 function id() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
@@ -330,6 +342,44 @@ function avvisa(t) {
   clearTimeout(TOAST); TOAST = setTimeout(function () { e.hidden = true; }, 2600);
 }
 function num(v) { var n = parseFloat(String(v).replace(",", ".")); return isFinite(n) ? n : 0; }
+
+/* ------------------------------ foto ------------------------------ */
+/* Le foto pesano: le rimpiccioliamo a 640px lato lungo e le salviamo in JPEG.
+   Una foto da 4 MB del telefono diventa ~40 KB, se no la memoria si riempie subito. */
+function comprimiFoto(file, cb) {
+  if (!file) return;
+  if (file.size > 25 * 1024 * 1024) { avvisa("Immagine troppo grande."); return; }
+  var r = new FileReader();
+  r.onload = function () {
+    var im = new Image();
+    im.onload = function () {
+      try {
+        var max = 640, sc = Math.min(1, max / Math.max(im.width, im.height));
+        var c = document.createElement("canvas");
+        c.width = Math.max(1, Math.round(im.width * sc));
+        c.height = Math.max(1, Math.round(im.height * sc));
+        var x = c.getContext("2d");
+        x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height);
+        x.drawImage(im, 0, 0, c.width, c.height);
+        cb(c.toDataURL("image/jpeg", 0.62));
+      } catch (e) { avvisa("Non riesco a ridurre l'immagine."); }
+    };
+    im.onerror = function () { avvisa("Immagine non leggibile."); };
+    /* i browser attuali raddrizzano da soli le foto girate del telefono (EXIF) */
+    im.src = r.result;
+  };
+  r.onerror = function () { avvisa("Non riesco a leggere il file."); };
+  r.readAsDataURL(file);
+}
+function miniatura(a, cls) {
+  return a.foto ? '<img class="' + (cls || "fmini") + '" src="' + a.foto + '" alt="">' : "";
+}
+function pesoMemoria() {
+  try { return (localStorage.getItem(CHIAVE) || "").length; } catch (e) { return 0; }
+}
+function kb(n) {
+  return n > 1024 * 1024 ? (n / 1048576).toFixed(1) + " MB" : Math.round(n / 1024) + " KB";
+}
 
 /* --------------------------- dati derivati --------------------------- */
 function articoliDelMag() {
@@ -450,7 +500,7 @@ function rigaArticolo(a) {
   var g = giacenza(a.id), st = statoScorta(a);
   var pill = st === "zero" ? '<span class="pill ko">esaurito</span>'
            : st === "scorta" ? '<span class="pill warn">sotto scorta</span>' : "";
-  var h = '<div class="voce" data-id="' + esc(a.id) + '">' +
+  var h = '<div class="voce" data-id="' + esc(a.id) + '">' + miniatura(a) +
     "<div><div class=\"cod\">" + esc(a.codice || "—") +
       (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
     '<div class="des">' + esc(a.descrizione || "(senza descrizione)") + "</div>" +
@@ -463,6 +513,7 @@ function rigaArticolo(a) {
 function dettaglio(a) {
   var mv = movimentiDi(a.id);
   var h = '<div style="padding:.2rem 0 .8rem">' +
+    (a.foto ? '<div class="fbox"><img class="fgrande" src="' + a.foto + '" alt="Foto di ' + esc(a.descrizione) + '"></div>' : "") +
     '<div class="riga-bot"><button class="mini" data-prelievo="' + esc(a.id) + '" type="button">Preleva</button></div>' +
     '<div class="tenue" style="margin-top:.6rem">' +
       (a.scortaMin ? "Scorta minima: <b>" + esc(a.scortaMin) + "</b> · " : "") +
@@ -498,7 +549,7 @@ function disegnaRicerca(k) {
   if (!q.trim()) { c.innerHTML = '<div class="vuoto-msg">Scrivi il codice, il numero di attribuzione o due parole della descrizione.</div>'; return; }
   if (!lista.length) { c.innerHTML = '<div class="vuoto-msg">Nessun articolo trovato in questo magazzino.</div>'; return; }
   c.innerHTML = lista.map(function (a) {
-    return '<div class="voce" data-id="' + esc(a.id) + '"><div>' +
+    return '<div class="voce" data-id="' + esc(a.id) + '">' + miniatura(a) + "<div>" +
       '<div class="cod">' + esc(a.codice || "—") + (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
       '<div class="des">' + esc(a.descrizione || "(senza descrizione)") + "</div></div>" +
       '<div class="q"><b>' + giacenza(a.id) + '</b><span class="u">' + esc(a.unita || "pz") + "</span></div></div>";
@@ -510,7 +561,7 @@ function disegnaRicerca(k) {
 function scegliArticolo(k, aid) { scelto[k] = aid; $("#q-" + k).value = ""; disegnaRicerca(k); }
 
 function intestazioneArt(a) {
-  return '<div class="voce" style="cursor:default"><div>' +
+  return '<div class="voce" style="cursor:default">' + miniatura(a) + "<div>" +
     '<div class="cod">' + esc(a.codice || "—") + (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
     '<div class="des">' + esc(a.descrizione || "") + "</div></div>" +
     '<div class="q"><b>' + giacenza(a.id) + '</b><span class="u">in magazzino</span></div></div>';
@@ -622,8 +673,10 @@ function tile(n, e) { return '<div class="tile"><div class="n">' + n + '</div><d
 
 /* ------------------------------ DATI ------------------------------ */
 var modifica = null;
+var fotoBozza = "";
 function disegnaSetup() {
   var a = modifica ? articolo(modifica) : null;
+  $("#tit-art").textContent = a ? "Modifica articolo" : "Nuovo articolo";
   $("#form-art").innerHTML =
     '<div class="due"><div><label for="a-attr">N. attribuzione</label><input id="a-attr" value="' + esc(a ? a.attribuzione : "") + '" autocomplete="off"></div>' +
     '<div><label for="a-cod">N. codice</label><input id="a-cod" value="' + esc(a ? a.codice : "") + '" autocomplete="off"></div></div>' +
@@ -633,8 +686,51 @@ function disegnaSetup() {
     '<div><label for="a-min">Scorta minima</label><input id="a-min" type="number" min="0" inputmode="numeric" value="' + esc(a ? a.scortaMin : "") + '"></div></div>' +
     '<div class="due"><div><label for="a-prz">Prezzo acquisto €</label><input id="a-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a ? a.prezzoAcquisto : "") + '"></div>' +
     '<div><label for="a-forn">Fornitore</label><input id="a-forn" value="' + esc(a ? a.fornitore : "") + '" autocomplete="off"></div></div>' +
+    '<label>Foto dell\'articolo</label>' +
+    '<div class="fbox" id="a-foto-box"></div>' +
+    '<div class="riga-bot">' +
+      '<button class="mini" id="a-scatta" type="button">Scatta foto</button>' +
+      '<button class="mini vuoto" id="a-carica" type="button">Carica immagine</button>' +
+      '<button class="mini vuoto" id="a-togli" type="button">Togli foto</button>' +
+    "</div>" +
+    '<input id="a-file-cam" type="file" accept="image/*" capture="environment" hidden>' +
+    '<input id="a-file-gal" type="file" accept="image/jpeg,image/png,image/webp" hidden>' +
     '<button class="bottone" id="a-ok" type="button">' + (a ? "Salva le modifiche" : "Aggiungi al catalogo") + "</button>" +
     (a ? '<button class="bottone chiaro" id="a-ann" type="button">Annulla</button>' : "");
+
+  /* la foto vive in fotoBozza finché l'articolo non viene salvato */
+  fotoBozza = a ? (a.foto || "") : fotoBozza;
+  function mostraFoto() {
+    var b = $("#a-foto-box");
+    b.innerHTML = fotoBozza
+      ? '<img class="fgrande" src="' + fotoBozza + '" alt="Anteprima">'
+      : '<div class="fvuota">Nessuna foto</div>';
+    $("#a-togli").disabled = !fotoBozza;
+  }
+  mostraFoto();
+  $("#a-scatta").addEventListener("click", function () { $("#a-file-cam").click(); });
+  $("#a-carica").addEventListener("click", function () { $("#a-file-gal").click(); });
+  $("#a-togli").addEventListener("click", function () {
+    fotoBozza = ""; if (a) { a.foto = ""; salva(); } mostraFoto(); avvisa("Foto tolta.");
+  });
+  ["#a-file-cam", "#a-file-gal"].forEach(function (sel) {
+    $(sel).addEventListener("change", function () {
+      var f = this.files && this.files[0]; this.value = "";
+      if (!f) return;
+      comprimiFoto(f, function (dataUrl) {
+        var prima = a ? (a.foto || "") : "";
+        fotoBozza = dataUrl;
+        if (a) {
+          a.foto = dataUrl;
+          if (!salva()) { a.foto = prima; fotoBozza = prima; mostraFoto(); return; }
+          avvisa("Foto salvata (" + kb(dataUrl.length) + ").");
+        } else {
+          avvisa("Foto pronta: adesso aggiungi l'articolo.");
+        }
+        mostraFoto();
+      });
+    });
+  });
 
   $("#a-ok").addEventListener("click", function () {
     var des = $("#a-des").value.trim();
@@ -643,16 +739,17 @@ function disegnaSetup() {
       attribuzione: $("#a-attr").value.trim(), codice: $("#a-cod").value.trim(),
       descrizione: des, categoria: $("#a-cat").value.trim(),
       unita: $("#a-uni").value.trim() || "pz", scortaMin: $("#a-min").value,
-      prezzoAcquisto: $("#a-prz").value, fornitore: $("#a-forn").value.trim()
+      prezzoAcquisto: $("#a-prz").value, fornitore: $("#a-forn").value.trim(),
+      foto: fotoBozza || ""
     };
     if (a) { Object.keys(dati).forEach(function (k) { a[k] = dati[k]; }); avvisa("Articolo aggiornato."); }
     else {
       dati.id = id(); dati.magazzinoId = S.cfg.magazzinoAttivo;
       S.articoli.push(dati); avvisa("Articolo aggiunto.");
     }
-    modifica = null; salva(); disegna();
+    modifica = null; fotoBozza = ""; salva(); disegna();
   });
-  if (a) $("#a-ann").addEventListener("click", function () { modifica = null; disegnaSetup(); });
+  if (a) $("#a-ann").addEventListener("click", function () { modifica = null; fotoBozza = ""; disegnaSetup(); });
 
   var arts = articoliDelMag().sort(function (x, y) {
     return String(x.descrizione || "").localeCompare(String(y.descrizione || ""));
@@ -665,9 +762,13 @@ function disegnaSetup() {
   }).join("") : '<div class="vuoto-msg">Nessun articolo in questo magazzino.</div>';
   $("#lista-art").querySelectorAll("[data-mod]").forEach(function (b) {
     b.addEventListener("click", function () {
-      modifica = b.dataset.mod; disegnaSetup(); window.scrollTo(0, 0);
+      modifica = b.dataset.mod; fotoBozza = ""; disegnaSetup(); window.scrollTo(0, 0);
     });
   });
+
+  var pesoTot = pesoMemoria(), conFoto = S.articoli.filter(function (x) { return x.foto; }).length;
+  $("#peso").innerHTML = "Spazio usato: <b>" + kb(pesoTot) + "</b> · foto: <b>" + conFoto + "</b>" +
+    (pesoTot > 3500000 ? ' — <span style="color:var(--allerta)">vicino al limite, togli qualche foto</span>' : "");
 
   $("#lista-magazzini").innerHTML = S.magazzini.map(function (m) {
     var n = S.articoli.filter(function (x) { return x.magazzinoId === m.id; }).length;
