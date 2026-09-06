@@ -150,6 +150,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 .mov.aperta{background:var(--blu-tenue)}
 .mov.morta{opacity:.5;text-decoration:line-through}
 .corr{border-top:1px solid var(--riga);padding:.6rem 0 .9rem}
+.avviso-sede{background:var(--avviso-fondo);color:var(--avviso);border-radius:.7rem;
+       padding:.55rem .7rem;font-size:.82rem;margin:.5rem 0}
 
 /* ---------- avviso ---------- */
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:1.2rem;z-index:60;
@@ -644,11 +646,11 @@ function movimentiDi(articoloId) {
 /* Un movimento sbagliato non si cancella davvero: si annulla. Così la
    correzione viaggia sul foglio come tutto il resto e la vedono tutti. */
 function vivo(v) { return v && !v.eliminato; }
-function sedeMov(v, a) {
-  if (v.sede) return v.sede;
-  var art = a || articolo(v.articoloId);
-  return (art && art.sede) || "";
-}
+/* Niente ripieghi sulla sede dell'articolo: un movimento senza sede sta in
+   "Senza sede" e basta. Il ripiego sembrava comodo per i dati vecchi, ma
+   faceva migrare la storia ogni volta che cambiava a.sede, e i pezzi si
+   contavano due volte (una nella sede nuova, una in quella di ripiego). */
+function sedeMov(v) { return String(v.sede || ""); }
 function giacenza(articoloId) {
   return S.movimenti.reduce(function (t, v) {
     if (v.articoloId !== articoloId || !vivo(v)) return t;
@@ -667,7 +669,7 @@ function giacenzaSede(articoloId, sede) {
       if (String(v.sedeDa || "").toLowerCase() === s) t -= q;
       return t;
     }
-    if (String(sedeMov(v, a)).toLowerCase() !== s) return t;
+    if (sedeMov(v).toLowerCase() !== s) return t;
     return v.tipo === "entrata" ? t + q : t - q;
   }, 0);
 }
@@ -1079,6 +1081,11 @@ function dettaglio(a) {
           }).join(" · ")
         : "<i>nessun pezzo in giacenza</i>") +
       (a.posizione ? ' <span class="tenue">· ' + esc(a.posizione) + "</span>" : "") + "</div>" +
+    (giacenzaSede(a.id, "") > 0
+      ? '<div class="avviso-sede"><b>' + giacenzaSede(a.id, "") + " " + esc(a.unita || "pz") +
+        " senza sede.</b> Non compaiono nei filtri Roma, Padenghe o Tirana. " +
+        'Tocca <b>Sposta</b> qui sotto e mandali nella sede giusta.</div>'
+      : "") +
     '<div class="riga-bot"><button class="mini" data-prelievo="' + esc(a.id) + '" type="button">Preleva</button>' +
       '<button class="mini vuoto" data-sposta="' + esc(a.id) + '" type="button">Sposta</button></div>' +
     (spostaId === a.id ? formSposta(a) : "") +
@@ -1186,7 +1193,8 @@ function formCarico(a) {
     '<div class="due"><div><label for="c-qta">Quantità</label>' +
     '<input id="c-qta" type="number" min="1" step="1" value="1" inputmode="numeric"></div>' +
     '<div><label for="c-data">Data</label><input id="c-data" type="date" value="' + oggiISO() + '"></div></div>' +
-    '<label for="c-sede">In quale sede entra</label>' + selectSede("c-sede", a.sede) +
+    '<label for="c-sede">In quale sede entra <b style="color:var(--allerta)">*</b></label>' +
+      selectSede("c-sede", a.sede) +
     '<label for="c-forn">Fornitore</label><input id="c-forn" value="' + esc(a.fornitore || "") + '" autocomplete="off">' +
     '<div class="due"><div><label for="c-nacq">Numero acquisto</label><input id="c-nacq" placeholder="Es. FT-2026-118" autocomplete="off"></div>' +
     '<div><label for="c-prz">Prezzo unitario €</label><input id="c-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a.prezzoAcquisto || "") + '"></div></div>' +
@@ -1250,6 +1258,8 @@ function legaForm(k) {
       S.movimenti.push(mu); segna("movimenti", mu);
     } else {
       var prz = $("#c-prz").value, forn = $("#c-forn").value.trim(), sedeC = $("#c-sede").value;
+      /* senza sede la macchina non risulta da nessuna parte: meglio fermarsi qui */
+      if (!sedeC) { avvisa("Scegli in quale sede entra."); $("#c-sede").focus(); return; }
       var me = {
         id: id(), articoloId: a.id, tipo: "entrata", qta: q, data: $("#c-data").value || oggiISO(),
         sede: sedeC, paese: paeseDiSede(sedeC),
