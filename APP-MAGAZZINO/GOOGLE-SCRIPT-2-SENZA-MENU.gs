@@ -1,37 +1,35 @@
 /*  MAGAZZINO NIPEC — ponte fra l'app e il Foglio Google
- *  VERSIONE 2: da usare quando NON trovi il menu "Estensioni".
- *  ----------------------------------------------------------
- *  Si incolla su  script.google.com  →  Nuovo progetto.
- *  Rispetto all'altra versione cambia una cosa sola: qui devi dirgli
- *  QUALE foglio usare, scrivendo il suo codice qui sotto.
+ *  ----------------------------------------------------
+ *  Questo codice va incollato nell'editor di Apps Script del foglio.
+ *  Le istruzioni passo passo stanno in ISTRUZIONI-CONDIVISIONE.txt
  *
  *  Cosa fa: tiene il magazzino su tre schede del foglio e risponde all'app.
  *  Non sovrascrive mai tutto: aggiorna riga per riga, così se Alice registra
  *  un'uscita mentre Giorgio registra un'entrata, restano tutte e due.
+ *
+ *  Le colonne non sono più fisse: la prima riga di ogni scheda è l'elenco
+ *  delle colonne, e se l'app manda un dato nuovo la colonna si aggiunge da
+ *  sola in fondo. Così le prossime modifiche all'app non chiedono più di
+ *  rifare il deployment.
  */
 
-/* ⚠️ DUE COSE DA SCRIVERE QUI SOTTO, poi non tocchi più niente.
-
-   1) La parola d'ordine: inventane una tua. La stessa va messa nell'app.        */
+/* ⚠️ CAMBIA QUESTA PAROLA e mettine una tua. La stessa va scritta nell'app. */
 var PAROLA = "CAMBIAMI-CON-UNA-TUA";
 
-/* 2) Il codice del foglio. Apri il foglio e guarda l'indirizzo in alto:
-
-        docs.google.com/spreadsheets/d/1AbC...XyZ/edit
-                                      \_____________/
-                                       questo pezzo qui
-
-      Copialo e incollalo qui in mezzo alle virgolette.                          */
+/* Codice del foglio: sta nel suo indirizzo, fra /d/ e /edit */
 var CODICE_FOGLIO = "INCOLLA-QUI-IL-CODICE-DEL-FOGLIO";
 
 var SCHEDE = { articoli: "ARTICOLI", movimenti: "MOVIMENTI", magazzini: "MAGAZZINI" };
+
+/* Colonne di partenza, solo per un foglio nuovo. Dopo comanda la riga 1. */
 var COLONNE = {
   articoli: ["id", "attribuzione", "codice", "descrizione", "categoria", "unita",
-             "scortaMin", "prezzoAcquisto", "fornitore", "paese", "posizione",
-             "magazzinoId", "foto", "agg"],
-  movimenti: ["id", "articoloId", "tipo", "qta", "data", "fornitore", "numeroAcquisto",
-              "prezzo", "destinazione", "causale", "nota", "da", "a",
-              "paeseDa", "paeseA", "agg"],
+             "scortaMin", "prezzoAcquisto", "prezzoListino", "fornitore",
+             "sede", "paese", "posizione", "magazzinoId", "foto", "agg"],
+  movimenti: ["id", "articoloId", "tipo", "qta", "data", "sede", "sedeDa", "sedeA",
+              "fornitore", "numeroAcquisto", "prezzo", "prezzoAcquisto",
+              "prezzoListino", "prezzoFinale", "iva", "destinazione", "causale",
+              "nota", "da", "a", "paese", "paeseDa", "paeseA", "agg"],
   magazzini: ["id", "nome", "agg"]
 };
 
@@ -71,22 +69,38 @@ function leggiTutto() {
 function foglio(tipo) {
   var ss = SpreadsheetApp.openById(CODICE_FOGLIO);
   var f = ss.getSheetByName(SCHEDE[tipo]);
-  if (!f) {
-    f = ss.insertSheet(SCHEDE[tipo]);
-    f.getRange(1, 1, 1, COLONNE[tipo].length).setValues([COLONNE[tipo]]);
-    f.setFrozenRows(1);
-  }
-  if (f.getLastRow() === 0) {
+  if (!f) f = ss.insertSheet(SCHEDE[tipo]);
+  if (f.getLastRow() === 0 || f.getLastColumn() === 0) {
     f.getRange(1, 1, 1, COLONNE[tipo].length).setValues([COLONNE[tipo]]);
     f.setFrozenRows(1);
   }
   return f;
 }
 
+/* L'elenco vero delle colonne è la riga 1 del foglio, non questo file. */
+function intestazione(f) {
+  var n = f.getLastColumn();
+  if (n < 1) return [];
+  return f.getRange(1, 1, 1, n).getValues()[0]
+    .map(function (c) { return String(c).trim(); })
+    .filter(function (c) { return c !== ""; });
+}
+
+/* Aggiunge in fondo le colonne che nel foglio ancora non ci sono. */
+function allarga(f, col, chiavi) {
+  var manca = [];
+  chiavi.forEach(function (k) {
+    if (k && col.indexOf(k) < 0 && manca.indexOf(k) < 0) manca.push(k);
+  });
+  if (!manca.length) return col;
+  f.getRange(1, col.length + 1, 1, manca.length).setValues([manca]);
+  return col.concat(manca);
+}
+
 function leggi(tipo) {
-  var f = foglio(tipo), col = COLONNE[tipo];
+  var f = foglio(tipo), col = intestazione(f);
   var n = f.getLastRow();
-  if (n < 2) return [];
+  if (n < 2 || !col.length) return [];
   var righe = f.getRange(2, 1, n - 1, col.length).getValues();
   var out = [];
   righe.forEach(function (r) {
@@ -102,7 +116,16 @@ function leggi(tipo) {
 
 /* Aggiorna le righe esistenti (per id) e aggiunge quelle nuove in fondo. */
 function scrivi(tipo, elenco) {
-  var f = foglio(tipo), col = COLONNE[tipo];
+  var f = foglio(tipo), col = intestazione(f);
+
+  /* prima allargo il foglio a tutte le chiavi che arrivano dall'app */
+  var chiavi = [];
+  elenco.forEach(function (o) {
+    if (!o) return;
+    Object.keys(o).forEach(function (k) { if (chiavi.indexOf(k) < 0) chiavi.push(k); });
+  });
+  col = allarga(f, col, chiavi);
+
   var n = f.getLastRow();
   var indice = {};
   if (n >= 2) {
@@ -127,16 +150,7 @@ function rispondi(o) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-/* PROVA PRIMA DI PUBBLICARE.
-   Nell'editor scegli "prova" dal menu delle funzioni e premi Esegui.
-   - Se dice "foglio trovato" sei a posto.
-   - Se dà errore, quasi sempre il CODICE_FOGLIO è sbagliato o incompleto. */
+/* Comodo per provare: esegui questa dall'editor e guarda il registro. */
 function prova() {
-  try {
-    var nome = SpreadsheetApp.openById(CODICE_FOGLIO).getName();
-    Logger.log("foglio trovato: " + nome);
-    Logger.log(JSON.stringify(leggiTutto()).slice(0, 300));
-  } catch (e) {
-    Logger.log("NON riesco ad aprire il foglio. Controlla CODICE_FOGLIO. " + e.message);
-  }
+  Logger.log(JSON.stringify(leggiTutto()).slice(0, 500));
 }

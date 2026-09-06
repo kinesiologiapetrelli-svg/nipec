@@ -1,0 +1,28 @@
+AGGIORNARE LO SCRIPT GOOGLE — una volta sola, poi mai più
+=========================================================
+
+Serve perché il foglio adesso deve tenere anche le sedi, le quantità
+spostate e i prezzi di vendita.
+
+Da qui in poi lo script si allarga da solo: se in futuro l'app manda un
+dato nuovo, la colonna compare nel foglio senza rifare niente.
+
+1. Apri il Foglio Google del magazzino.
+2. Menù  Estensioni → Apps Script.
+   (se non vedi "Estensioni", allarga la finestra o guarda dentro "…")
+3. Nell'editor, seleziona TUTTO il codice che c'è (Ctrl+A) e cancellalo.
+4. Incolla tutto il contenuto di GOOGLE-SCRIPT.gs
+5. Riga 17: al posto di CAMBIAMI-CON-UNA-TUA scrivi la TUA parola
+   — la stessa che hai messo nell'app, senza spazi.
+6. Icona del dischetto (Salva).
+7. In alto a destra: Esegui il deployment → Gestisci deployment
+   → matita (modifica) → Versione: Nuova versione → Esegui il deployment.
+
+   ⚠️ NON creare un deployment nuovo: modifica quello che hai già,
+      altrimenti cambia l'indirizzo /exec e devi rifarlo su tre telefoni.
+
+8. L'indirizzo resta lo stesso. Nell'app non tocchi niente.
+
+Sul foglio, alla prima sincronia, compaiono le colonne nuove
+(sede, sedeDa, sedeA, prezzoAcquisto, prezzoListino, prezzoFinale, iva).
+I dati che c'erano già restano dove sono.

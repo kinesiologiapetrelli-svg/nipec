@@ -237,6 +237,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 
   <section id="v-numeri" hidden>
     <div class="tiles" id="tiles"></div>
+    <div class="scheda"><h2>Vendite</h2><div id="graf-vendite"></div></div>
+    <div class="scheda"><h2>Pezzi per sede</h2><div id="graf-sedi"></div></div>
     <div class="scheda"><h2>Uscite degli ultimi 6 mesi</h2><div class="barre" id="graf-mesi"></div></div>
     <div class="scheda"><h2>I 5 più prelevati</h2><div id="graf-top"></div></div>
     <div class="scheda"><h2>Da riordinare</h2><div id="lista-scorta"></div></div>
@@ -446,6 +448,7 @@ function avvisa(t) {
   clearTimeout(TOAST); TOAST = setTimeout(function () { e.hidden = true; }, 2600);
 }
 function num(v) { var n = parseFloat(String(v).replace(",", ".")); return isFinite(n) ? n : 0; }
+function eur(n) { return (Math.round(num(n) * 100) / 100).toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
 /* ====================== magazzino condiviso ======================
    I dati veri stanno in un Foglio Google sul Drive di Giorgio. Qui teniamo una
@@ -625,11 +628,52 @@ function movimentiDi(articoloId) {
   return S.movimenti.filter(function (v) { return v.articoloId === articoloId; })
     .sort(function (a, b) { return (b.data + b.id).localeCompare(a.data + a.id); });
 }
+/* Da quando si sposta una QUANTITA', un articolo non sta piu' in una sede sola:
+   la sede vive sul movimento, non sull'articolo. a.sede resta come sede di partenza
+   per i movimenti vecchi, che quella riga non ce l'hanno. */
+function sedeMov(v, a) {
+  if (v.sede) return v.sede;
+  var art = a || articolo(v.articoloId);
+  return (art && art.sede) || "";
+}
 function giacenza(articoloId) {
   return S.movimenti.reduce(function (t, v) {
     if (v.articoloId !== articoloId) return t;
-    return t + (v.tipo === "entrata" ? num(v.qta) : -num(v.qta));
+    if (v.tipo === "entrata") return t + num(v.qta);
+    if (v.tipo === "spostamento") return t;          /* sposta, non consuma */
+    return t - num(v.qta);                            /* uscita e vendita */
   }, 0);
+}
+function giacenzaSede(articoloId, sede) {
+  var a = articolo(articoloId), s = String(sede || "").toLowerCase();
+  return S.movimenti.reduce(function (t, v) {
+    if (v.articoloId !== articoloId) return t;
+    var q = num(v.qta);
+    if (v.tipo === "spostamento") {
+      if (String(v.sedeA || v.sede || "").toLowerCase() === s) t += q;
+      if (String(v.sedeDa || "").toLowerCase() === s) t -= q;
+      return t;
+    }
+    if (String(sedeMov(v, a)).toLowerCase() !== s) return t;
+    return v.tipo === "entrata" ? t + q : t - q;
+  }, 0);
+}
+/* dove sta adesso, sede per sede — solo quelle con pezzi sopra lo zero */
+function sediArticolo(articoloId) {
+  var a = articolo(articoloId), viste = {}, out = [];
+  function vedi(n) {
+    n = String(n || "").trim(); if (!n) return;
+    var k = n.toLowerCase(); if (viste[k]) return;
+    viste[k] = 1; out.push(n);
+  }
+  vedi(a && a.sede);
+  S.movimenti.forEach(function (v) {
+    if (v.articoloId !== articoloId) return;
+    vedi(v.sede); vedi(v.sedeDa); vedi(v.sedeA);
+  });
+  return out.map(function (n) { return { sede: n, qta: giacenzaSede(articoloId, n) }; })
+            .filter(function (x) { return x.qta > 0; })
+            .sort(function (x, y) { return y.qta - x.qta || x.sede.localeCompare(y.sede); });
 }
 function statoScorta(a) {
   var g = giacenza(a.id), min = num(a.scortaMin);
@@ -720,10 +764,23 @@ var spostaId = null;
    Per questo non si sovrascrive e basta — ogni spostamento lascia la sua riga nello storico,
    così fra sei mesi si sa non solo dov'è, ma da dove è arrivato e quando. */
 function formSposta(a) {
+  var da = sediArticolo(a.id);
+  if (!da.length) {
+    return '<div style="margin:.6rem 0 .2rem"><div class="tenue">Non ci sono pezzi da spostare: ' +
+      'la giacenza e\' a zero. Registra prima un\'entrata.</div>' +
+      '<div class="riga-bot"><button class="mini vuoto" id="s-no" type="button">Chiudi</button></div></div>';
+  }
   return '<div style="margin:.6rem 0 .2rem">' +
-    '<label for="s-sede">Sede di destinazione</label>' + selectSede("s-sede", a.sede) +
+    '<div class="due"><div><label for="s-da">Da quale sede</label><select id="s-da">' +
+      da.map(function (x, i) {
+        return '<option value="' + esc(x.sede) + '"' + (i ? "" : " selected") + ">" +
+          esc(x.sede) + " (" + x.qta + " " + esc(a.unita || "pz") + ")</option>";
+      }).join("") + "</select></div>" +
+    '<div><label for="s-qta">Quantità</label>' +
+    '<input id="s-qta" type="number" min="1" step="1" value="' + da[0].qta + '" inputmode="numeric"></div></div>' +
+    '<label for="s-sede">A quale sede</label>' + selectSede("s-sede", "") +
     '<div class="due"><div><label for="s-dove">Dettaglio (facoltativo)</label>' +
-    '<input id="s-dove" value="' + esc(a.posizione || "") + '" placeholder="Es. Scaffale A3 · furgone" autocomplete="off"></div>' +
+    '<input id="s-dove" value="" placeholder="Es. Scaffale A3 · furgone" autocomplete="off"></div>' +
     '<div><label for="s-data">Data</label><input id="s-data" type="date" value="' + oggiISO() + '"></div></div>' +
     '<div class="riga-bot"><button class="mini" id="s-ok" type="button">Registra lo spostamento</button>' +
     '<button class="mini vuoto" id="s-no" type="button">Annulla</button></div></div>';
@@ -734,8 +791,11 @@ function disegnaMagazzino() {
     if (filtro === "scorta") return st !== "ok";
     if (filtro === "zero") return st === "zero";
     if (filtro.indexOf("paese:") === 0) return a.paese === filtro.slice(6);
-    if (filtro.indexOf("sede:") === 0)
-      return String(a.sede || "").toLowerCase() === filtro.slice(5).toLowerCase();
+    if (filtro.indexOf("sede:") === 0) {
+      var sd = filtro.slice(5);
+      return giacenzaSede(a.id, sd) > 0 ||
+             (giacenza(a.id) === 0 && String(a.sede || "").toLowerCase() === sd.toLowerCase());
+    }
     return true;
   }).sort(function (a, b) {
     return String(a.descrizione || "").localeCompare(String(b.descrizione || ""));
@@ -773,20 +833,29 @@ function disegnaMagazzino() {
     if (sk) sk.addEventListener("click", function (ev) {
       ev.stopPropagation();
       var a = articolo(spostaId);
+      var sedeDa = c.querySelector("#s-da").value;
       var sede = c.querySelector("#s-sede").value;
       var dove = c.querySelector("#s-dove").value.trim();
-      var paese = paeseDiSede(sede);
+      var q = num(c.querySelector("#s-qta").value);
       if (!sede) { avvisa("Scegli la sede di destinazione."); return; }
+      if (sede.toLowerCase() === sedeDa.toLowerCase()) { avvisa("Le due sedi sono la stessa."); return; }
+      if (q <= 0) { avvisa("Metti una quantità."); return; }
+      var disp = giacenzaSede(a.id, sedeDa);
+      if (q > disp) { avvisa("A " + sedeDa + " ce ne sono solo " + disp + "."); return; }
       var ms = {
-        id: id(), articoloId: a.id, tipo: "spostamento", qta: 0,
+        id: id(), articoloId: a.id, tipo: "spostamento", qta: q,
         data: c.querySelector("#s-data").value || oggiISO(),
-        da: dovEtichetta(a), a: dove ? sede + " · " + dove : sede,
-        paeseDa: a.paese || "", paeseA: paese
+        sedeDa: sedeDa, sedeA: sede, sede: sede,
+        da: sedeDa, a: dove ? sede + " · " + dove : sede,
+        paeseDa: paeseDiSede(sedeDa), paeseA: paeseDiSede(sede), nota: dove
       };
       S.movimenti.push(ms); segna("movimenti", ms);
-      a.sede = sede; a.posizione = dove; a.paese = paese; segna("articoli", a);
+      /* l'articolo tiene la sede dove e' rimasto il grosso: serve solo come etichetta */
+      var top = sediArticolo(a.id)[0];
+      if (top) { a.sede = top.sede; a.paese = paeseDiSede(top.sede); }
+      a.posizione = dove; segna("articoli", a);
       spostaId = null; salva(); disegna();
-      avvisa("Spostamento registrato.");
+      avvisa("Spostati " + q + " " + (a.unita || "pz") + " da " + sedeDa + " a " + sede + ".");
     });
   }
 }
@@ -804,8 +873,9 @@ function rigaArticolo(a) {
       (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
     '<div class="des">' + esc(a.descrizione || "(senza descrizione)") + "</div>" +
     '<div class="sotto">' + (a.categoria ? esc(a.categoria) + " · " : "") + pill +
-      (a.sede ? ' <span class="pill paese">' + esc(a.sede) + "</span>" : "") +
-      (a.paese ? ' <span class="pill dove">' + esc(a.paese) + "</span>" : "") +
+      sediArticolo(a.id).map(function (x) {
+        return ' <span class="pill paese">' + esc(x.sede) + " " + x.qta + "</span>";
+      }).join("") +
       (a.posizione ? ' <span class="pill dove">' + esc(a.posizione) + "</span>" : "") +
       "</div></div>" +
     '<div class="q"><b>' + g + "</b><span class=\"u\">" + esc(a.unita || "pz") + "</span></div></div>";
@@ -818,9 +888,13 @@ function dettaglio(a) {
   var h = '<div style="padding:.2rem 0 .8rem">' +
     (a.foto ? '<div class="fbox"><img class="fgrande" src="' + a.foto + '" alt="Foto di ' + esc(a.descrizione) + '"></div>' : "") +
     '<div class="dove-ora"><b>Dove si trova ora:</b> ' +
-      (a.sede ? esc(a.sede) : "<i>sede non assegnata</i>") +
-      (a.posizione ? " · " + esc(a.posizione) : "") +
-      (a.paese ? " (" + esc(a.paese) + ")" : "") + "</div>" +
+      (sediArticolo(a.id).length
+        ? sediArticolo(a.id).map(function (x) {
+            return esc(x.sede) + " <b>" + x.qta + "</b> " + esc(a.unita || "pz") +
+              (paeseDiSede(x.sede) ? ' <span class="tenue">(' + esc(paeseDiSede(x.sede)) + ")</span>" : "");
+          }).join(" · ")
+        : "<i>nessun pezzo in giacenza</i>") +
+      (a.posizione ? ' <span class="tenue">· ' + esc(a.posizione) + "</span>" : "") + "</div>" +
     '<div class="riga-bot"><button class="mini" data-prelievo="' + esc(a.id) + '" type="button">Preleva</button>' +
       '<button class="mini vuoto" data-sposta="' + esc(a.id) + '" type="button">Sposta</button></div>' +
     (spostaId === a.id ? formSposta(a) : "") +
@@ -833,14 +907,22 @@ function dettaglio(a) {
     h += mv.slice(0, 30).map(function (v) {
       if (v.tipo === "spostamento") {
         return '<div class="mov"><span class="d">' + itData(v.data) + "</span>" +
-          "<span>spostato da <b>" + esc(v.da || "?") + "</b> a <b>" + esc(v.a || "?") + "</b>" +
-          (v.paeseA ? " · " + esc(v.paeseA) : "") + "</span>" +
-          '<span class="q">↦</span></div>';
+          "<span>da <b>" + esc(v.sedeDa || v.da || "?") + "</b> a <b>" + esc(v.sedeA || v.a || "?") + "</b>" +
+          (v.nota ? " · " + esc(v.nota) : "") + "</span>" +
+          '<span class="q">↦ ' + (num(v.qta) || "") + "</span></div>";
+      }
+      if (v.tipo === "vendita") {
+        var tot = num(v.prezzoFinale) * num(v.qta);
+        return '<div class="mov"><span class="d">' + itData(v.data) + "</span>" +
+          "<span>venduto" + (v.sede ? " da <b>" + esc(v.sede) + "</b>" : "") +
+          (v.destinazione ? " a " + esc(v.destinazione) : "") +
+          (tot ? ' · <b>€ ' + eur(tot) + "</b> + IVA " + (num(v.iva) || 0) + "%" : "") + "</span>" +
+          '<span class="q out">−' + num(v.qta) + "</span></div>";
       }
       var seg = v.tipo === "entrata" ? "+" : "−";
       var det = v.tipo === "entrata"
-        ? [v.fornitore, v.numeroAcquisto ? "acq. " + v.numeroAcquisto : ""].filter(Boolean).join(" · ")
-        : [v.destinazione, v.causale].filter(Boolean).join(" · ");
+        ? [v.sede, v.fornitore, v.numeroAcquisto ? "acq. " + v.numeroAcquisto : ""].filter(Boolean).join(" · ")
+        : [v.sede, v.destinazione, v.causale].filter(Boolean).join(" · ");
       return '<div class="mov"><span class="d">' + itData(v.data) + "</span>" +
         "<span>" + esc(det || (v.tipo === "entrata" ? "entrata" : "uscita")) + "</span>" +
         '<span class="q ' + (v.tipo === "entrata" ? "in" : "out") + '">' + seg + num(v.qta) + "</span></div>";
@@ -881,17 +963,56 @@ function intestazioneArt(a) {
     '<div class="des">' + esc(a.descrizione || "") + "</div></div>" +
     '<div class="q"><b>' + giacenza(a.id) + '</b><span class="u">in magazzino</span></div></div>';
 }
+/* sedi da cui si puo' far uscire roba: solo quelle che hanno pezzi */
+function selectSedeCon(idEl, aid, unita) {
+  var el = sediArticolo(aid);
+  if (!el.length) return '<select id="' + idEl + '"><option value="">— nessuna giacenza —</option></select>';
+  return '<select id="' + idEl + '">' + el.map(function (x, i) {
+    return '<option value="' + esc(x.sede) + '"' + (i ? "" : " selected") + ">" +
+      esc(x.sede) + " (" + x.qta + " " + esc(unita || "pz") + ")</option>";
+  }).join("") + "</select>";
+}
+var IVE = [22, 10, 5, 4, 0];
+var modoUscita = "uso";   /* "uso" oppure "vendita" */
+
 function formPrelievo(a) {
-  return "<h2>Uscita</h2>" + intestazioneArt(a) +
+  var vend = modoUscita === "vendita";
+  var h = "<h2>" + (vend ? "Vendita" : "Uscita") + "</h2>" + intestazioneArt(a) +
+    '<div class="riga-bot">' +
+      '<button class="mini' + (vend ? " vuoto" : "") + '" id="p-m-uso" type="button">Uso / uscita</button>' +
+      '<button class="mini' + (vend ? "" : " vuoto") + '" id="p-m-ven" type="button">Venduto</button>' +
+    "</div>" +
+    '<label for="p-sede">Da quale sede esce' + (vend ? "" : " (dove viene usata)") + "</label>" +
+      selectSedeCon("p-sede", a.id, a.unita) +
     '<div class="due"><div><label for="p-qta">Quantità</label>' +
     '<input id="p-qta" type="number" min="1" step="1" value="1" inputmode="numeric"></div>' +
     '<div><label for="p-data">Data</label><input id="p-data" type="date" value="' + oggiISO() + '"></div></div>' +
-    '<label for="p-dest">Chi la prende / dove va</label><input id="p-dest" placeholder="Es. Centro Beauty Concept, Taranto" autocomplete="off">' +
-    '<label for="p-caus">Causale</label><select id="p-caus">' +
-    ["Noleggio", "Vendita", "Sostituzione in garanzia", "Muletto", "Uso interno", "Reso a fornitore", "Rottura / scarto", "Altro"]
-      .map(function (c) { return "<option>" + c + "</option>"; }).join("") + "</select>" +
-    '<label for="p-nota">Nota</label><input id="p-nota" placeholder="facoltativa" autocomplete="off">' +
-    '<button class="bottone" id="p-ok" type="button">Registra l\'uscita</button>' +
+    '<label for="p-dest">' + (vend ? "Cliente / a chi è stata venduta" : "Chi la prende / dove va") +
+      '</label><input id="p-dest" placeholder="Es. Centro Beauty Concept, Taranto" autocomplete="off">';
+
+  if (vend) {
+    h += '<div class="due"><div><label for="p-pacq">Prezzo acquisto €</label>' +
+      '<input id="p-pacq" type="number" step="0.01" inputmode="decimal" value="' + esc(a.prezzoAcquisto || "") + '"></div>' +
+      '<div><label for="p-plis">Vendita di listino €</label>' +
+      '<input id="p-plis" type="number" step="0.01" inputmode="decimal" value="' + esc(a.prezzoListino || "") + '"></div></div>' +
+      '<div class="due"><div><label for="p-pfin">Vendita finale €</label>' +
+      '<input id="p-pfin" type="number" step="0.01" inputmode="decimal" value="' + esc(a.prezzoListino || "") + '"></div>' +
+      '<div><label for="p-iva">IVA</label><select id="p-iva">' +
+        IVE.map(function (x) { return '<option value="' + x + '"' + (x === 22 ? " selected" : "") + ">" + x + "%</option>"; }).join("") +
+      "</select></div></div>" +
+      '<label for="p-nfat">Numero fattura / documento</label>' +
+      '<input id="p-nfat" placeholder="Es. FT-2026-118" autocomplete="off">' +
+      '<div class="dove-ora" id="p-conti"></div>';
+  } else {
+    h += '<label for="p-caus">Causale</label><select id="p-caus">' +
+      ["Noleggio", "Sostituzione in garanzia", "Muletto", "Uso interno", "Consumo su cliente",
+       "Reso a fornitore", "Rottura / scarto", "Altro"]
+        .map(function (c) { return "<option>" + c + "</option>"; }).join("") + "</select>";
+  }
+
+  return h + '<label for="p-nota">Nota</label><input id="p-nota" placeholder="facoltativa" autocomplete="off">' +
+    '<button class="bottone" id="p-ok" type="button">' +
+      (vend ? "Registra la vendita" : "Registra l'uscita") + "</button>" +
     '<button class="bottone chiaro" id="p-annulla" type="button">Cambia articolo</button>';
 }
 function formCarico(a) {
@@ -899,6 +1020,7 @@ function formCarico(a) {
     '<div class="due"><div><label for="c-qta">Quantità</label>' +
     '<input id="c-qta" type="number" min="1" step="1" value="1" inputmode="numeric"></div>' +
     '<div><label for="c-data">Data</label><input id="c-data" type="date" value="' + oggiISO() + '"></div></div>' +
+    '<label for="c-sede">In quale sede entra</label>' + selectSede("c-sede", a.sede) +
     '<label for="c-forn">Fornitore</label><input id="c-forn" value="' + esc(a.fornitore || "") + '" autocomplete="off">' +
     '<div class="due"><div><label for="c-nacq">Numero acquisto</label><input id="c-nacq" placeholder="Es. FT-2026-118" autocomplete="off"></div>' +
     '<div><label for="c-prz">Prezzo unitario €</label><input id="c-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a.prezzoAcquisto || "") + '"></div></div>' +
@@ -908,30 +1030,72 @@ function formCarico(a) {
 }
 function legaForm(k) {
   $("#" + k[0] + "-annulla").addEventListener("click", function () { scelto[k] = null; disegnaRicerca(k); });
+
+  if (k === "pre") {
+    $("#p-m-uso").addEventListener("click", function () { modoUscita = "uso"; disegnaRicerca("pre"); });
+    $("#p-m-ven").addEventListener("click", function () { modoUscita = "vendita"; disegnaRicerca("pre"); });
+    if (modoUscita === "vendita") {
+      /* i conti si aggiornano mentre scrive: cosi' il margine si vede prima di salvare */
+      var conti = function () {
+        var q = num($("#p-qta").value), pf = num($("#p-pfin").value),
+            pa = num($("#p-pacq").value), iv = num($("#p-iva").value);
+        var imp = pf * q, iva = imp * iv / 100, marg = (pf - pa) * q;
+        $("#p-conti").innerHTML = q && pf
+          ? "Imponibile <b>€ " + eur(imp) + "</b> · IVA " + iv + "% <b>€ " + eur(iva) +
+            "</b> · Totale <b>€ " + eur(imp + iva) + "</b>" +
+            (pa ? ' · margine <b style="color:var(--' + (marg >= 0 ? "ok" : "allerta") + ')">€ ' + eur(marg) + "</b>" : "")
+          : '<span class="tenue">Metti quantità e prezzo finale per vedere i conti.</span>';
+      };
+      ["#p-qta", "#p-pfin", "#p-pacq", "#p-iva"].forEach(function (sel) {
+        $(sel).addEventListener("input", conti); $(sel).addEventListener("change", conti);
+      });
+      conti();
+    }
+  }
+
   $("#" + k[0] + "-ok").addEventListener("click", function () {
     var a = articolo(scelto[k]);
     var q = num($("#" + k[0] + "-qta").value);
     if (q <= 0) { avvisa("Metti una quantità."); return; }
     if (k === "pre") {
-      var g = giacenza(a.id);
-      if (q > g) { avvisa("In magazzino ce ne sono solo " + g + "."); return; }
+      var sede = $("#p-sede").value;
+      if (!sede) { avvisa("Non ci sono pezzi in giacenza da far uscire."); return; }
+      var disp = giacenzaSede(a.id, sede);
+      if (q > disp) { avvisa("A " + sede + " ce ne sono solo " + disp + "."); return; }
       var mu = {
-        id: id(), articoloId: a.id, tipo: "uscita", qta: q, data: $("#p-data").value || oggiISO(),
-        destinazione: $("#p-dest").value.trim(), causale: $("#p-caus").value, nota: $("#p-nota").value.trim()
+        id: id(), articoloId: a.id, qta: q, data: $("#p-data").value || oggiISO(),
+        sede: sede, paese: paeseDiSede(sede),
+        destinazione: $("#p-dest").value.trim(), nota: $("#p-nota").value.trim()
       };
+      if (modoUscita === "vendita") {
+        mu.tipo = "vendita"; mu.causale = "Vendita";
+        mu.prezzoAcquisto = $("#p-pacq").value;
+        mu.prezzoListino = $("#p-plis").value;
+        mu.prezzoFinale = $("#p-pfin").value;
+        mu.prezzo = $("#p-pfin").value;          /* colonna storica, per i vecchi rapporti */
+        mu.iva = $("#p-iva").value;
+        mu.numeroAcquisto = $("#p-nfat").value.trim();
+        if (mu.prezzoListino && !a.prezzoListino) { a.prezzoListino = mu.prezzoListino; segna("articoli", a); }
+        avvisa("Vendita registrata: " + q + " " + (a.unita || "pz") + " da " + sede + ".");
+      } else {
+        mu.tipo = "uscita"; mu.causale = $("#p-caus").value;
+        avvisa("Uscita registrata: " + q + " " + (a.unita || "pz") + " da " + sede + ".");
+      }
       S.movimenti.push(mu); segna("movimenti", mu);
-      avvisa("Uscita registrata: " + q + " " + (a.unita || "pz") + ".");
     } else {
-      var prz = $("#c-prz").value, forn = $("#c-forn").value.trim();
+      var prz = $("#c-prz").value, forn = $("#c-forn").value.trim(), sedeC = $("#c-sede").value;
       var me = {
         id: id(), articoloId: a.id, tipo: "entrata", qta: q, data: $("#c-data").value || oggiISO(),
+        sede: sedeC, paese: paeseDiSede(sedeC),
         fornitore: forn, numeroAcquisto: $("#c-nacq").value.trim(), prezzo: prz, nota: $("#c-nota").value.trim()
       };
       S.movimenti.push(me); segna("movimenti", me);
       if (prz) a.prezzoAcquisto = prz;
       if (forn) a.fornitore = forn;
-      if (prz || forn) segna("articoli", a);
-      avvisa("Entrata registrata: " + q + " " + (a.unita || "pz") + ".");
+      if (sedeC && !a.sede) { a.sede = sedeC; a.paese = paeseDiSede(sedeC); }
+      if (prz || forn || sedeC) segna("articoli", a);
+      avvisa("Entrata registrata: " + q + " " + (a.unita || "pz") +
+             (sedeC ? " a " + sedeC : "") + ".");
     }
     salva(); scelto[k] = null; disegnaRicerca(k); disegna();
   });
@@ -943,11 +1107,45 @@ function disegnaNumeri() {
   var pezzi = arts.reduce(function (t, a) { return t + giacenza(a.id); }, 0);
   var valore = arts.reduce(function (t, a) { return t + giacenza(a.id) * num(a.prezzoAcquisto); }, 0);
   var sotto = arts.filter(function (a) { return statoScorta(a) !== "ok"; });
+  var idsA = {}; arts.forEach(function (a) { idsA[a.id] = 1; });
+  var vend = S.movimenti.filter(function (v) { return v.tipo === "vendita" && idsA[v.articoloId]; });
+  var fatt = vend.reduce(function (t, v) { return t + num(v.prezzoFinale) * num(v.qta); }, 0);
+  var marg = vend.reduce(function (t, v) {
+    return t + (num(v.prezzoFinale) - num(v.prezzoAcquisto)) * num(v.qta);
+  }, 0);
   $("#tiles").innerHTML =
     tile(arts.length, "articoli a catalogo") +
     tile(pezzi, "pezzi in magazzino") +
     tile(valore ? "€ " + Math.round(valore).toLocaleString("it-IT") : "—", "valore di acquisto") +
-    tile(sotto.length, "da riordinare");
+    tile(sotto.length, "da riordinare") +
+    tile(fatt ? "€ " + Math.round(fatt).toLocaleString("it-IT") : "—", "venduto (imponibile)") +
+    tile(marg ? "€ " + Math.round(marg).toLocaleString("it-IT") : "—", "margine sul venduto");
+
+  /* le ultime vendite, con il margine riga per riga */
+  $("#graf-vendite").innerHTML = vend.length
+    ? vend.slice().sort(function (x, y) { return String(y.data).localeCompare(String(x.data)); })
+        .slice(0, 10).map(function (v) {
+          var a = articolo(v.articoloId), m = (num(v.prezzoFinale) - num(v.prezzoAcquisto)) * num(v.qta);
+          return '<div class="mov"><span class="d">' + itData(v.data) + "</span>" +
+            "<span>" + esc((a && (a.descrizione || a.codice)) || "?") + " ×" + num(v.qta) +
+            (v.sede ? " · " + esc(v.sede) : "") + (v.destinazione ? " · " + esc(v.destinazione) : "") + "</span>" +
+            '<span class="q">€ ' + eur(num(v.prezzoFinale) * num(v.qta)) +
+            (v.prezzoAcquisto ? ' <span class="' + (m >= 0 ? "in" : "out") + '">(' + (m >= 0 ? "+" : "") + eur(m) + ")</span>" : "") +
+            "</span></div>";
+        }).join("")
+    : '<div class="vuoto-msg">Ancora nessuna vendita registrata.</div>';
+
+  /* quanto c'e' in ogni sede */
+  var perSede = {};
+  arts.forEach(function (a) {
+    sediArticolo(a.id).forEach(function (x) { perSede[x.sede] = (perSede[x.sede] || 0) + x.qta; });
+  });
+  var chiavi = Object.keys(perSede).sort(function (x, y) { return perSede[y] - perSede[x]; });
+  $("#graf-sedi").innerHTML = chiavi.length ? chiavi.map(function (n) {
+    return '<div class="mov"><span><b>' + esc(n) + "</b>" +
+      (paeseDiSede(n) ? ' <span class="pill dove">' + esc(paeseDiSede(n)) + "</span>" : "") + "</span>" +
+      '<span class="q">' + perSede[n] + " pz</span></div>";
+  }).join("") : '<div class="vuoto-msg">Nessun pezzo assegnato a una sede.</div>';
 
   /* uscite per mese, ultimi 6 mesi */
   var mesi = [], d = new Date();
@@ -958,7 +1156,7 @@ function disegnaNumeri() {
   }
   var idsMag = {}; arts.forEach(function (a) { idsMag[a.id] = 1; });
   S.movimenti.forEach(function (v) {
-    if (v.tipo !== "uscita" || !idsMag[v.articoloId]) return;
+    if ((v.tipo !== "uscita" && v.tipo !== "vendita") || !idsMag[v.articoloId]) return;
     var k = String(v.data).slice(0, 7);
     mesi.forEach(function (m) { if (m.k === k) m.v += num(v.qta); });
   });
@@ -971,7 +1169,7 @@ function disegnaNumeri() {
   /* top 5 usciti */
   var conta = {};
   S.movimenti.forEach(function (v) {
-    if (v.tipo !== "uscita" || !idsMag[v.articoloId]) return;
+    if ((v.tipo !== "uscita" && v.tipo !== "vendita") || !idsMag[v.articoloId]) return;
     conta[v.articoloId] = (conta[v.articoloId] || 0) + num(v.qta);
   });
   var top = Object.keys(conta).map(function (k) { return { a: articolo(k), n: conta[k] }; })
@@ -1003,7 +1201,8 @@ function disegnaSetup() {
     '<div><label for="a-uni">Unità</label><input id="a-uni" value="' + esc(a ? (a.unita || "pz") : "pz") + '" autocomplete="off"></div>' +
     '<div><label for="a-min">Scorta minima</label><input id="a-min" type="number" min="0" inputmode="numeric" value="' + esc(a ? a.scortaMin : "") + '"></div></div>' +
     '<div class="due"><div><label for="a-prz">Prezzo acquisto €</label><input id="a-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a ? a.prezzoAcquisto : "") + '"></div>' +
-    '<div><label for="a-forn">Fornitore</label><input id="a-forn" value="' + esc(a ? a.fornitore : "") + '" autocomplete="off"></div></div>' +
+    '<div><label for="a-plis">Vendita di listino €</label><input id="a-plis" type="number" step="0.01" inputmode="decimal" value="' + esc(a ? a.prezzoListino : "") + '"></div></div>' +
+    '<label for="a-forn">Fornitore</label><input id="a-forn" value="' + esc(a ? a.fornitore : "") + '" autocomplete="off">' +
     '<div class="due"><div><label for="a-sede">Sede (location)</label>' + selectSede("a-sede", a ? a.sede : "") + "</div>" +
     '<div><label for="a-pos">Dettaglio (facoltativo)</label><input id="a-pos" value="' + esc(a ? a.posizione : "") + '" placeholder="Es. Scaffale A3" autocomplete="off"></div></div>' +
     '<label>Foto dell\'articolo</label>' +
@@ -1060,7 +1259,8 @@ function disegnaSetup() {
       attribuzione: $("#a-attr").value.trim(), codice: $("#a-cod").value.trim(),
       descrizione: des, categoria: $("#a-cat").value.trim(),
       unita: $("#a-uni").value.trim() || "pz", scortaMin: $("#a-min").value,
-      prezzoAcquisto: $("#a-prz").value, fornitore: $("#a-forn").value.trim(),
+      prezzoAcquisto: $("#a-prz").value, prezzoListino: $("#a-plis").value,
+      fornitore: $("#a-forn").value.trim(),
       sede: $("#a-sede").value, paese: paeseDiSede($("#a-sede").value),
       posizione: $("#a-pos").value.trim(),
       foto: fotoBozza || ""
@@ -1196,13 +1396,22 @@ $("#esporta").addEventListener("click", function () {
 $("#csv").addEventListener("click", function () {
   var r = [["data", "tipo", "attribuzione", "codice", "descrizione", "quantita", "unita",
             "destinazione_o_fornitore", "causale_o_n_acquisto", "prezzo", "nota",
-            "sede", "paese", "posizione_attuale"]];
+            "sede_movimento", "sede_da", "sede_a",
+            "prezzo_acquisto", "prezzo_listino", "prezzo_finale", "iva_pct",
+            "imponibile", "iva_euro", "totale", "margine",
+            "sede_articolo", "paese", "posizione_attuale"]];
   S.movimenti.slice().sort(function (a, b) { return a.data.localeCompare(b.data); }).forEach(function (v) {
     var a = articolo(v.articoloId); if (!a) return;
     r.push([v.data, v.tipo, a.attribuzione || "", a.codice || "", a.descrizione || "", v.qta, a.unita || "pz",
             v.tipo === "entrata" ? (v.fornitore || "") : (v.destinazione || ""),
             v.tipo === "entrata" ? (v.numeroAcquisto || "") : (v.causale || ""),
             v.prezzo || "", v.nota || (v.tipo === "spostamento" ? "da " + (v.da || "?") + " a " + (v.a || "?") : ""),
+            v.sede || "", v.sedeDa || "", v.sedeA || "",
+            v.prezzoAcquisto || "", v.prezzoListino || "", v.prezzoFinale || "", v.iva || "",
+            v.tipo === "vendita" ? eur(num(v.prezzoFinale) * num(v.qta)) : "",
+            v.tipo === "vendita" ? eur(num(v.prezzoFinale) * num(v.qta) * num(v.iva) / 100) : "",
+            v.tipo === "vendita" ? eur(num(v.prezzoFinale) * num(v.qta) * (1 + num(v.iva) / 100)) : "",
+            v.tipo === "vendita" ? eur((num(v.prezzoFinale) - num(v.prezzoAcquisto)) * num(v.qta)) : "",
             a.sede || "", a.paese || "", a.posizione || ""]);
   });
   var csv = r.map(function (riga) {
