@@ -1,0 +1,61 @@
+MAGAZZINO NIPEC — come si mette online e come funziona
+
+
+COME SI PUBBLICA
+
+Trascina TUTTA questa cartella su netlify.com (drag & drop, area "deploy").
+Ti dà un indirizzo tipo magazzino-nipec.netlify.app.
+Apri quell'indirizzo dal telefono e premi "Installa": diventa un'icona
+sulla schermata Home e si apre come un'app, anche senza rete.
+
+Per aggiornarla: ritrascini la cartella. La pagina si prende dalla rete
+per prima, quindi la versione nuova si vede subito.
+
+
+LE CINQUE FINESTRE
+
+MAGAZZINO   Cosa c'è adesso. Cerchi per codice, numero di attribuzione o
+            descrizione. Tocchi una riga e si apre lo storico completo:
+            tutte le entrate e tutte le uscite con la data, chi l'ha presa
+            e perché. Il pallino rosso sul menu conta gli articoli
+            sotto scorta o esauriti.
+
+PRELIEVO    Quando prendi un pezzo dal magazzino. Cerchi, tocchi
+            l'articolo, metti quanti, chi lo prende e la causale.
+            Non ti fa scaricare più pezzi di quelli che ci sono.
+
+CARICO      Quando arriva merce. Stesso giro, più fornitore, numero
+            acquisto e prezzo. Il prezzo aggiorna il valore di magazzino.
+
+NUMERI      Quattro numeri secchi (articoli, pezzi, valore, da riordinare),
+            le uscite degli ultimi sei mesi, i cinque pezzi più prelevati
+            e la lista di cosa riordinare.
+
+DATI        Qui crei gli articoli: numero di attribuzione, numero di codice,
+            descrizione, categoria, unità, scorta minima, prezzo, fornitore.
+            Qui aggiungi anche altri magazzini (Brescia, Tirana, ecc.):
+            si cambia magazzino dal menu in alto a destra.
+
+
+LA COSA IMPORTANTE — LA COPIA DI SICUREZZA
+
+I dati stanno SOLO sul dispositivo dove usi l'app. Non sono nel cloud,
+non sono su un server, non li vede nessun altro.
+
+Vuol dire che se cambi telefono, pulisci il browser o si rompe il
+dispositivo, senza copia si perde tutto.
+
+In DATI c'è "Esporta copia": ti scarica un file .json.
+Fallo ogni tanto (una volta al mese basta) e tienilo sul Drive.
+Con "Importa copia" lo rimetti dentro su un altro dispositivo.
+
+C'è anche "Esporta CSV movimenti": è la lista di tutte le entrate e uscite
+con le date, che si apre in Excel e si può dare al commercialista.
+
+
+COME È FATTA DENTRO
+
+La giacenza non è un numero salvato: è la somma delle entrate meno le
+uscite. Quindi non può mai andare fuori sincrono, e lo storico è sempre
+la verità. Se vuoi correggere una giacenza, registri un movimento —
+non modifichi un totale.

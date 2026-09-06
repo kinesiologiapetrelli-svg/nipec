@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="it">
+<title>MAGAZZINO NIPEC</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#123a63">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  --carta:#ffffff; --fondo:#f1f4f7; --riga:#d9e2e9; --riga-forte:#b9c8d4;
+  --inchiostro:#17222e; --tenue:#5a6b79; --blu:#1c6ea4; --navy:#123a63; --blu-tenue:#e6eff7;
+  --allerta:#a3432e; --allerta-fondo:#faeae6; --avviso:#8a6208; --avviso-fondo:#f8efdb;
+  --ok:#1b6e52; --ok-fondo:#e2f1ea;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+  --sans:"Archivo", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --carta:#16212c; --fondo:#0d151d; --riga:#26333f; --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6; --tenue:#9aaab8; --blu:#5aa6d6; --navy:#8ec8ea; --blu-tenue:#152b3a;
+  --allerta:#e0917a; --allerta-fondo:#2a1b17; --avviso:#dcb264; --avviso-fondo:#2a2211;
+  --ok:#63c19d; --ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --carta:#16212c; --fondo:#0d151d; --riga:#26333f; --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6; --tenue:#9aaab8; --blu:#5aa6d6; --navy:#8ec8ea; --blu-tenue:#152b3a;
+  --allerta:#e0917a; --allerta-fondo:#2a1b17; --avviso:#dcb264; --avviso-fondo:#2a2211;
+  --ok:#63c19d; --ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{background:var(--fondo);color:var(--inchiostro);font-family:var(--sans);
+     font-size:16px;line-height:1.45;-webkit-text-size-adjust:100%}
+h1,h2,h3{margin:0;line-height:1.2}
+button,input,select,textarea{font:inherit;color:inherit}
+
+/* ---------- testata ---------- */
+header{position:sticky;top:0;z-index:30;background:var(--navy);color:#fff;
+       padding:.7rem .8rem;display:flex;align-items:center;gap:.6rem;overflow:hidden}
+header .marchio{display:flex;align-items:center;gap:.55rem;min-width:0;flex:0 0 auto}
+header svg.em{width:30px;height:30px;flex:none}
+header .tit{font-size:1.05rem;font-weight:700;letter-spacing:.16em;line-height:1}
+header .firma{font-size:.62rem;letter-spacing:.22em;color:#aecbe4;margin-top:.2rem}
+header .dx{margin-left:auto;display:flex;align-items:center;gap:.4rem;min-width:0;flex:1 1 auto;justify-content:flex-end}
+header select{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+       color:#fff;border-radius:.5rem;padding:.3rem .4rem;font-size:.8rem;
+       min-width:0;max-width:9.5rem;text-overflow:ellipsis}
+header select option{color:#17222e}
+header button{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;
+       border-radius:2rem;padding:.35rem .8rem;font-size:.8rem;font-weight:600;cursor:pointer}
+
+/* ---------- barra sezioni ---------- */
+nav.barra{position:sticky;top:53px;z-index:29;display:grid;grid-template-columns:repeat(5,1fr);
+    background:var(--carta);border-bottom:1px solid var(--riga)}
+nav.barra button{background:none;border:0;border-bottom:3px solid transparent;cursor:pointer;
+    padding:.55rem .1rem .5rem;color:var(--tenue);font-size:.68rem;font-weight:600;min-width:0;
+    display:flex;flex-direction:column;align-items:center;gap:.2rem;line-height:1.1}
+nav.barra svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;
+    stroke-linecap:round;stroke-linejoin:round}
+nav.barra button[aria-current="true"]{color:var(--navy);border-bottom-color:var(--blu)}
+nav.barra .pallino{display:inline-block;min-width:1.15rem;padding:0 .25rem;border-radius:1rem;
+    background:var(--allerta);color:#fff;font-size:.62rem;font-weight:700;line-height:1.15rem}
+
+main{padding:.9rem .8rem 4rem;max-width:900px;margin:0 auto}
+section[hidden]{display:none}
+
+/* ---------- pezzi ---------- */
+.scheda{background:var(--carta);border:1px solid var(--riga);border-radius:.9rem;
+        padding:.9rem 1rem;margin-bottom:.8rem;box-shadow:var(--ombra)}
+.scheda h2{font-size:.72rem;letter-spacing:.16em;color:var(--blu);text-transform:uppercase;
+        margin-bottom:.6rem;font-weight:700}
+label{display:block;font-size:.78rem;color:var(--tenue);font-weight:600;margin:.55rem 0 .18rem}
+input,select,textarea{width:100%;background:var(--fondo);border:1px solid var(--riga-forte);
+        border-radius:.55rem;padding:.55rem .65rem}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-offset:1px}
+.due{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.tre{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem}
+@media(max-width:420px){.tre{grid-template-columns:1fr 1fr}}
+.bottone{width:100%;background:var(--navy);color:#fff;border:0;border-radius:.65rem;
+        padding:.8rem;font-weight:700;cursor:pointer;margin-top:.9rem}
+.bottone.chiaro{background:var(--blu-tenue);color:var(--navy)}
+.bottone.rosso{background:var(--allerta)}
+.bottone:disabled{opacity:.45;cursor:not-allowed}
+.mini{background:var(--blu-tenue);color:var(--navy);border:0;border-radius:.5rem;
+      padding:.35rem .7rem;font-size:.78rem;font-weight:700;cursor:pointer}
+.mini.vuoto{background:none;border:1px solid var(--riga-forte);color:var(--tenue)}
+.riga-bot{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+.tenue{color:var(--tenue);font-size:.82rem}
+.cerca{position:relative}
+.cerca input{padding-left:2.2rem;font-size:1.02rem}
+.cerca svg{position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:19px;height:19px;
+      fill:none;stroke:var(--tenue);stroke-width:2}
+
+/* ---------- elenco articoli ---------- */
+.voce{display:flex;align-items:center;gap:.7rem;padding:.65rem 0;border-top:1px solid var(--riga);
+      cursor:pointer}
+.voce>div:first-child{min-width:0;flex:1 1 auto}
+.voce .des{overflow-wrap:anywhere}
+.voce:first-child{border-top:0}
+.voce .cod{font-size:.68rem;font-weight:700;letter-spacing:.06em;color:var(--blu);
+      font-variant-numeric:tabular-nums}
+.voce .des{font-weight:600;line-height:1.25}
+.voce .sotto{font-size:.74rem;color:var(--tenue)}
+.voce .q{margin-left:auto;text-align:right;flex:none}
+.voce .q b{font-size:1.3rem;font-variant-numeric:tabular-nums;line-height:1}
+.voce .q .u{font-size:.7rem;color:var(--tenue);display:block}
+.pill{display:inline-block;padding:.1rem .45rem;border-radius:1rem;font-size:.66rem;font-weight:700}
+.pill.ko{background:var(--allerta-fondo);color:var(--allerta)}
+.pill.warn{background:var(--avviso-fondo);color:var(--avviso)}
+.pill.ok{background:var(--ok-fondo);color:var(--ok)}
+
+/* ---------- numeri ---------- */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.tile{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;padding:.75rem .85rem}
+.tile .n{font-size:1.8rem;font-weight:700;line-height:1.05;font-variant-numeric:tabular-nums;color:var(--navy)}
+.tile .e{font-size:.72rem;color:var(--tenue);font-weight:600}
+.barre{display:flex;align-items:flex-end;gap:.35rem;height:110px;margin-top:.5rem}
+.barre .b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.25rem}
+.barre .b i{display:block;width:100%;background:var(--blu);border-radius:.25rem .25rem 0 0;min-height:2px}
+.barre .b span{font-size:.6rem;color:var(--tenue)}
+.barre .b em{font-size:.66rem;font-style:normal;font-weight:700;color:var(--navy);
+      font-variant-numeric:tabular-nums}
+
+/* ---------- movimenti ---------- */
+.mov{display:flex;gap:.6rem;align-items:baseline;padding:.5rem 0;border-top:1px solid var(--riga);
+     font-size:.86rem}
+.mov .d{color:var(--tenue);font-size:.76rem;min-width:5.2rem;font-variant-numeric:tabular-nums}
+.mov .q{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
+.mov .q.in{color:var(--ok)} .mov .q.out{color:var(--allerta)}
+
+/* ---------- avviso ---------- */
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:1.2rem;z-index:60;
+   background:var(--navy);color:#fff;padding:.6rem 1.1rem;border-radius:2rem;font-size:.86rem;
+   font-weight:600;box-shadow:var(--ombra);max-width:92vw;text-align:center}
+#toast[hidden]{display:none}
+.vuoto-msg{text-align:center;color:var(--tenue);padding:1.6rem .6rem;font-size:.9rem}
+</style>
+
+<header>
+  <div class="marchio">
+    <svg class="em" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#5AA6D6"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#fff"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#fff"/>
+    </svg>
+    <div>
+      <div class="tit">MAGAZZINO</div>
+      <div class="firma">NIPEC</div>
+    </div>
+  </div>
+  <div class="dx">
+    <select id="sel-mag" aria-label="Magazzino"></select>
+    <button id="installa" hidden type="button">Installa</button>
+  </div>
+</header>
+
+<nav class="barra" aria-label="Sezioni">
+  <button type="button" data-vista="magazzino" aria-current="true">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M8 21v-7h8v7"/></svg>
+    Magazzino<span class="pallino" id="p-scorta" hidden>0</span>
+  </button>
+  <button type="button" data-vista="prelievo">
+    <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+    Prelievo
+  </button>
+  <button type="button" data-vista="carico">
+    <svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M7 14l5-5 5 5"/><path d="M4 3h16"/></svg>
+    Carico
+  </button>
+  <button type="button" data-vista="numeri">
+    <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+    Numeri
+  </button>
+  <button type="button" data-vista="setup">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8 2 2 0 1 1-2.8 2.8 1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5 2 2 0 1 1-4 0 1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3 2 2 0 1 1-2.8-2.8 1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1 2 2 0 1 1 0-4 1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8 2 2 0 1 1 2.8-2.8 1.6 1.6 0 0 0 1.8.3 1.6 1.6 0 0 0 1-1.5 2 2 0 1 1 4 0 1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3 2 2 0 1 1 2.8 2.8 1.6 1.6 0 0 0-.3 1.8 1.6 1.6 0 0 0 1.5 1 2 2 0 1 1 0 4 1.6 1.6 0 0 0-1.5 1z"/></svg>
+    Dati
+  </button>
+</nav>
+
+<main>
+  <section id="v-magazzino">
+    <div class="scheda">
+      <div class="cerca">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="q-mag" type="search" placeholder="Cerca codice, attribuzione o descrizione" autocomplete="off">
+      </div>
+      <div class="riga-bot">
+        <button class="mini" data-filtro="tutti" type="button">Tutti</button>
+        <button class="mini vuoto" data-filtro="scorta" type="button">Sotto scorta</button>
+        <button class="mini vuoto" data-filtro="zero" type="button">Esauriti</button>
+      </div>
+    </div>
+    <div class="scheda" id="lista-mag"></div>
+  </section>
+
+  <section id="v-prelievo" hidden>
+    <div class="scheda">
+      <h2>Chi prende, cosa prende</h2>
+      <div class="cerca">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="q-pre" type="search" placeholder="Codice, attribuzione o descrizione" autocomplete="off">
+      </div>
+      <div id="ris-pre"></div>
+    </div>
+    <div class="scheda" id="form-pre" hidden></div>
+  </section>
+
+  <section id="v-carico" hidden>
+    <div class="scheda">
+      <h2>Entrata merce</h2>
+      <div class="cerca">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="q-car" type="search" placeholder="Codice, attribuzione o descrizione" autocomplete="off">
+      </div>
+      <div id="ris-car"></div>
+    </div>
+    <div class="scheda" id="form-car" hidden></div>
+  </section>
+
+  <section id="v-numeri" hidden>
+    <div class="tiles" id="tiles"></div>
+    <div class="scheda"><h2>Uscite degli ultimi 6 mesi</h2><div class="barre" id="graf-mesi"></div></div>
+    <div class="scheda"><h2>I 5 più prelevati</h2><div id="graf-top"></div></div>
+    <div class="scheda"><h2>Da riordinare</h2><div id="lista-scorta"></div></div>
+  </section>
+
+  <section id="v-setup" hidden>
+    <div class="scheda">
+      <h2>Nuovo articolo</h2>
+      <div id="form-art"></div>
+    </div>
+    <div class="scheda">
+      <h2>Anagrafica articoli</h2>
+      <div id="lista-art"></div>
+    </div>
+    <div class="scheda">
+      <h2>Magazzini</h2>
+      <div id="lista-magazzini"></div>
+      <label for="nuovo-mag">Aggiungi un magazzino</label>
+      <div class="due">
+        <input id="nuovo-mag" placeholder="Es. Sede Brescia" autocomplete="off">
+        <button class="mini" id="add-mag" type="button">Aggiungi</button>
+      </div>
+    </div>
+    <div class="scheda">
+      <h2>Copia di sicurezza</h2>
+      <p class="tenue">I dati stanno solo su questo dispositivo. Esporta ogni tanto: se cambi telefono o pulisci il browser, senza copia si perde tutto.</p>
+      <div class="riga-bot">
+        <button class="mini" id="esporta" type="button">Esporta copia</button>
+        <button class="mini vuoto" id="importa-btn" type="button">Importa copia</button>
+        <button class="mini vuoto" id="csv" type="button">Esporta CSV movimenti</button>
+      </div>
+      <input id="importa" type="file" accept="application/json" hidden>
+    </div>
+    <div class="scheda">
+      <h2>Aspetto</h2>
+      <div class="riga-bot">
+        <button class="mini vuoto" data-tema="auto" type="button">Automatico</button>
+        <button class="mini vuoto" data-tema="light" type="button">Chiaro</button>
+        <button class="mini vuoto" data-tema="dark" type="button">Scuro</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="toast" hidden></div>
+
+<script>
+"use strict";
+var CHIAVE = "magazzino-nipec-v1";
+var VUOTO = {
+  magazzini: [{ id: "m1", nome: "Magazzino principale" }],
+  articoli: [],
+  movimenti: [],
+  cfg: { magazzinoAttivo: "m1", tema: "auto" }
+};
+
+/* ------------------------------ stato ------------------------------ */
+var S = carica();
+function carica() {
+  var s = null;
+  try { s = JSON.parse(localStorage.getItem(CHIAVE)); } catch (e) { s = null; }
+  if (!s || typeof s !== "object") s = {};
+  var base = JSON.parse(JSON.stringify(VUOTO));
+  ["magazzini", "articoli", "movimenti"].forEach(function (k) {
+    if (Array.isArray(s[k])) base[k] = s[k];
+  });
+  if (s.cfg && typeof s.cfg === "object") {
+    Object.keys(s.cfg).forEach(function (k) { base.cfg[k] = s.cfg[k]; });
+  }
+  if (!base.magazzini.length) base.magazzini = [{ id: "m1", nome: "Magazzino principale" }];
+  if (!trovaMag(base.cfg.magazzinoAttivo, base)) base.cfg.magazzinoAttivo = base.magazzini[0].id;
+  return base;
+}
+function trovaMag(id, st) { return (st || S).magazzini.filter(function (m) { return m.id === id; })[0]; }
+function salva() {
+  try { localStorage.setItem(CHIAVE, JSON.stringify(S)); }
+  catch (e) { avvisa("Memoria piena: esporta una copia di sicurezza."); }
+}
+function id() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+/* ------------------------------ utilità ------------------------------ */
+function $(s) { return document.querySelector(s); }
+function esc(t) {
+  return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+function oggiISO() {
+  var d = new Date(), z = function (n) { return (n < 10 ? "0" : "") + n; };
+  return d.getFullYear() + "-" + z(d.getMonth() + 1) + "-" + z(d.getDate());
+}
+function itData(iso) {
+  if (!iso) return "";
+  var p = String(iso).split("-");
+  return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0].slice(2) : iso;
+}
+var TOAST;
+function avvisa(t) {
+  var e = $("#toast"); e.textContent = t; e.hidden = false;
+  clearTimeout(TOAST); TOAST = setTimeout(function () { e.hidden = true; }, 2600);
+}
+function num(v) { var n = parseFloat(String(v).replace(",", ".")); return isFinite(n) ? n : 0; }
+
+/* --------------------------- dati derivati --------------------------- */
+function articoliDelMag() {
+  var m = S.cfg.magazzinoAttivo;
+  return S.articoli.filter(function (a) { return a.magazzinoId === m; });
+}
+function movimentiDi(articoloId) {
+  return S.movimenti.filter(function (v) { return v.articoloId === articoloId; })
+    .sort(function (a, b) { return (b.data + b.id).localeCompare(a.data + a.id); });
+}
+function giacenza(articoloId) {
+  return S.movimenti.reduce(function (t, v) {
+    if (v.articoloId !== articoloId) return t;
+    return t + (v.tipo === "entrata" ? num(v.qta) : -num(v.qta));
+  }, 0);
+}
+function statoScorta(a) {
+  var g = giacenza(a.id), min = num(a.scortaMin);
+  if (g <= 0) return "zero";
+  if (min > 0 && g <= min) return "scorta";
+  return "ok";
+}
+function articolo(aid) { return S.articoli.filter(function (a) { return a.id === aid; })[0]; }
+function cerca(testo, soloMagAttivo) {
+  var q = String(testo || "").trim().toLowerCase();
+  var base = soloMagAttivo === false ? S.articoli : articoliDelMag();
+  if (!q) return base;
+  return base.filter(function (a) {
+    return [a.codice, a.attribuzione, a.descrizione, a.categoria]
+      .join(" ").toLowerCase().indexOf(q) >= 0;
+  });
+}
+
+/* ------------------------------ navigazione ------------------------------ */
+var vista = "magazzino";
+var VISTE = ["magazzino", "prelievo", "carico", "numeri", "setup"];
+function vaiA(v) {
+  vista = v;
+  VISTE.forEach(function (n) { $("#v-" + n).hidden = (n !== v); });
+  document.querySelectorAll(".barra button").forEach(function (b) {
+    b.setAttribute("aria-current", String(b.dataset.vista === v));
+  });
+  window.scrollTo(0, 0);
+  disegna();
+}
+document.querySelectorAll(".barra button").forEach(function (b) {
+  b.addEventListener("click", function () { vaiA(b.dataset.vista); });
+});
+
+/* ------------------------------ disegno ------------------------------ */
+function disegna() {
+  disegnaSelettoreMag();
+  var sotto = articoliDelMag().filter(function (a) { return statoScorta(a) !== "ok"; }).length;
+  var p = $("#p-scorta"); p.textContent = sotto; p.hidden = sotto === 0;
+  if (vista === "magazzino") disegnaMagazzino();
+  if (vista === "prelievo") disegnaRicerca("pre");
+  if (vista === "carico") disegnaRicerca("car");
+  if (vista === "numeri") disegnaNumeri();
+  if (vista === "setup") disegnaSetup();
+}
+
+function disegnaSelettoreMag() {
+  var s = $("#sel-mag");
+  s.innerHTML = S.magazzini.map(function (m) {
+    return '<option value="' + esc(m.id) + '"' + (m.id === S.cfg.magazzinoAttivo ? " selected" : "") + ">" + esc(m.nome) + "</option>";
+  }).join("");
+}
+$("#sel-mag").addEventListener("change", function () {
+  S.cfg.magazzinoAttivo = this.value; salva(); disegna();
+});
+
+/* ---------------------------- vista MAGAZZINO ---------------------------- */
+var filtro = "tutti";
+document.querySelectorAll("[data-filtro]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    filtro = b.dataset.filtro;
+    document.querySelectorAll("[data-filtro]").forEach(function (x) {
+      x.className = "mini" + (x.dataset.filtro === filtro ? "" : " vuoto");
+    });
+    disegnaMagazzino();
+  });
+});
+$("#q-mag").addEventListener("input", disegnaMagazzino);
+
+var apertoId = null;
+function disegnaMagazzino() {
+  var lista = cerca($("#q-mag").value).filter(function (a) {
+    var st = statoScorta(a);
+    if (filtro === "scorta") return st !== "ok";
+    if (filtro === "zero") return st === "zero";
+    return true;
+  }).sort(function (a, b) {
+    return String(a.descrizione || "").localeCompare(String(b.descrizione || ""));
+  });
+  var c = $("#lista-mag");
+  if (!lista.length) {
+    c.innerHTML = '<div class="vuoto-msg">' +
+      (S.articoli.length ? "Nessun articolo trovato." :
+       "Il magazzino è vuoto.<br>Vai su <b>Dati</b> e inserisci il primo articolo.") + "</div>";
+    return;
+  }
+  c.innerHTML = lista.map(rigaArticolo).join("");
+  c.querySelectorAll(".voce").forEach(function (r) {
+    r.addEventListener("click", function () {
+      apertoId = (apertoId === r.dataset.id) ? null : r.dataset.id;
+      disegnaMagazzino();
+    });
+  });
+  c.querySelectorAll("[data-prelievo]").forEach(function (b) {
+    b.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      vaiA("prelievo"); scegliArticolo("pre", b.dataset.prelievo);
+    });
+  });
+}
+
+function rigaArticolo(a) {
+  var g = giacenza(a.id), st = statoScorta(a);
+  var pill = st === "zero" ? '<span class="pill ko">esaurito</span>'
+           : st === "scorta" ? '<span class="pill warn">sotto scorta</span>' : "";
+  var h = '<div class="voce" data-id="' + esc(a.id) + '">' +
+    "<div><div class=\"cod\">" + esc(a.codice || "—") +
+      (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
+    '<div class="des">' + esc(a.descrizione || "(senza descrizione)") + "</div>" +
+    '<div class="sotto">' + (a.categoria ? esc(a.categoria) + " · " : "") + pill + "</div></div>" +
+    '<div class="q"><b>' + g + "</b><span class=\"u\">" + esc(a.unita || "pz") + "</span></div></div>";
+  if (apertoId === a.id) h += dettaglio(a);
+  return h;
+}
+
+function dettaglio(a) {
+  var mv = movimentiDi(a.id);
+  var h = '<div style="padding:.2rem 0 .8rem">' +
+    '<div class="riga-bot"><button class="mini" data-prelievo="' + esc(a.id) + '" type="button">Preleva</button></div>' +
+    '<div class="tenue" style="margin-top:.6rem">' +
+      (a.scortaMin ? "Scorta minima: <b>" + esc(a.scortaMin) + "</b> · " : "") +
+      (a.prezzoAcquisto ? "Ultimo prezzo: <b>" + esc(a.prezzoAcquisto) + " €</b>" : "") + "</div>";
+  if (!mv.length) {
+    h += '<div class="tenue" style="margin-top:.5rem">Nessun movimento registrato.</div>';
+  } else {
+    h += mv.slice(0, 30).map(function (v) {
+      var seg = v.tipo === "entrata" ? "+" : "−";
+      var det = v.tipo === "entrata"
+        ? [v.fornitore, v.numeroAcquisto ? "acq. " + v.numeroAcquisto : ""].filter(Boolean).join(" · ")
+        : [v.destinazione, v.causale].filter(Boolean).join(" · ");
+      return '<div class="mov"><span class="d">' + itData(v.data) + "</span>" +
+        "<span>" + esc(det || (v.tipo === "entrata" ? "entrata" : "uscita")) + "</span>" +
+        '<span class="q ' + (v.tipo === "entrata" ? "in" : "out") + '">' + seg + num(v.qta) + "</span></div>";
+    }).join("");
+    if (mv.length > 30) h += '<div class="tenue" style="margin-top:.4rem">…e altri ' + (mv.length - 30) + " movimenti.</div>";
+  }
+  return h + "</div>";
+}
+
+/* ------------------------ PRELIEVO e CARICO ------------------------ */
+var scelto = { pre: null, car: null };
+["pre", "car"].forEach(function (k) {
+  $("#q-" + k).addEventListener("input", function () { scelto[k] = null; disegnaRicerca(k); });
+});
+function disegnaRicerca(k) {
+  var q = $("#q-" + k).value;
+  var c = $("#ris-" + k), f = $("#form-" + k);
+  if (scelto[k]) { c.innerHTML = ""; f.hidden = false; f.innerHTML = (k === "pre" ? formPrelievo : formCarico)(articolo(scelto[k])); legaForm(k); return; }
+  f.hidden = true;
+  var lista = cerca(q).slice(0, 12);
+  if (!q.trim()) { c.innerHTML = '<div class="vuoto-msg">Scrivi il codice, il numero di attribuzione o due parole della descrizione.</div>'; return; }
+  if (!lista.length) { c.innerHTML = '<div class="vuoto-msg">Nessun articolo trovato in questo magazzino.</div>'; return; }
+  c.innerHTML = lista.map(function (a) {
+    return '<div class="voce" data-id="' + esc(a.id) + '"><div>' +
+      '<div class="cod">' + esc(a.codice || "—") + (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
+      '<div class="des">' + esc(a.descrizione || "(senza descrizione)") + "</div></div>" +
+      '<div class="q"><b>' + giacenza(a.id) + '</b><span class="u">' + esc(a.unita || "pz") + "</span></div></div>";
+  }).join("");
+  c.querySelectorAll(".voce").forEach(function (r) {
+    r.addEventListener("click", function () { scegliArticolo(k, r.dataset.id); });
+  });
+}
+function scegliArticolo(k, aid) { scelto[k] = aid; $("#q-" + k).value = ""; disegnaRicerca(k); }
+
+function intestazioneArt(a) {
+  return '<div class="voce" style="cursor:default"><div>' +
+    '<div class="cod">' + esc(a.codice || "—") + (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
+    '<div class="des">' + esc(a.descrizione || "") + "</div></div>" +
+    '<div class="q"><b>' + giacenza(a.id) + '</b><span class="u">in magazzino</span></div></div>';
+}
+function formPrelievo(a) {
+  return "<h2>Uscita</h2>" + intestazioneArt(a) +
+    '<div class="due"><div><label for="p-qta">Quantità</label>' +
+    '<input id="p-qta" type="number" min="1" step="1" value="1" inputmode="numeric"></div>' +
+    '<div><label for="p-data">Data</label><input id="p-data" type="date" value="' + oggiISO() + '"></div></div>' +
+    '<label for="p-dest">Chi la prende / dove va</label><input id="p-dest" placeholder="Es. Centro Beauty Concept, Taranto" autocomplete="off">' +
+    '<label for="p-caus">Causale</label><select id="p-caus">' +
+    ["Noleggio", "Vendita", "Sostituzione in garanzia", "Muletto", "Uso interno", "Reso a fornitore", "Rottura / scarto", "Altro"]
+      .map(function (c) { return "<option>" + c + "</option>"; }).join("") + "</select>" +
+    '<label for="p-nota">Nota</label><input id="p-nota" placeholder="facoltativa" autocomplete="off">' +
+    '<button class="bottone" id="p-ok" type="button">Registra l\'uscita</button>' +
+    '<button class="bottone chiaro" id="p-annulla" type="button">Cambia articolo</button>';
+}
+function formCarico(a) {
+  return "<h2>Entrata</h2>" + intestazioneArt(a) +
+    '<div class="due"><div><label for="c-qta">Quantità</label>' +
+    '<input id="c-qta" type="number" min="1" step="1" value="1" inputmode="numeric"></div>' +
+    '<div><label for="c-data">Data</label><input id="c-data" type="date" value="' + oggiISO() + '"></div></div>' +
+    '<label for="c-forn">Fornitore</label><input id="c-forn" value="' + esc(a.fornitore || "") + '" autocomplete="off">' +
+    '<div class="due"><div><label for="c-nacq">Numero acquisto</label><input id="c-nacq" placeholder="Es. FT-2026-118" autocomplete="off"></div>' +
+    '<div><label for="c-prz">Prezzo unitario €</label><input id="c-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a.prezzoAcquisto || "") + '"></div></div>' +
+    '<label for="c-nota">Nota</label><input id="c-nota" placeholder="facoltativa" autocomplete="off">' +
+    '<button class="bottone" id="c-ok" type="button">Registra l\'entrata</button>' +
+    '<button class="bottone chiaro" id="c-annulla" type="button">Cambia articolo</button>';
+}
+function legaForm(k) {
+  $("#" + k[0] + "-annulla").addEventListener("click", function () { scelto[k] = null; disegnaRicerca(k); });
+  $("#" + k[0] + "-ok").addEventListener("click", function () {
+    var a = articolo(scelto[k]);
+    var q = num($("#" + k[0] + "-qta").value);
+    if (q <= 0) { avvisa("Metti una quantità."); return; }
+    if (k === "pre") {
+      var g = giacenza(a.id);
+      if (q > g) { avvisa("In magazzino ce ne sono solo " + g + "."); return; }
+      S.movimenti.push({
+        id: id(), articoloId: a.id, tipo: "uscita", qta: q, data: $("#p-data").value || oggiISO(),
+        destinazione: $("#p-dest").value.trim(), causale: $("#p-caus").value, nota: $("#p-nota").value.trim()
+      });
+      avvisa("Uscita registrata: " + q + " " + (a.unita || "pz") + ".");
+    } else {
+      var prz = $("#c-prz").value, forn = $("#c-forn").value.trim();
+      S.movimenti.push({
+        id: id(), articoloId: a.id, tipo: "entrata", qta: q, data: $("#c-data").value || oggiISO(),
+        fornitore: forn, numeroAcquisto: $("#c-nacq").value.trim(), prezzo: prz, nota: $("#c-nota").value.trim()
+      });
+      if (prz) a.prezzoAcquisto = prz;
+      if (forn) a.fornitore = forn;
+      avvisa("Entrata registrata: " + q + " " + (a.unita || "pz") + ".");
+    }
+    salva(); scelto[k] = null; disegnaRicerca(k); disegna();
+  });
+}
+
+/* ------------------------------ NUMERI ------------------------------ */
+function disegnaNumeri() {
+  var arts = articoliDelMag();
+  var pezzi = arts.reduce(function (t, a) { return t + giacenza(a.id); }, 0);
+  var valore = arts.reduce(function (t, a) { return t + giacenza(a.id) * num(a.prezzoAcquisto); }, 0);
+  var sotto = arts.filter(function (a) { return statoScorta(a) !== "ok"; });
+  $("#tiles").innerHTML =
+    tile(arts.length, "articoli a catalogo") +
+    tile(pezzi, "pezzi in magazzino") +
+    tile(valore ? "€ " + Math.round(valore).toLocaleString("it-IT") : "—", "valore di acquisto") +
+    tile(sotto.length, "da riordinare");
+
+  /* uscite per mese, ultimi 6 mesi */
+  var mesi = [], d = new Date();
+  for (var i = 5; i >= 0; i--) {
+    var x = new Date(d.getFullYear(), d.getMonth() - i, 1);
+    mesi.push({ k: x.getFullYear() + "-" + (x.getMonth() < 9 ? "0" : "") + (x.getMonth() + 1),
+                et: ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"][x.getMonth()], v: 0 });
+  }
+  var idsMag = {}; arts.forEach(function (a) { idsMag[a.id] = 1; });
+  S.movimenti.forEach(function (v) {
+    if (v.tipo !== "uscita" || !idsMag[v.articoloId]) return;
+    var k = String(v.data).slice(0, 7);
+    mesi.forEach(function (m) { if (m.k === k) m.v += num(v.qta); });
+  });
+  var max = Math.max.apply(null, mesi.map(function (m) { return m.v; }).concat([1]));
+  $("#graf-mesi").innerHTML = mesi.map(function (m) {
+    return '<div class="b"><em>' + (m.v || "") + '</em><i style="height:' +
+      Math.round(6 + (m.v / max) * 78) + 'px"></i><span>' + m.et + "</span></div>";
+  }).join("");
+
+  /* top 5 usciti */
+  var conta = {};
+  S.movimenti.forEach(function (v) {
+    if (v.tipo !== "uscita" || !idsMag[v.articoloId]) return;
+    conta[v.articoloId] = (conta[v.articoloId] || 0) + num(v.qta);
+  });
+  var top = Object.keys(conta).map(function (k) { return { a: articolo(k), n: conta[k] }; })
+    .filter(function (r) { return r.a; })
+    .sort(function (x, y) { return y.n - x.n; }).slice(0, 5);
+  $("#graf-top").innerHTML = top.length ? top.map(function (r) {
+    return '<div class="mov"><span>' + esc(r.a.descrizione || r.a.codice) + '</span><span class="q out">' + r.n + "</span></div>";
+  }).join("") : '<div class="vuoto-msg">Ancora nessun prelievo.</div>';
+
+  $("#lista-scorta").innerHTML = sotto.length ? sotto.map(function (a) {
+    return '<div class="mov"><span>' + esc(a.descrizione || a.codice) + '</span>' +
+      '<span class="q ' + (statoScorta(a) === "zero" ? "out" : "") + '">' + giacenza(a.id) +
+      (a.scortaMin ? " / " + a.scortaMin : "") + "</span></div>";
+  }).join("") : '<div class="vuoto-msg">Nessun articolo sotto scorta.</div>';
+}
+function tile(n, e) { return '<div class="tile"><div class="n">' + n + '</div><div class="e">' + e + "</div></div>"; }
+
+/* ------------------------------ DATI ------------------------------ */
+var modifica = null;
+function disegnaSetup() {
+  var a = modifica ? articolo(modifica) : null;
+  $("#form-art").innerHTML =
+    '<div class="due"><div><label for="a-attr">N. attribuzione</label><input id="a-attr" value="' + esc(a ? a.attribuzione : "") + '" autocomplete="off"></div>' +
+    '<div><label for="a-cod">N. codice</label><input id="a-cod" value="' + esc(a ? a.codice : "") + '" autocomplete="off"></div></div>' +
+    '<label for="a-des">Descrizione</label><input id="a-des" value="' + esc(a ? a.descrizione : "") + '" autocomplete="off">' +
+    '<div class="tre"><div><label for="a-cat">Categoria</label><input id="a-cat" value="' + esc(a ? a.categoria : "") + '" autocomplete="off"></div>' +
+    '<div><label for="a-uni">Unità</label><input id="a-uni" value="' + esc(a ? (a.unita || "pz") : "pz") + '" autocomplete="off"></div>' +
+    '<div><label for="a-min">Scorta minima</label><input id="a-min" type="number" min="0" inputmode="numeric" value="' + esc(a ? a.scortaMin : "") + '"></div></div>' +
+    '<div class="due"><div><label for="a-prz">Prezzo acquisto €</label><input id="a-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a ? a.prezzoAcquisto : "") + '"></div>' +
+    '<div><label for="a-forn">Fornitore</label><input id="a-forn" value="' + esc(a ? a.fornitore : "") + '" autocomplete="off"></div></div>' +
+    '<button class="bottone" id="a-ok" type="button">' + (a ? "Salva le modifiche" : "Aggiungi al catalogo") + "</button>" +
+    (a ? '<button class="bottone chiaro" id="a-ann" type="button">Annulla</button>' : "");
+
+  $("#a-ok").addEventListener("click", function () {
+    var des = $("#a-des").value.trim();
+    if (!des) { avvisa("Metti almeno la descrizione."); return; }
+    var dati = {
+      attribuzione: $("#a-attr").value.trim(), codice: $("#a-cod").value.trim(),
+      descrizione: des, categoria: $("#a-cat").value.trim(),
+      unita: $("#a-uni").value.trim() || "pz", scortaMin: $("#a-min").value,
+      prezzoAcquisto: $("#a-prz").value, fornitore: $("#a-forn").value.trim()
+    };
+    if (a) { Object.keys(dati).forEach(function (k) { a[k] = dati[k]; }); avvisa("Articolo aggiornato."); }
+    else {
+      dati.id = id(); dati.magazzinoId = S.cfg.magazzinoAttivo;
+      S.articoli.push(dati); avvisa("Articolo aggiunto.");
+    }
+    modifica = null; salva(); disegna();
+  });
+  if (a) $("#a-ann").addEventListener("click", function () { modifica = null; disegnaSetup(); });
+
+  var arts = articoliDelMag().sort(function (x, y) {
+    return String(x.descrizione || "").localeCompare(String(y.descrizione || ""));
+  });
+  $("#lista-art").innerHTML = arts.length ? arts.map(function (x) {
+    return '<div class="voce" style="cursor:default"><div>' +
+      '<div class="cod">' + esc(x.codice || "—") + (x.attribuzione ? " · " + esc(x.attribuzione) : "") + "</div>" +
+      '<div class="des">' + esc(x.descrizione) + "</div></div>" +
+      '<div class="q"><button class="mini vuoto" data-mod="' + esc(x.id) + '" type="button">Modifica</button></div></div>';
+  }).join("") : '<div class="vuoto-msg">Nessun articolo in questo magazzino.</div>';
+  $("#lista-art").querySelectorAll("[data-mod]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      modifica = b.dataset.mod; disegnaSetup(); window.scrollTo(0, 0);
+    });
+  });
+
+  $("#lista-magazzini").innerHTML = S.magazzini.map(function (m) {
+    var n = S.articoli.filter(function (x) { return x.magazzinoId === m.id; }).length;
+    return '<div class="mov"><span><b>' + esc(m.nome) + "</b></span>" +
+      '<span class="q">' + n + " art.</span></div>";
+  }).join("");
+}
+$("#add-mag").addEventListener("click", function () {
+  var n = $("#nuovo-mag").value.trim();
+  if (!n) { avvisa("Dai un nome al magazzino."); return; }
+  S.magazzini.push({ id: id(), nome: n });
+  $("#nuovo-mag").value = ""; salva(); disegna(); avvisa("Magazzino aggiunto.");
+});
+
+/* ------------------------------ backup ------------------------------ */
+function scarica(nome, testo, tipo) {
+  var b = new Blob([testo], { type: tipo || "application/json" });
+  var u = URL.createObjectURL(b), a = document.createElement("a");
+  a.href = u; a.download = nome; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); setTimeout(function () { URL.revokeObjectURL(u); }, 1000);
+}
+$("#esporta").addEventListener("click", function () {
+  scarica("magazzino-nipec-" + oggiISO() + ".json", JSON.stringify(S, null, 2));
+  avvisa("Copia esportata.");
+});
+$("#csv").addEventListener("click", function () {
+  var r = [["data", "tipo", "attribuzione", "codice", "descrizione", "quantita", "unita",
+            "destinazione_o_fornitore", "causale_o_n_acquisto", "prezzo", "nota"]];
+  S.movimenti.slice().sort(function (a, b) { return a.data.localeCompare(b.data); }).forEach(function (v) {
+    var a = articolo(v.articoloId); if (!a) return;
+    r.push([v.data, v.tipo, a.attribuzione || "", a.codice || "", a.descrizione || "", v.qta, a.unita || "pz",
+            v.tipo === "entrata" ? (v.fornitore || "") : (v.destinazione || ""),
+            v.tipo === "entrata" ? (v.numeroAcquisto || "") : (v.causale || ""),
+            v.prezzo || "", v.nota || ""]);
+  });
+  var csv = r.map(function (riga) {
+    return riga.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(";");
+  }).join("\n");
+  scarica("movimenti-nipec-" + oggiISO() + ".csv", "﻿" + csv, "text/csv");
+  avvisa("CSV esportato.");
+});
+$("#importa-btn").addEventListener("click", function () { $("#importa").click(); });
+$("#importa").addEventListener("change", function () {
+  var f = this.files && this.files[0]; if (!f) return;
+  var r = new FileReader();
+  r.onload = function () {
+    var d = null;
+    try { d = JSON.parse(r.result); } catch (e) { d = null; }
+    if (!d || !Array.isArray(d.articoli)) { avvisa("File non valido."); return; }
+    if (!confirm("Questo sostituisce tutti i dati che hai adesso. Procedo?")) return;
+    localStorage.setItem(CHIAVE, JSON.stringify(d));
+    S = carica(); salva(); disegna(); avvisa("Copia importata.");
+  };
+  r.readAsText(f); this.value = "";
+});
+
+/* ------------------------------ tema ------------------------------ */
+function applicaTema() {
+  var t = S.cfg.tema || "auto";
+  if (t === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", t);
+  document.querySelectorAll("[data-tema]").forEach(function (b) {
+    b.className = "mini" + (b.dataset.tema === t ? "" : " vuoto");
+  });
+}
+document.querySelectorAll("[data-tema]").forEach(function (b) {
+  b.addEventListener("click", function () { S.cfg.tema = b.dataset.tema; salva(); applicaTema(); });
+});
+
+/* ------------------------------ installazione ------------------------------ */
+var invito = null;
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault(); invito = e; $("#installa").hidden = false;
+});
+$("#installa").addEventListener("click", function () {
+  if (!invito) return;
+  invito.prompt(); invito = null; $("#installa").hidden = true;
+});
+if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () { /* offline: pazienza */ });
+  });
+}
+
+/* ------------------------------ avvio ------------------------------ */
+applicaTema();
+vaiA("magazzino");
+</script>
