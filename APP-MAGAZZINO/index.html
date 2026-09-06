@@ -114,6 +114,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 .fmini{width:46px;height:46px;flex:none;border-radius:.5rem;object-fit:cover;
        background:var(--blu-tenue);border:1px solid var(--riga)}
 .fbox{margin-top:.5rem}
+.dove-ora{background:var(--blu-tenue);border-radius:.6rem;padding:.5rem .7rem;margin:.5rem 0;
+      font-size:.86rem;color:var(--navy)}
 .fgrande{width:100%;max-height:260px;object-fit:contain;border-radius:.7rem;
        background:var(--blu-tenue);border:1px solid var(--riga);display:block}
 .fvuota{display:flex;align-items:center;justify-content:center;height:96px;border-radius:.7rem;
@@ -122,6 +124,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 .pill.ko{background:var(--allerta-fondo);color:var(--allerta)}
 .pill.warn{background:var(--avviso-fondo);color:var(--avviso)}
 .pill.ok{background:var(--ok-fondo);color:var(--ok)}
+.pill.paese{background:var(--navy);color:#fff}
+.pill.dove{background:var(--blu-tenue);color:var(--navy)}
 
 /* ---------- numeri ---------- */
 .tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
@@ -205,6 +209,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
         <button class="mini" data-filtro="tutti" type="button">Tutti</button>
         <button class="mini vuoto" data-filtro="scorta" type="button">Sotto scorta</button>
         <button class="mini vuoto" data-filtro="zero" type="button">Esauriti</button>
+        <button class="mini vuoto" data-filtro="Italia" type="button">Italia</button>
+        <button class="mini vuoto" data-filtro="Albania" type="button">Albania</button>
       </div>
     </div>
     <div class="scheda" id="lista-mag"></div>
@@ -455,7 +461,7 @@ $("#sel-mag").addEventListener("change", function () {
 var filtro = "tutti";
 document.querySelectorAll("[data-filtro]").forEach(function (b) {
   b.addEventListener("click", function () {
-    filtro = b.dataset.filtro;
+    filtro = b.dataset.filtro; spostaId = null;
     document.querySelectorAll("[data-filtro]").forEach(function (x) {
       x.className = "mini" + (x.dataset.filtro === filtro ? "" : " vuoto");
     });
@@ -465,11 +471,29 @@ document.querySelectorAll("[data-filtro]").forEach(function (b) {
 $("#q-mag").addEventListener("input", disegnaMagazzino);
 
 var apertoId = null;
+var spostaId = null;
+
+/* Il paese è un dato fermo, la posizione no: cambia ogni volta che l'articolo si muove.
+   Per questo non si sovrascrive e basta — ogni spostamento lascia la sua riga nello storico,
+   così fra sei mesi si sa non solo dov'è, ma da dove è arrivato e quando. */
+function formSposta(a) {
+  return '<div style="margin:.6rem 0 .2rem">' +
+    '<label for="s-dove">Nuova posizione</label>' +
+    '<input id="s-dove" value="' + esc(a.posizione || "") + '" placeholder="Es. Scaffale A3 · Furgone · Centro di Taranto" autocomplete="off">' +
+    '<div class="due"><div><label for="s-paese">Paese</label><select id="s-paese">' +
+      ["", "Italia", "Albania"].map(function (x) {
+        return '<option value="' + x + '"' + ((a.paese || "") === x ? " selected" : "") + ">" + (x || "—") + "</option>";
+      }).join("") + "</select></div>" +
+    '<div><label for="s-data">Data</label><input id="s-data" type="date" value="' + oggiISO() + '"></div></div>' +
+    '<div class="riga-bot"><button class="mini" id="s-ok" type="button">Registra lo spostamento</button>' +
+    '<button class="mini vuoto" id="s-no" type="button">Annulla</button></div></div>';
+}
 function disegnaMagazzino() {
   var lista = cerca($("#q-mag").value).filter(function (a) {
     var st = statoScorta(a);
     if (filtro === "scorta") return st !== "ok";
     if (filtro === "zero") return st === "zero";
+    if (filtro === "Italia" || filtro === "Albania") return a.paese === filtro;
     return true;
   }).sort(function (a, b) {
     return String(a.descrizione || "").localeCompare(String(b.descrizione || ""));
@@ -494,6 +518,32 @@ function disegnaMagazzino() {
       vaiA("prelievo"); scegliArticolo("pre", b.dataset.prelievo);
     });
   });
+  c.querySelectorAll("[data-sposta]").forEach(function (b) {
+    b.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      spostaId = (spostaId === b.dataset.sposta) ? null : b.dataset.sposta;
+      disegnaMagazzino();
+    });
+  });
+  if (spostaId) {
+    var sn = c.querySelector("#s-no"), sk = c.querySelector("#s-ok");
+    if (sn) sn.addEventListener("click", function (ev) { ev.stopPropagation(); spostaId = null; disegnaMagazzino(); });
+    if (sk) sk.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      var a = articolo(spostaId);
+      var dove = c.querySelector("#s-dove").value.trim();
+      var paese = c.querySelector("#s-paese").value;
+      if (!dove) { avvisa("Scrivi dove si trova adesso."); return; }
+      S.movimenti.push({
+        id: id(), articoloId: a.id, tipo: "spostamento", qta: 0,
+        data: c.querySelector("#s-data").value || oggiISO(),
+        da: a.posizione || "", a: dove, paeseDa: a.paese || "", paeseA: paese
+      });
+      a.posizione = dove; a.paese = paese;
+      spostaId = null; salva(); disegna();
+      avvisa("Spostamento registrato.");
+    });
+  }
 }
 
 function rigaArticolo(a) {
@@ -504,7 +554,10 @@ function rigaArticolo(a) {
     "<div><div class=\"cod\">" + esc(a.codice || "—") +
       (a.attribuzione ? " · " + esc(a.attribuzione) : "") + "</div>" +
     '<div class="des">' + esc(a.descrizione || "(senza descrizione)") + "</div>" +
-    '<div class="sotto">' + (a.categoria ? esc(a.categoria) + " · " : "") + pill + "</div></div>" +
+    '<div class="sotto">' + (a.categoria ? esc(a.categoria) + " · " : "") + pill +
+      (a.paese ? ' <span class="pill paese">' + esc(a.paese) + "</span>" : "") +
+      (a.posizione ? ' <span class="pill dove">' + esc(a.posizione) + "</span>" : "") +
+      "</div></div>" +
     '<div class="q"><b>' + g + "</b><span class=\"u\">" + esc(a.unita || "pz") + "</span></div></div>";
   if (apertoId === a.id) h += dettaglio(a);
   return h;
@@ -514,7 +567,12 @@ function dettaglio(a) {
   var mv = movimentiDi(a.id);
   var h = '<div style="padding:.2rem 0 .8rem">' +
     (a.foto ? '<div class="fbox"><img class="fgrande" src="' + a.foto + '" alt="Foto di ' + esc(a.descrizione) + '"></div>' : "") +
-    '<div class="riga-bot"><button class="mini" data-prelievo="' + esc(a.id) + '" type="button">Preleva</button></div>' +
+    '<div class="dove-ora"><b>Dove si trova ora:</b> ' +
+      (a.posizione ? esc(a.posizione) : "<i>non indicata</i>") +
+      (a.paese ? " · " + esc(a.paese) : "") + "</div>" +
+    '<div class="riga-bot"><button class="mini" data-prelievo="' + esc(a.id) + '" type="button">Preleva</button>' +
+      '<button class="mini vuoto" data-sposta="' + esc(a.id) + '" type="button">Sposta</button></div>' +
+    (spostaId === a.id ? formSposta(a) : "") +
     '<div class="tenue" style="margin-top:.6rem">' +
       (a.scortaMin ? "Scorta minima: <b>" + esc(a.scortaMin) + "</b> · " : "") +
       (a.prezzoAcquisto ? "Ultimo prezzo: <b>" + esc(a.prezzoAcquisto) + " €</b>" : "") + "</div>";
@@ -522,6 +580,12 @@ function dettaglio(a) {
     h += '<div class="tenue" style="margin-top:.5rem">Nessun movimento registrato.</div>';
   } else {
     h += mv.slice(0, 30).map(function (v) {
+      if (v.tipo === "spostamento") {
+        return '<div class="mov"><span class="d">' + itData(v.data) + "</span>" +
+          "<span>spostato da <b>" + esc(v.da || "?") + "</b> a <b>" + esc(v.a || "?") + "</b>" +
+          (v.paeseA ? " · " + esc(v.paeseA) : "") + "</span>" +
+          '<span class="q">↦</span></div>';
+      }
       var seg = v.tipo === "entrata" ? "+" : "−";
       var det = v.tipo === "entrata"
         ? [v.fornitore, v.numeroAcquisto ? "acq. " + v.numeroAcquisto : ""].filter(Boolean).join(" · ")
@@ -686,6 +750,11 @@ function disegnaSetup() {
     '<div><label for="a-min">Scorta minima</label><input id="a-min" type="number" min="0" inputmode="numeric" value="' + esc(a ? a.scortaMin : "") + '"></div></div>' +
     '<div class="due"><div><label for="a-prz">Prezzo acquisto €</label><input id="a-prz" type="number" step="0.01" inputmode="decimal" value="' + esc(a ? a.prezzoAcquisto : "") + '"></div>' +
     '<div><label for="a-forn">Fornitore</label><input id="a-forn" value="' + esc(a ? a.fornitore : "") + '" autocomplete="off"></div></div>' +
+    '<div class="due"><div><label for="a-paese">Location (paese)</label><select id="a-paese">' +
+      ["", "Italia", "Albania"].map(function (x) {
+        return '<option value="' + x + '"' + ((a && a.paese || "") === x ? " selected" : "") + ">" + (x || "—") + "</option>";
+      }).join("") + "</select></div>" +
+    '<div><label for="a-pos">Dove si trova ora</label><input id="a-pos" value="' + esc(a ? a.posizione : "") + '" placeholder="Es. Scaffale A3" autocomplete="off"></div></div>' +
     '<label>Foto dell\'articolo</label>' +
     '<div class="fbox" id="a-foto-box"></div>' +
     '<div class="riga-bot">' +
@@ -740,9 +809,20 @@ function disegnaSetup() {
       descrizione: des, categoria: $("#a-cat").value.trim(),
       unita: $("#a-uni").value.trim() || "pz", scortaMin: $("#a-min").value,
       prezzoAcquisto: $("#a-prz").value, fornitore: $("#a-forn").value.trim(),
+      paese: $("#a-paese").value, posizione: $("#a-pos").value.trim(),
       foto: fotoBozza || ""
     };
-    if (a) { Object.keys(dati).forEach(function (k) { a[k] = dati[k]; }); avvisa("Articolo aggiornato."); }
+    if (a) {
+      /* se qui dentro cambia la posizione, lo spostamento va tracciato lo stesso */
+      if ((a.posizione || "") !== dati.posizione && dati.posizione) {
+        S.movimenti.push({
+          id: id(), articoloId: a.id, tipo: "spostamento", qta: 0, data: oggiISO(),
+          da: a.posizione || "", a: dati.posizione, paeseDa: a.paese || "", paeseA: dati.paese
+        });
+      }
+      Object.keys(dati).forEach(function (k) { a[k] = dati[k]; });
+      avvisa("Articolo aggiornato.");
+    }
     else {
       dati.id = id(); dati.magazzinoId = S.cfg.magazzinoAttivo;
       S.articoli.push(dati); avvisa("Articolo aggiunto.");
@@ -796,13 +876,15 @@ $("#esporta").addEventListener("click", function () {
 });
 $("#csv").addEventListener("click", function () {
   var r = [["data", "tipo", "attribuzione", "codice", "descrizione", "quantita", "unita",
-            "destinazione_o_fornitore", "causale_o_n_acquisto", "prezzo", "nota"]];
+            "destinazione_o_fornitore", "causale_o_n_acquisto", "prezzo", "nota",
+            "paese", "posizione_attuale"]];
   S.movimenti.slice().sort(function (a, b) { return a.data.localeCompare(b.data); }).forEach(function (v) {
     var a = articolo(v.articoloId); if (!a) return;
     r.push([v.data, v.tipo, a.attribuzione || "", a.codice || "", a.descrizione || "", v.qta, a.unita || "pz",
             v.tipo === "entrata" ? (v.fornitore || "") : (v.destinazione || ""),
             v.tipo === "entrata" ? (v.numeroAcquisto || "") : (v.causale || ""),
-            v.prezzo || "", v.nota || ""]);
+            v.prezzo || "", v.nota || (v.tipo === "spostamento" ? "da " + (v.da || "?") + " a " + (v.a || "?") : ""),
+            a.paese || "", a.posizione || ""]);
   });
   var csv = r.map(function (riga) {
     return riga.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(";");

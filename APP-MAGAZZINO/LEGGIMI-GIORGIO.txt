@@ -37,6 +37,30 @@ DATI        Qui crei gli articoli: numero di attribuzione, numero di codice,
             si cambia magazzino dal menu in alto a destra.
 
 
+DOVE SI TROVA L'ARTICOLO
+
+Su ogni articolo ci sono due informazioni diverse, e conviene tenerle
+distinte:
+
+  LOCATION (paese)      Italia o Albania. È il dato fermo: cambia solo
+                        quando la merce passa davvero il confine.
+
+  DOVE SI TROVA ORA     Il posto preciso in questo momento: "Scaffale A3",
+                        "Furgone", "Centro di Taranto". Cambia spesso.
+
+Nell'elenco del magazzino le vedi come due etichette accanto alla
+descrizione, e in alto hai i filtri ITALIA e ALBANIA per vedere solo
+quello che sta di qua o di là.
+
+QUANDO UN ARTICOLO SI SPOSTA: apri l'articolo e premi SPOSTA. Scrivi
+dove va, e se serve cambia il paese. La posizione si aggiorna, ma soprattutto
+resta la riga nello storico: "spostato da Scaffale A3 a Furgone, il 6 settembre".
+
+È la stessa logica della giacenza: non si sovrascrive un dato e basta,
+si registra il movimento. Se no fra sei mesi il campo dice "Furgone" e
+nessuno sa da quanto tempo, né da dove veniva.
+
+
 LA FOTO DELL'ARTICOLO
 
 Su ogni articolo, in DATI, ci sono due bottoni:
