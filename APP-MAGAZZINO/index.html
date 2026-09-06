@@ -177,7 +177,6 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
     </div>
   </div>
   <div class="dx">
-    <select id="sel-mag" aria-label="Magazzino"></select>
     <button id="stato-sync" type="button" title="Stato del collegamento" hidden>•</button>
     <button id="installa" hidden type="button">Installa</button>
   </div>
@@ -270,15 +269,6 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
         <select id="nuova-sede-paese"><option value="Italia">Italia</option><option value="Albania">Albania</option></select>
       </div>
       <div class="riga-bot"><button class="mini" id="add-sede" type="button">Aggiungi sede</button></div>
-    </div>
-    <div class="scheda">
-      <h2>Magazzini</h2>
-      <div id="lista-magazzini"></div>
-      <label for="nuovo-mag">Aggiungi un magazzino</label>
-      <div class="due">
-        <input id="nuovo-mag" placeholder="Es. Sede Brescia" autocomplete="off">
-        <button class="mini" id="add-mag" type="button">Aggiungi</button>
-      </div>
     </div>
     <div class="scheda">
       <h2>Magazzino condiviso</h2>
@@ -574,15 +564,6 @@ function fondiRemoto(r) {
     });
   }
   if (!trovaMag(S.cfg.magazzinoAttivo)) S.cfg.magazzinoAttivo = S.magazzini[0].id;
-  /* primo collegamento da un telefono vuoto: mi porto sul magazzino che ha roba dentro */
-  var mio = trovaMag(S.cfg.magazzinoAttivo);
-  var quanti = function (mid) {
-    return S.articoli.filter(function (a) { return a.magazzinoId === mid; }).length;
-  };
-  if (mio && mio.nuovo && !quanti(mio.id)) {
-    var pieno = S.magazzini.filter(function (m) { return quanti(m.id) > 0; })[0];
-    if (pieno) S.cfg.magazzinoAttivo = pieno.id;
-  }
 }
 
 /* ------------------------------ foto ------------------------------ */
@@ -632,10 +613,11 @@ function kb(n) {
 }
 
 /* --------------------------- dati derivati --------------------------- */
-function articoliDelMag() {
-  var m = S.cfg.magazzinoAttivo;
-  return S.articoli.filter(function (a) { return a.magazzinoId === m; });
-}
+/* Un solo magazzino. Prima c'erano i "magazzini" (un elenco a parte) E le sedi:
+   due modi di dire dov'e' una macchina, che non si parlavano. Spostavi a Roma
+   con Sposta, poi aprivi il magazzino "SEDE ROMA" e non c'era niente. Ora il
+   posto lo dicono solo le sedi, e la lista e' una sola. */
+function articoliDelMag() { return S.articoli; }
 function movimentiDi(articoloId) {
   return S.movimenti.filter(function (v) { return v.articoloId === articoloId; })
     .sort(function (a, b) { return (b.data + b.id).localeCompare(a.data + a.id); });
@@ -728,7 +710,6 @@ document.querySelectorAll(".barra button").forEach(function (b) {
 
 /* ------------------------------ disegno ------------------------------ */
 function disegna() {
-  disegnaSelettoreMag();
   var sotto = articoliDelMag().filter(function (a) { return statoScorta(a) !== "ok"; }).length;
   var p = $("#p-scorta"); p.textContent = sotto; p.hidden = sotto === 0;
   if (vista === "magazzino") { disegnaFiltri(); disegnaMagazzino(); }
@@ -737,16 +718,6 @@ function disegna() {
   if (vista === "numeri") disegnaNumeri();
   if (vista === "setup") disegnaSetup();
 }
-
-function disegnaSelettoreMag() {
-  var s = $("#sel-mag");
-  s.innerHTML = S.magazzini.map(function (m) {
-    return '<option value="' + esc(m.id) + '"' + (m.id === S.cfg.magazzinoAttivo ? " selected" : "") + ">" + esc(m.nome) + "</option>";
-  }).join("");
-}
-$("#sel-mag").addEventListener("change", function () {
-  S.cfg.magazzinoAttivo = this.value; salva(); disegna();
-});
 
 /* ---------------------------- vista MAGAZZINO ---------------------------- */
 var filtro = "tutti";
@@ -1456,10 +1427,9 @@ function disegnaSetup() {
       avvisa("Articolo aggiornato.");
     }
     else {
+      /* magazzinoId resta solo per non cambiare le colonne gia' sul foglio */
       dati.id = id(); dati.magazzinoId = S.cfg.magazzinoAttivo;
       S.articoli.push(dati); segna("articoli", dati);
-      var mm = trovaMag(S.cfg.magazzinoAttivo);
-      if (mm && mm.nuovo) { delete mm.nuovo; segna("magazzini", mm); }
       avvisa("Articolo aggiunto.");
     }
     modifica = null; fotoBozza = ""; salva(); disegna();
@@ -1503,11 +1473,6 @@ function disegnaSetup() {
       '<span class="q">' + n + " art.</span></div>";
   }).join("") || '<div class="tenue">Nessuna sede.</div>';
 
-  $("#lista-magazzini").innerHTML = S.magazzini.map(function (m) {
-    var n = S.articoli.filter(function (x) { return x.magazzinoId === m.id; }).length;
-    return '<div class="mov"><span><b>' + esc(m.nome) + "</b></span>" +
-      '<span class="q">' + n + " art.</span></div>";
-  }).join("");
 }
 $("#sy-attiva").addEventListener("click", function () {
   var u = $("#sy-url").value.trim(), pw = $("#sy-par").value.trim();
@@ -1548,14 +1513,6 @@ $("#add-sede").addEventListener("click", function () {
   S.cfg.sediExtra.push({ nome: n, paese: pa });
   $("#nuova-sede").value = ""; salva(); disegna();
   avvisa("Sede aggiunta. Diventa visibile agli altri quando le assegni un articolo.");
-});
-
-$("#add-mag").addEventListener("click", function () {
-  var n = $("#nuovo-mag").value.trim();
-  if (!n) { avvisa("Dai un nome al magazzino."); return; }
-  var mg = { id: id(), nome: n };
-  S.magazzini.push(mg); segna("magazzini", mg);
-  $("#nuovo-mag").value = ""; salva(); disegna(); avvisa("Magazzino aggiunto.");
 });
 
 /* ------------------------------ backup ------------------------------ */
