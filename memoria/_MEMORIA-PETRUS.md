@@ -588,3 +588,428 @@ Questo non è una variante: è un settimo protocollo, nuovo.
 
 **Decisione aperta:** il ri-test finale è **bloccante** (niente macchina se non è bilanciato)
 o solo da registrare in scheda?
+
+---
+
+## 17. TEST 3 MINUTI — v2 È LA VERSIONE CANONICA (correzione della §12)
+
+La v1 (8 domande, verdetto a fasce Rara/Normale/Allarme) è **archiviata**. In uso c'è la
+**v2: 11 domande raggruppate per pilastro**. Disponibile IT + SQ (Albania coperta).
+
+**Le 11 domande**
+1. Quante clienti hai coccolato almeno una volta, nell'ultimo anno? *(numero)*
+2. Di queste, quante non le vedi più da 3-4 mesi o più? *(numero — **conto**)*
+3. In un anno, quanto ti lascia in media una cliente? *(€ — **conto**)*
+4. Hai i contatti di tutte le clienti in un posto solo e ordinato? *(GESTIONE)*
+5. Se giovedì hai 3 buchi in agenda, hai pronta la lista di chi chiamare? *(GESTIONE)*
+6. Ti capita di dire no perché non hai il trattamento che cerca? *(MACCHINE)*
+7. Hai un trattamento "di punta" che da solo ti porta clienti nuove? *(MACCHINE)*
+8. Segui un metodo strutturato o decidi caso per caso? *(FORMAZIONE)*
+9. Le clienti comprano percorsi completi o singoli trattamenti? *(FORMAZIONE)*
+10. Le clienti nuove arrivano da un sistema o solo dal passaparola? *(STRATEGIA)*
+11. Se ti fermi, il tuo giro clienti regge da solo? *(STRATEGIA)*
+
+**Il conto:** D2 × D3 = soldi che escono dalla cassa ogni anno.
+Chiosa: *«Non perché lavori male. Solo perché ti manca il sistema che le tiene.»*
+
+**La mappa a 4 pilastri** — ognuno vale *Già forte / Da sistemare / Buco*:
+- ⚙️ **MACCHINE** (i trattamenti) → il **device NIPEC**
+- 🗂️ **GESTIONE** (l'ordine) → **DEMETRA** (chi/quando richiamare)
+- 🎓 **FORMAZIONE** (il metodo) → **Metodo DEMETRA** (percorsi, non singoli)
+- 🧭 **STRATEGIA** (la crescita) → **PRAGMA** (il sistema che porta clienti)
+
+**Verdetto** per numero di pilastri buco/da sistemare: 0 = *sistema completo* · 1 = *quasi
+pronto* · 2 = *a metà* · 3+ = *manca il sistema*.
+Chiusura: *«Non ti vendiamo una macchina né pubblicità. Costruiamo con te il TUO sistema —
+device, gestione, metodo, crescita — un pezzo alla volta. La causa parte da noi.»*
+
+**Termini commerciali da usare (tabella ufficiale)**
+
+| Voce | Valore |
+|---|---|
+| Canone | **500 € / mese** |
+| Vincolo contrattuale | **Nessuno** — la tiene finché serve, la ferma quando vuole *(leva anti-paura più forte)* |
+| Ritmo di follow-up | **24 ore → 1 settimana → 30 giorni** |
+| Cosa include il "sistema" | Device + gestionale Demetra + assistenza sempre + **muletto** |
+
+**Mappa dolore → chi lo cura**
+
+| Dolore che il test dimostra | Chi lo cura |
+|---|---|
+| Clienti che spariscono, non richiamate | Demetra + Contatto 30 Giorni |
+| Buchi in agenda, poltrona ferma | Device a noleggio (trattamento nuovo da vendere) |
+| «Se mi fermo, il giro crolla» | Il sistema NIPEC (ci siamo sempre + muletto) |
+
+**La crepa da evitare:** il test parla di *retention*; se poi salti a vendere *una macchina*,
+lei pensa «e che c'entra il laser col fatto che non richiamo le clienti?». Il **ponte**
+(passo 4) chiude quel buco. Non è un dettaglio: è il punto in cui si perde la vendita.
+
+⚠️ **Da verificare:** il file `NIPEC_Sistema_Approccio.md` riporta l'assistenza come
+**351 846 605** (10 cifre), tutti gli altri documenti come **351 846 6025**. Un refuso in
+un documento destinato a Giovanni va corretto alla fonte.
+
+---
+
+## 18. SCRIPT "LA CLIENTE PERSA" — vendere l'APP, non il device
+
+Documento **interno** (Giorgio & Uarda), non si mostra all'estetista. Obiettivo: *non
+vendere l'app — far scoprire a lei, con le sue mani, quante clienti sta perdendo.*
+L'app entra **solo dopo** la scoperta, mai prima.
+
+**Le 3 regole che tengono in piedi tutto**
+- **Zero silenzio dopo il suo "non lo so"** — salti sopra subito. È la pausa che la mette
+  sulla difensiva, non le parole.
+- **Mai la parola "dovresti"** — «dovresti saperlo» = accusa = si chiude. Stai dalla sua
+  parte contro il problema, non contro di lei.
+- **Non vincere la discussione** — falle vincere la scoperta. Si convince solo di ciò che
+  scopre da sola.
+
+**Le battute**
+1. **Apertura** — *«Ti faccio una domanda scomoda, poi ti lascio in pace. Le clienti che non
+   vedi più… le conti mai?»* (variante calda se è tesa: prima accendi il desiderio —
+   *«lavorare meglio, guadagnare di più, faticare di meno…»* — poi la domanda scomoda).
+2. **Le 3 domande** — clienti viste nell'anno · quante sparite da 3-4 mesi · quanto lascia
+   in media una cliente. La seconda è il perno: quasi sempre risponde «non lo so».
+3. **Il perno** — *«Perfetto, è la risposta giusta. Nessuna estetista lo sa. Se mi avessi
+   sparato un numero preciso, avrei pensato che te lo stavi inventando.»* → capovolgi:
+   non-sapere = onesto, sapere = sospetto.
+4. **La prova del telefono** — *«Apri il telefono, scorri i messaggi, dimmi la prima cliente
+   che non senti da più di tre mesi.»* In 5 secondi ne trova una: il "non lo so" diventa
+   "oddio è vero" **con le sue mani**.
+5. **L'immagine concreta** — *«E come lei ne hai un cassetto pieno. Quella veniva, era pure
+   simpatica, e ti è scivolata via senza che nessuno se ne accorgesse.»*
+6. **Se dice "le conosco tutte"** — non contraddirla mai: *«Bellissimo, allora per te è
+   facile: quante non vedi da tre mesi? …E da sei?»* Le dai ragione e la mandi lei stessa
+   alla prova.
+7. **Il conto ad alta voce** — [tot sparite] × [€ a cliente] = *«…che non entrano più. E non
+   perché hai sbagliato un trattamento: perché nessuno le ha richiamate.»*
+8. **Il ribaltamento** — *«Non puoi ricordare 200 clienti a memoria. Non è un tuo difetto: è
+   che le tieni in testa e nel telefono, non in un sistema che te le ricorda.»*
+9. **Il pivot (ora entra l'app)** — *«Ho una cosa che fa bene una cosa sola: ogni lunedì ti
+   dice chi sta per sparire, così la riprendi prima che se ne vada.»* Una funzione sola.
+   Mai "gestionale", mai "app".
+10. **L'offerta del primo mese** — *«Il primo mese non tocchi niente. Le clienti vecchie te
+    le carichiamo noi, le prime te le richiamiamo io e Uarda. Tu guardi le prenotazioni
+    arrivare. Se non funziona, hai perso zero.»* Prima il risultato, poi l'adozione.
+11. **Chiusura** — *«Io non ti vendo un numero. Ti tolgo il doverlo tenere a mente. Partiamo
+    con le prime dieci?»* Micro-azione facile, non un contratto.
+
+**Obiezioni pronte**
+
+| Se ti frena | Rispondi |
+|---|---|
+| (generale) | «Il primo mese non tocchi niente: lo facciamo noi. Tu guardi e basta.» |
+| «Non ho tempo» | Prova del telefono: «allora è facile — quante non vedi da 3 mesi? E da 6?» |
+| «Le conosco tutte» | «Bene. E ti dice ogni lunedì chi sta scappando? No? Allora ce l'hai, ma non lavora per te.» |
+| «Ho già un quaderno / un gestionale» | «Non devi esserlo tu. Il primo mese lo tocchiamo solo noi. Tu leggi un messaggio con le prenotazioni.» |
+| «Quanto costa?» | «Il prezzo te lo dico dopo che hai visto le prime clienti tornare. Prima il risultato.» |
+
+**Da registrare dopo ogni conversazione** (materiale per automatizzarla poi): nome centro e
+chi è (sola / con dipendenti / grande) · i 3 numeri detti · l'obiezione esatta · a quale
+domanda ha sussultato · ha prenotato le prime dieci sì/no.
+
+> **Nota lingua — soprattutto per Uarda:** si parla estetista, mai clinico o tecnico. Mai
+> "CRM", "database", "gestionale". Sempre: "clienti sparite", "soldi che non entrano", "te
+> le richiamo io". Se la frase suona da software, il sussulto non scatta.
+
+---
+
+## 19. IL CONTATTO DEI 30 GIORNI — il presidio che si fa chiamare
+
+**In una frase:** non chiamiamo noi per controllare. Facciamo cercare **loro** ogni mese per
+un vantaggio concreto — e il controllo della macchina viaggia sopra, senza che se ne accorgano.
+
+**Perché un controllo imposto non funziona.** L'estetista contatta NIPEC solo quando ha un
+problema. A un check tecnico programmato non dedica tempo: non lo percepisce utile a sé, e
+lo salta. Da sola si muove spontaneamente solo per due motivi: **fare più sedute** o **non
+perdere incassi**. Un controllo sulla testina non è né l'uno né l'altro.
+
+> **Principio:** il presidio tecnico non è mai l'esca. È il cavallo di Troia che viaggia
+> sopra qualcosa che il centro vuole già.
+
+**L'esca: la promo del mese.** Ogni 30 giorni NIPEC prepara una promozione laser pronta da
+pubblicare (immagine/story, testo, offerta a scadenza), personalizzata col nome del centro.
+Tira perché il suo dolore numero uno non è la macchina, è **la poltrona vuota**; è reale e
+immediata; e costa a NIPEC un solo template al mese.
+
+**Il meccanismo: si sblocca con lo snapshot.**
+> *«Ciao! Ho pronta la campagna di questo mese per te. Per attivarla mandami al volo tre
+> foto — manipolo, cristallo e contaore — e te la giro personalizzata col tuo nome.»*
+
+| Cosa vive l'estetista | Cosa ottiene NIPEC |
+|---|---|
+| Riceve una promo pronta che le riempie l'agenda | Le foto di manipolo, cristallo e contaore |
+| Sente di essere seguita, non abbandonata | Lo stato reale della macchina, ogni mese |
+| Ha un motivo per restare che non è il prezzo | I primi segnali di urto, depotenziamento, calo |
+| Un vantaggio concreto e gratuito, subito | Il contatto vivo, senza doverlo imporre |
+
+**La telefonata di saluto** — subito dopo lo scambio WhatsApp, due minuti, non tecnica:
+*«Ciao, tutto bene? Com'è andato il mese?»* L'asset di NIPEC è la **relazione**, non la
+macchina: il messaggio scritto trasferisce dati, la voce trasferisce fiducia. Alza il costo
+psicologico di andarsene — chi lascia NIPEC non rescinde un contratto, lascia una persona. Ed
+è proprio lì che emergono le casistiche vere.
+
+**Il rituale mensile**
+
+| Quando | Chi / Cosa |
+|---|---|
+| Giorno 1 | **NIPEC** — «ho la promo del mese per te» + chiede le tre foto |
+| Giorno 1-2 | **Il centro** — manda foto e monte ore. *Contatta lui, per ricevere il vantaggio.* |
+| Giorno 2 | **NIPEC** — invia la promo personalizzata + il mini-certificato «Macchina Verificata NIPEC» del mese |
+| Giorno 2 | **NIPEC** — chiama per salutare: due minuti, umani |
+| Dopo | **NIPEC** — registra le casistiche. Ogni tre mesi le ricorrenti tornano al Referente |
+
+**Il fossato.** Il concorrente che costa venti euro in meno dà laser di basso valore, zero
+assistenza, zero formazione — e zero promo, zero voce, zero presidio. Andarsene non significa
+più "risparmiare venti euro": significa perdere le prenotazioni della promo e la persona che
+la segue. **Il prezzo smette di essere l'unico criterio di scelta.**
+
+> **La formula:** regala un vantaggio → fatti mandare la foto → chiama per salutare.
+
+---
+
+## 20. STORICO DI CRESCITA 2021-2026 — i numeri veri
+
+Fonti: cash flow ITA 2024/2025/2026, cash flow Albania KREA 2023-2026, calendari operativi
+CAL 2021-2023 (Drive, letti direttamente). 2021-2022 = stime **al ribasso**; 2026 =
+run-rate annualizzato (gen-giu ×2). Escluso il ramo PHD (import) e crediti/software.
+
+**Incasso lordo per anno** *(migliaia €)*
+
+| Anno | Italia | Albania |
+|---|---|---|
+| 2021 (stima) | 60 | — |
+| 2022 (stima) | 80 | — |
+| 2023 | 135 | 13 |
+| 2024 | 208 | 58 |
+| 2025 | **264** *(record)* | 95 |
+| 2026 (run-rate) | 230 | 98 |
+
+**Incasso per fonte** *(migliaia €)*
+
+| Periodo | Noleggio | Vendita macchinari | Totale |
+|---|---|---|---|
+| ITA 2024 | 136 | 68 | 208 |
+| ITA 2025 | **171** | 86 | 264 |
+| ITA 2026 (run-rate) | 170 | 62 | 240 |
+| AL 2024 | 33 | 62 | 95 |
+| AL 2025 | 44 | — | 58 |
+| AL 2026 (run-rate) | 54 | 40 | 98 |
+
+**Noleggio ricorrente** (la parte che conta): ITA 65 → 136 → 171 → 170; AL 13 → 33 → 44 → 54.
+Il ricorrente CLUB cresce mese su mese: da 9,6k (gen) a 12,3k (giu) 2026.
+
+**Clienti a canone**: ITA 10 → 16 → 22 → 26 → 29 → **30**; AL — → — → 16 → 22 → 22 → **24**.
+(2025-2026 ITA contano il "mensile puro" CLUB, esclusi i giornalieri che sono in più.)
+
+**Utile netto** *(migliaia €)*: ITA 143 (2024) → 157 (2025); AL 29 (2024) → 5 (2025).
+
+**Il reinvestito è nascosto nelle spese.** Ogni mese ricompri almeno una macchina (~3.000):
+nei conti pesa come "spesa", ma non è un costo — è un asset nuovo che frutterà 33.400 in 4
+anni. Un anno "magro" come l'Albania 2025 (utile 5k) ha in realtà creato ~36k di nuovi asset
+produttivi. **L'utile basso non è debolezza: è il volano a piena potenza.**
+
+**Economia di un device su 4 anni** — investi 3.000, ne incassi 33.400:
+
+| Investi | Spese varie | Gestione | Incassi | **Utile netto** |
+|---|---|---|---|---|
+| 3.000 | 2.000 | 4.000 | 33.400 | **24.400** |
+
+Incasso medio/anno 8.350 · utile medio/anno 6.100 · **ritorno sul capitale 813%**
+(~8× il capitale, ~2,7× i costi totali).
+
+**Proiezione da settembre 2026: +6 macchine a 500 €** → +3.000/mese, +36.000/anno di
+noleggio; run-rate mensile da ~13k a 16k; su 4 anni **+200.400 di incassi e +146.400 di
+utile netto**. A 500 € la fase VIP (24 mesi), poi scendono a 400 € — comunque +2.400/mese
+ricorrenti.
+
+---
+
+## 21. STANDARD DEMETRA — LANCIO DI UN CENTRO (format 10 video)
+
+Format replicabile per l'apertura di **qualsiasi** centro DEMETRA. Segnaposto da sostituire
+prima di girare: **[VOLTO]** (il volto unico del centro — idealmente con titolo
+professionale), **[città] · [Paese] · [lingua locale] · [evento di settore] · [DATA] · [X]**.
+Caption e bio sono in italiano come riferimento: si traducono nella lingua locale.
+
+**La logica: prima la fiducia, poi la vendita.** Su una pagina nuova un'offerta al 50% da
+uno sconosciuto suona come pubblicità aggressiva, non come opportunità. La campagna si
+ribalta: prima l'identità, poi l'autorità, e **solo alla fine** si vende.
+
+**Le 3 fasi**
+- **FASE 1 · IDENTITÀ (video 1-3)** — chi è, perché esiste DEMETRA, cosa nasce. Nessuna
+  offerta. Obiettivo: **farsi riconoscere**.
+- **FASE 2 · AUTORITÀ (video 4-7)** — educazione e demolizione dei miti. Si regala
+  competenza. Obiettivo: **farsi rispettare**.
+- **FASE 3 · LANCIO (video 8-10)** — prova sociale, annuncio, offerta Fondatrici. Solo ora
+  si chiede qualcosa. Obiettivo: **riempire l'agenda**.
+
+**I 10 video**
+
+| # | Titolo | Fase | Gancio |
+|---|---|---|---|
+| 1 | Il Manifesto — «La pianta secca» | 1 | Lucida la foglia di una pianta visibilmente secca |
+| 2 | La Storia — «Perché ho scelto DEMETRA» | 1 | «Sono un medico. E sto per aprire un centro estetico.» |
+| 3 | Build in Public — «Sta nascendo» | 1 | Drone / time-lapse del cantiere, nessuna voce |
+| 4 | Mito 1 — «Il massaggio non è il segreto» | 2 | Tre domande secche a raffica, taglio su ogni «no» |
+| 5 | Mito 2 — «La dieta rivoluzionaria» | 2 | «Hai già giocato la carta della dieta miracolosa, vero?» |
+| 6 | Il Metodo — «Come funziona DEMETRA» | 2 | «Ti spiego in un minuto perché funziona quando tutto il resto ha fallito» |
+| 7 | **La Tecnologia in Azione** | 2 | Macro del manipolo sulla pelle, zero preamboli |
+| 8 | La Prova — «Il metodo è già in [Paese]» | 3 | «Il centro è nuovo. Il metodo no.» |
+| 9 | L'Annuncio — «Le Fondatrici» | 3 | «Apriamo. E le prime 30 avranno condizioni che non torneranno mai più.» |
+| 10 | Ultima Chiamata — «Gli ultimi posti» | 3 | «Dei 30 posti Fondatrici ne restano [X].» |
+
+**Il video 7 è il collo di bottiglia**: è il contenuto più performante del settore («macchina
+in azione su persona reale»), genera i «quanto costa?» in DM e regge le ADV future. **Giralo
+appena la prima macchina è installata**, anche a centro non finito.
+
+**Il programma Fondatrici** (video 9): 30 posti, non uno di più. Ricevono la valutazione
+completa in omaggio + prima seduta intensiva al 50% + blocco del prezzo Fondatrici su tutto
+il primo percorso. In cambio: **l'opinione sincera**. Il form chiede una *candidatura* (non
+una *prenotazione*): alza il valore percepito e filtra le curiose. Follow-up telefonico
+entro 24h.
+
+**Calendario 5 settimane**: S1 = video 1+2+3 lo stesso giorno dell'apertura pagina (mai una
+pagina con un solo post) · S2 = 4+5 + stories di cantiere · S3 = 6+7, [VOLTO] risponde
+personalmente a OGNI commento entro un'ora · S4 = 8+9, video 7 in boost 50-100 € di test,
+video 9 con ADV dedicata (donne 28-55, [città] +20km) · S5 = 10 + aggiornamento posti reale
+ogni 2 giorni.
+
+**I 3 errori da non fare**
+1. **Non vendere prima del video 9** — brucia il posizionamento premium.
+2. **Non inventare numeri di riprova sociale** — «centinaia di clienti» non le avete: avete
+   un volto credibile e un metodo già attivo. Basta, se raccontato bene.
+3. **Non sparire dopo l'apertura** — dal giorno 1 il contenuto cambia natura: clienti reali,
+   risultati reali. La campagna 2 si costruisce da sé.
+
+**Posizionamento:** la promessa = *«Non trattamenti. Un sistema che cambia il corpo perché
+lavora su tutto ciò che lo governa.»* Il nemico = **l'estetica superficiale** (crema
+miracolosa, macchina di moda usata senza metodo, dieta lampo) — **non** gli altri centri.
+Target: donna 30-55, già delusa da diete e trattamenti spot.
+
+### 21-bis. Variante: un centro **già esistente** entra in DEMETRA
+
+Stesso format, adattato (file `ESEMPIO_Centro_Estetico_DEMETRA.md`). Cambia il perno:
+- **[TITOLARE]** al posto di [VOLTO] — l'autorità non è il titolo medico ma **gli anni sul
+  campo**: *«Ho un centro estetico da anni. E ho appena cambiato tutto. Ti spiego perché.»*
+- Il rischio non è "sconosciuto", è **«l'ennesima promo»**: con clienti già affezionate,
+  annunciare il metodo nuovo con uno sconto lo svaluta. **Il metodo non si sconta: si
+  presenta con autorità.**
+- Il "build in public" non è il cantiere ma **l'arrivo e l'allestimento delle nuove
+  tecnologie** (unboxing).
+- Video 8 diventa *«Il metodo, da noi, è nuovo. Ma non è affatto nuovo»*.
+- Video 1 chiude con: *«Nel mio centro non troverai più trattamenti sciolti l'uno
+  dall'altro: troverai un metodo.»*
+
+---
+
+## 22. DEMETRA TIRANA — i due piani paralleli (Egla / Uarda)
+
+Due documenti sullo **stesso progetto**, scritti per due destinatari opposti. Il metodo è
+questo: al cliente il piano motivante, all'interno il cancello con la data.
+
+**Piano EGLA** *(si consegna a lei)* — «Il tuo piano di lancio»
+- Cos'è il centro: benessere corpo e viso attraverso Metodo + Sistema DEMETRA — percorsi
+  personalizzati con tecnologie NIPEC, manualità corrette e prodotti **Certezze**
+  (convenzione con Metodo Certo già attiva).
+- **Non vendi sedute singole: vendi percorsi e risultati.**
+- Calendario: entro **30 agosto** protocolli e app pronti · **1-5 settembre** apertura
+  ufficiale · **ogni settimana** chiama tutte le clienti + inseriscile nell'app + scrivi a
+  tutte l'apertura (mail + messaggio + contatto personale) + 2 reel e 1 post.
+- Come vendere: parti dalle **clienti calde** (chi già si fida di te) · dividi per bisogno
+  (corpo: rimodellamento, cellulite, ritenzione, tono / viso: ringiovanimento) · vendi il
+  **percorso da 10-12 sedute** con risultato vero (fino a −4/8 cm) · **vendi con le domande**,
+  mai partendo dal listino.
+- Chiusura onesta: *«Tra il dire e il fare c'è un oceano — ma tu hai già la barca. I primi
+  giorni chiederanno diverse ore al telefono e sull'app: è la parte meno comoda, ma è
+  esattamente quella che porta le clienti. Il motore, però, lo accendi tu.»*
+
+**Piano UARDA** *(interno — non si mostra a Egla)* — «Piano di partenza e controllo scadenze»
+- **La situazione senza giri:** tre mesi estivi con la macchina ferma. *Una macchina ferma è
+  un danno economico, non una preparazione.* Da settembre va a regime, o rientra.
+- **La regola:** la macchina deve rendere **500 €/mese a regime entro il 30 settembre**. Se
+  non genera prenotazioni, torna in magazzino per essere riaffittata. Punto.
+- **10 settembre** = Egla deve aver chiamato tutte le clienti, inserite nel database, scritto
+  a tutte, e avviato i contenuti.
+- **30 settembre** = doppio checkpoint: **AZIONI** (se non fatte → la macchina rientra) e
+  **FATTURATO** (se non genera prenotazioni → rientra per essere riaffittata).
+- **Verifica con prova, non a parole:** quante clienti chiamate · quante inserite
+  (*prova: screenshot dell'app*) · ha scritto a tutte · 2 reel + 1 post a settimana
+  (*prova: il profilo*) · quante prenotazioni → fatturato del mese.
+- Il ruolo di Uarda: **sei tu l'occhio.** Verifichi e riferisci a Giorgio, **senza sconti**.
+- *«L'errore è consentito, la ripetizione no. La crescita è guidata, non lasciata al caso.»*
+
+**I 10 reel per Egla** (2 a settimana, telefono, luce naturale, 20-40 s, una sola idea per
+reel; il gancio nei primi 3 secondi è tutto):
+1. Apertura: chi sono e cosa faccio → DM «INFO»
+2. Il principio: perché una cosa sola non basta (4 pilastri: metabolismo, adipe, muscolo,
+   drenaggio) → DM «ANALISI»
+3. Seduta vs percorso (10-12 tacche sul calendario)
+4. Cellulite: 3 bugie da smontare → DM «CELLULITE»
+5. Ti senti gonfia entro sera? (ritenzione e microcircolo) → DM «LEGGERA»
+6. Cosa succede in una seduta DEMETRA, in 30 secondi (le 4 fasi)
+7. Vuoi dimagrire? Ti serve più muscolo, non meno → DM «TONO»
+8. Perché la tecnologia da sola non basta (macchina + mani + Certezze)
+9. Risultati veri, misurati in centimetri (la «sfida centimetri»)
+10. «Non vendo miracoli, vendo un metodo» → DM «METODO»
+
+> **La regola d'oro:** ogni reel chiude con UNA azione — «scrivimi [PAROLA] in DM» oppure
+> «prenota la tua analisi gratuita». Senza invito, il reel intrattiene e basta. E la parola
+> in DM serve a te: ti dice quale reel ha funzionato e cosa cercava quella cliente.
+
+---
+
+## 23. DOSSIER PROGETTO NIPEC (IT + SQ) e la guida alla strategia
+
+**Dossier Progetto NIPEC** — standard operativo Laser Ares/Uriel · Afrodite VS++, in italiano
+e albanese (`Dossier_Progetto_NIPEC.md` / `_SQAALB.md`). Frase-cardine:
+> *«Usarlo bene è più facile che usarlo male.»* — *«Përdorimi i mirë është më i lehtë se ai i keq.»*
+
+**Cosa cambia**
+- **Da:** formazione in un giorno → uso non presidiato → guasti attribuiti alla macchina.
+- **A:** percorso a tappe → operatore certificato → presidio mensile → il gesto giusto reso
+  più comodo.
+
+**Il risultato:** meno guasti da uso improprio · componenti che durano · macchina sempre
+pronta = incassi · relazione salda · responsabilità chiara.
+
+**Le 3 frasi** *(da mandare a memoria, IT e SQ)*
+- «Usarlo bene è più facile che usarlo male.»
+- «Prima di chiamarmi, tre controlli.»
+- «Se serve, io ci sono.»
+
+**Il materiale prodotto** (tutto IT + SQ, pronto per WhatsApp e per la stampa): Card Regole
+Laser · Card Regole Afrodite · Copioni Video WhatsApp · Kit Frizione/Adesivi · Guida
+Installatore T0 · Checklist/Verbale di Consegna.
+
+**Mini-guida «Come ragioniamo la strategia»** (artifact pubblicato + PDF + scheda WhatsApp).
+Quattro schemi:
+1. **Matriosca** — Sistema ⊃ Metodo → Processo → (Procedura + Protocollo). Metodo = *perché*,
+   Processo = *sequenza*, Procedura = *come*, Protocollo = *cosa devi / non devi*,
+   Sistema = *l'insieme*.
+2. **Scala mezzi-fini** — DOVE = strategia, COME = tattica; ogni gradino è fine per quello
+   sotto e mezzo per quello sopra. Domanda-chiave: **«è un fine o un mezzo?»**
+3. **Iceberg** — del concorrente vedi la tattica (le mosse), non la strategia (il perché, da
+   dedurre dal pattern); proteggi il tuo "sotto".
+4. **Opinione → Ipotesi → Lettura provata** — i fatti sono certi, il perché va testato con
+   una **mossa-sonda**.
+
+**Nota tecnica ricorrente:** PDF/PNG via Chrome headless (`--headless=new --print-to-pdf` /
+`--screenshot`) vanno **sempre scritti su disco locale e poi copiati**, perché le scritture
+dirette su `G:\` (Google Drive virtual FS) falliscono in modo intermittente.
+
+---
+
+## FONTI DELL'IMPORT — stato finale
+
+Import dal Google Drive di Giorgio completato per **tutti i .md** presenti:
+- cartella `memoria/` (48 file) → §0-15
+- cartella `MD/` + `MD/NIPEC SISTEMA/` (15 file: Sistema_Approccio, Copione_Approccio_Operativo,
+  Test_3_Minuti_v2, Script_Cliente_Persa, Modello e Mappa Contatto 30 Giorni, storico-crescita,
+  STANDARD_DEMETRA_Lancio_Centro, ESEMPIO_Centro_Estetico_DEMETRA, DEMETRA_Tirana ×3,
+  Sistema_Muletto, Dossier_Progetto_NIPEC IT+SQ) → §17-23
+- `CLAUDE.md` (le 12 regole, già in §0) · `nipec-guida-strategia.md` → §23
+- `contratti/*.md` (7 file) → prodotti in questa sessione, già nel repo
+- **Escluso volutamente:** `CR!2YW00DNPT57212BY65ER6T237BDP.azw.md` (265 KB, export Kindle,
+  non è materiale NIPEC) e `rosa-milan.md` (15 KB, rosa Football Manager 26 — già annotato
+  in §10 come interesse personale).
