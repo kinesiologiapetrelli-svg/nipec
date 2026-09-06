@@ -265,6 +265,12 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
       <div id="lista-art"></div>
     </div>
     <div class="scheda">
+      <h2>Cestino</h2>
+      <p class="tenue">I movimenti che hai tolto. Non contano nella giacenza. Puoi rimetterli a posto o buttarli per sempre.</p>
+      <div id="lista-cestino"></div>
+      <div class="riga-bot" id="cestino-bot"></div>
+    </div>
+    <div class="scheda">
       <h2>Sedi</h2>
       <p class="tenue">Dove si trovano fisicamente le macchine. Roma e Padenghe stanno sotto Italia, Tirana sotto Albania.</p>
       <div id="lista-sedi"></div>
@@ -301,6 +307,11 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
       <input id="importa" type="file" accept="application/json" hidden>
     </div>
     <div class="scheda">
+      <h2>Ricomincia da zero</h2>
+      <p class="tenue">Cancella <b>tutto</b> quello che c'è su questo dispositivo: articoli, movimenti, foto e il collegamento al foglio. Serve quando si riparte con un magazzino pulito. <b>Esporta prima una copia</b>, da qui non si torna indietro.</p>
+      <div class="riga-bot"><button class="mini vuoto" id="azzera" type="button" style="color:var(--allerta)">Cancella tutto</button></div>
+    </div>
+    <div class="scheda">
       <h2>Aspetto</h2>
       <div class="riga-bot">
         <button class="mini vuoto" data-tema="auto" type="button">Automatico</button>
@@ -316,7 +327,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blu);outline-off
 <script>
 "use strict";
 var CHIAVE = "magazzino-nipec-v1";
-var VERSIONE = "6 set 2026 · 7";
+var VERSIONE = "6 set 2026 · 9";
 var VUOTO = {
   magazzini: [{ id: "m1", nome: "Magazzino principale" }],
   articoli: [],
@@ -909,16 +920,10 @@ function legaCorrezione(c) {
   }
   stop(q("#mv-chiudi"), function () { movApertoId = null; disegnaMagazzino(); });
 
-  stop(q("#mv-ripristina"), function () {
-    delete v.eliminato; segna("movimenti", v);
-    movApertoId = null; salva(); disegna(); avvisa("Movimento ripristinato.");
-  });
-
   stop(q("#mv-elimina"), function () {
-    /* annullato, non cancellato: la riga resta e la correzione arriva agli altri */
     v.eliminato = "1"; segna("movimenti", v);
     movApertoId = null; salva(); disegna();
-    avvisa("Movimento annullato. Puoi ripristinarlo riaprendolo.");
+    avvisa("Spostato nel cestino. Lo trovi in Dati → Cestino.");
   });
 
   stop(q("#mv-salva"), function () {
@@ -989,7 +994,7 @@ function rigaArticolo(a) {
 /* Ogni riga dello storico si apre e si corregge: e' l'unico modo per
    rimediare a un errore senza mettersi a smanettare sul foglio Google. */
 function rigaMovimento(v, a) {
-  var cls = "mov tocca" + (movApertoId === v.id ? " aperta" : "") + (v.eliminato ? " morta" : "");
+  var cls = "mov tocca" + (movApertoId === v.id ? " aperta" : "");
   var apri = '<div class="' + cls + '" data-mov="' + esc(v.id) + '"><span class="d">' + itData(v.data) + "</span>";
   if (v.tipo === "spostamento") {
     return apri + "<span>da <b>" + esc(nomeSede(v.sedeDa || v.da)) + "</b> a <b>" +
@@ -1017,12 +1022,6 @@ var CAUSALI = ["Noleggio", "Sostituzione in garanzia", "Muletto", "Uso interno",
 function formCorreggi(v, a) {
   var t = v.tipo, u = esc(a.unita || "pz");
   var h = '<div class="corr">';
-  if (v.eliminato) {
-    h += '<div class="tenue">Movimento annullato. Non conta più nella giacenza.</div>' +
-      '<div class="riga-bot"><button class="mini" id="mv-ripristina" type="button">Ripristina</button>' +
-      '<button class="mini vuoto" id="mv-chiudi" type="button">Chiudi</button></div></div>';
-    return h;
-  }
   h += '<div class="due"><div><label for="mv-qta">Quantità (' + u + ")</label>" +
     '<input id="mv-qta" type="number" min="0" step="1" value="' + esc(v.qta) + '" inputmode="numeric"></div>' +
     '<div><label for="mv-data">Data</label><input id="mv-data" type="date" value="' +
@@ -1071,12 +1070,12 @@ function formCorreggi(v, a) {
   h += '<label for="mv-nota">Nota</label><input id="mv-nota" value="' + esc(v.nota) + '" autocomplete="off">' +
     '<div class="riga-bot"><button class="mini" id="mv-salva" type="button">Salva la correzione</button>' +
     '<button class="mini vuoto" id="mv-chiudi" type="button">Annulla</button>' +
-    '<button class="mini vuoto" id="mv-elimina" type="button" style="color:var(--allerta)">Elimina</button></div>';
+    '<button class="mini vuoto" id="mv-elimina" type="button" style="color:var(--allerta)">Metti nel cestino</button></div>';
   return h + "</div>";
 }
 
 function dettaglio(a) {
-  var mv = movimentiDi(a.id);
+  var mv = movimentiDi(a.id).filter(vivo);   /* i cestinati stanno nel cestino */
   var h = '<div style="padding:.2rem 0 .8rem">' +
     (a.foto ? '<div class="fbox"><img class="fgrande" src="' + a.foto + '" alt="Foto di ' + esc(a.descrizione) + '"></div>' : "") +
     '<div class="dove-ora"><b>Dove si trova ora:</b> ' +
@@ -1369,6 +1368,81 @@ function disegnaNumeri() {
       (a.scortaMin ? " / " + a.scortaMin : "") + "</span></div>";
   }).join("") : '<div class="vuoto-msg">Nessun articolo sotto scorta.</div>';
 }
+/* eliminato "1" = nel cestino · "2" = buttato per sempre, non si vede piu' */
+function nelCestino() {
+  return S.movimenti.filter(function (v) { return String(v.eliminato) === "1"; })
+    .sort(function (x, y) { return String(y.agg || "").localeCompare(String(x.agg || "")); });
+}
+function descriviMov(v) {
+  var a = articolo(v.articoloId);
+  var che = (a && (a.descrizione || a.codice)) || "articolo tolto";
+  if (v.tipo === "spostamento") {
+    return che + " · da " + esc(nomeSede(v.sedeDa || v.da)) + " a " + esc(nomeSede(v.sedeA || v.a));
+  }
+  var etichetta = v.tipo === "entrata" ? "entrata" : (v.tipo === "vendita" ? "venduto" : "uscita");
+  return che + " · " + etichetta +
+    (v.sede ? " · " + esc(v.sede) : "") +
+    (v.destinazione ? " · " + esc(v.destinazione) : "") +
+    (v.fornitore ? " · " + esc(v.fornitore) : "");
+}
+function disegnaCestino() {
+  var el = nelCestino();
+  $("#lista-cestino").innerHTML = el.length
+    ? el.map(function (v) {
+        return '<div class="mov"><span class="d">' + itData(v.data) + "</span>" +
+          "<span>" + descriviMov(v) + "</span>" +
+          '<span class="q">' + (v.tipo === "entrata" ? "+" : v.tipo === "spostamento" ? "↦ " : "−") +
+            num(v.qta) + "</span>" +
+          '<span style="width:100%;display:flex;gap:.4rem;margin-top:.35rem">' +
+            '<button class="mini" data-ripristina="' + esc(v.id) + '" type="button">Rimetti a posto</button>' +
+            '<button class="mini vuoto" data-sempre="' + esc(v.id) + '" type="button" style="color:var(--allerta)">Elimina definitivamente</button>' +
+          "</span></div>";
+      }).join("")
+    : '<div class="tenue">Il cestino è vuoto.</div>';
+
+  $("#cestino-bot").innerHTML = el.length
+    ? '<button class="mini vuoto" id="svuota-cestino" type="button" style="color:var(--allerta)">Svuota il cestino (' + el.length + ")</button>"
+    : "";
+
+  $("#lista-cestino").querySelectorAll("[data-ripristina]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var v = S.movimenti.filter(function (x) { return x.id === b.dataset.ripristina; })[0];
+      if (!v) return;
+      delete v.eliminato; segna("movimenti", v);
+      salva(); disegna(); avvisa("Rimesso a posto.");
+    });
+  });
+  $("#lista-cestino").querySelectorAll("[data-sempre]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var v = S.movimenti.filter(function (x) { return x.id === b.dataset.sempre; })[0];
+      if (!v) return;
+      buttaPerSempre(v);
+      salva(); disegna(); avvisa("Eliminato.");
+    });
+  });
+  var sv = $("#svuota-cestino");
+  if (sv) sv.addEventListener("click", function () {
+    if (!svuotaArmato) {
+      svuotaArmato = true; sv.textContent = "Sei sicuro? Tocca di nuovo"; sv.className = "mini";
+      svuotaTimer = setTimeout(function () { svuotaArmato = false; disegnaCestino(); }, 6000);
+      return;
+    }
+    clearTimeout(svuotaTimer); svuotaArmato = false;
+    nelCestino().forEach(buttaPerSempre);
+    salva(); disegna(); avvisa("Cestino svuotato.");
+  });
+}
+var svuotaArmato = false, svuotaTimer = null;
+/* Il foglio si scrive solo per riga, non sa cancellarne: quindi la riga la
+   svuoto di tutto e la marchio, cosi' sparisce ovunque e non torna piu' su. */
+function buttaPerSempre(v) {
+  Object.keys(v).forEach(function (k) {
+    if (k !== "id" && k !== "articoloId" && k !== "agg") delete v[k];
+  });
+  v.tipo = ""; v.qta = 0; v.data = ""; v.eliminato = "2";
+  segna("movimenti", v);
+}
+
 /* Una fotografia in italiano di quello che l'app ha davvero in pancia.
    Serve per non tirare a indovinare quando qualcosa "non funziona". */
 function disegnaControllo() {
@@ -1537,6 +1611,7 @@ function disegnaSetup() {
       (q ? ' · <b style="color:var(--avviso)">' + q + " da inviare</b>" : " · tutto inviato");
 
   disegnaControllo();
+  disegnaCestino();
 
   var pesoTot = pesoMemoria(), conFoto = S.articoli.filter(function (x) { return x.foto; }).length;
   $("#peso").innerHTML = "Spazio usato: <b>" + kb(pesoTot) + "</b> · foto: <b>" + conFoto + "</b>" +
@@ -1631,6 +1706,25 @@ $("#csv").addEventListener("click", function () {
   scarica("movimenti-nipec-" + oggiISO() + ".csv", "﻿" + csv, "text/csv");
   avvisa("CSV esportato.");
 });
+/* Due passaggi invece di una finestra di conferma: sul telefono il primo tocco
+   e' facile che sia involontario, il secondo no. */
+var azzeraArmato = false, azzeraTimer = null;
+$("#azzera").addEventListener("click", function () {
+  var b = this;
+  if (!azzeraArmato) {
+    azzeraArmato = true;
+    b.textContent = "Sei sicuro? Tocca di nuovo";
+    b.className = "mini";
+    azzeraTimer = setTimeout(function () {
+      azzeraArmato = false; b.textContent = "Cancella tutto"; b.className = "mini vuoto";
+    }, 6000);
+    return;
+  }
+  clearTimeout(azzeraTimer);
+  try { localStorage.removeItem(CHIAVE); localStorage.removeItem(CHIAVE_CODA); } catch (e) { /* pazienza */ }
+  location.reload();
+});
+
 $("#importa-btn").addEventListener("click", function () { $("#importa").click(); });
 $("#importa").addEventListener("change", function () {
   var f = this.files && this.files[0]; if (!f) return;
