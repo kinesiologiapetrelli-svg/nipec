@@ -120,3 +120,15 @@ di aprire, non dopo.
 | F1 | Cercare il profilo sui canali del settore in Germania e Austria, e **fra i tedeschi già residenti in Albania**. | ☐ |
 | F2 | Definire il **pacchetto**: stipendio, alloggio, viaggi a casa, e cosa gli si chiede davvero (telefono, visite delle famiglie, video, qualità). | ☐ |
 | F3 | Metterlo **a bilancio del pilota** prima di aprire: è la voce singola più pesante dei 30 posti. | ☐ |
+
+---
+
+## Aggiunta — le due cose che nascono dalla decisione 8
+
+Deciso che nei primi 30 posti entra **solo chi sta bene** (`CHI-STA-BENE.md`).
+Due conseguenze che vanno nel Tempo 1 e non si rimandano:
+
+| | | Fatto |
+|---|---|---|
+| **A9** | **All'avvocato: si chiede l'autorizzazione sanitaria lo stesso, in parallelo**, anche se i primi 30 posti non ne hanno bisogno. Il giorno che la prima signora peggiora — e succederà entro due-tre anni — o abbiamo la carta o la mandiamo via davanti alla sua famiglia. | ☐ |
+| **G1** | **La struttura si sceglie e si sistema già «pronta per la cura»**: porte e bagni larghi, ascensore o piano terra, campanello in ogni camera e bagno, niente gradini, un locale medicheria che per ora fa da magazzino. **Costa poco adesso e moltissimo dopo:** una struttura pensata solo per gente in forma non si converte, si rifà. | ☐ |
