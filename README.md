@@ -54,10 +54,12 @@ NIPEC viaggia il **battito**, sei numeri e una data, senza nessun nome.
 
 ## Un altro progetto, in una cartella sua
 
-**`RSA-ALBANIA/`** — progetto nuovo, aperto il 13 settembre 2026. Non c'entra con il
-laser e non tocca niente di quello che sta qui sopra: sta nello stesso repository solo
-perché è lo stesso posto dove Giorgio guarda le sue cose. Tutto quello che si fa là
-dentro è scritto in `.md`. Si parte da `RSA-ALBANIA/LEGGIMI.md`.
+**`RSA-ALBANIA/`** — progetto nuovo, aperto il 13 settembre 2026: una residenza per
+anziani sulla costa albanese, vicino all'aeroporto di Tirana, per famiglie tedesche,
+svizzere, inglesi e italiane. Non c'entra con il laser e non tocca niente di quello che
+sta qui sopra: sta nello stesso repository solo perché è lo stesso posto dove Giorgio
+guarda le sue cose. Tutto quello che si fa là dentro è scritto in `.md`.
+Si parte da [`RSA-ALBANIA/LEGGIMI.md`](RSA-ALBANIA/LEGGIMI.md).
 
 ---
 NIPEC · Tecnologie Estetiche — Assistenza 351 846 6025

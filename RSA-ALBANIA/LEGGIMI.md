@@ -1,44 +1,50 @@
 # RSA ALBANIA
 
-Progetto nuovo, aperto il **13 settembre 2026**. Sta dentro il repository NIPEC ma
-è una cosa sua: cartella separata, file suoi, niente in comune con il laser.
+**Una residenza per anziani sulla costa albanese, vicino all'aeroporto di Tirana e in
+convenzione con un ospedale privato della capitale, che a 2.500-3.000 € al mese tutto
+incluso accoglie famiglie da Germania, Svizzera, Regno Unito e Italia.**
+
+Progetto aperto il **13 settembre 2026**. Sta dentro il repository NIPEC ma è una cosa
+sua: cartella separata, file suoi, niente in comune con il laser.
 
 ## La regola di questo progetto
 
 **Tutto quello che facciamo finisce in un `.md`.** Ogni decisione, ogni numero, ogni
-telefonata, ogni preventivo: se non è scritto qui dentro, non è successo. Niente
-appunti sparsi, niente «l'avevamo detto a voce».
+telefonata, ogni preventivo: se non è scritto qui dentro, non è successo. Niente appunti
+sparsi, niente «l'avevamo detto a voce».
 
-Perché: un `.md` si legge dal telefono, dal computer e da GitHub senza aprire niente,
-si cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
+Perché: un `.md` si legge dal telefono, dal computer e da GitHub senza aprire niente, si
+cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 
-## I file
+## Da dove si comincia a leggere
+
+| # | File | Cosa ci sta dentro |
+|---|---|---|
+| **1** | **[`DOMANDE-PER-INIZIARE.md`](DOMANDE-PER-INIZIARE.md)** | **Le dieci domande per Giorgio.** Le prime tre cambiano il progetto. **Si parte da qui.** |
+| **2** | **[`ANALISI-FATTIBILITA.md`](ANALISI-FATTIBILITA.md)** | Il documento operativo: che struttura, dove, per chi, con che personale, i conti a spanne, le tattiche di vendita, i rischi e il piano in tre tempi. |
+| **3** | **[`PREZZI-EUROPA.md`](PREZZI-EUROPA.md)** | La statistica: quanto paga di tasca propria una famiglia in ogni paese d'Europa, e quali paesi vanno presi e quali lasciati perdere. Con le fonti. |
+| 4 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
+
+## Le carte di servizio
 
 | File | Cosa ci sta dentro |
 |---|---|
-| **`LEGGIMI.md`** | Questo. Cos'è il progetto e come sono organizzate le carte. |
-| **`DIARIO.md`** | Il registro, in ordine di data. Cosa è stato fatto, giorno per giorno. Si aggiunge in cima, non si riscrive il passato. |
-| **`DECISIONI.md`** | Solo le cose decise e chiuse. Una riga per decisione, con la data e il perché. Quello che sta qui non si ridiscute. |
-| **`DOMANDE-APERTE.md`** | Quello che non sappiamo ancora, in ordine di quanto pesa. Quando una si chiude, si sposta in `DECISIONI.md`. |
+| [`DIARIO.md`](DIARIO.md) | Il registro, in ordine di data. Il più recente in cima. Non si riscrive il passato. |
+| [`DECISIONI.md`](DECISIONI.md) | Solo le cose decise e chiuse. Quello che sta qui **non si ridiscute**. |
+| [`DOMANDE-APERTE.md`](DOMANDE-APERTE.md) | Quello che non sappiamo ancora, in ordine di quanto pesa. Quando una si chiude, si sposta in `DECISIONI.md`. |
 
-## Com'è messo adesso
+## Com'è messo adesso, in cinque righe
 
-Il progetto ha un nome e una regola. Non ha ancora un contenuto:
-cosa sia esattamente **RSA ALBANIA** è la prima domanda aperta.
-
-Le cinque domande da sistemare prima di scrivere altro stanno in `DOMANDE-APERTE.md`.
-
-## Quello che già sappiamo sull'Albania
-
-Dallo studio `RADIOGRAFIA.html` (agosto 2026), fatto per il laser ma buono anche qui:
-
-- l'Albania era stata guardata come **quarta piazza** dopo nord, centro e sud Italia;
-- ci sono medici italiani che già lavorano là e un turismo sanitario in crescita;
-- salari e costi molto più bassi dell'Italia, PIL in crescita;
-- **come ci si fa pagare è rimasta una domanda aperta** — dogana, valuta, contratti.
-  Non la risolve il prodotto: serve il commercialista.
-
-Quest'ultimo punto vale per il laser e vale identico qui.
+- **L'idea regge.** Domanda enorme e insoddisfatta, un precedente che funziona da anni
+  (i tedeschi in casa di riposo in Polonia), un vantaggio di costo reale, un aeroporto in
+  mezzo all'Europa con 108 destinazioni.
+- **L'arma che nessun altro ha:** gli infermieri albanesi emigrati in Germania, Svizzera e
+  Italia che vorrebbero tornare a casa senza tornare poveri.
+- **Il rischio numero uno è il personale**, il numero due è arrivare al terzo anno con i
+  soldi finiti.
+- **Nessuno paga per noi**: né l'ASL italiana né la cassa tedesca. Si nasce privati al 100%.
+- **Il prossimo passo non è costruire.** Sono le carte (avvocato e commercialista),
+  **le dieci telefonate**, e poi un pilota da 30-40 posti in un albergo affittato.
 
 ---
 NIPEC · Tecnologie Estetiche
