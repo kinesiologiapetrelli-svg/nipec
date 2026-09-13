@@ -368,4 +368,4 @@ affitto. La costruzione è il terzo passo, non il primo.**
 Fonti: tutte in `PREZZI-EUROPA.md` e in `IL-PROGETTO.md`.
 Domande aperte: `DOMANDE-APERTE.md`. Le domande per Giorgio: `DOMANDE-PER-INIZIARE.md`.
 
-NIPEC · Tecnologie Estetiche
+**Adriatik Cocoon**

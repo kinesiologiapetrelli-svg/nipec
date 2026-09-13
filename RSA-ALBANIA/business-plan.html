@@ -1,40 +1,40 @@
-<title>Residenza Illyria</title>
+<title>Adriatik Cocoon</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --paper:#F5F8F9; --surface:#FFFFFF; --surface-2:#EDF3F5;
-  --ink:#111E26; --ink-2:#2C4250; --muted:#5B717C;
-  --line:#D8E2E6; --line-strong:#B6C7CE;
-  --accent:#0C6474; --accent-weak:#7FB2BC; --wash:#E5F0F2;
-  --warn:#8A5709; --warn-wash:#F8EFDC;
+  --paper:#F2F6F6; --surface:#FFFFFF; --surface-2:#E9F1F1;
+  --ink:#13212A; --ink-2:#2E454C; --muted:#5E7278;
+  --line:#D5E2E3; --line-strong:#AFC7C9;
+  --accent:#0B4A54; --accent-2:#2B7E86; --accent-weak:#95C3C4; --wash:#E4EFEF;
+  --warn:#8A5709; --warn-wash:#F7EFDD;
   --neg:#9A3225; --pos:#1C6549;
-  --shadow:0 1px 2px rgba(17,30,38,.06), 0 8px 24px -16px rgba(17,30,38,.25);
+  --shadow:0 1px 2px rgba(11,74,84,.07), 0 10px 28px -18px rgba(11,74,84,.35);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#0C161B; --surface:#13222A; --surface-2:#192C35;
-    --ink:#E4EDF0; --ink-2:#BACBD3; --muted:#8FA5AF;
-    --line:#263B45; --line-strong:#3A5560;
-    --accent:#4FAFC2; --accent-weak:#2C6B79; --wash:#15303A;
+    --paper:#0A171C; --surface:#11242A; --surface-2:#172E35;
+    --ink:#E2EDEE; --ink-2:#B6CCCE; --muted:#8CA5A9;
+    --line:#243C42; --line-strong:#37565C;
+    --accent:#57AEB5; --accent-2:#3E939B; --accent-weak:#2A6068; --wash:#12313A;
     --warn:#D6A249; --warn-wash:#2A2415;
     --neg:#D9776A; --pos:#5BB392;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.7);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0C161B; --surface:#13222A; --surface-2:#192C35;
-  --ink:#E4EDF0; --ink-2:#BACBD3; --muted:#8FA5AF;
-  --line:#263B45; --line-strong:#3A5560;
-  --accent:#4FAFC2; --accent-weak:#2C6B79; --wash:#15303A;
+  --paper:#0A171C; --surface:#11242A; --surface-2:#172E35;
+  --ink:#E2EDEE; --ink-2:#B6CCCE; --muted:#8CA5A9;
+  --line:#243C42; --line-strong:#37565C;
+  --accent:#57AEB5; --accent-2:#3E939B; --accent-weak:#2A6068; --wash:#12313A;
   --warn:#D6A249; --warn-wash:#2A2415;
   --neg:#D9776A; --pos:#5BB392;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.7);
 }
 *{box-sizing:border-box}
 body{
   background:var(--paper); color:var(--ink);
-  font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  font-family:Archivo,system-ui,-apple-system,"Helvetica Neue",sans-serif;
   font-size:16px; line-height:1.62; margin:0;
   -webkit-font-smoothing:antialiased;
 }
@@ -56,6 +56,27 @@ body{
 .topbar nav{margin-left:auto; display:flex; gap:14px; flex-wrap:wrap}
 .topbar nav a{color:var(--muted); text-decoration:none; border-bottom:1px solid transparent}
 .topbar nav a:hover{color:var(--accent); border-bottom-color:var(--accent-weak)}
+
+/* ---------- marchio ---------- */
+.mark{display:flex; align-items:center; gap:10px; text-decoration:none}
+.mark svg{width:26px; height:26px; flex:none; display:block}
+.mark .wm{
+  font-family:Spectral,Georgia,serif; font-weight:600; font-size:15px;
+  letter-spacing:.16em; color:var(--accent); line-height:1; white-space:nowrap;
+}
+.lockup{display:flex; align-items:center; gap:18px; margin-bottom:34px}
+.lockup svg{width:54px; height:54px; flex:none; display:block}
+.lockup .wm{
+  font-family:Spectral,Georgia,serif; font-weight:600;
+  font-size:clamp(21px,3.4vw,27px); letter-spacing:.19em; color:var(--accent);
+  line-height:1.1; margin:0;
+}
+.lockup .sub{
+  font-family:Archivo,sans-serif; font-size:11px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--muted); margin:7px 0 0;
+}
+.colophon{display:flex; align-items:center; gap:16px; margin-bottom:18px}
+.colophon svg{width:38px; height:38px; flex:none}
 
 /* ---------- masthead ---------- */
 .mast{padding-block:64px 40px; border-bottom:2px solid var(--ink); margin-bottom:8px}
@@ -140,6 +161,7 @@ figcaption{font-size:13px; color:var(--muted); margin-top:14px; max-width:62ch; 
 .bar-track{display:flex; align-items:center; gap:9px; min-width:0}
 .bar-fill{height:19px; border-radius:0 3px 3px 0; background:var(--accent); flex:none}
 .bar-fill.off{background:var(--accent-weak)}
+.bar-fill{box-shadow:none}
 .bar-fill.nil{background:var(--line-strong); min-width:3px}
 .bar-val{
   font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--ink);
@@ -221,7 +243,11 @@ a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent); outlin
 </style>
 
 <div class="topbar"><div class="topbar-in">
-  <strong>Residenza Illyria</strong> <span>Business plan · bozza 1 · 13 settembre 2026</span>
+  <span class="mark">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M15 43C9 36 8 26 11 19c3-8 22-8 26 0 3 7 2 17-4 24"/><path d="M17.5 33h13"/></g></svg>
+    <span class="wm">ADRIATIK COCOON</span>
+  </span>
+  <span>Business plan · bozza 1 · 13 settembre 2026</span>
   <nav>
     <a href="#mercato">Mercato</a><a href="#albania">Albania</a>
     <a href="#numeri">Numeri</a><a href="#piano">Piano</a><a href="#rischi">Rischi</a>
@@ -231,7 +257,14 @@ a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent); outlin
 <div class="wrap">
 
 <header class="mast">
-  <p class="eyebrow">NIPEC · Documento di lavoro</p>
+  <div class="lockup">
+    <svg viewBox="0 0 48 48" role="img" aria-label="Adriatik Cocoon"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M15 43C9 36 8 26 11 19c3-8 22-8 26 0 3 7 2 17-4 24"/><path d="M17.5 33h13"/></g></svg>
+    <div>
+      <p class="wm">ADRIATIK COCOON</p>
+      <p class="sub">Residenze per chi sta bene · Albania</p>
+    </div>
+  </div>
+  <p class="eyebrow">Documento di lavoro · riservato</p>
   <h1>Due residenze per anziani europei in Albania</h1>
   <p class="standfirst">Un mercato da migliaia di euro al mese per famiglia, un paese a due ore di volo dove il lavoro costa un quinto, e una pensione privata che lì non paga tasse. Il piano per aprire trenta posti sul mare e poi centoventi in collina.</p>
   <div class="mast-meta">
@@ -580,9 +613,12 @@ a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent); outlin
 </section>
 
 <footer>
-  Documento di lavoro · bozza 1 · 13 settembre 2026<br>
-  Le decisioni prese, le domande ancora aperte e chi fa cosa nei prossimi trenta giorni stanno nei file del progetto.<br><br>
-  <strong>NIPEC · Tecnologie Estetiche</strong>
+  <div class="colophon">
+    <svg viewBox="0 0 48 48" role="img" aria-label="Adriatik Cocoon"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M15 43C9 36 8 26 11 19c3-8 22-8 26 0 3 7 2 17-4 24"/><path d="M17.5 33h13"/></g></svg>
+    <span class="wm" style="font-family:Spectral,Georgia,serif;font-weight:600;font-size:15px;letter-spacing:.16em;color:var(--accent)">ADRIATIK COCOON</span>
+  </div>
+  Documento di lavoro · bozza 1 · 13 settembre 2026 · riservato<br>
+  Le decisioni prese, le domande ancora aperte e chi fa cosa nei prossimi trenta giorni stanno nei file del progetto.
 </footer>
 
 </div>

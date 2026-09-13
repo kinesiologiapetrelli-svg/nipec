@@ -143,4 +143,4 @@ traghetto e **due frontiere** (l'Albania non è nell'Unione). Per adesso è un n
 - Aeroporto di Tirana, rotte e compagnie: fonti in [`ANALISI-FATTIBILITA.md`](ANALISI-FATTIBILITA.md)
 
 ---
-NIPEC · Tecnologie Estetiche
+**Adriatik Cocoon**

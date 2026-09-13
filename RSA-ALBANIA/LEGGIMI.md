@@ -1,5 +1,12 @@
 # RSA ALBANIA
 
+> ### Il progetto ha un nome e una faccia: **ADRIATIK COCOON**
+> *Residenze per chi sta bene · Albania*
+>
+> Nome, logo, colori e caratteri stanno in **[`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.md)**.
+> **Niente marchio NIPEC**: questo progetto sta in piedi da solo.
+> *(`RSA ALBANIA` resta il nome di cantiere, quello che usiamo fra noi.)*
+
 **Due case, non una.**
 
 **🇮🇹 Casa 1 — il Cocoon.** Una residenza sul mare fra Durazzo e Golem, a 38 minuti
@@ -47,6 +54,7 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 |---|---|
 | [`DIARIO.md`](DIARIO.md) | Il registro, in ordine di data. Il più recente in cima. Non si riscrive il passato. |
 | [`DECISIONI.md`](DECISIONI.md) | Solo le cose decise e chiuse. Quello che sta qui **non si ridiscute**. |
+| [`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.md) | Il marchio: nome, logo, colori, caratteri, regole d'uso e le cinque verifiche da fare prima di affezionarsi. |
 | [`DOMANDE-APERTE.md`](DOMANDE-APERTE.md) | Quello che non sappiamo ancora, in ordine di quanto pesa. Quando una si chiude, si sposta in `DECISIONI.md`. |
 
 ## Com'è messo adesso, in cinque righe
@@ -67,4 +75,4 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
   l'argomento di vendita principale. Ma **l'autorizzazione sanitaria serve subito.**
 
 ---
-NIPEC · Tecnologie Estetiche
+**Adriatik Cocoon**

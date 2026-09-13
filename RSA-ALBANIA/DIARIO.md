@@ -5,6 +5,34 @@ la data nuova che è cambiata.
 
 ---
 
+## 13 settembre 2026 — il marchio: **Adriatik Cocoon**
+
+Giorgio: *«togli brand NIPEC, qui è un nuovo brand e nuovi loghi e colori»*, e poi il
+nome: **Adriatik Cocoon**.
+
+- **NIPEC esce del tutto** — non in facciata, non in fondo, nemmeno davanti alla banca.
+  Tolto da tutti i file del progetto e dal business plan.
+- **`Adriatik`** è Adriatico scritto in albanese: dice dove siamo senza mettere «Albania»
+  nel titolo, è cercabile, e non sa di catena di RSA. **`Cocoon`** è il film del 1985 —
+  anziani che in una residenza ritrovano la salute e ricominciano a nuotare: **è il
+  prodotto in una parola.**
+- **Il logo: un bozzolo aperto, e dentro la linea del mare.** L'apertura è deliberata —
+  «cocoon» può suonare come *chiudersi dentro*, che è l'opposto di quello che vendiamo, e
+  il segno lo smentisce da solo. Due tratti, stessa larghezza: funziona a 16 pixel come
+  favicon e su un'insegna di tre metri.
+- **Una sola famiglia di colori**, il mare: Adriatico profondo `#0B4A54`. Niente secondo
+  colore di marca — i caldi restano solo per i segnali, così quando compaiono vogliono
+  dire qualcosa. **Spectral** per i titoli, **Archivo** per il testo, **IBM Plex Mono**
+  per i numeri.
+- Creati `MARCHIO/` con cinque file SVG (orizzontale, verticale, emblema, e i due
+  negativi) e `MARCHIO/LEGGIMI.md` con le regole d'uso.
+- Il business plan è stato ri-vestito e ripubblicato, **stesso indirizzo**.
+
+**Da fare prima di affezionarsi:** domini, verifica marchi (UIBM, EUIPO, DPMA, DPPI),
+come suona a Tirana, e il test al telefono — la **K** è il punto da provare.
+
+---
+
 ## 13 settembre 2026 — il business plan
 
 Giorgio chiede un documento unico con tutte le ricerche e le statistiche della giornata,

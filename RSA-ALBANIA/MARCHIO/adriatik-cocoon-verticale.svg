@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="200" height="120" role="img" aria-label="Adriatik Cocoon">
+  <title>Adriatik Cocoon — logo verticale</title>
+  <g fill="none" stroke="#0B4A54" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(76 6)">
+    <path d="M15 43C9 36 8 26 11 19c3-8 22-8 26 0 3 7 2 17-4 24"/>
+    <path d="M17.5 33h13"/>
+  </g>
+  <text x="100" y="82" text-anchor="middle" fill="#0B4A54"
+        font-family="Spectral, Georgia, 'Times New Roman', serif"
+        font-size="23" font-weight="600" letter-spacing="3.2">ADRIATIK</text>
+  <text x="100" y="104" text-anchor="middle" fill="#0B4A54"
+        font-family="Spectral, Georgia, 'Times New Roman', serif"
+        font-size="23" font-weight="600" letter-spacing="3.2">COCOON</text>
+</svg>

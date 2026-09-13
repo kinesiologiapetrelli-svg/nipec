@@ -473,4 +473,4 @@ Tutte pubbliche e verificabili. Marcate ⚠️ quelle che vendono il servizio di
 *Documento di lavoro. Le decisioni prese stanno in `DECISIONI.md`, quello che non sappiamo
 ancora in `DOMANDE-APERTE.md`, e chi fa cosa in `PRIMI-30-GIORNI.md`.*
 
-**NIPEC · Tecnologie Estetiche — 13 settembre 2026**
+**Adriatik Cocoon** — 13 settembre 2026

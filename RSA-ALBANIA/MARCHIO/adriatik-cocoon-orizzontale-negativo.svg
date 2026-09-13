@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 56" width="300" height="56" role="img" aria-label="Adriatik Cocoon">
+  <title>Adriatik Cocoon — logo orizzontale, negativo</title>
+  <g fill="none" stroke="#F2F6F6" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 4)">
+    <path d="M15 43C9 36 8 26 11 19c3-8 22-8 26 0 3 7 2 17-4 24"/>
+    <path d="M17.5 33h13"/>
+  </g>
+  <text x="66" y="32" fill="#F2F6F6"
+        font-family="Spectral, Georgia, 'Times New Roman', serif"
+        font-size="24" font-weight="600" letter-spacing="3.4">ADRIATIK COCOON</text>
+  <text x="68" y="46" fill="#95C3C4"
+        font-family="Archivo, 'Helvetica Neue', Arial, sans-serif"
+        font-size="9" letter-spacing="2.8">RESIDENZE PER CHI STA BENE · ALBANIA</text>
+</svg>

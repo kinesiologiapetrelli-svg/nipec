@@ -98,14 +98,35 @@ incluso (6) — **e l'Albania detta subito, in seconda riga.**
 
 ## E il marchio NIPEC?
 
-**Non in facciata.** NIPEC è tecnologie estetiche: a una figlia di Monaco che cerca un
-posto per sua madre quel nome non dice niente di buono, e mescolare i due mestieri li
-indebolisce tutti e due.
-
-**Ma in fondo alla pagina «chi siamo» ci sta bene**, e serve: *«un progetto del gruppo
-italiano NIPEC»* dice che dietro c'è un'azienda vera con una storia, non tre persone e un
-sito. **Alla banca lo stesso: là NIPEC va in prima pagina, non in fondo.** Davanti al
-cliente no; davanti a chi mette i soldi sì.
+> ### Deciso il 13 settembre 2026: **fuori. Da nessuna parte.**
+>
+> In una versione precedente di questo file avevo scritto che NIPEC poteva stare in fondo
+> alla pagina «chi siamo», e in prima pagina davanti alla banca. **Giorgio ha deciso
+> diversamente, e ha ragione:** questo è un mestiere diverso, con clienti diversi e rischi
+> diversi. Un marchio di tecnologie estetiche accanto a una residenza per anziani non
+> aggiunge fiducia a nessuno dei due — e se un giorno una delle due aziende ha un
+> problema, non deve trascinarsi dietro l'altra.
+>
+> **Adriatik Cocoon sta in piedi da solo**, con nome, logo e colori suoi.
+> Stanno in [`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.md).
 
 ---
-NIPEC · Tecnologie Estetiche
+
+## ⬛ Il nome è stato scelto: **ADRIATIK COCOON**
+
+Scelto da Giorgio il 13 settembre 2026, e sostituisce le due proposte qui sopra.
+
+- **`Adriatik`** è *Adriatico* **scritto in albanese**: dice dove siamo senza mettere
+  «Albania» nel titolo, rende il nome cercabile, e toglie l'aria da catena di RSA.
+- **`Cocoon`** è il film del 1985, dove degli anziani in una casa di riposo ritrovano la
+  salute e ricominciano a nuotare. **È il prodotto, in una parola:** non è il posto dove
+  si finisce, è il posto dove si riparte.
+
+Il marchio completo — logo, colori, caratteri, le regole d'uso e le cinque verifiche da
+fare prima di affezionarsi — sta in **[`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.md)**.
+
+**Quello che non cambia è la riga in cima a questo file**: il nome non nomina l'Albania,
+ma il sottotitolo sì, in prima schermata, nella prima telefonata e nel contratto.
+
+---
+**Adriatik Cocoon**
