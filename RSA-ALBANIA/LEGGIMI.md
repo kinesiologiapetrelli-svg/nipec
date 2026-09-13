@@ -23,7 +23,8 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 | **1** | **[`DOMANDE-PER-INIZIARE.md`](DOMANDE-PER-INIZIARE.md)** | **Le dieci domande per Giorgio.** Le prime tre cambiano il progetto. **Si parte da qui.** |
 | **2** | **[`ANALISI-FATTIBILITA.md`](ANALISI-FATTIBILITA.md)** | Il documento operativo: che struttura, dove, per chi, con che personale, i conti a spanne, le tattiche di vendita, i rischi e il piano in tre tempi. |
 | **3** | **[`PREZZI-EUROPA.md`](PREZZI-EUROPA.md)** | La statistica: quanto paga di tasca propria una famiglia in ogni paese d'Europa, e quali paesi vanno presi e quali lasciati perdere. Con le fonti. |
-| 4 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
+| **4** | **[`TIRANA-O-MARE.md`](TIRANA-O-MARE.md)** | Il terreno sta a Tirana e non sul mare: cosa si perde, cosa si guadagna, e come cambia il prodotto. **Da leggere insieme all'analisi**, che era stata scritta immaginando la costa. |
+| 5 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
 
 ## Le carte di servizio
 
@@ -44,7 +45,11 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
   soldi finiti.
 - **Nessuno paga per noi**: né l'ASL italiana né la cassa tedesca. Si nasce privati al 100%.
 - **Il prossimo passo non è costruire.** Sono le carte (avvocato e commercialista),
-  **le dieci telefonate**, e poi un pilota da 30-40 posti in un albergo affittato.
+  **le dieci telefonate**, e poi **30 posti di prova in una struttura esistente**.
+  Il terreno si costruisce al terzo tempo.
+- **Il terreno sta a Tirana, non sul mare.** Si perde l'argomento del mare, si guadagna
+  il personale (che vive in capitale) e **l'ospedale a dieci minuti**, che diventa
+  l'argomento di vendita principale. Ma **l'autorizzazione sanitaria serve subito.**
 
 ---
 NIPEC · Tecnologie Estetiche
