@@ -439,38 +439,7 @@ nell'Unione. **Si nasce privati al 100%.**
 
 ---
 
-# 9 · Cosa serve adesso
-
-## Le sette caselle per andare in banca
-
-| | | |
-|---|---|---|
-| ☐ | **Il terreno con il titolo pulito** | è la garanzia |
-| ☐ | **L'autorizzazione, o la strada scritta per averla** | senza, non è un'azienda |
-| ☐ | **Un anno di conti veri**, anche su pochi posti | il costo vero di un posto letto |
-| ☐ | **La lista d'attesa firmata con caparre** | la domanda dimostrata |
-| ☐ | **La convenzione con l'ospedale** | il rischio sanitario coperto |
-| ☐ | **Chi gestisce**, con nome e curriculum | chi ci mette le mani |
-| ☐ | **Lo status AIDA**, se si ottiene | incentivi e procedure accelerate |
-
-## Le tre cose urgenti
-
-1. ⚠️ **Telefonare ad AIDA questa settimana** — la legge scade a dicembre 2026.
-2. **Verificare il titolo del terreno** — costa poco e blocca tutto il resto.
-3. **Le dieci telefonate** — costano zero e dicono più di questo documento.
-
-## Il capitale
-
-| | |
-|---|---|
-| Disponibile oggi | **1 – 3 M€** fra capitale proprio e soci |
-| Serve per la Casa 1 | **≈ 2,25 M€** — **ci sta dentro** |
-| Serve per la Casa 2 | **≈ 9,5 M€** — banca, fondi albanesi, status AIDA |
-| Potenzialmente accessibile | **Finanziatori e fondi statali albanesi** |
-
----
-
-# 10 · Le fonti
+# 9 · Le fonti
 
 Tutte pubbliche e verificabili. Marcate ⚠️ quelle che vendono il servizio di cui parlano.
 
@@ -493,6 +462,13 @@ Tutte pubbliche e verificabili. Marcate ⚠️ quelle che vendono il servizio di
 **Le regole albanesi sull'assistenza agli anziani** — [Consiglio d'Europa, MISSCEO: *Long-term care, Albania* (2023)](https://rm.coe.int/missceo-2023-long-term-care/1680b0eea2) · [Medicus Mundi: assistenza domiciliare](https://www.medicusmundi.ch/en/advocacy/publications/mms-bulletin/ageing-in-international-health-cooperation/kapitel-ii/providing-home-care-to-vulnerable-populations) · [ONU: rapporto di missione in Albania](https://www.un.org/esa/socdev/ageing/documents/Technical_Cooperation/AgeingAlbaniaMissionReport.pdf)
 
 ---
+
+> **Nota.** Una sezione «Cosa serve adesso» — le sette caselle da spuntare prima di andare
+> in banca, le tre cose urgenti e il capitale disponibile — è stata **tolta da questo
+> documento il 13 settembre 2026**, perché mostrava quello che ancora **non** abbiamo e il
+> nostro tetto di capitale: cose che non si danno a chi sta dall'altra parte del tavolo.
+> **Non è persa: vive dove serve**, cioè in `CLIENTI-O-SOLDI.md` (le sette caselle) e in
+> `PRIMI-30-GIORNI.md` (le urgenze e chi fa cosa).
 
 *Documento di lavoro. Le decisioni prese stanno in `DECISIONI.md`, quello che non sappiamo
 ancora in `DOMANDE-APERTE.md`, e chi fa cosa in `PRIMI-30-GIORNI.md`.*
