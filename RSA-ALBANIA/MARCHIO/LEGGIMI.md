@@ -1,4 +1,4 @@
-# Adriatik Cocoon · il marchio
+# Illyria Cocoon · il marchio
 
 Deciso il **13 settembre 2026**. Nome scelto da Giorgio.
 **Questo progetto non porta il marchio NIPEC**: è un'azienda sua, con nome, logo e colori suoi.
@@ -7,15 +7,27 @@ Deciso il **13 settembre 2026**. Nome scelto da Giorgio.
 
 ## Il nome
 
-# ADRIATIK COCOON
+# ILLYRIA COCOON
 
 **Due parole, e ognuna fa un mestiere.**
 
-**`Adriatik`** — è *Adriatico* **scritto in albanese**. Non è un errore: è il mare detto
-nella lingua del posto. Un italiano e un tedesco lo leggono e lo capiscono lo stesso, ma
-quella **K** fa tre cose: dice dove siamo senza dover scrivere «Albania» nel titolo, rende
-il nome **cercabile** (non esistono mille «Adriatico» con cui confondersi) e toglie
-l'aria da catena di RSA.
+**`Illyria`** — è il nome antico di quelle terre. *Illiria* in italiano, *Illyrien* in
+tedesco, *Illyria* in inglese e in Shakespeare: **una parola sola che funziona in tutti e
+tre i mercati senza cambiare una lettera.**
+
+Si scrive **con la Y**, sempre, in tutte le lingue. È la forma internazionale, ed è anche
+quella che rende il nome **cercabile**: di «Adriatico» ce n'è mezzo Mediterraneo pieno, di
+Illyria no.
+
+> **Perché Illyria e non Adriatik** *(che era la prima scelta, il 13 settembre)*.
+> Il marchio madre deve essere vero **per tutte le case, per sempre** — e la Casa 2 sta a
+> Tirana, **trentacinque chilometri dal mare**. Su quella casa «Adriatik» comincia a
+> scricchiolare, e la regola che ci siamo dati — *il nome non promette niente che non ci
+> sia* — l'avremmo scritta noi contro di noi.
+>
+> **Illyria è vera ovunque, perché è la terra e non la costa.**
+> E l'Adriatico non si perde: si sposta dove è vero, cioè nella prima riga del sito di
+> Golem — *«sull'Adriatico, a 38 minuti dall'aeroporto»*.
 
 **`Cocoon`** — è il film del 1985, e l'ha portato Giorgio. Nel film degli anziani in una
 casa di riposo in Florida ritrovano la salute e ricominciano a nuotare e a ballare.
@@ -26,18 +38,27 @@ riesce a dire: non è il posto dove si finisce, è il posto dove si riparte.
 > mentre si diventa qualcos'altro.**
 
 **Una cosa da tenere d'occhio, non un problema:** «cocoon» può suonare anche come
-*chiudersi dentro*, che è l'opposto di quello che vendiamo. Si neutralizza con le
-immagini e con il sottotitolo — mai un bozzolo chiuso: **sempre un bozzolo aperto sul
-mare.** Il logo è costruito esattamente così.
+*chiudersi dentro*, che è l'opposto di quello che vendiamo. Si neutralizza con le immagini
+e con il sottotitolo — mai un bozzolo chiuso: **sempre un bozzolo aperto sul mare.** Il
+logo è costruito esattamente così.
+
+**E la mezza riga che spiega il nome, quando serve:**
+
+> *«Illyria è il nome antico di queste terre — quelle dove il mare è a venti minuti e
+> l'aeroporto a trentotto.»*
+
+Un pensionato italiano di 74 anni «Adriatik» lo capiva in un secondo; «Illyria» gliela
+devi raccontare. **Ma mezza riga che racconta una storia è un regalo, non un problema.**
 
 ### Come si declina
 
 | | |
 |---|---|
-| 🇮🇹 Italiano | **Adriatik Cocoon** · *Residenze per chi sta bene* |
-| 🇩🇪 Tedesco *(Casa 2)* | **Adriatik Cocoon** · *Wohnen am Meer* |
+| Il marchio, la società, la faccia | **ILLYRIA COCOON** |
+| Italiano | *Residenze per chi sta bene* |
+| Tedesco *(Casa 2)* | *Wohnen am Meer* |
 | Nome corto, nell'uso quotidiano | **Cocoon** |
-| Le case | **Cocoon Golem** · **Cocoon Tirana** |
+| **Le case, ognuna col suo posto** | **Cocoon Golem** · **Cocoon Tirana** · **Cocoon Valona** |
 
 ---
 
@@ -55,9 +76,9 @@ Funziona a 16 pixel come favicon e su un'insegna di tre metri.
 
 | File | Quando si usa |
 |---|---|
-| `adriatik-cocoon-orizzontale.svg` | **Il principale.** Carta intestata, sito, documenti, firma email |
-| `adriatik-cocoon-verticale.svg` | Quando lo spazio è stretto e alto: insegne, targhe, social |
-| `adriatik-cocoon-emblema.svg` | Solo il bozzolo: favicon, app, timbro, ricamo sulle divise |
+| `illyria-cocoon-orizzontale.svg` | **Il principale.** Carta intestata, sito, documenti, firma email |
+| `illyria-cocoon-verticale.svg` | Quando lo spazio è stretto e alto: insegne, targhe, social |
+| `illyria-cocoon-emblema.svg` | Solo il bozzolo: favicon, app, timbro, ricamo sulle divise |
 | `*-negativo.svg` | Le stesse cose su fondo scuro o su fotografia |
 
 ### Le regole
@@ -116,7 +137,7 @@ lettere e lo spazio, non una seconda tinta. I colori caldi restano **solo** per 
 | **Testo e interfaccia** | **Archivo** | Grottesco solido e leggibile, buono nelle tabelle e sulle etichette, senza l'aria da software |
 | **Numeri** | **IBM Plex Mono** | Le cifre incolonnate devono stare in colonna davvero. In un documento con dei conti dentro, questo si vede |
 
-Nel nome le lettere sono **maiuscole e distanziate**: `A D R I A T I K   C O C O O N`.
+Nel nome le lettere sono **maiuscole e distanziate**: `I L L Y R I A   C O C O O N`.
 È l'unico punto dove la spaziatura è così larga — serve a farlo leggere come un marchio e
 non come una parola.
 
@@ -138,11 +159,11 @@ non come una parola.
 
 | | | Fatto |
 |---|---|---|
-| 1 | **Domini liberi?** `adriatikcocoon.com`, `.it`, `.al`, `.de` | ☐ |
+| 1 | **Domini liberi?** `illyriacocoon.com`, `.it`, `.al`, `.de` | ☐ |
 | 2 | **Marchio già registrato?** Verifica in Italia (UIBM), nell'Unione (EUIPO), in Germania (DPMA) e in Albania (DPPI) | ☐ |
 | 3 | **Come suona a Tirana.** Là ci lavorano le persone e ci passano le autorizzazioni | ☐ |
 | 4 | **Dirlo al telefono a un italiano e a un tedesco** e vedere se lo riscrivono giusto — la K è il punto da provare | ☐ |
 | 5 | **Testo del logo convertito in curve** per la stampa | ☐ |
 
 ---
-**Adriatik Cocoon**
+**Illyria Cocoon**

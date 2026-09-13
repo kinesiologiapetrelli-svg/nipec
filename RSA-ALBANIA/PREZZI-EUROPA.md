@@ -145,4 +145,4 @@ con le pinze, anche se qui sono coerenti tra loro.
 [Statista sul costo medio delle case di riposo in Europa](https://www.statista.com/statistics/1237274/cost-comparison-of-care-homes-in-europe/) — è **la fonte migliore che esista** per questa tabella e va comprata o consultata; e [Statista sulla quota pagata dal pubblico](https://www.statista.com/statistics/1239864/nursing-homes-costs-covered-by-public-authorities-or-insurance-in-europe/).
 
 ---
-**Adriatik Cocoon**
+**Illyria Cocoon**

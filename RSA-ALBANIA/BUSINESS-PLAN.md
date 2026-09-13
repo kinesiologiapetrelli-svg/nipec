@@ -1,4 +1,4 @@
-# Adriatik Cocoon · Business plan
+# Illyria Cocoon · Business plan
 
 **Bozza 1 — 13 settembre 2026**
 
@@ -473,4 +473,4 @@ Tutte pubbliche e verificabili. Marcate ⚠️ quelle che vendono il servizio di
 *Documento di lavoro. Le decisioni prese stanno in `DECISIONI.md`, quello che non sappiamo
 ancora in `DOMANDE-APERTE.md`, e chi fa cosa in `PRIMI-30-GIORNI.md`.*
 
-**Adriatik Cocoon** — 13 settembre 2026
+**Illyria Cocoon** — 13 settembre 2026

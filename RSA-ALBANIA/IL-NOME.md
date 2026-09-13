@@ -107,12 +107,12 @@ incluso (6) — **e l'Albania detta subito, in seconda riga.**
 > aggiunge fiducia a nessuno dei due — e se un giorno una delle due aziende ha un
 > problema, non deve trascinarsi dietro l'altra.
 >
-> **Adriatik Cocoon sta in piedi da solo**, con nome, logo e colori suoi.
+> **Illyria Cocoon sta in piedi da solo**, con nome, logo e colori suoi.
 > Stanno in [`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.md).
 
 ---
 
-## ⬛ Il nome è stato scelto: **ADRIATIK COCOON**
+## ⬛ Il nome è stato scelto: **ILLYRIA COCOON**
 
 Scelto da Giorgio il 13 settembre 2026, e sostituisce le due proposte qui sopra.
 
@@ -129,4 +129,4 @@ fare prima di affezionarsi — sta in **[`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.m
 ma il sottotitolo sì, in prima schermata, nella prima telefonata e nel contratto.
 
 ---
-**Adriatik Cocoon**
+**Illyria Cocoon**

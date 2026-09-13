@@ -1,6 +1,7 @@
 # RSA ALBANIA
 
-> ### Il progetto ha un nome e una faccia: **ADRIATIK COCOON**
+> ### Il progetto ha un nome e una faccia: **ILLYRIA COCOON**
+> *Le case: **Cocoon Golem** · **Cocoon Tirana** · **Cocoon Valona***
 > *Residenze per chi sta bene · Albania*
 >
 > Nome, logo, colori e caratteri stanno in **[`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.md)**.
@@ -25,7 +26,7 @@ sua: cartella separata, file suoi, niente in comune con il laser.
 
 | | |
 |---|---|
-| **Google Drive** — [cartella `ADRIATIK COCOON`](https://drive.google.com/drive/folders/1bHnByOOlLHt4fnre1uVI1aPKWirVy_La) | **La copia da leggere.** Documenti Google, si aprono dal telefono senza scaricare niente |
+| **Google Drive** — [cartella `ILLYRIA COCOON`](https://drive.google.com/drive/folders/1bHnByOOlLHt4fnre1uVI1aPKWirVy_La) | **La copia da leggere.** Documenti Google, si aprono dal telefono senza scaricare niente |
 | **GitHub**, `RSA-ALBANIA/` | **L'archivio.** Qui resta la storia di ogni modifica |
 | [La pagina del business plan](https://claude.ai/code/artifact/6b3fd716-46e0-46be-9229-b4d0e256776c) | Impaginata, da mandare a una banca o a un socio |
 
@@ -39,7 +40,7 @@ Perché: un `.md` si legge dal telefono, dal computer e da GitHub senza aprire n
 cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 
 **E dal 13 settembre 2026 vale anche la seconda metà della regola: tutto va messo anche su
-Google Drive**, nella cartella `ADRIATIK COCOON`, convertito in Documenti Google. Il repo
+Google Drive**, nella cartella `ILLYRIA COCOON`, convertito in Documenti Google. Il repo
 resta l'archivio; il Drive è dove Giorgio legge e lavora. **Ogni cosa nuova va in tutti e
 due i posti.**
 
@@ -88,4 +89,4 @@ due i posti.**
   l'argomento di vendita principale. Ma **l'autorizzazione sanitaria serve subito.**
 
 ---
-**Adriatik Cocoon**
+**Illyria Cocoon**

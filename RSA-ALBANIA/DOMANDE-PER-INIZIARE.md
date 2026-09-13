@@ -109,7 +109,7 @@ lontano il primo anno vanno male quasi sempre.
 e «Albania» è la parola da cui ci dobbiamo difendere**, non quella da mettere in cima al
 sito. Serve un nome che dica **mare, cura e fiducia** — e un sito in due lingue.
 
-> ✅ **Chiusa il 13 settembre 2026: `ADRIATIK COCOON`.** Nome scelto da Giorgio, e niente
+> ✅ **Chiusa il 13 settembre 2026: `ILLYRIA COCOON`.** Nome scelto da Giorgio, e niente
 > marchio NIPEC: **questo progetto vive con una faccia sua.** Logo, colori e caratteri
 > stanno in [`MARCHIO/LEGGIMI.md`](MARCHIO/LEGGIMI.md).
 
@@ -143,4 +143,4 @@ Nel progetto del laser la stessa voce era rimasta aperta ed era segnata come **�
 più alto rendimento di tutto il progetto»**. Qui non facciamola scadere di nuovo.
 
 ---
-**Adriatik Cocoon**
+**Illyria Cocoon**

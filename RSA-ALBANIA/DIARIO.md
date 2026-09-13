@@ -5,10 +5,17 @@ la data nuova che è cambiata.
 
 ---
 
-## 13 settembre 2026 — il marchio: **Adriatik Cocoon**
+## 13 settembre 2026 — il marchio: **Illyria Cocoon**
+
+> **Il nome è cambiato due volte nella stessa serata.** Prima `Adriatik Cocoon`, poi
+> `Illyria Cocoon` su proposta di Giorgio — e la seconda è migliore, per un motivo
+> preciso: **il marchio madre deve essere vero per tutte le case, e la Casa 2 sta a
+> Tirana, 35 km dal mare.** Su quella casa «Adriatik» scricchiolava. Illyria è la terra,
+> non la costa: è vera ovunque. E l'Adriatico non si perde, si sposta dove è vero — nella
+> prima riga del sito di Golem.
 
 Giorgio: *«togli brand NIPEC, qui è un nuovo brand e nuovi loghi e colori»*, e poi il
-nome: **Adriatik Cocoon**.
+nome: **Illyria Cocoon**.
 
 - **NIPEC esce del tutto** — non in facciata, non in fondo, nemmeno davanti alla banca.
   Tolto da tutti i file del progetto e dal business plan.

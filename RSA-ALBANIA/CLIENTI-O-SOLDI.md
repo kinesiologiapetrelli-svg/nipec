@@ -168,4 +168,4 @@ La lista da tenere sul tavolo. Quando queste sette caselle sono spuntate, si va.
 | ☐ | **Lo status AIDA**, se si ottiene | incentivi e procedure accelerate |
 
 ---
-**Adriatik Cocoon**
+**Illyria Cocoon**

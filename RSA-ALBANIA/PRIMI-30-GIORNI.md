@@ -126,4 +126,4 @@ Ma costa quattro-cinque volte un'assunzione albanese. **I quattro modi di regger
 **Con queste sei risposte si va in banca. Senza, no.**
 
 ---
-**Adriatik Cocoon**
+**Illyria Cocoon**
