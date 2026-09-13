@@ -83,3 +83,40 @@ persone. **Le persone ci sono. I tre filoni partono insieme, lunedì.**
 
 ---
 NIPEC · Tecnologie Estetiche
+
+---
+
+## Aggiunta del 13 settembre 2026 — la prima assunzione
+
+**Deciso: la voce tedesca è un tedesco o un austriaco assunto** (decisione 7).
+È la prima assunzione del progetto, prima del direttore sanitario.
+
+### Perché vale la spesa
+
+Su un mercato che non perdona, la figlia di Monaco sente in dieci secondi se dall'altra
+parte c'è qualcuno di casa sua. E **«deutsche Leitung»** — direzione tedesca — è la frase
+che le case di riposo per tedeschi in Polonia mettono in prima pagina. **Non è un costo
+di struttura: è marketing che cammina e parla.**
+
+### Il problema, detto chiaro
+
+Un responsabile di struttura tedesco costa, in Germania, quattro-cinque volte un'assunzione
+albanese. **Su 30 posti è una voce che si sente**, e va messa nel conto del pilota prima
+di aprire, non dopo.
+
+### I quattro modi di renderla sostenibile
+
+| | Come | Nota |
+|---|---|---|
+| 1 | **Il costo della vita fa metà del lavoro.** A Tirana si vive con un terzo che in Germania. Un pacchetto con **alloggio incluso** può essere ottimo per lui e sostenibile per noi. | Da calcolare col commercialista (filone B4) |
+| 2 | **Un pensionato del settore.** Un *Heimleiter* o un'infermiera capo tedeschi in pensione o prepensionamento: esperienza altissima, aspettativa di stipendio molto più bassa, e spesso **voglia di una seconda vita al sole.** | La strada più promettente |
+| 3 | **Part-time all'inizio.** Nei primi mesi non servono 40 ore: serve **la voce al telefono e la faccia nei video**. Si può cominciare con un contratto leggero e crescere con gli ospiti. | |
+| 4 | **Un tedesco o austriaco che già vive in Albania.** Ce ne sono, e sono già passati per la parte difficile: trasferirsi. | Da cercare subito |
+
+### Da mettere nel Tempo 1
+
+| | | Fatto |
+|---|---|---|
+| F1 | Cercare il profilo sui canali del settore in Germania e Austria, e **fra i tedeschi già residenti in Albania**. | ☐ |
+| F2 | Definire il **pacchetto**: stipendio, alloggio, viaggi a casa, e cosa gli si chiede davvero (telefono, visite delle famiglie, video, qualità). | ☐ |
+| F3 | Metterlo **a bilancio del pilota** prima di aprire: è la voce singola più pesante dei 30 posti. | ☐ |
