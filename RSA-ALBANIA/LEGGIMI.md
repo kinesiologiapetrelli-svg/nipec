@@ -1,8 +1,15 @@
 # RSA ALBANIA
 
-**Una residenza per anziani sulla costa albanese, vicino all'aeroporto di Tirana e in
-convenzione con un ospedale privato della capitale, che a 2.500-3.000 € al mese tutto
-incluso accoglie famiglie da Germania, Svizzera, Regno Unito e Italia.**
+**Due case, non una.**
+
+**🇮🇹 Casa 1 — il Cocoon.** Una residenza sul mare fra Durazzo e Golem, a 38 minuti
+dall'aeroporto di Tirana, per pensionati italiani che stanno bene e vogliono godersi la
+pensione: servizi, compagnia, clima, una stanza per quando viene la figlia — **e la
+pensione privata che in Albania non paga tasse.** Da 1.800-2.500 € al mese, tutto incluso.
+
+**🇩🇪 Casa 2 — la cura.** Sul terreno di Tirana, a dieci minuti dall'ospedale accreditato
+JCI, per famiglie tedesche, svizzere e austriache che oggi pagano 3.364 € al mese di tasca
+propria. Con direzione tedesca. *(Dopo la prima, non insieme.)*
 
 Progetto aperto il **13 settembre 2026**. Sta dentro il repository NIPEC ma è una cosa
 sua: cartella separata, file suoi, niente in comune con il laser.
@@ -26,11 +33,12 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 | **4** | **[`ANALISI-FATTIBILITA.md`](ANALISI-FATTIBILITA.md)** | Il documento operativo: che struttura, dove, per chi, con che personale, i conti a spanne, le tattiche di vendita, i rischi e il piano in tre tempi. |
 | **5** | **[`PREZZI-EUROPA.md`](PREZZI-EUROPA.md)** | La statistica: quanto paga di tasca propria una famiglia in ogni paese d'Europa, e quali paesi vanno presi e quali lasciati perdere. Con le fonti. |
 | **6** | **[`IL-NOME.md`](IL-NOME.md)** | Il nome tedesco, le due proposte, e **la riga che non si supera**: non mettere «Albania» nel titolo è marketing, non dire dove siamo è truffa. |
-| **7** | **[`CHI-STA-BENE.md`](CHI-STA-BENE.md)** | Nei primi 30 posti entra solo chi sta bene. Perché questo non vuol dire «il pensionato in forma che sceglie il sole» — e le tre regole per non doverli mandare via quando peggiorano. |
-| **8** | **[`VALONA.md`](VALONA.md)** | Valona valutata sul serio: l'aeroporto VLO non apre nel 2026 e non c'è un ospedale JCI. Il posto giusto al momento sbagliato — e le due condizioni che diventano il metro di ogni casa futura. |
-| **9** | **[`LA-FRASE.md`](LA-FRASE.md)** | *«Perché dovrei mandare mia madre in Albania?»* — la scrive Giorgio. **È l'unica casella ancora vuota del progetto.** |
-| **10** | **[`TIRANA-O-MARE.md`](TIRANA-O-MARE.md)** | Il terreno sta a Tirana e non sul mare: cosa si perde, cosa si guadagna, e come cambia il prodotto. **Da leggere insieme all'analisi**, che era stata scritta immaginando la costa. |
-| 11 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
+| **7** | **[`CHI-STA-BENE.md`](CHI-STA-BENE.md)** | **I due mercati esaminati.** Il Cocoon si vende agli italiani (pensione privata tassata 0% in Albania), la cura si vende ai tedeschi. Non due modi di vendere la stessa cosa: **due prodotti, e due case.** |
+| **8** | **[`POSTI-DI-MARE.md`](POSTI-DI-MARE.md)** | Le cinque coste a confronto. Vince **Durazzo – Golem – Qerret**: l'unica che ha aeroporto a 38 minuti, ospedali a 45 **ed è viva d'inverno**, che è la nostra alta stagione. |
+| **9** | **[`VALONA.md`](VALONA.md)** | Valona valutata sul serio: l'aeroporto VLO non apre nel 2026 e non c'è un ospedale JCI. Il posto giusto al momento sbagliato — e le due condizioni che diventano il metro di ogni casa futura. |
+| **10** | **[`LA-FRASE.md`](LA-FRASE.md)** | *«Perché dovrei mandare mia madre in Albania?»* — la scrive Giorgio. **È l'unica casella ancora vuota del progetto.** |
+| **11** | **[`TIRANA-O-MARE.md`](TIRANA-O-MARE.md)** | Il terreno sta a Tirana e non sul mare: cosa si perde, cosa si guadagna, e come cambia il prodotto. **Da leggere insieme all'analisi**, che era stata scritta immaginando la costa. |
+| 12 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
 
 ## Le carte di servizio
 

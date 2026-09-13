@@ -132,3 +132,25 @@ Due conseguenze che vanno nel Tempo 1 e non si rimandano:
 |---|---|---|
 | **A9** | **All'avvocato: si chiede l'autorizzazione sanitaria lo stesso, in parallelo**, anche se i primi 30 posti non ne hanno bisogno. Il giorno che la prima signora peggiora — e succederà entro due-tre anni — o abbiamo la carta o la mandiamo via davanti alla sua famiglia. | ☐ |
 | **G1** | **La struttura si sceglie e si sistema già «pronta per la cura»**: porte e bagni larghi, ascensore o piano terra, campanello in ogni camera e bagno, niente gradini, un locale medicheria che per ora fa da magazzino. **Costa poco adesso e moltissimo dopo:** una struttura pensata solo per gente in forma non si converte, si rifà. | ☐ |
+
+---
+
+## Filone M — il mare · *dove va la Casa 1*
+
+Nato dalla decisione 14: **Casa 1 sul mare, a Durazzo – Golem – Qerret.**
+
+| | Cosa fare | Risposta | Data |
+|---|---|---|---|
+| M1 | **Cronometrare in ora di punta e a luglio:** Golem → aeroporto di Rinas, Golem → American Hospital di Tirana. I numeri veri. | | |
+| M2 | **Guardare le strutture** in vendita o in affitto fra Durazzo, Golem e Qerret: alberghi fuori stagione, residence fermi, strutture mai aperte. Con un agente locale e il socio. | | |
+| M3 | **Che sanità c'è a Durazzo**, privata e pubblica, e in quanti minuti. Al nostro medico. | | |
+| M4 | **Andarci a gennaio, non a luglio.** Un posto di mare si giudica d'inverno: se a gennaio è un deserto, i nostri ospiti d'inverno si annoiano. | | |
+| M5 | **Trovare i pensionati italiani già a Durazzo e parlarci.** Sono clienti, testimoni e la migliore ricerca di mercato che esista. **Costano un caffè.** | | |
+
+## Aggiunte ai filoni esistenti, dopo le decisioni 13, 14 e 15
+
+| | | Fatto |
+|---|---|---|
+| **B7** | **Al commercialista, urgente: la defiscalizzazione della pensione italiana in Albania.** Aliquota 0% sulle pensioni **private** estere per chi sposta la residenza fiscale. **Le pensioni pubbliche — ex INPDAP, statali, militari — restano tassate in Italia.** Serve: AIRE, residenza effettiva, domanda all'INPS con attestazione fiscale albanese. **Va capito benissimo, perché diventa il nostro argomento di vendita numero uno.** | ☐ |
+| **A10** | **All'avvocato: per il Cocoon che autorizzazione serve?** Una residenza per anziani **autosufficienti**, con pasti, pulizie e attività ma **senza assistenza sanitaria**, è una struttura socio-sanitaria o una struttura ricettiva? **Sono due mondi diversi e cambia tutto:** tempi, requisiti, costi. | ☐ |
+| **E4** | **Le dieci telefonate diventano italiane.** Non più famiglie tedesche con un genitore in casa di cura: **pensionati italiani di 68-78 anni, con pensione privata, soli o in coppia, che stanno bene.** Le domande nuove sono in fondo a `CHI-STA-BENE.md`. | ☐ |

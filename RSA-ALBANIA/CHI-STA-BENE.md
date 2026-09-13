@@ -1,136 +1,216 @@
-# «Solo chi sta bene» · come si fa a funzionare
+# I due mercati · Cocoon e cura
 
-Deciso il **13 settembre 2026**: nei primi 30 posti entrano solo persone autosufficienti.
-
-Questo file esiste perché la decisione, messa insieme alle altre due dello stesso giorno
-(**Tirana senza mare** e **mercato tedesco**), apre una tensione vera. Non si nasconde:
-si guarda, e si risolve.
-
----
-
-## La tensione, detta chiara
-
-> Il pensionato tedesco **in forma**, che si trasferisce all'estero **per scelta**, va in
-> Spagna, in Portogallo, in Turchia. Sole, mare, comunità di tedeschi già fatta, voli da
-> ogni città. **Tirana, senza mare, contro la Costa del Sol, quella partita la perde.**
-
-Se per «chi sta bene» intendiamo *il signore di 70 anni in salute che cerca una vita
-migliore*, il rischio è concreto: **apriamo il prodotto più facile da gestire e non
-troviamo nessuno a cui venderlo.** Mentre le famiglie che ci implorano per un posto hanno
-tutte un genitore che **non** sta bene — e quelle le mandiamo via.
-
-**Ma «chi sta bene» non vuol dire quello.**
-
----
-
-## La lettura giusta: il grado 1 e 2 tedesco
-
-In Germania la non autosufficienza si misura in **gradi (*Pflegegrade*), da 1 a 5**. E fra
-il «sta benissimo» e il «va in casa di cura» c'è una fascia enorme di persone che:
-
-- **non sono malate** e non hanno bisogno di assistenza sanitaria continua;
-- **ma non possono più stare da sole.** Si dimenticano le medicine, non cucinano più,
-  cadono, non escono, non parlano con nessuno per giorni;
-- hanno una figlia a 400 chilometri che **non ce la fa** e si sente in colpa ogni giorno.
-
-In Germania questa fascia ha un nome e un mercato: **`Betreutes Wohnen`** — abitare
-assistito. **Regole molto più leggere di una casa di cura, e un bisogno gigantesco.**
-
-> **È qui che sta il nostro cliente, ed è perfettamente dentro la decisione «solo chi sta
-> bene».**
+> ### ⚠️ Correzione — 13 settembre 2026
 >
-> Non vendiamo una vita migliore a chi già ce l'ha. Vendiamo **la fine della solitudine e
-> della paura** a chi non sta ancora male ma non può più stare solo — e alla figlia,
-> la fine del senso di colpa.
+> In un file precedente avevo letto «chi sta bene» come *«non è malato ma non può più
+> stare solo»* — il grado 1-2 tedesco, il `Betreutes Wohnen`. **Era una lettura mia, e
+> Giorgio l'ha corretta:**
+>
+> > *«Di base non vogliamo gente che sia all'ultimo stadio, ma gente che decide di godersi
+> > la pensione. Un Cocoon, come il film. Un villaggio turistico, una villa, una residenza
+> > per anziani che stanno bene e vogliono ancora godersela.»*
+>
+> **È un prodotto diverso**, e questo file è riscritto da capo. La vecchia versione resta
+> nella storia del repository: non si cancella, si corregge.
 
-E questa persona **non sceglie la Spagna**, perché non si sta trasferendo per il sole:
-si sta trasferendo perché a casa sua non funziona più niente. **Sceglie dove qualcuno la
-guarda.** Il sole è un accessorio; la compagnia e la sicurezza sono il prodotto.
+Giorgio ha poi chiesto di **esaminare tutti e due i mercati**. Fatto — e il risultato è
+più interessante di quanto pensassi: **non sono due modi di vendere la stessa cosa. Sono
+due prodotti diversi, per due paesi diversi.**
 
-## Quello che le vendiamo davvero
+---
 
-| Non è | È |
+## Il quadro, in una riga
+
+> **Il mercato tedesco compra la cura. Il mercato italiano compra il Cocoon.**
+>
+> E il motivo non è culturale: è **fiscale, geografico e linguistico.** Sta tutto qui sotto.
+
+---
+
+# Mercato A · il Cocoon — e il cliente è **italiano**
+
+## La scoperta che cambia le carte
+
+> ## 🇮🇹 In Albania la pensione privata estera è tassata **allo 0%**.
+
+L'Albania prevede **l'esenzione totale** per lo straniero che sposta lì la residenza
+fiscale e percepisce una pensione di fonte estera. E i pensionati italiani **ci stanno già
+andando**: è un fenomeno in corso, con la stampa italiana che se ne occupa, la
+defiscalizzazione come motivo dichiarato, e Durazzo come una delle mete — *«una cena fuori
+costa 15 euro e le spiagge sono bellissime»*.
+
+**Attenzione, il limite è preciso e va detto a ogni cliente:**
+**solo le pensioni private azzerano l'imposta.** Le pensioni **pubbliche** italiane —
+ex INPDAP, statali, militari — **restano tassate in Italia** anche spostando la residenza.
+Chi è stato dipendente pubblico non ha questo vantaggio.
+*(Da far confermare al commercialista: filone B6.)*
+
+**Cosa serve:** iscrizione all'**AIRE**, trasferimento di residenza **effettivo**, domanda
+di detassazione all'INPS con l'attestazione di residenza fiscale albanese.
+
+## Perché questo argomento vale più di ogni depliant
+
+Un pensionato italiano con 2.400 € netti di pensione privata, spostando la residenza, ne
+riprende in mano una fetta grossa ogni mese. **Non è uno sconto che facciamo noi: è un suo
+diritto**, e noi siamo il posto dove esercitarlo senza doversi arrangiare da solo con un
+appartamento, la spesa, la lavatrice e un paese che non conosce.
+
+> **Il nostro prodotto smette di essere un costo e diventa il modo di incassare un
+> vantaggio.** In tutta Europa non abbiamo un altro argomento così forte.
+
+## E tutto il resto, per l'italiano, è già a posto
+
+| | |
 |---|---|
-| Il mare | **Qualcuno che le bussa la mattina** |
-| Il clima | **Tre pasti veri e le medicine date all'ora giusta** |
-| Il trasferimento di lusso | **Non essere più sola dalle quattro del pomeriggio** |
-| Una vita nuova | **La figlia che smette di svegliarsi alle tre di notte con l'angoscia** |
-| — | **E l'ospedale JCI a dieci minuti, se un giorno serve** |
+| **La lingua** | L'italiano è la seconda lingua di fatto dell'Albania. Personale, medici, negozi, televisione: **non deve imparare niente.** |
+| **La distanza** | **31 voli a settimana da Milano Bergamo**, più Roma e altri. Un'ora e venti di volo. La figlia viene **davvero**. |
+| **Il paese** | L'Albania gli italiani la conoscono già: non è l'ignoto, è «di là dall'Adriatico». |
+| **Il costo** | Una cena fuori 15 €. Fuori dalla residenza, la vita costa un terzo che in Italia. |
+| **Il clima** | Uguale o migliore del nord Italia, e non deve attraversare l'Europa per averlo. |
 
-E il prezzo, in questa fascia: **1.800-2.400 € al mese**, contro un *Betreutes Wohnen*
-tedesco che costa molto di più e contro i **3.364 €** medi di una casa di cura tedesca.
+## Chi è, di preciso
 
----
+**Non è chi non ce la fa più.** È chi:
 
-## Le tre regole che tengono aperta la porta del dopo
+- ha **68-78 anni**, sta bene, guida ancora, ha voglia di fare;
+- **è rimasto solo** — vedovo, o con i figli lontani — e in Italia si annoia e spende;
+- vive in un appartamento troppo grande e troppo caro da scaldare;
+- ha una **pensione privata** fra i 1.500 e i 3.000 €;
+- **non vuole essere assistito. Vuole essere in compagnia, e servito.**
 
-Questa è la parte operativa, ed è la più importante del file.
+## Cosa compra davvero
 
-### 1. L'autorizzazione sanitaria si chiede lo stesso, in parallelo
+**Non compra una residenza per anziani. Non lo direbbe mai, quella parola.**
 
-**Anche se i primi 30 posti non ne hanno bisogno.**
-
-Perché: le autorizzazioni albanesi non si sa quanto ci mettano, e il giorno in cui la
-signora del grado 2 diventa grado 4 — e succederà, a tutte, entro due o tre anni —
-**o abbiamo la carta o dobbiamo mandarla via.** Mandare via una nonna che sta peggiorando,
-davanti alla sua famiglia tedesca, è la cosa peggiore che possa capitare a questo progetto.
-
-Va in `PRIMI-30-GIORNI.md`, filone A, e non si rimanda.
-
-### 2. Si costruisce già «pronto per la cura»
-
-Costa poco adesso, costa moltissimo dopo. Nella struttura esistente che affittiamo o
-compriamo, **queste cose si fanno subito anche se non servono ancora**:
-
-- **porte e bagni larghi** per la sedia a rotelle e il sollevatore;
-- **nessun posto letto raggiungibile solo per scale** — ascensore o piano terra;
-- **campanello di chiamata in ogni camera e in ogni bagno**;
-- **maniglioni, docce a filo pavimento, niente gradini** dentro casa;
-- un **locale medicheria** che per ora fa da magazzino.
-
-> Una struttura pensata solo per gente in forma **non si converte**: si rifà.
-> E rifarla costa più che farla larga adesso.
-
-### 3. Il contratto dice cosa succede quando peggiora
-
-Nero su bianco, dal primo ospite, in tedesco:
-
-- **cosa** siamo autorizzati a fare oggi e cosa no;
-- **cosa succede** quando il grado di assistenza sale: restiamo noi, e come cambia il prezzo;
-- **e se non possiamo tenerla**, cosa facciamo — chi la accompagna, dove, chi paga.
-
-**Una famiglia tedesca questa domanda la fa.** Se non abbiamo la risposta scritta, la
-vendita si ferma lì. Se ce l'abbiamo, diventa un motivo per sceglierci.
+Compra: *ho la mia stanza o il mio appartamentino, mangio bene senza cucinare, qualcuno
+pulisce, la mattina c'è la ginnastica e il pomeriggio le carte o la gita, il mare è lì,
+mia figlia viene quando vuole e dorme nella stanza degli ospiti — **e mi resta in tasca
+più di quanto mi restava a Brescia**.*
 
 ---
 
-## Il vantaggio che questa scelta ci regala, e che vale molto
+# Mercato B · la cura — e il cliente è **tedesco**
 
-**Si apre presto.** Ed è esattamente quello che serve per rompere il paradosso di
-`CLIENTI-O-SOLDI.md`: la banca non aspetta la struttura perfetta, aspetta la prova che i
-clienti esistono. Una casa da 30 posti aperta e piena vale più di un progetto da 120 sulla
-carta.
+Resta valido tutto quello che sta in `PREZZI-EUROPA.md`, e resta il mercato che paga di
+più d'Europa.
 
-E si apre **con il rischio più basso**: nessun malato grave, nessuna notte drammatica,
-nessuna ispezione sanitaria pesante mentre stiamo ancora imparando. **I primi sei mesi si
-sbaglia per forza, ed è molto meglio sbagliare su una signora che si annoia che su una
-signora che sta male.**
+| | |
+|---|---|
+| **Quanto pagano oggi** | **3.364 € al mese di tasca propria**, media tedesca, e sale di 119 € ogni sei mesi. Svizzera ≈ 7.000 €. |
+| **L'obiezione è già caduta** | I tedeschi vanno in casa di riposo **in Polonia** (1.000-1.500 €) da vent'anni. Non dobbiamo convincerli che si può fare. |
+| **Chi decide** | **La figlia**, non l'anziano. E decide **per necessità**, non per desiderio. |
+| **Cosa compra** | Sicurezza, medicina, sollievo. **Non il clima.** |
+
+**Ma per il Cocoon il tedesco è il cliente sbagliato**, e va detto:
+
+> Il pensionato tedesco **in forma** che sceglie dove godersi la pensione **va in Spagna.**
+> Lì c'è già tutto: 20.000 tedeschi stabili solo a Maiorca, medici tedeschi, avvocati
+> tedeschi, e perfino **residenze per anziani tedesche già aperte**. Lo svernamento in
+> Spagna gli costa **1.000 € al mese** arrangiandosi, o 1.400-2.300 € con volo e tutto
+> compreso a Maiorca.
+>
+> **Contro quello, dalla Albania, a 2.500 € al mese, non si vince sul clima.**
 
 ---
 
-## Cosa cambia nelle dieci telefonate
+## Il confronto, messo in tabella
 
-Le cinque domande vanno riformulate per questa fascia. **Non cerchiamo famiglie con un
-genitore in casa di cura: cerchiamo famiglie con un genitore che vive ancora da solo e
-non dovrebbe.**
+| | **Cocoon · 🇮🇹 italiano** | **Cura · 🇩🇪 tedesco** |
+|---|---|---|
+| **Chi decide** | **L'anziano stesso** | **La figlia** |
+| **Perché si muove** | **Vuole** — vantaggio fiscale, compagnia, clima, costo | **Deve** — non si può più andare avanti così |
+| **Concorrente vero** | Restare a casa in Italia · la Spagna | La casa di riposo tedesca **in Polonia** · la RSA in Germania |
+| **La nostra arma** | **Pensione privata tassata 0%** · lingua · 31 voli/settimana · costo del paese | **Prezzo contro i 3.364 €** · ospedale JCI · direzione tedesca |
+| **Prezzo giusto** | **1.800 – 2.500 €** tutto incluso | **2.500 – 3.200 €** tutto incluso |
+| **Quanto resta** | **Anni. Anche dieci.** | Due o tre |
+| **Quanto costa servirlo** | **Poco** — è ospitalità | **Molto** — è sanità |
+| **Regole** | Leggere | **Pesanti**: autorizzazione, direttore sanitario, personale 24h |
+| **Velocità di vendita** | ⚠️ **Lenta.** Nessuna urgenza | **Veloce.** C'è una crisi in corso |
+| **Serve il mare?** | **Sì. È il prodotto.** | No. In Polonia non ce l'hanno |
 
-> 1. Sua madre vive da sola? Da quanto?
-> 2. Quante volte al giorno ci pensa, e cosa teme di preciso?
-> 3. Cosa avete già provato — badante, servizi a domicilio, farla venire da voi — e perché
->    non ha funzionato?
-> 4. Se ci fosse un posto dove **non è mai sola**, con i pasti, le medicine e un ospedale a
->    dieci minuti, a 2.000 € al mese, a due ore di volo: **ci pensa o dice no subito?**
-> 5. **Se dice no: qual è la cosa che glielo impedisce?**
+---
+
+## Il rischio del Cocoon, detto chiaro
+
+> **Nessuno è obbligato a comprarlo.**
+
+La figlia tedesca con la madre che cade in casa **deve** fare qualcosa entro il mese. Il
+signore di 72 anni che sta bene **non deve fare niente**, mai. Può pensarci per tre anni e
+non decidere.
+
+**Tradotto:** il Cocoon ha margini migliori, costi più bassi, regole più leggere, clienti
+che restano dieci anni invece di due — **ma si riempie lentamente.** E il modo in cui
+questi progetti muoiono è **arrivare al terzo anno mezzi vuoti** (`ANALISI-FATTIBILITA.md`,
+rischio 2).
+
+### Le tre mosse che risolvono la lentezza
+
+**1. Si vendono vacanze, non residenze.**
+Nessuno decide di trasferirsi al telefono. **Tutti decidono di venire due settimane.**
+Quindi il prodotto d'ingresso è il **soggiorno lungo**: due settimane in primavera, un
+mese, **l'inverno intero**. Costa poco decidere, porta ricavi dal primo mese, e **chi
+viene, resta**. La residenza si vende di persona, sul posto, non da un sito.
+
+**2. Non si apre vuoti. Mai.**
+Un prodotto di **compagnia** con quattro ospiti è invendibile: il quinto che arriva vede
+una casa vuota e se ne va. **Si apre con un gruppo**, tutto insieme: venti persone
+arrivate nello stesso mese, anche a prezzo scontato, anche solo per l'inverno. **Il primo
+gruppo non è un cliente: è il prodotto.**
+
+**3. Chi parla è un ospite, non noi.**
+In questo mestiere convince solo chi c'è già stato. I primi venti vanno trattati come
+soci: sconto a vita, e in cambio raccontano — video, telefonate con chi è indeciso, la
+figlia che scrive nei gruppi. **Sono il motore di vendita, e costano uno sconto.**
+
+---
+
+## Quindi: si fanno tutti e due?
+
+**Sì, ma non insieme e non nello stesso posto.** E in quest'ordine:
+
+| | | Perché |
+|---|---|---|
+| **Prima** | 🇮🇹 **Cocoon italiano, sul mare** | Regole leggere, si apre in mesi, costi bassi, **e abbiamo l'argomento fiscale più forte d'Europa.** È il modo di aprire presto — che è quello che serve per rompere il paradosso di `CLIENTI-O-SOLDI.md` |
+| **Poi** | 🇩🇪 **Cura tedesca**, con l'autorizzazione sanitaria e la vicinanza all'ospedale | Vale di più per cliente, ma vuole tempo, carte e un direttore sanitario. **E vuole un posto diverso.** |
+
+> **La conseguenza pesante, e va guardata in faccia:** i due mercati **non stanno bene
+> nella stessa casa.** Uno vuole il mare e la vita; l'altro vuole l'ospedale a dieci
+> minuti. Uno è ospitalità, l'altro è sanità. Uno parla italiano, l'altro tedesco.
+>
+> **Sono due case.** E il terreno di Tirana, che per il Cocoon è il posto sbagliato, per
+> la cura tedesca è il posto giusto. **Non è uno spreco: è la Casa 2.**
+
+---
+
+## Le fonti
+
+**La defiscalizzazione delle pensioni** · [Investire Oggi — pensionati italiani in Albania](https://www.investireoggi.it/pensionati-italiani-in-albania-un-nuovo-orizzonte-per-la-terza-eta/) · [TGcom24 — aumentano i pensionati che si trasferiscono](https://www.tgcom24.mediaset.it/cronaca/defiscalizzazione-pensionati-albania_88314386-202402k.shtml) · [PMI.it — pensione in Albania senza tasse, a chi conviene](https://www.pmi.it/economia/lavoro/497122/trasferirsi-pensione-albania-senza-tasse.html) · [Today.it — «qui una cena costa 15 euro»](https://www.today.it/attualita/pensionati-italiani-albania.html) · [Italian Network — permesso di soggiorno e defiscalizzazione](https://www.italian-network.net/blog/pensionati-in-albania-come-ottenere-il-permesso-di-soggiorno-e-la-defiscalizzazione-della-pensione) · [Fiscomania — tassazione pensioni in Albania](https://fiscomania.com/tassazione-pensioni-albania/) *(non si apre dal mio ambiente: da rileggere)*
+
+**Lo svernamento tedesco in Spagna** · [pflege-panorama.de — svernare da senior, le destinazioni 2026](https://www.pflege-panorama.de/ratgeber/ueberwintern-als-senior-2026-die-besten-destinationen-fuer-den-winter/) · [rentner-spanien.com — soggiorni lunghi e svernamento](https://rentner-spanien.com/langzeiturlaub-und-uberwintern-in-spanien/) · [Yes Mallorca — pensionati tedeschi a Maiorca, costi](https://yes-mallorca-immobilien.de/blog/info/deutsche-rentner-mallorca-Lebenshaltungskosten/) · [marysolcostablanca.com — soggiorni lunghi per pensionati](https://marysolcostablanca.com/blog/langzeiturlaub-fuer-rentner/)
+
+**Il mercato tedesco della cura** — tutte le fonti in `PREZZI-EUROPA.md`.
+
+---
+
+## Le dieci telefonate, riscritte per il Cocoon italiano
+
+Non più famiglie con un genitore in casa di cura. **Dieci pensionati italiani, 68-78 anni,
+che stanno bene**, soli o in coppia, con una pensione privata. Cinque domande:
+
+> 1. **Come passa le giornate adesso?** E quante volte alla settimana esce e vede qualcuno?
+> 2. **Quanto le costa vivere** — casa, riscaldamento, spesa, condominio, macchina? E quanto
+>    le resta in tasca?
+> 3. **Ha mai pensato di andare a vivere da un'altra parte?** Dove, e cosa l'ha fermata?
+> 4. **Se ci fosse un posto sul mare in Albania**, a un'ora e venti di volo, dove non deve
+>    più cucinare né pulire, con gente intorno, la ginnastica, le gite, una stanza per
+>    quando viene sua figlia — **e dove la sua pensione privata non paga tasse** — a
+>    1.900 € al mese tutto compreso: **ci pensa o dice no subito?**
+> 5. **Se dice no: qual è la cosa che glielo impedisce?** *(È la risposta che vale più di
+>    tutte le altre messe insieme.)*
+
+**E una sesta, solo per chi dice di sì:** *«Ci verrebbe due settimane a provare, a marzo?»*
+Quella risposta vale quanto le altre cinque insieme — perché **è così che si vende
+davvero**: prima la vacanza, poi la casa.
 
 ---
 NIPEC · Tecnologie Estetiche
