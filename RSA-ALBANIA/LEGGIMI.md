@@ -27,6 +27,7 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 
 | # | File | Cosa ci sta dentro |
 |---|---|---|
+| **0** | **[`BUSINESS-PLAN.md`](BUSINESS-PLAN.md)** · **[`business-plan.html`](business-plan.html)** | **Il documento completo: tutte le ricerche e le statistiche, più il conto economico a tre anni.** La versione `.html` è impaginata per essere mandata a una banca o a un socio — online su <https://claude.ai/code/artifact/6b3fd716-46e0-46be-9229-b4d0e256776c> |
 | **1** | **[`DOMANDE-PER-INIZIARE.md`](DOMANDE-PER-INIZIARE.md)** | **Le dieci domande per Giorgio.** Le prime tre cambiano il progetto. **Si parte da qui.** |
 | **2** | **[`CLIENTI-O-SOLDI.md`](CLIENTI-O-SOLDI.md)** | **Il paradosso: i soldi arrivano se ci sono clienti, i clienti arrivano se c'è il progetto.** Come si rompe il cerchio, cosa vuole vedere davvero una banca, e se il pilota deve somigliare alla struttura finale. |
 | **3** | **[`PRIMI-30-GIORNI.md`](PRIMI-30-GIORNI.md)** | **Chi fa cosa, da lunedì.** Cinque filoni in parallelo: l'avvocato, il commercialista, il medico, il socio e noi. Le risposte si scrivono lì dentro man mano che tornano. |

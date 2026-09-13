@@ -5,6 +5,36 @@ la data nuova che è cambiata.
 
 ---
 
+## 13 settembre 2026 — il business plan
+
+Giorgio chiede un documento unico con tutte le ricerche e le statistiche della giornata,
+più una bozza di business plan con i numeri. Fatto:
+
+- **`BUSINESS-PLAN.md`** — il documento completo: sintesi, il mercato di dodici paesi con
+  le fonti, perché l'Albania, il prodotto, **i numeri**, il piano, come si riempiono i
+  letti, i rischi, cosa serve adesso, e tutte le fonti raccolte oggi.
+- **`business-plan.html`** — la stessa cosa impaginata, da mandare a una banca o a un
+  socio. Pubblicata su
+  <https://claude.ai/code/artifact/6b3fd716-46e0-46be-9229-b4d0e256776c>
+
+**I numeri nuovi, e sono la parte che mancava.** Casa 1, trenta posti a Golem:
+investimento **2,25 M€** (di cui **250.000 di capitale circolante**, la benzina per
+arrivare al terzo anno), e un conto a tre anni che fa **−136.000 · +65.000 · +149.000**,
+con il **pareggio a 22 ospiti su 30, cioè il 72% di occupazione**. Più cinque scenari,
+fra cui quello brutto: al 60% con retta bassa si perdono 160.000 € l'anno e **in due anni
+si brucia tutta la benzina**.
+
+**La cosa che i numeri dicono e che non sapevamo:** la Casa 1 rende il **6,6%**, cioè
+**non è un investimento che paga — è il prezzo della prova.** Su trenta posti i costi
+fissi sono quasi gli stessi che su centoventi. **I soldi sono nella Casa 2**, che a
+centoventi posti fa **1,75 milioni l'anno con il 46% di margine** — e con 9,5 milioni di
+investimento e 78 posti di lavoro **cade esattamente dentro la soglia AIDA**.
+
+Ogni numero non verificato è marcato `(ip.)`: vanno sostituiti dai preventivi veri nei
+trenta giorni.
+
+---
+
 ## 13 settembre 2026 — notte: le dieci domande, una alla volta
 
 Giorgio chiede le domande una per volta e risponde a tutte. **Dieci decisioni in una
