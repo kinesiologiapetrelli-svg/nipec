@@ -21,10 +21,11 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 | # | File | Cosa ci sta dentro |
 |---|---|---|
 | **1** | **[`DOMANDE-PER-INIZIARE.md`](DOMANDE-PER-INIZIARE.md)** | **Le dieci domande per Giorgio.** Le prime tre cambiano il progetto. **Si parte da qui.** |
-| **2** | **[`ANALISI-FATTIBILITA.md`](ANALISI-FATTIBILITA.md)** | Il documento operativo: che struttura, dove, per chi, con che personale, i conti a spanne, le tattiche di vendita, i rischi e il piano in tre tempi. |
-| **3** | **[`PREZZI-EUROPA.md`](PREZZI-EUROPA.md)** | La statistica: quanto paga di tasca propria una famiglia in ogni paese d'Europa, e quali paesi vanno presi e quali lasciati perdere. Con le fonti. |
-| **4** | **[`TIRANA-O-MARE.md`](TIRANA-O-MARE.md)** | Il terreno sta a Tirana e non sul mare: cosa si perde, cosa si guadagna, e come cambia il prodotto. **Da leggere insieme all'analisi**, che era stata scritta immaginando la costa. |
-| 5 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
+| **2** | **[`PRIMI-30-GIORNI.md`](PRIMI-30-GIORNI.md)** | **Chi fa cosa, da lunedì.** Cinque filoni in parallelo: l'avvocato, il commercialista, il medico, il socio e noi. Le risposte si scrivono lì dentro man mano che tornano. |
+| **3** | **[`ANALISI-FATTIBILITA.md`](ANALISI-FATTIBILITA.md)** | Il documento operativo: che struttura, dove, per chi, con che personale, i conti a spanne, le tattiche di vendita, i rischi e il piano in tre tempi. |
+| **4** | **[`PREZZI-EUROPA.md`](PREZZI-EUROPA.md)** | La statistica: quanto paga di tasca propria una famiglia in ogni paese d'Europa, e quali paesi vanno presi e quali lasciati perdere. Con le fonti. |
+| **5** | **[`TIRANA-O-MARE.md`](TIRANA-O-MARE.md)** | Il terreno sta a Tirana e non sul mare: cosa si perde, cosa si guadagna, e come cambia il prodotto. **Da leggere insieme all'analisi**, che era stata scritta immaginando la costa. |
+| 6 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
 
 ## Le carte di servizio
 
