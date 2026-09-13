@@ -28,8 +28,9 @@ cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
 | **6** | **[`IL-NOME.md`](IL-NOME.md)** | Il nome tedesco, le due proposte, e **la riga che non si supera**: non mettere «Albania» nel titolo è marketing, non dire dove siamo è truffa. |
 | **7** | **[`CHI-STA-BENE.md`](CHI-STA-BENE.md)** | Nei primi 30 posti entra solo chi sta bene. Perché questo non vuol dire «il pensionato in forma che sceglie il sole» — e le tre regole per non doverli mandare via quando peggiorano. |
 | **8** | **[`VALONA.md`](VALONA.md)** | Valona valutata sul serio: l'aeroporto VLO non apre nel 2026 e non c'è un ospedale JCI. Il posto giusto al momento sbagliato — e le due condizioni che diventano il metro di ogni casa futura. |
-| **9** | **[`TIRANA-O-MARE.md`](TIRANA-O-MARE.md)** | Il terreno sta a Tirana e non sul mare: cosa si perde, cosa si guadagna, e come cambia il prodotto. **Da leggere insieme all'analisi**, che era stata scritta immaginando la costa. |
-| 10 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
+| **9** | **[`LA-FRASE.md`](LA-FRASE.md)** | *«Perché dovrei mandare mia madre in Albania?»* — la scrive Giorgio. **È l'unica casella ancora vuota del progetto.** |
+| **10** | **[`TIRANA-O-MARE.md`](TIRANA-O-MARE.md)** | Il terreno sta a Tirana e non sul mare: cosa si perde, cosa si guadagna, e come cambia il prodotto. **Da leggere insieme all'analisi**, che era stata scritta immaginando la costa. |
+| 11 | [`IL-PROGETTO.md`](IL-PROGETTO.md) | Il primo studio del mattino: il precedente tedesco in Polonia, le leggi, le pensioni, il personale albanese. Fa da sfondo. |
 
 ## Le carte di servizio
 

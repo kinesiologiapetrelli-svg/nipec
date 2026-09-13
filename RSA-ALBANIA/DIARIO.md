@@ -5,6 +5,51 @@ la data nuova che è cambiata.
 
 ---
 
+## 13 settembre 2026 — notte: le dieci domande, una alla volta
+
+Giorgio chiede le domande una per volta e risponde a tutte. **Dieci decisioni in una
+serata**, e il progetto passa da studio a piano operativo.
+
+| # | Domanda | Risposta |
+|---|---|---|
+| 1 | I soldi | **1-3 milioni**, suoi più soci |
+| 2 | Un pezzo già in mano | **Un terreno** — poi: si comincia da **una struttura esistente** |
+| 3 | Altri soldi | **Finanziatori e fondi statali albanesi**, potenzialmente |
+| 4 | Dove | **Tirana città o dintorni.** Niente mare |
+| 5 | Chi c'è in Albania | **Socio, avvocato e medico.** Tutti e tre |
+| 6 | La lingua | **Tedesco** — Germania, Svizzera, Austria |
+| 7 | Chi risponde al telefono | **Un tedesco o austriaco assunto** |
+| 8 | Chi entra nei 30 posti | **Solo chi sta bene** |
+| 9 | Il nome | **Tedesco. Adriatico, non Albania — nel titolo** |
+| 10 | Valona | **Sì al ragionamento, no al momento** |
+| 11 | La frase | **La scrive lui** — l'unica casella ancora vuota |
+
+**E in mezzo, la domanda che vale più di tutte le risposte.** Giorgio: *«riusciamo a
+farci finanziare se abbiamo clienti, riusciamo ad avere clienti se vendiamo il progetto.»*
+È il problema vero del progetto, ed è nato `CLIENTI-O-SOLDI.md`: **la banca non vuole
+clienti, vuole la prova che i clienti esistono — e la prova è una firma, non un ospite nel
+letto.** La lista d'attesa con caparra rimborsabile su conto vincolato rompe il cerchio
+senza costruire niente.
+
+**Le tre cose che ho dovuto dire in faccia, e che restano scritte:**
+
+1. **Tirana costa il mare**, cioè metà dell'argomento contro la Polonia. Ma dà il
+   personale (vive in capitale), l'ospedale JCI a dieci minuti e nessuna stagione morta.
+   E per un tedesco il mare non era mai stato l'argomento: **le case di riposo in Polonia
+   il mare non ce l'hanno.** → `TIRANA-O-MARE.md`
+2. **«Solo chi sta bene» + Tirana + tedeschi è una tensione**, perché il pensionato in
+   forma va in Spagna. Si scioglie ridefinendo chi è «chi sta bene»: **il grado 1-2, chi
+   non è malato ma non può più stare solo.** → `CHI-STA-BENE.md`
+3. **Non mettere «Albania» nel nome è marketing; non dire dove siamo è truffa.**
+   → `IL-NOME.md`
+
+**Nuovi file della serata:** `CLIENTI-O-SOLDI.md`, `PRIMI-30-GIORNI.md`, `CHI-STA-BENE.md`,
+`IL-NOME.md`, `VALONA.md`, `TIRANA-O-MARE.md`, `LA-FRASE.md`.
+
+**Cosa manca:** la frase di Giorgio. E poi si parte con i cinque filoni dei trenta giorni.
+
+---
+
 ## 13 settembre 2026 — sera: le prime risposte, e il piano prende forma
 
 Giorgio risponde alle domande una alla volta. Quattro risposte, e il piano cambia:
