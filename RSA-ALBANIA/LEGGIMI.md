@@ -21,6 +21,14 @@ propria. Con direzione tedesca. *(Dopo la prima, non insieme.)*
 Progetto aperto il **13 settembre 2026**. Sta dentro il repository NIPEC ma è una cosa
 sua: cartella separata, file suoi, niente in comune con il laser.
 
+## Dove vive il progetto
+
+| | |
+|---|---|
+| **Google Drive** — [cartella `ADRIATIK COCOON`](https://drive.google.com/drive/folders/1bHnByOOlLHt4fnre1uVI1aPKWirVy_La) | **La copia da leggere.** Documenti Google, si aprono dal telefono senza scaricare niente |
+| **GitHub**, `RSA-ALBANIA/` | **L'archivio.** Qui resta la storia di ogni modifica |
+| [La pagina del business plan](https://claude.ai/code/artifact/6b3fd716-46e0-46be-9229-b4d0e256776c) | Impaginata, da mandare a una banca o a un socio |
+
 ## La regola di questo progetto
 
 **Tutto quello che facciamo finisce in un `.md`.** Ogni decisione, ogni numero, ogni
@@ -29,6 +37,11 @@ sparsi, niente «l'avevamo detto a voce».
 
 Perché: un `.md` si legge dal telefono, dal computer e da GitHub senza aprire niente, si
 cerca con una parola, e tiene la storia di chi ha cambiato cosa e quando.
+
+**E dal 13 settembre 2026 vale anche la seconda metà della regola: tutto va messo anche su
+Google Drive**, nella cartella `ADRIATIK COCOON`, convertito in Documenti Google. Il repo
+resta l'archivio; il Drive è dove Giorgio legge e lavora. **Ogni cosa nuova va in tutti e
+due i posti.**
 
 ## Da dove si comincia a leggere
 
