@@ -278,8 +278,10 @@ nell'Unione. **È un dato del progetto, non un problema da risolvere: si nasce p
 
 > ### Non si costruisce niente per primo.
 >
-> Si **affitta un albergo esistente** sulla costa Durazzo-Golem, fuori stagione ce ne sono
-> a disposizione, e lo si converte in **30-40 posti**. Un anno di esercizio vero.
+> Si parte da una **struttura che esiste già** sulla costa Durazzo-Golem — affittata o
+> comprata, fuori stagione ce ne sono — e la si converte in **30 posti**. Un anno di
+> esercizio vero. *(Deciso il 13 settembre 2026: il terreno che abbiamo si costruisce al
+> Tempo 3, quando si sa già tutto.)*
 >
 > Costa una frazione, e compra le uniche cose che contano davvero: **quanto costa
 > veramente un posto letto in Albania**, **se il personale si trova**, **quanto ci mette
@@ -289,11 +291,26 @@ nell'Unione. **È un dato del progetto, non un problema da risolvere: si nasce p
 > Chi costruisce prima di sapere queste quattro cose sta scommettendo 10 milioni su
 > un'ipotesi. Chi le sa, va in banca con dei numeri.
 
+**Aggiornato la sera del 13 settembre 2026, con le risposte di Giorgio:** ci sono 1-3
+milioni fra suoi e soci, **c'è un terreno**, si comincia da **una struttura esistente**, e
+potenzialmente ci sono **finanziatori e fondi statali albanesi**. Il piano diventa:
+
 | | Cosa | Quanto dura | Cosa serve alla fine |
 |---|---|---|---|
-| **Tempo 1 — Le carte** | Avvocato albanese (autorizzazioni), commercialista (società e soldi), costi di costruzione veri, cronometro sulle due strade, convenzione ospedaliera. **Più le dieci telefonate** *(sotto)* | 2-3 mesi | Sapere se è **legale**, quanto **costa**, e se **qualcuno lo compra** |
-| **Tempo 2 — Il pilota** | Albergo affittato, 30-40 posti, **solo cerchio esterno e di mezzo** — niente non autosufficienti finché non c'è la struttura vera. Un blocco linguistico solo | 12-18 mesi | Numeri veri, un metodo di vendita provato, le prime famiglie **che raccontano** |
-| **Tempo 3 — La struttura** | Costruzione 90-120 posti, tre cerchi, secondo blocco linguistico | 24-36 mesi | Il progetto |
+| **Tempo 1 — Le carte** | Avvocato albanese (autorizzazioni **e titolo del terreno**), commercialista (società e soldi), **telefonata ad AIDA** *(scadenza dicembre 2026, vedi sotto)*, cronometro sulle strade, convenzione ospedaliera. **Più le dieci telefonate** | 2-3 mesi | Sapere se è **legale**, quanto **costa**, se il terreno **è davvero nostro**, e se **qualcuno lo compra** |
+| **Tempo 2 — La prova** | **30 posti in una struttura esistente** (affitto o acquisto), **solo cerchio esterno e di mezzo** — niente non autosufficienti finché non c'è la struttura vera. Un blocco linguistico solo | 12-18 mesi | Numeri veri, un metodo di vendita provato, le prime famiglie **che raccontano** |
+| **Tempo 3 — La struttura** | **Costruzione sul nostro terreno**: 90-120 posti, tre cerchi, secondo blocco linguistico | 24-36 mesi | Il progetto |
+
+### La soglia albanese su cui il Tempo 3 cade perfetto
+
+La legge albanese sugli investimenti strategici (AIDA) dà incentivi fiscali e **procedure
+amministrative accelerate** sopra **5 milioni di investimento e 80 posti di lavoro**. Un
+campus da 120 posti sta sopra i 5 milioni e impiega 70-80 persone: **siamo esattamente
+dentro la soglia.** È un motivo in più per non fare la struttura finale piccola.
+
+⚠️ **Ma la legge scade a dicembre 2026.** Prorogata più volte, probabilmente lo sarà
+ancora — non è una cosa su cui programmare senza chiedere. **Telefonata ad AIDA in questi
+giorni.** Dettagli e fonti nella domanda aperta 13 di `DOMANDE-APERTE.md`.
 
 ### Le dieci telefonate
 

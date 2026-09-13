@@ -5,6 +5,37 @@ la data nuova che è cambiata.
 
 ---
 
+## 13 settembre 2026 — sera: le prime risposte, e il piano prende forma
+
+Giorgio risponde alle domande una alla volta. Quattro risposte, e il piano cambia:
+
+1. **1-3 milioni, suoi più soci.**
+2. **C'è un terreno.**
+3. **Si comincia da una struttura esistente**, non costruendo — correzione dello stesso
+   giorno, e sostituisce l'idea di costruire subito 30 posti sul terreno.
+4. **Potenzialmente ci sono finanziatori e fondi statali albanesi.**
+
+**Il piano che ne esce è più solido di quello del pomeriggio:**
+
+| | | |
+|---|---|---|
+| **Tempo 1** | Le carte, le dieci telefonate, il titolo del terreno, **la telefonata ad AIDA** | 2-3 mesi |
+| **Tempo 2** | **30 posti in una struttura esistente.** La prova vera | 12-18 mesi |
+| **Tempo 3** | **La struttura da 90-120 posti sul nostro terreno**, puntando allo status di investitore strategico | 24-36 mesi |
+
+**La cosa urgente uscita dalla ricerca:** la legge albanese sugli investimenti strategici
+dà incentivi fiscali e **procedure accelerate** sopra i **5 milioni di investimento e 80
+posti di lavoro** — soglie su cui il Tempo 3 cade perfetto. Ma **la legge scade a dicembre
+2026**. È stata prorogata più volte e probabilmente lo sarà ancora, **ma è una telefonata
+ad AIDA da fare in questi giorni**, non un punto da rimandare.
+
+**E la cosa da guardare in faccia:** prendere soldi pubblici albanesi per una struttura
+che ospita solo stranieri paganti è attaccabile. Serve una risposta vera e scelta da noi —
+posti per anziani albanesi, servizio sul territorio, formazione di personale locale —
+decisa adesso invece che subita dopo.
+
+---
+
 ## 13 settembre 2026 — pomeriggio: l'analisi di fattibilità
 
 Giorgio chiede un progetto costruito dall'inizio: analisi di fattibilità, tattiche,

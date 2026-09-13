@@ -123,3 +123,103 @@ col commercialista**: il portale **INPS** (accordo Italia-Albania), **fiscomania
 pensionato), e le due tabelle **Statista** sul costo medio delle case di riposo in Europa
 e sulla quota pagata dal pubblico — che sono la fonte migliore che esista per
 `PREZZI-EUROPA.md`.
+
+---
+
+## Aggiunte del 13 settembre 2026, dopo le risposte 1 e 2
+
+### 11. Il titolo del terreno — da verificare prima di ogni altra cosa
+
+C'è un terreno. **In Albania la proprietà è la trappola classica**: titoli sovrapposti,
+restituzioni post-1991 mai chiuse, eredi che spuntano a lavori iniziati. Prima di
+disegnare una riga:
+
+- estratto catastale e **titull pronësie** verificati da un avvocato albanese, non dal
+  venditore;
+- storia dei passaggi di proprietà degli ultimi trent'anni;
+- vincoli: costiero, agricolo, archeologico, idrogeologico;
+- **destinazione d'uso**: ci si può fare una struttura socio-sanitaria, o serve un cambio
+  di destinazione (e quanto ci vuole)?
+
+Un terreno col titolo contestato non è un terreno. **È la prima spesa da fare, ed è
+piccola.**
+
+### 12. Trenta posti non fanno margine da soli
+
+I costi fissi — direttore, medico, cucina, lavanderia, amministrazione, licenze,
+assicurazione — sono quasi gli stessi con 30 posti e con 120. Su 30 posti a 2.750 € con
+il 90% pieno si fanno circa **890.000 € l'anno**, e i fissi se ne mangiano la maggior parte.
+
+**Non è un problema, è il prezzo della prova**: i 30 posti servono a comprare le quattro
+risposte che nessuno studio può dare (quanto costa davvero un posto letto, se il personale
+si trova, quanto ci mette una famiglia a dire di sì, se l'autorizzazione arriva).
+
+**Ma vanno progettati di conseguenza:**
+- **Masterplan per 120 posti dal primo giorno**, costruito il primo modulo da 30. Impianti,
+  cucina, lavanderia, accessi e scarichi dimensionati per il campus finito, non per 30.
+  Rifarli dopo costa più che farli larghi adesso.
+- **Si parte dai cerchi esterno e di mezzo** (autosufficienti e assistiti): regole più
+  leggere, personale meno costoso, si apre molto prima. **I non autosufficienti e il
+  nucleo demenze entrano con il secondo modulo.**
+- **Personale in doppio ruolo** nei primi due anni: chi fa l'accoglienza fa anche
+  l'amministrazione. È l'unico modo di tenere in piedi i fissi su 30 posti.
+
+---
+
+## Aggiunte dopo le risposte 2c e 3 — i fondi albanesi
+
+### 13. Lo status di investitore strategico: c'è una soglia e c'è una scadenza
+
+L'Albania ha una **Legge sugli investimenti strategici** (2015), amministrata da **AIDA**
+(*Albanian Investment Development Agency*), che fa da sportello unico. Dà incentivi
+fiscali e **procedure amministrative accelerate** — cioè esattamente la cosa che vale di
+più in un progetto come il nostro, dove il rischio numero quattro è l'autorizzazione.
+
+**I due numeri da tenere a mente:**
+
+| | |
+|---|---|
+| Investimento minimo (*procedura assistita*) | **5 milioni di euro** |
+| Posti di lavoro da creare | **80** |
+| **Scadenza della legge** | **dicembre 2026** ⚠️ |
+
+**Cosa vuol dire per noi.**
+
+- **I 30 posti di prova non ci arrivano**, né come investimento né come occupati. Lo status
+  di investitore strategico è una cosa del **Tempo 3**, la struttura da 90-120 posti sul
+  nostro terreno — dove invece **ci arriviamo benissimo**: un campus da 120 posti costa
+  sopra i 5 milioni e impiega intorno alle 70-80 persone. **Il progetto è tagliato su
+  misura per quella soglia**, ed è un motivo in più per non fare la struttura finale
+  piccola.
+- ⚠️ **La scadenza è dicembre 2026, cioè fra tre mesi.** La legge è già stata prorogata
+  più volte (l'ultima proroga è di gennaio 2025) e probabilmente lo sarà ancora, **ma non
+  si programma su un "probabilmente".** Questa è una **telefonata ad AIDA da fare in questi
+  giorni**, non un punto da rimandare: si chiede se verrà prorogata, se si può presentare
+  una domanda per un investimento a fasi, e cosa succede a chi è in corso quando scade.
+
+### 14. Cosa chiedono in cambio i fondi statali albanesi
+
+Le domande da fare all'avvocato albanese **prima** di accettare qualsiasi cosa:
+
+- **Obblighi verso i cittadini albanesi.** Se lo Stato albanese mette soldi o terra in una
+  struttura per anziani, può chiedere che una quota di posti sia riservata ad albanesi, o
+  a prezzo calmierato? Quanti, a che prezzo, per quanti anni? **Va saputo prima, perché
+  cambia il conto e cambia il prodotto.**
+- **Vincoli su occupazione e durata.** Quanti posti di lavoro, per quanto tempo, e cosa
+  succede se non si raggiungono.
+- **Cosa si restituisce** se il progetto si ferma o si vende.
+- **Terra dello Stato**: a che titolo viene data, e cosa succede al nostro investimento se
+  la concessione finisce.
+
+### 15. Il rischio politico, detto onestamente
+
+Una struttura che prende sostegno pubblico albanese e **accoglie solo stranieri paganti**
+è una cosa che un giornale o un'opposizione possono usare facilmente: *«soldi pubblici
+albanesi per gli anziani ricchi tedeschi, mentre i nostri anziani non hanno posto»*.
+
+Non è un motivo per non farlo. È un motivo per **avere una risposta pronta e vera fin dal
+primo giorno** — per esempio una quota di posti per anziani albanesi, o un servizio
+domiciliare per il territorio, o la formazione di personale sanitario locale. **Meglio
+sceglierla noi adesso che subirla dopo.**
+
+**Fonti** · [AIDA — Strategic Investors Status](https://aida.gov.al/en/strategic-investers-status/) · [AIDA — testo della legge in inglese (PDF)](https://aida.gov.al/wp-content/uploads/2024/04/STRATEGIC-INVESTMENT-LAW-eng.pdf) · [UNCTAD — Law on Strategic Investments](https://investmentpolicy.unctad.org/investment-laws/laws/168/albania-law-on-strategic-investments) · [Dipartimento di Stato USA — *Investment Climate Statement: Albania 2025*](https://www.state.gov/reports/2025-investment-climate-statements/albania) · [Oracle Law Global — investimenti strategici, procedure 2025](https://oraclelawglobal.com/news/strategic-investments-in-albania-opportunities-and-procedures-for-2025/) · [Ambasciata d'Italia a Tirana — fare affari in Albania](https://ambtirana.esteri.it/it/italia-e-albania/diplomazia-economica/fare-affari-in-albania/) · [Assolombarda — Albania, opportunità per gli investitori](https://www.assolombarda.it/servizi/internazionalizzazione/informazioni/albania-crescita-economica-solida-e-nuove-opportunita-per-gli-investitori)
