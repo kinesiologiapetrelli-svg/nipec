@@ -1,0 +1,33 @@
+SITO-BUSINESS-PLAN — Illyria Cocoon
+====================================
+
+Cosa c'e' qui dentro
+--------------------
+index.html — il business plan completo, impaginato. Una pagina sola,
+             non ha bisogno di niente altro.
+
+Come si pubblica su Netlify
+---------------------------
+1. Vai su https://app.netlify.com/drop
+2. Trascina QUESTA CARTELLA INTERA (non il singolo file) nel riquadro.
+3. Netlify ti da' un indirizzo tipo https://nome-a-caso-123.netlify.app
+4. Da "Site configuration" -> "Change site name" gli dai il nome che vuoi.
+
+ATTENZIONE — questa pagina non va messa in giro
+-----------------------------------------------
+Dentro ci sono i conti, i margini, il punto di pareggio e gli scenari
+brutti. E' roba per la banca, per i soci e per il commercialista, non
+per il pubblico.
+
+Su Netlify ogni indirizzo e' visibile a chiunque lo indovini o lo
+riceva. Prima di dare il link a qualcuno, metti la password:
+  Site configuration -> Access & security -> Visitor access
+  -> Password protection
+
+Se preferisci non pubblicarla affatto, il link privato che gia' hai
+va benissimo e non e' indicizzato da nessun motore di ricerca.
+
+Quando si aggiorna
+------------------
+Il file viene rigenerato da RSA-ALBANIA/business-plan.html.
+Non si modifica a mano: si modifica l'originale e si ricopia qui.
