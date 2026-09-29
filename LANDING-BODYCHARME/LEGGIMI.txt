@@ -1,0 +1,76 @@
+BODYCHARME · LANDING BODY REVOLUTION
+Cosa c'è qui e in che ordine si mette in opera.
+
+------------------------------------------------------------------
+I FILE
+------------------------------------------------------------------
+index.html ............ la landing. Un file solo, nessuna libreria.
+privacy.html .......... l'informativa, da completare dove è evidenziato.
+RICEVI-CONTATTI.gs .... lo script che raccoglie i contatti in un
+                        foglio Google. Non va pubblicato sul sito.
+adv.html / PDF ........ copione del reel, copy, analisi. Non va
+                        pubblicato sul sito.
+
+Su Netlify si trascinano SOLO index.html e privacy.html.
+Gli altri due restano qui: sono roba nostra e del cliente.
+
+------------------------------------------------------------------
+I CINQUE PASSI, IN QUEST'ORDINE
+------------------------------------------------------------------
+
+1. IL FOGLIO DEI CONTATTI
+   Foglio Google nuovo -> Estensioni -> Apps Script.
+   Incolla RICEVI-CONTATTI.gs, cambia PAROLA con una tua.
+   Distribuisci -> Nuova distribuzione -> Applicazione web
+     Esegui come: Me          Chi ha accesso: Chiunque
+   Copia l'indirizzo che finisce con /exec.
+
+   Se un domani modifichi lo script:
+     Gestisci distribuzioni -> matita -> Nuova versione.
+     MAI una distribuzione nuova: cambierebbe l'indirizzo.
+
+2. COLLEGARE LA LANDING
+   In fondo a index.html c'è il blocco CONFIGURAZIONE.
+     endpoint: "...l'indirizzo /exec del punto 1..."
+     parola:   "...la stessa parola dello script..."
+   Finché endpoint resta vuoto il modulo funziona lo stesso, ma
+   apre WhatsApp: i contatti restano solo in chat e si perdono.
+
+3. L'INFORMATIVA
+   In privacy.html tutto quello che è evidenziato in giallo va
+   compilato: ragione sociale, indirizzo, partita IVA, per quanto
+   tempo si tengono i contatti, chi ospita il sito.
+   Senza, l'informativa non è valida — e il modulo ci rimanda.
+   Falla leggere a chi segue il cliente per gli adempimenti.
+
+4. GLI ALTRI DATI DEL CLIENTE
+   Sempre nel blocco CONFIGURAZIONE: ragione sociale e partita IVA
+   per il fondo pagina (adesso c'è scritto "da inserire").
+   DA CONFERMARE: via Val d'Aosta 22 o 24? Il brand book dice 22,
+   la sponsorizzata dice 24. Adesso c'è il 22.
+
+5. PUBBLICARE
+   Trascina index.html e privacy.html su Netlify (o sullo spazio
+   web del cliente). Prova il modulo da telefono PRIMA di mandare
+   traffico: compila, invia, e controlla che la riga arrivi nel
+   foglio.
+
+------------------------------------------------------------------
+DUE COSE DA SAPERE
+------------------------------------------------------------------
+
+L'INDIRIZZO /exec STA DENTRO LA PAGINA, quindi è visibile a chi
+guarda il codice. Per questo lo script SCRIVE E BASTA: non legge
+e non restituisce niente. Al massimo qualcuno può aggiungere righe
+finte nel foglio. Non può leggere i contatti già raccolti.
+La parola condivisa serve a tenere fuori i robot che provano a caso.
+
+I CARATTERI DELLA PAGINA arrivano dai server di Google, e questo
+comporta la comunicazione dell'IP di chi visita a Google: è scritto
+nell'informativa. Se si preferisce evitarlo, si scaricano i due
+caratteri (Fraunces e Inter), si mettono accanto a index.html e si
+sostituisce il collegamento a fonts.googleapis.com con un @font-face.
+È mezz'ora di lavoro: dimmelo e lo faccio.
+
+------------------------------------------------------------------
+NIPEC · assistenza 351 846 6025

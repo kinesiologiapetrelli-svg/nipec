@@ -366,6 +366,10 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
         <li>Scheda, misure e <b>foto del prima</b></li>
         <li><b>Data del controllo</b> fissata subito</li>
       </ul>
+      <div class="box" style="text-align:left;margin:0 0 20px;background:var(--sabbia2);border-left-color:var(--verde);padding:14px 16px;border-radius:0 12px 12px 0;font-size:15.5px;line-height:1.5">
+        <b>E se poi pensi che non faccia per te, i 39,90 € te li restituiamo.</b> Senza spiegazioni.<br>
+        <span style="color:var(--tenue);font-size:14.5px">E se dalla valutazione risulta che non è il caso di iniziare, te lo diciamo noi e finisce lì.</span>
+      </div>
       <a href="#prenota" class="btn oro largo">Lascia i tuoi dati e ti richiamiamo</a>
       <p class="sotto-btn">Ti richiamiamo noi per fissare il giorno. Nessun pagamento online.</p>
     </div>
@@ -382,6 +386,7 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
       <details><summary>È doloroso?</summary><div class="risp"><p>No. Le manualità sono intense in alcune fasi ma non dolorose, e la tecnologia si regola su di te. Se qualcosa non ti è comodo si dice sul momento e si cambia: <b>non esiste il «stringi i denti che poi passa».</b></p></div></details>
       <details><summary>Ho poco tempo. Quante volte devo venire?</summary><div class="risp"><p>Te lo diciamo alla fine della valutazione, non prima — perché dipende dalla fase da cui hai bisogno di partire. Quello che possiamo dirti subito è che il percorso viene costruito <b>sul tempo che hai davvero</b>, non su quello ideale: un piano che non riesci a seguire non è un piano.</p></div></details>
       <details><summary>Ho già provato altre cose e non è servito.</summary><div class="risp"><p>Ce lo dicono quasi tutte, ed è il motivo per cui esiste la valutazione. Quasi sempre non è che «non funziona niente»: è che si è partiti dalla fase sbagliata. Portaci quello che hai già fatto — <b>è informazione utile</b>, non un fallimento da nascondere.</p></div></details>
+      <details><summary>E se pago e poi non mi convince?</summary><div class="risp"><p>Il check-up e la prima seduta costano 39,90 € e <b>quei 39,90 € te li restituiamo</b> se alla fine pensi che non faccia per te. Non ti chiediamo il motivo.</p><p>Quello che non troverai mai scritto da noi è una garanzia sul risultato: i corpi non rispondono tutti allo stesso modo, e <b>chi te lo garantisce per iscritto o non lo sa o lo sa e lo scrive lo stesso</b>. Noi garantiamo il metodo e il controllo: se al controllo non è cambiato niente, si continua a lavorare senza che tu paghi altro.</p></div></details>
       <details><summary>E se dopo la prova non voglio continuare?</summary><div class="risp"><p>Non succede niente. Il check-up e la prima seduta si esauriscono in sé: <b>non si firma nulla e non c'è nessun rinnovo automatico.</b> Ti resta la scheda con le tue misure e le tue foto, che sono tue.</p></div></details>
     </div>
   </div>
@@ -504,8 +509,10 @@ const CFG = {
   /* DOVE FINISCONO I CONTATTI.
      Lasciato vuoto, il modulo apre WhatsApp con i dati già scritti:
      funziona da subito, ma il contatto resta solo nella chat.
-     Con un indirizzo, i dati vengono inviati lì e restano registrati. */
+     Mettendo qui l'indirizzo /exec dello script (RICEVI-CONTATTI.gs),
+     ogni richiesta finisce in un foglio Google e non se ne perde nessuna. */
   endpoint:      "",
+  parola:        "CAMBIAMI-CON-UNA-TUA",   // deve combaciare con quella dello script
 };
 /* =================================================================== */
 
@@ -569,7 +576,7 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
     const cifre = pulito(t).replace(/[^\d]/g,"");
     return cifre.length >= 9 && cifre.length <= 15;
   }
-  function messaggioWhatsApp(d){
+  function messaggioWhatsApp(d){   /* la parola resta fuori da qualunque testo visibile */
     return "Ciao! Ho lasciato i dati sul sito per il check-up."
          + "\nNome: " + d.nome
          + "\nTelefono: " + d.telefono
@@ -589,7 +596,8 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
       obiettivo: pulito(form.obiettivo.value),
       quando:    pulito(form.quando.value),
       pagina:    location.href,
-      quando_inviato: new Date().toISOString()
+      quando_inviato: new Date().toISOString(),
+      parola:    CFG.parola
     };
     if (dati.nome.length < 2)              return mostraErrore("Scrivi il tuo nome, così sappiamo come chiamarti.");
     if (!telefonoValido(dati.telefono))    return mostraErrore("Controlla il numero di telefono: sembra incompleto.");

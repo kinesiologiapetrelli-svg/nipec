@@ -190,7 +190,7 @@ s{color:var(--grigio)}
   </table>
 
   <h4>Dove finiscono i contatti</h4>
-  <div class="box">Nel file c'è un blocco <b>CONFIGURAZIONE</b> con una voce <b>endpoint</b>. Lasciandola vuota, il modulo <b>apre WhatsApp con i dati già scritti</b>: funziona subito, ma il contatto resta solo nella chat. Mettendoci un indirizzo di raccolta, i dati vengono registrati e non si perde nessuna. <b>È la decisione numero uno</b>, e va presa prima di mandare traffico: i contatti che arrivano mentre non c'è una destinazione sono contatti persi.</div>
+  <div class="box">Nel file c'è un blocco <b>CONFIGURAZIONE</b> con due voci: <b>endpoint</b> e <b>parola</b>. Lasciando endpoint vuoto il modulo <b>apre WhatsApp con i dati già scritti</b> — funziona subito, ma il contatto resta solo nella chat e prima o poi se ne perde qualcuno. Mettendoci l'indirizzo dello script <b>RICEVI-CONTATTI.gs</b>, ogni richiesta finisce in un foglio Google con data, stato «da richiamare» e tutto il resto.<br><b>L'indirizzo dello script sta dentro la pagina</b>, quindi è visibile a chi ne guarda il codice: per questo lo script <b>scrive e basta</b> — non legge e non restituisce niente. Chi lo scoprisse potrebbe al massimo aggiungere righe finte, <b>non leggere i contatti raccolti</b>. La parola condivisa tiene fuori i robot.</div>
 
   <div class="alert"><b>Nome e telefono sono dati personali di terzi, non numeri di magazzino.</b> Servono tre cose, tutte a carico del cliente in quanto titolare del trattamento: <b>l'informativa privacy</b> raggiungibile dal modulo (nella pagina il link c'è già, punta a <span class="picc">privacy.html</span> che va scritta), <b>il consenso</b> — già obbligatorio nel modulo — e una destinazione con <b>un accesso vero</b>, non un indirizzo che chiunque conosca possa leggere. In fondo alla pagina vanno la ragione sociale e la partita IVA: adesso c'è scritto «da inserire».</div>
 </div>
@@ -201,8 +201,8 @@ s{color:var(--grigio)}
 
   <table>
     <tr><th style="width:8mm">#</th><th>Punto</th><th style="width:22mm">Stato</th></tr>
-    <tr><td class="e">1</td><td><b>La garanzia.</b> Il cliente accetta di sostituire «garanzia scritta sul risultato» con le formule A + C? Finché resta quella attuale, io la campagna non la manderei online.</td><td><span class="tag tr_">blocca</span></td></tr>
-    <tr class="lo"><td class="e">2</td><td><b>Dove finiscono i contatti</b>, e chi scrive l'informativa privacy. Senza, la landing raccoglie dati che non hanno una casa.</td><td><span class="tag tr_">blocca</span></td></tr>
+    <tr><td class="e">1</td><td><b>La garanzia.</b> Confermata la sostituzione: nel riquadro dell'offerta c'è il <b>rimborso dei 39,90 €</b> e il «se non è il caso te lo diciamo»; nelle domande c'è la risposta che spiega <b>perché non garantiamo il risultato</b> — ed è diventata uno dei punti più forti della pagina. La garanzia sul metodo resta in cabina, scritta sulla scheda.</td><td><span class="tag tv">fatto</span></td></tr>
+    <tr class="lo"><td class="e">2</td><td><b>Dove finiscono i contatti.</b> Consegnato <b>RICEVI-CONTATTI.gs</b>: raccoglie ogni richiesta in un foglio Google. Consegnata anche <b>privacy.html</b>, da completare dove è evidenziato. Restano due cose da fare al cliente: pubblicare lo script e compilare l'informativa. I passi esatti sono nel <b>LEGGIMI</b>.</td><td><span class="tag">da mettere in opera</span></td></tr>
     <tr><td class="e">3</td><td><b>Via Val d'Aosta 22 o 24?</b> I due materiali dicono cose diverse.</td><td><span class="tag">da confermare</span></td></tr>
     <tr class="lo"><td class="e">4</td><td><b>Il prezzo pieno.</b> 79,80 € è mai stato praticato davvero? Se no, si toglie il «−50%» e si tiene «prezzo riservato ai 10 posti».</td><td><span class="tag">da confermare</span></td></tr>
     <tr><td class="e">5</td><td><b>Ragione sociale e partita IVA</b> per il fondo pagina, e il dominio dove pubblicare.</td><td><span class="tag">serve</span></td></tr>
