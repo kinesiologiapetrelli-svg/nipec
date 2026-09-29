@@ -4,14 +4,17 @@ Cosa c'è qui e in che ordine si mette in opera.
 ------------------------------------------------------------------
 I FILE
 ------------------------------------------------------------------
-index.html ............ la landing. Un file solo, nessuna libreria.
+index.html ............ la landing. Nessuna libreria esterna.
+caratteri/ ............ i due caratteri della pagina. Va caricata
+                        insieme a index.html, altrimenti si perdono.
 privacy.html .......... l'informativa, da completare dove è evidenziato.
 RICEVI-CONTATTI.gs .... lo script che raccoglie i contatti in un
                         foglio Google. Non va pubblicato sul sito.
 adv.html / PDF ........ copione del reel, copy, analisi. Non va
                         pubblicato sul sito.
 
-Su Netlify si trascinano SOLO index.html e privacy.html.
+Su Netlify si trascinano index.html, privacy.html e la
+cartella caratteri. Basta trascinare la cartella intera.
 Gli altri due restano qui: sono roba nostra e del cliente.
 
 ------------------------------------------------------------------
@@ -65,12 +68,15 @@ e non restituisce niente. Al massimo qualcuno può aggiungere righe
 finte nel foglio. Non può leggere i contatti già raccolti.
 La parola condivisa serve a tenere fuori i robot che provano a caso.
 
-I CARATTERI DELLA PAGINA arrivano dai server di Google, e questo
-comporta la comunicazione dell'IP di chi visita a Google: è scritto
-nell'informativa. Se si preferisce evitarlo, si scaricano i due
-caratteri (Fraunces e Inter), si mettono accanto a index.html e si
-sostituisce il collegamento a fonts.googleapis.com con un @font-face.
-È mezz'ora di lavoro: dimmelo e lo faccio.
+I CARATTERI STANNO NELLA CARTELLA "caratteri", non sui server di
+Google. La pagina quindi NON carica niente da altri siti: l'indirizzo
+IP di chi la apre non esce da qui. Sono due soli file, uno per
+famiglia, perché sono caratteri variabili: dentro ci sono tutti i pesi.
+Centoventi kilobyte in tutto.
+
+IMPORTANTE: la cartella "caratteri" va caricata INSIEME a index.html.
+Se si trascina su Netlify solo il file, la pagina si vede lo stesso ma
+con i caratteri di sistema, e perde mezza eleganza.
 
 ------------------------------------------------------------------
 NIPEC · assistenza 351 846 6025
