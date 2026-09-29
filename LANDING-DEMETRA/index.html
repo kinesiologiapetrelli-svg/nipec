@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Metodo DEMETRA · Centro DEMETRA — Tirana</title>
-<meta name="description" content="Metodo DEMETRA: un percorso personalizzato che parte da un’analisi gratuita e lavora su quattro sistemi insieme — metabolismo, adipe, muscolo e drenaggio.">
+<meta name="description" content="Metodo DEMETRA: un percorso personalizzato che parte da un’analisi completa e lavora su quattro sistemi insieme — metabolismo, adipe, muscolo e drenaggio.">
 <meta name="robots" content="index,follow">
 <meta property="og:title" content="Metodo DEMETRA · Tirana">
 <meta property="og:description" content="Il corpo non cambia con le promesse. Cambia con un metodo.">
@@ -144,6 +144,7 @@ footer b,footer strong{color:#F7F3E7}
          padding:clamp(26px,4.4vw,40px);box-shadow:var(--ombra-alta);text-align:center;
          max-width:640px;margin:0 auto}
 .prezzo{display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap;margin:18px 0 6px}
+.prezzo .vecchio{font-size:22px;color:var(--tenue);text-decoration:line-through}
 .prezzo .nuovo{font-family:"Fraunces",serif;font-size:clamp(38px,8vw,54px);font-weight:500;
                color:var(--scuro);line-height:1}
 .posti{display:inline-flex;align-items:center;gap:9px;background:var(--sabbia2);
@@ -204,6 +205,19 @@ html.anima .sale.visto{opacity:1;transform:none}
   .pallino{animation:none}
 }
 
+
+/* i video dei reel: la sezione non esiste finché non ci sono */
+#video{display:none}
+.filmati{display:grid;gap:16px;margin-top:8px}
+@media(min-width:700px){.filmati{grid-template-columns:repeat(3,1fr)}}
+.filmato{background:var(--carta);border:1px solid var(--bordo);border-radius:var(--r);
+         overflow:hidden;box-shadow:var(--ombra)}
+.filmato .schermo{position:relative;aspect-ratio:9/16;background:var(--scuro);display:block}
+.filmato video{width:100%;height:100%;object-fit:cover;display:block}
+.filmato .sotto{padding:16px 18px 18px}
+.filmato h3{font-size:18px;margin:0 0 .3em}
+.filmato p{margin:0;font-size:15px;color:var(--ink2);line-height:1.5}
+
 footer{background:var(--scuro);color:#BFB8A5;padding:52px 0 40px;font-size:14.5px;line-height:1.7}
 footer a{color:var(--oro-chiaro)}
 footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-top:22px;font-size:12.5px;color:#9A9382}
@@ -218,9 +232,9 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
       <span class="luogo" style="color:rgba(247,243,231,.5)" data-cfg="citta">Tirana</span>
     </div>
     <h1>Il corpo non cambia<br>con le promesse.<br>Cambia con <span class="ac">un metodo.</span></h1>
-    <p class="guida">Il <b>Metodo DEMETRA</b> lavora su quattro sistemi insieme — metabolismo, adipe, muscolo e drenaggio. E parte sempre dalla stessa cosa: <b>un'analisi gratuita</b>, per sapere da dove parti.</p>
+    <p class="guida">Il <b>Metodo DEMETRA</b> lavora su quattro sistemi insieme — metabolismo, adipe, muscolo e drenaggio. E parte sempre dalla stessa cosa: <b>un'analisi completa</b>, per sapere da dove parti.</p>
     <div class="hero-azioni">
-      <a href="#rezervo" class="btn">Prenota l'analisi gratuita</a>
+      <a href="#rezervo" class="btn">Prenota l'analisi completa</a>
       <a href="#metoda" class="btn vuoto">Come funziona</a>
     </div>
     <div class="fiducia">
@@ -273,9 +287,9 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
 <section class="crema">
   <div class="wrap">
     <div class="stretto sale" style="margin:0 auto 34px">
-      <p class="occhiello">Il primo passo — gratuito</p>
-      <h2>L'analisi. Mezz'ora in cui non ti vendiamo niente.</h2>
-      <p class="guida">Prima di parlare di percorsi, di sedute o di prezzi, si guarda da dove parti. <b>È gratuita e non ti impegna a niente.</b></p>
+      <p class="occhiello">Il primo passo</p>
+      <h2>L'analisi completa. Mezz'ora in cui non ti vendiamo niente.</h2>
+      <p class="guida">Prima di parlare di percorsi, di sedute o di prezzi, si guarda da dove parti. Costa <b>39,90 € invece di 90</b>, e non ti impegna a niente — <b>non c'è niente da firmare.</b></p>
     </div>
     <div class="griglia g2">
       <div class="card sale">
@@ -343,12 +357,23 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
   </div>
 </section>
 
+<section class="crema" id="video">
+  <div class="wrap">
+    <div class="stretto sale" style="margin:0 auto 26px">
+      <p class="occhiello">Guarda</p>
+      <h2 id="video-titolo">Come si lavora, in trenta secondi.</h2>
+      <p class="guida" id="video-testo">Meglio vederlo che leggerlo.</p>
+    </div>
+    <div class="filmati sale" id="filmati"></div>
+  </div>
+</section>
+
 <section class="crema">
   <div class="wrap sale">
     <div class="offerta">
       <span class="posti"><i class="pallino"></i><span data-cfg="posti">Posti limitati questo mese</span></span>
-      <h2 style="margin:10px 0 4px">La prima analisi</h2>
-      <div class="prezzo"><span class="nuovo" data-cfg="prezzo">Gratuita</span></div>
+      <h2 style="margin:10px 0 4px">L'analisi completa</h2>
+      <div class="prezzo"><span class="vecchio" data-cfg="prezzo-pieno">90 €</span><span class="nuovo" data-cfg="prezzo">39,90 €</span></div>
       <p class="picc" data-cfg="nota-prezzo" style="margin-bottom:22px">Senza impegno e senza niente da firmare.</p>
       <ul class="spunte" style="text-align:left;max-width:400px;margin:0 auto 26px">
         <li>Valutazione dei quattro pilastri, con le mani</li>
@@ -357,8 +382,8 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
         <li><b>Data del controllo</b> fissata subito</li>
       </ul>
       <div class="card" style="text-align:left;margin:0 0 20px;background:var(--sabbia);border-color:var(--verde);border-left-width:4px;padding:14px 16px;box-shadow:none;font-size:15.5px;line-height:1.5">
-        <b>E se dall'analisi risulta che non è il caso di iniziare, te lo diciamo noi.</b><br>
-        <span style="color:var(--tenue);font-size:14.5px">I percorsi vanno da 10 a 12 sedute. Quante e quali si decide dopo l'analisi — non prima.</span>
+        <b>Se alla fine pensi che non faccia per te, i 39,90 € te li restituiamo.</b> Senza spiegazioni.<br>
+        <span style="color:var(--tenue);font-size:14.5px">E se decidi di continuare, <b>i 39,90 € te li scaliamo dal percorso</b>. I percorsi vanno da 10 a 12 sedute: quante e quali si decide dopo l'analisi, non prima.</span>
       </div>
       <a href="#rezervo" class="btn oro largo">Lascia il numero e ti richiamiamo</a>
       <p class="sotto-btn">Ti richiamiamo noi per fissare il giorno. Nessun pagamento online.</p>
@@ -376,7 +401,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
       <details><summary>È doloroso?</summary><div class="risp"><p>No. Le manualità sono intense in alcune fasi ma non dolorose, e la tecnologia si regola su di te. Se qualcosa non ti è comodo si dice sul momento e si cambia: <b>non esiste il «stringi i denti che poi passa».</b></p></div></details>
       <details><summary>Ho poco tempo. Quante volte devo venire?</summary><div class="risp"><p>Te lo diciamo alla fine dell'analisi, non prima — perché dipende dal pilastro da cui hai bisogno di partire. Quello che possiamo dirti subito è che il percorso viene costruito <b>sul tempo che hai davvero</b>, non su quello ideale. Un piano che non riesci a seguire non è un piano.</p></div></details>
       <details><summary>Ho già provato altre cose e non è servito.</summary><div class="risp"><p>Ce lo dicono quasi tutte, ed è il motivo per cui esiste l'analisi. Quasi sempre non è che «non funziona niente»: è che si è lavorato su un pilastro solo. Portaci quello che hai già fatto — <b>è informazione utile</b>, non un fallimento da nascondere.</p></div></details>
-      <details><summary>L'analisi è davvero gratuita?</summary><div class="risp"><p>Sì, e non c'è niente da firmare. Ti chiediamo una cosa sola: <b>se prendi un orario e non puoi venire, avvisaci.</b> Quell'orario è di un'altra persona che sta aspettando.</p></div></details>
+      <details><summary>Perché l'analisi si paga?</summary><div class="risp"><p>Perché è mezz'ora del tempo di una professionista, con misure, foto e una scheda che resta a te. Normalmente costa 90 €: <b>39,90 € è il prezzo d'ingresso</b>, riservato a chi arriva da qui.</p><p>E soprattutto: <b>se decidi di continuare te li scaliamo dal percorso, se non ti convince te li restituiamo.</b> In tutti e due i casi non li hai persi. Quello che compri con 39,90 € non è uno sconto — è il fatto che qualcuno si sieda mezz'ora a guardare te invece di venderti un pacchetto.</p></div></details>
     </div>
   </div>
 </section>
@@ -489,8 +514,27 @@ const CFG = {
   instagramTesto: "@demetra",
   privacy:        "privacy.html",
 
-  prezzo:        "Gratuita",
-  notaPrezzo:    "Senza impegno e senza niente da firmare.",
+  /* I REEL DEL SITO.
+     Finché questo elenco è vuoto, la sezione "Guarda" non compare:
+     il sito non sembra incompleto, semplicemente non ce l'ha.
+     Quando i video sono pronti si mettono qui accanto a index.html
+     (cartella "video") e si scrivono qui sotto. Il "poster" è il
+     fotogramma che si vede prima di premere play: serve, altrimenti
+     su telefono resta un rettangolo nero. */
+  video: [
+    // { file:"video/reel-1.mp4", poster:"video/reel-1.jpg",
+    //   titolo:"Il metodo",  testo:"Perché una cosa sola non cambia il corpo." },
+    // { file:"video/reel-2.mp4", poster:"video/reel-2.jpg",
+    //   titolo:"L'analisi",  testo:"Mezz'ora in cui non ti vendiamo niente." },
+    // { file:"video/reel-3.mp4", poster:"video/reel-3.jpg",
+    //   titolo:"La seduta",  testo:"Le quattro fasi, in ordine." },
+  ],
+  videoTitolo: "Come si lavora, in trenta secondi.",
+  videoTesto:  "Meglio vederlo che leggerlo.",
+
+  prezzo:        "39,90 €",
+  prezzoPieno:   "90 €",
+  notaPrezzo:    "Prezzo d'ingresso, riservato a chi arriva da questa pagina.",
   posti:         "Posti limitati questo mese",
 
   /* DOVE FINISCONO I CONTATTI — vedi RICEVI-CONTATTI.gs.
@@ -504,7 +548,7 @@ const mappa = {
   "marchio":CFG.marchio, "sottomarchio":CFG.sottomarchio, "citta":CFG.citta, "via":CFG.via,
   "titolare":CFG.titolare, "titolare2":CFG.titolare,
   "telefono-bello":CFG.telefonoBello, "mail":CFG.mail, "prezzo":CFG.prezzo,
-  "nota-prezzo":CFG.notaPrezzo, "posti":CFG.posti,
+  "prezzo-pieno":CFG.prezzoPieno, "nota-prezzo":CFG.notaPrezzo, "posti":CFG.posti,
   "ragione-sociale":CFG.ragioneSociale, "nipt":CFG.nipt,
   "instagram-testo":CFG.instagramTesto
 };
@@ -520,6 +564,37 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
   const v = link[el.getAttribute("data-cfg-href")];
   if (v) el.setAttribute("href", v);
 });
+
+/* --- i video, se ci sono --- */
+(function(){
+  const elenco = Array.isArray(CFG.video) ? CFG.video.filter(function(v){ return v && v.file; }) : [];
+  if (!elenco.length) return;            /* niente video, niente sezione */
+  const sez = document.getElementById("video");
+  const box = document.getElementById("filmati");
+  document.getElementById("video-titolo").textContent = CFG.videoTitolo;
+  document.getElementById("video-testo").textContent  = CFG.videoTesto;
+  elenco.slice(0,3).forEach(function(v){
+    const d = document.createElement("div");
+    d.className = "filmato";
+    const schermo = document.createElement("div");
+    schermo.className = "schermo";
+    const f = document.createElement("video");
+    f.src = v.file;
+    if (v.poster) f.poster = v.poster;
+    f.controls = true; f.playsInline = true; f.preload = "none";
+    schermo.appendChild(f);
+    d.appendChild(schermo);
+    if (v.titolo || v.testo) {
+      const sotto = document.createElement("div");
+      sotto.className = "sotto";
+      if (v.titolo) { const h = document.createElement("h3"); h.textContent = v.titolo; sotto.appendChild(h); }
+      if (v.testo)  { const p = document.createElement("p");  p.textContent  = v.testo;  sotto.appendChild(p); }
+      d.appendChild(sotto);
+    }
+    box.appendChild(d);
+  });
+  sez.style.display = "block";
+})();
 
 (function(){
   if (!("IntersectionObserver" in window)) return;
