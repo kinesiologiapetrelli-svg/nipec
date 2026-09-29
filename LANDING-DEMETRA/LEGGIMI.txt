@@ -1,0 +1,81 @@
+DEMETRA · LANDING METODO DEMETRA — TIRANA
+Cosa c'è qui e in che ordine si mette in opera.
+
+------------------------------------------------------------------
+I FILE
+------------------------------------------------------------------
+index.html ............ la landing. Nessuna libreria esterna.
+caratteri/ ............ i due caratteri della pagina. Va caricata
+                        insieme a index.html, altrimenti si perdono.
+privacy.html .......... l'informativa, da completare dove è
+                        evidenziato in giallo.
+RICEVI-CONTATTI.gs .... lo script che raccoglie i contatti in un
+                        foglio Google. Non va pubblicato sul sito.
+
+Su un qualunque spazio web (o su Netlify) si caricano index.html,
+privacy.html e la cartella caratteri. Lo script resta fuori.
+
+------------------------------------------------------------------
+PRIMA DI PUBBLICARE — I SEGNAPOSTO
+------------------------------------------------------------------
+Nella pagina ci sono dei buchi scritti fra parentesi quadre.
+Si riempiono TUTTI nel blocco CONFIGURAZIONE in fondo a index.html:
+
+  [indirizzo] ........ la via del centro a Tirana
+  [numero] ........... il telefono, e anche CFG.telefono in formato
+                       internazionale senza il + (es. 355691234567)
+  [email] ............ la posta del centro
+  [ragione sociale] .. il nome del soggetto
+  [NIPT] ............. il numero fiscale albanese
+  instagram .......... l'indirizzo vero del profilo
+
+Finché restano i segnaposto la pagina si vede, ma il pulsante
+"chiama" e WhatsApp non portano da nessuna parte.
+
+------------------------------------------------------------------
+I COLORI
+------------------------------------------------------------------
+La palette è PROVVISORIA: verde profondo e oro del grano, scelti
+perché Demetra è la dea del raccolto. Il logo non mi è mai arrivato.
+Quando arriva, si cambiano SOLO le sei righe in cima al CSS di
+index.html (il blocco :root con il commento "PALETTE PROVVISORIA")
+e tutta la pagina si adegua. Cinque minuti.
+Gli stessi colori vanno poi riportati in privacy.html.
+
+------------------------------------------------------------------
+I CINQUE PASSI
+------------------------------------------------------------------
+1. Foglio Google nuovo -> Estensioni -> Apps Script.
+   Incolla RICEVI-CONTATTI.gs, cambia PAROLA con una tua.
+   Distribuisci -> Nuova distribuzione -> Applicazione web
+     Esegui come: Me          Chi ha accesso: Chiunque
+   Copia l'indirizzo che finisce con /exec.
+   Se poi modifichi lo script: Gestisci distribuzioni -> matita ->
+   Nuova versione. MAI una distribuzione nuova.
+
+2. In fondo a index.html, nel blocco CONFIGURAZIONE:
+     endpoint: "...l'indirizzo /exec del punto 1..."
+     parola:   "...la stessa parola dello script..."
+   Se endpoint resta vuoto il modulo funziona lo stesso ma apre
+   WhatsApp: i contatti restano solo in chat e si perdono.
+
+3. Compila privacy.html dove è evidenziato. Il centro è in Albania,
+   quindi vale la legge 124/2024, non il GDPR italiano: l'autorità
+   è l'IDP. Falla leggere a chi segue il centro là.
+
+4. Riempi i segnaposto (vedi sopra).
+
+5. Pubblica e PROVA IL MODULO DA TELEFONO prima di mandare
+   traffico: compila, invia, e controlla che la riga arrivi nel
+   foglio.
+
+------------------------------------------------------------------
+UNA COSA DA SAPERE
+------------------------------------------------------------------
+L'INDIRIZZO /exec STA DENTRO LA PAGINA, quindi è visibile a chi
+guarda il codice. Per questo lo script SCRIVE E BASTA: non legge e
+non restituisce niente. Al massimo qualcuno può aggiungere righe
+finte nel foglio. Non può leggere i contatti già raccolti.
+
+------------------------------------------------------------------
+NIPEC · assistenza 351 846 6025
