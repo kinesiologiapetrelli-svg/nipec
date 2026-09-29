@@ -1,5 +1,13 @@
-DEMETRA · LANDING METODO DEMETRA — TIRANA
+DEMETRA · LANDING METODA DEMETRA — TIRANË
 Cosa c'è qui e in che ordine si mette in opera.
+
+NOTA: la landing e l'informativa sono IN ALBANESE, perché le legge
+la cliente di Tirana. Questo foglio di istruzioni resta in italiano
+perché lo leggi tu: se serve in albanese per chi mette in opera là,
+dimmelo e lo traduco.
+
+L'albanese della pagina va fatto rileggere a Uarda prima di
+pubblicare: l'ho scritto io e va controllato da chi è madrelingua.
 
 ------------------------------------------------------------------
 I FILE
@@ -21,11 +29,11 @@ PRIMA DI PUBBLICARE — I SEGNAPOSTO
 Nella pagina ci sono dei buchi scritti fra parentesi quadre.
 Si riempiono TUTTI nel blocco CONFIGURAZIONE in fondo a index.html:
 
-  [indirizzo] ........ la via del centro a Tirana
-  [numero] ........... il telefono, e anche CFG.telefono in formato
+  [adresa] ........... la via del centro a Tirana
+  [numri] ............ il telefono, e anche CFG.telefono in formato
                        internazionale senza il + (es. 355691234567)
   [email] ............ la posta del centro
-  [ragione sociale] .. il nome del soggetto
+  [emri i subjektit] . il nome del soggetto
   [NIPT] ............. il numero fiscale albanese
   instagram .......... l'indirizzo vero del profilo
 
