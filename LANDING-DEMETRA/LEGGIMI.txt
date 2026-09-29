@@ -35,12 +35,23 @@ Finché restano i segnaposto la pagina si vede, ma il pulsante
 ------------------------------------------------------------------
 I COLORI
 ------------------------------------------------------------------
-La palette è PROVVISORIA: verde profondo e oro del grano, scelti
-perché Demetra è la dea del raccolto. Il logo non mi è mai arrivato.
-Quando arriva, si cambiano SOLO le sei righe in cima al CSS di
-index.html (il blocco :root con il commento "PALETTE PROVVISORIA")
-e tutta la pagina si adegua. Cinque minuti.
-Gli stessi colori vanno poi riportati in privacy.html.
+Presi dal logo DEMETRA 360° TRANSFORMATION, campionati dal file e
+non scelti a occhio:
+
+  oro ............. #C9A455   (il cerchio e la figura)
+  oro chiaro ...... #E4C06C   (i riflessi)
+  oro scuro ....... #A2842F   (la scritta DEMETRA)
+  blu notte ....... #252F37   (il nastro scuro — è il fondo scuro
+                               della pagina, non un verde)
+  verde oliva ..... #8A8C3C   (il nastro verde — usato per le spunte)
+
+Stanno tutti nel blocco :root in cima al CSS di index.html, e gli
+stessi valori sono in privacy.html. Se un domani il marchio cambia,
+si toccano solo quelle righe.
+
+Nella pagina c'è anche "360° Transformation" accanto al nome e
+"Powered by NIPEC & ROSSE" in fondo, come nel logo.
+Il fotogramma del logo è salvato qui accanto: logo-demetra.png
 
 ------------------------------------------------------------------
 I CINQUE PASSI

@@ -26,16 +26,16 @@
    nel blocco CONFIGURAZIONE in fondo al file.
    =================================================================== */
 :root{
-  /* ⚠ PALETTE PROVVISORIA — in attesa del logo DEMETRA.
-     Demetra è la dea del raccolto: verde profondo e oro del grano.
-     Quando arriva il logo si cambiano SOLO queste sei righe. */
-  --sabbia:#FBF9F4; --sabbia2:#F1EDE1; --carta:#FFFFFF;
-  --ink:#1F2620; --ink2:#4A574C; --tenue:#7C877D;
-  --scuro:#25402F; --scuro2:#33523E;
-  --oro:#C2A24B; --oro-chiaro:#E0CB92; --oro-scuro:#93762F;
-  --verde:#3F6B4E; --bordo:#E2DCCB;
-  --ombra:0 1px 2px rgba(31,38,32,.05), 0 8px 28px rgba(31,38,32,.07);
-  --ombra-alta:0 2px 6px rgba(31,38,32,.08), 0 18px 50px rgba(31,38,32,.14);
+  /* Palette presa dal marchio DEMETRA 360° TRANSFORMATION:
+     oro #C9A455, blu notte #252F37, verde oliva #8A8C3C.
+     I valori sono campionati dal logo, non scelti a occhio. */
+  --sabbia:#FCFAF6; --sabbia2:#F4EFE3; --carta:#FFFFFF;
+  --ink:#22272B; --ink2:#4C555C; --tenue:#7E868C;
+  --scuro:#252F37; --scuro2:#35434E;
+  --oro:#C9A455; --oro-chiaro:#E4C06C; --oro-scuro:#A2842F;
+  --verde:#8A8C3C; --bordo:#E6DECB;
+  --ombra:0 1px 2px rgba(34,39,43,.05), 0 8px 28px rgba(34,39,43,.07);
+  --ombra-alta:0 2px 6px rgba(34,39,43,.08), 0 18px 50px rgba(34,39,43,.14);
   --r:18px;
 }
 *{box-sizing:border-box}
@@ -75,11 +75,11 @@ section{padding:clamp(54px,9vw,104px) 0;position:relative}
 .btn.largo{width:100%}
 .sotto-btn{font-size:13.5px;color:var(--tenue);margin-top:12px;line-height:1.5}
 
-.hero{background:linear-gradient(170deg,#2F4E3A 0%,#22392C 60%,#1B2E23 100%);
+.hero{background:linear-gradient(170deg,#33414C 0%,#252F37 60%,#1B232A 100%);
       color:#F7F3E7;padding:clamp(34px,6vw,54px) 0 clamp(54px,8vw,86px);overflow:hidden}
 .hero:before{content:"";position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(70% 55% at 78% 8%,rgba(194,162,75,.34),transparent 62%),
-                 radial-gradient(55% 45% at 6% 96%,rgba(194,162,75,.15),transparent 60%)}
+      background:radial-gradient(70% 55% at 78% 8%,rgba(201,164,85,.34),transparent 62%),
+                 radial-gradient(55% 45% at 6% 96%,rgba(201,164,85,.15),transparent 60%)}
 .hero .wrap{position:relative;z-index:1}
 .marchio{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:clamp(30px,6vw,52px)}
 .marchio .nome{font-family:"Fraunces",serif;font-size:19px;letter-spacing:.055em;color:#F7F3E7}
@@ -150,8 +150,8 @@ footer b,footer strong{color:#F7F3E7}
        border:1px solid var(--bordo);border-radius:999px;padding:8px 17px;
        font-size:14px;font-weight:600;color:var(--ink2);margin-bottom:6px}
 .pallino{width:8px;height:8px;border-radius:50%;background:var(--oro);
-         box-shadow:0 0 0 0 rgba(194,162,75,.6);animation:batte 2.2s infinite}
-@keyframes batte{70%{box-shadow:0 0 0 9px rgba(194,162,75,0)}100%{box-shadow:0 0 0 0 rgba(194,162,75,0)}}
+         box-shadow:0 0 0 0 rgba(201,164,85,.6);animation:batte 2.2s infinite}
+@keyframes batte{70%{box-shadow:0 0 0 9px rgba(201,164,85,0)}100%{box-shadow:0 0 0 0 rgba(201,164,85,0)}}
 
 details{background:var(--carta);border:1px solid var(--bordo);border-radius:14px;
         margin-bottom:11px;overflow:hidden}
@@ -173,7 +173,7 @@ details .risp p:last-child{margin-bottom:0}
   background:var(--sabbia);transition:border-color .16s, background .16s}
 .campo input:focus,.campo select:focus{outline:0;border-color:var(--oro);background:#fff}
 .campo select{appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C877D' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237E868C' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 15px center;background-size:17px;padding-right:44px}
 .consenso{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;
           margin:20px 0 22px;font-size:13.5px;line-height:1.5;color:var(--ink2)}
@@ -214,7 +214,8 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
   <div class="wrap">
     <div class="marchio">
       <span class="nome" data-cfg="marchio">DEMETRA</span>
-      <span class="luogo" data-cfg="citta">Tirana</span>
+      <span class="luogo" data-cfg="sottomarchio">360° Transformation</span>
+      <span class="luogo" style="color:rgba(247,243,231,.5)" data-cfg="citta">Tirana</span>
     </div>
     <h1>Il corpo non cambia<br>con le promesse.<br>Cambia con <span class="ac">un metodo.</span></h1>
     <p class="guida">Il <b>Metodo DEMETRA</b> lavora su quattro sistemi insieme — metabolismo, adipe, muscolo e drenaggio. E parte sempre dalla stessa cosa: <b>un'analisi gratuita</b>, per sapere da dove parti.</p>
@@ -449,11 +450,12 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
   <div class="wrap">
     <div class="marchio" style="margin-bottom:22px">
       <span class="nome" style="color:#F7F3E7" data-cfg="marchio">DEMETRA</span>
-      <span class="luogo" style="color:var(--oro-chiaro)">Centro benessere</span>
+      <span class="luogo" style="color:var(--oro-chiaro)">360° Transformation</span>
     </div>
     <p style="margin-bottom:6px"><span data-cfg="via">[indirizzo]</span>, <span data-cfg="citta">Tirana</span></p>
     <p style="margin-bottom:6px">Tel. <a href="#" data-cfg-href="tel-link"><span data-cfg="telefono-bello">[numero]</span></a> · <a href="#" data-cfg-href="mail-link"><span data-cfg="mail">[email]</span></a></p>
     <p><a href="#" data-cfg-href="instagram" target="_blank" rel="noopener" data-cfg="instagram-testo">@demetra</a></p>
+    <p class="picc" style="color:#9A9382;margin-top:14px;letter-spacing:.14em;text-transform:uppercase;font-size:11.5px">Powered by <b style="color:var(--oro-chiaro)">NIPEC</b> &amp; <b style="color:var(--oro-chiaro)">ROSSE</b></p>
     <div class="riga">
       <p style="margin-bottom:5px"><span data-cfg="ragione-sociale">[ragione sociale]</span> · NIPT <span data-cfg="nipt">[NIPT]</span> · Titolare del trattamento dei dati.</p>
       <p style="margin:0"><a href="#" data-cfg-href="privacy">Informativa sui dati personali</a></p>
@@ -474,6 +476,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:26px;padding-
    =================================================================== */
 const CFG = {
   marchio:        "DEMETRA",
+  sottomarchio:   "360° Transformation",
   ragioneSociale: "[ragione sociale]",
   nipt:           "[NIPT]",
   citta:          "Tirana",
@@ -498,7 +501,7 @@ const CFG = {
 /* =================================================================== */
 
 const mappa = {
-  "marchio":CFG.marchio, "citta":CFG.citta, "via":CFG.via,
+  "marchio":CFG.marchio, "sottomarchio":CFG.sottomarchio, "citta":CFG.citta, "via":CFG.via,
   "titolare":CFG.titolare, "titolare2":CFG.titolare,
   "telefono-bello":CFG.telefonoBello, "mail":CFG.mail, "prezzo":CFG.prezzo,
   "nota-prezzo":CFG.notaPrezzo, "posti":CFG.posti,
