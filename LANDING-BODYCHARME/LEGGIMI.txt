@@ -92,9 +92,9 @@ La parola condivisa serve a tenere fuori i robot che provano a caso.
 
 I CARATTERI STANNO NELLA CARTELLA "caratteri", non sui server di
 Google. La pagina quindi NON carica niente da altri siti: l'indirizzo
-IP di chi la apre non esce da qui. Sono due soli file, uno per
-famiglia, perché sono caratteri variabili: dentro ci sono tutti i pesi.
-Centoventi kilobyte in tutto.
+IP di chi la apre non esce da qui. Sono due file: Inter (variabile,
+dentro ci sono tutti i pesi) e Anton, che serve come riserva dove
+Impact non c'e'. Sessantasette kilobyte in tutto.
 
 IMPORTANTE: la cartella "caratteri" va caricata INSIEME a index.html.
 Se si trascina su Netlify solo il file, la pagina si vede lo stesso ma
