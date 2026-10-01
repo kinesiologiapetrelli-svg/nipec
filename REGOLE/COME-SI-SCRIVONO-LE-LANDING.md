@@ -1,6 +1,6 @@
 # Come si scrivono le landing NIPEC
 
-Quattro regole date da Giorgio il 1° ottobre 2026.
+Regole date da Giorgio il 1° ottobre 2026.
 **Valgono per sempre, su ogni pagina e ogni cliente.**
 
 ---
@@ -48,30 +48,56 @@ rettangolo nero.
 
 ---
 
-## 4 · Il carattere: Impact
+## 4 · Il carattere segue il marchio
 
-Titoli in **Impact**, maiuscolo. È il carattere che Giorgio ha chiesto:
-pesante, stretto, si legge da lontano e sullo schermo di un telefono
-tenuto in mano mentre si cammina.
+La regola non è «metti Impact». È: **il carattere deve essere dello
+stesso genere del logo del cliente.** Se stona col logo, la pagina
+sembra fatta da due persone diverse.
 
-Impact c'è già su quasi tutti i computer e i telefoni. Dove non c'è,
-la pagina usa **Anton**, che è lo stesso disegno ed è servito dalla
-cartella qui accanto. Il risultato è lo stesso: nessuno si accorge
-della differenza.
+| Il logo è… | Titoli | Nome del marchio |
+|---|---|---|
+| grosso, diretto, da insegna | **Impact** (riserva: Anton) | lo stesso |
+| una capitale romana in oro, filigranata | **Playfair Display** | **Cinzel** |
 
-In CSS sta scritto una volta sola, nella variabile `--titoli`:
+- **Bodycharme** — marchio schietto, messaggio diretto: Impact.
+- **DEMETRA** — emblema d'oro e scritta in capitale romana: Playfair
+  Display per i titoli, Cinzel per il nome. Impact lì era sbagliato,
+  e si vedeva: un grottesco da manifesto accanto a una filigrana.
 
-```css
---titoli: Impact, "Anton", "Haettenschweiler", "Franklin Gothic Bold",
-          "Arial Narrow", sans-serif;
-```
+Il testo è sempre **Inter**: è il più leggibile sui telefoni e ha
+tutte le lettere che servono.
 
-Testo in **Inter**. Niente serif eleganti: la pagina deve colpire
-prima di essere letta.
+**Le lettere albanesi vanno verificate nel file del carattere**, non
+date per scontate: ë ç Ë Ç. Si controllano prima di consegnare —
+un titolo con le dieresi mancanti è una pagina che non si può usare.
+
+Se il titolo è in un serif ad alto contrasto, **non si scrive tutto
+maiuscolo**: si legge peggio. La maiuscola resta alle etichette corte.
 
 I caratteri stanno sempre nella cartella `caratteri` accanto alla
 pagina, mai sui server di Google: così l'indirizzo IP di chi visita
 non esce dal sito.
+
+---
+
+## 5 · Il fondo bianco e i colori del marchio
+
+Quando il marchio ha colori forti — un oro, un verde — questi
+**fanno il contorno, non il fondo**: filetti fra le fasce, filo
+intorno alle schede, riga in testa alle colonne, cornice del
+riquadro dell'offerta.
+
+Il fondo resta bianco. Un fondo pieno color oro spegne l'oro; una
+riga d'oro su bianco lo accende.
+
+I colori si **campionano dal file del logo**, pixel per pixel, non
+si scelgono a occhio.
+
+Il pulsante principale prende il colore più scuro del marchio: su
+bianco è quello che si vede di più. L'oro pieno si tiene per i due
+punti dove si parla di soldi — il riquadro dell'offerta e il modulo.
+
+---
 
 ---
 
@@ -90,7 +116,7 @@ per il testo piccolo serve un oro più scuro (`--oro-testo`).
 
 ## Quello che non cambia
 
-Queste quattro regole si aggiungono a quelle che valevano già:
+Queste regole si aggiungono a quelle che valevano già:
 
 - **Niente numeri né tempi sul corpo** — «meno 5 cm», «in 2 settimane»
   fanno bocciare l'inserzione su Meta dal 22 luglio 2026.

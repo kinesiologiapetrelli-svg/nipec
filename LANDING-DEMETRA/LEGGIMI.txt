@@ -13,15 +13,20 @@ pubblicare: l'ho scritto io e va controllato da chi è madrelingua.
 I FILE
 ------------------------------------------------------------------
 index.html ............ la landing. Nessuna libreria esterna.
-caratteri/ ............ i caratteri della pagina (Anton + Inter). Va caricata
-                        insieme a index.html, altrimenti si perdono.
+caratteri/ ............ i tre caratteri della pagina (Cinzel, Playfair
+                        Display, Inter). Va caricata insieme a
+                        index.html, altrimenti si perdono.
+logo-demetra-emblema.png  l'emblema ritagliato, fondo trasparente.
+                        Va caricato anche lui: e' il logo in cima alla
+                        pagina e l'icona della scheda del browser.
 privacy.html .......... l'informativa, da completare dove è
                         evidenziato in giallo.
 RICEVI-CONTATTI.gs .... lo script che raccoglie i contatti in un
                         foglio Google. Non va pubblicato sul sito.
 
 Su un qualunque spazio web (o su Netlify) si caricano index.html,
-privacy.html e la cartella caratteri. Lo script resta fuori.
+privacy.html, logo-demetra-emblema.png e la cartella caratteri.
+Lo script resta fuori.
 
 ------------------------------------------------------------------
 PRIMA DI PUBBLICARE — I SEGNAPOSTO
@@ -41,17 +46,30 @@ Finché restano i segnaposto la pagina si vede, ma il pulsante
 "chiama" e WhatsApp non portano da nessuna parte.
 
 ------------------------------------------------------------------
-I COLORI
+I COLORI, E PERCHE' LA PAGINA E' BIANCA
 ------------------------------------------------------------------
-Presi dal logo DEMETRA 360° TRANSFORMATION, campionati dal file e
-non scelti a occhio:
+Campionati dall'emblema, pixel per pixel, non scelti a occhio:
 
-  oro ............. #C9A455   (il cerchio e la figura)
-  oro chiaro ...... #E4C06C   (i riflessi)
-  oro scuro ....... #A2842F   (la scritta DEMETRA)
-  blu notte ....... #252F37   (il nastro scuro — è il fondo scuro
-                               della pagina, non un verde)
-  verde oliva ..... #8A8C3C   (il nastro verde — usato per le spunte)
+  oro ............. #CBA353   (il cerchio e la figura)
+  oro chiaro ...... #E8C67A   (i riflessi)
+  oro per il testo  #7A5F1C   (l'oro del marchio a 12px non si
+                               legge: per le scritte piccole serve
+                               questo, piu' scuro)
+  verde oliva ..... #878A38   (il nastro verde)
+  blu notte ....... #282C33   (il nastro scuro)
+
+LA PAGINA E' BIANCA DAPPERTUTTO. Oro, verde e blu notte fanno il
+CONTORNO, non il fondo: le fasce sono chiuse fra due righe d'oro,
+le schede hanno il filo d'oro al posto dell'ombra, il riquadro
+dell'offerta e il modulo sono incorniciati.
+
+Il motivo e' semplice: un fondo pieno color oro spegne l'oro, una
+riga d'oro su bianco lo accende. E il logo, che e' d'oro su bianco,
+ci sta dentro invece di combatterci.
+
+Il pulsante dei richiami e' blu notte, perche' su bianco e' quello
+che si vede di piu'. L'oro pieno resta nei due punti dove si parla
+di soldi: il riquadro dell'offerta e il modulo.
 
 Stanno tutti nel blocco :root in cima al CSS di index.html, e gli
 stessi valori sono in privacy.html. Se un domani il marchio cambia,
@@ -59,7 +77,8 @@ si toccano solo quelle righe.
 
 Nella pagina c'è anche "360° Transformation" accanto al nome e
 "Powered by NIPEC & ROSSE" in fondo, come nel logo.
-Il fotogramma del logo è salvato qui accanto: logo-demetra.png
+Il logo intero è salvato qui accanto: logo-demetra.png
+L'emblema ritagliato, quello che va in pagina: logo-demetra-emblema.png
 
 ------------------------------------------------------------------
 I REEL NELLA PAGINA
@@ -76,12 +95,24 @@ Quando i reel sono pronti:
 La sezione compare da sola. Si fermano a tre.
 
 ------------------------------------------------------------------
-IL CARATTERE
+I CARATTERI
 ------------------------------------------------------------------
-I titoli sono in IMPACT. Dove Impact non c'e' (qualche telefono
-Android) la pagina usa Anton, che e' lo stesso disegno e sta nella
-cartella "caratteri". Per questo la cartella va caricata sempre:
-senza, i titoli cambiano aspetto.
+Sono scelti sul logo, non a caso:
+
+  Cinzel ............ la capitale romana della scritta DEMETRA.
+                      Serve solo per il nome del marchio.
+  Playfair Display .. i titoli. Stesso genere del logo - asta
+                      spessa e grazia sottile - ma abbastanza
+                      pesante da reggere lo schermo del telefono.
+  Inter ............. il testo. E' il piu' leggibile.
+
+Tutti e tre hanno la e con dieresi e la c con cediglia: verificato
+dentro al file, non dato per scontato.
+
+Stanno nella cartella "caratteri", non sui server di Google: la
+pagina non carica niente da altri siti. Centododici kilobyte in
+tutto. Se la cartella non viene caricata, la pagina si vede lo
+stesso ma coi caratteri di sistema e perde meta' eleganza.
 
 ------------------------------------------------------------------
 I CINQUE PASSI
