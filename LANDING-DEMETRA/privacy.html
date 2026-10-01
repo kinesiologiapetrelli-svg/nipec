@@ -3,29 +3,34 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Njoftim për mbrojtjen e të dhënave personale · DEMETRA</title>
 <meta name="robots" content="noindex,follow">
+<link rel="icon" href="logo-demetra-emblema.png" type="image/png">
 <style>
 @font-face{font-family:"Cinzel";src:url("caratteri/cinzel.woff2") format("woff2");font-weight:400 900;font-display:swap}
 @font-face{font-family:"Playfair Display";src:url("caratteri/playfair.woff2") format("woff2");font-weight:400 900;font-display:swap}
 @font-face{font-family:"Inter";src:url("caratteri/inter.woff2") format("woff2");font-weight:100 900;font-display:swap}
-:root{--sabbia:#FCFAF6;--ink:#22272B;--ink2:#4C555C;--tenue:#6B747B;
-      --scuro:#252F37;--oro:#C9A455;--oro-scuro:#A2842F;--bordo:#E6DECB;--carta:#fff}
+:root{--sabbia:#FCFAF5;--ink:#22262B;--ink2:#4C535A;--tenue:#6B737A;
+      --scuro:#282C33;--oro:#CBA353;--oro-scuro:#A2842F;--oro-testo:#7A5F1C;
+      --verde:#878A38;--bordo:#EADFC6;--carta:#fff}
 *{box-sizing:border-box}
-body{margin:0;background:var(--sabbia);color:var(--ink);
+body{margin:0;background:var(--carta);color:var(--ink);
      font:400 16.5px/1.62 "Inter",system-ui,sans-serif;overflow-wrap:break-word}
 .wrap{max-width:760px;margin:0 auto;padding:0 22px}
-header{background:var(--scuro);color:#F7F3E7;padding:40px 0 34px;margin-bottom:44px}
-header .nome{font-family:"Cinzel",Georgia,serif;font-weight:600;font-size:19px;letter-spacing:.09em}
+header{background:var(--carta);color:var(--ink);padding:34px 0 30px;margin-bottom:40px;
+       border-bottom:3px solid var(--oro)}
+header .riga-marchio{display:flex;align-items:center;gap:13px}
+header img{width:54px;height:auto;flex:none}
+header .nome{font-family:"Cinzel",Georgia,serif;font-weight:600;font-size:21px;letter-spacing:.11em;color:var(--scuro)}
 header h1{font-family:"Playfair Display",Georgia,serif;font-weight:700;font-size:clamp(28px,6vw,42px);
-          margin:22px 0 6px;line-height:1.1;color:#FBF7ED}
-header p{margin:0;color:#D2C8B1;font-size:15px}
+          margin:20px 0 6px;line-height:1.1;color:var(--scuro)}
+header p{margin:0;color:var(--ink2);font-size:15px}
 h2{font-family:"Playfair Display",Georgia,serif;font-weight:700;line-height:1.15;font-size:clamp(21px,3.6vw,26px);
    color:var(--scuro);margin:36px 0 10px}
 p{margin:0 0 14px}b{color:var(--scuro)}
-a{color:var(--oro-scuro)}
+a{color:var(--oro-testo)}
 ul{padding-left:20px;margin:0 0 14px}li{margin-bottom:6px}
 .vuoto{background:#FBF1D5;border-bottom:2px solid var(--oro);padding:1px 6px;
        font-weight:600;color:#6F5718;border-radius:3px}
-.nota{background:var(--carta);border:1px solid var(--bordo);border-left:4px solid var(--oro);
+.nota{background:var(--sabbia);border:1.5px solid var(--bordo);border-left:5px solid var(--oro);
       border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;font-size:15px;color:var(--ink2)}
 table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0 18px}
 th{background:var(--scuro);color:#fff;text-align:left;padding:9px 11px;font-size:13px;
@@ -36,7 +41,7 @@ footer{margin-top:52px;padding:26px 0 42px;border-top:1px solid var(--bordo);
 </style></head><body>
 
 <header><div class="wrap">
-  <span class="nome">DEMETRA</span>
+  <div class="riga-marchio"><img src="logo-demetra-emblema.png" width="320" height="320" alt="DEMETRA"><span class="nome">DEMETRA</span></div>
   <h1>Njoftim për të dhënat personale</h1>
   <p>Si i trajtojmë të dhënat e atyre që na lënë një kontakt — përditësuar më <span class="vuoto">[data]</span></p>
 </div></header>
@@ -45,7 +50,7 @@ footer{margin-top:52px;padding:26px 0 42px;border-top:1px solid var(--bordo);
 
 <div class="nota"><b>Pjesëve të theksuara u mungon një e dhënë.</b> Plotësohen para se faqja të publikohet: pa to, njoftimi nuk vlen. Ky tekst është një model i ndërtuar mbi funksionimin real të kësaj faqeje — <b>duhet lexuar nga kush merret me përputhshmërinë ligjore të qendrës</b> përpara se të vihet online.</div>
 
-<div class="nota" style="border-left-color:var(--scuro)"><b>Cili ligj zbatohet.</b> Qendra është në Shqipëri, prandaj zbatohet <b>ligji nr. 124/2024 «Për mbrojtjen e të dhënave personale»</b>, në fuqi që nga shkurti 2025 dhe i përafruar me rregulloren evropiane. Autoriteti të cilit mund t'i drejtohesh është <b>IDP</b> — Komisioneri për të Drejtën e Informimit dhe Mbrojtjen e të Dhënave Personale (<a href="https://idp.al" target="_blank" rel="noopener">idp.al</a>).</div>
+<div class="nota" style="border-left-color:var(--verde)"><b>Cili ligj zbatohet.</b> Qendra është në Shqipëri, prandaj zbatohet <b>ligji nr. 124/2024 «Për mbrojtjen e të dhënave personale»</b>, në fuqi që nga shkurti 2025 dhe i përafruar me rregulloren evropiane. Autoriteti të cilit mund t'i drejtohesh është <b>IDP</b> — Komisioneri për të Drejtën e Informimit dhe Mbrojtjen e të Dhënave Personale (<a href="https://idp.al" target="_blank" rel="noopener">idp.al</a>).</div>
 
 <h2>Kush i trajton të dhënat e tua</h2>
 <p>Kontrollues i të dhënave është <span class="vuoto">[emri i subjektit]</span>, me seli në <span class="vuoto">[adresa e plotë]</span>, Tiranë, NIPT <span class="vuoto">[NIPT]</span>.<br>
