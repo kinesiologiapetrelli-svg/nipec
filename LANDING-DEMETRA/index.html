@@ -9,10 +9,14 @@
 <meta property="og:title" content="Trupi nuk ndryshon me premtime">
 <meta property="og:description" content="Ndryshon me një metodë. Katër sisteme, jo një.">
 <meta property="og:type" content="website">
+<link rel="icon" href="logo-demetra-emblema.png" type="image/png">
+<link rel="apple-touch-icon" href="logo-demetra-emblema.png">
 <style>
 /* I caratteri stanno qui accanto: la pagina non chiama nessun server esterno. */
-@font-face{font-family:"Anton";src:url("caratteri/anton.woff2") format("woff2");
-           font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Playfair Display";src:url("caratteri/playfair.woff2") format("woff2");
+           font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Cinzel";src:url("caratteri/cinzel.woff2") format("woff2");
+           font-weight:400 900;font-style:normal;font-display:swap}
 @font-face{font-family:"Inter";src:url("caratteri/inter.woff2") format("woff2");
            font-weight:100 900;font-style:normal;font-display:swap}
 </style>
@@ -24,31 +28,39 @@
    Tutto ciò che si cambia sta nel blocco KONFIGURIMI in fondo.
    =================================================================== */
 :root{
-  /* palette campionata dal marchio DEMETRA 360° TRANSFORMATION */
-  --sabbia:#FCFAF6; --sabbia2:#F4EFE3; --carta:#FFFFFF;
-  --ink:#22272B; --ink2:#4C555C; --tenue:#6B747B;
-  --scuro:#252F37; --scuro2:#35434E;
-  --oro:#C9A455; --oro-chiaro:#E4C06C; --oro-scuro:#A2842F; --oro-testo:#7A5F1C;
-  --verde:#8A8C3C; --bordo:#E6DECB;
-  --ombra:0 1px 2px rgba(34,39,43,.05), 0 8px 28px rgba(34,39,43,.07);
-  --ombra-alta:0 2px 6px rgba(34,39,43,.08), 0 18px 50px rgba(34,39,43,.14);
+  /* I colori sono campionati dall'emblema, pixel per pixel.
+     La pagina e' BIANCA: oro, verde e blu notte servono da contorno,
+     da filetto e da scritta — mai da fondo pieno. */
+  --carta:#FFFFFF; --velo:#FCFAF5;          /* bianco, e un bianco appena caldo */
+  --ink:#22262B; --ink2:#4C535A; --tenue:#6B737A;
+  --scuro:#282C33; --scuro2:#3A4049;        /* il blu notte del nastro */
+  --oro:#CBA353; --oro-chiaro:#E8C67A; --oro-scuro:#A2842F; --oro-testo:#7A5F1C;
+  --verde:#878A38; --verde-scuro:#5E6127;   /* il verde oliva del nastro */
+  --bordo:#EADFC6;                          /* oro molto diluito: i contorni */
+  --ombra:0 1px 2px rgba(40,44,51,.04), 0 8px 24px rgba(40,44,51,.05);
+  --ombra-alta:0 2px 6px rgba(40,44,51,.06), 0 16px 44px rgba(40,44,51,.10);
   --r:18px;
-  /* IL CARATTERE DEI TITOLI — Impact se c'e' sul dispositivo,
-     altrimenti Anton (lo stesso disegno, servito da qui accanto). */
-  --titoli:Impact,"Anton","Haettenschweiler","Franklin Gothic Bold","Arial Narrow",sans-serif;
+  /* I CARATTERI.
+     --marchio  Cinzel: la capitale romana della scritta DEMETRA del logo.
+                Serve solo per il nome del marchio.
+     --titoli   Playfair Display: stesso genere del logo — asta spessa e
+                grazia sottile — ma con un peso che sul telefono si vede.
+     Il testo resta in Inter, che e' il piu' leggibile e ha la ë e la ç. */
+  --marchio:"Cinzel",Georgia,"Times New Roman",serif;
+  --titoli:"Playfair Display",Georgia,"Times New Roman",serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--sabbia);color:var(--ink);overflow-wrap:break-word;
+body{margin:0;background:var(--carta);color:var(--ink);overflow-wrap:break-word;
      font:400 18px/1.68 "Inter",system-ui,-apple-system,sans-serif;
      -webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 
 /* ---------- il carattere impact ---------- */
-h1,h2,.urlo{font-family:var(--titoli);font-weight:400;
-            text-transform:uppercase;letter-spacing:-.005em;line-height:1.02;margin:0 0 .35em}
-h1{font-size:clamp(40px,11vw,88px);letter-spacing:.004em}
-h2{font-size:clamp(32px,7.8vw,58px);letter-spacing:.004em}
+h1,h2,.urlo{font-family:var(--titoli);font-weight:700;
+            letter-spacing:-.012em;line-height:1.08;margin:0 0 .4em;color:var(--scuro)}
+h1{font-size:clamp(36px,8.6vw,66px);line-height:1.04}
+h2{font-size:clamp(28px,5.8vw,44px)}
 h3{font-family:"Inter",sans-serif;font-weight:700;font-size:clamp(19px,3.4vw,23px);
    line-height:1.25;margin:0 0 .45em;color:var(--scuro);letter-spacing:-.01em}
 p{margin:0 0 1.1em}
@@ -63,6 +75,7 @@ section{padding:clamp(56px,10vw,110px) 0;position:relative}
 .blocco p{margin:0 0 .55em}
 .blocco p:last-child{margin-bottom:0}
 .stacco{width:54px;height:3px;background:var(--oro);border:0;margin:34px 0;border-radius:2px}
+.stacco.verde{background:var(--verde)}
 .stacco.centro{margin-left:auto;margin-right:auto}
 
 .occhiello{font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.22em;
@@ -72,56 +85,68 @@ section{padding:clamp(56px,10vw,110px) 0;position:relative}
 
 /* ---------- pulsanti ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
-     background:var(--scuro);color:#fff;border:0;cursor:pointer;
+     background:var(--scuro);color:#fff;border:2px solid var(--scuro);cursor:pointer;
      font:700 17px/1 "Inter",sans-serif;letter-spacing:.005em;
      padding:21px 32px;border-radius:999px;text-decoration:none;
      box-shadow:var(--ombra-alta);transition:transform .18s, background .18s;text-align:center}
 .btn:hover{background:var(--scuro2);transform:translateY(-2px)}
-.btn.oro{background:var(--oro);color:var(--scuro)}
-.btn.oro:hover{background:var(--oro-chiaro)}
-.btn.vuoto{background:transparent;color:var(--scuro);border:2px solid var(--bordo);box-shadow:none}
-.btn.vuoto:hover{background:var(--carta);border-color:var(--oro-chiaro)}
+.btn.oro{background:var(--oro);color:var(--scuro);border-color:var(--oro)}
+.btn.oro:hover{background:var(--oro-chiaro);border-color:var(--oro-chiaro)}
+.btn.vuoto{background:transparent;color:var(--scuro);border:2px solid var(--oro);box-shadow:none}
+.btn.vuoto:hover{background:var(--velo);border-color:var(--oro-scuro)}
 .btn.largo{width:100%}
 .sotto-btn{font-size:14.5px;color:var(--tenue);margin-top:13px;line-height:1.5}
 
-/* ---------- hero ---------- */
-.hero{background:linear-gradient(170deg,#33414C 0%,#252F37 60%,#1B232A 100%);
-      color:#F7F3E7;padding:clamp(32px,6vw,52px) 0 clamp(58px,9vw,92px);overflow:hidden}
-.hero:before{content:"";position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(70% 55% at 80% 6%,rgba(201,164,85,.40),transparent 62%),
-                 radial-gradient(55% 45% at 4% 98%,rgba(201,164,85,.16),transparent 60%)}
+/* ---------- l'apertura ----------
+   Bianca, con l'emblema in alto e un cerchio d'oro appena accennato
+   dietro: e' il cerchio del marchio, ripreso come filigrana. */
+/* position:relative e' obbligatorio: senza, i due cerchi qui sotto si
+   agganciano alla finestra invece che all'apertura, escono dallo
+   schermo e la pagina scorre di lato. */
+.hero{background:var(--carta);color:var(--ink);position:relative;
+      padding:clamp(26px,5vw,44px) 0 clamp(50px,8vw,80px);overflow:hidden;
+      border-bottom:3px solid var(--oro)}
+.hero:before{content:"";position:absolute;pointer-events:none;border-radius:50%;
+      width:min(66vw,520px);height:min(66vw,520px);right:-26vw;top:-20vw;
+      border:1px solid var(--bordo);opacity:.7}
+.hero:after{content:"";position:absolute;pointer-events:none;border-radius:50%;
+      width:min(42vw,320px);height:min(42vw,320px);left:-22vw;bottom:-22vw;
+      border:1px solid var(--bordo);opacity:.7}
 .hero .wrap{position:relative;z-index:1}
-.marchio{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:clamp(34px,7vw,58px)}
-.marchio .nome{font-family:var(--titoli);font-size:21px;letter-spacing:.07em;color:#F7F3E7}
-.marchio .luogo{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
-                font-weight:700;color:var(--oro-chiaro)}
-.hero h1{color:#FBF7ED;max-width:13ch}
-.hero h1 .ac{color:var(--oro-chiaro)}
-.hero .blocco{color:#E4DBC8;margin-top:24px;font-size:clamp(18px,2.6vw,21px);line-height:1.55}
-.hero b,.hero strong{color:#FBF7ED}
-.hero .stacco{background:var(--oro-chiaro)}
+.marchio{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:clamp(30px,6vw,48px)}
+.marchio .segno{width:clamp(72px,19vw,108px);height:auto;flex:none}
+.marchio .scritte{display:flex;flex-direction:column;gap:3px}
+.marchio .nome{font-family:var(--marchio);font-weight:600;font-size:clamp(23px,5.4vw,32px);
+               letter-spacing:.12em;color:var(--scuro);line-height:1}
+.marchio .luogo{font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+                font-weight:700;color:var(--oro-testo)}
+.hero h1{color:var(--scuro);max-width:13ch}
+.hero h1 .ac{color:var(--oro-scuro)}
+.hero .blocco{color:var(--ink2);margin-top:24px;font-size:clamp(18px,2.6vw,21px);line-height:1.55}
+.hero b,.hero strong{color:var(--scuro)}
+.hero .stacco{background:var(--verde)}
 .hero-azioni{display:flex;flex-wrap:wrap;gap:13px;margin-top:32px}
-.hero .btn{background:var(--oro);color:var(--scuro)}
-.hero .btn:hover{background:var(--oro-chiaro);color:var(--scuro)}
-.hero .btn.vuoto{background:transparent;color:#F7F3E7;border-color:rgba(247,243,231,.34)}
 .fiducia{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:36px;
-         padding-top:28px;border-top:1px solid rgba(247,243,231,.16)}
-.fiducia div{font-size:15px;color:#D2C8B1}
-.fiducia b{color:#FBF7ED;font-weight:700}
+         padding-top:28px;border-top:1px solid var(--bordo)}
+.fiducia div{font-size:15px;color:var(--ink2)}
+.fiducia b{color:var(--scuro);font-weight:700}
 
-/* ---------- blocchi di fondo ---------- */
-.chiaro{background:var(--sabbia)}
-.crema{background:var(--sabbia2)}
-.scurissimo{background:var(--scuro);color:#E9E2D3}
-.scurissimo h2,.scurissimo h3{color:#FBF7ED}
-.scurissimo .blocco,.scurissimo .guida{color:#D2C8B1}
-.scurissimo .occhiello{color:var(--oro-chiaro)}
-.scurissimo b{color:#FBF7ED}
-.scurissimo .stacco{background:var(--oro-chiaro)}
-footer b,footer strong{color:#F7F3E7}
+/* ---------- le fasce ----------
+   Il fondo resta bianco dappertutto. Il ritmo della pagina lo danno
+   i filetti d'oro e lo spazio, non i rettangoli colorati. */
+.chiaro{background:var(--carta)}
+.crema{background:var(--velo);border-top:1px solid var(--bordo);border-bottom:1px solid var(--bordo)}
+/* la fascia "forte": bianca, ma chiusa fra due righe d'oro piene */
+.scurissimo{background:var(--carta);border-top:3px solid var(--oro);border-bottom:3px solid var(--oro)}
+.scurissimo h2,.scurissimo h3{color:var(--scuro)}
+.scurissimo .blocco,.scurissimo .guida{color:var(--ink2)}
+.scurissimo .occhiello{color:var(--oro-testo)}
+.scurissimo b{color:var(--scuro)}
+.scurissimo .stacco{background:var(--verde)}
+.scurissimo .spunte li:before{background-color:var(--verde)}
 
-.card{background:var(--carta);border:1px solid var(--bordo);border-radius:var(--r);
-      padding:clamp(24px,3.8vw,34px);box-shadow:var(--ombra)}
+.card{background:var(--carta);border:1.5px solid var(--bordo);border-radius:var(--r);
+      padding:clamp(24px,3.8vw,34px);box-shadow:none}
 .griglia{display:grid;gap:16px}
 @media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
                         .g4{grid-template-columns:repeat(2,1fr)}}
@@ -131,16 +156,17 @@ footer b,footer strong{color:#F7F3E7}
 .cta{margin:36px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:11px}
 .cta.centro{align-items:center;text-align:center;margin-left:auto;margin-right:auto}
 .cta .nota{font-size:15px;color:var(--ink2);margin:0;line-height:1.5;max-width:34em}
-.scurissimo .cta .nota{color:#C5BAA6}
+.scurissimo .cta .nota{color:var(--ink2)}
 @media(max-width:520px){.cta{align-items:stretch}.cta .btn{width:100%}.cta .nota{text-align:center}}
 
 .provato{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
-.provato span{background:var(--carta);border:1px solid var(--bordo);border-radius:999px;
+.provato span{background:var(--carta);border:1.5px solid var(--bordo);border-radius:999px;
               padding:10px 19px;font-size:16px;font-weight:600;color:var(--ink2)}
 
 /* le quattro colonne */
-.pilastro{background:var(--carta);border:1px solid var(--bordo);border-radius:var(--r);padding:24px}
-.pilastro .eti{font-family:var(--titoli);font-size:30px;color:var(--oro-scuro);line-height:1;margin-bottom:10px}
+.pilastro{background:var(--carta);border:1.5px solid var(--bordo);border-radius:var(--r);padding:24px;
+          border-top:3px solid var(--oro)}
+.pilastro .eti{font-family:var(--marchio);font-weight:700;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:var(--oro-testo);line-height:1;margin-bottom:10px}
 .pilastro h3{font-size:21px;margin-bottom:.35em}
 .pilastro p{margin:0;font-size:16.5px;color:var(--ink2);line-height:1.5}
 
@@ -148,7 +174,7 @@ footer b,footer strong{color:#F7F3E7}
 .fase{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
       padding:26px 0;border-top:1px solid var(--bordo)}
 .fase:first-of-type{border-top:0;padding-top:0}
-.fase .n{font-family:var(--titoli);font-size:40px;color:var(--oro-scuro);line-height:.9;min-width:52px}
+.fase .n{font-family:var(--titoli);font-weight:700;font-size:40px;color:var(--oro-scuro);line-height:.9;min-width:52px}
 .fase p{margin:0;color:var(--ink2);font-size:17px}
 
 .spunte{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:13px}
@@ -163,8 +189,8 @@ footer b,footer strong{color:#F7F3E7}
 #video{display:none}
 .filmati{display:grid;gap:16px;margin-top:10px}
 @media(min-width:700px){.filmati{grid-template-columns:repeat(3,1fr)}}
-.filmato{background:var(--carta);border:1px solid var(--bordo);border-radius:var(--r);
-         overflow:hidden;box-shadow:var(--ombra)}
+.filmato{background:var(--carta);border:1.5px solid var(--bordo);border-radius:var(--r);
+         overflow:hidden;box-shadow:none}
 .filmato .schermo{position:relative;aspect-ratio:9/16;background:var(--scuro);display:block}
 .filmato video{width:100%;height:100%;object-fit:cover;display:block}
 .filmato .sotto{padding:17px 19px 19px}
@@ -172,20 +198,20 @@ footer b,footer strong{color:#F7F3E7}
 .filmato p{margin:0;font-size:16px;color:var(--ink2);line-height:1.5}
 
 /* offerta */
-.offerta{background:var(--carta);border:2px solid var(--oro-chiaro);border-radius:26px;
-         padding:clamp(28px,4.6vw,44px);box-shadow:var(--ombra-alta);text-align:center;
+.offerta{background:var(--carta);border:3px solid var(--oro);border-radius:26px;
+         padding:clamp(28px,4.6vw,44px);box-shadow:var(--ombra);text-align:center;
          max-width:620px;margin:0 auto}
 .prezzo{display:flex;align-items:baseline;justify-content:center;gap:16px;flex-wrap:wrap;margin:16px 0 4px}
 .prezzo .vecchio{font-size:24px;color:var(--tenue);text-decoration:line-through;font-weight:600}
-.prezzo .nuovo{font-family:var(--titoli);font-size:clamp(44px,11vw,72px);color:var(--scuro);line-height:.95}
-.posti{display:inline-flex;align-items:center;gap:9px;background:var(--sabbia2);
-       border:1px solid var(--bordo);border-radius:999px;padding:9px 18px;
+.prezzo .nuovo{font-family:var(--titoli);font-weight:700;font-size:clamp(40px,9.5vw,62px);color:var(--scuro);line-height:.95}
+.posti{display:inline-flex;align-items:center;gap:9px;background:var(--carta);
+       border:1.5px solid var(--oro);border-radius:999px;padding:9px 18px;
        font-size:14.5px;font-weight:700;color:var(--ink2);margin-bottom:4px}
 .pallino{width:9px;height:9px;border-radius:50%;background:var(--oro);
          box-shadow:0 0 0 0 rgba(201,164,85,.6);animation:batte 2.2s infinite}
 @keyframes batte{70%{box-shadow:0 0 0 10px rgba(201,164,85,0)}100%{box-shadow:0 0 0 0 rgba(201,164,85,0)}}
 
-details{background:var(--carta);border:1px solid var(--bordo);border-radius:15px;
+details{background:var(--carta);border:1.5px solid var(--bordo);border-radius:15px;
         margin-bottom:11px;overflow:hidden}
 details summary{cursor:pointer;padding:20px 23px;font-weight:700;font-size:17px;
                 color:var(--scuro);list-style:none;display:flex;justify-content:space-between;
@@ -197,14 +223,14 @@ details .risp{padding:0 23px 21px;color:var(--ink2);font-size:16.5px}
 details .risp p:last-child{margin-bottom:0}
 
 /* modulo */
-.modulo{background:var(--carta);border-radius:26px;padding:clamp(26px,4.4vw,40px);
-        box-shadow:var(--ombra-alta);max-width:540px;margin:0 auto}
+.modulo{background:var(--carta);border:3px solid var(--oro);border-radius:26px;
+        padding:clamp(26px,4.4vw,40px);box-shadow:var(--ombra);max-width:540px;margin:0 auto}
 .campo{margin-bottom:18px}
 .campo label{display:block;font-size:14.5px;font-weight:700;color:var(--ink2);margin-bottom:8px}
 .campo input,.campo select{width:100%;padding:16px 17px;border:2px solid var(--bordo);
   border-radius:13px;font:400 17px/1.4 "Inter",sans-serif;color:var(--ink);
-  background:var(--sabbia);transition:border-color .16s, background .16s}
-.campo input:focus,.campo select:focus{outline:0;border-color:var(--oro);background:#fff}
+  background:var(--velo);transition:border-color .16s, background .16s}
+.campo input:focus,.campo select:focus{outline:0;border-color:var(--verde);background:#fff}
 .campo select{appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237E868C' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 16px center;background-size:18px;padding-right:46px}
@@ -222,11 +248,11 @@ details .risp p:last-child{margin-bottom:0}
 
 .barra{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:9px;
        padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-       background:rgba(252,250,246,.94);backdrop-filter:blur(12px);
-       border-top:1px solid var(--bordo);transform:translateY(130%);transition:transform .3s}
+       background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
+       border-top:2px solid var(--oro);transform:translateY(130%);transition:transform .3s}
 .barra.su{transform:translateY(0)}
 .barra .btn{flex:1;padding:16px 12px;font-size:16px;box-shadow:none}
-.barra .tel{flex:0 0 56px;background:var(--carta);border:2px solid var(--bordo);color:var(--scuro)}
+.barra .tel{flex:0 0 56px;background:var(--carta);border:2px solid var(--oro);color:var(--scuro)}
 @media(min-width:880px){.barra{display:none}}
 
 html.anima .sale{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease}
@@ -236,18 +262,25 @@ html.anima .sale.visto{opacity:1;transform:none}
   html{scroll-behavior:auto}.pallino{animation:none}
 }
 
-footer{background:var(--scuro);color:#BFB8A5;padding:56px 0 44px;font-size:15px;line-height:1.7}
-footer a{color:var(--oro-chiaro)}
-footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-top:24px;font-size:13px;color:#ACA595}
+footer{background:var(--velo);color:var(--ink2);padding:52px 0 44px;font-size:15px;line-height:1.7;
+       border-top:3px solid var(--oro)}
+footer a{color:var(--oro-testo)}
+footer b,footer strong{color:var(--scuro)}
+footer .riga{border-top:1px solid var(--bordo);margin-top:28px;padding-top:24px;font-size:13px;color:var(--tenue)}
+footer .marchio{margin-bottom:20px}
+footer .marchio .segno{width:52px}
 </style>
 </head>
 <body>
 <header class="hero">
   <div class="wrap">
     <div class="marchio">
-      <span class="nome" data-cfg="marchio">DEMETRA</span>
-      <span class="luogo" data-cfg="sottomarchio">360° Transformation</span>
-      <span class="luogo" style="color:rgba(247,243,231,.5)" data-cfg="citta">Tiranë</span>
+      <img class="segno" src="logo-demetra-emblema.png" width="640" height="640" alt="DEMETRA">
+      <div class="scritte">
+        <span class="nome" data-cfg="marchio">DEMETRA</span>
+        <span class="luogo" data-cfg="sottomarchio">360° Transformation</span>
+        <span class="luogo" style="color:var(--tenue)" data-cfg="citta">Tiranë</span>
+      </div>
     </div>
 
     <h1>Trupi nuk ndryshon<br>me premtime.<br>Ndryshon me <span class="ac">një metodë.</span></h1>
@@ -296,7 +329,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <p class="guida">Mbaje. Do të të duhet edhe me ne.</p>
     </div>
     <div class="cta">
-      <a href="#rezervo" class="btn oro">Nis nga analiza e plotë</a>
+      <a href="#rezervo" class="btn">Nis nga analiza e plotë</a>
       <p class="nota">Të marrim ne. Asnjë pagesë online.</p>
     </div>
 
@@ -325,10 +358,10 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
 
     <hr class="stacco">
 
-    <p class="urlo" style="font-size:clamp(22px,4.6vw,34px);color:#FBF7ED;max-width:22ch">Problemi nuk është këmbëngulja jote.</p>
+    <p class="urlo" style="font-size:clamp(22px,4.6vw,34px);color:var(--scuro);max-width:22ch">Problemi nuk është këmbëngulja jote.</p>
     <p class="guida" style="max-width:30em">Është që deri tani është punuar vetëm mbi një pjesë.</p>
     <div class="cta">
-      <a href="#rezervo" class="btn oro">Shiko nga ku nisesh</a>
+      <a href="#rezervo" class="btn">Shiko nga ku nisesh</a>
       <p class="nota">Analiza e plotë: 3.900 LEK në vend të 9.000.</p>
     </div>
 
@@ -354,7 +387,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <div class="pilastro sale"><div class="eti">Shtylla 4</div><h3>Drenazhi</h3><p>Lëngjet dhe qarkullimi i ngadaltë të bëjnë të ndihesh e fryrë. Kjo ndryshon e para.</p></div>
     </div>
     <div class="cta">
-      <a href="#rezervo" class="btn oro">Cila shtyllë është e bllokuar tek ti?</a>
+      <a href="#rezervo" class="btn">Cila shtyllë është e bllokuar tek ti?</a>
       <p class="nota">Kjo shihet në analizë, jo me sy.</p>
     </div>
 
@@ -395,7 +428,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       </div>
     </div>
 
-    <div class="card sale" style="margin-top:16px;border-color:var(--oro-chiaro);background:var(--sabbia)">
+    <div class="card sale" style="margin-top:16px;border-left:5px solid var(--verde);background:var(--velo)">
       <h3 style="margin-bottom:.4em">Dhe nëse nuk është rasti të fillosh, ta themi.</h3>
       <div class="blocco" style="margin-bottom:0">
         <p>Ndodh. Ndonjëherë nuk është momenti i duhur.</p>
@@ -404,7 +437,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       </div>
     </div>
     <div class="cta">
-      <a href="#rezervo" class="btn oro">Rezervo analizën e plotë</a>
+      <a href="#rezervo" class="btn">Rezervo analizën e plotë</a>
       <p class="nota">3.900 LEK. T'i kthejmë nëse nuk të bind, t'i zbresim nëse vazhdon.</p>
     </div>
 
@@ -431,7 +464,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <div class="fase"><div class="n">04</div><div><h3>Drenazhi</h3><p>Mbyllja. Edhe pjesa që ndihet më shpejt: del më e lehtë se sa hyre.</p></div></div>
     </div>
     <div class="cta">
-      <a href="#rezervo" class="btn oro">Lër numrin, të marrim ne</a>
+      <a href="#rezervo" class="btn">Lër numrin, të marrim ne</a>
       <p class="nota">Nga cila fazë nisesh, vendoset pas analizës.</p>
     </div>
 
@@ -456,7 +489,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <p class="guida">Kush të shet dhjetë seanca me një aparaturë, të ka shitur mjetin. Planin e ndërton ti.</p>
     </div>
     <div class="cta">
-      <a href="#rezervo" class="btn oro">Dua një plan, jo një makineri</a>
+      <a href="#rezervo" class="btn">Dua një plan, jo një makineri</a>
       <p class="nota">Nis nga analiza e plotë.</p>
     </div>
 
@@ -475,7 +508,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <div class="card sale"><h3>Të matshme</h3><p style="font-size:16.5px;color:var(--ink2);margin:0">Rezultate <b>në centimetra</b>, jo premtime. Në kontroll shihet, nuk kujtohet.</p></div>
     </div>
     <div class="cta centro">
-      <a href="#rezervo" class="btn oro">Rezervo me Dr. Eglën</a>
+      <a href="#rezervo" class="btn">Rezervo me Dr. Eglën</a>
       <p class="nota">Me takim. Të marrim ne për të caktuar ditën.</p>
     </div>
 
@@ -509,7 +542,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
         <li>Skeda e rrugëtimit, e jotja</li>
         <li><b>Data e kontrollit</b> e caktuar menjëherë</li>
       </ul>
-      <div class="card" style="text-align:left;margin:0 0 20px;background:var(--sabbia);border-color:var(--verde);border-left-width:4px;padding:16px 18px;box-shadow:none;font-size:16px;line-height:1.55">
+      <div class="card" style="text-align:left;margin:0 0 20px;background:var(--velo);border-color:var(--verde);border-left-width:5px;padding:16px 18px;box-shadow:none;font-size:16px;line-height:1.55">
         <p style="margin:0 0 .5em"><b>Nuk të bind? T'i kthejmë.</b> Pa shpjegime.</p>
         <p style="margin:0;color:var(--ink2)"><b>Vazhdon? T'i zbresim nga rrugëtimi.</b></p>
         <p style="margin:.6em 0 0;color:var(--tenue);font-size:15px">Rrugëtimet janë 10–12 seanca. Sa dhe cilat, vendoset pas analizës. Jo më parë.</p>
@@ -561,7 +594,7 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
         <p>Ajo që blen me 3.900 LEK nuk është një ulje çmimi. Është që dikush ulet gjysmë ore të shohë <b>ty</b> — në vend që të të shesë një paketë.</p>
       </div></details>
       <div class="cta centro">
-        <a href="#rezervo" class="btn oro">Mirë, lë numrin</a>
+        <a href="#rezervo" class="btn">Mirë, lë numrin</a>
         <p class="nota">Pyetjet e tjera i bëjmë në telefon.</p>
       </div>
     </div>
@@ -631,22 +664,25 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       </div>
     </div>
 
-    <p class="picc sale" style="text-align:center;margin-top:24px;color:#B3AB98">
-      Ose na merr drejtpërdrejt: <a href="#" data-cfg-href="tel-link" style="color:var(--oro-chiaro);font-weight:600"><span data-cfg="telefono-bello">[numri]</span></a>
+    <p class="picc sale" style="text-align:center;margin-top:24px;color:var(--tenue)">
+      Ose na merr drejtpërdrejt: <a href="#" data-cfg-href="tel-link" style="color:var(--oro-testo);font-weight:600"><span data-cfg="telefono-bello">[numri]</span></a>
     </p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div class="marchio" style="margin-bottom:22px">
-      <span class="nome" style="color:#F7F3E7" data-cfg="marchio">DEMETRA</span>
-      <span class="luogo" style="color:var(--oro-chiaro)">360° Transformation</span>
+    <div class="marchio">
+      <img class="segno" src="logo-demetra-emblema.png" width="640" height="640" alt="DEMETRA">
+      <div class="scritte">
+        <span class="nome" data-cfg="marchio">DEMETRA</span>
+        <span class="luogo">360° Transformation</span>
+      </div>
     </div>
     <p style="margin-bottom:6px"><span data-cfg="via">[adresa]</span>, <span data-cfg="citta">Tiranë</span></p>
     <p style="margin-bottom:6px">Tel. <a href="#" data-cfg-href="tel-link"><span data-cfg="telefono-bello">[numri]</span></a> · <a href="#" data-cfg-href="mail-link"><span data-cfg="mail">[email]</span></a></p>
     <p><a href="#" data-cfg-href="instagram" target="_blank" rel="noopener" data-cfg="instagram-testo">@demetra</a></p>
-    <p class="picc" style="color:#ACA595;margin-top:14px;letter-spacing:.14em;text-transform:uppercase;font-size:11.5px">Powered by <b style="color:var(--oro-chiaro)">NIPEC</b> &amp; <b style="color:var(--oro-chiaro)">ROSSE</b></p>
+    <p class="picc" style="color:var(--tenue);margin-top:14px;letter-spacing:.14em;text-transform:uppercase;font-size:11.5px">Powered by <b style="color:var(--oro-testo)">NIPEC</b> &amp; <b style="color:var(--oro-testo)">ROSSE</b></p>
     <div class="riga">
       <p style="margin-bottom:5px"><span data-cfg="ragione-sociale">[emri i subjektit]</span> · NIPT <span data-cfg="nipt">[NIPT]</span> · Kontrollues i të dhënave personale.</p>
       <p style="margin:0"><a href="#" data-cfg-href="privacy">Njoftimi për të dhënat personale</a></p>
