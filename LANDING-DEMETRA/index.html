@@ -24,8 +24,9 @@
 /* ===================================================================
    METODA DEMETRA · Tiranë
    Regole: piano di lettura dell'estetista · max 5-6 righe e stacco ·
-   sezione reel che si nasconde da sola · carattere impact.
-   Tutto ciò che si cambia sta nel blocco KONFIGURIMI in fondo.
+   sezione reel che si nasconde da sola · fondo bianco e colori del
+   marchio usati come contorno · caratteri scelti sul logo.
+   Tutto ciò che si cambia sta nel blocco CONFIGURAZIONE in fondo.
    =================================================================== */
 :root{
   /* I colori sono campionati dall'emblema, pixel per pixel.
@@ -56,7 +57,7 @@ body{margin:0;background:var(--carta);color:var(--ink);overflow-wrap:break-word;
      -webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 
-/* ---------- il carattere impact ---------- */
+/* ---------- i titoli ---------- */
 h1,h2,.urlo{font-family:var(--titoli);font-weight:700;
             letter-spacing:-.012em;line-height:1.08;margin:0 0 .4em;color:var(--scuro)}
 h1{font-size:clamp(36px,8.6vw,66px);line-height:1.04}
@@ -183,7 +184,6 @@ section{padding:clamp(56px,10vw,110px) 0;position:relative}
 .spunte li{position:relative;padding-left:35px;font-size:17px;line-height:1.5;text-align:left}
 .spunte li:before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;
   background:var(--verde) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/13px no-repeat}
-.scurissimo .spunte li:before{background-color:var(--oro)}
 
 /* i video dei reel: la sezione non esiste finché non ci sono */
 #video{display:none}
@@ -208,8 +208,8 @@ section{padding:clamp(56px,10vw,110px) 0;position:relative}
        border:1.5px solid var(--oro);border-radius:999px;padding:9px 18px;
        font-size:14.5px;font-weight:700;color:var(--ink2);margin-bottom:4px}
 .pallino{width:9px;height:9px;border-radius:50%;background:var(--oro);
-         box-shadow:0 0 0 0 rgba(201,164,85,.6);animation:batte 2.2s infinite}
-@keyframes batte{70%{box-shadow:0 0 0 10px rgba(201,164,85,0)}100%{box-shadow:0 0 0 0 rgba(201,164,85,0)}}
+         box-shadow:0 0 0 0 rgba(203,163,83,.6);animation:batte 2.2s infinite}
+@keyframes batte{70%{box-shadow:0 0 0 10px rgba(203,163,83,0)}100%{box-shadow:0 0 0 0 rgba(203,163,83,0)}}
 
 details{background:var(--carta);border:1.5px solid var(--bordo);border-radius:15px;
         margin-bottom:11px;overflow:hidden}
