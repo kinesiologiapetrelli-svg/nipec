@@ -3,240 +3,265 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Body Revolution · Bodycharme Evolution — Taranto</title>
-<meta name="description" content="Body Revolution: il percorso corpo personalizzato di Bodycharme Evolution, a Taranto. Parte da una valutazione di 30 minuti, non da un trattamento standard.">
+<title>Body Revolution · Bodycharme Evolution Taranto</title>
+<meta name="description" content="Body Revolution: un percorso costruito su di te, non un trattamento uguale per tutte. Si parte da un check-up di 30 minuti.">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Body Revolution · Bodycharme Evolution">
-<meta property="og:description" content="Non l'ennesimo trattamento. Un percorso che parte da una valutazione di 30 minuti.">
+<meta property="og:title" content="Non l'ennesimo trattamento">
+<meta property="og:description" content="Un percorso che parte da come sei fatta tu.">
 <meta property="og:type" content="website">
 <style>
-/* I caratteri stanno qui accanto, nella cartella "caratteri": la pagina
-   non chiama nessun server esterno, quindi l'indirizzo IP di chi visita
-   non esce da questo sito. Sono due file variabili: uno per famiglia,
-   tutti i pesi dentro. */
-@font-face{font-family:"Fraunces";src:url("caratteri/fraunces.woff2") format("woff2");
-           font-weight:100 900;font-style:normal;font-display:swap}
+/* I caratteri stanno qui accanto: la pagina non chiama nessun server esterno. */
+@font-face{font-family:"Anton";src:url("caratteri/anton.woff2") format("woff2");
+           font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Inter";src:url("caratteri/inter.woff2") format("woff2");
            font-weight:100 900;font-style:normal;font-display:swap}
 </style>
 <style>
 /* ===================================================================
-   BODY REVOLUTION · landing a scorrimento
-   Tutto ciò che si cambia senza toccare il codice sta nel blocco
-   CONFIGURAZIONE in fondo al file, prima di </body>.
+   BODYCHARME EVOLUTION · Taranto
+   Metodo Body Revolution
+   Regole: piano di lettura dell'estetista · max 5-6 righe e stacco ·
+   sezione reel che si nasconde da sola · carattere impact.
+   Tutto ciò che si cambia sta nel blocco KONFIGURIMI in fondo.
    =================================================================== */
 :root{
-  /* palette presa dal marchio Bodycharme Evolution: oro caldo + bordeaux scuro */
+  /* palette del marchio Bodycharme Evolution */
   --sabbia:#FCF9F6; --sabbia2:#F5EDE4; --carta:#FFFFFF;
-  --ink:#2B211F; --ink2:#5F4A46; --tenue:#8E7A73;
+  --ink:#2B211F; --ink2:#5F4A46; --tenue:#7A655E;
   --scuro:#4E2626; --scuro2:#63332F;
-  --oro:#C99A64; --oro-chiaro:#E3C49B; --oro-scuro:#A67A45;
-  --verde:#5E7A63; --bordo:#EADFD3;
+  --oro:#C99A64; --oro-chiaro:#E3C49B; --oro-scuro:#A67A45; --oro-testo:#7A5327;
+  --verde:#4F6A54; --bordo:#EADFD3;
   --ombra:0 1px 2px rgba(78,38,38,.05), 0 8px 28px rgba(78,38,38,.07);
   --ombra-alta:0 2px 6px rgba(78,38,38,.08), 0 18px 50px rgba(78,38,38,.14);
   --r:18px;
+  /* IL CARATTERE DEI TITOLI — Impact se c'e' sul dispositivo,
+     altrimenti Anton (lo stesso disegno, servito da qui accanto). */
+  --titoli:Impact,"Anton","Haettenschweiler","Franklin Gothic Bold","Arial Narrow",sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--sabbia);color:var(--ink);overflow-wrap:break-word;
-     font:400 17px/1.62 "Inter",system-ui,-apple-system,sans-serif;
+     font:400 18px/1.68 "Inter",system-ui,-apple-system,sans-serif;
      -webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
-h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.12;
-         letter-spacing:-.015em;margin:0 0 .5em;color:var(--scuro)}
-h1{font-size:clamp(31px,7.2vw,58px);font-weight:300}
-h2{font-size:clamp(26px,5.4vw,42px);font-weight:300}
-h3{font-size:clamp(19px,3.4vw,24px);font-weight:500}
-p{margin:0 0 1.05em}
-b,strong{font-weight:600;color:var(--scuro)}
-em{font-style:italic;color:var(--ink2)}
-a{color:var(--oro-scuro)}
-.wrap{width:100%;max-width:1060px;margin:0 auto;padding:0 22px}
-.stretto{max-width:720px}
-section{padding:clamp(54px,9vw,104px) 0;position:relative}
-.occhiello{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
-           font-weight:600;color:var(--oro-scuro);margin:0 0 18px}
-.guida{font-size:clamp(17px,2.6vw,20px);line-height:1.6;color:var(--ink2);max-width:62ch}
-.picc{font-size:14px;color:var(--tenue);line-height:1.55}
+
+/* ---------- il carattere impact ---------- */
+h1,h2,.urlo{font-family:var(--titoli);font-weight:400;
+            text-transform:uppercase;letter-spacing:-.005em;line-height:1.02;margin:0 0 .35em}
+h1{font-size:clamp(40px,11vw,88px);letter-spacing:.004em}
+h2{font-size:clamp(32px,7.8vw,58px);letter-spacing:.004em}
+h3{font-family:"Inter",sans-serif;font-weight:700;font-size:clamp(19px,3.4vw,23px);
+   line-height:1.25;margin:0 0 .45em;color:var(--scuro);letter-spacing:-.01em}
+p{margin:0 0 1.1em}
+b,strong{font-weight:700;color:var(--scuro)}
+a{color:var(--oro-testo)}
+.wrap{width:100%;max-width:1020px;margin:0 auto;padding:0 22px}
+.stretto{max-width:660px}
+section{padding:clamp(56px,10vw,110px) 0;position:relative}
+
+/* ---------- regola 2: blocchi corti e stacco ---------- */
+.blocco{max-width:34em;margin:0 0 26px}
+.blocco p{margin:0 0 .55em}
+.blocco p:last-child{margin-bottom:0}
+.stacco{width:54px;height:3px;background:var(--oro);border:0;margin:34px 0;border-radius:2px}
+.stacco.centro{margin-left:auto;margin-right:auto}
+
+.occhiello{font-family:"Inter",sans-serif;font-size:12px;letter-spacing:.22em;
+           text-transform:uppercase;font-weight:700;color:var(--oro-testo);margin:0 0 16px}
+.guida{font-size:clamp(18px,2.6vw,21px);line-height:1.6;color:var(--ink2)}
+.picc{font-size:15px;color:var(--tenue);line-height:1.55}
 
 /* ---------- pulsanti ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
      background:var(--scuro);color:#fff;border:0;cursor:pointer;
-     font:600 16.5px/1 "Inter",sans-serif;letter-spacing:.01em;
-     padding:19px 30px;border-radius:999px;text-decoration:none;
-     box-shadow:var(--ombra-alta);transition:transform .18s, background .18s;
-     text-align:center}
+     font:700 17px/1 "Inter",sans-serif;letter-spacing:.005em;
+     padding:21px 32px;border-radius:999px;text-decoration:none;
+     box-shadow:var(--ombra-alta);transition:transform .18s, background .18s;text-align:center}
 .btn:hover{background:var(--scuro2);transform:translateY(-2px)}
-.btn:active{transform:translateY(0)}
-.btn.oro{background:var(--oro);color:#fff}
-.btn.oro:hover{background:var(--oro-scuro)}
-.btn.vuoto{background:transparent;color:var(--scuro);border:1.5px solid var(--bordo);box-shadow:none}
+.btn.oro{background:var(--oro);color:var(--scuro)}
+.btn.oro:hover{background:var(--oro-chiaro)}
+.btn.vuoto{background:transparent;color:var(--scuro);border:2px solid var(--bordo);box-shadow:none}
 .btn.vuoto:hover{background:var(--carta);border-color:var(--oro-chiaro)}
 .btn.largo{width:100%}
-.sotto-btn{font-size:13.5px;color:var(--tenue);margin-top:12px;line-height:1.5}
+.sotto-btn{font-size:14.5px;color:var(--tenue);margin-top:13px;line-height:1.5}
 
 /* ---------- hero ---------- */
-.hero{background:linear-gradient(170deg,#5A2E2C 0%,#41211F 60%,#33191A 100%);
-      color:#FBF2E8;padding:clamp(34px,6vw,54px) 0 clamp(54px,8vw,86px);overflow:hidden}
+.hero{background:linear-gradient(170deg,#5F2C2C 0%,#4A2323 58%,#321516 100%);
+      color:#FBF4EC;padding:clamp(32px,6vw,52px) 0 clamp(58px,9vw,92px);overflow:hidden}
 .hero:before{content:"";position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(70% 55% at 78% 8%,rgba(201,154,100,.40),transparent 62%),
-                 radial-gradient(55% 45% at 6% 96%,rgba(201,154,100,.17),transparent 60%)}
+      background:radial-gradient(70% 55% at 80% 6%,rgba(227,196,155,.26),transparent 62%),
+                 radial-gradient(55% 45% at 4% 98%,rgba(201,154,100,.18),transparent 60%)}
 .hero .wrap{position:relative;z-index:1}
-.marchio{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:clamp(30px,6vw,52px)}
-.marchio .nome{font-family:"Fraunces",serif;font-size:19px;letter-spacing:.055em;color:#F6EEE6}
-.marchio .luogo{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--oro-chiaro)}
-.hero h1{color:#FBF4EC;max-width:17ch}
-.hero h1 .ac{color:var(--oro-chiaro);font-style:italic}
-.hero .guida{color:#E2D3C6;max-width:52ch;margin-top:20px;font-size:clamp(17px,2.5vw,20.5px)}
-.hero b,.hero strong{color:#FBF4EC}   /* il grassetto deve restare chiaro sul fondo scuro */
-.hero-azioni{display:flex;flex-wrap:wrap;gap:13px;margin-top:34px}
-.hero .btn{background:var(--oro)}
+.marchio{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin-bottom:clamp(34px,7vw,58px)}
+.marchio .nome{font-family:var(--titoli);font-size:21px;letter-spacing:.07em;color:#FBF4EC}
+.marchio .luogo{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+                font-weight:700;color:var(--oro-chiaro)}
+.hero h1{color:#FDF7F0;max-width:15ch}
+.hero h1 .ac{color:var(--oro-chiaro)}
+.hero .blocco{color:#E9DACD;margin-top:24px;font-size:clamp(18px,2.6vw,21px);line-height:1.55}
+.hero b,.hero strong{color:#FDF7F0}
+.hero .stacco{background:var(--oro-chiaro)}
+.hero-azioni{display:flex;flex-wrap:wrap;gap:13px;margin-top:32px}
+.hero .btn{background:var(--oro);color:var(--scuro)}
 .hero .btn:hover{background:var(--oro-chiaro);color:var(--scuro)}
-.hero .btn.vuoto{background:transparent;color:#F6EEE6;border-color:rgba(246,238,230,.34)}
-.hero .btn.vuoto:hover{background:rgba(246,238,230,.09)}
-.fiducia{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:34px;
-         padding-top:26px;border-top:1px solid rgba(246,238,230,.16)}
-.fiducia div{font-size:14px;color:#D8C7B8;display:flex;align-items:center;gap:8px}
-.fiducia b{color:#FBF4EC;font-weight:600}
+.hero .btn.vuoto{background:transparent;color:#FBF4EC;border-color:rgba(251,244,236,.34)}
+.fiducia{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:36px;
+         padding-top:28px;border-top:1px solid rgba(251,244,236,.18)}
+.fiducia div{font-size:15px;color:#D9C8BA}
+.fiducia b{color:#FDF7F0;font-weight:700}
 
-/* ---------- blocchi ---------- */
+/* ---------- blocchi di fondo ---------- */
 .chiaro{background:var(--sabbia)}
 .crema{background:var(--sabbia2)}
-.scurissimo{background:var(--scuro);color:#EFE4DA}
-.scurissimo h2,.scurissimo h3{color:#FBF4EC}
-.scurissimo .guida{color:#D8C7B8}
+.scurissimo{background:var(--scuro);color:#EDE1D7}
+.scurissimo h2,.scurissimo h3{color:#FDF7F0}
+.scurissimo .blocco,.scurissimo .guida{color:#D9C8BA}
 .scurissimo .occhiello{color:var(--oro-chiaro)}
-.scurissimo b{color:#FBF4EC}
-/* su fondo scuro grassetto e corsivo non devono ereditare i colori chiari */
-.hero em,.scurissimo em{color:inherit}
-footer b,footer strong{color:#FBF2E8}
+.scurissimo b{color:#FDF7F0}
+.scurissimo .stacco{background:var(--oro-chiaro)}
+footer b,footer strong{color:#FBF4EC}
 
 .card{background:var(--carta);border:1px solid var(--bordo);border-radius:var(--r);
-      padding:clamp(22px,3.6vw,32px);box-shadow:var(--ombra)}
+      padding:clamp(24px,3.8vw,34px);box-shadow:var(--ombra)}
 .griglia{display:grid;gap:16px}
-@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+                        .g4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.g4{grid-template-columns:repeat(4,1fr)}}
 
-/* elenco "hai già provato" */
-.provato{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 8px}
+.provato{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
 .provato span{background:var(--carta);border:1px solid var(--bordo);border-radius:999px;
-              padding:9px 18px;font-size:15px;color:var(--ink2)}
+              padding:10px 19px;font-size:16px;font-weight:600;color:var(--ink2)}
 
-/* le 4 fasi */
-.fase{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
-      padding:24px 0;border-top:1px solid var(--bordo)}
-.fase:first-of-type{border-top:0}
-.fase .n{font-family:"Fraunces",serif;font-size:34px;font-weight:300;color:var(--oro);
-         line-height:1;min-width:46px;font-variant-numeric:tabular-nums}
-.fase h3{margin-bottom:.3em}
-.fase p{margin:0;color:var(--ink2);font-size:16px}
+/* le quattro colonne */
+.pilastro{background:var(--carta);border:1px solid var(--bordo);border-radius:var(--r);padding:24px}
+.pilastro .eti{font-family:var(--titoli);font-size:30px;color:var(--oro-scuro);line-height:1;margin-bottom:10px}
+.pilastro h3{font-size:21px;margin-bottom:.35em}
+.pilastro p{margin:0;font-size:16.5px;color:var(--ink2);line-height:1.5}
 
-/* check list */
-.spunte{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
-.spunte li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;
-           font-size:16.5px;line-height:1.5}
-.spunte li:before{content:"";width:21px;height:21px;border-radius:50%;margin-top:2px;
+/* le quattro fasi */
+.fase{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+      padding:26px 0;border-top:1px solid var(--bordo)}
+.fase:first-of-type{border-top:0;padding-top:0}
+.fase .n{font-family:var(--titoli);font-size:40px;color:var(--oro-scuro);line-height:.9;min-width:52px}
+.fase p{margin:0;color:var(--ink2);font-size:17px}
+
+.spunte{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:13px}
+/* il segno di spunta sta fuori dal flusso: cosi' il testo in grassetto
+   resta nella stessa riga invece di finire in una colonna sua. */
+.spunte li{position:relative;padding-left:35px;font-size:17px;line-height:1.5;text-align:left}
+.spunte li:before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;
   background:var(--verde) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/13px no-repeat}
 .scurissimo .spunte li:before{background-color:var(--oro)}
 
-/* offerta */
-.offerta{background:var(--carta);border:1.5px solid var(--oro-chiaro);border-radius:24px;
-         padding:clamp(26px,4.4vw,40px);box-shadow:var(--ombra-alta);text-align:center;
-         max-width:640px;margin:0 auto}
-.prezzo{display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap;margin:18px 0 6px}
-.prezzo .vecchio{font-size:22px;color:var(--tenue);text-decoration:line-through}
-.prezzo .nuovo{font-family:"Fraunces",serif;font-size:clamp(44px,9vw,62px);font-weight:500;
-               color:var(--scuro);line-height:1}
-.posti{display:inline-flex;align-items:center;gap:9px;background:var(--sabbia2);
-       border:1px solid var(--bordo);border-radius:999px;padding:8px 17px;
-       font-size:14px;font-weight:600;color:var(--ink2);margin-bottom:6px}
-.pallino{width:8px;height:8px;border-radius:50%;background:var(--oro);
-         box-shadow:0 0 0 0 rgba(201,154,100,.6);animation:batte 2.2s infinite}
-@keyframes batte{70%{box-shadow:0 0 0 9px rgba(201,154,100,0)}100%{box-shadow:0 0 0 0 rgba(201,154,100,0)}}
+/* i video dei reel: la sezione non esiste finché non ci sono */
+#video{display:none}
+.filmati{display:grid;gap:16px;margin-top:10px}
+@media(min-width:700px){.filmati{grid-template-columns:repeat(3,1fr)}}
+.filmato{background:var(--carta);border:1px solid var(--bordo);border-radius:var(--r);
+         overflow:hidden;box-shadow:var(--ombra)}
+.filmato .schermo{position:relative;aspect-ratio:9/16;background:var(--scuro);display:block}
+.filmato video{width:100%;height:100%;object-fit:cover;display:block}
+.filmato .sotto{padding:17px 19px 19px}
+.filmato h3{font-size:19px;margin:0 0 .25em}
+.filmato p{margin:0;font-size:16px;color:var(--ink2);line-height:1.5}
 
-/* domande */
-details{background:var(--carta);border:1px solid var(--bordo);border-radius:14px;
+/* offerta */
+.offerta{background:var(--carta);border:2px solid var(--oro-chiaro);border-radius:26px;
+         padding:clamp(28px,4.6vw,44px);box-shadow:var(--ombra-alta);text-align:center;
+         max-width:620px;margin:0 auto}
+.prezzo{display:flex;align-items:baseline;justify-content:center;gap:16px;flex-wrap:wrap;margin:16px 0 4px}
+.prezzo .vecchio{font-size:24px;color:var(--tenue);text-decoration:line-through;font-weight:600}
+.prezzo .nuovo{font-family:var(--titoli);font-size:clamp(44px,11vw,72px);color:var(--scuro);line-height:.95}
+.posti{display:inline-flex;align-items:center;gap:9px;background:var(--sabbia2);
+       border:1px solid var(--bordo);border-radius:999px;padding:9px 18px;
+       font-size:14.5px;font-weight:700;color:var(--ink2);margin-bottom:4px}
+.pallino{width:9px;height:9px;border-radius:50%;background:var(--oro);
+         box-shadow:0 0 0 0 rgba(201,154,100,.6);animation:batte 2.2s infinite}
+@keyframes batte{70%{box-shadow:0 0 0 10px rgba(201,154,100,0)}100%{box-shadow:0 0 0 0 rgba(201,154,100,0)}}
+
+details{background:var(--carta);border:1px solid var(--bordo);border-radius:15px;
         margin-bottom:11px;overflow:hidden}
-details summary{cursor:pointer;padding:19px 22px;font-weight:600;font-size:16.5px;
+details summary{cursor:pointer;padding:20px 23px;font-weight:700;font-size:17px;
                 color:var(--scuro);list-style:none;display:flex;justify-content:space-between;
                 gap:16px;align-items:center}
 details summary::-webkit-details-marker{display:none}
-details summary:after{content:"+";font-size:25px;color:var(--oro);font-weight:300;line-height:1;flex:none}
+details summary:after{content:"+";font-family:"Inter",sans-serif;font-weight:400;font-size:26px;color:var(--oro);line-height:1;flex:none}
 details[open] summary:after{content:"–"}
-details .risp{padding:0 22px 20px;color:var(--ink2);font-size:16px}
+details .risp{padding:0 23px 21px;color:var(--ink2);font-size:16.5px}
 details .risp p:last-child{margin-bottom:0}
 
 /* modulo */
-.modulo{background:var(--carta);border-radius:24px;padding:clamp(24px,4.2vw,38px);
-        box-shadow:var(--ombra-alta);max-width:560px;margin:0 auto}
-.campo{margin-bottom:17px}
-.campo label{display:block;font-size:14px;font-weight:600;color:var(--ink2);margin-bottom:7px}
-.campo input,.campo select,.campo textarea{
-  width:100%;padding:15px 16px;border:1.5px solid var(--bordo);border-radius:12px;
-  font:400 16.5px/1.4 "Inter",sans-serif;color:var(--ink);background:var(--sabbia);
-  transition:border-color .16s, background .16s}
-.campo input:focus,.campo select:focus,.campo textarea:focus{
-  outline:0;border-color:var(--oro);background:#fff}
+.modulo{background:var(--carta);border-radius:26px;padding:clamp(26px,4.4vw,40px);
+        box-shadow:var(--ombra-alta);max-width:540px;margin:0 auto}
+.campo{margin-bottom:18px}
+.campo label{display:block;font-size:14.5px;font-weight:700;color:var(--ink2);margin-bottom:8px}
+.campo input,.campo select{width:100%;padding:16px 17px;border:2px solid var(--bordo);
+  border-radius:13px;font:400 17px/1.4 "Inter",sans-serif;color:var(--ink);
+  background:var(--sabbia);transition:border-color .16s, background .16s}
+.campo input:focus,.campo select:focus{outline:0;border-color:var(--oro);background:#fff}
 .campo select{appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238E7A73' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 15px center;background-size:17px;padding-right:44px}
-.consenso{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;
-          margin:20px 0 22px;font-size:13.5px;line-height:1.5;color:var(--ink2)}
-.consenso input{width:21px;height:21px;margin-top:1px;accent-color:var(--oro);flex:none}
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237E868C' stroke-width='2.2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;background-size:18px;padding-right:46px}
+.consenso{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;
+          margin:22px 0 24px;font-size:14px;line-height:1.5;color:var(--ink2)}
+.consenso input{width:22px;height:22px;margin-top:1px;accent-color:var(--oro);flex:none}
 .trappola{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-.errore{color:#A6412C;font-size:14px;font-weight:600;margin-top:12px;display:none}
+.errore{color:#9C3A28;font-size:15px;font-weight:700;margin-top:13px;display:none}
 .grazie{display:none;text-align:center;padding:14px 0}
-.grazie .segno{width:64px;height:64px;border-radius:50%;background:var(--verde);margin:0 auto 20px;
+.grazie .segno{width:68px;height:68px;border-radius:50%;background:var(--verde);margin:0 auto 20px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:center;background-size:30px}
+  background-repeat:no-repeat;background-position:center;background-size:32px}
 .inviato .modulo-corpo{display:none}
 .inviato .grazie{display:block}
 
-/* barra fissa mobile */
 .barra{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:9px;
        padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-       background:rgba(251,247,243,.93);backdrop-filter:blur(12px);
+       background:rgba(252,250,246,.94);backdrop-filter:blur(12px);
        border-top:1px solid var(--bordo);transform:translateY(130%);transition:transform .3s}
 .barra.su{transform:translateY(0)}
-.barra .btn{flex:1;padding:15px 12px;font-size:15px;box-shadow:none}
-.barra .tel{flex:0 0 54px;background:var(--carta);border:1.5px solid var(--bordo);color:var(--scuro)}
+.barra .btn{flex:1;padding:16px 12px;font-size:16px;box-shadow:none}
+.barra .tel{flex:0 0 56px;background:var(--carta);border:2px solid var(--bordo);color:var(--scuro)}
 @media(min-width:880px){.barra{display:none}}
-@media(max-width:879px){body{padding-bottom:4px}}
 
-/* comparsa a scorrimento — il contenuto e' visibile di default:
-   lo stato nascosto esiste solo se il JS ha acceso html.anima, cosi'
-   una pagina senza JS resta leggibile invece di restare bianca */
 html.anima .sale{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease}
 html.anima .sale.visto{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   html.anima .sale{opacity:1;transform:none;transition:none}
-  html{scroll-behavior:auto}
-  .pallino{animation:none}
+  html{scroll-behavior:auto}.pallino{animation:none}
 }
 
-footer{background:var(--scuro);color:#C6B4A6;padding:52px 0 40px;font-size:14.5px;line-height:1.7}
+footer{background:var(--scuro);color:#C7B2A6;padding:56px 0 44px;font-size:15px;line-height:1.7}
 footer a{color:var(--oro-chiaro)}
-footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-top:22px;font-size:12.5px;color:#9C8A7D}
+footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-top:24px;font-size:13px;color:#B5A197}
 </style>
 </head>
 <body>
-
 <!-- =================== HERO =================== -->
 <header class="hero">
   <div class="wrap">
     <div class="marchio">
       <span class="nome" data-cfg="marchio">Bodycharme Evolution</span>
       <span class="luogo" data-cfg="citta">Taranto</span>
+      <span class="luogo" style="color:rgba(251,244,236,.5)">Metodo Body Revolution</span>
     </div>
-    <h1>Non l'ennesimo trattamento.<br>Un percorso che parte<br>da <span class="ac">come sei fatta tu.</span></h1>
-    <p class="guida"><b>Body Revolution</b> comincia da una valutazione di 30 minuti — inestetismi, abitudini, obiettivi — e solo dopo si decide cosa fare. Perché non esiste un corpo uguale a un altro.</p>
+
+    <h1>Non l'ennesimo trattamento.<br>Un percorso che parte da <span class="ac">come sei fatta tu.</span></h1>
+
+    <div class="blocco">
+      <p><b>Body Revolution</b> comincia da una valutazione di 30 minuti.</p>
+      <p>Inestetismi, abitudini, obiettivi. E solo dopo si decide cosa fare.</p>
+      <p>Perché <b>non esiste un corpo uguale a un altro.</b></p>
+    </div>
+
     <div class="hero-azioni">
-      <a href="#prenota" class="btn">Prenota il check-up + prima seduta</a>
+      <a href="#prenota" class="btn">Prenota il check-up</a>
       <a href="#metodo" class="btn vuoto">Come funziona</a>
     </div>
+
     <div class="fiducia">
       <div><b data-cfg="anni">12 anni</b> di esperienza</div>
       <div>Valutazione di <b>30 minuti</b></div>
-      <div>Su appuntamento, in <b data-cfg="via">via Val d’Aosta 22</b></div>
+      <div>Su appuntamento, <b data-cfg="via">via Val d’Aosta 22</b></div>
     </div>
   </div>
 </header>
@@ -245,13 +270,27 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
 <section class="chiaro">
   <div class="wrap stretto sale">
     <p class="occhiello">Se sei arrivata fin qui</p>
-    <h2>Probabilmente hai già provato qualcosa. Anche più di qualcosa.</h2>
+    <h2>Hai già provato qualcosa. Anche più di qualcosa.</h2>
+
     <div class="provato">
       <span>massaggi</span><span>fanghi</span><span>creme</span><span>bendaggi</span>
       <span>trattamenti veloci</span><span>macchinari</span><span>palestra</span><span>diete</span>
     </div>
-    <p style="margin-top:26px">E quasi sempre finisce allo stesso modo: <b>qualche giorno di entusiasmo, poi tutto torna com'era.</b> Rimane la sensazione di aver speso dei soldi per niente — e un po' di diffidenza in più verso il prossimo che promette.</p>
-    <p><b>Quella diffidenza è sana.</b> Tienila: ti servirà anche con noi.</p>
+
+    <hr class="stacco">
+
+    <div class="blocco">
+      <p>E finisce sempre allo stesso modo.</p>
+      <p>Qualche giorno di entusiasmo. Poi tutto torna com'era.</p>
+      <p>Resta la sensazione di aver speso dei soldi per niente.</p>
+    </div>
+
+    <hr class="stacco">
+
+    <div class="blocco">
+      <p class="guida"><b>Quella diffidenza è sana.</b></p>
+      <p class="guida">Tienila. Ti servirà anche con noi.</p>
+    </div>
   </div>
 </section>
 
@@ -260,9 +299,25 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
   <div class="wrap stretto sale">
     <p class="occhiello">Il motivo, quasi sempre, è uno solo</p>
     <h2>Si è partiti dal trattamento invece che dalla persona.</h2>
-    <p class="guida">Due corpi che sembrano uguali possono avere storie completamente diverse: ore passate in piedi, ritenzione, poco sonno, tono, gravidanze, momenti della vita. Tutto questo cambia <b>cosa ha senso fare</b> — e soprattutto <b>in che ordine.</b></p>
-    <p class="guida">Se nessuno guarda quello, qualunque trattamento — anche il migliore — resta un tentativo. Ed è per questo che l'effetto svanisce: <b>non è stato costruito su di te.</b></p>
-    <p class="guida" style="color:#FBF4EC;font-size:clamp(19px,3.2vw,24px);margin-top:30px"><em>Il problema non è la tua costanza. È che non è mai stato fatto il primo passo.</em></p>
+
+    <div class="blocco">
+      <p class="guida">Due corpi che sembrano uguali possono avere storie diverse.</p>
+      <p class="guida">Ore in piedi. Ritenzione. Poco sonno. Tono. Gravidanze.</p>
+      <p class="guida">Tutto questo cambia <b>cosa ha senso fare</b> — e <b>in che ordine.</b></p>
+    </div>
+
+    <hr class="stacco">
+
+    <div class="blocco">
+      <p class="guida">Se nessuno guarda quello, qualunque trattamento resta un tentativo.</p>
+      <p class="guida">Anche il migliore.</p>
+      <p class="guida">Ed è per questo che l'effetto svanisce: <b>non è stato costruito su di te.</b></p>
+    </div>
+
+    <hr class="stacco">
+
+    <p class="urlo" style="font-size:clamp(22px,4.6vw,34px);color:#FDF7F0;max-width:22ch">Il problema non è la tua costanza.</p>
+    <p class="guida" style="max-width:30em">È che non è mai stato fatto il primo passo.</p>
   </div>
 </section>
 
@@ -272,8 +327,14 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
     <div class="stretto sale" style="margin:0 auto 34px">
       <p class="occhiello">Il primo passo — analizziamo</p>
       <h2>Trenta minuti in cui non ti vendiamo niente.</h2>
-      <p class="guida">Il check-up è una valutazione visiva e manuale. Serve a capire <b>da dove viene</b> quello che vedi allo specchio, non solo a guardarlo. Dura mezz'ora, e a fine mezz'ora sai una cosa che prima non sapevi.</p>
+
+      <div class="blocco">
+        <p class="guida">Il check-up è una valutazione visiva e manuale.</p>
+        <p class="guida">Serve a capire <b>da dove viene</b> quello che vedi allo specchio.</p>
+        <p class="guida">Dura mezz'ora. E a fine mezz'ora sai una cosa che prima non sapevi.</p>
+      </div>
     </div>
+
     <div class="griglia g2">
       <div class="card sale">
         <h3>Cosa guardiamo</h3>
@@ -288,15 +349,20 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
         <h3>Cosa ti resta in mano</h3>
         <ul class="spunte">
           <li>La <b>scheda del percorso</b>: punto di partenza scritto, non a memoria</li>
-          <li>Le <b>misure</b> prese in punti fissi, così si possono rifare uguali</li>
-          <li><b>Le foto del prima</b>, stesso muro e stessa luce — e te le mandiamo sul tuo telefono</li>
+          <li>Le <b>misure</b> in punti fissi, così si possono rifare uguali</li>
+          <li><b>Le foto del prima</b> — stesso muro, stessa luce. E te le mandiamo sul telefono</li>
           <li>La <b>data del controllo</b>, fissata prima che tu esca</li>
         </ul>
       </div>
     </div>
+
     <div class="card sale" style="margin-top:16px;border-color:var(--oro-chiaro);background:var(--sabbia2)">
       <h3 style="margin-bottom:.4em">E se non è il caso di iniziare, te lo diciamo.</h3>
-      <p style="margin:0;color:var(--ink2)">Succede: a volte quello che cerchi non si ottiene con un percorso estetico, o non è il momento giusto. In quel caso finisce lì, e te lo diciamo alla fine dei trenta minuti. <b>Preferiamo perdere una cliente che prenderle dei soldi sapendo come va a finire.</b></p>
+      <div class="blocco" style="margin-bottom:0">
+        <p>Succede. A volte non è il momento giusto.</p>
+        <p>In quel caso finisce lì, e te lo diciamo alla fine dei trenta minuti.</p>
+        <p><b>Preferiamo perdere una cliente che prenderle dei soldi sapendo come va a finire.</b></p>
+      </div>
     </div>
   </div>
 </section>
@@ -306,26 +372,20 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
   <div class="wrap stretto">
     <div class="sale">
       <p class="occhiello">Poi — progettiamo e trasformiamo</p>
-      <h2>Body Revolution, quattro fasi in ordine.</h2>
-      <p class="guida" style="margin-bottom:8px">L'ordine non è un dettaglio: <b>è il metodo.</b> Ogni fase prepara la successiva, e saltarne una è il motivo per cui altrove il risultato non regge.</p>
+      <h2>Body Revolution: quattro fasi, in ordine.</h2>
+
+      <div class="blocco">
+        <p class="guida">L'ordine non è un dettaglio. <b>È il metodo.</b></p>
+        <p class="guida">Ogni fase prepara la successiva.</p>
+        <p class="guida">Saltarne una è il motivo per cui altrove il risultato non regge.</p>
+      </div>
     </div>
+
     <div class="card sale" style="margin-top:28px">
-      <div class="fase">
-        <div class="n">01</div>
-        <div><h3>Detossinare</h3><p>Si comincia liberando liquidi in eccesso e alleggerendo i tessuti. È la fase in cui il corpo torna al centro: rallentare, ascoltarlo, rimetterlo nelle condizioni di lavorare.</p></div>
-      </div>
-      <div class="fase">
-        <div class="n">02</div>
-        <div><h3>Idratare</h3><p>Un tessuto disidratato non risponde. Prima di chiedergli qualcosa lo si prepara — ed è il passaggio che quasi nessuno fa, perché non si vede e non si vende.</p></div>
-      </div>
-      <div class="fase">
-        <div class="n">03</div>
-        <div><h3>Fase attiva</h3><p>Qui si lavora sull'inestetismo: <b>tecniche manuali avanzate</b> insieme alla tecnologia, scelte in base a cosa è emerso dalla valutazione. Non «si fa una macchina»: si applica un piano.</p></div>
-      </div>
-      <div class="fase">
-        <div class="n">04</div>
-        <div><h3>Mantenere</h3><p>La fase che decide se fra sei mesi sei ancora contenta. Un mantenimento costruito sulle tue abitudini vere, non su quelle che dovresti avere.</p></div>
-      </div>
+      <div class="fase"><div class="n">01</div><div><h3>Detossinare</h3><p>Si libera il liquido in eccesso e si alleggeriscono i tessuti. È la fase in cui il corpo torna al centro.</p></div></div>
+      <div class="fase"><div class="n">02</div><div><h3>Idratare</h3><p>Un tessuto disidratato non risponde. Prima di chiedergli qualcosa lo si prepara — ed è il passaggio che quasi nessuno fa, perché non si vede e non si vende.</p></div></div>
+      <div class="fase"><div class="n">03</div><div><h3>Fase attiva</h3><p>Qui si lavora sull'inestetismo: <b>manualità avanzate</b> insieme alla tecnologia, scelte su quello che è emerso. Non «si fa una macchina»: si applica un piano.</p></div></div>
+      <div class="fase"><div class="n">04</div><div><h3>Mantenere</h3><p>La fase che decide se fra sei mesi sei ancora contenta. Costruita sulle tue abitudini vere, non su quelle che dovresti avere.</p></div></div>
     </div>
   </div>
 </section>
@@ -335,8 +395,20 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
   <div class="wrap stretto sale">
     <p class="occhiello">La tecnologia, al posto giusto</p>
     <h2>Borea entra nel percorso solo quando serve.</h2>
-    <p class="guida">Borea combina <b>stimolazione elettromagnetica</b> e <b>raffreddamento controllato</b>. È l'evoluzione più recente di Body Revolution, e la usiamo <b>quando la valutazione dice che ha senso usarla</b> — non perché è nuova e non perché fa scena.</p>
-    <p class="guida">È questa la differenza fra un percorso e un pacchetto: <b>la macchina è uno strumento dentro un piano</b>, non il piano. Chi ti vende direttamente «dieci sedute di macchina» ti sta vendendo lo strumento e ti lascia costruire il piano da sola.</p>
+
+    <div class="blocco">
+      <p class="guida">Borea unisce <b>stimolazione elettromagnetica</b> e <b>raffreddamento controllato</b>.</p>
+      <p class="guida">È l'evoluzione più recente di Body Revolution.</p>
+      <p class="guida">La usiamo <b>quando la valutazione dice che ha senso</b> — non perché è nuova.</p>
+    </div>
+
+    <hr class="stacco">
+
+    <div class="blocco">
+      <p class="guida">È questa la differenza fra un percorso e un pacchetto.</p>
+      <p class="guida"><b>La macchina è uno strumento dentro un piano.</b> Non il piano.</p>
+      <p class="guida">Chi ti vende «dieci sedute di macchina» ti vende lo strumento. Il piano lo costruisci tu.</p>
+    </div>
   </div>
 </section>
 
@@ -348,15 +420,27 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
       <h2>Una specialista, la stessa, dall'inizio alla fine.</h2>
     </div>
     <div class="griglia g3">
-      <div class="card sale"><h3 data-cfg="anni2">12 anni</h3><p class="picc" style="font-size:16px;color:var(--ink2)">Di lavoro sul corpo, non di corsi. Il percorso lo costruisce chi poi te lo fa.</p></div>
-      <div class="card sale"><h3>Riservato</h3><p class="picc" style="font-size:16px;color:var(--ink2)">Un ambiente su appuntamento, senza sale d'attesa piene e senza fretta.</p></div>
-      <div class="card sale"><h3>Misurabile</h3><p class="picc" style="font-size:16px;color:var(--ink2)">Misure e foto in punti fissi, così ai controlli si guarda — non si ricorda.</p></div>
+      <div class="card sale"><h3 data-cfg="anni2">12 anni</h3><p style="font-size:16.5px;color:var(--ink2);margin:0">Di lavoro sul corpo, non di corsi. Il percorso lo costruisce chi poi te lo fa.</p></div>
+      <div class="card sale"><h3>Riservato</h3><p style="font-size:16.5px;color:var(--ink2);margin:0">Su appuntamento. Senza sale d'attesa piene, senza fretta.</p></div>
+      <div class="card sale"><h3>Misurabile</h3><p style="font-size:16.5px;color:var(--ink2);margin:0">Misure e foto in punti fissi. Ai controlli si guarda, non si ricorda.</p></div>
     </div>
-    <p class="picc sale" style="text-align:center;margin-top:30px;font-family:Fraunces,serif;font-size:clamp(19px,3vw,24px);color:var(--scuro);font-style:italic">«La bellezza non è un traguardo, è un viaggio.»</p>
+    <p class="urlo sale" style="text-align:center;margin:34px auto 0;font-size:clamp(20px,4vw,30px);color:var(--scuro);max-width:20ch;line-height:1.1">«La bellezza non è un traguardo, è un viaggio.»</p>
   </div>
 </section>
 
-<!-- =================== 7 · L'OFFERTA =================== -->
+<!-- =================== 7 · I REEL (compare solo se ci sono) =================== -->
+<section class="crema" id="video">
+  <div class="wrap">
+    <div class="stretto sale" style="margin:0 auto 26px">
+      <p class="occhiello">Guarda</p>
+      <h2 id="video-titolo">Come lavoriamo, in trenta secondi.</h2>
+      <p class="guida" id="video-testo">Meglio vederlo che leggerlo.</p>
+    </div>
+    <div class="filmati sale" id="filmati"></div>
+  </div>
+</section>
+
+<!-- =================== 8 · L'OFFERTA =================== -->
 <section class="crema">
   <div class="wrap sale">
     <div class="offerta">
@@ -367,52 +451,85 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
         <span class="nuovo" data-cfg="prezzo">39,90 €</span>
       </div>
       <p class="picc" data-cfg="nota-prezzo" style="margin-bottom:22px">Prezzo riservato ai posti di questa selezione.</p>
-      <ul class="spunte" style="text-align:left;max-width:390px;margin:0 auto 26px">
+      <ul class="spunte" style="max-width:400px;margin:0 auto 26px">
         <li>Valutazione visiva e manuale di <b>30 minuti</b></li>
         <li><b>Prima seduta</b> del percorso, lo stesso giorno</li>
         <li>Scheda, misure e <b>foto del prima</b></li>
         <li><b>Data del controllo</b> fissata subito</li>
       </ul>
-      <div class="box" style="text-align:left;margin:0 0 20px;background:var(--sabbia2);border-left-color:var(--verde);padding:14px 16px;border-radius:0 12px 12px 0;font-size:15.5px;line-height:1.5">
-        <b>E se poi pensi che non faccia per te, i 39,90 € te li restituiamo.</b> Senza spiegazioni.<br>
-        <span style="color:var(--tenue);font-size:14.5px">E se dalla valutazione risulta che non è il caso di iniziare, te lo diciamo noi e finisce lì.</span>
+      <div class="card" style="text-align:left;margin:0 0 20px;background:var(--sabbia2);border-color:var(--verde);border-left-width:4px;padding:16px 18px;box-shadow:none;font-size:16px;line-height:1.55">
+        <p style="margin:0 0 .5em"><b>Non ti convince? I 39,90 € te li restituiamo.</b> Senza spiegazioni.</p>
+        <p style="margin:0;color:var(--ink2)">E se dalla valutazione risulta che non è il caso di iniziare, <b>te lo diciamo noi</b> e finisce lì.</p>
       </div>
-      <a href="#prenota" class="btn oro largo">Lascia i tuoi dati e ti richiamiamo</a>
+      <a href="#prenota" class="btn oro largo">Fatti richiamare</a>
       <p class="sotto-btn">Ti richiamiamo noi per fissare il giorno. Nessun pagamento online.</p>
     </div>
   </div>
 </section>
 
-<!-- =================== 8 · DOMANDE =================== -->
+<!-- =================== 9 · DOMANDE =================== -->
 <section class="chiaro">
   <div class="wrap stretto">
     <div class="sale"><p class="occhiello">Prima che tu lo chieda</p><h2>Le domande che ci fanno tutte.</h2></div>
     <div class="sale" style="margin-top:26px">
-      <details><summary>In quanto tempo si vedono i risultati?</summary><div class="risp"><p>Dipende dal punto di partenza, e chiunque ti dia una data precisa senza averti vista <b>sta tirando a indovinare</b>. È esattamente per questo che si parte dalla valutazione e si fissa un controllo: al controllo si guardano le foto e le misure, e si vede. Senza raccontarsi niente.</p></div></details>
-      <details><summary>Devo mettermi a dieta?</summary><div class="risp"><p>No, non ti diamo diete: non è il nostro mestiere e non possiamo. Nella valutazione guardiamo le tue abitudini perché incidono sul risultato, e se serve un supporto alimentare te lo diciamo e ti indirizziamo a chi è titolato a darlo.</p></div></details>
-      <details><summary>È doloroso?</summary><div class="risp"><p>No. Le manualità sono intense in alcune fasi ma non dolorose, e la tecnologia si regola su di te. Se qualcosa non ti è comodo si dice sul momento e si cambia: <b>non esiste il «stringi i denti che poi passa».</b></p></div></details>
-      <details><summary>Ho poco tempo. Quante volte devo venire?</summary><div class="risp"><p>Te lo diciamo alla fine della valutazione, non prima — perché dipende dalla fase da cui hai bisogno di partire. Quello che possiamo dirti subito è che il percorso viene costruito <b>sul tempo che hai davvero</b>, non su quello ideale: un piano che non riesci a seguire non è un piano.</p></div></details>
-      <details><summary>Ho già provato altre cose e non è servito.</summary><div class="risp"><p>Ce lo dicono quasi tutte, ed è il motivo per cui esiste la valutazione. Quasi sempre non è che «non funziona niente»: è che si è partiti dalla fase sbagliata. Portaci quello che hai già fatto — <b>è informazione utile</b>, non un fallimento da nascondere.</p></div></details>
-      <details><summary>E se pago e poi non mi convince?</summary><div class="risp"><p>Il check-up e la prima seduta costano 39,90 € e <b>quei 39,90 € te li restituiamo</b> se alla fine pensi che non faccia per te. Non ti chiediamo il motivo.</p><p>Quello che non troverai mai scritto da noi è una garanzia sul risultato: i corpi non rispondono tutti allo stesso modo, e <b>chi te lo garantisce per iscritto o non lo sa o lo sa e lo scrive lo stesso</b>. Noi garantiamo il metodo e il controllo: se al controllo non è cambiato niente, si continua a lavorare senza che tu paghi altro.</p></div></details>
-      <details><summary>E se dopo la prova non voglio continuare?</summary><div class="risp"><p>Non succede niente. Il check-up e la prima seduta si esauriscono in sé: <b>non si firma nulla e non c'è nessun rinnovo automatico.</b> Ti resta la scheda con le tue misure e le tue foto, che sono tue.</p></div></details>
+      <details><summary>In quanto tempo si vedono i risultati?</summary><div class="risp">
+        <p>Dipende dal punto di partenza.</p>
+        <p>Chiunque ti dia una data precisa senza averti vista <b>sta tirando a indovinare.</b></p>
+        <p>È per questo che si parte dalla valutazione e si fissa un controllo. Al controllo si guardano foto e misure. E si vede.</p>
+      </div></details>
+      <details><summary>Devo mettermi a dieta?</summary><div class="risp">
+        <p>No. Non ti diamo diete: non è il nostro mestiere e non possiamo.</p>
+        <p>Nella valutazione guardiamo le tue abitudini, perché incidono sul risultato.</p>
+        <p>Se serve un supporto alimentare te lo diciamo e ti indirizziamo a chi è titolato a darlo.</p>
+      </div></details>
+      <details><summary>È doloroso?</summary><div class="risp">
+        <p>No. Le manualità sono intense in alcune fasi, ma non dolorose.</p>
+        <p>La tecnologia si regola su di te.</p>
+        <p>Se qualcosa non ti è comodo si dice sul momento e si cambia. <b>Non esiste il «stringi i denti che poi passa».</b></p>
+      </div></details>
+      <details><summary>Ho poco tempo. Quante volte devo venire?</summary><div class="risp">
+        <p>Te lo diciamo alla fine della valutazione, non prima.</p>
+        <p>Dipende dalla fase da cui hai bisogno di partire.</p>
+        <p>Una cosa la sappiamo già: il percorso si costruisce <b>sul tempo che hai davvero</b>, non su quello ideale. Un piano che non riesci a seguire non è un piano.</p>
+      </div></details>
+      <details><summary>Ho già provato altre cose e non è servito.</summary><div class="risp">
+        <p>Ce lo dicono quasi tutte. Ed è il motivo per cui esiste la valutazione.</p>
+        <p>Quasi sempre non è che «non funziona niente». È che si è partiti dalla fase sbagliata.</p>
+        <p>Portaci quello che hai già fatto: <b>è informazione utile</b>, non un fallimento da nascondere.</p>
+      </div></details>
+      <details><summary>E se pago e poi non mi convince?</summary><div class="risp">
+        <p>Il check-up e la prima seduta costano 39,90 €. <b>Te li restituiamo</b> se alla fine pensi che non faccia per te. Senza chiederti il motivo.</p>
+        <p>Quello che non troverai mai scritto da noi è una garanzia sul risultato.</p>
+        <p>I corpi non rispondono tutti allo stesso modo, e <b>chi te lo garantisce per iscritto o non lo sa, o lo sa e lo scrive lo stesso.</b></p>
+        <p>Noi garantiamo il metodo e il controllo: se al controllo non è cambiato niente, si continua a lavorare senza che tu paghi altro.</p>
+      </div></details>
+      <details><summary>E se dopo la prova non voglio continuare?</summary><div class="risp">
+        <p>Non succede niente.</p>
+        <p>Il check-up e la prima seduta si esauriscono in sé. <b>Non si firma nulla, non c'è nessun rinnovo automatico.</b></p>
+        <p>Ti resta la scheda con le tue misure e le tue foto. Che sono tue.</p>
+      </div></details>
     </div>
   </div>
 </section>
 
-<!-- =================== 9 · IL MODULO =================== -->
+<!-- =================== 10 · IL MODULO =================== -->
 <section class="scurissimo" id="prenota">
   <div class="wrap">
     <div class="stretto sale" style="margin:0 auto 32px;text-align:center">
       <p class="occhiello">Ultimo passo</p>
       <h2>Lascia il numero. Ti richiamiamo noi.</h2>
-      <p class="guida" style="margin:0 auto">Due campi e il consenso. Ti chiamiamo per fissare il giorno del check-up — <b>nessun pagamento online, nessun impegno</b>.</p>
+      <div class="blocco" style="margin:0 auto">
+        <p class="guida">Due campi e il consenso.</p>
+        <p class="guida">Ti chiamiamo per fissare il giorno del check-up.</p>
+        <p class="guida"><b>Nessun pagamento online. Nessun impegno.</b></p>
+      </div>
     </div>
 
     <div class="modulo sale" id="scatola-modulo">
       <form class="modulo-corpo" id="modulo" novalidate>
         <div class="campo">
           <label for="nome">Come ti chiami *</label>
-          <input id="nome" name="nome" type="text" autocomplete="given-name" required placeholder="Nome e cognome">
+          <input id="nome" name="nome" type="text" autocomplete="name" required placeholder="Nome e cognome">
         </div>
         <div class="campo">
           <label for="tel">Il tuo numero di telefono *</label>
@@ -454,12 +571,12 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
       <div class="grazie" id="grazie">
         <div class="segno"></div>
         <h3>Ricevuto.</h3>
-        <p style="color:var(--ink2)">Ti richiamiamo dal numero <b data-cfg="telefono-bello">379 148 5302</b>. Se preferisci anticipare, scrivici pure adesso su WhatsApp.</p>
+        <p style="color:var(--ink2)">Ti richiamiamo dal numero <b data-cfg="telefono-bello">379 148 5302</b>. Se preferisci anticipare, scrivici adesso su WhatsApp.</p>
         <a class="btn largo" id="wa-grazie" href="#" style="margin-top:8px">Scrivi su WhatsApp</a>
       </div>
     </div>
 
-    <p class="picc sale" style="text-align:center;margin-top:24px;color:#B9A496">
+    <p class="picc sale" style="text-align:center;margin-top:24px;color:#C7B2A6">
       Oppure chiama direttamente: <a href="#" data-cfg-href="tel-link" style="color:var(--oro-chiaro);font-weight:600"><span data-cfg="telefono-bello">379 148 5302</span></a>
     </p>
   </div>
@@ -469,7 +586,7 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
 <footer>
   <div class="wrap">
     <div class="marchio" style="margin-bottom:22px">
-      <span class="nome" style="color:#FBF2E8" data-cfg="marchio">Bodycharme Evolution</span>
+      <span class="nome" style="color:#FBF4EC" data-cfg="marchio">Bodycharme Evolution</span>
       <span class="luogo" style="color:var(--oro-chiaro)">Estetica evoluta</span>
     </div>
     <p style="margin-bottom:6px"><span data-cfg="via">via Val d’Aosta 22</span>, <span data-cfg="citta">Taranto</span></p>
@@ -489,7 +606,6 @@ footer .riga{border-top:1px solid rgba(246,238,230,.14);margin-top:26px;padding-
   </a>
   <a class="btn oro" href="#prenota">Fatti richiamare</a>
 </div>
-
 <script>
 /* ===================================================================
    CONFIGURAZIONE — si tocca solo questo blocco
@@ -500,32 +616,47 @@ const CFG = {
   piva:           "— da inserire —",
   citta:          "Taranto",
   via:            "via Val d’Aosta 22",
-  telefono:       "+393791485302",     // formato internazionale, senza spazi
+  anni:           "12 anni",
+  telefono:       "393791485302",      // ⚠ formato internazionale, senza + e senza spazi
   telefonoBello:  "379 148 5302",
   mail:           "bodycharmeevo@gmail.com",
   instagram:      "https://instagram.com/bodycharmeevolution",
   privacy:        "privacy.html",      // pagina dell'informativa (da preparare)
   cookie:         "privacy.html#cookie",
-  anni:           "12 anni",
+
+  /* I REEL DEL SITO.
+     Finché questo elenco è vuoto, la sezione "Guarda" non compare:
+     il sito non sembra incompleto, semplicemente non ce l'ha.
+     Quando i video sono pronti si mettono qui accanto a index.html
+     (cartella "video") e si scrivono qui sotto. Il "poster" è il
+     fotogramma che si vede prima di premere play: serve, altrimenti
+     su telefono resta un rettangolo nero. */
+  video: [
+    // { file:"video/reel-1.mp4", poster:"video/reel-1.jpg",
+    //   titolo:"Il metodo",   testo:"Perché una cosa sola non cambia il corpo." },
+    // { file:"video/reel-2.mp4", poster:"video/reel-2.jpg",
+    //   titolo:"Il check-up", testo:"Trenta minuti in cui non ti vendiamo niente." },
+    // { file:"video/reel-3.mp4", poster:"video/reel-3.jpg",
+    //   titolo:"La seduta",   testo:"Le quattro fasi, in ordine." },
+  ],
+  videoTitolo: "Come lavoriamo, in trenta secondi.",
+  videoTesto:  "Meglio vederlo che leggerlo.",
 
   prezzo:        "39,90 €",
-  prezzoPieno:   "79,80 €",            // ⚠ dev'essere un prezzo davvero praticato: vedi NOTE
+  prezzoPieno:   "79,80 €",            // ⚠ dev'essere un prezzo davvero praticato: vedi LEGGIMI
   notaPrezzo:    "Prezzo riservato ai posti di questa selezione.",
   posti:         "10 posti disponibili",
 
-  /* DOVE FINISCONO I CONTATTI.
-     Lasciato vuoto, il modulo apre WhatsApp con i dati già scritti:
-     funziona da subito, ma il contatto resta solo nella chat.
-     Mettendo qui l'indirizzo /exec dello script (RICEVI-CONTATTI.gs),
-     ogni richiesta finisce in un foglio Google e non se ne perde nessuna. */
+  /* DOVE FINISCONO I CONTATTI — vedi RICEVI-CONTATTI.gs.
+     Vuoto: il modulo apre WhatsApp coi dati già scritti. */
   endpoint:      "",
-  parola:        "CAMBIAMI-CON-UNA-TUA",   // deve combaciare con quella dello script
+  parola:        "CAMBIAMI-CON-UNA-TUA",
 };
 /* =================================================================== */
 
-/* --- riempie i segnaposto --- */
 const mappa = {
-  "marchio":CFG.marchio, "citta":CFG.citta, "via":CFG.via, "anni":CFG.anni, "anni2":CFG.anni,
+  "marchio":CFG.marchio, "citta":CFG.citta, "via":CFG.via,
+  "anni":CFG.anni, "anni2":CFG.anni,
   "telefono-bello":CFG.telefonoBello, "mail":CFG.mail, "prezzo":CFG.prezzo,
   "prezzo-pieno":CFG.prezzoPieno, "nota-prezzo":CFG.notaPrezzo, "posti":CFG.posti,
   "ragione-sociale":CFG.ragioneSociale, "piva":CFG.piva
@@ -535,7 +666,7 @@ document.querySelectorAll("[data-cfg]").forEach(function(el){
   if (v) el.textContent = v;
 });
 const link = {
-  "tel-link":"tel:"+CFG.telefono, "mail-link":"mailto:"+CFG.mail,
+  "tel-link":"tel:+"+CFG.telefono, "mail-link":"mailto:"+CFG.mail,
   "instagram":CFG.instagram, "privacy":CFG.privacy, "cookie":CFG.cookie
 };
 document.querySelectorAll("[data-cfg-href]").forEach(function(el){
@@ -543,20 +674,48 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
   if (v) el.setAttribute("href", v);
 });
 
-/* --- comparsa a scorrimento --- */
+/* --- i video, se ci sono --- */
 (function(){
-  if (!("IntersectionObserver" in window)) return;   /* senza osservatore si lascia tutto visibile */
+  const elenco = Array.isArray(CFG.video) ? CFG.video.filter(function(v){ return v && v.file; }) : [];
+  if (!elenco.length) return;            /* niente video, niente sezione */
+  const sez = document.getElementById("video");
+  const box = document.getElementById("filmati");
+  document.getElementById("video-titolo").textContent = CFG.videoTitolo;
+  document.getElementById("video-testo").textContent  = CFG.videoTesto;
+  elenco.slice(0,3).forEach(function(v){
+    const d = document.createElement("div");
+    d.className = "filmato";
+    const schermo = document.createElement("div");
+    schermo.className = "schermo";
+    const f = document.createElement("video");
+    f.src = v.file;
+    if (v.poster) f.poster = v.poster;
+    f.controls = true; f.playsInline = true; f.preload = "none";
+    schermo.appendChild(f);
+    d.appendChild(schermo);
+    if (v.titolo || v.testo) {
+      const sotto = document.createElement("div");
+      sotto.className = "sotto";
+      if (v.titolo) { const h = document.createElement("h3"); h.textContent = v.titolo; sotto.appendChild(h); }
+      if (v.testo)  { const p = document.createElement("p");  p.textContent  = v.testo;  sotto.appendChild(p); }
+      d.appendChild(sotto);
+    }
+    box.appendChild(d);
+  });
+  sez.style.display = "block";
+})();
+
+(function(){
+  if (!("IntersectionObserver" in window)) return;
   document.documentElement.classList.add("anima");
-  const voci = document.querySelectorAll(".sale");
   const oss = new IntersectionObserver(function(righe){
     righe.forEach(function(r){
       if (r.isIntersecting) { r.target.classList.add("visto"); oss.unobserve(r.target); }
     });
   }, { rootMargin:"0px 0px -12% 0px", threshold:.08 });
-  voci.forEach(function(v){ oss.observe(v); });
+  document.querySelectorAll(".sale").forEach(function(v){ oss.observe(v); });
 })();
 
-/* --- barra fissa: compare dopo il primo schermo, sparisce sul modulo --- */
 (function(){
   const barra = document.getElementById("barra");
   const meta  = document.getElementById("prenota");
@@ -571,7 +730,6 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
   guarda();
 })();
 
-/* --- il modulo --- */
 (function(){
   const form    = document.getElementById("modulo");
   const scatola = document.getElementById("scatola-modulo");
@@ -595,8 +753,8 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
   form.addEventListener("submit", function(e){
     e.preventDefault();
     errore.style.display = "none";
+    if (pulito(form.sito.value)) return;
 
-    if (pulito(form.sito.value)) return;               // trappola anti-spam
     const dati = {
       nome:      pulito(form.nome.value),
       telefono:  pulito(form.telefono.value),
@@ -606,10 +764,10 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
       quando_inviato: new Date().toISOString(),
       parola:    CFG.parola
     };
-    if (dati.nome.length < 2)              return mostraErrore("Scrivi il tuo nome, così sappiamo come chiamarti.");
-    if (!telefonoValido(dati.telefono))    return mostraErrore("Controlla il numero di telefono: sembra incompleto.");
+    if (dati.nome.length < 2)           return mostraErrore("Scrivi il tuo nome, così sappiamo come chiamarti.");
+    if (!telefonoValido(dati.telefono)) return mostraErrore("Controlla il numero di telefono: sembra incompleto.");
     if (!document.getElementById("consenso").checked)
-      return mostraErrore("Serve la spunta sul consenso: senza, non possiamo richiamarti.");
+      return mostraErrore("Serve il consenso: senza, non possiamo richiamarti.");
 
     const wa = "https://wa.me/" + CFG.telefono.replace(/[^\d]/g,"")
              + "?text=" + encodeURIComponent(messaggioWhatsApp(dati));
@@ -617,19 +775,13 @@ document.querySelectorAll("[data-cfg-href]").forEach(function(el){
 
     function fatto(){ scatola.classList.add("inviato"); scatola.scrollIntoView({block:"center"}); }
 
-    if (!CFG.endpoint) {
-      /* senza destinazione: si apre WhatsApp in una scheda nuova e la pagina
-         resta viva, cosi' la conferma si vede davvero */
-      window.open(wa, "_blank", "noopener");
-      fatto();
-      return;
-    }
+    if (!CFG.endpoint) { window.open(wa, "_blank", "noopener"); fatto(); return; }
 
     bottone.disabled = true;
     bottone.textContent = "Invio in corso…";
     fetch(CFG.endpoint, {
       method:"POST",
-      headers:{ "Content-Type":"text/plain;charset=utf-8" },  // niente preflight CORS
+      headers:{ "Content-Type":"text/plain;charset=utf-8" },
       body: JSON.stringify(dati)
     }).then(fatto).catch(function(){
       mostraErrore("Non siamo riusciti a inviare. Scrivici su WhatsApp e ti rispondiamo subito.");

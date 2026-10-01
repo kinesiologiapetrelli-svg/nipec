@@ -5,7 +5,7 @@ Cosa c'è qui e in che ordine si mette in opera.
 I FILE
 ------------------------------------------------------------------
 index.html ............ la landing. Nessuna libreria esterna.
-caratteri/ ............ i due caratteri della pagina. Va caricata
+caratteri/ ............ i caratteri della pagina (Anton + Inter). Va caricata
                         insieme a index.html, altrimenti si perdono.
 privacy.html .......... l'informativa, da completare dove è evidenziato.
 RICEVI-CONTATTI.gs .... lo script che raccoglie i contatti in un
@@ -16,6 +16,28 @@ adv.html / PDF ........ copione del reel, copy, analisi. Non va
 Su Netlify si trascinano index.html, privacy.html e la
 cartella caratteri. Basta trascinare la cartella intera.
 Gli altri due restano qui: sono roba nostra e del cliente.
+
+------------------------------------------------------------------
+I REEL NELLA PAGINA
+------------------------------------------------------------------
+La pagina ha gia' la sezione "Guarda", ma RESTA INVISIBILE finche'
+non ci sono video: cosi' il sito non sembra mai incompleto.
+
+Quando i reel sono pronti:
+  - si mettono i file .mp4 nella cartella "video" qui accanto;
+  - per ognuno serve anche un fotogramma di copertina .jpg,
+    altrimenti sul telefono resta un rettangolo nero;
+  - in fondo a index.html, nel blocco CONFIGURAZIONE, si toglie
+    il // davanti alle righe di CFG.video e si scrivono i nomi.
+La sezione compare da sola. Si fermano a tre.
+
+------------------------------------------------------------------
+IL CARATTERE
+------------------------------------------------------------------
+I titoli sono in IMPACT. Dove Impact non c'e' (qualche telefono
+Android) la pagina usa Anton, che e' lo stesso disegno e sta nella
+cartella "caratteri". Per questo la cartella va caricata sempre:
+senza, i titoli cambiano aspetto.
 
 ------------------------------------------------------------------
 I CINQUE PASSI, IN QUEST'ORDINE
