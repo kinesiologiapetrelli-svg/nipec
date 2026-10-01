@@ -128,6 +128,13 @@ footer b,footer strong{color:#FBF4EC}
                         .g4{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.g4{grid-template-columns:repeat(4,1fr)}}
 
+/* ---------- il richiamo: torna alla fine di ogni sezione ---------- */
+.cta{margin:36px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.cta.centro{align-items:center;text-align:center;margin-left:auto;margin-right:auto}
+.cta .nota{font-size:15px;color:var(--ink2);margin:0;line-height:1.5;max-width:34em}
+.scurissimo .cta .nota{color:#CDBBAE}
+@media(max-width:520px){.cta{align-items:stretch}.cta .btn{width:100%}.cta .nota{text-align:center}}
+
 .provato{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
 .provato span{background:var(--carta);border:1px solid var(--bordo);border-radius:999px;
               padding:10px 19px;font-size:16px;font-weight:600;color:var(--ink2)}
@@ -291,6 +298,11 @@ footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-
       <p class="guida"><b>Quella diffidenza è sana.</b></p>
       <p class="guida">Tienila. Ti servirà anche con noi.</p>
     </div>
+    <div class="cta">
+      <a href="#prenota" class="btn oro">Parto dal check-up</a>
+      <p class="nota">Ti richiamiamo noi. Nessun pagamento online.</p>
+    </div>
+
   </div>
 </section>
 
@@ -318,6 +330,11 @@ footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-
 
     <p class="urlo" style="font-size:clamp(22px,4.6vw,34px);color:#FDF7F0;max-width:22ch">Il problema non è la tua costanza.</p>
     <p class="guida" style="max-width:30em">È che non è mai stato fatto il primo passo.</p>
+    <div class="cta">
+      <a href="#prenota" class="btn oro">Facciamo il primo passo</a>
+      <p class="nota">Check-up + prima seduta: 39,90 €.</p>
+    </div>
+
   </div>
 </section>
 
@@ -364,6 +381,11 @@ footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-
         <p><b>Preferiamo perdere una cliente che prenderle dei soldi sapendo come va a finire.</b></p>
       </div>
     </div>
+    <div class="cta">
+      <a href="#prenota" class="btn oro">Prenota il check-up</a>
+      <p class="nota">39,90 €, e te li restituiamo se non ti convince.</p>
+    </div>
+
   </div>
 </section>
 
@@ -387,6 +409,11 @@ footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-
       <div class="fase"><div class="n">03</div><div><h3>Fase attiva</h3><p>Qui si lavora sull'inestetismo: <b>manualità avanzate</b> insieme alla tecnologia, scelte su quello che è emerso. Non «si fa una macchina»: si applica un piano.</p></div></div>
       <div class="fase"><div class="n">04</div><div><h3>Mantenere</h3><p>La fase che decide se fra sei mesi sei ancora contenta. Costruita sulle tue abitudini vere, non su quelle che dovresti avere.</p></div></div>
     </div>
+    <div class="cta">
+      <a href="#prenota" class="btn oro">Da che fase parto io?</a>
+      <p class="nota">Si vede alla valutazione, non prima.</p>
+    </div>
+
   </div>
 </section>
 
@@ -409,6 +436,11 @@ footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-
       <p class="guida"><b>La macchina è uno strumento dentro un piano.</b> Non il piano.</p>
       <p class="guida">Chi ti vende «dieci sedute di macchina» ti vende lo strumento. Il piano lo costruisci tu.</p>
     </div>
+    <div class="cta">
+      <a href="#prenota" class="btn oro">Voglio un piano, non una macchina</a>
+      <p class="nota">Si parte dal check-up di 30 minuti.</p>
+    </div>
+
   </div>
 </section>
 
@@ -425,6 +457,11 @@ footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-
       <div class="card sale"><h3>Misurabile</h3><p style="font-size:16.5px;color:var(--ink2);margin:0">Misure e foto in punti fissi. Ai controlli si guarda, non si ricorda.</p></div>
     </div>
     <p class="urlo sale" style="text-align:center;margin:34px auto 0;font-size:clamp(20px,4vw,30px);color:var(--scuro);max-width:20ch;line-height:1.1">«La bellezza non è un traguardo, è un viaggio.»</p>
+    <div class="cta centro">
+      <a href="#prenota" class="btn oro">Fatti richiamare</a>
+      <p class="nota">Su appuntamento, in via Val d’Aosta 22.</p>
+    </div>
+
   </div>
 </section>
 
@@ -508,6 +545,10 @@ footer .riga{border-top:1px solid rgba(251,244,236,.14);margin-top:28px;padding-
         <p>Il check-up e la prima seduta si esauriscono in sé. <b>Non si firma nulla, non c'è nessun rinnovo automatico.</b></p>
         <p>Ti resta la scheda con le tue misure e le tue foto. Che sono tue.</p>
       </div></details>
+      <div class="cta centro">
+        <a href="#prenota" class="btn oro">Va bene, lascio il numero</a>
+        <p class="nota">Il resto te lo chiediamo al telefono.</p>
+      </div>
     </div>
   </div>
 </section>

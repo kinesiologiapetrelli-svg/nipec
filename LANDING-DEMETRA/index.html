@@ -127,6 +127,13 @@ footer b,footer strong{color:#F7F3E7}
                         .g4{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.g4{grid-template-columns:repeat(4,1fr)}}
 
+/* ---------- il richiamo: torna alla fine di ogni sezione ---------- */
+.cta{margin:36px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.cta.centro{align-items:center;text-align:center;margin-left:auto;margin-right:auto}
+.cta .nota{font-size:15px;color:var(--ink2);margin:0;line-height:1.5;max-width:34em}
+.scurissimo .cta .nota{color:#C5BAA6}
+@media(max-width:520px){.cta{align-items:stretch}.cta .btn{width:100%}.cta .nota{text-align:center}}
+
 .provato{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
 .provato span{background:var(--carta);border:1px solid var(--bordo);border-radius:999px;
               padding:10px 19px;font-size:16px;font-weight:600;color:var(--ink2)}
@@ -288,6 +295,11 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <p class="guida"><b>Ai mosbesim është i shëndetshëm.</b></p>
       <p class="guida">Mbaje. Do të të duhet edhe me ne.</p>
     </div>
+    <div class="cta">
+      <a href="#rezervo" class="btn oro">Nis nga analiza e plotë</a>
+      <p class="nota">Të marrim ne. Asnjë pagesë online.</p>
+    </div>
+
   </div>
 </section>
 
@@ -315,6 +327,11 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
 
     <p class="urlo" style="font-size:clamp(22px,4.6vw,34px);color:#FBF7ED;max-width:22ch">Problemi nuk është këmbëngulja jote.</p>
     <p class="guida" style="max-width:30em">Është që deri tani është punuar vetëm mbi një pjesë.</p>
+    <div class="cta">
+      <a href="#rezervo" class="btn oro">Shiko nga ku nisesh</a>
+      <p class="nota">Analiza e plotë: 3.900 LEK në vend të 9.000.</p>
+    </div>
+
   </div>
 </section>
 
@@ -336,6 +353,11 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <div class="pilastro sale"><div class="eti">Shtylla 3</div><h3>Muskuli</h3><p>Më shumë muskul, metabolizëm më i lartë. Djeg edhe kur pushon.</p></div>
       <div class="pilastro sale"><div class="eti">Shtylla 4</div><h3>Drenazhi</h3><p>Lëngjet dhe qarkullimi i ngadaltë të bëjnë të ndihesh e fryrë. Kjo ndryshon e para.</p></div>
     </div>
+    <div class="cta">
+      <a href="#rezervo" class="btn oro">Cila shtyllë është e bllokuar tek ti?</a>
+      <p class="nota">Kjo shihet në analizë, jo me sy.</p>
+    </div>
+
   </div>
 </section>
 
@@ -381,6 +403,11 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
         <p><b>Më mirë të humbasim një kliente sesa t'i marrim paratë duke ditur si përfundon.</b></p>
       </div>
     </div>
+    <div class="cta">
+      <a href="#rezervo" class="btn oro">Rezervo analizën e plotë</a>
+      <p class="nota">3.900 LEK. T'i kthejmë nëse nuk të bind, t'i zbresim nëse vazhdon.</p>
+    </div>
+
   </div>
 </section>
 
@@ -403,6 +430,11 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <div class="fase"><div class="n">03</div><div><h3>Toni</h3><p>Tonifikimi i indeve dhe i muskulit. Pjesa që e mban rezultatin në kohë.</p></div></div>
       <div class="fase"><div class="n">04</div><div><h3>Drenazhi</h3><p>Mbyllja. Edhe pjesa që ndihet më shpejt: del më e lehtë se sa hyre.</p></div></div>
     </div>
+    <div class="cta">
+      <a href="#rezervo" class="btn oro">Lër numrin, të marrim ne</a>
+      <p class="nota">Nga cila fazë nisesh, vendoset pas analizës.</p>
+    </div>
+
   </div>
 </section>
 
@@ -423,6 +455,11 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <p class="guida"><b>Makineria është një mjet brenda një plani.</b> Jo plani.</p>
       <p class="guida">Kush të shet dhjetë seanca me një aparaturë, të ka shitur mjetin. Planin e ndërton ti.</p>
     </div>
+    <div class="cta">
+      <a href="#rezervo" class="btn oro">Dua një plan, jo një makineri</a>
+      <p class="nota">Nis nga analiza e plotë.</p>
+    </div>
+
   </div>
 </section>
 
@@ -437,6 +474,11 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
       <div class="card sale"><h3>Me takim</h3><p style="font-size:16.5px;color:var(--ink2);margin:0">Ambient i qetë. Pa sallë pritjeje plot, pa nxitim.</p></div>
       <div class="card sale"><h3>Të matshme</h3><p style="font-size:16.5px;color:var(--ink2);margin:0">Rezultate <b>në centimetra</b>, jo premtime. Në kontroll shihet, nuk kujtohet.</p></div>
     </div>
+    <div class="cta centro">
+      <a href="#rezervo" class="btn oro">Rezervo me Dr. Eglën</a>
+      <p class="nota">Me takim. Të marrim ne për të caktuar ditën.</p>
+    </div>
+
   </div>
 </section>
 
@@ -518,6 +560,10 @@ footer .riga{border-top:1px solid rgba(247,243,231,.14);margin-top:28px;padding-
         <p>Dhe mbi të gjitha: <b>vazhdon, t'i zbresim. Nuk të bind, t'i kthejmë.</b> Në të dyja rastet nuk i ke humbur.</p>
         <p>Ajo që blen me 3.900 LEK nuk është një ulje çmimi. Është që dikush ulet gjysmë ore të shohë <b>ty</b> — në vend që të të shesë një paketë.</p>
       </div></details>
+      <div class="cta centro">
+        <a href="#rezervo" class="btn oro">Mirë, lë numrin</a>
+        <p class="nota">Pyetjet e tjera i bëjmë në telefon.</p>
+      </div>
     </div>
   </div>
 </section>
