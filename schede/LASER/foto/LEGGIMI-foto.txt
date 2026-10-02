@@ -1,0 +1,11 @@
+Qui dentro vanno tre fotografie, con questi nomi esatti:
+
+  ares-2025.jpg    la piccola bianca, comandi a mano
+  ares-2026.jpg    la grande bianca, telecamera e IA
+  uriel-2026.jpg   la carrellata, 16 diodi e 3 bande
+
+Vanno bene anche .png: in quel caso si cambia l'estensione dentro
+scheda-laser-808.html (cerca "foto/").
+
+Meglio su fondo bianco o scontornate: la cornice in prima pagina e' alta
+42 mm e la fotografia ci entra dentro intera, senza tagli.
