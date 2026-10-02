@@ -95,10 +95,21 @@ Due cose da sapere prima di darla in giro:
     in fondo. Il 351 846 6025 e' un numero italiano: se a Tirana risponde
     un altro riferimento, quello va scritto. Dimmelo e lo metto.
 
- 2. I PREZZI SONO IN EURO.
-    Come nell'italiana, IVA esclusa. Se per l'Albania servono in LEK —
-    come abbiamo fatto per la landing DEMETRA — si cambiano in un minuto,
-    ma serve il cambio che vuoi usare tu, non quello del giorno.
+ 2. I PREZZI SONO IN LEK, E NON SONO LA CONVERSIONE DI QUELLI IN EURO.
+    Albanese            Italiana        Rapporto
+    40.000 Lek/mese     400 euro/mese   x 100
+    50.000 Lek/mese     500 euro/mese   x 100
+    250.000 Lek         25.000 euro     x 10
+    175.000 Lek         17.500 euro     x 10
+    350.000 Lek         35.000 euro     x 10
+    245.000 Lek         24.500 euro     x 10
+
+    I noleggi stanno a cento, le vendite a dieci. Con il cambio reale
+    (circa 100 Lek per euro) i noleggi tornano, le vendite no: 250.000 Lek
+    sono circa 2.500 euro, non 25.000.
+    I numeri sono quelli che mi hai dato tu e li ho scritti cosi'. Ma e'
+    una differenza di uno zero su un listino che va in mano ai clienti:
+    controllala prima che la scheda giri in Albania.
 
 E come per il protocollo: prima che l'albanese vada in mano a qualcuno,
 falla leggere a Uarda. L'ho scritta io e la rileggo io, ma su un documento
