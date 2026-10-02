@@ -95,21 +95,19 @@ Due cose da sapere prima di darla in giro:
     per Tirana non serve. Resta il nome NIPEC e basta. Se un giorno c'e'
     un riferimento albanese, si aggiunge in un minuto.
 
- 2. I PREZZI SONO IN LEK, E NON SONO LA CONVERSIONE DI QUELLI IN EURO.
-    Albanese            Italiana        Rapporto
-    40.000 Lek/mese     400 euro/mese   x 100
-    50.000 Lek/mese     500 euro/mese   x 100
-    250.000 Lek         25.000 euro     x 10
-    175.000 Lek         17.500 euro     x 10
-    350.000 Lek         35.000 euro     x 10
-    245.000 Lek         24.500 euro     x 10
+ 2. I PREZZI SONO IN LEK, TUTTI A CENTO VOLTE L'EURO.
+    Albanese              Italiana
+    40.000 Lek/mese       400 euro/mese
+    50.000 Lek/mese       500 euro/mese
+    2.500.000 Lek         25.000 euro
+    1.750.000 Lek         17.500 euro
+    3.500.000 Lek         35.000 euro
+    2.450.000 Lek         24.500 euro
 
-    I noleggi stanno a cento, le vendite a dieci. Con il cambio reale
-    (circa 100 Lek per euro) i noleggi tornano, le vendite no: 250.000 Lek
-    sono circa 2.500 euro, non 25.000.
-    I numeri sono quelli che mi hai dato tu e li ho scritti cosi'. Ma e'
-    una differenza di uno zero su un listino che va in mano ai clienti:
-    controllala prima che la scheda giri in Albania.
+    Un solo rapporto per tutto, noleggi e vendite: cento Lek per euro.
+    Se un giorno il cambio si muove, si rifanno tutte e sei insieme — mai
+    una riga sola, altrimenti la scheda smette di tornare con l'italiana.
+
 
 E come per il protocollo: prima che l'albanese vada in mano a qualcuno,
 falla leggere a Uarda. L'ho scritta io e la rileggo io, ma su un documento
