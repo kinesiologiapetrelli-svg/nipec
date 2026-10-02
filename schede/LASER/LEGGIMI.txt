@@ -3,8 +3,10 @@ Le tre macchine della lavagna del 12 ottobre: ARES 2025, ARES 2026 IA, URIEL 202
 
 
 COSA C'E' IN QUESTA CARTELLA
-  SCHEDA-LASER-808-NIPEC.pdf   5 pagine A4, pronta da stampare o da mandare
-  scheda-laser-808.html        il sorgente, da cui si ristampa
+  SCHEDA-LASER-808-NIPEC.pdf     italiano, 5 pagine A4, pronta
+  scheda-laser-808.html          il sorgente italiano
+  SKEDA-LASER-808-NIPEC-SQ.pdf   albanese, 5 pagine A4, pronta
+  scheda-laser-808-SQ.html       il sorgente albanese
   foto/                        VUOTA. Qui dentro vanno le tre fotografie
   caratteri/                   i caratteri del marchio, non si toccano
 
@@ -74,6 +76,34 @@ gennaio 2027 e' quasi certamente un'altra scadenza.
 E' un argomento di vendita forte, e un centro puo' girarlo al suo
 consulente. Fatti scrivere dalla fabbrica la norma e la data esatta: da
 li' in poi e' un'arma, non un rischio.
+
+
+IL NOLEGGIO
+ARES 2025: 400 euro al mese. ARES 2026 IA: 500 euro al mese.
+Sulla URIEL il noleggio non compare — ne' nella card ne' in tabella.
+
+
+LA VERSIONE ALBANESE
+Stesso impianto, stesse fotografie, stessi numeri. Le pagine sono cinque,
+identiche per struttura: chi ha in mano l'italiana e chi ha in mano
+l'albanese guardano la stessa cosa alla stessa pagina.
+
+Due cose da sapere prima di darla in giro:
+
+ 1. IL NUMERO DI TELEFONO E' VUOTO.
+    Nell'albanese ho lasciato i puntini al posto del numero, in testata e
+    in fondo. Il 351 846 6025 e' un numero italiano: se a Tirana risponde
+    un altro riferimento, quello va scritto. Dimmelo e lo metto.
+
+ 2. I PREZZI SONO IN EURO.
+    Come nell'italiana, IVA esclusa. Se per l'Albania servono in LEK —
+    come abbiamo fatto per la landing DEMETRA — si cambiano in un minuto,
+    ma serve il cambio che vuoi usare tu, non quello del giorno.
+
+E come per il protocollo: prima che l'albanese vada in mano a qualcuno,
+falla leggere a Uarda. L'ho scritta io e la rileggo io, ma su un documento
+che gira ai clienti un occhio madrelingua vale piu' di qualunque
+controllo mio.
 
 
 A CHI SI DA' QUESTA SCHEDA
