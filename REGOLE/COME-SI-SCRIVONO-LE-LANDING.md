@@ -114,6 +114,37 @@ per il testo piccolo serve un oro più scuro (`--oro-testo`).
 
 ---
 
+## I prezzi in Lek: sempre per cento
+
+Vale per tutto quello che va in Albania — landing, schede, offerte,
+contratti — non solo per le landing.
+
+**Un prezzo in euro diventa Lek moltiplicando per cento. Sempre, e per
+ogni riga.** Niente eccezioni fra noleggi e vendite: o si moltiplica
+tutto, o la versione albanese smette di tornare con l'italiana.
+
+| In italiano | In albanese |
+|---|---|
+| 400 €/mese | 40.000 Lek/mese |
+| 500 €/mese | 50.000 Lek/mese |
+| 25.000 € | 2.500.000 Lek |
+| 17.500 € | 1.750.000 Lek |
+| 35.000 € | 3.500.000 Lek |
+| 24.500 € | 2.450.000 Lek |
+
+**Il controllo, prima di stampare:** si prende una riga a caso, si
+dividono i Lek per cento e deve uscire il numero italiano. Se su una
+riga non esce, è saltato uno zero — ed è già successo.
+
+Se un giorno il cambio si muove, **si rifanno tutte le righe insieme**.
+Mai una sola: due rapporti diversi dentro lo stesso documento sono
+l'errore che nessuno vede finché non lo vede il cliente.
+
+Le cifre tonde restano tonde: 39,90 € diventa 3.900 Lek, non 3.990. Si
+arrotonda al prezzo che si legge bene, non al cambio esatto.
+
+---
+
 ## Quello che non cambia
 
 Queste regole si aggiungono a quelle che valevano già:
