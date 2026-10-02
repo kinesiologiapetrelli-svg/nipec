@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Protocollo Laser NIPEC · Epilazione corpo</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+</style>
+</head>
+<body>
+
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    BOZZA 0.1 — da chiudere insieme<br>
+    Documento interno NIPEC<br>
+    Non consegnare alla cliente
+  </div>
+</div>
+
+<h1>Protocollo Laser · Epilazione corpo</h1>
+<p class="sotto">Dal campanello alla porta — i nove momenti di una seduta</p>
+<p class="riga-rev">Revisione ……… — ……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;Dispositivo: ……………………………………&nbsp;&nbsp;·&nbsp;&nbsp;Centro: ……………………………………</p>
+
+<div class="box rosso">
+  <span class="eti">Da sciogliere prima di stampare questo foglio</span>
+  <p><b>Chi può usare il laser, e dove.</b> In Italia l'elenco degli apparecchi dell'estetista
+  (DM 110/2011) non comprende il laser epilatorio, e dal 22 giugno 2025 i laser per
+  epilazione ricadono in pieno nel regolamento europeo sui dispositivi medici. Significa che
+  <b>il nome sulla porta e il titolo di chi preme il pulsante cambiano a seconda del Paese e
+  del contesto</b> — centro estetico, studio medico, Albania.</p>
+  <p>Questo foglio non decide quella cosa: la decidi tu con chi ti segue per gli adempimenti.
+  Ma è la <b>prima</b> casella del cancello, non una nota a piè di pagina. Finché non è
+  scritta qui sopra, il protocollo non si consegna a nessuno.</p>
+</div>
+
+<div class="box">
+  <span class="eti">A cosa serve questo foglio</span>
+  <p>È la sequenza di una seduta di epilazione, nell'ordine in cui le cose succedono davvero:
+  <b>dal momento in cui prende appuntamento al momento in cui esce dalla porta.</b>
+  Non è il manuale della macchina — quello sta a parte e contiene i parametri.</p>
+  <p>Si tiene in cabina. Si legge una volta per intero, poi si usa a colpo d'occhio.</p>
+</div>
+
+<h2><span class="n">1</span>Al telefono — prima che arrivi</h2>
+<p class="quando">Quando prende appuntamento · 2 minuti</p>
+<p>Metà delle sedute andate male sono sedute preparate male. Queste sei cose si dicono
+<b>al telefono</b>, non sulla porta: se le scopri quando è già arrivata, la seduta salta
+e lei ha perso un pomeriggio.</p>
+
+<table>
+  <tr><th style="width:30%">Cosa le dici</th><th>Perché</th></tr>
+  <tr><td><b>Niente ceretta, pinzetta, filo o epilatore</b> per <span class="vuoto"></span> settimane prima</td>
+      <td>Il laser lavora sul pelo attaccato alla radice. Se la radice è stata strappata, non c'è niente da colpire e la seduta è buttata. <b>Il rasoio invece va bene</b>, anzi serve.</td></tr>
+  <tr><td><b>Si rasa la sera prima o la mattina</b>, a casa</td>
+      <td>Il pelo deve esserci sotto pelle ma non sopra: il pelo lungo in superficie brucia, puzza e sporca il manipolo. Rasata in istituto all'ultimo minuto, la pelle arriva già irritata.</td></tr>
+  <tr><td><b>Niente sole, lampada e autoabbronzante</b> per <span class="vuoto"></span> settimane prima</td>
+      <td>Su pelle abbronzata il laser confonde il pelo con la pelle. È la causa numero uno delle macchie e delle bolle.</td></tr>
+  <tr><td><b>Il giorno della seduta, zona pulita</b>: niente creme, oli, deodorante, trucco, profumo</td>
+      <td>Quello che sta sulla pelle si scalda insieme a lei.</td></tr>
+  <tr><td><b>Mi dici tutte le medicine che prendi</b>, anche quelle che le sembrano banali</td>
+      <td>Alcune rendono la pelle sensibile alla luce. Non è una domanda da ficcanaso: è la domanda che evita l'ustione.</td></tr>
+  <tr><td><b>La prima volta vieni dieci minuti prima</b></td>
+      <td>Perché la prima volta non si tratta: si fa la scheda e si fa il test. Dirlo al telefono evita la delusione sul posto.</td></tr>
+</table>
+
+<div class="box giallo">
+  <span class="eti">Il messaggio che parte da solo</span>
+  <p>Queste sei righe andrebbero anche in un messaggio che parte automatico quando fissi
+  l'appuntamento. Chi lo riceve si presenta preparata; chi non lo riceve si presenta come
+  capita. <b>È il pezzo più economico di tutto il protocollo.</b></p>
+</div>
+
+<h2><span class="n">2</span>Quando entra — i primi tre minuti</h2>
+<p class="quando">Al banco, non al lettino</p>
+<p>Non si va subito in cabina. Tre minuti in piedi, al banco, e si guadagna tutta la seduta.</p>
+<ol>
+  <li><b>Le chiedi come è andata dall'ultima volta.</b> Rossore? Bolle? Crosticine? Quanto sono durate? Si scrive sulla scheda <b>prima</b> di toccare la macchina.</li>
+  <li><b>Controlli le sei cose del telefono.</b> Si è rasata? È stata al sole? Ha messo creme stamattina? Farmaci nuovi?</li>
+  <li><b>Guardi la zona alla luce</b>, prima che si spogli: abbronzatura, irritazioni, nei nuovi, tatuaggi che non c'erano.</li>
+</ol>
+<p class="dire">«Prima di accendere ti faccio due domande, così lavoriamo sul sicuro.»<br>
+Non è burocrazia e non va detta come se lo fosse: è la cosa che le fa capire che lì dentro
+si ragiona.</p>
+
+<h2><span class="n">3</span>La scheda e il cancello</h2>
+<p class="quando">Prima di accendere · obbligatorio a ogni seduta</p>
+<p>Il cancello funziona come quello del protocollo corpo: <b>non è un giudizio tuo, è una
+regola.</b> Se la casella è barrata, la casella comanda.</p>
+
+<table class="semaforo">
+  <tr><th style="width:84px">Esito</th><th>Quando</th><th>Cosa fai oggi</th></tr>
+  <tr><td><span class="pallino p-verde"></span>VERDE</td>
+      <td>Nessuna casella barrata, pelle chiara e integra, rasata bene</td>
+      <td>Seduta completa, parametri di scheda</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>GIALLO</td>
+      <td>Abbronzatura residua · pelle sensibile all'ultima seduta · zona piccola irritata · ciclo in corso su zona intima</td>
+      <td><b>Si abbassa</b> secondo la tabella del manuale e si <b>rifà il test</b> sulla zona. Se il test non convince, si rimanda</td></tr>
+  <tr><td><span class="pallino p-rosso"></span>ROSSO</td>
+      <td>Gravidanza o allattamento · farmaco fotosensibilizzante in corso · herpes attivo, infezione, ferita, scottatura sulla zona · pelle abbronzata di fresco · epilessia fotosensibile · tumore cutaneo o nei in cambiamento · isotretinoina negli ultimi <span class="vuoto"></span> mesi</td>
+      <td><b>Oggi non si fa.</b> Si fissa la data in cui si potrà fare e la si scrive. Non si contratta</td></tr>
+</table>
+
+<div class="box rosso">
+  <span class="eti">Le quattro cose che non si trattano mai, punto</span>
+  <p><b>Sopra un tatuaggio</b> — l'inchiostro assorbe tutto e brucia. Si gira intorno, si lascia un margine, si segna sulla mappa.<br>
+  <b>Sopra un neo</b> — si copre con la matita bianca e si salta.<br>
+  <b>Dentro l'orbita dell'occhio</b> — sopracciglia e zigomo alto: la luce arriva all'occhio anche con gli occhiali.<br>
+  <b>Su pelle che non è sua</b> — se non la riconosci rispetto all'ultima volta, non è il giorno.</p>
+</div>
+
+<h3>Il fototipo — si scrive una volta e resta</h3>
+<p>Si stabilisce alla prima seduta, si scrive sulla scheda e <b>non si cambia a occhio</b> da
+una volta all'altra. Se la cliente si abbronza, non cambia fototipo: cambia il semaforo.</p>
+<table>
+  <tr><th style="width:62px">Fototipo</th><th>Come si riconosce</th><th class="c" style="width:88px">Si tratta?</th></tr>
+  <tr><td class="c"><b>I–II</b></td><td>Pelle molto chiara, si scotta sempre, si abbronza poco o niente</td><td class="c">………………</td></tr>
+  <tr><td class="c"><b>III–IV</b></td><td>Si scotta a volte, poi si abbronza. È la maggioranza delle clienti</td><td class="c">………………</td></tr>
+  <tr><td class="c"><b>V–VI</b></td><td>Pelle scura, raramente si scotta</td><td class="c">………………</td></tr>
+</table>
+<div class="box giallo">
+  <span class="eti">Questa riga la riempi tu</span>
+  <p>Quali fototipi si trattano, e con quale lunghezza d'onda, <b>dipende dal dispositivo</b>.
+  Non è una cosa che si può scrivere in generale: la mettiamo qui dopo che mi dici su quale
+  macchina gira questo protocollo.</p>
+</div>
+
+<h2><span class="n">4</span>Il test — solo la prima volta</h2>
+<p class="quando">Prima seduta · poi ogni volta che il semaforo è giallo</p>
+<p>Il test non è una formalità e non si salta perché la cliente ha fretta. È la cosa che
+separa un centro serio da uno che tira a indovinare.</p>
+<ul>
+  <li>Si fanno <b>pochi colpi</b> su un'area nascosta della zona da trattare, con i parametri che useresti.</li>
+  <li>Si segna sulla scheda <b>dove</b> l'hai fatto e con <b>quali</b> parametri.</li>
+  <li>Si rivede dopo <b><span class="vuoto"></span> ore</b>. Non si tratta nella stessa giornata.</li>
+</ul>
+<p>Al ritorno guardi tre cose: la pelle è tornata normale? Sono rimaste macchie chiare o
+scure? Ci sono state bolle? <b>Se la risposta non è pulita, si abbassa e si rifà il test.</b></p>
+
+<h2><span class="n">5</span>Si prepara la zona</h2>
+<p class="quando">Cabina · 5 minuti</p>
+<table>
+  <tr><th style="width:30%">Cosa</th><th>Come, e perché</th></tr>
+  <tr><td><b>Si controlla la rasatura</b></td><td>Se è rimasto pelo lungo si rifinisce lì. Pelo in superficie = odore di bruciato, manipolo sporco, meno energia che arriva dove serve.</td></tr>
+  <tr><td><b>Si pulisce e si asciuga</b></td><td>Via creme, deodorante, residui. La pelle dev'essere asciutta: l'umidità cambia come scorre il manipolo.</td></tr>
+  <tr><td><b>Si segna la mappa</b></td><td>Matita bianca: nei da saltare, bordi del tatuaggio, confini della zona. Si rifà ogni volta — un neo nuovo si vede solo se lo cerchi.</td></tr>
+  <tr><td><b>Occhiali — a tutte e due</b></td><td>I suoi e i tuoi, della protezione giusta per quella lunghezza d'onda. <b>Non si accende se non li avete addosso entrambe.</b> Nemmeno "per un colpo solo".</td></tr>
+  <tr><td><b>Aspirazione fumi accesa</b></td><td>Quello che si alza dal pelo bruciato lo respiri tu, tutto il giorno, tutti i giorni. Lei una volta al mese.</td></tr>
+  <tr><td><b>Porta chiusa, cartello fuori</b></td><td>Nessuno entra in cabina mentre la macchina è accesa.</td></tr>
+</table>
+
+<h2><span class="n">6</span>La seduta</h2>
+<p class="quando">Il cuore · durata per zona nella tabella</p>
+
+<h3>I parametri</h3>
+<div class="box">
+  <span class="eti">Qui dentro non ci metto numeri inventati</span>
+  <p>Energia, durata dell'impulso, frequenza e raffreddamento <b>vengono dal manuale del
+  dispositivo</b>, non da un documento generico: cambiano da macchina a macchina e sbagliarli
+  significa ustionare. La tabella è pronta: i numeri li scriviamo insieme leggendo il manuale
+  della macchina su cui gira questo protocollo.</p>
+</div>
+<table>
+  <tr><th>Zona</th><th class="c">Fototipo</th><th class="c">Energia</th><th class="c">Impulso</th><th class="c">Frequenza</th><th class="c">Passate</th><th class="c">Durata</th></tr>
+  <tr><td>Ascelle</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Inguine</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Gambe intere</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Mezze gambe</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Braccia</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Baffetto / mento</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Schiena / petto</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+</table>
+
+<h3>Come si passa</h3>
+<ul>
+  <li><b>Manipolo appoggiato, perpendicolare alla pelle.</b> Inclinato, l'energia si sparpaglia e la zona resta scoperta.</li>
+  <li><b>Senza sovrapporre</b> più del dovuto e <b>senza lasciare buchi</b>. I buchi si vedono fra un mese, come righe di peli rimasti.</li>
+  <li><b>Una zona alla volta, in un ordine fisso</b>, sempre lo stesso. L'ordine fisso è quello che ti fa accorgere di aver saltato un pezzo.</li>
+  <li><b>Parli con lei mentre lavori.</b> «Dimmi se senti più di un elastico che schiocca.» Il dolore che cambia è l'unico allarme che hai in tempo reale.</li>
+</ul>
+
+<h3>Cosa guardi mentre passi</h3>
+<table>
+  <tr><th style="width:36%">Quello che vedi</th><th>Che cosa vuol dire</th></tr>
+  <tr><td><b>Un alone rosa attorno a ogni pelo</b>, che compare entro qualche minuto</td>
+      <td>È il segno che stai lavorando bene. Se non compare per niente, l'energia è troppo bassa e la seduta non servirà</td></tr>
+  <tr><td>Rossore diffuso e gonfiore leggero</td><td>Normale. Passa in poche ore</td></tr>
+  <tr><td><b>Pelle che sbianca sul momento, bollicine, lei che si ritrae di scatto</b></td>
+      <td><b>Ti fermi.</b> Non abbassi: ti fermi, raffreddi, e la seduta su quella zona finisce lì</td></tr>
+  <tr><td>Odore di bruciato forte</td><td>Pelo non rasato bene. Fermi, rifinisci, riparti</td></tr>
+</table>
+
+<h2><span class="n">7</span>Appena finito</h2>
+<p class="quando">Ancora sul lettino · 5 minuti</p>
+<ul>
+  <li><b>Raffreddi</b> come previsto dal manuale, anche se lei dice che non serve.</li>
+  <li><b>Guardate insieme la zona.</b> Allo specchio, non di sfuggita. Quello che vede adesso è il metro di paragone per quando tornerà.</li>
+  <li><b>Le dici cosa succederà</b>, perché se non glielo dici lo interpreterà male.</li>
+</ul>
+<div class="box verde">
+  <span class="eti">La frase che evita la telefonata preoccupata</span>
+  <p class="dire" style="margin:0">«Nei prossimi giorni ti sembrerà che i peli ricrescano. Non stanno
+  ricrescendo: stanno uscendo. È il modo in cui il corpo li butta fuori, e succede fra una
+  settimana e due. Non tirarli: lasciali andare da soli.»</p>
+</div>
+
+<h2><span class="n">8</span>Prima che esca — qui si decide se torna</h2>
+<p class="quando">Al banco · 3 minuti · è il momento più importante dopo il cancello</p>
+<p>La seduta è finita, il lavoro commerciale no. <b>Chi esce senza il prossimo appuntamento
+fissato torna la metà delle volte</b>, e un ciclo di epilazione lasciato a metà non dà
+risultato — quindi non è nemmeno un problema di cassa: è un problema di risultato.</p>
+<table>
+  <tr><th style="width:34%">Cosa fai</th><th>Come</th></tr>
+  <tr><td><b>Il foglietto del dopo</b></td><td>Scritto, non detto. Quello che si può e non si può fare, con i giorni. Detto a voce si dimentica in ascensore</td></tr>
+  <tr><td><b>Il prossimo appuntamento, adesso</b></td><td>Agenda in mano, data fissata, promemoria scritto. <b>Fra <span class="vuoto"></span> e <span class="vuoto"></span> giorni</b> — non "fra un mesetto"</td></tr>
+  <tr><td><b>La tessera del ciclo</b></td><td>Seduta <span class="vuoto"></span> di 12, timbrata. Vedere il percorso che avanza è quello che la tiene dentro</td></tr>
+  <tr><td><b>La foto</b></td><td>Sedute 1, 6 e 12. Stessa luce, stessa distanza, stesso muro. Senza foto, alla sesta seduta non si ricorda com'era</td></tr>
+</table>
+
+<h3>Il foglietto del dopo — cosa ci va scritto</h3>
+<div class="due">
+  <div class="box verde"><span class="eti">Si può</span>
+  <p>Doccia tiepida · crema lenitiva · deodorante dal giorno dopo · rasoio fra una seduta e l'altra, quanto vuole</p></div>
+  <div class="box rosso"><span class="eti">Non si può</span>
+  <p>Sole, lampada e autoabbronzante per <span class="vuoto"></span> settimane · piscina, sauna, palestra e acqua molto calda per <span class="vuoto"></span> ore · profumi e creme aggressive sulla zona · <b>ceretta e pinzetta mai, per tutto il ciclo</b> · grattare o tirare i peli che escono</p></div>
+</div>
+
+<h2><span class="n">9</span>Dopo che è uscita</h2>
+<p class="quando">Non finisce alla porta</p>
+<table>
+  <tr><th style="width:24%">Quando</th><th>Cosa succede</th></tr>
+  <tr><td><b>Dopo 48 ore</b></td><td>Un messaggio: «Tutto a posto con la pelle?» Costa dieci secondi, intercetta il problema piccolo prima che diventi una recensione</td></tr>
+  <tr><td><b>Fra 21 e 28 giorni</b></td><td>La finestra del rientro. È l'orologio del cruscotto: fuori da quella finestra il ciclo perde efficacia</td></tr>
+  <tr><td><b>Alla 6ª seduta</b></td><td>Controllo con le foto in mano. Si guarda insieme, non si racconta</td></tr>
+  <tr><td><b>Alla 12ª</b></td><td>Fine ciclo. Si decide il mantenimento e <b>si fissa lì</b> la seduta a 90 giorni</td></tr>
+  <tr><td><b>Dopo 6 mesi di silenzio</b></td><td>È "dormiente". La richiami tu, con l'offerta giusta — non aspetti che si ricordi di te</td></tr>
+</table>
+<div class="box">
+  <span class="eti">Il protocollo e il foglio sono la stessa cosa</span>
+  <p>Questi numeri non sono messi lì per fare ordine: sono <b>gli stessi sei numeri del
+  Cruscotto Clienti Laser</b>. Quello che scrivi sulla scheda a fine seduta è esattamente
+  quello che il foglio legge per dirti, ogni mattina, chi chiamare per prima. Se la scheda
+  resta vuota, il cruscotto è cieco.</p>
+</div>
+
+<h2><span class="n">10</span>Quando ci si ferma — e si chiama</h2>
+<table>
+  <tr><th style="width:44%">Se succede questo</th><th>Cosa fai</th></tr>
+  <tr><td>Bolle, vesciche, pelle che sbianca e non torna</td><td>Fermi tutto, raffreddi, <b>non metti niente</b> di tua iniziativa, documenti con foto, chiami NIPEC</td></tr>
+  <tr><td>Macchia chiara o scura che compare dopo la seduta</td><td>Si sospende la zona, si fotografa, si chiama prima della seduta successiva</td></tr>
+  <tr><td>La macchina dà allarme, scalda, fa rumore nuovo</td><td>Si spegne. <b>Entro 48 ore</b> lo segnala per iscritto il Referente Unico</td></tr>
+  <tr><td>Peli che aumentano invece di diminuire sulla zona trattata</td><td>Succede, su certe zone e certi fototipi. Si sospende <b>quella</b> zona e si chiama: non si insiste alzando l'energia</td></tr>
+  <tr><td>Non sei sicura</td><td>Non si fa. Una seduta rimandata costa un'ora; una seduta sbagliata costa una cliente e una segnalazione</td></tr>
+</table>
+<p class="firma">Assistenza NIPEC · <b>351 846 6025</b> — Referente Unico del centro: ………………………………………………………</p>
+
+<div class="note">
+  <span class="eti">Note della cabina — cosa abbiamo trovato lavorando</span>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div>
+</div>
+
+<h2 class="nuovo-foglio">Le cose da chiudere insieme</h2>
+<p>Questa è una bozza onesta: quello che manca manca <b>apposta</b>, perché sono decisioni
+tue o numeri che devono venire dal manuale, non da me.</p>
+<table>
+  <tr><th style="width:26px" class="c">#</th><th style="width:30%">Cosa manca</th><th>Perché serve a te deciderlo</th></tr>
+  <tr><td class="c"><b>1</b></td><td><b>Chi può usarlo e dove</b></td><td>È il riquadro rosso in prima pagina. Cambia tutto il resto: destinatario, tono, e se il documento può circolare. In Italia e in Albania la risposta non è la stessa</td></tr>
+  <tr><td class="c"><b>2</b></td><td><b>Quale dispositivo</b></td><td>Lunghezza d'onda e tipo di raffreddamento decidono fototipi trattabili, parametri e metà delle frasi di questo foglio</td></tr>
+  <tr><td class="c"><b>3</b></td><td><b>I parametri per zona</b></td><td>Li prendiamo dal manuale e li scriviamo nella tabella. Non si inventano</td></tr>
+  <tr><td class="c"><b>4</b></td><td><b>Le settimane: sole, ceretta, isotretinoina</b></td><td>Ci sono prassi diverse. Scegliamo i tuoi numeri e restano quelli su tutti i documenti</td></tr>
+  <tr><td class="c"><b>5</b></td><td><b>La scheda cliente</b></td><td>Questo è il protocollo; manca il foglio che l'operatrice compila. Va fatto insieme a questo, come la Scheda DEMETRA sta al protocollo Afrodite</td></tr>
+  <tr><td class="c"><b>6</b></td><td><b>Il consenso informato</b></td><td>Documento a parte. Qui lo nomino e basta</td></tr>
+  <tr><td class="c"><b>7</b></td><td><b>Il foglietto del dopo</b></td><td>Mezza pagina stampabile da dare in mano. Si ricava da qui in dieci minuti</td></tr>
+  <tr><td class="c"><b>8</b></td><td><b>Livello BASE o AVANZATO</b></td><td>Afrodite ha due livelli legati alla certificazione. Qui facciamo lo stesso?</td></tr>
+</table>
+
+<h3>Tre spunti che secondo me valgono più del resto</h3>
+<div class="box verde">
+  <span class="eti">Uno — il messaggio automatico</span>
+  <p>Le sei regole del <b>momento 1</b> mandate in automatico quando si fissa l'appuntamento.
+  È la cosa che costa meno in tutto il sistema ed è quella che salva più sedute: la cliente
+  arriva rasata, non abbronzata e senza crema, e la seduta parte invece di saltare.</p>
+</div>
+<div class="box verde">
+  <span class="eti">Due — il prossimo appuntamento prima della porta</span>
+  <p>Non è un trucco da vendita: in epilazione <b>è clinica</b>. Il ciclo funziona se le
+  sedute cadono nella finestra giusta, e la finestra la tieni solo se la data è già fissata
+  mentre lei è ancora lì. Metterlo dentro il protocollo — e non lasciarlo alla buona volontà
+  della reception — è il singolo cambiamento con più effetto.</p>
+</div>
+<div class="box verde">
+  <span class="eti">Tre — il protocollo alimenta il cruscotto</span>
+  <p>Il foglio Excel che hai già fatto ha sei numeri: 12 sedute, rientro 21-28, conferma a
+  −7 e −1, mantenimento 90, dormienza 6 mesi. <b>Sono gli stessi numeri del momento 9.</b>
+  Se chiudiamo il protocollo tenendoli allineati, il centro non ha due sistemi da aggiornare:
+  ne ha uno. Vale la pena scriverlo esplicitamente nella versione finale.</p>
+</div>
+
+
+<div class="chiusura">
+  <span>Protocollo Laser NIPEC · Epilazione corpo — BOZZA 0.1</span>
+  <span>NIPEC · Tecnologie Estetiche · assistenza 351 846 6025</span>
+</div>
+
+</body>
+</html>

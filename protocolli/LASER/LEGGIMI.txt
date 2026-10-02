@@ -1,0 +1,25 @@
+PROTOCOLLO LASER NIPEC · EPILAZIONE CORPO — BOZZA 0.1
+
+Cosa c'e' qui:
+  protocollo-laser.html ..... il sorgente. Si modifica questo.
+  caratteri/ ................ Archivo e Source Serif 4, i caratteri NIPEC.
+  PROTOCOLLO-...-BOZZA.pdf .. il PDF generato da quel file.
+
+Il logo NIPEC e' dentro l'HTML come disegno vettoriale, non come
+immagine: non serve nessun file accanto, e in stampa resta nitido a
+qualunque ingrandimento.
+
+Per rigenerare il PDF dopo una modifica:
+  chrome --headless=new --no-pdf-header-footer \
+         --print-to-pdf=PROTOCOLLO-LASER-NIPEC-epilazione-corpo-BOZZA.pdf \
+         protocollo-laser.html
+
+ATTENZIONE — e' una BOZZA e lo dice in copertina.
+Mancano apposta: chi puo' usare il laser e dove, il dispositivo, i
+parametri per zona, le settimane di sospensione. Sono le otto righe
+dell'ultima pagina, da chiudere insieme a Giorgio.
+
+Nel documento NON ci sono numeri di energia inventati. Quando ci sara'
+il manuale del dispositivo, si riempiono le caselle della tabella.
+
+NIPEC · assistenza 351 846 6025
