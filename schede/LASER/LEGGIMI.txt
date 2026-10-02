@@ -25,41 +25,43 @@ la pagina le prova in fila e si tiene la prima che si apre. Se un file
 sparisce torna la cornice tratteggiata e la pagina si stampa lo stesso.
 
 
-DUE NUMERI DA SISTEMARE, PRIMA CHE LA SCHEDA GIRI
+I WATT DELLA URIEL: 2400, E UNA COSA DA CORREGGERE ALTROVE
+La URIEL 2026 fa 2400 W. Nella scheda e' scritto cosi'.
 
-1. I WATT DELLA URIEL
-   Qui ho scritto 2000 W, come mi hai detto tu e come dice la quotazione
-   ufficiale 2026. La lavagna del corso del 12 ottobre pero' dice 2400 W.
-   Uno dei due va corretto: il giorno del corso l'estetista ha davanti un
-   numero e sulla scheda ne legge un altro.
-
-2. MDR, GENNAIO 2027
-   Nella scheda l'ho scritto come me l'hai dato, ma attribuito: "secondo
-   quanto ci conferma la fabbrica, da gennaio 2027...". L'ho fatto apposta.
-   Il motivo: per i laser epilatori il passaggio all'Allegato XVI del
-   Regolamento MDR si e' chiuso il 22 giugno 2025, non a gennaio 2027.
-   Gennaio 2027 e' quasi certamente un'altra scadenza — una proroga o un
-   termine specifico che ti ha dato il fornitore.
-   E' un argomento di vendita forte, e se un centro lo gira al suo
-   consulente quello va a cercare l'articolo. Fatti scrivere dalla fabbrica
-   la norma e la data esatta, poi la mettiamo nera su bianco e diventa
-   un'arma invece che un rischio.
+Attenzione pero': la quotazione ufficiale che gira ai clienti —
+Quotazione_Laser_ARES_URIEL_2026.pdf, su Drive — dice 2000 W. Quella e'
+sbagliata, e sta in mano a chi deve comprare. Va rifatta, altrimenti il
+centro legge 2400 sulla scheda e 2000 sull'offerta e chiede quale delle
+due e' vera.
 
 
-LA COLONNA ARES 2025, QUELLA COI PUNTINI
-Della 2025 non ho la scheda tecnica. Nella tabella a confronto ho messo solo
-quello che e' certo e ho lasciato i puntini sul resto. Su un laser non si
-scrivono numeri a memoria: un numero sbagliato su un foglio diventa un
-numero sbagliato impostato in cabina.
+LE DUE ARES HANNO LO STESSO MOTORE
+Stessi 10 diodi da 100 W, stessi 1500 W, stesso raffreddamento, stessa
+testina. Cambia il software — e col software arrivano telecamera, IA e
+pannello nuovo.
 
-Mi servono sei voci, dalla scheda della fabbrica:
-  diodi · potenza (W) · frequenza · raffreddamento · alimentazione
-  · conferma della testina in titanio
-Piu' il prezzo: listino, lancio, noleggio.
+Nella tabella le prime due colonne adesso sono identiche riga per riga, e
+sotto c'e' il riquadro verde che lo dice in chiaro. E' il punto piu' forte
+della scheda: chi ha la 2025 non ha una macchina inferiore, e chi passa
+alla 2026 non cambia fisica.
 
-Sono le stesse voci che gia' aspettavamo da Eliana per il punto 5 della
-lavagna (i valori di partenza per fototipo sull'ARES 2025). Si chiudono
-insieme, in una telefonata sola.
+Il cabinet e il display restano diversi — si vede dalle fotografie — quindi
+telecamera, IA e interfaccia nella tabella restano "no" sulla 2025. Se la
+fabbrica intende hardware identico anche li', dimmelo e correggo.
+
+
+COSA MANCA ANCORA — DUE COSE
+
+1. IL PREZZO DELLA ARES 2025
+   Listino, prezzo di lancio e noleggio. Nella tabella dei prezzi quella
+   riga e' ancora a puntini.
+
+2. LA ARES 2025 E' MDR?
+   Nella tabella le ho messo "CE" e non "CE italiana · MDR", perche' la
+   certificazione va per modello e di quella non ho carta. La cosa pesa:
+   tutto l'argomento di pagina 4 ruota intorno all'MDR, e un centro che ha
+   gia' la 2025 chiedera' per prima cosa se la sua e' a posto.
+   Serve una risposta certa, non una ragionevole.
 
 
 A CHI SI DA' QUESTA SCHEDA
