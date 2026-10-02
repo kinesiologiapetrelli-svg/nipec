@@ -3,10 +3,37 @@ Le tre macchine della lavagna del 12 ottobre: ARES 2025, ARES 2026 IA, URIEL 202
 
 
 COSA C'E' IN QUESTA CARTELLA
-  SCHEDA-LASER-808-NIPEC.pdf     italiano, 5 pagine A4, pronta
-  scheda-laser-808.html          il sorgente italiano
-  SKEDA-LASER-808-NIPEC-SQ.pdf   albanese, 5 pagine A4, pronta
-  scheda-laser-808-SQ.html       il sorgente albanese
+QUATTRO SCHEDE: DUE COL PREZZO, DUE SENZA
+
+  COL PREZZO
+  SCHEDA-LASER-808-NIPEC.pdf             italiano, euro
+  SKEDA-LASER-808-NIPEC-SQ.pdf           albanese, Lek
+
+  SENZA PREZZO
+  SCHEDA-LASER-808-NIPEC-SENZA-PREZZI.pdf  italiano
+  SKEDA-LASER-808-NIPEC-SQ-PA-CMIME.pdf    albanese
+
+  I SORGENTI, da cui si ristampa
+  scheda-laser-808.html · scheda-laser-808-SQ.html
+  scheda-laser-808-senza-prezzi.html · scheda-laser-808-SQ-senza-prezzi.html
+
+Le quattro sono identiche riga per riga. Nelle due senza prezzo cambia
+solo questo: sotto ogni macchina resta la certificazione al posto del
+prezzo, e il capitolo 6 (Prezzi) non c'e'. Tutto il resto — fotografie,
+tabella tecnica, glossario, le quattro domande, l'ultima pagina da
+compilare — e' lo stesso.
+
+QUANDO SI USA QUELLA SENZA PREZZO
+Quando il prezzo si dice a voce e non si lascia scritto: primo incontro,
+fiera, un centro che gira i fogli ai concorrenti, una trattativa dove il
+numero dipende dalla permuta. La scheda fa il suo lavoro lo stesso —
+racconta le macchine — e il prezzo resta un discorso tuo, non un foglio
+che cammina.
+
+ATTENZIONE A NON SCAMBIARLE
+Il nome del file lo dice, ma in fretta si sbaglia. Il controllo di un
+secondo: apri l'ultima pagina. Se c'e' la tabella dei prezzi e' quella
+col prezzo, se c'e' solo il riquadro da compilare e' quella senza.
   foto/                        VUOTA. Qui dentro vanno le tre fotografie
   caratteri/                   i caratteri del marchio, non si toccano
 

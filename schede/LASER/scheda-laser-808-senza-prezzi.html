@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Scheda Laser Diodo 808 nm · NIPEC</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+  --oro:#8A6208;
+}
+@page{size:A4;margin:14mm 15mm 16mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.5pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.card h3,.card .ruolo,.prezzo,.quando,.dato .k{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:16px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:20pt;font-weight:700;margin:14px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.1}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 14px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:18px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:12px 0 4px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+/* ---------- l'attacco, in lingua da cabina ---------- */
+.attacco{font-size:10.6pt;line-height:1.62;margin:0 0 14px;max-width:none}
+.attacco span{display:block}
+.attacco .forte{font-weight:600;color:var(--navy)}
+
+/* ---------- le tre schede macchina ---------- */
+.tre{display:flex;gap:9px;margin:4px 0 12px;page-break-inside:avoid}
+.card{flex:1;border:1px solid var(--riga);border-radius:5px;overflow:hidden;
+      display:flex;flex-direction:column}
+.card .top{background:var(--blu-velo);border-bottom:1px solid var(--riga);padding:7px 9px 8px}
+.card.vip .top{background:#E6EFF7}
+.card .ruolo{font-size:7pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+             color:var(--blu);display:block;margin-bottom:2px}
+.card h3{font-size:11pt;margin:0;color:var(--navy);line-height:1.15}
+.card .soprannome{font-size:8.4pt;color:var(--ink2);font-style:italic;margin:2px 0 0}
+/* il posto della fotografia: se il file non c'e', resta la cornice tratteggiata
+   con scritto dentro quale file ci va. Cosi' la pagina si stampa comunque. */
+.foto{height:42mm;background:#FBFDFE;border-bottom:1px solid var(--riga);
+      display:flex;align-items:center;justify-content:center;position:relative}
+.foto img{max-width:92%;max-height:94%;object-fit:contain;display:block}
+.foto .manca{position:absolute;inset:4mm;border:1.4px dashed var(--blu-chiaro);border-radius:4px;
+             display:flex;flex-direction:column;align-items:center;justify-content:center;
+             text-align:center;font-family:"Archivo",sans-serif;font-size:7.2pt;
+             color:var(--blu);line-height:1.5;padding:4px}
+.foto .manca b{display:block;font-size:7.6pt;letter-spacing:.1em;margin-bottom:3px;color:var(--blu)}
+.foto .manca code{font-family:"Archivo",monospace;font-size:6.8pt;color:var(--ink2)}
+.card .corpo{padding:8px 9px 9px;flex:1;display:flex;flex-direction:column}
+.card .corpo p{font-size:8.6pt;line-height:1.45;margin:0 0 7px}
+.card ul{list-style:none;padding:0;margin:0 0 8px;font-size:8.4pt}
+.card ul li{position:relative;padding-left:12px;margin-bottom:3px;line-height:1.4}
+.card ul li:before{content:"";position:absolute;left:0;top:4.6px;width:5px;height:5px;
+                   border-radius:50%;background:var(--blu)}
+.card .prezzo{margin-top:auto;border-top:1px solid var(--riga);padding-top:6px;
+              font-size:8.2pt;color:var(--ink2);line-height:1.45}
+.card .prezzo b{display:block;font-size:11pt;color:var(--navy);letter-spacing:-.01em}
+.card .prezzo s{color:var(--grigio)}
+
+/* ---------- tabelle ---------- */
+table{width:100%;border-collapse:collapse;font-size:8.3pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 7px;font-size:7.6pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.06em;vertical-align:bottom}
+td{padding:4.5px 7px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.4}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.confronto td:first-child{font-weight:600;color:var(--navy);width:27%}
+.confronto th:not(:first-child),.confronto td:not(:first-child){width:24.3%}
+.vuoto{display:inline-block;min-width:46px;border-bottom:1px dotted var(--grigio)}
+.fab{font-size:7.4pt;color:#6B747C;font-style:italic}
+.si{color:var(--verde);font-weight:600}
+.no{color:var(--grigio)}
+
+/* ---------- riquadri ---------- */
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:4px}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+.box.rosso .eti{color:var(--rosso)}
+
+/* ---------- le voci nuove del 2026 ---------- */
+.dato{border:1px solid var(--riga);border-radius:5px;padding:9px 11px;margin:0 0 8px;
+      page-break-inside:avoid}
+.dato .k{display:block;font-size:8.6pt;font-weight:700;color:var(--navy);
+         letter-spacing:.01em;margin-bottom:3px}
+.dato p{font-size:8.8pt;line-height:1.5;margin:0 0 5px}
+.dato p:last-child{margin-bottom:0}
+.dato .cabina{font-size:8.5pt;color:var(--verde);border-left:2.5px solid var(--verde);
+              padding-left:8px;margin-top:6px}
+.dato .cabina b{color:var(--verde)}
+.due{display:flex;gap:11px}
+.due>*{flex:1}
+
+.dire{font-style:italic;color:var(--navy);border-left:3px solid var(--blu-chiaro);
+      padding-left:10px;margin:7px 0}
+
+.nuovo-foglio{page-break-before:always}
+h2+p.quando,h2+p,h2+.tre,h2+table{page-break-before:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol,.due{page-break-inside:avoid}
+/* lo spazio che avanza in fondo non si butta: il centro ci scrive sopra */
+.note{margin-top:16px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:17px}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+.chiusura{margin-top:20px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Scheda commerciale e tecnica<br>
+    Si consegna al centro<br>
+    Assistenza 351 846 6025
+  </div>
+</div>
+
+<h1>Laser a diodo 808 nm</h1>
+<p class="sotto">Tre macchine, una sola fisica — ARES 2025 · ARES 2026 IA · URIEL 2026 IA</p>
+<p class="riga-rev">Revisione ……… — ……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;Centro: ……………………………………&nbsp;&nbsp;·&nbsp;&nbsp;Consegnata da: ……………………………………</p>
+
+<p class="attacco">
+  <span class="forte">Il laser non ti porta la cliente una volta. Te la porta dodici.</span>
+  <span>Ma te la riporta solo se la macchina non si ferma, e se i numeri che imposti sono giusti.</span>
+  <span>Le due ARES sono la stessa macchina: stesso motore, stessi diodi, stessi watt.</span>
+  <span>Cambia una cosa sola: <b>chi fa i conti.</b></span>
+  <span>Sulla 2025 li fai tu a mano. Sulla 2026 li fa il software, e tu controlli.</span>
+</p>
+
+<h2>Le tre macchine</h2>
+
+<div class="tre">
+
+  <div class="card">
+    <div class="top">
+      <span class="ruolo">Quella che hai già</span>
+      <h3>ARES 2025</h3>
+      <p class="soprannome">la piccola bianca</p>
+    </div>
+    <div class="foto">
+      <div class="manca"><b>FOTO</b>ARES 2025<code>foto/ares-2025 &middot; jpg o png</code></div>
+      <img data-base="foto/ares-2025" alt="Laser ARES 2025" style="display:none">
+    </div>
+    <div class="corpo">
+      <p>È la macchina che molti centri hanno già in cabina. Diodo 808, lavoro pieno, comandi a mano.</p>
+      <ul>
+        <li><b>10 diodi</b> da 100 W · <b>1500 W</b></li>
+        <li>Stesso motore della 2026:<br><b>cambia solo il software</b></li>
+        <li>Joule, millisecondi e Hertz <b>a mano</b></li>
+        <li>Niente telecamera, niente IA</li>
+      </ul>
+      <div class="prezzo">CE italiana · MDR attivo.<br>
+      <span class="fab">Valutata anche in permuta.</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="ruolo">Il passo avanti</span>
+      <h3>ARES 2026 · IA</h3>
+      <p class="soprannome">la grande bianca</p>
+    </div>
+    <div class="foto">
+      <div class="manca"><b>FOTO</b>ARES 2026 IA<code>foto/ares-2026 &middot; jpg o png</code></div>
+      <img data-base="foto/ares-2026" alt="Laser ARES 2026 IA" style="display:none">
+    </div>
+    <div class="corpo">
+      <p>Stessa fisica della 2025, ma con la telecamera e l'intelligenza artificiale a bordo. I conti li fa lei.</p>
+      <ul>
+        <li><b>10 diodi</b> da 100 W · <b>1500 W</b></li>
+        <li><b>Telecamera integrata</b> + software IA</li>
+        <li>Gestione e alimentazione <b>digitali</b></li>
+        <li>Sistema <b>HR / SHR</b>: griglia, kJ target, fluenza</li>
+      </ul>
+      <div class="prezzo">CE italiana · MDR attivo.</div>
+    </div>
+  </div>
+
+  <div class="card vip">
+    <div class="top">
+      <span class="ruolo">Top di gamma</span>
+      <h3>URIEL 2026 · IA</h3>
+      <p class="soprannome">la carrellata</p>
+    </div>
+    <div class="foto">
+      <div class="manca"><b>FOTO</b>URIEL 2026 IA<code>foto/uriel-2026 &middot; jpg o png</code></div>
+      <img data-base="foto/uriel-2026" alt="Laser URIEL 2026 IA" style="display:none">
+    </div>
+    <div class="corpo">
+      <p>Tre lunghezze d'onda sullo stesso manipolo. Prende ogni pelle e ogni pelo, anche quelli che le altre lasciano lì.</p>
+      <ul>
+        <li>Fino a <b>16 diodi</b> da 100 W · <b>2000 W</b></li>
+        <li>Fino a <b>3 bande</b>: 755 / 808 / 1064 nm</li>
+        <li>Touch LCD <b>15"</b> · IA a bordo</li>
+        <li>Raffreddamento radiatore + aria + TEC</li>
+      </ul>
+      <div class="prezzo">CE italiana · MDR attivo.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="box">
+  <span class="eti">La frase da tenere a mente</span>
+  <p class="dire" style="margin:0">La fisica è la stessa su tutte e tre. La fluenza che leggi sul pannello nuovo sono i Joule
+  di prima: millisecondi e Hertz non sono spariti, li calcola il software. Per questo chi sa
+  lavorare sulla 2025 impara la 2026 in mezza giornata — è la stessa macchina.</p>
+</div>
+
+<!-- =================== FOGLIO 2 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h2><span class="n">1</span>Scheda tecnica a confronto</h2>
+<p class="quando">Dati tecnici ufficiali NIPEC</p>
+
+<table class="confronto">
+  <tr>
+    <th>Caratteristica</th>
+    <th>ARES 2025</th>
+    <th>ARES 2026 · IA</th>
+    <th>URIEL 2026 · IA</th>
+  </tr>
+  <tr><td>Tipo</td><td>Laser a diodo</td><td>Laser a diodo</td><td>Laser a diodo tri-onda</td></tr>
+  <tr><td>Lunghezze d'onda</td><td>808 nm</td><td>808 nm</td><td>755 / 808 / 1064 nm<br><span class="fab">fino a 3 bande sullo stesso manipolo</span></td></tr>
+  <tr><td>Diodi</td><td>10 diodi da 100 W</td><td>10 diodi da 100 W</td><td>fino a 16 diodi da 100 W<br><span class="fab">16 diodi in opzione</span></td></tr>
+  <tr><td>Potenza</td><td>1500 W</td><td>1500 W</td><td>2000 W</td></tr>
+  <tr><td>Frequenza</td><td>60 Hz</td><td>60 Hz</td><td>60 Hz · 1–10 Hz</td></tr>
+  <tr><td>Tipo emissione</td><td>1–400 ms · Macro Canale</td><td>1–400 ms · Macro Canale</td><td>1–400 ms · Macrocanale</td></tr>
+  <tr><td>Raffreddamento</td><td>TECH cool con Micro Chip</td><td>TECH cool con Micro Chip</td><td>Radiatore + Aria + TEC Cool</td></tr>
+  <tr><td>Interfaccia</td><td>Pannello manuale:<br>Joule · ms · Hz</td><td>Display touch digitale</td><td>Touch LCD 15"</td></tr>
+  <tr><td>Telecamera integrata</td><td class="no">no</td><td class="si">sì</td><td class="si">sì</td></tr>
+  <tr><td>Software IA</td><td class="no">no</td><td class="si">sì · HR / SHR / SHR Stack</td><td class="si">sì</td></tr>
+  <tr><td>Gestione</td><td>Digitale, impostata a mano</td><td>Digitale</td><td>Digitale a controllo elettronico</td></tr>
+  <tr><td>Alimentazione</td><td>A controllo digitale</td><td>A controllo digitale</td><td>Digitale a controllo elettronico</td></tr>
+  <tr><td>Rete elettrica</td><td>AC 220V / 110V</td><td>AC 220V / 110V</td><td>AC 220V / 110V</td></tr>
+  <tr><td>Testina</td><td>Titanio</td><td>Titanio</td><td>Titanio</td></tr>
+  <tr><td>Sicurezza</td><td>Classe 4 · Interlock</td><td>Classe 4 · Interlock</td><td>Classe 4 · Interlock</td></tr>
+  <tr><td>Certificazione</td><td>CE italiana · MDR</td><td>CE italiana · MDR</td><td>CE italiana · MDR</td></tr>
+  <tr><td>Formato</td><td>Da banco</td><td>Da banco</td><td>Carrellata</td></tr>
+</table>
+
+<div class="box verde">
+  <span class="eti">Guarda le prime due colonne</span>
+  <p>Sono uguali. <b>La ARES 2025 e la ARES 2026 hanno lo stesso motore:</b> gli stessi
+  dieci diodi, gli stessi 1500 watt, lo stesso raffreddamento, la stessa testina in titanio.
+  Cambia il software — e con il software arrivano la telecamera, l'IA e il pannello nuovo.</p>
+  <p style="margin-top:6px">Vuol dire due cose, tutte e due buone da dire a voce alta.
+  Chi ha la 2025 <b>non ha una macchina inferiore</b>: ha la stessa macchina con meno aiuti.
+  E chi passa alla 2026 <b>non cambia fisica</b>, cambia solo chi fa i conti.</p>
+</div>
+
+<!-- =================== FOGLIO 3 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h2><span class="n">2</span>Come si legge quella tabella</h2>
+<p class="quando">In lingua da cabina</p>
+
+<table>
+  <tr><th style="width:24%">Quello che leggi</th><th>Quello che è</th></tr>
+  <tr><td><b>Watt</b></td><td>Il motore. Più watt, più potenza disponibile: la zona grande la fai in meno passaggi e la cliente sta meno tempo sul lettino.</td></tr>
+  <tr><td><b>Diodi</b></td><td>Le lampadine che fanno il colpo. Più diodi, più luce nello stesso istante e meno fatica per la macchina — quindi meno soste a raffreddare.</td></tr>
+  <tr><td><b>Bande</b> (lunghezze d'onda)</td><td>Quanto in profondità arriva. 755 prende il pelo sottile e chiaro, 808 è il cavallo di battaglia, 1064 scende in profondità e lavora sulle pelli scure. Tre bande = tre tipi di cliente, con un solo manipolo.</td></tr>
+  <tr><td><b>Millisecondi</b></td><td>Quanto dura il colpo. Pelo grosso vuole colpo lungo, pelle delicata colpo corto.</td></tr>
+  <tr><td><b>Hertz</b></td><td>Quanti colpi al secondo. È la velocità con cui scorri la zona.</td></tr>
+  <tr><td><b>Fluenza</b> (J/cm²)</td><td>I Joule di prima, scritti in un altro modo. È la quantità di energia che lasci su ogni centimetro di pelle.</td></tr>
+  <tr><td><b>HR / SHR</b></td><td>Due modi di lavorare. HR: colpo singolo e forte, a griglia. SHR: passaggi ripetuti e più leggeri, scaldando in movimento. SHR è quello che si tollera meglio sulle pelli reattive.</td></tr>
+  <tr><td><b>Testina in titanio</b></td><td>Il pezzo che tocca la cliente. In titanio non si opacizza e non si consuma come le altre: è la parte che normalmente si cambia e si paga.</td></tr>
+  <tr><td><b>Classe 4 · interlock</b></td><td>È un laser vero, e la legge lo tratta come tale: occhiali sempre, chiave e blocco di sicurezza. L'interlock è quello che lo spegne se qualcosa non è a posto.</td></tr>
+</table>
+
+<h2><span class="n">3</span>Cosa c'è di nuovo sul 2026</h2>
+<p class="quando">Le voci per cui si cambia macchina</p>
+
+<div class="dato">
+  <span class="k">Gestione e alimentazione digitali</span>
+  <p>Sulle macchine vecchie la corrente arriva ai diodi come arriva dalla presa: se la rete
+  del negozio balla, ballano anche i colpi. Qui l'elettronica tiene la corrente ferma colpo
+  dopo colpo.</p>
+  <p class="cabina"><b>In cabina:</b> il colpo numero cento è uguale al colpo numero uno. La cliente
+  non ti dice più «oggi l'ho sentito di più».</p>
+</div>
+
+<div class="dato">
+  <span class="k">Telecamera integrata · software IA</span>
+  <p>La telecamera guarda la pelle e il pelo. Il software legge quello che vede e propone i
+  parametri: griglia, kJ target, fluenza. Tu resti quella che decide — la macchina non parte
+  da sola — ma non parti più da un foglio di carta e dall'esperienza a occhio.</p>
+  <p class="cabina"><b>In cabina:</b> l'operatrice nuova fa una seduta corretta dal primo giorno,
+  e tu non devi stare dietro a ogni impostazione.</p>
+</div>
+
+<div class="due">
+  <div class="dato">
+    <span class="k">2000 watt</span>
+    <p>È la potenza della URIEL 2026: 500 watt in più della ARES. Serve sulle zone grandi —
+    gambe intere, schiena, addome — dove più potenza vuol dire meno passaggi.</p>
+    <p class="cabina"><b>In cabina:</b> più clienti nella stessa giornata, a parità di risultato.</p>
+  </div>
+  <div class="dato">
+    <span class="k">Fino a 16 diodi, in opzione</span>
+    <p>I diodi si aggiungono. Si parte con la configurazione che serve oggi e si sale quando
+    il centro cresce, senza buttare la macchina.</p>
+    <p class="cabina"><b>In cabina:</b> la macchina scalda meno e si ferma meno a raffreddare.</p>
+  </div>
+</div>
+
+<div class="dato">
+  <span class="k">Fino a 3 bande sullo stesso manipolo</span>
+  <p>755, 808 e 1064 nanometri nello stesso pezzo che tieni in mano. Non cambi manipolo, non
+  cambi macchina, non mandi via la cliente dicendo che sulla sua pelle non si può fare.
+  La pelle scura e il pelo chiaro — i due casi che di solito si rifiutano — qui si lavorano.</p>
+  <p class="cabina"><b>In cabina:</b> non dici più di no a nessuno. E quello che prima rifiutavi,
+  lo fatturi.</p>
+</div>
+
+<h2><span class="n">4</span>Certificazione</h2>
+
+<div class="box verde">
+  <span class="eti">Certificata CE in Italia</span>
+  <p>Non è una macchina importata e rimarchiata. <b>Prodotto certificato in Italia</b>, con
+  marcatura CE italiana. Vuol dire che il fascicolo tecnico, la dichiarazione di conformità
+  e il numero di serie sono rintracciabili, e che se ti arriva un controllo c'è una carta
+  da mostrare con un nome e un indirizzo dietro.</p>
+</div>
+
+<div class="box rosso">
+  <span class="eti">MDR — la data che conta</span>
+  <p>Il laser epilatorio è un <b>dispositivo medico</b>. La regola che lo governa è il
+  Regolamento europeo MDR.</p>
+  <p><b>Tutte e tre le nostre macchine sono già MDR: attivo, adesso.</b> ARES 2025, ARES 2026 IA
+  e URIEL 2026 IA — marcatura CE italiana e MDR attivo su ognuna, documenti alla mano.</p>
+  <p>Secondo quanto ci conferma la fabbrica, <b>da gennaio 2027 l'MDR diventa obbligatorio</b>:
+  da quella data una macchina senza MDR non è più una macchina con un vantaggio in meno —
+  è una macchina che non puoi usare.</p>
+  <p>Chi compra oggi una macchina non MDR la paga due volte: una adesso, e una quando deve
+  sostituirla.</p>
+</div>
+
+<h2><span class="n">5</span>Le quattro domande da fare a qualunque fornitore</h2>
+<p class="quando">Anche a noi</p>
+
+<p>Prima di firmare con chiunque, queste quattro. Se una risposta non arriva per iscritto,
+quella è la risposta.</p>
+
+<table>
+  <tr><th style="width:52%">La domanda</th><th>Perché la fai</th></tr>
+  <tr><td><b>1.</b> La macchina è marcata CE come dispositivo medico MDR? Me lo scrivi sul contratto?</td>
+      <td>Da gennaio 2027 è la differenza fra una macchina che lavora e un mobile.</td></tr>
+  <tr><td><b>2.</b> Se si ferma, in quanto tempo ho un muletto in cabina?</td>
+      <td>Un laser fermo una settimana sono dodici clienti che saltano il turno e non tornano più nella finestra.</td></tr>
+  <tr><td><b>3.</b> Chi mi forma, quando, e la formazione è dentro il prezzo?</td>
+      <td>Una macchina che nessuno sa impostare è una macchina che non lavora.</td></tr>
+  <tr><td><b>4.</b> La testina è compresa o si paga a parte dopo? Quanto dura e quanto costa?</td>
+      <td>È il pezzo che si consuma. È lì che il prezzo basso di oggi torna indietro.</td></tr>
+</table>
+
+<div class="box verde">
+  <span class="eti">Con ogni laser NIPEC, sempre dentro</span>
+  <p><b>Formazione del team inclusa</b> — operative da subito, non dopo tre mesi.<br>
+  <b>Muletto entro 48 ore</b> in caso di guasto: non chiudi mai un'ora.<br>
+  <b>Assistenza diretta</b> — un riferimento con nome e cognome, non un call center.<br>
+  <b>Installazione e avvio seguiti da noi</b>, in sede.<br>
+  <b>Garanzia 12 mesi.</b></p>
+</div>
+
+<div class="box">
+  <span class="eti">Il passo successivo</span>
+  <p>La prova in sede si fa quando vuoi: porti due clienti, imposti con noi, vedi la macchina
+  lavorare sulla loro pelle. Non si firma niente quel giorno.</p>
+  <p style="margin-top:6px"><b>NIPEC · Tecnologie Estetiche</b> — Assistenza e informazioni
+  <b>351 846 6025</b></p>
+</div>
+
+<div class="note">
+  <span class="eti">Quello che il centro ha chiesto oggi</span>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div>
+</div>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Data della prova in sede</span></div>
+  <div><div class="riga-firma"></div><span class="et">Referente del centro</span></div>
+  <div><div class="riga-firma"></div><span class="et">Per NIPEC</span></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Tecnologie Estetiche — Scheda Laser diodo 808 nm · ARES 2025 · ARES 2026 IA · URIEL 2026 IA</span>
+  <span>Rev. ……… / ……… / …………</span>
+</div>
+
+<script>
+/* La fotografia si chiama foto/<nome>.<estensione>. L'estensione non la
+   decidiamo noi: dipende da come arriva il file. Le proviamo in fila e ci
+   teniamo la prima che si apre. Se non si apre nessuna, resta la cornice
+   tratteggiata e la pagina si stampa lo stesso. */
+(function(){
+  var ESTENSIONI=['jpg','jpeg','png','webp','JPG','PNG'];
+  Array.prototype.forEach.call(document.querySelectorAll('.foto'),function(cornice){
+    var img=cornice.querySelector('img'), manca=cornice.querySelector('.manca');
+    var base=img.getAttribute('data-base'), i=0;
+    img.onload=function(){ manca.style.display='none'; img.style.display='block'; };
+    img.onerror=function(){ prova(); };
+    function prova(){
+      if(i>=ESTENSIONI.length){ img.style.display='none'; return; }
+      img.src=base+'.'+ESTENSIONI[i++];
+    }
+    prova();
+  });
+})();
+</script>
+</body>
+</html>

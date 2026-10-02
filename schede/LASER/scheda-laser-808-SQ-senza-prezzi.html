@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<title>Skedë Lazer me Diodë 808 nm · NIPEC</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+  --oro:#8A6208;
+}
+@page{size:A4;margin:14mm 15mm 16mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.5pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.card h3,.card .ruolo,.prezzo,.quando,.dato .k{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:16px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:20pt;font-weight:700;margin:14px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.1}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 14px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:18px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:12px 0 4px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+/* ---------- l'attacco, in lingua da cabina ---------- */
+.attacco{font-size:10.6pt;line-height:1.62;margin:0 0 14px;max-width:none}
+.attacco span{display:block}
+.attacco .forte{font-weight:600;color:var(--navy)}
+
+/* ---------- le tre schede macchina ---------- */
+.tre{display:flex;gap:9px;margin:4px 0 12px;page-break-inside:avoid}
+.card{flex:1;border:1px solid var(--riga);border-radius:5px;overflow:hidden;
+      display:flex;flex-direction:column}
+.card .top{background:var(--blu-velo);border-bottom:1px solid var(--riga);padding:7px 9px 8px}
+.card.vip .top{background:#E6EFF7}
+.card .ruolo{font-size:7pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+             color:var(--blu);display:block;margin-bottom:2px}
+.card h3{font-size:11pt;margin:0;color:var(--navy);line-height:1.15}
+.card .soprannome{font-size:8.4pt;color:var(--ink2);font-style:italic;margin:2px 0 0}
+/* il posto della fotografia: se il file non c'e', resta la cornice tratteggiata
+   con scritto dentro quale file ci va. Cosi' la pagina si stampa comunque. */
+.foto{height:42mm;background:#FBFDFE;border-bottom:1px solid var(--riga);
+      display:flex;align-items:center;justify-content:center;position:relative}
+.foto img{max-width:92%;max-height:94%;object-fit:contain;display:block}
+.foto .manca{position:absolute;inset:4mm;border:1.4px dashed var(--blu-chiaro);border-radius:4px;
+             display:flex;flex-direction:column;align-items:center;justify-content:center;
+             text-align:center;font-family:"Archivo",sans-serif;font-size:7.2pt;
+             color:var(--blu);line-height:1.5;padding:4px}
+.foto .manca b{display:block;font-size:7.6pt;letter-spacing:.1em;margin-bottom:3px;color:var(--blu)}
+.foto .manca code{font-family:"Archivo",monospace;font-size:6.8pt;color:var(--ink2)}
+.card .corpo{padding:8px 9px 9px;flex:1;display:flex;flex-direction:column}
+.card .corpo p{font-size:8.6pt;line-height:1.45;margin:0 0 7px}
+.card ul{list-style:none;padding:0;margin:0 0 8px;font-size:8.4pt}
+.card ul li{position:relative;padding-left:12px;margin-bottom:3px;line-height:1.4}
+.card ul li:before{content:"";position:absolute;left:0;top:4.6px;width:5px;height:5px;
+                   border-radius:50%;background:var(--blu)}
+.card .prezzo{margin-top:auto;border-top:1px solid var(--riga);padding-top:6px;
+              font-size:8.2pt;color:var(--ink2);line-height:1.45}
+.card .prezzo b{display:block;font-size:11pt;color:var(--navy);letter-spacing:-.01em}
+.card .prezzo s{color:var(--grigio)}
+
+/* ---------- tabelle ---------- */
+table{width:100%;border-collapse:collapse;font-size:8.3pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 7px;font-size:7.6pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.06em;vertical-align:bottom}
+td{padding:4.5px 7px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.4}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.confronto td:first-child{font-weight:600;color:var(--navy);width:27%}
+.confronto th:not(:first-child),.confronto td:not(:first-child){width:24.3%}
+.vuoto{display:inline-block;min-width:46px;border-bottom:1px dotted var(--grigio)}
+.fab{font-size:7.4pt;color:#6B747C;font-style:italic}
+.si{color:var(--verde);font-weight:600}
+.no{color:var(--grigio)}
+
+/* ---------- riquadri ---------- */
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:4px}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+.box.rosso .eti{color:var(--rosso)}
+
+/* ---------- le voci nuove del 2026 ---------- */
+.dato{border:1px solid var(--riga);border-radius:5px;padding:9px 11px;margin:0 0 8px;
+      page-break-inside:avoid}
+.dato .k{display:block;font-size:8.6pt;font-weight:700;color:var(--navy);
+         letter-spacing:.01em;margin-bottom:3px}
+.dato p{font-size:8.8pt;line-height:1.5;margin:0 0 5px}
+.dato p:last-child{margin-bottom:0}
+.dato .cabina{font-size:8.5pt;color:var(--verde);border-left:2.5px solid var(--verde);
+              padding-left:8px;margin-top:6px}
+.dato .cabina b{color:var(--verde)}
+.due{display:flex;gap:11px}
+.due>*{flex:1}
+
+.dire{font-style:italic;color:var(--navy);border-left:3px solid var(--blu-chiaro);
+      padding-left:10px;margin:7px 0}
+
+.nuovo-foglio{page-break-before:always}
+h2+p.quando,h2+p,h2+.tre,h2+table{page-break-before:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol,.due{page-break-inside:avoid}
+/* lo spazio che avanza in fondo non si butta: il centro ci scrive sopra */
+.note{margin-top:16px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:17px}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+.chiusura{margin-top:20px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Teknologji Estetike">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TEKNOLOGJI ESTETIKE</text>
+  </svg>
+  <div class="dx">
+    Skedë tregtare dhe teknike<br>
+    I dorëzohet qendrës
+  </div>
+</div>
+
+<h1>Lazer me diodë 808 nm</h1>
+<p class="sotto">Tri makina, një fizikë e vetme — ARES 2025 · ARES 2026 IA · URIEL 2026 IA</p>
+<p class="riga-rev">Rishikimi ……… — ……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;Qendra: ……………………………………&nbsp;&nbsp;·&nbsp;&nbsp;Dorëzuar nga: ……………………………………</p>
+
+<p class="attacco">
+  <span class="forte">Lazeri nuk ta sjell klienten një herë. Ta sjell dymbëdhjetë.</span>
+  <span>Por ta rikthen vetëm nëse makina nuk ndalon, dhe nëse numrat që vendos janë të saktë.</span>
+  <span>Të dy ARES-at janë e njëjta makinë: i njëjti motor, të njëjtat dioda, të njëjtat vat.</span>
+  <span>Ndryshon vetëm një gjë: <b>kush i bën llogaritë.</b></span>
+  <span>Te 2025 i bën ti me dorë. Te 2026 i bën programi, dhe ti kontrollon.</span>
+</p>
+
+<h2>Tri makinat</h2>
+
+<div class="tre">
+
+  <div class="card">
+    <div class="top">
+      <span class="ruolo">Ajo që e ke tashmë</span>
+      <h3>ARES 2025</h3>
+      <p class="soprannome">e bardha e vogël</p>
+    </div>
+    <div class="foto">
+      <div class="manca"><b>FOTO</b>ARES 2025<code>foto/ares-2025 &middot; jpg ose png</code></div>
+      <img data-base="foto/ares-2025" alt="Lazer ARES 2025" style="display:none">
+    </div>
+    <div class="corpo">
+      <p>Është makina që shumë qendra e kanë tashmë në kabinë. Diodë 808, punë e plotë, komanda me dorë.</p>
+      <ul>
+        <li><b>10 dioda</b> nga 100 W · <b>1500 W</b></li>
+        <li>I njëjti motor si 2026:<br><b>ndryshon vetëm programi</b></li>
+        <li>Xhaul, milisekonda dhe Herc <b>me dorë</b></li>
+        <li>Pa kamera, pa IA</li>
+      </ul>
+      <div class="prezzo">CE italiane · MDR aktiv.<br>
+      <span class="fab">Vlerësohet edhe në këmbim.</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="ruolo">Hapi përpara</span>
+      <h3>ARES 2026 · IA</h3>
+      <p class="soprannome">e bardha e madhe</p>
+    </div>
+    <div class="foto">
+      <div class="manca"><b>FOTO</b>ARES 2026 IA<code>foto/ares-2026 &middot; jpg ose png</code></div>
+      <img data-base="foto/ares-2026" alt="Lazer ARES 2026 IA" style="display:none">
+    </div>
+    <div class="corpo">
+      <p>E njëjta fizikë si 2025, por me kamerën dhe inteligjencën artificiale brenda. Llogaritë i bën ajo.</p>
+      <ul>
+        <li><b>10 dioda</b> nga 100 W · <b>1500 W</b></li>
+        <li><b>Kamera e integruar</b> + program IA</li>
+        <li>Menaxhim dhe ushqim elektrik <b>dixhital</b></li>
+        <li>Sistemi <b>HR / SHR</b>: rrjetë, kJ të synuar, fluencë</li>
+      </ul>
+      <div class="prezzo">CE italiane · MDR aktiv.</div>
+    </div>
+  </div>
+
+  <div class="card vip">
+    <div class="top">
+      <span class="ruolo">Maja e gamës</span>
+      <h3>URIEL 2026 · IA</h3>
+      <p class="soprannome">ajo me rrota</p>
+    </div>
+    <div class="foto">
+      <div class="manca"><b>FOTO</b>URIEL 2026 IA<code>foto/uriel-2026 &middot; jpg ose png</code></div>
+      <img data-base="foto/uriel-2026" alt="Lazer URIEL 2026 IA" style="display:none">
+    </div>
+    <div class="corpo">
+      <p>Tri gjatësi vale në të njëjtin manipol. Merr çdo lëkurë dhe çdo qime, edhe ato që të tjerat i lënë aty.</p>
+      <ul>
+        <li>Deri në <b>16 dioda</b> nga 100 W · <b>2000 W</b></li>
+        <li>Deri në <b>3 breza</b>: 755 / 808 / 1064 nm</li>
+        <li>Touch LCD <b>15"</b> · IA brenda</li>
+        <li>Ftohje radiator + ajër + TEC</li>
+      </ul>
+      <div class="prezzo">CE italiane · MDR aktiv.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="box">
+  <span class="eti">Fjalia që duhet mbajtur mend</span>
+  <p class="dire" style="margin:0">Fizika është e njëjtë te të tria. Fluenca që lexon në panelin e ri janë Xhaulët
+  e dikurshëm: milisekondat dhe Hercët nuk janë zhdukur, i llogarit programi. Prandaj kush di të
+  punojë me 2025-ën e mëson 2026-ën për gjysmë dite — është e njëjta makinë.</p>
+</div>
+
+<!-- =================== FLETA 2 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h2><span class="n">1</span>Të dhënat teknike përballë</h2>
+<p class="quando">Të dhëna teknike zyrtare NIPEC</p>
+
+<table class="confronto">
+  <tr>
+    <th>Karakteristika</th>
+    <th>ARES 2025</th>
+    <th>ARES 2026 · IA</th>
+    <th>URIEL 2026 · IA</th>
+  </tr>
+  <tr><td>Lloji</td><td>Lazer me diodë</td><td>Lazer me diodë</td><td>Lazer me diodë tri-valësh</td></tr>
+  <tr><td>Gjatësitë e valës</td><td>808 nm</td><td>808 nm</td><td>755 / 808 / 1064 nm<br><span class="fab">deri në 3 breza në të njëjtin manipol</span></td></tr>
+  <tr><td>Diodat</td><td>10 dioda nga 100 W</td><td>10 dioda nga 100 W</td><td>deri në 16 dioda nga 100 W<br><span class="fab">16 dioda si opsion</span></td></tr>
+  <tr><td>Fuqia</td><td>1500 W</td><td>1500 W</td><td>2000 W</td></tr>
+  <tr><td>Frekuenca</td><td>60 Hz</td><td>60 Hz</td><td>60 Hz · 1–10 Hz</td></tr>
+  <tr><td>Lloji i emetimit</td><td>1–400 ms · Makro Kanal</td><td>1–400 ms · Makro Kanal</td><td>1–400 ms · Makrokanal</td></tr>
+  <tr><td>Ftohja</td><td>TECH cool me Micro Chip</td><td>TECH cool me Micro Chip</td><td>Radiator + Ajër + TEC Cool</td></tr>
+  <tr><td>Ndërfaqja</td><td>Panel manual:<br>Xhaul · ms · Hz</td><td>Ekran touch dixhital</td><td>Touch LCD 15"</td></tr>
+  <tr><td>Kamera e integruar</td><td class="no">jo</td><td class="si">po</td><td class="si">po</td></tr>
+  <tr><td>Programi IA</td><td class="no">jo</td><td class="si">po · HR / SHR / SHR Stack</td><td class="si">po</td></tr>
+  <tr><td>Menaxhimi</td><td>Dixhital, vendosur me dorë</td><td>Dixhital</td><td>Dixhital me kontroll elektronik</td></tr>
+  <tr><td>Ushqimi elektrik</td><td>Me kontroll dixhital</td><td>Me kontroll dixhital</td><td>Dixhital me kontroll elektronik</td></tr>
+  <tr><td>Rrjeti elektrik</td><td>AC 220V / 110V</td><td>AC 220V / 110V</td><td>AC 220V / 110V</td></tr>
+  <tr><td>Koka</td><td>Titan</td><td>Titan</td><td>Titan</td></tr>
+  <tr><td>Siguria</td><td>Klasa 4 · Interlock</td><td>Klasa 4 · Interlock</td><td>Klasa 4 · Interlock</td></tr>
+  <tr><td>Certifikimi</td><td>CE italiane · MDR</td><td>CE italiane · MDR</td><td>CE italiane · MDR</td></tr>
+  <tr><td>Formati</td><td>Mbi tavolinë</td><td>Mbi tavolinë</td><td>Me rrota</td></tr>
+</table>
+
+<div class="box verde">
+  <span class="eti">Shiko dy kolonat e para</span>
+  <p>Janë të njëjta. <b>ARES 2025 dhe ARES 2026 kanë të njëjtin motor:</b> të njëjtat dhjetë
+  dioda, të njëjtat 1500 vat, të njëjtën ftohje, të njëjtën kokë prej titani. Ndryshon
+  programi — dhe me programin vijnë kamera, IA dhe paneli i ri.</p>
+  <p style="margin-top:6px">Do të thotë dy gjëra, të dyja të mira për t'u thënë me zë të lartë.
+  Kush ka 2025-ën <b>nuk ka makinë më të dobët</b>: ka të njëjtën makinë me më pak ndihma.
+  Dhe kush kalon te 2026 <b>nuk ndryshon fizikë</b>, ndryshon vetëm kush i bën llogaritë.</p>
+</div>
+
+<!-- =================== FLETA 3 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h2><span class="n">2</span>Si lexohet ajo tabelë</h2>
+<p class="quando">Në gjuhën e kabinës</p>
+
+<table>
+  <tr><th style="width:24%">Çfarë lexon</th><th>Çfarë është</th></tr>
+  <tr><td><b>Vat</b></td><td>Motori. Më shumë vat, më shumë fuqi në dispozicion: zonën e madhe e bën me më pak kalime dhe klientja rri më pak në shtrat.</td></tr>
+  <tr><td><b>Diodat</b></td><td>Llambat që bëjnë goditjen. Më shumë dioda, më shumë dritë në të njëjtin çast dhe më pak lodhje për makinën — pra më pak ndalesa për ftohje.</td></tr>
+  <tr><td><b>Brezat</b> (gjatësitë e valës)</td><td>Sa thellë arrin. 755 merr qimen e hollë dhe të çelët, 808 është kali i betejës, 1064 zbret thellë dhe punon mbi lëkurat e errëta. Tri breza = tri lloje klientesh, me një manipol të vetëm.</td></tr>
+  <tr><td><b>Milisekondat</b></td><td>Sa zgjat goditja. Qimja e trashë do goditje të gjatë, lëkura delikate goditje të shkurtër.</td></tr>
+  <tr><td><b>Hercët</b></td><td>Sa goditje në sekondë. Është shpejtësia me të cilën kalon zonën.</td></tr>
+  <tr><td><b>Fluenca</b> (J/cm²)</td><td>Xhaulët e dikurshëm, të shkruar ndryshe. Është sasia e energjisë që lë mbi çdo centimetër lëkure.</td></tr>
+  <tr><td><b>HR / SHR</b></td><td>Dy mënyra pune. HR: goditje e vetme dhe e fortë, me rrjetë. SHR: kalime të përsëritura dhe më të lehta, duke ngrohur në lëvizje. SHR tolerohet më mirë nga lëkurat reaktive.</td></tr>
+  <tr><td><b>Koka prej titani</b></td><td>Pjesa që prek klienten. Prej titani nuk turbullohet dhe nuk konsumohet si të tjerat: është pjesa që zakonisht ndërrohet dhe paguhet.</td></tr>
+  <tr><td><b>Klasa 4 · interlock</b></td><td>Është lazer i vërtetë, dhe ligji e trajton si të tillë: syze gjithmonë, çelës dhe bllokim sigurie. Interlock-u është ai që e fik nëse diçka nuk është në rregull.</td></tr>
+</table>
+
+<h2><span class="n">3</span>Çfarë ka të re te 2026</h2>
+<p class="quando">Zërat për të cilët ndërrohet makina</p>
+
+<div class="dato">
+  <span class="k">Menaxhim dhe ushqim elektrik dixhital</span>
+  <p>Te makinat e vjetra rryma shkon te diodat ashtu siç vjen nga priza: nëse rrjeti i dyqanit
+  luhatet, luhaten edhe goditjet. Këtu elektronika e mban rrymën të qëndrueshme goditje pas
+  goditjeje.</p>
+  <p class="cabina"><b>Në kabinë:</b> goditja e njëqindtë është e njëjtë me goditjen e parë.
+  Klientja nuk të thotë më «sot e ndjeva më shumë».</p>
+</div>
+
+<div class="dato">
+  <span class="k">Kamera e integruar · programi IA</span>
+  <p>Kamera shikon lëkurën dhe qimen. Programi lexon atë që sheh dhe propozon parametrat:
+  rrjetë, kJ të synuar, fluencë. Ti mbetesh ajo që vendos — makina nuk niset vetë — por nuk
+  nisesh më nga një fletë letre dhe nga përvoja me sy.</p>
+  <p class="cabina"><b>Në kabinë:</b> operatorja e re bën seancë të saktë që ditën e parë, dhe
+  ti nuk duhet të ndjekësh çdo rregullim.</p>
+</div>
+
+<div class="due">
+  <div class="dato">
+    <span class="k">2000 vat</span>
+    <p>Është fuqia e URIEL 2026: 500 vat më shumë se ARES. Shërben në zonat e mëdha — këmbë të
+    plota, shpinë, bark — ku më shumë fuqi do të thotë më pak kalime.</p>
+    <p class="cabina"><b>Në kabinë:</b> më shumë kliente në të njëjtën ditë, me të njëjtin
+    rezultat.</p>
+  </div>
+  <div class="dato">
+    <span class="k">Deri në 16 dioda, si opsion</span>
+    <p>Diodat shtohen. Nisesh me konfigurimin që të duhet sot dhe ngjitesh kur qendra rritet,
+    pa e hedhur makinën.</p>
+    <p class="cabina"><b>Në kabinë:</b> makina nxehet më pak dhe ndalon më pak për ftohje.</p>
+  </div>
+</div>
+
+<div class="dato">
+  <span class="k">Deri në 3 breza në të njëjtin manipol</span>
+  <p>755, 808 dhe 1064 nanometra në të njëjtën pjesë që mban në dorë. Nuk ndërron manipol, nuk
+  ndërron makinë, nuk e largon klienten duke i thënë se mbi lëkurën e saj nuk bëhet. Lëkura e
+  errët dhe qimja e çelët — dy rastet që zakonisht refuzohen — këtu punohen.</p>
+  <p class="cabina"><b>Në kabinë:</b> nuk i thua më jo askujt. Dhe atë që më parë e refuzoje,
+  e faturon.</p>
+</div>
+
+<h2><span class="n">4</span>Certifikimi</h2>
+
+<div class="box verde">
+  <span class="eti">E certifikuar CE në Itali</span>
+  <p>Nuk është makinë e importuar dhe e rimarkuar. <b>Produkt i certifikuar në Itali</b>, me
+  markim CE italian. Do të thotë se dosja teknike, deklarata e konformitetit dhe numri i serisë
+  janë të gjurmueshëm, dhe se nëse të vjen një kontroll ka një letër për të treguar, me një emër
+  dhe një adresë pas saj.</p>
+</div>
+
+<div class="box rosso">
+  <span class="eti">MDR — data që ka peshë</span>
+  <p>Lazeri i epilimit është <b>pajisje mjekësore</b>. Rregulla që e qeveris është Rregullorja
+  evropiane MDR.</p>
+  <p><b>Të tria makinat tona janë tashmë MDR: aktiv, tani.</b> ARES 2025, ARES 2026 IA dhe
+  URIEL 2026 IA — markim CE italian dhe MDR aktiv mbi secilën, me dokumentet në dorë.</p>
+  <p>Sipas asaj që na konfirmon fabrika, <b>nga janari 2027 MDR bëhet i detyrueshëm</b>: nga ajo
+  datë një makinë pa MDR nuk është më një makinë me një avantazh më pak — është një makinë që
+  nuk mund ta përdorësh.</p>
+  <p>Kush blen sot një makinë pa MDR e paguan dy herë: një tani, dhe një kur duhet ta
+  zëvendësojë.</p>
+</div>
+
+<h2><span class="n">5</span>Katër pyetjet për t'i bërë çdo furnitori</h2>
+<p class="quando">Edhe neve</p>
+
+<p>Para se të firmosësh me këdo, këto të katra. Nëse një përgjigje nuk vjen me shkrim, ajo
+është përgjigjja.</p>
+
+<table>
+  <tr><th style="width:52%">Pyetja</th><th>Pse e bën</th></tr>
+  <tr><td><b>1.</b> A është makina e markuar CE si pajisje mjekësore MDR? Ma shkruan në kontratë?</td>
+      <td>Nga janari 2027 është ndryshimi mes një makine që punon dhe një mobilieje.</td></tr>
+  <tr><td><b>2.</b> Nëse ndalon, për sa kohë kam një makinë zëvendësuese në kabinë?</td>
+      <td>Një lazer i ndalur një javë janë dymbëdhjetë kliente që humbasin radhën dhe nuk kthehen më brenda dritares.</td></tr>
+  <tr><td><b>3.</b> Kush më trajnon, kur, dhe a është trajnimi brenda çmimit?</td>
+      <td>Një makinë që askush nuk di ta vendosë është një makinë që nuk punon.</td></tr>
+  <tr><td><b>4.</b> A është koka e përfshirë apo paguhet veçmas më pas? Sa zgjat dhe sa kushton?</td>
+      <td>Është pjesa që konsumohet. Aty çmimi i ulët i sotëm kthehet mbrapsht.</td></tr>
+</table>
+
+<div class="box verde">
+  <span class="eti">Me çdo lazer NIPEC, gjithmonë brenda</span>
+  <p><b>Trajnimi i ekipit i përfshirë</b> — operative menjëherë, jo pas tre muajsh.<br>
+  <b>Makinë zëvendësuese brenda 48 orëve</b> në rast defekti: nuk mbyll asnjë orë.<br>
+  <b>Asistencë e drejtpërdrejtë</b> — një referencë me emër dhe mbiemër, jo një call center.<br>
+  <b>Instalimi dhe nisja të ndjekura nga ne</b>, në vend.<br>
+  <b>Garanci 12 muaj.</b></p>
+</div>
+
+<div class="box">
+  <span class="eti">Hapi tjetër</span>
+  <p>Prova në vend bëhet kur të duash: sjell dy kliente, i vendos parametrat bashkë me ne, e
+  sheh makinën të punojë mbi lëkurën e tyre. Atë ditë nuk firmoset asgjë.</p>
+  <p style="margin-top:6px"><b>NIPEC · Teknologji Estetike</b></p>
+</div>
+
+<div class="note">
+  <span class="eti">Çfarë ka kërkuar qendra sot</span>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div>
+</div>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Data e provës në vend</span></div>
+  <div><div class="riga-firma"></div><span class="et">Përgjegjësi i qendrës</span></div>
+  <div><div class="riga-firma"></div><span class="et">Për NIPEC</span></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Teknologji Estetike — Skedë Lazer me diodë 808 nm · ARES 2025 · ARES 2026 IA · URIEL 2026 IA</span>
+  <span>Rish. ……… / ……… / …………</span>
+</div>
+
+<script>
+/* La fotografia si chiama foto/<nome>.<estensione>. L'estensione non la
+   decidiamo noi: dipende da come arriva il file. Le proviamo in fila e ci
+   teniamo la prima che si apre. Se non si apre nessuna, resta la cornice
+   tratteggiata e la pagina si stampa lo stesso. */
+(function(){
+  var ESTENSIONI=['jpg','jpeg','png','webp','JPG','PNG'];
+  Array.prototype.forEach.call(document.querySelectorAll('.foto'),function(cornice){
+    var img=cornice.querySelector('img'), manca=cornice.querySelector('.manca');
+    var base=img.getAttribute('data-base'), i=0;
+    img.onload=function(){ manca.style.display='none'; img.style.display='block'; };
+    img.onerror=function(){ prova(); };
+    function prova(){
+      if(i>=ESTENSIONI.length){ img.style.display='none'; return; }
+      img.src=base+'.'+ESTENSIONI[i++];
+    }
+    prova();
+  });
+})();
+</script>
+</body>
+</html>
