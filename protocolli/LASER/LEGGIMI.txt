@@ -1,25 +1,46 @@
-PROTOCOLLO LASER NIPEC · EPILAZIONE CORPO — BOZZA 0.1
+PROTOCOLLO LASER NIPEC · EPILAZIONE CORPO
 
-Cosa c'e' qui:
-  protocollo-laser.html ..... il sorgente. Si modifica questo.
-  caratteri/ ................ Archivo e Source Serif 4, i caratteri NIPEC.
-  PROTOCOLLO-...-BOZZA.pdf .. il PDF generato da quel file.
+Due versioni, stesso contenuto:
+  protocollo-laser-IT.html  ->  PROTOCOLLO-LASER-NIPEC-epilazione-corpo-IT.pdf
+  protocollo-laser-SQ.html  ->  PROTOKOLLI-LASER-NIPEC-epilim-trupi-SQ.pdf
 
-Il logo NIPEC e' dentro l'HTML come disegno vettoriale, non come
-immagine: non serve nessun file accanto, e in stampa resta nitido a
-qualunque ingrandimento.
+Sono il documento che si da' all'ESTETISTA: si tiene in cabina, non si
+consegna alla cliente. Sei pagine A4.
 
-Per rigenerare il PDF dopo una modifica:
+  protocollo-laser.html ..... la bozza interna, con il riquadro sulla
+                              regolamentazione e l'ultima pagina delle
+                              cose da chiudere. NON si consegna.
+  caratteri/ ................ Archivo e Source Serif 4.
+
+Il logo NIPEC e' dentro l'HTML come disegno vettoriale: non serve
+nessun file accanto e in stampa resta nitido a qualunque ingrandimento.
+
+------------------------------------------------------------------
+L'ALBANESE
+------------------------------------------------------------------
+L'ho scritto io. VA FATTO RILEGGERE A UARDA prima di consegnarlo a
+chiunque: e' un documento di sicurezza, e una parola fraintesa su una
+controindicazione non e' un errore di stile.
+
+------------------------------------------------------------------
+QUELLO CHE MANCA, E CHE VA MESSO PRIMA DI STAMPARE
+------------------------------------------------------------------
+Le caselle con i puntini si riempiono una volta sola, con il manuale
+del dispositivo in mano, il giorno della formazione:
+
+  - i parametri per zona (energia, impulso, frequenza, passate, durata)
+  - quali fototipi si trattano, e con quale lunghezza d'onda
+  - le settimane di sospensione per sole, ceretta e isotretinoina
+  - le ore del test e le ore di sospensione dopo la seduta
+  - i giorni della finestra di rientro (nel cruscotto sono 21-28)
+
+Nel documento NON ci sono numeri di energia inventati, di proposito.
+
+------------------------------------------------------------------
+PER RIGENERARE UN PDF DOPO UNA MODIFICA
+------------------------------------------------------------------
   chrome --headless=new --no-pdf-header-footer \
-         --print-to-pdf=PROTOCOLLO-LASER-NIPEC-epilazione-corpo-BOZZA.pdf \
-         protocollo-laser.html
+         --print-to-pdf=NOME.pdf protocollo-laser-IT.html
 
-ATTENZIONE — e' una BOZZA e lo dice in copertina.
-Mancano apposta: chi puo' usare il laser e dove, il dispositivo, i
-parametri per zona, le settimane di sospensione. Sono le otto righe
-dell'ultima pagina, da chiudere insieme a Giorgio.
-
-Nel documento NON ci sono numeri di energia inventati. Quando ci sara'
-il manuale del dispositivo, si riempiono le caselle della tabella.
-
+------------------------------------------------------------------
 NIPEC · assistenza 351 846 6025

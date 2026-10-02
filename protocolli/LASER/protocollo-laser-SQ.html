@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<title>Protokolli Laser NIPEC · Epilim trupi</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+</style>
+</head>
+<body>
+
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Dokument për operatoren e certifikuar<br>
+    Mbahet në kabinë<br>
+    Nuk i jepet klientes
+  </div>
+</div>
+
+<h1>Protokolli Laser · Epilim trupi</h1>
+<p class="sotto">Nga zilja te dera — nëntë momentet e një seance</p>
+<p class="riga-rev">Rishikimi ……… — ……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;Pajisja: ……………………………………&nbsp;&nbsp;·&nbsp;&nbsp;Qendra: ……………………………………<br>Operatorja: ……………………………………&nbsp;&nbsp;·&nbsp;&nbsp;Certifikata NIPEC nr. ……………………&nbsp;&nbsp;·&nbsp;&nbsp;Skadon: ……… / ……… / …………</p>
+
+<div class="box">
+  <span class="eti">Për çfarë shërben kjo fletë</span>
+  <p>Është radha e një seance epilimi, sipas rendit në të cilin gjërat ndodhin vërtet:
+  <b>nga momenti kur cakton takimin deri në momentin kur del nga dera.</b>
+  Nuk është manuali i makinerisë — ai rri veçmas dhe përmban parametrat.</p>
+  <p>Mbahet në kabinë. Lexohet një herë e tëra, pastaj përdoret me një vështrim.</p>
+</div>
+
+<h2><span class="n">1</span>Në telefon — para se të vijë</h2>
+<p class="quando">Kur cakton takimin · 2 minuta</p>
+<p>Gjysma e seancave që shkojnë keq janë seanca të përgatitura keq. Këto gjashtë gjëra thuhen
+<b>në telefon</b>, jo te dera: nëse i zbulon kur ajo ka ardhur tashmë, seanca anulohet dhe
+asaj i ka ikur një pasdite.</p>
+
+<table>
+  <tr><th style="width:30%">Çfarë i thua</th><th>Pse</th></tr>
+  <tr><td><b>Pa dyll, pa piskatore, pa fill dhe pa epilator</b> për <span class="vuoto"></span> javë përpara</td>
+      <td>Laseri punon mbi qimen e ngjitur me rrënjën. Nëse rrënja është shkulur, nuk ka çfarë të godasë dhe seanca shkon dëm. <b>Brisku përkundrazi shkon mirë</b>, madje duhet.</td></tr>
+  <tr><td><b>Rruhet mbrëmjen para ose në mëngjes</b>, në shtëpi</td>
+      <td>Qimja duhet të jetë nën lëkurë por jo sipër: qimja e gjatë në sipërfaqe digjet, qelbet dhe ndot kokën e aparatit. E rruar në qendër në minutën e fundit, lëkura vjen tashmë e irrituar.</td></tr>
+  <tr><td><b>Pa diell, pa solar dhe pa autobronzant</b> për <span class="vuoto"></span> javë përpara</td>
+      <td>Mbi lëkurë të nxirë laseri e ngatërron qimen me lëkurën. Është shkaku numër një i njollave dhe i flluskave.</td></tr>
+  <tr><td><b>Ditën e seancës, zona e pastër</b>: pa krema, vajra, deodorant, grim, parfum</td>
+      <td>Ajo që rri mbi lëkurë nxehet bashkë me të.</td></tr>
+  <tr><td><b>Më thuaj të gjitha barnat që merr</b>, edhe ato që të duken të parëndësishme</td>
+      <td>Disa e bëjnë lëkurën të ndjeshme ndaj dritës. Nuk është pyetje kureshtari: është pyetja që shmang djegien.</td></tr>
+  <tr><td><b>Herën e parë eja dhjetë minuta më përpara</b></td>
+      <td>Sepse herën e parë nuk trajtohet: bëhet skeda dhe bëhet testi. Ta thuash në telefon shmang zhgënjimin aty për aty.</td></tr>
+</table>
+
+<div class="box verde">
+  <span class="eti">Dërgoja edhe të shkruara</span>
+  <p>Këto gjashtë rreshta shkojnë edhe në një mesazh, menjëherë pasi ke caktuar takimin.
+  <b>Kush i merr vjen e përgatitur; kush nuk i merr vjen si t'i dalë</b> — dhe seanca
+  anulohet. Mbaji gati për t'i kopjuar.</p>
+</div>
+
+<h2><span class="n">2</span>Kur hyn — tre minutat e para</h2>
+<p class="quando">Te banaku, jo te shtrati</p>
+<p>Nuk shkohet menjëherë në kabinë. Tre minuta në këmbë, te banaku, dhe fiton gjithë seancën.</p>
+<ol>
+  <li><b>E pyet si ka shkuar nga hera e fundit.</b> Skuqje? Flluska? Kore? Sa zgjatën? Shkruhet në skedë <b>para</b> se të prekësh makinerinë.</li>
+  <li><b>Kontrollon gjashtë gjërat e telefonit.</b> A u rrua? A ka qenë në diell? A ka vënë krem sot? Barna të reja?</li>
+  <li><b>Shikon zonën në dritë</b>, para se të zhvishet: nxirje, irritime, nishane të reja, tatuazhe që nuk ishin.</li>
+</ol>
+<p class="dire">«Para se të ndez, të bëj dy pyetje, që të punojmë të sigurta.»<br>
+Nuk është burokraci dhe nuk duhet thënë sikur të ishte: është gjëja që i bën të kuptojë se
+aty brenda arsyetohet.</p>
+
+<h2><span class="n">3</span>Skeda dhe porta</h2>
+<p class="quando">Para se të ndezësh · e detyrueshme në çdo seancë</p>
+<p>Porta funksionon si ajo e protokollit të trupit: <b>nuk është gjykim i yti, është
+rregull.</b> Nëse kutiza është e shënuar, kutiza komandon.</p>
+
+<table class="semaforo">
+  <tr><th style="width:84px">Rezultati</th><th>Kur</th><th>Çfarë bën sot</th></tr>
+  <tr><td><span class="pallino p-verde"></span>JESHILE</td>
+      <td>Asnjë kutizë e shënuar, lëkurë e çelët dhe e paprekur, e rruar mirë</td>
+      <td>Seancë e plotë, parametrat e skedës</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>E VERDHË</td>
+      <td>Nxirje e mbetur · lëkurë e ndjeshme në seancën e fundit · zonë e vogël e irrituar · cikli në zonën intime</td>
+      <td><b>Ulet</b> sipas tabelës së manualit dhe <b>ribëhet testi</b> mbi zonë. Nëse testi nuk bind, shtyhet</td></tr>
+  <tr><td><span class="pallino p-rosso"></span>E KUQE</td>
+      <td>Shtatzëni ose gjidhënie · bar fotosensibilizues në përdorim · herpes aktiv, infeksion, plagë, djegie nga dielli mbi zonë · lëkurë e nxirë rishtas · epilepsi fotosensibile · tumor i lëkurës ose nishane që ndryshojnë · izotretinoinë në <span class="vuoto"></span> muajt e fundit</td>
+      <td><b>Sot nuk bëhet.</b> Caktohet data kur do të mundet dhe shkruhet. Nuk negociohet</td></tr>
+</table>
+
+<div class="box rosso">
+  <span class="eti">Katër gjërat që nuk trajtohen kurrë, pikë</span>
+  <p><b>Mbi një tatuazh</b> — boja thith gjithçka dhe digjet. I rrihet rrotull, lihet një buzë, shënohet në hartë.<br>
+  <b>Mbi një nishan</b> — mbulohet me laps të bardhë dhe kapërcehet.<br>
+  <b>Brenda zgavrës së syrit</b> — vetullat dhe mollëza e lartë: drita arrin te syri edhe me syze.<br>
+  <b>Mbi lëkurë që nuk është e sajat</b> — nëse nuk e njeh krahasuar me herën e fundit, nuk është dita.</p>
+</div>
+
+<h3>Fototipi — shkruhet një herë dhe mbetet</h3>
+<p>Përcaktohet në seancën e parë, shkruhet në skedë dhe <b>nuk ndryshohet me sy</b> nga njëra
+herë te tjetra. Nëse klientja nxihet, nuk ndryshon fototipi: ndryshon semafori.</p>
+<table>
+  <tr><th style="width:62px">Fototipi</th><th>Si njihet</th><th class="c" style="width:92px">Trajtohet?</th></tr>
+  <tr><td class="c"><b>I–II</b></td><td>Lëkurë shumë e çelët, digjet gjithmonë, nxihet pak ose aspak</td><td class="c">………………</td></tr>
+  <tr><td class="c"><b>III–IV</b></td><td>Digjet ndonjëherë, pastaj nxihet. Është shumica e klienteve</td><td class="c">………………</td></tr>
+  <tr><td class="c"><b>V–VI</b></td><td>Lëkurë e errët, rrallë digjet</td><td class="c">………………</td></tr>
+</table>
+<div class="box giallo">
+  <span class="eti">Kjo kutizë plotësohet në dorëzim</span>
+  <p>Cilët fototipe trajtohen, dhe me cilën gjatësi vale, <b>varet nga pajisja jote</b>:
+  shkruhet këtu ditën e trajnimit, me manualin në dorë. Nëse kutiza është bosh, ai fototip
+  <b>nuk trajtohet</b> derisa të jetë plotësuar.</p>
+</div>
+
+<h2><span class="n">4</span>Testi — vetëm herën e parë</h2>
+<p class="quando">Seanca e parë · pastaj sa herë semafori është i verdhë</p>
+<p>Testi nuk është formalitet dhe nuk kapërcehet se klientja ka nxitim. Është gjëja që ndan
+një qendër serioze nga një që hedh me hamendje.</p>
+<ul>
+  <li>Bëhen <b>pak goditje</b> mbi një zonë të fshehur të pjesës që do trajtohet, me parametrat që do të përdorje.</li>
+  <li>Shënohet në skedë <b>ku</b> e ke bërë dhe me <b>cilët</b> parametra.</li>
+  <li>Rishikohet pas <b><span class="vuoto"></span> orësh</b>. Nuk trajtohet në të njëjtën ditë.</li>
+</ul>
+<p>Në kthim shikon tri gjëra: a u kthye lëkura normale? A mbetën njolla të çelëta apo të
+errëta? A pati flluska? <b>Nëse përgjigjja nuk është e pastër, ulet dhe ribëhet testi.</b></p>
+
+<h2><span class="n">5</span>Përgatitet zona</h2>
+<p class="quando">Kabina · 5 minuta</p>
+<table>
+  <tr><th style="width:30%">Çfarë</th><th>Si, dhe pse</th></tr>
+  <tr><td><b>Kontrollohet rruajtja</b></td><td>Nëse ka mbetur qime e gjatë, rregullohet aty. Qime në sipërfaqe = erë e djegur, kokë aparati e ndotur, më pak energji atje ku duhet.</td></tr>
+  <tr><td><b>Pastrohet dhe thahet</b></td><td>Pa krema, deodorant, mbetje. Lëkura duhet të jetë e thatë: lagështia ndryshon mënyrën si rrëshqet koka e aparatit.</td></tr>
+  <tr><td><b>Shënohet harta</b></td><td>Laps i bardhë: nishanet që kapërcehen, buzët e tatuazhit, kufijtë e zonës. Ribëhet çdo herë — një nishan i ri shihet vetëm nëse e kërkon.</td></tr>
+  <tr><td><b>Syzet — që të dyja</b></td><td>Të sajat dhe të tuat, me mbrojtjen e duhur për atë gjatësi vale. <b>Nuk ndizet nëse nuk i keni të dyja në sy.</b> As «për një goditje të vetme».</td></tr>
+  <tr><td><b>Thithja e tymit e ndezur</b></td><td>Atë që ngrihet nga qimja e djegur e thith ti, gjithë ditën, çdo ditë. Ajo një herë në muaj.</td></tr>
+  <tr><td><b>Dera e mbyllur, tabela jashtë</b></td><td>Askush nuk hyn në kabinë ndërsa makineria është e ndezur.</td></tr>
+</table>
+
+<h2><span class="n">6</span>Seanca</h2>
+<p class="quando">Zemra · kohëzgjatja për zonë në tabelë</p>
+
+<h3>Parametrat</h3>
+<div class="box rosso">
+  <span class="eti">Numrat vijnë nga manuali, gjithmonë</span>
+  <p>Energjia, kohëzgjatja e impulsit, frekuenca dhe ftohja <b>lexohen në manualin e pajisjes
+  tënde</b> dhe shkruhen këtu poshtë një herë të vetme, bashkë me Beauty Trainer-in.
+  Ndryshojnë nga makineria në makineri.</p>
+  <p><b>Nuk ngrihen «se duket sikur nuk po bën gjë».</b> Nëse seanca nuk jep, merret NIPEC
+  në telefon: shihet bashkë çfarë nuk shkon. Energjia e ngritur me ndjesi është mënyra
+  si digjet një kliente.</p>
+</div>
+<table>
+  <tr><th>Zona</th><th class="c">Fototipi</th><th class="c">Energjia</th><th class="c">Impulsi</th><th class="c">Frekuenca</th><th class="c">Kalime</th><th class="c">Kohëzgjatja</th></tr>
+  <tr><td>Sqetullat</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Ijet</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Këmbët e plota</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Gjysmë këmbë</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Krahët</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Mustaqja / mjekra</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+  <tr><td>Shpina / gjoksi</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td><td class="c">………</td></tr>
+</table>
+
+<h3>Si kalohet</h3>
+<ul>
+  <li><b>Koka e aparatit e mbështetur, pingul me lëkurën.</b> E pjerrët, energjia shpërndahet dhe zona mbetet e pambuluar.</li>
+  <li><b>Pa e mbivendosur</b> më shumë se duhet dhe <b>pa lënë vrima</b>. Vrimat shihen pas një muaji, si rreshta qimesh të mbetura.</li>
+  <li><b>Një zonë në çdo kohë, me një rend të caktuar</b>, gjithmonë i njëjti. Rendi i caktuar është ai që të bën të kuptosh se ke kapërcyer një copë.</li>
+  <li><b>Fol me të ndërsa punon.</b> «Më thuaj nëse ndien më shumë se një llastik që kërcet.» Dhimbja që ndryshon është i vetmi sinjal që ke në kohë reale.</li>
+</ul>
+
+<h3>Çfarë shikon ndërsa kalon</h3>
+<table>
+  <tr><th style="width:36%">Ajo që sheh</th><th>Çfarë do të thotë</th></tr>
+  <tr><td><b>Një unazë rozë rreth çdo qimeje</b>, që shfaqet brenda pak minutash</td>
+      <td>Është shenja që po punon mirë. Nëse nuk shfaqet fare, energjia është shumë e ulët dhe seanca nuk do të shërbejë</td></tr>
+  <tr><td>Skuqje e përhapur dhe ënjtje e lehtë</td><td>Normale. Kalon brenda pak orësh</td></tr>
+  <tr><td><b>Lëkurë që zbardhet në çast, flluska, ajo që tërhiqet befas</b></td>
+      <td><b>Ndalon.</b> Nuk ul: ndalon, ftoh, dhe seanca mbi atë zonë mbaron aty</td></tr>
+  <tr><td>Erë e fortë e djegur</td><td>Qime e parruar mirë. Ndalon, rregullon, rinis</td></tr>
+</table>
+
+<h2><span class="n">7</span>Sapo mbaron</h2>
+<p class="quando">Ende mbi shtrat · 5 minuta</p>
+<ul>
+  <li><b>Ftoh</b> siç parashikon manuali, edhe nëse ajo thotë se nuk duhet.</li>
+  <li><b>Shikoni bashkë zonën.</b> Në pasqyrë, jo kalimthi. Ajo që sheh tani është masa e krahasimit për kur të kthehet.</li>
+  <li><b>I thua çfarë do të ndodhë</b>, sepse nëse nuk ia thua, do ta keqkuptojë.</li>
+</ul>
+<div class="box verde">
+  <span class="eti">Fjalia që shmang telefonatën e shqetësuar</span>
+  <p class="dire" style="margin:0">«Në ditët në vijim do të të duket sikur qimet po rriten sërish.
+  Nuk po rriten: po dalin. Është mënyra si trupi i nxjerr jashtë, dhe ndodh mes një jave
+  dhe dy. Mos i tërhiq: lëri të ikin vetë.»</p>
+</div>
+
+<h2><span class="n">8</span>Para se të dalë — këtu vendoset nëse kthehet</h2>
+<p class="quando">Te banaku · 3 minuta · momenti më i rëndësishëm pas portës</p>
+<p>Seanca mbaroi, puna tregtare jo. <b>Kush del pa takimin e radhës të caktuar kthehet
+gjysmën e herëve</b>, dhe një cikël epilimi i lënë përgjysmë nuk jep rezultat — pra nuk
+është as problem arke: është problem rezultati.</p>
+<table>
+  <tr><th style="width:34%">Çfarë bën</th><th>Si</th></tr>
+  <tr><td><b>Fletushka e pas-seancës</b></td><td>E shkruar, jo e thënë. Çfarë mund dhe nuk mund të bëhet, me ditët. E thënë me gojë harrohet në ashensor</td></tr>
+  <tr><td><b>Takimi i radhës, tani</b></td><td>Agjenda në dorë, data e caktuar, kujtesa e shkruar. <b>Mes <span class="vuoto"></span> dhe <span class="vuoto"></span> ditësh</b> — jo «pas një muaji»</td></tr>
+  <tr><td><b>Karta e ciklit</b></td><td>Seanca <span class="vuoto"></span> nga 12, e vulosur. Të shohësh rrugën që ecën është ajo që e mban brenda</td></tr>
+  <tr><td><b>Fotoja</b></td><td>Seancat 1, 6 dhe 12. E njëjta dritë, e njëjta largësi, i njëjti mur. Pa foto, në seancën e gjashtë nuk kujton si ishte</td></tr>
+</table>
+
+<h3>Fletushka e pas-seancës — çfarë shkruhet</h3>
+<div class="due">
+  <div class="box verde"><span class="eti">Mund</span>
+  <p>Dush i vakët · krem qetësues · deodorant nga dita tjetër · brisk mes njërës seancë dhe tjetrës, sa të dojë</p></div>
+  <div class="box rosso"><span class="eti">Nuk mund</span>
+  <p>Diell, solar dhe autobronzant për <span class="vuoto"></span> javë · pishinë, saunë, palestër dhe ujë shumë i nxehtë për <span class="vuoto"></span> orë · parfume dhe krema agresive mbi zonë · <b>dyll dhe piskatore kurrë, gjithë ciklin</b> · të gërvishtë ose të tërheqë qimet që dalin</p></div>
+</div>
+
+<h2><span class="n">9</span>Pasi ka dalë</h2>
+<p class="quando">Nuk mbaron te dera</p>
+<table>
+  <tr><th style="width:24%">Kur</th><th>Çfarë ndodh</th></tr>
+  <tr><td><b>Pas 48 orësh</b></td><td>Një mesazh: «Gjithçka në rregull me lëkurën?» Kushton dhjetë sekonda, kap problemin e vogël para se të bëhet recension</td></tr>
+  <tr><td><b>Mes 21 dhe 28 ditësh</b></td><td>Dritarja e kthimit. Është ora e kruskotit: jashtë asaj dritareje cikli humbet efikasitet</td></tr>
+  <tr><td><b>Në seancën e 6-të</b></td><td>Kontroll me fotot në dorë. Shihet bashkë, nuk tregohet</td></tr>
+  <tr><td><b>Në të 12-tën</b></td><td>Fund cikli. Vendoset mbajtja dhe <b>caktohet aty</b> seanca pas 90 ditësh</td></tr>
+  <tr><td><b>Pas 6 muajsh heshtje</b></td><td>Është «në gjumë». E merr ti në telefon, me ofertën e duhur — nuk pret që të kujtohet ajo për ty</td></tr>
+</table>
+<div class="box">
+  <span class="eti">Protokolli dhe fleta janë e njëjta gjë</span>
+  <p>Këta numra nuk janë vënë aty për bukuri: janë <b>të njëjtët gjashtë numra të Kruskotit
+  të Klienteve Laser</b>. Ajo që shkruan në skedë në fund të seancës është pikërisht ajo që
+  fleta lexon për të të thënë, çdo mëngjes, kë të marrësh e para. Nëse skeda mbetet bosh,
+  kruskoti është i verbër.</p>
+</div>
+
+<h2><span class="n">10</span>Kur ndalohet — dhe merret në telefon</h2>
+<table>
+  <tr><th style="width:44%">Nëse ndodh kjo</th><th>Çfarë bën</th></tr>
+  <tr><td>Flluska, puçrra me ujë, lëkurë që zbardhet dhe nuk kthehet</td><td>Ndalon gjithçka, ftoh, <b>nuk vë asgjë</b> me nismën tënde, dokumenton me foto, merr NIPEC</td></tr>
+  <tr><td>Njollë e çelët ose e errët që shfaqet pas seancës</td><td>Pezullohet zona, fotografohet, merret në telefon para seancës së radhës</td></tr>
+  <tr><td>Makineria jep alarm, nxehet, bën zhurmë të re</td><td>Fiket. <b>Brenda 48 orësh</b> e njofton me shkrim Referenti i Vetëm</td></tr>
+  <tr><td>Qime që shtohen në vend që të pakësohen në zonën e trajtuar</td><td>Ndodh, në disa zona dhe disa fototipe. Pezullohet <b>ajo</b> zonë dhe merret në telefon: nuk këmbëngulet duke ngritur energjinë</td></tr>
+  <tr><td>Nuk je e sigurt</td><td>Nuk bëhet. Një seancë e shtyrë kushton një orë; një seancë e gabuar kushton një kliente dhe një ankesë</td></tr>
+</table>
+<p class="firma">Asistenca NIPEC · <b>351 846 6025</b> — Referenti i Vetëm i qendrës: ………………………………………………………</p>
+
+<div class="note">
+  <span class="eti">Shënime nga kabina — çfarë kemi gjetur duke punuar</span>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div>
+</div>
+
+<div class="chiusura">
+  <span>Protokolli Laser NIPEC · Epilim trupi</span>
+  <span>NIPEC · Tecnologie Estetiche · asistenca 351 846 6025</span>
+</div>
+
+</body>
+</html>
