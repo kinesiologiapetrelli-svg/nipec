@@ -9,25 +9,20 @@ COSA C'E' IN QUESTA CARTELLA
   caratteri/                   i caratteri del marchio, non si toccano
 
 
-LE TRE FOTOGRAFIE — QUESTO MANCA
-Le cornici tratteggiate in prima pagina aspettano tre file, con questi nomi
-esatti, dentro la cartella foto/:
+LE TRE FOTOGRAFIE — CI SONO
+Montate tutte e tre, dentro foto/:
 
-  foto/ares-2025.jpg     la piccola bianca, comandi a mano
-  foto/ares-2026.jpg     la grande bianca, telecamera e IA
-  foto/uriel-2026.jpg    la carrellata, 16 diodi e 3 bande
+  foto/ares-2025.jpg     la piccola bianca, col NIPEC sul frontale
+  foto/ares-2026.jpg     la grande bianca, display nero ribaltabile
+  foto/uriel-2026.jpg    la nera carrellata, 16 diodi e 3 bande
 
-Vanno bene anche .png, .jpeg o .webp: la pagina prova le estensioni in fila
-e si tiene la prima che si apre. Conta solo il nome: ares-2025, ares-2026,
-uriel-2026.
+A ognuna ho tolto il bianco attorno: nella cornice da 42 mm la macchina
+deve riempire, non galleggiare in mezzo al foglio.
 
-Appena i file ci sono, la cornice sparisce da sola e al suo posto compare la
-fotografia. Poi si ristampa il PDF e la scheda e' finita.
-
-Perche' non ce le ho messe io: le foto sono su Drive, private, e da qui non
-riesco a tirarle giu'. In piu' su Drive c'e' una sola fotografia dell'ARES,
-e qui ne servono due diverse — la 2025 e la 2026 non sono la stessa macchina.
-Se me le mandi in chat le monto io in un minuto.
+Se un domani ne arriva una migliore basta sovrascrivere il file con lo
+stesso nome e ristampare. L'estensione non conta — jpg, jpeg, png o webp:
+la pagina le prova in fila e si tiene la prima che si apre. Se un file
+sparisce torna la cornice tratteggiata e la pagina si stampa lo stesso.
 
 
 DUE NUMERI DA SISTEMARE, PRIMA CHE LA SCHEDA GIRI
