@@ -25,14 +25,15 @@ la pagina le prova in fila e si tiene la prima che si apre. Se un file
 sparisce torna la cornice tratteggiata e la pagina si stampa lo stesso.
 
 
-I WATT DELLA URIEL: 2400, E UNA COSA DA CORREGGERE ALTROVE
-La URIEL 2026 fa 2400 W. Nella scheda e' scritto cosi'.
+LA URIEL STA A 2000 W
+Deciso cosi': 2000 W sulla scheda, lo stesso numero della quotazione
+ufficiale che gira ai clienti. Scheda e offerta dicono la stessa cosa e
+nessuno chiede quale delle due e' vera.
 
-Attenzione pero': la quotazione ufficiale che gira ai clienti —
-Quotazione_Laser_ARES_URIEL_2026.pdf, su Drive — dice 2000 W. Quella e'
-sbagliata, e sta in mano a chi deve comprare. Va rifatta, altrimenti il
-centro legge 2400 sulla scheda e 2000 sull'offerta e chiede quale delle
-due e' vera.
+Resta un punto aperto che non riguarda questa scheda: sulla lavagna del
+corso del 12 ottobre la URIEL e' scritta a 2400 W. Prima del corso quel
+quadro va allineato a 2000, altrimenti l'estetista ha un numero sullo
+schermo e un altro sul foglio che si porta a casa.
 
 
 LE DUE ARES HANNO LO STESSO MOTORE
@@ -40,28 +41,39 @@ Stessi 10 diodi da 100 W, stessi 1500 W, stesso raffreddamento, stessa
 testina. Cambia il software — e col software arrivano telecamera, IA e
 pannello nuovo.
 
-Nella tabella le prime due colonne adesso sono identiche riga per riga, e
-sotto c'e' il riquadro verde che lo dice in chiaro. E' il punto piu' forte
-della scheda: chi ha la 2025 non ha una macchina inferiore, e chi passa
-alla 2026 non cambia fisica.
+Nella tabella le prime due colonne sono identiche riga per riga, e sotto
+c'e' il riquadro verde che lo dice in chiaro. E' il punto piu' forte della
+scheda: chi ha la 2025 non ha una macchina inferiore, e chi passa alla
+2026 non cambia fisica.
 
 Il cabinet e il display restano diversi — si vede dalle fotografie — quindi
-telecamera, IA e interfaccia nella tabella restano "no" sulla 2025. Se la
-fabbrica intende hardware identico anche li', dimmelo e correggo.
+telecamera, IA e interfaccia nella tabella restano "no" sulla 2025.
 
 
-COSA MANCA ANCORA — DUE COSE
+CERTIFICAZIONE: TUTTE E TRE
+ARES 2025, ARES 2026 IA e URIEL 2026 IA: marcatura CE italiana e MDR
+attivo su ognuna, documenti alla mano. Nella tabella la riga
+"Certificazione" dice la stessa cosa su tutte e tre le colonne, e nel
+riquadro rosso di pagina 4 i tre nomi sono scritti per esteso.
 
-1. IL PREZZO DELLA ARES 2025
-   Listino, prezzo di lancio e noleggio. Nella tabella dei prezzi quella
-   riga e' ancora a puntini.
+E' la risposta alla prima domanda che fa chi ha gia' la 2025 in cabina.
 
-2. LA ARES 2025 E' MDR?
-   Nella tabella le ho messo "CE" e non "CE italiana · MDR", perche' la
-   certificazione va per modello e di quella non ho carta. La cosa pesa:
-   tutto l'argomento di pagina 4 ruota intorno all'MDR, e un centro che ha
-   gia' la 2025 chiedera' per prima cosa se la sua e' a posto.
-   Serve una risposta certa, non una ragionevole.
+
+IL PREZZO DELLA ARES 2025 NON SI SCRIVE
+Nella tabella dei prezzi la 2025 non compare: si valuta in permuta o come
+usato garantito, caso per caso. Lo dice la sua card in prima pagina, senza
+numeri.
+
+
+MDR, GENNAIO 2027 — RESTA DA CONFERMARE
+Nella scheda e' scritto attribuito: "secondo quanto ci conferma la
+fabbrica, da gennaio 2027...". Apposta. Per i laser epilatori il passaggio
+all'Allegato XVI del Regolamento MDR si e' chiuso il 22 giugno 2025, quindi
+gennaio 2027 e' quasi certamente un'altra scadenza.
+
+E' un argomento di vendita forte, e un centro puo' girarlo al suo
+consulente. Fatti scrivere dalla fabbrica la norma e la data esatta: da
+li' in poi e' un'arma, non un rischio.
 
 
 A CHI SI DA' QUESTA SCHEDA
