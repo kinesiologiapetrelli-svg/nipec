@@ -187,10 +187,8 @@ ul,ol,.due{page-break-inside:avoid}
       <p class="soprannome">la piccola bianca</p>
     </div>
     <div class="foto">
-      <div class="manca"><b>FOTO</b>ARES 2025<code>foto/ares-2025.jpg</code></div>
-      <img src="foto/ares-2025.jpg" alt="Laser ARES 2025"
-           onerror="this.style.display='none'"
-           onload="this.parentNode.querySelector('.manca').style.display='none'">
+      <div class="manca"><b>FOTO</b>ARES 2025<code>foto/ares-2025 &middot; jpg o png</code></div>
+      <img data-base="foto/ares-2025" alt="Laser ARES 2025" style="display:none">
     </div>
     <div class="corpo">
       <p>È la macchina che molti centri hanno già in cabina. Diodo 808, lavoro pieno, comandi a mano.</p>
@@ -212,10 +210,8 @@ ul,ol,.due{page-break-inside:avoid}
       <p class="soprannome">la grande bianca</p>
     </div>
     <div class="foto">
-      <div class="manca"><b>FOTO</b>ARES 2026 IA<code>foto/ares-2026.jpg</code></div>
-      <img src="foto/ares-2026.jpg" alt="Laser ARES 2026 IA"
-           onerror="this.style.display='none'"
-           onload="this.parentNode.querySelector('.manca').style.display='none'">
+      <div class="manca"><b>FOTO</b>ARES 2026 IA<code>foto/ares-2026 &middot; jpg o png</code></div>
+      <img data-base="foto/ares-2026" alt="Laser ARES 2026 IA" style="display:none">
     </div>
     <div class="corpo">
       <p>Stessa fisica della 2025, ma con la telecamera e l'intelligenza artificiale a bordo. I conti li fa lei.</p>
@@ -238,10 +234,8 @@ ul,ol,.due{page-break-inside:avoid}
       <p class="soprannome">la carrellata</p>
     </div>
     <div class="foto">
-      <div class="manca"><b>FOTO</b>URIEL 2026 IA<code>foto/uriel-2026.jpg</code></div>
-      <img src="foto/uriel-2026.jpg" alt="Laser URIEL 2026 IA"
-           onerror="this.style.display='none'"
-           onload="this.parentNode.querySelector('.manca').style.display='none'">
+      <div class="manca"><b>FOTO</b>URIEL 2026 IA<code>foto/uriel-2026 &middot; jpg o png</code></div>
+      <img data-base="foto/uriel-2026" alt="Laser URIEL 2026 IA" style="display:none">
     </div>
     <div class="corpo">
       <p>Tre lunghezze d'onda sullo stesso manipolo. Prende ogni pelle e ogni pelo, anche quelli che le altre lasciano lì.</p>
@@ -456,5 +450,25 @@ Prezzi IVA esclusa. Garanzia 12 mesi. Permuta della macchina usata valutata caso
   <span>Rev. ……… / ……… / …………</span>
 </div>
 
+<script>
+/* La fotografia si chiama foto/<nome>.<estensione>. L'estensione non la
+   decidiamo noi: dipende da come arriva il file. Le proviamo in fila e ci
+   teniamo la prima che si apre. Se non si apre nessuna, resta la cornice
+   tratteggiata e la pagina si stampa lo stesso. */
+(function(){
+  var ESTENSIONI=['jpg','jpeg','png','webp','JPG','PNG'];
+  Array.prototype.forEach.call(document.querySelectorAll('.foto'),function(cornice){
+    var img=cornice.querySelector('img'), manca=cornice.querySelector('.manca');
+    var base=img.getAttribute('data-base'), i=0;
+    img.onload=function(){ manca.style.display='none'; img.style.display='block'; };
+    img.onerror=function(){ prova(); };
+    function prova(){
+      if(i>=ESTENSIONI.length){ img.style.display='none'; return; }
+      img.src=base+'.'+ESTENSIONI[i++];
+    }
+    prova();
+  });
+})();
+</script>
 </body>
 </html>

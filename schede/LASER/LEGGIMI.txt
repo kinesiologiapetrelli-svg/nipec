@@ -17,6 +17,10 @@ esatti, dentro la cartella foto/:
   foto/ares-2026.jpg     la grande bianca, telecamera e IA
   foto/uriel-2026.jpg    la carrellata, 16 diodi e 3 bande
 
+Vanno bene anche .png, .jpeg o .webp: la pagina prova le estensioni in fila
+e si tiene la prima che si apre. Conta solo il nome: ares-2025, ares-2026,
+uriel-2026.
+
 Appena i file ci sono, la cornice sparisce da sola e al suo posto compare la
 fotografia. Poi si ristampa il PDF e la scheda e' finita.
 
