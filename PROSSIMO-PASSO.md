@@ -55,6 +55,31 @@ temporanea e sono andate perse). 26 verifiche in un browser vero: si lanciano co
 `cd PROVE && npm install playwright-core && node prova.js`. **Se non passano, non si
 pubblica.**
 
+## I nomi, decisi il 5 ottobre
+
+    PERSELOPE           la sequenza di consegna      (documento)
+    PERSELOPE LASER     l'app della titolare          (perselopelaser.netlify.app)
+    PERSELOPE Clienti   le formule del foglio         (era ALERT-LASER.html)
+    NIPECPERSELOPE      l'app di controllo di Giorgio (sua, un altro progetto)
+
+Le ultime due si somigliavano troppo e si facevano confusione: adesso ogni pezzo
+porta il nome di famiglia. Al vecchio indirizzo `ALERT-LASER.html` c'è una pagina
+che reindirizza, così i link già mandati in giro non si rompono.
+
+## Come si pubblica, adesso
+
+Il sito dell'app nasce **trascinando `PERSELOPE-LASER.zip` su app.netlify.com/drop**
+e rinominando il sito in `perselopelaser`. Lo zip si rifà con:
+
+    cd APP-ALERT-LASER && zip ../PERSELOPE-LASER.zip index.html manifest.webmanifest \
+      sw.js netlify.toml icona-*.png apple-touch-icon.png
+
+**Attenzione: è una fotocopia.** Un sito nato da trascinamento non si aggiorna da solo.
+Ogni volta che si tocca l'app bisogna: rigenerare la demo, cambiare `VERSIONE` in
+`sw.js`, rifare lo zip e ritrascinarlo. Quando l'app sarà stabile conviene collegarlo
+a GitHub (Import an existing project → Publish directory `APP-ALERT-LASER`, Build
+command vuoto) e non pensarci più.
+
 ## Le lacune ancora aperte (dalla RADIOGRAFIA)
 
 1. ~~Doppio inserimento~~ — **chiusa**: l'app è l'agenda, non si aggancia a nulla.
