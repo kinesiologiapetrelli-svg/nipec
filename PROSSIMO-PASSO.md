@@ -1,4 +1,4 @@
-# Dove eravamo — 25 agosto, mattina
+# Dove siamo — 5 ottobre
 
 Da riprendere domani. Tutto quello che c'è scritto qui è deciso, non da discutere:
 serve solo a non ripartire da capo.
@@ -37,6 +37,23 @@ Provata a browser: 22 verifiche.
   allega davvero il file) — è più bella ma va solo da telefono. Serve sapere da Giorgio
   chi fa le immagini e dove stanno.
 - **Più clienti insieme.** Fatto una per volta, col contatore. Da confermare che vada bene.
+
+## Pronti a partire — 5 ottobre
+
+La procedura di consegna **PERSELOPE è stata riscritta intorno all'app**: la fase A è
+passata da quindici passaggi a quattro (dieci minuti, nessun computer), la fase B ha
+dentro i passaggi veri — l'icona, **la sveglia**, le venti clienti a due campi, la prima
+telefonata, le tre offerte e la copia. Il foglio Google non si nomina più in consegna:
+resta come archivio.
+
+Trovato e corretto un difetto che avrebbe rovinato il lancio: l'app era cambiata tre
+volte senza che cambiasse il numero di `VERSIONE` dentro `sw.js`. Chi l'avesse già
+installata sarebbe rimasto alla versione di agosto per sempre.
+
+**Le prove adesso stanno in `PROVE/`, dentro il repo** (prima vivevano su una macchina
+temporanea e sono andate perse). 26 verifiche in un browser vero: si lanciano con
+`cd PROVE && npm install playwright-core && node prova.js`. **Se non passano, non si
+pubblica.**
 
 ## Le lacune ancora aperte (dalla RADIOGRAFIA)
 

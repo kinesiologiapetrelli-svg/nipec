@@ -1,7 +1,7 @@
 /* ALERT LASER — il guscio offline.
    Cambia VERSIONE a ogni pubblicazione: è l'unico modo perché i telefoni
    già installati si accorgano che c'è una versione nuova. */
-var VERSIONE = "alert-laser-demo-1";
+var VERSIONE = "alert-laser-demo-3";
 var ROBA = ["./", "index.html", "manifest.webmanifest",
             "icona-192.png", "icona-512.png", "icona-maskable-512.png", "apple-touch-icon.png"];
 

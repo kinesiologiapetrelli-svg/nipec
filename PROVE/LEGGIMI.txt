@@ -1,0 +1,24 @@
+LE PROVE
+
+Perché esistono: l'app la usa una persona sola, in centro, davanti a una
+cliente. Se si rompe lì, la consegna è bruciata. Questo file la apre in un
+browser vero e controlla che faccia quello che deve.
+
+COME SI LANCIANO
+  cd PROVE
+  npm install playwright-core
+  node prova.js
+
+Serve Chromium. Se non sta nel posto di serie:
+  CHROME=/percorso/del/chrome node prova.js
+
+QUANDO SI LANCIANO
+Ogni volta che si tocca APP-ALERT-LASER/index.html, PRIMA di pubblicare.
+Se non passano, non si pubblica.
+
+E SE SI CAMBIA L'APP
+Dopo aver modificato index.html vanno fatte due cose, sempre:
+  1. rigenerare la demo:  python3 APP-ALERT-LASER/_genera-demo.py
+  2. cambiare il numero di VERSIONE dentro sw.js (e in quello della demo)
+Senza il punto 2 i telefoni che hanno già installato l'app restano fermi
+alla versione vecchia, per sempre, e non se ne accorge nessuno.
