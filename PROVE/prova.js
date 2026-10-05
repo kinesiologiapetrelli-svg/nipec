@@ -120,7 +120,7 @@ const servi = () => http.createServer((q, r) => {
   await ctx.setOffline(true);
   await d.reload({ waitUntil: "domcontentloaded" });
   await d.waitForTimeout(900);
-  ok("senza linea si apre lo stesso", (await d.textContent(".capo .titolo-app")).includes("ALERT LASER"));
+  ok("senza linea si apre lo stesso", (await d.textContent(".capo .titolo-app")).includes("PERSELOPE LASER"));
   await ctx.setOffline(false);
 
   /* ---------- la versione del guscio: se non cambia, i telefoni restano indietro ---------- */

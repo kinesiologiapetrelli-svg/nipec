@@ -82,6 +82,7 @@ di `2-FOGLI`: va fatto la prima volta che si converte il foglio in Foglio Google
 - App dei centri — https://nipecalert.netlify.app
 - Demo — https://kinesiologiapetrelli-svg.github.io/nipec/APP-ALERT-LASER-DEMO/
 - Radiografia — https://kinesiologiapetrelli-svg.github.io/nipec/RADIOGRAFIA.html
+- Le formule del foglio — .../nipec/PERSELOPE-CLIENTI.html (prima si chiamava ALERT-LASER.html)
 - Repo — https://github.com/kinesiologiapetrelli-svg/nipec (ramo `claude/persefore-y6fpo8`)
 
 Si ripubblica tutto da solo a ogni modifica. Se si tocca l'app, cambiare il numero di

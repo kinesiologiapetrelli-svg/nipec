@@ -70,14 +70,14 @@ def genera():
         assert s.count(vecchio) == quante, "non trovato: " + vecchio[:60]
         s = s.replace(vecchio, nuovo)
 
-    cambia("<title>ALERT LASER</title>", "<title>ALERT LASER · DEMO</title>")
-    cambia('<meta name="apple-mobile-web-app-title" content="Alert Laser">',
-           '<meta name="apple-mobile-web-app-title" content="Laser DEMO">')
+    cambia("<title>PERSELOPE LASER</title>", "<title>PERSELOPE LASER · DEMO</title>")
+    cambia('<meta name="apple-mobile-web-app-title" content="Perselope Laser">',
+           '<meta name="apple-mobile-web-app-title" content="Perselope DEMO">')
     cambia('var CHIAVE = "alertlaser.v1";', 'var CHIAVE = "alertlaser.demo.v1";')
 
     # il nastro DEMO in testata: deve essere impossibile confonderla
-    cambia('<div class="firma">Persefone <b>By NIPEC</b></div>',
-           '<div class="firma"><span class="nastro">DEMO</span> Persefone <b>By NIPEC</b></div>')
+    cambia('<div class="firma">il tuo quaderno delle clienti <b>· NIPEC</b></div>',
+           '<div class="firma"><span class="nastro">DEMO</span> il tuo quaderno delle clienti <b>· NIPEC</b></div>')
     cambia(".capo .firma b{font-weight:700;opacity:.95}",
            ".capo .firma b{font-weight:700;opacity:.95}\n"
            ".nastro{background:#e0917a;color:#2a1b17;font-weight:700;letter-spacing:.1em;"
@@ -108,15 +108,15 @@ def genera():
     # manifest e guscio offline, con nomi propri
     m = os.path.join(FUORI, "manifest.webmanifest")
     t = open(m, encoding="utf-8").read()
-    t = t.replace('"name": "ALERT LASER"', '"name": "ALERT LASER · DEMO"')
-    t = t.replace('"short_name": "Alert Laser"', '"short_name": "Laser DEMO"')
+    t = t.replace('"name": "PERSELOPE LASER"', '"name": "PERSELOPE LASER · DEMO"')
+    t = t.replace('"short_name": "Perselope"', '"short_name": "Perselope DEMO"')
     t = t.replace('"description": "La rubrica del laser che dice chi richiamare oggi."',
                   '"description": "La copia dimostrativa di ALERT LASER, già piena di clienti finte."')
     open(m, "w", encoding="utf-8").write(t)
 
     w = os.path.join(FUORI, "sw.js")
     t = open(w, encoding="utf-8").read()
-    t = t.replace('var VERSIONE = "alert-laser-1";', 'var VERSIONE = "alert-laser-demo-1";')
+    t = t.replace('var VERSIONE = "perselope-laser-4";', 'var VERSIONE = "perselope-laser-demo-4";')
     open(w, "w", encoding="utf-8").write(t)
     return FUORI
 

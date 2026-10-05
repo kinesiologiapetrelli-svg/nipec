@@ -2,7 +2,7 @@
 <html lang="it" data-tema="chiaro">
 <head>
 <meta charset="utf-8">
-<title>ALERT LASER · DEMO</title>
+<title>PERSELOPE LASER · DEMO</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#123a63">
 <meta name="color-scheme" content="light">
@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Laser DEMO">
+<meta name="apple-mobile-web-app-title" content="Perselope DEMO">
 <style>
 :root{
   color-scheme:light;
@@ -285,8 +285,8 @@ dialog .piede{padding:.8rem 1rem;border-top:1px solid var(--riga);display:flex;g
     <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#FFFFFF"/>
   </svg>
   <div class="chi">
-    <div class="titolo-app">ALERT LASER</div>
-    <div class="firma"><span class="nastro">DEMO</span> Persefone <b>By NIPEC</b></div>
+    <div class="titolo-app">PERSELOPE LASER</div>
+    <div class="firma"><span class="nastro">DEMO</span> il tuo quaderno delle clienti <b>· NIPEC</b></div>
   </div>
   <div class="data" id="capo-data"></div>
   <button id="installa" hidden type="button">Installa</button>
@@ -707,7 +707,7 @@ function disegna() {
   var badge = $("#conta-oggi");
   badge.textContent = righe.length;
   badge.hidden = righe.length === 0;
-  document.title = (righe.length ? "(" + righe.length + ") " : "") + "ALERT LASER";
+  document.title = (righe.length ? "(" + righe.length + ") " : "") + "PERSELOPE LASER";
 
   if (vista === "oggi") disegnaOggi(righe);
   if (vista === "rubrica") disegnaRubrica();
