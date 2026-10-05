@@ -1,0 +1,21 @@
+# Sta dentro il pacchetto, così vale anche quando il sito nasce
+# trascinando lo zip e non dal repo.
+
+# L'app è una pagina sola: qualunque indirizzo sbagliato torna a casa
+# invece di mostrare un errore. I file veri vengono serviti prima.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Il guscio offline e il manifest non vanno messi in cache dai server
+# intermedi: se no i telefoni già installati non vedono le versioni nuove.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "no-cache"
