@@ -1,0 +1,56 @@
+DEMETRA · AFRODITE — i documenti di cabina
+Rifatti sull'impianto NIPEC, lo stesso del protocollo laser: logo in
+testata, i caratteri del marchio, i riquadri colorati, le righe da
+compilare. Il contenuto non e' cambiato di una virgola.
+
+
+QUATTRO DOCUMENTI, QUATTRO MESTIERI DIVERSI
+
+  SCHEDA-CABINA-AFRODITE.pdf            1 pagina · si appende al muro
+  Tutta la seduta in una facciata: cancello, parametri, prodotti, i
+  quattro controlli prima di chiamare l'assistenza. Si guarda, non si
+  legge. E' quella che serve davvero mentre si lavora.
+
+  SCHEDA-VALUTAZIONE-DEMETRA.pdf        2 facciate · una per cliente
+  Si stampa fronte e retro e si compila. Controindicazioni, valutazione,
+  cancello, misure alle sedute 1-5-10, seduta eseguita, prossimo
+  appuntamento, firme. Resta nella cartella della cliente.
+
+  PROTOCOLLO-DEMETRA-AFRODITE-BASE.pdf  4 pagine · si studia una volta
+  La sequenza completa, gesto per gesto, con il perche' di ogni passaggio.
+  Si legge in formazione e si tiene in cabina come riferimento.
+
+  FORMAZIONE-MANUALITA-DEMETRA.pdf      2 pagine · si consegna
+  Il livello AVANZATO. Documento per la titolare, non per la cabina:
+  cosa impara, come si svolge, quanto costa, e la frase che toglie
+  l'obiezione prima che arrivi.
+
+  I SORGENTI (.html) e i testi originali (.md) stanno qui accanto.
+
+
+COSA MANCA ANCORA
+
+ 1. I PREZZI DELLA GIORNATA DI FORMAZIONE
+    Tre caselle vuote: giornata per centro, spese di trasferta, giornata
+    di aggiornamento. Finche' sono vuote il documento non si consegna.
+
+ 2. LA SOGLIA DEL CANCELLO ROSSO
+    "Differenza di lunghezza marcata" e' una parola, non un numero. Sulla
+    Scheda c'e' la riga "soglia concordata con NIPEC: differenza superiore
+    a ………". Va riempita una volta e vale per tutti i centri — altrimenti
+    ogni operatrice decide per conto suo cosa vuol dire marcata.
+
+ 3. L'ALBANESE
+    Afrodite oggi esiste solo in italiano. Il laser ha tutte e due le
+    lingue. Se serve per Tirana, l'impianto e' pronto: serve la traduzione
+    e la rilettura di Uarda.
+
+
+COME SI RISTAMPA
+Si apre il file .html nel browser e si stampa in PDF, A4, margini di
+default, con "grafica di sfondo" attiva. Altrimenti escono pagine bianche
+senza i riquadri colorati.
+
+La scheda di cabina e la scheda di valutazione hanno in fondo al CSS un
+blocco di misure piu' strette: servono a tenerle in una pagina e in due
+facciate. Se si aggiunge testo, quelle due vanno ricontrollate.

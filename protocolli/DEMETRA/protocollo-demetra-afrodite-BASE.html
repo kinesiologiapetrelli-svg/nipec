@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Protocollo DEMETRA · Afrodite — livello BASE</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+
+/* ---------- aggiunte DEMETRA ---------- */
+.fab{font-size:7.6pt;color:#6B747C;font-style:italic}
+/* la casella da barrare: un quadrato vero, non un carattere che cambia da font a font */
+.cas{display:inline-block;width:10px;height:10px;border:1.2px solid var(--blu);
+     border-radius:2px;vertical-align:-1px;margin-right:4px}
+.caselle{list-style:none;padding:0;margin:0 0 6px}
+.caselle li{position:relative;padding-left:17px;margin-bottom:5px;line-height:1.4}
+.caselle li:before{content:"";position:absolute;left:0;top:3px;width:10px;height:10px;
+                   border:1.2px solid var(--blu);border-radius:2px}
+.riga-casella{margin:8px 0}
+.riga-note{margin:8px 0;color:var(--ink2)}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Documento per l'operatrice certificata<br>
+    Si tiene in cabina<br>
+    Non si consegna alla cliente
+  </div>
+</div>
+
+<h1>Protocollo DEMETRA · Afrodite</h1>
+<p class="sotto">Livello BASE — corpo · incluso nel noleggio e nella vendita</p>
+<p class="riga-rev">Revisione 1.0 — ……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;Centro: ……………………………………&nbsp;&nbsp;·&nbsp;&nbsp;Operatrice: ……………………………………<br>Certificato NIPEC n. ……………………&nbsp;&nbsp;·&nbsp;&nbsp;Scadenza: ……… / ……… / …………</p>
+
+<div class="box">
+  <span class="eti">A cosa serve questo foglio</span>
+  <p>È la sequenza di una seduta corpo con Afrodite, gesto per gesto, nell'ordine in cui si fa.</p>
+  <p>Si esegue <b>con la Scheda di Valutazione DEMETRA in mano</b>. Senza quella il protocollo
+  non parte: le caselle che decidono come lavorare stanno lì.</p>
+  <p><b>Ciclo:</b> 10-12 sedute, 2 a settimana. <b>Durata seduta:</b> 45-60 minuti.</p>
+</div>
+
+<div class="box giallo">
+  <span class="eti">Cosa non c'è qui dentro</span>
+  <p>Le manualità DEMETRA — correzione, aperture linfatiche, neurolinfatici sottocostali,
+  svuotamento colon, bioenergetica viso — <b>non fanno parte del livello BASE</b>. Sono il
+  livello AVANZATO e richiedono la giornata di formazione pratica dedicata.</p>
+  <p><b>Non improvvisarle.</b></p>
+</div>
+
+<h2><span class="n">0</span>Prima di toccare la cliente</h2>
+<p class="quando">5 minuti · prima che si spogli</p>
+
+<ol>
+  <li><b>Controindicazioni.</b> Scorri le 11 caselle della Scheda. <b>Se anche una sola è
+  barrata, la seduta non si fa.</b> Non è una valutazione tua: è una regola.</li>
+  <li><b>Consenso informato</b> firmato.</li>
+  <li><b>Misure e foto</b> — solo alle sedute 1, 5 e 10. Vita, addome, coscia. Stessa
+  posizione, stessa luce, stessa distanza.</li>
+  <li><b>Macchina</b>: accesa, manipoli collegati e ben inseriti, filtro dell'aria controllato.</li>
+</ol>
+
+<h2><span class="n">1</span>Valutazione</h2>
+<p class="quando">5 minuti · cliente supina</p>
+
+<p>Cliente distesa, rilassata, gambe distese e non incrociate. Osservi <b>quattro cose</b>
+e le scrivi sulla Scheda.</p>
+
+<table>
+  <tr><th style="width:4%">#</th><th style="width:30%">Osservazione</th><th>Come si guarda</th></tr>
+  <tr><td class="c"><b>1</b></td><td><b>Appoggio dei piedi</b></td><td>A cliente rilassata i piedi cadono verso l'esterno. Guardi se cadono <b>allo stesso modo</b> o se uno è più aperto dell'altro.</td></tr>
+  <tr><td class="c"><b>2</b></td><td><b>Lunghezza degli arti</b></td><td>Confronti l'allineamento dei <b>malleoli</b> — l'osso sporgente della caviglia. Uno arriva più corto?</td></tr>
+  <tr><td class="c"><b>3</b></td><td><b>Rotazione della caviglia</b></td><td>Muovi delicatamente la caviglia in rotazione, una per volta. Si muovono uguale, o una è <b>più limitata</b>?</td></tr>
+  <tr><td class="c"><b>4</b></td><td><b>Il lato critico</b></td><td>Dove hai trovato l'asimmetria, lì ti aspetti <b>più compressione e più ritenzione</b>. È il lato da cui parti e su cui dedichi più tempo.</td></tr>
+</table>
+
+<div class="box verde">
+  <span class="eti">Questo passaggio è il valore che la cliente percepisce</span>
+  <p>Diglielo ad alta voce, in parole sue:</p>
+  <p class="dire">«Guarda, il tuo piede destro cade più aperto e la caviglia si muove meno.
+  Su quella gamba il ristagno è più probabile — è da lì che partiamo.»</p>
+  <p>Non è una diagnosi e non si dichiara come tale. <b>È la ragione per cui la seduta è
+  cucita su di lei e non è uguale a quella di un'altra.</b></p>
+</div>
+
+<h2><span class="n">2</span>Il cancello</h2>
+<p class="quando">1 minuto · prima di accendere</p>
+
+<p>Decidi con la Scheda alla mano.</p>
+
+<table class="semaforo">
+  <tr><th style="width:19%">Esito</th><th>Cosa fai oggi</th></tr>
+  <tr><td><span class="pallino p-verde"></span>VERDE</td><td>Protocollo completo.</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>GIALLO</td><td>Asimmetria lieve. Protocollo completo, <b>partendo dal lato critico</b>.</td></tr>
+  <tr><td><span class="pallino p-rosso"></span>ROSSO</td><td>Caviglia limitata <b>oppure</b> differenza di lunghezza marcata. <b>Niente rimodellamento.</b> Solo Fase 3 (circolatorio) e Fase 5 (drenaggio). Poi <b>chiami NIPEC al 351 846 6025</b>.</td></tr>
+</table>
+
+<div class="box rosso">
+  <span class="eti">Il rosso non annulla la seduta</span>
+  <p>La cliente viene trattata, paga, e torna. Quello che salta è <b>solo la parte di
+  rimodellamento</b>.</p>
+  <p>Chi non rispetta il cancello si prende la responsabilità di lavorare in rimodellamento
+  su un corpo che non è pronto — e <b>fa decadere la copertura sui danni conseguenti</b>.</p>
+</div>
+
+<h2><span class="n">3</span>Apertura circolatoria</h2>
+<p class="quando">5-8 minuti · manipolo piccolo</p>
+
+<p>Lavoro leggero, di apertura, <b>sul lato critico per primo</b>.</p>
+
+<table>
+  <tr><th style="width:34%">Parametro</th><th>Valore</th></tr>
+  <tr><td>Manipolo</td><td><b>Piccolo</b></td></tr>
+  <tr><td>Livello RF</td><td><b>2</b></td></tr>
+  <tr><td>Livello vacuum</td><td><b>1-2</b></td></tr>
+  <tr><td>Pulsazione</td><td>2-3 Hz</td></tr>
+  <tr><td>Durata</td><td>5-8 minuti</td></tr>
+</table>
+
+<div class="box giallo">
+  <span class="eti">Le tre cose che si sbagliano qui</span>
+  <p><b>Si parte sempre dal livello più basso e si sale gradualmente.</b> Mai partire alti.</p>
+  <p><b>Lozione ad alta frequenza solo dove tocca il manipolo, in quantità giusta.</b> Se ne
+  metti troppa intasi l'ugello: è il guasto numero uno di questa macchina.</p>
+  <p><b>Il manipolo ben aderente alla pelle</b> per tutto il tempo.</p>
+</div>
+
+<h2><span class="n">4</span>Il bivio</h2>
+<p class="quando">Gambe o ventre — non tutte e due nella stessa seduta</p>
+
+<h3>▸ Se lavori le gambe — cliente prona</h3>
+
+<div class="due">
+  <div>
+    <p class="quando" style="margin-bottom:4px">4A · Ultrasuoni</p>
+    <table>
+      <tr><th style="width:42%">Parametro</th><th>Valore</th></tr>
+      <tr><td>Manipolo</td><td><b>Cavitazione U.F.D.</b></td></tr>
+      <tr><td>Modalità</td><td><b>Pulsazione 1</b><br>(100 ms on / 100 ms off) oppure <b>Auto</b></td></tr>
+      <tr><td>Potenza</td><td>parti bassa, sali gradualmente</td></tr>
+      <tr><td>Durata</td><td><b>8 minuti per gamba</b><br>inizia dal lato critico</td></tr>
+    </table>
+  </div>
+  <div>
+    <p class="quando" style="margin-bottom:4px">4B · Rimodellamento — RF + vacuum</p>
+    <table>
+      <tr><th style="width:42%">Parametro</th><th>Valore</th></tr>
+      <tr><td>Manipolo</td><td><b>Grande</b></td></tr>
+      <tr><td>Livello RF</td><td><b>2-3</b></td></tr>
+      <tr><td>Livello vacuum</td><td><b>2-3</b></td></tr>
+      <tr><td>Super pulsazione</td><td><b>10-12 Hz</b><br>solo manipolo grande e medio</td></tr>
+      <tr><td>Durata</td><td><b>10-25 minuti</b><br>di più sul lato critico</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>▸ Se lavori il ventre — cliente supina, resta com'è</h3>
+
+<div class="due">
+  <div>
+    <p class="quando" style="margin-bottom:4px">4A · Ultrasuoni</p>
+    <table>
+      <tr><th style="width:42%">Parametro</th><th>Valore</th></tr>
+      <tr><td>Manipolo</td><td><b>Cavitazione U.F.D.</b></td></tr>
+      <tr><td>Modalità</td><td><b>Pulsazione 1</b> oppure <b>Auto</b></td></tr>
+      <tr><td>Potenza</td><td>parti bassa, sali gradualmente</td></tr>
+      <tr><td>Durata</td><td><b>10 minuti</b></td></tr>
+    </table>
+  </div>
+  <div>
+    <p class="quando" style="margin-bottom:4px">4B · Rimodellamento — RF + vacuum</p>
+    <table>
+      <tr><th style="width:42%">Parametro</th><th>Valore</th></tr>
+      <tr><td>Manipolo</td><td><b>Grande</b></td></tr>
+      <tr><td>Livello RF</td><td><b>2-3</b></td></tr>
+      <tr><td>Livello vacuum</td><td><b>2-3</b></td></tr>
+      <tr><td>Super pulsazione</td><td><b>10-12 Hz</b></td></tr>
+      <tr><td>Durata</td><td><b>10-25 minuti</b></td></tr>
+    </table>
+  </div>
+</div>
+
+<h2><span class="n">5</span>Chiusura</h2>
+<p class="quando">10 minuti · massaggio drenante total body</p>
+
+<p>In direzione delle stazioni linfatiche. Prodotto Certezze secondo l'obiettivo.</p>
+
+<table>
+  <tr><th style="width:46%">Obiettivo</th><th>Prodotto</th></tr>
+  <tr><td>Ritenzione idrica, gambe</td><td><b>Vita Dren</b> · <b>Light Legs</b></td></tr>
+  <tr><td>Adiposità — addome, fianchi, cosce</td><td><b>Detox Snelling</b></td></tr>
+  <tr><td>Cellulite fibrosa</td><td><b>Gel Fibrocell</b></td></tr>
+  <tr><td>Effetto drenante e vascolare</td><td><b>Gel Crio</b></td></tr>
+</table>
+
+<h2><span class="n">6</span>Prima che esca dalla porta</h2>
+<p class="quando">3 minuti · mentre si riveste</p>
+
+<ol>
+  <li><b>Completa la Scheda</b>: cosa hai fatto, quanti minuti, quali livelli.</li>
+  <li><b>Fissa il prossimo appuntamento adesso.</b> Non «ti chiamo io». La cliente esce con
+  una data.</li>
+  <li><b>Registra la cliente sul cruscotto.</b></li>
+  <li>Se oggi era <b>seduta 1, 5 o 10</b>: mostrale le misure e le foto. <b>Il confronto
+  glielo fai vedere tu</b>, perché lei non se lo ricorda.</li>
+</ol>
+
+<div class="box verde">
+  <span class="eti">Perché l'appuntamento si fissa adesso</span>
+  <p>È l'unica cosa che tiene il ciclo di 10-12 sedute. <b>Sotto il 90% di clienti in ciclo
+  con l'appuntamento già preso, il centro sta perdendo clienti</b> — e se ne accorge due mesi
+  dopo, quando non tornano.</p>
+</div>
+
+<h2><span class="n">7</span>Dopo la seduta — la macchina</h2>
+<p class="quando">Prima di spegnere</p>
+
+<ul>
+  <li>Pulisci i manipoli con panno morbido e disinfetta la parte frontale.</li>
+  <li><b>Controlla il filtro dell'aria</b>: se ci sono residui di lozione, svuotalo.</li>
+  <li>Smonta i manipoli dal cavo e <b>riponili sul supporto</b>. Mai appesi al cavo, mai sul lettino.</li>
+  <li>Spegni.</li>
+</ul>
+
+<div class="box">
+  <span class="eti">I quattro controlli prima di chiamare l'assistenza</span>
+  <table style="margin:4px 0 0">
+    <tr><td class="c" style="width:5%"><b>1</b></td><td>C'è corrente e l'interruttore è acceso?</td></tr>
+    <tr><td class="c"><b>2</b></td><td>Il manipolo è collegato bene, fino in fondo?</td></tr>
+    <tr><td class="c"><b>3</b></td><td><b>L'aspirazione è calata?</b> Controlla clessidra e tubo: se sono sporchi di gel, puliscili.</td></tr>
+    <tr><td class="c"><b>4</b></td><td>Hai messo abbastanza gel sulla pelle?</td></tr>
+  </table>
+  <p style="margin-top:7px"><b>Assistenza NIPEC · 351 846 6025</b></p>
+</div>
+
+<h2><span class="n">8</span>Cosa non è compreso in questo protocollo</h2>
+
+<table>
+  <tr><th style="width:62%">Non compreso nel BASE</th><th>Dove si trova</th></tr>
+  <tr><td>Correzione</td><td>Livello <b>AVANZATO</b></td></tr>
+  <tr><td>Aperture linfatiche — inguinali, poplitee, addominali</td><td>Livello <b>AVANZATO</b></td></tr>
+  <tr><td>Apertura neurolinfatici sottocostali</td><td>Livello <b>AVANZATO</b></td></tr>
+  <tr><td>Svuotamento colon</td><td>Livello <b>AVANZATO</b></td></tr>
+  <tr><td>Bioenergetica viso</td><td>Livello <b>AVANZATO</b></td></tr>
+  <tr><td>Ri-test di bilanciamento dopo correzione</td><td>Livello <b>AVANZATO</b></td></tr>
+</table>
+
+<p>Il livello AVANZATO si ottiene con <b>una giornata di formazione pratica sulle manualità</b>
+presso il centro, erogata da un formatore NIPEC. Vedi il documento dedicato.</p>
+
+<div class="note">
+  <span class="eti">Note di cabina</span>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Tecnologie Estetiche — Protocollo DEMETRA · Afrodite VS++ / Multishape · livello BASE · Rev 1.0. I parametri macchina sono conformi al manuale d'uso del costruttore.</span>
+</div>
+
+
+</body>
+</html>

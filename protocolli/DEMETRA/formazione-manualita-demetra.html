@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Formazione Manualità DEMETRA</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+
+/* ---------- aggiunte DEMETRA ---------- */
+.fab{font-size:7.6pt;color:#6B747C;font-style:italic}
+/* la casella da barrare: un quadrato vero, non un carattere che cambia da font a font */
+.cas{display:inline-block;width:10px;height:10px;border:1.2px solid var(--blu);
+     border-radius:2px;vertical-align:-1px;margin-right:4px}
+.caselle{list-style:none;padding:0;margin:0 0 6px}
+.caselle li{position:relative;padding-left:17px;margin-bottom:5px;line-height:1.4}
+.caselle li:before{content:"";position:absolute;left:0;top:3px;width:10px;height:10px;
+                   border:1.2px solid var(--blu);border-radius:2px}
+.riga-casella{margin:8px 0}
+.riga-note{margin:8px 0;color:var(--ink2)}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Documento per la titolare<br>
+    Si consegna al centro<br>
+    Assistenza 351 846 6025
+  </div>
+</div>
+
+<h1>Formazione Manualità DEMETRA</h1>
+<p class="sotto">Una giornata pratica nel tuo centro — dal livello BASE al livello AVANZATO</p>
+<p class="riga-rev">Centro: ……………………………………&nbsp;&nbsp;·&nbsp;&nbsp;Data: ……… / ……… / …………</p>
+
+<h2>Perché esiste questa giornata</h2>
+
+<p>Il protocollo che hai in mano — il <b>livello BASE</b> — ti fa lavorare in sicurezza con
+l'Afrodite: valuti, decidi come lavorare, tratti. È incluso, e ti basta per fare sedute
+efficaci fin da subito.</p>
+
+<p>Ma nel BASE c'è un punto in cui ti devi fermare: <b>quando la valutazione trova
+un'asimmetria marcata, tu non intervieni — chiami noi.</b></p>
+
+<div class="box">
+  <span class="eti">Non è una limitazione commerciale</span>
+  <p>È che quel gesto lì <b>non si impara da un foglio.</b> Si impara con le mani sopra le
+  mani, su un corpo vero, con qualcuno che ti corregge mentre lo fai.</p>
+  <p>Per questo è una giornata in presenza, e non un video.</p>
+</div>
+
+<h2><span class="n">1</span>Cosa impari</h2>
+
+<table>
+  <tr><th style="width:5%">#</th><th>Contenuto</th></tr>
+  <tr><td class="c"><b>1</b></td><td><b>La correzione</b> — cosa fai quando la valutazione trova l'asimmetria, e come si applica</td></tr>
+  <tr><td class="c"><b>2</b></td><td><b>Le aperture linfatiche</b> — stazioni <b>inguinali</b>, <b>poplitee</b>, <b>addominali</b>: dove, in che ordine, con che pressione</td></tr>
+  <tr><td class="c"><b>3</b></td><td><b>L'apertura dei neurolinfatici sottocostali</b></td></tr>
+  <tr><td class="c"><b>4</b></td><td><b>Lo svuotamento del colon</b></td></tr>
+  <tr><td class="c"><b>5</b></td><td><b>La bioenergetica del viso</b> e il suo posto dentro una seduta corpo</td></tr>
+  <tr><td class="c"><b>6</b></td><td><b>Il ri-test di bilanciamento</b> — come si toglie la correzione e come si verifica che il lavoro abbia funzionato</td></tr>
+  <tr><td class="c"><b>7</b></td><td><b>Le manualità SNELLING</b> — pressioni profonde e scollamento dei tessuti</td></tr>
+  <tr><td class="c"><b>8</b></td><td><b>Le manualità drenanti finali</b> — convogliare i liquidi verso le stazioni</td></tr>
+</table>
+
+<h2><span class="n">2</span>Come si svolge</h2>
+
+<table>
+  <tr><th style="width:28%">Voce</th><th>Dettaglio</th></tr>
+  <tr><td><b>Durata</b></td><td><b>1 giornata</b>, ……… ore</td></tr>
+  <tr><td><b>Dove</b></td><td><b>Nel tuo centro</b>, sui tuoi lettini, con la tua macchina</td></tr>
+  <tr><td><b>Chi viene</b></td><td>Un formatore NIPEC</td></tr>
+  <tr><td><b>Quante persone</b></td><td>Tutte le operatrici del centro presenti quel giorno</td></tr>
+  <tr><td><b>Come si lavora</b></td><td>Pratica su corpo vero. Non teoria, non slide</td></tr>
+  <tr><td><b>Cosa ti resta</b></td><td>Il <b>Protocollo DEMETRA livello AVANZATO</b> e l'attestato</td></tr>
+</table>
+
+<h2><span class="n">3</span>Cosa ti abilita a fare</h2>
+
+<p>Dal giorno dopo esegui la <b>sequenza completa</b>:</p>
+
+<p class="dire">valutazione → <b>correzione</b> → <b>aperture linfatiche</b> →
+<b>neurolinfatici sottocostali</b> → <b>svuotamento colon</b> → <b>bioenergetica viso</b> →
+<b>togli la correzione</b> → <b>ri-test di bilanciamento</b> → macchina</p>
+
+<div class="box verde">
+  <span class="eti">E soprattutto</span>
+  <p><b>Le clienti che oggi devi rimandare, le tratti tu.</b></p>
+</div>
+
+<h2><span class="n">4</span>Quanto costa</h2>
+
+<table>
+  <tr><th style="width:62%">Voce</th><th>Importo <span class="fab">oltre IVA</span></th></tr>
+  <tr><td><b>Giornata di formazione pratica sulle manualità</b> — per centro</td><td><b>€ …………………</b></td></tr>
+  <tr><td>Spese di trasferta</td><td>€ …………………</td></tr>
+  <tr><td>Giornata di aggiornamento successiva <span class="fab">facoltativa</span></td><td>€ …………………</td></tr>
+</table>
+
+<p class="riga-casella"><span class="cas"></span> <b>Formazione richiesta</b> per il ……… / ……… / …………</p>
+
+<div class="box giallo">
+  <span class="eti">La cosa che ti diciamo prima che tu la chieda</span>
+  <p><b>Non ti serve per lavorare.</b> Con il BASE fai sedute complete, vendi percorsi e
+  ottieni risultati.</p>
+  <p>La giornata sulle manualità serve se vuoi <b>il metodo intero</b> — e se vuoi smettere
+  di fermarti davanti alle clienti più difficili, che di solito sono anche quelle che pagano
+  di più e restano di più.</p>
+  <p><b>Ti diamo le indicazioni. Se vuoi tutto, la giornata si paga.</b></p>
+</div>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Per NIPEC</span></div>
+  <div><div class="riga-firma"></div><span class="et">Il Cliente</span></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Tecnologie Estetiche — Formazione Manualità DEMETRA · Afrodite VS++ / Multishape</span>
+  <span>Assistenza 351 846 6025</span>
+</div>
+
+
+</body>
+</html>

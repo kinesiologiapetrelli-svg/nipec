@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Afrodite · scheda di cabina</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+
+/* ---------- aggiunte DEMETRA ---------- */
+.fab{font-size:7.6pt;color:#6B747C;font-style:italic}
+/* la casella da barrare: un quadrato vero, non un carattere che cambia da font a font */
+.cas{display:inline-block;width:10px;height:10px;border:1.2px solid var(--blu);
+     border-radius:2px;vertical-align:-1px;margin-right:4px}
+.caselle{list-style:none;padding:0;margin:0 0 6px}
+.caselle li{position:relative;padding-left:17px;margin-bottom:5px;line-height:1.4}
+.caselle li:before{content:"";position:absolute;left:0;top:3px;width:10px;height:10px;
+                   border:1.2px solid var(--blu);border-radius:2px}
+.riga-casella{margin:8px 0}
+.riga-note{margin:8px 0;color:var(--ink2)}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+
+/* ---------- questa scheda sta in una pagina sola, per forza ---------- */
+@page{size:A4;margin:11mm 12mm 10mm}
+body{font-size:9.1pt;line-height:1.42}
+h1{font-size:17pt;margin:11px 0 1px}
+h2{font-size:10.5pt;margin:11px 0 4px;padding-bottom:3px}
+h2 .n{font-size:8pt;padding:1px 6px}
+.testata{padding-bottom:8px;margin-bottom:10px}
+table{font-size:8.4pt;margin:4px 0 6px}
+td{padding:3.4px 7px}
+.quando{font-size:7.6pt;margin:0 0 4px}
+.box{padding:7px 11px;margin:7px 0;font-size:8.6pt}
+.box .eti{margin-bottom:3px}
+ul{margin:0 0 4px}
+li{margin-bottom:2px}
+.due{gap:14px}
+.chiusura{margin-top:10px;padding-top:5px}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Si appende in cabina<br>
+    Una pagina, tutta la seduta<br>
+    Assistenza 351 846 6025
+  </div>
+</div>
+
+<h1>Afrodite · la seduta in una pagina</h1>
+<p class="sotto">Scheda di cabina — livello BASE, corpo</p>
+
+<div class="box rosso" style="margin-top:12px">
+  <span class="eti">Le due cose che fermano tutto</span>
+  <p><b>Una casella delle controindicazioni barrata</b> → la seduta non si fa.<br>
+  <b>Cancello rosso</b> → si fa, ma senza rimodellamento.</p>
+</div>
+
+<div class="due">
+  <div>
+
+<h2><span class="n">1</span>Il cancello</h2>
+<table class="semaforo">
+  <tr><td><span class="pallino p-verde"></span>VERDE</td><td>Tutto</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>GIALLO</td><td>Tutto, dal lato critico</td></tr>
+  <tr><td><span class="pallino p-rosso"></span>ROSSO</td><td>Solo fase 3 e fase 5.<br>Poi chiami NIPEC</td></tr>
+</table>
+
+<h2><span class="n">2</span>Apertura circolatoria</h2>
+<p class="quando">5-8 min · dal lato critico</p>
+<table>
+  <tr><td style="width:52%">Manipolo</td><td><b>Piccolo</b></td></tr>
+  <tr><td>Livello RF</td><td><b>2</b></td></tr>
+  <tr><td>Livello vacuum</td><td><b>1-2</b></td></tr>
+  <tr><td>Pulsazione</td><td>2-3 Hz</td></tr>
+</table>
+
+<h2><span class="n">3</span>Ultrasuoni</h2>
+<table>
+  <tr><td style="width:52%">Manipolo</td><td><b>Cavitazione U.F.D.</b></td></tr>
+  <tr><td>Modalità</td><td><b>Pulsazione 1</b> o <b>Auto</b></td></tr>
+  <tr><td>Potenza</td><td>bassa, poi sali</td></tr>
+  <tr><td>Gambe</td><td><b>8 min per gamba</b></td></tr>
+  <tr><td>Ventre</td><td><b>10 min</b></td></tr>
+</table>
+
+  </div>
+  <div>
+
+<h2><span class="n">4</span>Rimodellamento</h2>
+<p class="quando">Solo se il cancello non è rosso</p>
+<table>
+  <tr><td style="width:52%">Manipolo</td><td><b>Grande</b></td></tr>
+  <tr><td>Livello RF</td><td><b>2-3</b></td></tr>
+  <tr><td>Livello vacuum</td><td><b>2-3</b></td></tr>
+  <tr><td>Super pulsazione</td><td><b>10-12 Hz</b></td></tr>
+  <tr><td>Durata</td><td><b>10-25 min</b><br><span class="fab">di più sul lato critico</span></td></tr>
+</table>
+
+<h2><span class="n">5</span>Chiusura</h2>
+<p class="quando">10 min · drenante total body</p>
+<table>
+  <tr><td style="width:52%">Ritenzione, gambe</td><td><b>Vita Dren</b> · <b>Light Legs</b></td></tr>
+  <tr><td>Adiposità</td><td><b>Detox Snelling</b></td></tr>
+  <tr><td>Cellulite fibrosa</td><td><b>Gel Fibrocell</b></td></tr>
+  <tr><td>Drenante e vascolare</td><td><b>Gel Crio</b></td></tr>
+</table>
+
+<h2><span class="n">6</span>Prima che esca</h2>
+<ul>
+  <li>Completa la Scheda</li>
+  <li><b>Fissa il prossimo appuntamento adesso</b></li>
+  <li>Registra sul cruscotto</li>
+  <li>Seduta 1, 5 o 10: <b>mostrale le misure</b></li>
+</ul>
+
+  </div>
+</div>
+
+<div class="box giallo">
+  <span class="eti">Il guasto numero uno</span>
+  <p><b>Troppa lozione intasa l'ugello.</b> Solo dove tocca il manipolo, in quantità giusta.
+  E il manipolo ben aderente alla pelle per tutto il tempo.</p>
+</div>
+
+<div class="due">
+  <div class="box">
+    <span class="eti">Si parte sempre bassi</span>
+    <p>Dal livello più basso, e si sale gradualmente. <b>Mai partire alti.</b></p>
+  </div>
+  <div class="box">
+    <span class="eti">Dopo la seduta</span>
+    <p>Pulisci e disinfetta i manipoli · svuota il filtro se c'è lozione · <b>manipoli sul
+    supporto</b>, mai appesi al cavo.</p>
+  </div>
+</div>
+
+<div class="box verde">
+  <span class="eti">Prima di chiamare l'assistenza, quattro controlli</span>
+  <p><b>1.</b> C'è corrente e l'interruttore è acceso? &nbsp;·&nbsp; <b>2.</b> Il manipolo è
+  collegato fino in fondo? &nbsp;·&nbsp; <b>3.</b> L'aspirazione è calata? Controlla clessidra
+  e tubo: se sono sporchi di gel, puliscili. &nbsp;·&nbsp; <b>4.</b> Hai messo abbastanza gel
+  sulla pelle?</p>
+  <p style="margin-top:5px"><b>Assistenza NIPEC · 351 846 6025</b></p>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Tecnologie Estetiche — Afrodite VS++ / Multishape · scheda di cabina, livello BASE · Rev 1.0</span>
+</div>
+
+
+</body>
+</html>
