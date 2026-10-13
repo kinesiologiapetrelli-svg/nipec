@@ -26,7 +26,11 @@ Le pagine e le due app si pubblicano da sole a ogni modifica del ramo principale
 
 Le pagine: `PERSELOPE.html` (la consegna), `PERSELOPE-CLIENTI.html` (le formule del foglio),
 `RADIOGRAFIA.html` (lo studio sul mercato),
-`CAMPAGNA.html` (la campagna pubblicitaria fino al 30 novembre).
+`CAMPAGNA.html` (la campagna del laser a noleggio), `REEL.html` (i copioni dei reel).
+
+Il sito pubblico NIPEC 5.0 sta in `SITO/` (si pubblica su Netlify: `SITO-NIPEC-5.1.zip`);
+le pagine delle inserzioni si rigenerano con gli script in `SITO-STRUMENTI/`,
+immagini e foglio contatti della campagna stanno in `CAMPAGNA-MATERIALI/`.
 
 Sono due indirizzi diversi, quindi **due archivi separati**: l'app tiene la rubrica
 nel browser, legata all'indirizzo da cui è stata aperta. La demo non può sporcare

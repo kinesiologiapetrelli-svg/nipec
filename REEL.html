@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="it" data-theme="light">
+<title>REEL NIPEC</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+:root{
+  --carta:#ffffff;--fondo:#f1f4f7;--riga:#d9e2e9;--riga-forte:#b9c8d4;
+  --inchiostro:#17222e;--tenue:#5a6b79;--blu:#1c6ea4;--navy:#123a63;--blu-tenue:#e6eff7;
+  --allerta:#a3432e;--allerta-fondo:#faeae6;--avviso:#8a6208;--avviso-fondo:#f8efdb;
+  --ok:#1b6e52;--ok-fondo:#e2f1ea;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+  --sans:"Archivo", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --carta:#16212c;--fondo:#0d151d;--riga:#26333f;--riga-forte:#3a4b59;
+    --inchiostro:#e9f0f6;--tenue:#9aaab8;--blu:#5aa6d6;--navy:#8ec8ea;--blu-tenue:#152b3a;
+    --allerta:#e0917a;--allerta-fondo:#2a1b17;--avviso:#dcb264;--avviso-fondo:#2a2211;
+    --ok:#63c19d;--ok-fondo:#122a22;
+    --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --carta:#16212c;--fondo:#0d151d;--riga:#26333f;--riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6;--tenue:#9aaab8;--blu:#5aa6d6;--navy:#8ec8ea;--blu-tenue:#152b3a;
+  --allerta:#e0917a;--allerta-fondo:#2a1b17;--avviso:#dcb264;--avviso-fondo:#2a2211;
+  --ok:#63c19d;--ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--inchiostro);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.foglio{max-width:53rem;margin:0 auto;padding:0 1rem 5rem}
+p{margin:0}
+:focus-visible{outline:2px solid var(--blu);outline-offset:3px;border-radius:.3rem}
+
+.testata{margin:0 -1rem 1.5rem;padding:3rem 1.5rem 2.25rem;background:#123a63;color:#fff;border-radius:0 0 1.25rem 1.25rem}
+.testata .occhiello{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#9fcbe8;font-weight:600;margin:0 0 .65rem}
+.testata h1{font-weight:700;font-size:clamp(2.4rem,8vw,3.9rem);line-height:1;letter-spacing:.02em;margin:0}
+.testata .tesi{font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.5;margin:1.1rem 0 0;max-width:42ch;color:#d5e6f2}
+.tempi{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.tempi span{font-size:.74rem;font-weight:500;padding:.32rem .6rem;border-radius:1.2rem;border:1px solid rgba(255,255,255,.28);color:#d5e6f2}
+.tempi b{color:#fff;font-weight:700}
+
+.indice{position:sticky;top:0;z-index:20;margin:0 -1rem 1.5rem;padding:.5rem 1rem;border-bottom:1px solid var(--riga);
+  background:color-mix(in srgb, var(--fondo) 90%, transparent);backdrop-filter:blur(8px);
+  display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none}
+.indice::-webkit-scrollbar{display:none}
+.indice a{font-size:.79rem;font-weight:600;color:var(--tenue);text-decoration:none;padding:.4rem .6rem;border-radius:.4rem;white-space:nowrap}
+.indice a:hover{color:var(--blu);background:var(--blu-tenue)}
+
+.sezione{margin:3.25rem 0 1.25rem;scroll-margin-top:3.75rem}
+.sezione .n{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--blu);margin:0 0 .4rem}
+.sezione h2{font-size:1.35rem;font-weight:700;letter-spacing:-.01em;margin:0;padding-bottom:.55rem;border-bottom:2px solid var(--blu);display:inline-block}
+.sezione p{margin:.7rem 0 0;color:var(--tenue);font-size:.95rem;max-width:62ch}
+.etichetta{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--blu);margin:2rem 0 .6rem}
+
+.carta{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;padding:1rem 1.2rem;box-shadow:var(--ombra)}
+.carta + .carta{margin-top:.6rem}
+.carta h3{font-size:1rem;margin:0 0 .3rem}
+.carta p,.carta li{font-size:.93rem}
+.carta ul{margin:.4rem 0 0;padding-left:1.1rem}
+.griglia{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.griglia .carta + .carta{margin-top:0}
+.tag{display:inline-block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--blu);background:var(--blu-tenue);border-radius:.3rem;padding:.12rem .45rem;margin-bottom:.45rem}
+.tag.rosso{color:var(--allerta);background:var(--allerta-fondo)}
+.tag.giallo{color:var(--avviso);background:var(--avviso-fondo)}
+.tag.verde{color:var(--ok);background:var(--ok-fondo)}
+
+.nota{border-left:3px solid var(--avviso);background:var(--avviso-fondo);border-radius:0 .6rem .6rem 0;padding:.8rem 1rem;margin:1rem 0;font-size:.92rem}
+.nota.rossa{border-color:var(--allerta);background:var(--allerta-fondo)}
+.nota.verde{border-color:var(--ok);background:var(--ok-fondo)}
+.nota b{display:block;margin-bottom:.15rem}
+
+.tabella{overflow-x:auto;background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;box-shadow:var(--ombra)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:.6rem .8rem;border-bottom:1px solid var(--riga)}
+th{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tenue);font-weight:600}
+tr:last-child td{border-bottom:0}
+td b{color:var(--navy)}
+
+.annuncio{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;box-shadow:var(--ombra);overflow:hidden}
+.annuncio + .annuncio{margin-top:.75rem}
+.annuncio header{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.6rem 1rem;border-bottom:1px solid var(--riga);background:var(--blu-tenue)}
+.annuncio header span{font-size:.75rem;font-weight:700;color:var(--blu);letter-spacing:.06em;text-transform:uppercase}
+.annuncio .corpo{padding:.9rem 1rem}
+.annuncio .campo{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tenue);font-weight:600;margin-top:.6rem}
+.annuncio .campo:first-child{margin-top:0}
+.annuncio .testo{font-family:var(--serif);font-size:1rem;white-space:pre-line}
+button.copia{font-family:var(--sans);font-size:.74rem;font-weight:600;color:var(--blu);background:var(--carta);border:1px solid var(--riga-forte);border-radius:.4rem;padding:.3rem .65rem;cursor:pointer}
+button.copia:hover{border-color:var(--blu)}
+
+.lista{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.lista li{display:grid;grid-template-columns:1.4rem 1fr;gap:.7rem;background:var(--carta);border:1px solid var(--riga);border-radius:.7rem;padding:.75rem 1rem;box-shadow:var(--ombra)}
+.lista input{width:1.1rem;height:1.1rem;margin-top:.25rem;accent-color:var(--blu)}
+.lista b{display:block}
+.lista small{color:var(--tenue);font-size:.86rem;display:block}
+.lista a{color:var(--blu)}
+
+.settimane{display:grid;gap:.5rem}
+.settimana{display:grid;grid-template-columns:6.5rem 1fr;gap:.9rem;background:var(--carta);border:1px solid var(--riga);border-radius:.7rem;padding:.75rem 1rem;box-shadow:var(--ombra)}
+.settimana .quando{font-weight:700;color:var(--blu);font-size:.85rem}
+.settimana p{font-size:.92rem}
+@media (max-width:520px){.settimana{grid-template-columns:1fr;gap:.2rem}}
+
+.piede{margin-top:4rem;padding-top:1.25rem;border-top:1px solid var(--riga);font-size:.82rem;color:var(--tenue)}
+a{color:var(--blu)}
+
+.reel{background:var(--carta);border:1px solid var(--riga);border-radius:.9rem;box-shadow:var(--ombra);margin:0 0 1.25rem;overflow:hidden;scroll-margin-top:3.75rem}
+.reel>header{padding:1rem 1.2rem;background:var(--blu-tenue);border-bottom:1px solid var(--riga)}
+.reel>header .cod{font-size:.72rem;letter-spacing:.16em;font-weight:700;color:var(--blu);text-transform:uppercase}
+.reel>header h3{font-size:1.3rem;margin:.15rem 0 .35rem}
+.reel>header p{font-size:.9rem;color:var(--tenue)}
+.reel .meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.55rem}
+.reel .meta span{font-size:.72rem;font-weight:600;border:1px solid var(--riga-forte);border-radius:1rem;padding:.15rem .55rem;color:var(--tenue)}
+.reel .dentro{padding:1rem 1.2rem}
+.scene{border-collapse:collapse;width:100%;font-size:.88rem}
+.scene td,.scene th{border-bottom:1px solid var(--riga);padding:.55rem .5rem;vertical-align:top;text-align:left}
+.scene th{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
+.scene td:first-child{font-weight:700;color:var(--blu);white-space:nowrap;font-variant-numeric:tabular-nums}
+.scene .voce{font-family:var(--serif);font-size:.98rem}
+.scene .schermo{font-weight:700;color:var(--navy)}
+@media (max-width:640px){.scene thead{display:none}.scene tr{display:grid;grid-template-columns:3.2rem 1fr;border-bottom:1px solid var(--riga);padding:.4rem 0}.scene td{border:0;padding:.2rem .3rem}.scene td:first-child{grid-row:span 3}}
+.attacchi{margin-top:.9rem;display:grid;gap:.4rem}
+.attacchi p{font-size:.9rem;background:var(--fondo);border-radius:.5rem;padding:.5rem .75rem}
+.attacchi b{color:var(--blu)}
+.didascalia{margin-top:.9rem;font-family:var(--serif);font-size:.95rem;white-space:pre-line;border-left:3px solid var(--blu);padding:.2rem 0 .2rem .8rem}
+.etichetta-r{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tenue);font-weight:600;margin-top:1rem}
+.reel .nota{margin:.9rem 0 0}
+</style>
+<div class="foglio">
+
+<header class="testata">
+  <p class="occhiello">NIPEC · Campagna noleggio · i copioni</p>
+  <h1>REEL</h1>
+  <p class="tesi">Otto reel da girare col telefono, in una mattina. Ognuno ha due attacchi di riserva: stessi secondi centrali, prime parole diverse. Così dalle stesse riprese escono ventiquattro versioni da mettere alla prova.</p>
+  <div class="tempi">
+    <span><b>8</b> copioni</span>
+    <span><b>24</b> versioni con gli attacchi</span>
+    <span>9:16 · 20–35 secondi</span>
+    <span>1 mattina di riprese</span>
+  </div>
+</header>
+
+<nav class="indice" aria-label="Sezioni">
+  <a href="#regole">Le regole</a>
+  <a href="#test">Come li testiamo</a>
+  <a href="#r1">R1</a><a href="#r2">R2</a><a href="#r3">R3</a><a href="#r4">R4</a>
+  <a href="#r5">R5</a><a href="#r6">R6</a><a href="#r7">R7</a><a href="#r8">R8</a>
+  <a href="#riprese">La mattina di riprese</a>
+</nav>
+
+<section class="sezione" id="regole">
+  <p class="n">Prima di girare</p>
+  <h2>Sei regole, valgono per tutti e otto</h2>
+</section>
+<div class="griglia">
+  <div class="carta"><span class="tag">1 · i primi 2 secondi</span><h3>Si decide tutto lì</h3><p>Il primo fotogramma ha già una persona che parla o una mano che fa qualcosa, e il testo scritto in alto. Niente logo all’inizio, niente «ciao a tutti».</p></div>
+  <div class="carta"><span class="tag">2 · sottotitoli</span><h3>Sempre, grandi</h3><p>La maggior parte guarda senza audio. CapCut → Testo → Sottotitoli automatici, poi correggi le parole sbagliate. Bianco con bordo nero, nella metà alta dello schermo.</p></div>
+  <div class="carta"><span class="tag">3 · chi parla</span><h3>Una persona vera</h3><p>Giorgio, o un’estetista che lavora con la macchina. Mai una voce fuori campo letta: le titolari credono a chi ha le mani in cabina.</p></div>
+  <div class="carta"><span class="tag">4 · un messaggio</span><h3>Una cosa per reel</h3><p>Il prezzo, oppure l’app, oppure l’assistenza. Il resto lo dice la pagina del noleggio, non il video.</p></div>
+  <div class="carta"><span class="tag rosso">5 · cosa non dire</span><h3>Le parole che fanno bloccare</h3><p>Niente «zero firme» (il contratto c’è), niente «nessun concorrente», niente «definitivo», «indolore», «garantito». Niente corpi prima/dopo. Si dice «chiedi agli altri se te lo danno»: è più forte, ed è vero.</p></div>
+  <div class="carta"><span class="tag">6 · la chiusura</span><h3>Sempre la stessa</h3><p>«Scrivimi NOLEGGIO su WhatsApp.» Con il testo a schermo <b>Scrivi NOLEGGIO</b>. La ripetizione è voluta: diventa la vostra frase.</p></div>
+</div>
+<div class="nota"><b>Il prezzo si dice sempre con l’IVA accanto</b>«Cinquecento euro al mese più IVA». A voce si può dire una volta, a schermo deve esserci sempre «+ IVA».</div>
+
+<section class="sezione" id="test">
+  <p class="n">Come li testiamo</p>
+  <h2>Prima la leva, poi l’attacco</h2>
+  <p>Non si mettono online tutti e otto insieme: Meta dividerebbe i soldi su troppe strade e non impareremmo niente.</p>
+</section>
+<div class="settimane">
+  <div class="settimana"><span class="quando">Settimana 1</span><p><b>Quattro leve, un reel ciascuna:</b> R1 (prezzo) · R3 (app) · R5 (assistenza) · R7 (chiedi agli altri). Stesso gruppo di inserzioni, stesso budget. Non si tocca niente per 5 giorni.</p></div>
+  <div class="settimana"><span class="quando">Giorno 7</span><p><b>Mi mandi i numeri.</b> Guardo tre cose per ogni reel: quanti si fermano nei primi 3 secondi, quanti arrivano in fondo, quanto costa una chat WhatsApp aperta.</p></div>
+  <div class="settimana"><span class="quando">Settimana 2</span><p><b>La leva che vince prende tutto.</b> Si mettono online il suo gemello (R2, R4, R6 o R8) e i due attacchi di riserva. Il reel peggiore si spegne.</p></div>
+  <div class="settimana"><span class="quando">Settimana 3</span><p><b>Scrivo i copioni nuovi</b> sulla leva vincente, con gli attacchi che hanno tenuto di più. Se ne servono altri, ne facciamo altri: il collo di bottiglia sono le riprese, non i testi.</p></div>
+</div>
+<div class="tabella" style="margin-top:1rem"><table>
+  <thead><tr><th>Numero</th><th>Dove lo trovi in Gestione inserzioni</th><th>Buono se</th></tr></thead>
+  <tbody>
+    <tr><td><b>Si fermano</b></td><td>Visualizzazioni di 3 secondi ÷ impressioni</td><td>sopra il 25%</td></tr>
+    <tr><td><b>Arrivano in fondo</b></td><td>ThruPlay ÷ visualizzazioni di 3 secondi</td><td>sopra il 15%</td></tr>
+    <tr><td><b>Scrivono</b></td><td>Costo per conversazione con messaggi avviata</td><td>sotto i 15 €</td></tr>
+  </tbody>
+</table></div>
+<div class="nota"><b>Le soglie sono un punto di partenza</b>Vengono dall’esperienza comune sui reel, non da dati del vostro settore. Dopo la prima settimana le sostituiamo con i vostri numeri.</div>
+<section class="sezione" id="copioni"><p class="n">I copioni</p><h2>Otto reel, quattro leve</h2><p>R1-R2 prezzo · R3-R4 app · R5-R6 assistenza · R7 chiedi agli altri · R8 una titolare vera. Il codice in alto (R1, R2…) va messo nel link dell’inserzione: così so quale reel ha portato ogni chat.</p></section><article class="reel" id="r1"><header><span class="cod">R1 · leva prezzo · utm_content=R1</span><h3>«Lo puoi restituire»</h3><p>Togliere la paura numero uno del noleggio: restare incastrata.</p>
+<div class="meta"><span>Chi parla: Giorgio</span><span>Dove: In cabina, macchina accesa</span><span>25 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>0–2</td><td>Primo piano: una mano gira la chiave e la ARES si spegne.</td><td class="voce">Questo laser lo puoi restituire quando vuoi.</td><td class="schermo">Lo restituisci quando vuoi</td></tr><tr><td>2–8</td><td>Giorgio accanto alla macchina, inquadratura a mezzo busto.</td><td class="voce">È una ARES 2026, con la telecamera e l’intelligenza artificiale. Cinquecento euro al mese più IVA. Senza vincoli.</td><td class="schermo">500 €/mese + IVA · senza vincoli</td></tr><tr><td>8–15</td><td>Giorgio che mostra il manipolo a un’operatrice, mani in primo piano.</td><td class="voce">Dentro c’è la formazione, con l’esame. L’installazione la facciamo noi.</td><td class="schermo">Formazione inclusa</td></tr><tr><td>15–21</td><td>Il telefono con l’app sulla schermata Oggi, il dito che scorre.</td><td class="voce">E c’è un’app che ogni mattina ti dice quali clienti richiamare.</td><td class="schermo">L’app che ti dice chi chiamare</td></tr><tr><td>21–25</td><td>Giorgio guarda in camera.</td><td class="voce">Scrivimi NOLEGGIO su WhatsApp e ti dico se ti conviene.</td><td class="schermo">Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «Smetti di pagare un laser che tieni spento.»</p><p><b>Attacco C</b> — «Il laser non lo devi comprare. Davvero.»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">ARES 2026 con IA a noleggio: 500 € al mese + IVA, senza vincoli.
+Formazione, installazione, assistenza diretta e l’app che ti dice chi richiamare.
+Tocca «Invia messaggio» e scrivi NOLEGGIO.</p></div></article><article class="reel" id="r2"><header><span class="cod">R2 · leva prezzo · utm_content=R2</span><h3>«Il conto in nove sedute»</h3><p>Trasformare il canone in un numero di sedute: l’estetista ragiona in sedute, non in euro al mese.</p>
+<div class="meta"><span>Chi parla: Un’estetista che usa la macchina</span><span>Dove: Alla reception, con l’agenda</span><span>22 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>0–2</td><td>Lei scrive su un foglio, si vede la penna: «500».</td><td class="voce">Cinquecento euro al mese. Quante sedute sono?</td><td class="schermo">500 € = quante sedute?</td></tr><tr><td>2–9</td><td>Scrive la divisione sul foglio, la camera la segue.</td><td class="voce">Se le gambe le fai a sessanta euro, sono nove sedute al mese. Poco più di due a settimana.</td><td class="schermo">Esempio: seduta a 60 € → 9 al mese</td></tr><tr><td>9–16</td><td>Lei in cabina con la ARES, lavora (zona neutra: gamba, mai il viso della cliente).</td><td class="voce">Dalla decima in poi, il canone è già pagato. E la macchina non la devi comprare: la restituisci quando vuoi.</td><td class="schermo">Senza vincoli</td></tr><tr><td>16–22</td><td>Lei in camera, sorride.</td><td class="voce">È il noleggio NIPEC. Scrivi NOLEGGIO su WhatsApp.</td><td class="schermo">Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «Ho fatto il conto prima di firmare.»</p><p><b>Attacco C</b> — «Un laser si ripaga con due clienti a settimana?»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">Il conto che ogni estetista dovrebbe fare prima di scegliere un laser.
+ARES 2026 IA a noleggio: 500 € al mese + IVA, senza vincoli.
+Scrivi NOLEGGIO su WhatsApp.</p><div class="nota"><b>Attenzione</b>Il prezzo a seduta è un esempio: mettete quello vero di una zona che le vostre clienti fanno davvero. A schermo deve restare la parola «Esempio», e accanto ai 500 € sempre «+ IVA».</div></div></article><article class="reel" id="r3"><header><span class="cod">R3 · leva app · utm_content=R3</span><h3>«POV: il tuo laser ti dice chi chiamare»</h3><p>Far vedere la cosa che gli altri non danno, senza dirlo: si vede e basta.</p>
+<div class="meta"><span>Chi parla: Un’estetista (si vedono soprattutto le mani)</span><span>Dove: Centro ancora chiuso, mattina</span><span>24 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>0–2</td><td>Mano che appoggia il caffè accanto al telefono. Sullo schermo l’app, schermata Oggi.</td><td class="voce">—</td><td class="schermo">POV: il tuo laser ti dice chi chiamare</td></tr><tr><td>2–9</td><td>Primo piano dello schermo: «3 telefonate · valgono 885 €». Il dito tocca Anna.</td><td class="voce">Ogni mattina mi dice chi richiamare. E quanto vale.</td><td class="schermo">3 telefonate · 885 €</td></tr><tr><td>9–15</td><td>Si legge «ultima del ciclo — proponi il mantenimento». Tocca Chiama.</td><td class="voce">Anna ha finito il ciclo. Prima me ne accorgevo a giugno, quando non tornava più.</td><td class="schermo">Prima me ne accorgevo a giugno</td></tr><tr><td>15–20</td><td>Lei al telefono, si sente «Ciao Anna…» (voce bassa, non si capisce il resto).</td><td class="voce">—</td><td class="schermo">—</td></tr><tr><td>20–24</td><td>Lei in camera.</td><td class="voce">Arriva con il laser a noleggio di NIPEC. Chiedi agli altri se te la danno.</td><td class="schermo">Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «Le clienti non spariscono. Sei tu che non le vedi andare via.»</p><p><b>Attacco C</b> — «Questa app vale più del laser.»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">Ogni mattina tre telefonate, in ordine, con quanto valgono.
+Arriva con il laser a noleggio NIPEC: 500 € al mese + IVA, senza vincoli.
+Scrivi NOLEGGIO su WhatsApp. Chiedi agli altri se te la danno.</p><div class="nota"><b>Attenzione</b>Usate la DEMO, che ha clienti inventate. Mai lo schermo di un centro vero: si leggerebbero nomi e telefoni di persone reali.</div></div></article><article class="reel" id="r4"><header><span class="cod">R4 · leva app · utm_content=R4</span><h3>«Quante ne hai perse?»</h3><p>La domanda della RADIOGRAFIA: il silenzio prima della risposta è il messaggio.</p>
+<div class="meta"><span>Chi parla: Giorgio</span><span>Dove: Davanti al centro, o in auto</span><span>26 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>0–3</td><td>Giorgio in camera, serio. Si ferma due secondi dopo la domanda.</td><td class="voce">Quante clienti non vedi da sei mesi?</td><td class="schermo">Quante clienti non vedi da sei mesi?</td></tr><tr><td>3–10</td><td>Stessa inquadratura.</td><td class="voce">Non lo sai. È normale: chi sparisce non fa rumore. Non lascia una sedia vuota, non chiama.</td><td class="schermo">Chi sparisce non fa rumore</td></tr><tr><td>10–18</td><td>Il telefono con l’app, scorre la lista delle telefonate.</td><td class="voce">Per questo con il laser ti diamo un’app che le vede per te, e ogni mattina ti dice chi richiamare.</td><td class="schermo">L’app che le vede per te</td></tr><tr><td>18–26</td><td>Giorgio in camera.</td><td class="voce">Laser a noleggio, cinquecento euro al mese più IVA, senza vincoli. Scrivimi NOLEGGIO.</td><td class="schermo">500 €/mese + IVA · Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «Ognuna ha già pagato metà del ciclo. E non è più tornata.»</p><p><b>Attacco C</b> — «Il problema non è trovare clienti nuove.»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">Quante clienti non vedi da sei mesi? Non serve il numero esatto.
+Con il laser a noleggio NIPEC arriva l’app che ti dice chi richiamare, ogni mattina.
+Scrivi NOLEGGIO su WhatsApp.</p></div></article><article class="reel" id="r5"><header><span class="cod">R5 · leva assistenza · utm_content=R5</span><h3>«Il muletto»</h3><p>La paura vera di chi ha già un laser: la macchina ferma e nessuno che risponde.</p>
+<div class="meta"><span>Chi parla: Giorgio</span><span>Dove: Mentre carica una macchina in auto, poi all’arrivo in un centro</span><span>26 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>0–3</td><td>Giorgio carica un laser nel bagagliaio, guarda in camera.</td><td class="voce">Questa è la macchina che ti porto se la tua si ferma.</td><td class="schermo">Se si ferma, te ne porto un’altra</td></tr><tr><td>3–9</td><td>Guida (camera fissa sul cruscotto, a macchina ferma per girarla).</td><td class="voce">Entro quarantotto ore. Il centro non chiude, le clienti non le sposti.</td><td class="schermo">Muletto entro 48 ore</td></tr><tr><td>9–17</td><td>Arriva, entra in un centro, la titolare lo saluta.</td><td class="voce">E quando chiami, rispondo io. O il tecnico che ti ha consegnato la macchina. Non un call center.</td><td class="schermo">Non un call center</td></tr><tr><td>17–26</td><td>Giorgio in cabina, accanto alla macchina.</td><td class="voce">Laser a noleggio, cinquecento euro al mese più IVA, senza vincoli. Scrivimi NOLEGGIO.</td><td class="schermo">500 €/mese + IVA · Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «Il tuo laser si è fermato. Adesso chi chiami?»</p><p><b>Attacco C</b> — «Quanti giorni hai chiuso l’ultima volta che si è rotto?»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">Se il laser si ferma, entro 48 ore hai il muletto. E quando chiami, risponde una persona.
+Laser a noleggio NIPEC: 500 € al mese + IVA, senza vincoli.
+Scrivi NOLEGGIO su WhatsApp.</p></div></article><article class="reel" id="r6"><header><span class="cod">R6 · leva assistenza · utm_content=R6</span><h3>«Il numero»</h3><p>Rendere l’assistenza concreta: un numero vero, una persona vera.</p>
+<div class="meta"><span>Chi parla: Giorgio (si vede anche lo schermo del telefono)</span><span>Dove: Ufficio o auto</span><span>20 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>0–3</td><td>Un telefono che squilla sul tavolo. Giorgio risponde.</td><td class="voce">Pronto, NIPEC.</td><td class="schermo">Se il laser si ferma, chi ti risponde?</td></tr><tr><td>3–10</td><td>Giorgio in camera, telefono in mano.</td><td class="voce">Questo è il numero che chiami se il tuo laser si ferma. Rispondo io, o il tecnico che conosce la tua macchina.</td><td class="schermo">351 846 6025</td></tr><tr><td>10–15</td><td>Stessa inquadratura.</td><td class="voce">E una volta al mese ci vediamo dieci minuti in video, per fermare i guasti prima che fermino te.</td><td class="schermo">Controllo mensile incluso</td></tr><tr><td>15–20</td><td>Giorgio in camera.</td><td class="voce">Laser a noleggio, senza vincoli. Scrivimi NOLEGGIO.</td><td class="schermo">Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «Ti ricordi l’ultima volta che hai chiamato l’assistenza?»</p><p><b>Attacco C</b> — «L’assistenza non è un numero verde.»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">Un nome e un numero, non un call center. E dieci minuti al mese per controllare la macchina prima che si fermi.
+Laser a noleggio NIPEC: 500 € al mese + IVA, senza vincoli.
+Scrivi NOLEGGIO su WhatsApp.</p></div></article><article class="reel" id="r7"><header><span class="cod">R7 · leva «chiedi agli altri» · utm_content=R7</span><h3>«Tre domande prima di noleggiare un laser»</h3><p>Il confronto con i concorrenti, senza nominarli e senza dire niente di falso: le domande le fa lei.</p>
+<div class="meta"><span>Chi parla: Giorgio</span><span>Dove: Camminando, o in cabina</span><span>32 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>0–3</td><td>Giorgio in camera, alza tre dita.</td><td class="voce">Tre domande da fare a chiunque ti voglia noleggiare un laser.</td><td class="schermo">3 domande prima di noleggiare un laser</td></tr><tr><td>3–10</td><td>Un dito.</td><td class="voce">Uno: se si ferma, in quanto tempo me ne porti un altro?</td><td class="schermo">1 · Se si ferma, in quanto tempo?</td></tr><tr><td>10–17</td><td>Due dita.</td><td class="voce">Due: chi mi forma, e per quanto? Una giornata, o finché non so usarlo?</td><td class="schermo">2 · Chi mi forma, e per quanto?</td></tr><tr><td>17–24</td><td>Tre dita.</td><td class="voce">Tre: mi dai qualcosa che mi riporta le clienti?</td><td class="schermo">3 · Mi riporti le clienti?</td></tr><tr><td>24–32</td><td>Giorgio, tono tranquillo.</td><td class="voce">Noi: quarantotto ore, formazione con l’esame, e un’app che ti dice chi richiamare. Le stesse domande, falle agli altri. Poi scrivimi NOLEGGIO.</td><td class="schermo">48 ore · esame · app · Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «Prima di firmare un noleggio, fai queste tre domande.»</p><p><b>Attacco C</b> — «Il prezzo del noleggio è l’ultima cosa da guardare.»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">Tre domande da fare a chiunque ti proponga un laser a noleggio.
+Le nostre risposte: muletto entro 48 ore, formazione con esame, l’app che ti dice chi richiamare.
+Scrivi NOLEGGIO su WhatsApp.</p></div></article><article class="reel" id="r8"><header><span class="cod">R8 · leva prova sociale · utm_content=R8</span><h3>«Perché l’ho preso a noleggio»</h3><p>Una titolare vera vale più di qualunque copione. Questo non si recita: si fanno domande e si monta.</p>
+<div class="meta"><span>Chi parla: Una titolare cliente NIPEC</span><span>Dove: Nel suo centro, accanto alla macchina</span><span>30 s</span></div></header>
+<div class="dentro"><table class="scene"><thead><tr><th>Sec.</th><th>Cosa si vede</th><th>Cosa si dice</th><th>Testo a schermo</th></tr></thead><tbody><tr><td>Domanda 1</td><td>Lei a mezzo busto. Giorgio fuori campo fa la domanda, che nel video non si sente.</td><td class="voce">«Perché il noleggio e non l’acquisto?»</td><td class="schermo">La risposta migliore diventa l’attacco</td></tr><tr><td>Domanda 2</td><td>Stessa inquadratura.</td><td class="voce">«Cosa è successo la prima volta che la macchina ha avuto un problema?»</td><td class="schermo">—</td></tr><tr><td>Domanda 3</td><td>Lei che mostra l’app sul suo telefono (schermata Come va, senza nomi).</td><td class="voce">«Usi l’app? Cosa ti ha fatto vedere che prima non vedevi?»</td><td class="schermo">—</td></tr><tr><td>Domanda 4</td><td>In camera.</td><td class="voce">«Cosa diresti a una collega che ci sta pensando?»</td><td class="schermo">Chiusura: Scrivi NOLEGGIO</td></tr></tbody></table>
+<p class="etichetta-r">Attacchi di riserva — stesse scene dal secondo 2-3 in poi, cambia solo la prima frase</p><div class="attacchi"><p><b>Attacco B</b> — «La prima frase forte che dice lei, presa dalla risposta 1 o 4.»</p><p><b>Attacco C</b> — «Una sua frase sull’assistenza, presa dalla risposta 2.»</p></div>
+<p class="etichetta-r">Didascalia del post</p><p class="didascalia">[Nome del centro, città] lavora con il laser NIPEC a noleggio.
+500 € al mese + IVA, senza vincoli. Scrivi NOLEGGIO su WhatsApp.</p><div class="nota"><b>Attenzione</b>Serve la sua liberatoria scritta per immagine e nome del centro, prima di pubblicare. Non le si mette in bocca nessuna frase: si monta solo quello che ha detto. Se racconta un guasto risolto, dev’essere successo davvero.</div></div></article><section class="sezione" id="riprese"><p class="n">La mattina di riprese</p><h2>Tutto in tre ore, in un centro solo</h2><p>Si gira tutto in un centro che ha la ARES 2026 (Demetra, o un centro cliente che vi presta la cabina). Le scene di stacco si girano una volta e servono a tutti i reel.</p></section>
+<ul class="lista" id="checklist">
+<li><input type="checkbox" id="g1"><label for="g1"><b>Attrezzatura</b><small>Il telefono (fotocamera posteriore, 4K, 30 fps), un treppiede con supporto per telefono, un microfono a clip per telefono (sui 20-30 €). Luce: davanti a una finestra, mai controluce.</small></label></li>
+<li><input type="checkbox" id="g2"><label for="g2"><b>Scene di stacco da girare una volta (10 secondi ciascuna)</b><small>La chiave che accende e spegne la ARES · lo schermo della telecamera IA che propone i parametri · il manipolo in mano, primo piano · l’app DEMO sulla schermata Oggi, il dito che scorre · un’operatrice che lavora su una gamba · Giorgio che carica una macchina in auto · Giorgio che entra in un centro.</small></label></li>
+<li><input type="checkbox" id="g3"><label for="g3"><b>Le parti parlate, in quest’ordine</b><small>R7, R4, R1, R6 (Giorgio, stessa inquadratura, cambiano solo le parole) → R5 (in auto) → R2 e R3 (l’estetista) → R8 (la titolare, per ultima: serve calma). Ogni frase si gira due volte; ogni attacco di riserva si gira subito dopo il suo reel.</small></label></li>
+<li><input type="checkbox" id="g4"><label for="g4"><b>Le liberatorie</b><small>Chiunque compaia in viso e non sia di NIPEC firma la liberatoria per l’uso dell’immagine, prima di girare. Le clienti in cabina: solo la zona trattata, mai il viso.</small></label></li>
+<li><input type="checkbox" id="g5"><label for="g5"><b>Il montaggio, con CapCut</b><small>Taglia le pause, sottotitoli automatici, testo a schermo in alto. Esporta in 1080×1920. Nome del file: il codice (R1-A, R1-B, R1-C per le tre versioni con attacchi diversi).</small></label></li>
+<li><input type="checkbox" id="g6"><label for="g6"><b>Mandameli</b><small>Caricali nella cartella del Drive e dimmelo: guardo i primi 3 secondi di ognuno prima che vadano online, e ti scrivo il testo dell’inserzione per ciascuno.</small></label></li>
+</ul>
+<footer class="piede">NIPEC · Tecnologie Estetiche — REEL, copioni della campagna noleggio, ottobre 2026.<br>Ogni condizione citata viene dal preventivo ARES/URIEL 2026 e dallo STANDARD NIPEC del noleggio. Assistenza 351 846 6025</footer>
+</div>
+<script>
+(function(){
+  var CHIAVE = 'nipec-reel-spunte', stato = {};
+  try { stato = JSON.parse(localStorage.getItem(CHIAVE) || '{}'); } catch(e) {}
+  document.querySelectorAll('#checklist input').forEach(function(c){
+    c.checked = !!stato[c.id];
+    c.addEventListener('change', function(){ stato[c.id] = c.checked; try { localStorage.setItem(CHIAVE, JSON.stringify(stato)); } catch(e) {} });
+  });
+})();
+</script>
