@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="it" data-theme="light">
+<title>CAMPAGNA NIPEC</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+:root{
+  --carta:#ffffff;--fondo:#f1f4f7;--riga:#d9e2e9;--riga-forte:#b9c8d4;
+  --inchiostro:#17222e;--tenue:#5a6b79;--blu:#1c6ea4;--navy:#123a63;--blu-tenue:#e6eff7;
+  --allerta:#a3432e;--allerta-fondo:#faeae6;--avviso:#8a6208;--avviso-fondo:#f8efdb;
+  --ok:#1b6e52;--ok-fondo:#e2f1ea;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+  --sans:"Archivo", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --carta:#16212c;--fondo:#0d151d;--riga:#26333f;--riga-forte:#3a4b59;
+    --inchiostro:#e9f0f6;--tenue:#9aaab8;--blu:#5aa6d6;--navy:#8ec8ea;--blu-tenue:#152b3a;
+    --allerta:#e0917a;--allerta-fondo:#2a1b17;--avviso:#dcb264;--avviso-fondo:#2a2211;
+    --ok:#63c19d;--ok-fondo:#122a22;
+    --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --carta:#16212c;--fondo:#0d151d;--riga:#26333f;--riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6;--tenue:#9aaab8;--blu:#5aa6d6;--navy:#8ec8ea;--blu-tenue:#152b3a;
+  --allerta:#e0917a;--allerta-fondo:#2a1b17;--avviso:#dcb264;--avviso-fondo:#2a2211;
+  --ok:#63c19d;--ok-fondo:#122a22;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--inchiostro);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.foglio{max-width:53rem;margin:0 auto;padding:0 1rem 5rem}
+p{margin:0}
+:focus-visible{outline:2px solid var(--blu);outline-offset:3px;border-radius:.3rem}
+
+.testata{margin:0 -1rem 1.5rem;padding:3rem 1.5rem 2.25rem;background:#123a63;color:#fff;border-radius:0 0 1.25rem 1.25rem}
+.testata .occhiello{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#9fcbe8;font-weight:600;margin:0 0 .65rem}
+.testata h1{font-weight:700;font-size:clamp(2.4rem,8vw,3.9rem);line-height:1;letter-spacing:.02em;margin:0}
+.testata .tesi{font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.3rem);line-height:1.5;margin:1.1rem 0 0;max-width:42ch;color:#d5e6f2}
+.tempi{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.5rem}
+.tempi span{font-size:.74rem;font-weight:500;padding:.32rem .6rem;border-radius:1.2rem;border:1px solid rgba(255,255,255,.28);color:#d5e6f2}
+.tempi b{color:#fff;font-weight:700}
+
+.indice{position:sticky;top:0;z-index:20;margin:0 -1rem 1.5rem;padding:.5rem 1rem;border-bottom:1px solid var(--riga);
+  background:color-mix(in srgb, var(--fondo) 90%, transparent);backdrop-filter:blur(8px);
+  display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none}
+.indice::-webkit-scrollbar{display:none}
+.indice a{font-size:.79rem;font-weight:600;color:var(--tenue);text-decoration:none;padding:.4rem .6rem;border-radius:.4rem;white-space:nowrap}
+.indice a:hover{color:var(--blu);background:var(--blu-tenue)}
+
+.sezione{margin:3.25rem 0 1.25rem;scroll-margin-top:3.75rem}
+.sezione .n{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--blu);margin:0 0 .4rem}
+.sezione h2{font-size:1.35rem;font-weight:700;letter-spacing:-.01em;margin:0;padding-bottom:.55rem;border-bottom:2px solid var(--blu);display:inline-block}
+.sezione p{margin:.7rem 0 0;color:var(--tenue);font-size:.95rem;max-width:62ch}
+.etichetta{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--blu);margin:2rem 0 .6rem}
+
+.carta{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;padding:1rem 1.2rem;box-shadow:var(--ombra)}
+.carta + .carta{margin-top:.6rem}
+.carta h3{font-size:1rem;margin:0 0 .3rem}
+.carta p,.carta li{font-size:.93rem}
+.carta ul{margin:.4rem 0 0;padding-left:1.1rem}
+.griglia{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.griglia .carta + .carta{margin-top:0}
+.tag{display:inline-block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--blu);background:var(--blu-tenue);border-radius:.3rem;padding:.12rem .45rem;margin-bottom:.45rem}
+.tag.rosso{color:var(--allerta);background:var(--allerta-fondo)}
+.tag.giallo{color:var(--avviso);background:var(--avviso-fondo)}
+.tag.verde{color:var(--ok);background:var(--ok-fondo)}
+
+.nota{border-left:3px solid var(--avviso);background:var(--avviso-fondo);border-radius:0 .6rem .6rem 0;padding:.8rem 1rem;margin:1rem 0;font-size:.92rem}
+.nota.rossa{border-color:var(--allerta);background:var(--allerta-fondo)}
+.nota.verde{border-color:var(--ok);background:var(--ok-fondo)}
+.nota b{display:block;margin-bottom:.15rem}
+
+.tabella{overflow-x:auto;background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;box-shadow:var(--ombra)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:.6rem .8rem;border-bottom:1px solid var(--riga)}
+th{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tenue);font-weight:600}
+tr:last-child td{border-bottom:0}
+td b{color:var(--navy)}
+
+.annuncio{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;box-shadow:var(--ombra);overflow:hidden}
+.annuncio + .annuncio{margin-top:.75rem}
+.annuncio header{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.6rem 1rem;border-bottom:1px solid var(--riga);background:var(--blu-tenue)}
+.annuncio header span{font-size:.75rem;font-weight:700;color:var(--blu);letter-spacing:.06em;text-transform:uppercase}
+.annuncio .corpo{padding:.9rem 1rem}
+.annuncio .campo{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--tenue);font-weight:600;margin-top:.6rem}
+.annuncio .campo:first-child{margin-top:0}
+.annuncio .testo{font-family:var(--serif);font-size:1rem;white-space:pre-line}
+button.copia{font-family:var(--sans);font-size:.74rem;font-weight:600;color:var(--blu);background:var(--carta);border:1px solid var(--riga-forte);border-radius:.4rem;padding:.3rem .65rem;cursor:pointer}
+button.copia:hover{border-color:var(--blu)}
+
+.lista{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.lista li{display:grid;grid-template-columns:1.4rem 1fr;gap:.7rem;background:var(--carta);border:1px solid var(--riga);border-radius:.7rem;padding:.75rem 1rem;box-shadow:var(--ombra)}
+.lista input{width:1.1rem;height:1.1rem;margin-top:.25rem;accent-color:var(--blu)}
+.lista b{display:block}
+.lista small{color:var(--tenue);font-size:.86rem;display:block}
+.lista a{color:var(--blu)}
+
+.settimane{display:grid;gap:.5rem}
+.settimana{display:grid;grid-template-columns:6.5rem 1fr;gap:.9rem;background:var(--carta);border:1px solid var(--riga);border-radius:.7rem;padding:.75rem 1rem;box-shadow:var(--ombra)}
+.settimana .quando{font-weight:700;color:var(--blu);font-size:.85rem}
+.settimana p{font-size:.92rem}
+@media (max-width:520px){.settimana{grid-template-columns:1fr;gap:.2rem}}
+
+.piede{margin-top:4rem;padding-top:1.25rem;border-top:1px solid var(--riga);font-size:.82rem;color:var(--tenue)}
+a{color:var(--blu)}
+</style>
+
+<div class="foglio">
+
+<header class="testata">
+  <p class="occhiello">NIPEC · Studio interno · non divulgare</p>
+  <h1>CAMPAGNA</h1>
+  <p class="tesi">Sette settimane, un’offerta, un pubblico solo: la titolare del centro estetico. Da oggi al 30 novembre, quando scade il prezzo lancio.</p>
+  <div class="tempi">
+    <span><b>13/10</b> si parte</span>
+    <span><b>ARES 2026 IA</b> −30%</span>
+    <span><b>30/11</b> scade l’offerta</span>
+    <span>Meta + WhatsApp + Google</span>
+    <span>~ <b>1.300 €</b> / mese di prova</span>
+  </div>
+</header>
+
+<nav class="indice" aria-label="Sezioni">
+  <a href="#idea">L’idea</a>
+  <a href="#pubblico">A chi</a>
+  <a href="#struttura">La struttura</a>
+  <a href="#annunci">Gli annunci</a>
+  <a href="#video">I video</a>
+  <a href="#contatto">Dopo il clic</a>
+  <a href="#soldi">Budget e numeri</a>
+  <a href="#oggi">Da fare oggi</a>
+  <a href="#calendario">Calendario</a>
+  <a href="#regole">Regole</a>
+</nav>
+
+<!-- 1 -->
+<section class="sezione" id="idea">
+  <p class="n">1 · L’idea</p>
+  <h2>Non vendiamo il laser. Vendiamo le clienti che lei sta perdendo.</h2>
+  <p>Tutti i fornitori pubblicizzano watt e nanometri. La RADIOGRAFIA dice che la titolare non compra per i watt: compra quando vede quanto sta perdendo. La campagna dice tre cose, in quest’ordine.</p>
+</section>
+
+<div class="griglia">
+  <div class="carta">
+    <span class="tag rosso">1 · la perdita</span>
+    <h3>«Quante clienti non vedi da sei mesi?»</h3>
+    <p>L’aggancio di ogni annuncio. È la stessa domanda della consegna PERSELOPE: il numero lo pensa lei, e diventa vero.</p>
+  </div>
+  <div class="carta">
+    <span class="tag">2 · il sistema</span>
+    <h3>La macchina + chi te le riporta</h3>
+    <p>ARES con IA, formazione con esame, assistenza in italiano — e l’app che ogni mattina dice chi richiamare. Nessun concorrente la dà.</p>
+  </div>
+  <div class="carta">
+    <span class="tag giallo">3 · la scadenza</span>
+    <h3>−30% fino al 30 novembre</h3>
+    <p>17.500 € invece di 25.000, oppure 500 €/mese senza vincoli. Il tuo laser vecchio lo valutiamo in permuta.</p>
+  </div>
+</div>
+
+<div class="nota verde"><b>Cosa chiediamo in cambio del clic</b>Non «compra»: <b style="display:inline">l’analisi gratuita del centro</b>, la fase 1 del Metodo che sul sito c’è già. Risposta su WhatsApp, non un modulo lungo. Chi scrive su WhatsApp è un contatto caldo; chi compila un modulo spesso no.</div>
+
+<!-- 2 -->
+<section class="sezione" id="pubblico">
+  <p class="n">2 · A chi</p>
+  <h2>Quattro pubblici, un messaggio diverso per ognuno</h2>
+  <p>Presi dalle quattro piazze della RADIOGRAFIA. Stesso prodotto, leva diversa.</p>
+</section>
+
+<div class="tabella"><table>
+  <thead><tr><th>Pubblico</th><th>Chi è</th><th>La leva</th><th>Formula da spingere</th></tr></thead>
+  <tbody>
+    <tr><td><b>A · Nord</b><br>Lombardia, Veneto, Emilia, Piemonte</td><td>Titolare con concorrenza in crescita, spesso ha già un laser vecchio</td><td>«Ne hanno aperti altri tre. Tu tieni le tue.» + permuta del vecchio</td><td>Acquisto 17.500 € · permuta</td></tr>
+    <tr><td><b>B · Centro-Sud</b><br>Lazio in giù, isole</td><td>Spesa delle clienti più bassa, picco estivo poi vuoto</td><td>«Le tue clienti non spariscono più da settembre a maggio.»</td><td>Noleggio 500 €/mese, lo fermi quando vuoi</td></tr>
+    <tr><td><b>C · Chi ci conosce già</b><br>retargeting</td><td>Ha visitato il sito, guardato metà video, scritto su Instagram</td><td>La scadenza, e la demo dell’app da toccare</td><td>«Mancano X giorni al −30%»</td></tr>
+    <tr><td><b>D · Albania</b><br>Tirana, Durazzo</td><td>1.800 insegne a Tirana. Clienti albanesi o italiane in turismo estetico</td><td>Tecnologia italiana, assistenza in albanese, centro pilota Demetra</td><td>Solo dopo la decisione sui pagamenti (lacuna 9)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="nota"><b>Come si trova la titolare su Meta</b>Età 25–60, interessi «Estetista», «Centro estetico», «Epilazione laser», «Cosmetologia», «Spa». Poi lascia lavorare l’algoritmo (pubblico «Advantage+» con questi suggerimenti): oggi Meta trova meglio da solo, se il Pixel gli dice chi converte. Per questo il Pixel viene prima di tutto.</div>
+
+<!-- 3 -->
+<section class="sezione" id="struttura">
+  <p class="n">3 · La struttura</p>
+  <h2>Tre campagne Meta, una Google, una albanese in panchina</h2>
+  <p>Così si costruisce in Gestione inserzioni: campagna → gruppo di inserzioni → annunci. I nomi sono già scritti: copiali uguali, così quando mi mandi i numeri li leggo al volo.</p>
+</section>
+
+<div class="tabella"><table>
+  <thead><tr><th>Campagna</th><th>Obiettivo</th><th>Gruppi di inserzioni</th><th>Budget / giorno</th></tr></thead>
+  <tbody>
+    <tr><td><b>NIPEC_ARES_Lancio_WA</b><br>Meta</td><td>Interazione → <i>Messaggi su WhatsApp</i></td><td>A_Nord · B_CentroSud<br>3 annunci per gruppo</td><td>2 × 10 €</td></tr>
+    <tr><td><b>NIPEC_ARES_Lancio_Lead</b><br>Meta</td><td>Contatti → <i>Modulo istantaneo</i> (4 domande, sotto)</td><td>IT_Tutta (Advantage+)</td><td>8 €</td></tr>
+    <tr><td><b>NIPEC_Retargeting</b><br>Meta</td><td>Interazione → <i>Messaggi su WhatsApp</i></td><td>C_Visitatori sito 30 gg + video 50% + interazioni IG 90 gg</td><td>5 €</td></tr>
+    <tr><td><b>NIPEC_Search_Laser</b><br>Google Ads</td><td>Contatti (chiamate + modulo)</td><td>«noleggio laser epilazione», «laser diodo 808 prezzo», «laser per centro estetico», «permuta laser estetica»</td><td>10 €</td></tr>
+    <tr><td><b>NIPEC_AL_Lancio</b><br>Meta, in albanese</td><td>Messaggi su WhatsApp (+355)</td><td>D_Tirana +25 km</td><td>8 € · <i>in pausa</i></td></tr>
+  </tbody>
+</table></div>
+
+<div class="nota rossa"><b>Perché WhatsApp e non solo il modulo</b>Le titolari vivono su WhatsApp, e voi pure: tutto il sistema PERSELOPE gira lì. Un annuncio «clic → WhatsApp» porta a una conversazione con Giorgio in due secondi, sul numero +39 351 846 6025 già scritto ovunque. Il modulo istantaneo resta come seconda strada, per misurare quale delle due porta clienti veri.</div>
+
+<p class="etichetta">Il modulo istantaneo — quattro domande, non dieci</p>
+<div class="carta">
+  <ul>
+    <li><b>Che laser usi oggi?</b> Nessuno · Ce l’ho ma è vecchio · Ne ho uno recente</li>
+    <li><b>Dove segni gli appuntamenti?</b> Quaderno · Telefono · Un gestionale — <i>la domanda n. 1 della RADIOGRAFIA</i></li>
+    <li><b>Ti interessa di più</b> Acquisto · Noleggio · Ancora non so</li>
+    <li><b>Nome, centro, città, telefono</b> — già compilati da Meta</li>
+  </ul>
+  <p style="margin-top:.6rem;color:var(--tenue)">Schermata finale: «Ti scriviamo su WhatsApp entro oggi. Se hai fretta, tocca qui» → wa.me/393518466025.</p>
+</div>
+
+<!-- 4 -->
+<section class="sezione" id="annunci">
+  <p class="n">4 · Gli annunci</p>
+  <h2>I testi, pronti da incollare</h2>
+  <p>Quattro angoli. In ogni gruppo ne metti tre, Meta sposta i soldi su quello che rende. Dopo sette giorni spegniamo il peggiore e ne scrivo uno nuovo.</p>
+</section>
+
+<article class="annuncio">
+  <header><span>1 · La perdita · tutti</span><button class="copia" type="button">copia</button></header>
+  <div class="corpo">
+    <p class="campo">Testo principale</p>
+    <p class="testo">Quante clienti hai che non vedi da sei mesi?
+
+Non serve il numero esatto. Ognuna ha già pagato metà del ciclo laser, e da te non è più tornata.
+
+Con NIPEC non arriva solo il laser ARES 2026 con intelligenza artificiale: arriva un’app che ogni mattina ti dice chi richiamare, e quanto vale quella telefonata.
+
+Prezzo lancio −30% fino al 30 novembre.</p>
+    <p class="campo">Titolo</p>
+    <p class="testo">Il laser che ti riporta le clienti</p>
+    <p class="campo">Descrizione · Pulsante</p>
+    <p class="testo">Analisi gratuita del centro · Invia messaggio</p>
+  </div>
+</article>
+
+<article class="annuncio">
+  <header><span>2 · Il prezzo · Nord</span><button class="copia" type="button">copia</button></header>
+  <div class="corpo">
+    <p class="campo">Testo principale</p>
+    <p class="testo">Laser ARES 2026 · IA. Diodo 808 nm, 1500 W, testina in titanio. La telecamera legge pelle e pelo e ti propone i parametri: tu confermi.
+
+Listino 25.000 € → 17.500 € fino al 30 novembre.
+Hai già un laser? Lo valutiamo noi e lo scaliamo dal prezzo.
+
+Formazione con esame, certificato operatrice 12 mesi, assistenza diretta in italiano. CE italiana · MDR.</p>
+    <p class="campo">Titolo</p>
+    <p class="testo">−30% sul laser ARES, permuta compresa</p>
+    <p class="campo">Descrizione · Pulsante</p>
+    <p class="testo">Scopri quanto vale il tuo usato · Invia messaggio</p>
+  </div>
+</article>
+
+<article class="annuncio">
+  <header><span>3 · Il noleggio · Centro-Sud</span><button class="copia" type="button">copia</button></header>
+  <div class="corpo">
+    <p class="campo">Testo principale</p>
+    <p class="testo">Un laser professionale a 500 € al mese. Senza vincoli: se non ti serve più, lo fermi.
+
+ARES 2026 con intelligenza artificiale, formazione in cabina, e qualcuno che risponde al telefono quando ti serve — non dopo due settimane.
+
+D’estate le clienti arrivano da sole. Noi ti diamo il sistema per non perderle a settembre.</p>
+    <p class="campo">Titolo</p>
+    <p class="testo">Laser in noleggio, lo fermi quando vuoi</p>
+    <p class="campo">Descrizione · Pulsante</p>
+    <p class="testo">Ti mostriamo i numeri prima di firmare · Invia messaggio</p>
+  </div>
+</article>
+
+<article class="annuncio">
+  <header><span>4 · La scadenza · retargeting</span><button class="copia" type="button">copia</button></header>
+  <div class="corpo">
+    <p class="campo">Testo principale</p>
+    <p class="testo">Il prezzo lancio dell’ARES 2026 finisce il 30 novembre.
+
+Prima di decidere, tocca con mano il sistema: questa è l’app che consegniamo con la macchina, già piena di clienti di prova. Apri e guarda chi ti direbbe di chiamare oggi.
+
+Poi scrivici: l’analisi del centro è gratuita. Se non ti serve una macchina nuova, te lo diciamo.</p>
+    <p class="campo">Titolo</p>
+    <p class="testo">Ultimi giorni al −30%</p>
+    <p class="campo">Descrizione · Pulsante</p>
+    <p class="testo">Prova l’app demo · Invia messaggio</p>
+  </div>
+</article>
+
+<article class="annuncio">
+  <header><span>5 · Shqip · Tirana · da far rileggere</span><button class="copia" type="button">copia</button></header>
+  <div class="corpo">
+    <p class="campo">Teksti kryesor</p>
+    <p class="testo">Lazer ARES 2026 me inteligjencë artificiale. Teknologji italiane, CE italiane.
+
+Trajnim në kabinë me provim, certifikatë operatoreje 12 muaj, asistencë direkte në shqip dhe italisht.
+
+Qendra pilot: Demetra Center, Tiranë. Eja ta shohësh duke punuar.</p>
+    <p class="campo">Titulli · Butoni</p>
+    <p class="testo">Teknologji italiane për qendrën tënde · Dërgo mesazh</p>
+  </div>
+</article>
+
+<div class="nota"><b>Il testo albanese</b>L’ho scritto io: prima di andare online lo fa rileggere qualcuno a Tirana (Demetra). Un errore di lingua, in un mercato dove si conoscono tutti, costa più di quanto rende l’annuncio.</div>
+
+<p class="etichetta">Google · gli annunci di ricerca</p>
+<div class="carta">
+  <p><b>Titoli</b> (max 30 caratteri): Laser Diodo 808 · −30% · Noleggio Laser 500 €/mese · Laser con IA per Centri · Permuta del Tuo Vecchio Laser · Assistenza Diretta in Italiano · Formazione con Certificato</p>
+  <p style="margin-top:.5rem"><b>Descrizioni</b> (max 90): «ARES 2026 con IA, CE italiana. Prezzo lancio fino al 30/11. Analisi del centro gratuita.» · «Vendita o noleggio senza vincoli. Formazione in cabina ed esame. Scrivici su WhatsApp.»</p>
+  <p style="margin-top:.5rem"><b>Parole da escludere</b>: casa, domestico, amazon, usato privato, corso gratis, lavoro, offerte lavoro, ricambi.</p>
+</div>
+
+<!-- 5 -->
+<section class="sezione" id="video">
+  <p class="n">5 · I video</p>
+  <h2>Cinque video col telefono, nessuna agenzia</h2>
+  <p>Verticali 9:16, 15–30 secondi, sottotitoli sempre (l’80% li guarda muto). Stessa regia del Kit Video Laser: parla un’estetista, non un tecnico. Le prime due parole decidono se si fermano.</p>
+</section>
+
+<div class="griglia">
+  <div class="carta"><span class="tag">V1 · la domanda</span><h3>«Quante ne hai perse?»</h3><p>Primo piano dell’estetista che sfoglia l’agenda: «Quante clienti non vedi da sei mesi? Io lo scoprivo solo a giugno.» Stacco sul telefono con l’app: tre nomi da chiamare.</p></div>
+  <div class="carta"><span class="tag">V2 · la macchina</span><h3>La telecamera che legge</h3><p>Il manipolo dell’ARES 2026, lo schermo che propone i parametri. Voce: «Lei propone, io decido.» Chiude col prezzo −30%.</p></div>
+  <div class="carta"><span class="tag">V3 · la consegna</span><h3>Giorno zero</h3><p>Giorgio che consegna in un centro vero: installa, accende, la titolare fa la prima telefonata. «Non ti lasciamo una macchina. Ti lasciamo un sistema.»</p></div>
+  <div class="carta"><span class="tag">V4 · la titolare</span><h3>La testimone</h3><p>Una cliente vera (es. Il Bello delle Donne) racconta in 20 secondi perché ha cambiato. Serve il suo consenso scritto.</p></div>
+  <div class="carta"><span class="tag">V5 · Tirana</span><h3>Demetra Center</h3><p>La cabina del centro pilota, in albanese con sottotitoli. Per la campagna D.</p></div>
+  <div class="carta"><span class="tag verde">+ 3 immagini fisse</span><h3>Quadrate e verticali</h3><p>ARES su fondo blu NIPEC con il prezzo barrato · lo schermo dell’app «Oggi» · la frase «Quante clienti non vedi da sei mesi?» da sola. Le preparo io.</p></div>
+</div>
+
+<!-- 6 -->
+<section class="sezione" id="contatto">
+  <p class="n">6 · Dopo il clic</p>
+  <h2>Il contatto si raffredda in cinque minuti</h2>
+  <p>La campagna può essere perfetta e fallire qui. Una titolare che scrive alle 13 tra due clienti e riceve risposta alle 19 è già passata oltre.</p>
+</section>
+
+<ol class="lista">
+  <li><span>1</span><div><b>Risposta automatica di WhatsApp Business, subito</b><small>«Ciao, sono Giorgio di NIPEC. Ti scrivo io entro un’ora. Intanto: che laser usi oggi, e dove segni gli appuntamenti?» — due domande, così la conversazione parte già qualificata.</small></div></li>
+  <li><span>2</span><div><b>Entro un’ora, la persona vera</b><small>Le domande della RADIOGRAFIA: quante clienti non vedi da sei mesi · quando finisce il ciclo cosa succede · le tue clienti sono di zona o di passaggio.</small></div></li>
+  <li><span>3</span><div><b>Mandi la demo, non il listino</b><small>Il link dell’app DEMO. Il PDF col prezzo arriva dopo, personalizzato come quello di Micole.</small></div></li>
+  <li><span>4</span><div><b>Fissi l’analisi gratuita</b><small>Videochiamata di 20 minuti o visita. È la conversione che conta, non il messaggio.</small></div></li>
+  <li><span>5</span><div><b>Una riga per ogni contatto</b><small>Data · da quale annuncio (il codice è nel messaggio precompilato) · città · ha un laser? · analisi fissata? · venduto? Senza questa riga non sappiamo quale annuncio porta soldi e quale porta curiosi.</small></div></li>
+</ol>
+
+<!-- 7 -->
+<section class="sezione" id="soldi">
+  <p class="n">7 · Budget e numeri</p>
+  <h2>Un mese di prova, circa 1.300 €</h2>
+  <p>Partenza prudente: con un prodotto da 17.500 € una sola vendita ripaga la prova più di tredici volte. Il budget si alza solo su quello che ha già portato analisi fissate.</p>
+</section>
+
+<div class="tabella"><table>
+  <thead><tr><th>Voce</th><th>Al giorno</th><th>In 30 giorni</th></tr></thead>
+  <tbody>
+    <tr><td>Meta · WhatsApp (A + B)</td><td>20 €</td><td>600 €</td></tr>
+    <tr><td>Meta · modulo istantaneo</td><td>8 €</td><td>240 €</td></tr>
+    <tr><td>Meta · retargeting</td><td>5 €</td><td>150 €</td></tr>
+    <tr><td>Google · ricerca</td><td>10 €</td><td>300 €</td></tr>
+    <tr><td><b>Totale Italia</b></td><td><b>43 €</b></td><td><b>~ 1.290 €</b></td></tr>
+  </tbody>
+</table></div>
+
+<p class="etichetta">I quattro numeri che guardiamo ogni lunedì</p>
+<div class="griglia">
+  <div class="carta"><span class="tag">costo per conversazione</span><h3>sotto i 15 €</h3><p>Quanto costa una chat WhatsApp aperta.</p></div>
+  <div class="carta"><span class="tag">qualificati</span><h3>almeno 1 su 3</h3><p>Ha un centro vero, lavora col laser o vuole iniziare.</p></div>
+  <div class="carta"><span class="tag">analisi fissate</span><h3>almeno 1 su 3 qualificati</h3><p>Il numero che decide se alzare il budget.</p></div>
+  <div class="carta"><span class="tag">costo per analisi</span><h3>sotto i 150 €</h3><p>Se una analisi su cinque chiude, è 750 € per una macchina da 17.500.</p></div>
+</div>
+<div class="nota"><b>Questi obiettivi sono ipotesi</b>Non ho dati pubblici affidabili sul costo di un contatto B2B nell’estetica in Italia. Sono soglie di partenza ragionevoli: dopo due settimane le sostituiamo con i vostri numeri veri.</div>
+
+<!-- 8 -->
+<section class="sezione" id="oggi">
+  <p class="n">8 · Da fare oggi</p>
+  <h2>Cosa scaricare e cosa aprire</h2>
+  <p>In ordine. Le spunte restano salvate su questo dispositivo. Dove c’è scritto «a me», è il pezzo che faccio io appena mi passi il dato.</p>
+</section>
+
+<ul class="lista" id="checklist">
+  <li><input type="checkbox" id="c1"><label for="c1"><b>App sul telefono: WhatsApp Business</b><small>Sul numero +39 351 846 6025. Se oggi è WhatsApp normale, il passaggio tiene le chat. Poi: profilo aziendale, catalogo con ARES/URIEL, messaggio di benvenuto e messaggio di assenza (il testo del punto 6).</small></label></li>
+  <li><input type="checkbox" id="c2"><label for="c2"><b>App sul telefono: Meta Business Suite</b><small>Da lì vedi messaggi di Instagram, Facebook e i risultati delle inserzioni.</small></label></li>
+  <li><input type="checkbox" id="c3"><label for="c3"><b>Portfolio Meta Business</b><small>Da computer: <a href="https://business.facebook.com" rel="noopener">business.facebook.com</a> → crea il portfolio «NIPEC – PHD System Srl». Dentro collega: Pagina Facebook NIPEC, account Instagram (deve essere «professionale»), il numero WhatsApp Business.</small></label></li>
+  <li><input type="checkbox" id="c4"><label for="c4"><b>Account pubblicitario + metodo di pagamento</b><small>Gestione inserzioni → impostazioni → pagamenti. Fattura intestata a PHD System Srl con P.IVA 04696530981.</small></label></li>
+  <li><input type="checkbox" id="c5"><label for="c5"><b>Crea il Pixel (Gestione eventi) → mandami l’ID</b><small>Un numero di 15-16 cifre. <i>A me:</i> lo installo nel sito con il banner dei cookie, l’evento «Contatto» sul pulsante WhatsApp e «Lead» sul modulo inviato.</small></label></li>
+  <li><input type="checkbox" id="c6"><label for="c6"><b>Verifica del dominio nipecestetica.com</b><small>Impostazioni portfolio → Sicurezza del brand → Domini → «meta-tag». Mi mandi la riga che ti dà, la metto io nel sito.</small></label></li>
+  <li><input type="checkbox" id="c7"><label for="c7"><b>Il sito dentro il repo</b><small><i>A me:</i> oggi il sito sta solo come zip sul Drive. Dimmi «sì» e lo metto in questo repository, così ogni modifica (Pixel, cookie, pagina dell’offerta) la faccio e la pubblico io.</small></label></li>
+  <li><input type="checkbox" id="c8"><label for="c8"><b>Google Ads + Google Tag</b><small><a href="https://ads.google.com" rel="noopener">ads.google.com</a> con l’account info@nipecestetica.com o il tuo. Salta la «campagna intelligente» che propone all’inizio: scegli «crea un account senza campagna». Mi mandi l’ID del tag (AW-…).</small></label></li>
+  <li><input type="checkbox" id="c9"><label for="c9"><b>App per i video: CapCut</b><small>Gratis, per tagliare e mettere i sottotitoli automatici in italiano. Facoltativa: Canva, se vuoi ritoccare le immagini fisse che ti preparo.</small></label></li>
+  <li><input type="checkbox" id="c10"><label for="c10"><b>Il materiale che solo tu hai</b><small>Foto vere di ARES e URIEL in cabina (non quelle del fornitore) · 30 secondi di video di una consegna · il permesso scritto di un centro cliente per una testimonianza.</small></label></li>
+  <li><input type="checkbox" id="c11"><label for="c11"><b>Il foglio dei contatti</b><small><i>A me:</i> te lo preparo come le altre volte — una riga per contatto, le colonne del punto 6.</small></label></li>
+</ul>
+
+<!-- 9 -->
+<section class="sezione" id="calendario">
+  <p class="n">9 · Calendario</p>
+  <h2>Sette settimane fino al 30 novembre</h2>
+</section>
+
+<div class="settimane">
+  <div class="settimana"><span class="quando">13–19 ott</span><p><b>Montaggio.</b> Account, Pixel, cookie, dominio, WhatsApp Business. Si girano V1 e V2. Io preparo immagini, pagina dell’offerta e foglio contatti.</p></div>
+  <div class="settimana"><span class="quando">20–26 ott</span><p><b>Accensione.</b> Partono A_Nord, B_CentroSud e il modulo. Nessuna modifica per i primi 5 giorni: Meta sta imparando, toccare azzera tutto.</p></div>
+  <div class="settimana"><span class="quando">27 ott – 2 nov</span><p><b>Primo taglio.</b> Mi mandi l’esportazione di Gestione inserzioni e il foglio contatti. Spegniamo l’annuncio peggiore, ne scrivo uno nuovo. Parte Google.</p></div>
+  <div class="settimana"><span class="quando">3–9 nov</span><p><b>Retargeting.</b> Ci sono abbastanza visitatori per accenderlo. Escono V3 e V4.</p></div>
+  <div class="settimana"><span class="quando">10–16 nov</span><p><b>Spingere ciò che funziona.</b> +30% di budget solo sul gruppo con il costo per analisi più basso.</p></div>
+  <div class="settimana"><span class="quando">17–30 nov</span><p><b>La scadenza.</b> Annuncio 4 a tutti quelli che hanno scritto e non hanno chiuso. Ultima settimana: «mancano X giorni».</p></div>
+  <div class="settimana"><span class="quando">dicembre</span><p><b>Il bilancio.</b> Contatti, analisi, vendite, costo per vendita. Decidiamo se continuare, con quale offerta, e se aprire l’Albania.</p></div>
+</div>
+
+<!-- 10 -->
+<section class="sezione" id="regole">
+  <p class="n">10 · Regole</p>
+  <h2>Le cose che fanno bloccare un account</h2>
+</section>
+
+<div class="griglia">
+  <div class="carta"><span class="tag rosso">Meta</span><h3>Niente prima/dopo sul corpo</h3><p>Vietato per Borea e Afrodite (dimagrimento) e rischioso per l’epilazione. Mai frasi che presumono qualcosa di chi legge («hai i peli?», «sei in sovrappeso?»): Meta le blocca. Parliamo alla titolare come professionista.</p></div>
+  <div class="carta"><span class="tag rosso">Promesse</span><h3>Niente «definitivo», «garantito», «indolore»</h3><p>Sono dispositivi con marcatura MDR: si dicono le caratteristiche, non i risultati sulla cliente.</p></div>
+  <div class="carta"><span class="tag giallo">Privacy</span><h3>Prima il banner, poi il Pixel</h3><p>In Italia il Pixel parte solo dopo il consenso. Senza banner il sito è fuori regola dal primo visitatore. Lo installo insieme.</p></div>
+  <div class="carta"><span class="tag giallo">Q-Switch</span><h3>Fuori da questa campagna</h3><p>È un atto medico: si pubblicizza solo a medici, con un’altra campagna e altre regole.</p></div>
+  <div class="carta"><span class="tag">Albania</span><h3>In panchina, non bocciata</h3><p>Prima la risposta del commercialista su come farsi pagare. Accenderla prima vuol dire generare contatti che non sappiamo incassare.</p></div>
+  <div class="carta"><span class="tag">Offerta</span><h3>Il 30/11 è vero</h3><p>Se la scadenza si sposta, le persone del retargeting se ne accorgono. Una scadenza finta brucia la prossima.</p></div>
+</div>
+
+<footer class="piede">
+  NIPEC · Tecnologie Estetiche — CAMPAGNA, piano interno, ottobre 2026.<br>
+  Costruita su: RADIOGRAFIA (il mercato) · PERSELOPE (il sistema) · il sito nipecestetica.com · l’offerta lancio ARES/URIEL valida fino al 30/11/2026.<br>
+  Assistenza 351 846 6025
+</footer>
+
+</div>
+
+<script>
+document.querySelectorAll('button.copia').forEach(function(b){
+  b.addEventListener('click', function(){
+    var testi = b.closest('.annuncio').querySelectorAll('.testo');
+    var t = Array.prototype.map.call(testi, function(n){ return n.textContent.trim(); }).join('\n\n');
+    var fatto = function(){ b.textContent = 'copiato'; setTimeout(function(){ b.textContent = 'copia'; }, 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(fatto, function(){});
+  });
+});
+(function(){
+  var CHIAVE = 'nipec-campagna-spunte';
+  var stato = {};
+  try { stato = JSON.parse(localStorage.getItem(CHIAVE) || '{}'); } catch(e) {}
+  document.querySelectorAll('#checklist input').forEach(function(c){
+    c.checked = !!stato[c.id];
+    c.addEventListener('change', function(){
+      stato[c.id] = c.checked;
+      try { localStorage.setItem(CHIAVE, JSON.stringify(stato)); } catch(e) {}
+    });
+  });
+})();
+</script>
