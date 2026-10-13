@@ -1,0 +1,40 @@
+# Vecchi indirizzi del sito WordPress → pagine del sito 5.0.
+# Servono il giorno in cui nipecestetica.com passa a questo sito:
+# i link già in giro (Google, Instagram, biglietti) non si rompono.
+/mission                 /chi-siamo.html     301
+/mission/                /chi-siamo.html     301
+/demetra                 /chi-siamo.html     301
+/demetra/                /chi-siamo.html     301
+/formazione              /formazione.html    301
+/formazione/             /formazione.html    301
+/laser-ares              /laser-ares.html    301
+/laser-ares/             /laser-ares.html    301
+/ares-led                /laser-ares.html    301
+/ares-led/               /laser-ares.html    301
+/laser-uriel             /laser-uriel.html   301
+/laser-uriel/            /laser-uriel.html   301
+/afrodite-vs-ultrasuoni-focalizzati-37-mhz-radiofrequenza-esapolare-vacuum-micropulse-low-laser   /afrodite.html  301
+/afrodite-vs-ultrasuoni-focalizzati-37-mhz-radiofrequenza-esapolare-vacuum-micropulse-low-laser/  /afrodite.html  301
+/borea-cryo-360-ems-pro  /borea-cryo.html    301
+/borea-cryo-360-ems-pro/ /borea-cryo.html    301
+/cryo-360-portatile      /borea-cryo.html    301
+/cryo-360-portatile/     /borea-cryo.html    301
+/divisione-medicale      /q-switch.html      301
+/divisione-medicale/     /q-switch.html      301
+/laser-tattoo-q-switch   /q-switch.html      301
+/laser-tattoo-q-switch/  /q-switch.html      301
+/contatti                /contatti.html      301
+/contatti/               /contatti.html      301
+/privacy-policy          /privacy.html       301
+/privacy-policy/         /privacy.html       301
+/prodotti                /#tecnologie        301
+/prodotti/               /#tecnologie        301
+/faq                     /metodo.html        301
+/faq/                    /metodo.html        301
+/dicono-di-noi           /chi-siamo.html     301
+/dicono-di-noi/          /chi-siamo.html     301
+/blog                    /                   301
+/blog/*                  /                   301
+/feed/*                  /                   301
+/wp-admin/*              /                   301
+/wp-content/*            /                   301

@@ -145,6 +145,7 @@
         .then(function (r) { if (!r.ok) throw new Error(r.status); })
         .then(function () {
           form.hidden = true;
+          doc.dispatchEvent(new CustomEvent('nipec:lead'));
           if (ok) { ok.hidden = false; ok.classList.add('is-on'); ok.setAttribute('tabindex', '-1'); ok.focus(); }
         })
         .catch(function () {
