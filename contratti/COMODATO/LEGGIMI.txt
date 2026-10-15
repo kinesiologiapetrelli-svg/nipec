@@ -1,0 +1,119 @@
+COMODATO AFRODITE — italiano e inglese
+Rifatto sul layout NIPEC dal file Word di partenza
+(Contratto_Afrodite_NIPEC_Italiano_Senza_Verbale_Consegna.docx).
+
+
+I FILE
+  CONTRATTO-COMODATO-AFRODITE-IT.pdf   8 pagine
+  CONTRATTO-COMODATO-AFRODITE-EN.pdf   8 pagine
+  i due sorgenti .html, da cui si ristampa
+
+Struttura identica nelle due lingue: 11 articoli, firme, tre allegati.
+Stessa pagina, stesso numero di articolo. Si possono mettere affiancati.
+
+
+COSA E' CAMBIATO RISPETTO AL WORD
+
+ 1. STATO ALLA CONSEGNA — art. 4.2 e Allegato 2 (nuovo)
+    Prima: nessun documento fotografava la macchina alla consegna, ma
+    l'art. 9.3 prevedeva fotografie alla restituzione. Senza termine di
+    confronto non si dimostra se un danno e' nuovo.
+    Adesso: fotografie datate in contraddittorio alla consegna, e un
+    allegato che elenca pezzo per pezzo cosa e' stato consegnato.
+
+ 2. ASSICURAZIONE — art. 8.2
+    Prima: facoltativa. "Le Parti verificano la necessita'."
+    Adesso: condizione. Senza polizza indicata e consegnata, la macchina
+    si usa solo per prove tecniche senza persone.
+    E' la stessa linea del contratto di noleggio, art. 11.4.
+
+ 3. VALORE DI SOSTITUZIONE — art. 1.1, 7.3
+    Prima: non c'era. In caso di perdita si litigava sul valore.
+    Adesso: campo in tabella, richiamato in caso di perdita totale.
+
+ 4. FURTO, INCENDIO, EVENTI — art. 7.3 (nuovo)
+    Denuncia entro 24 ore, copia al Concedente entro 48.
+
+ 5. OPERATORI CERTIFICATI — art. 5 (nuovo articolo)
+    Prima: "personale qualificato e formato".
+    Adesso: solo operatori con Certificato NIPEC in corso di validita',
+    nominati nell'Allegato 1 con numero e scadenza, e lo Standard NIPEC
+    e' parte integrante. I danni da operatore non certificato restano al
+    Beneficiario.
+    Era il buco piu' grande: il comodato era la porta di servizio del
+    sistema di certificazione che il noleggio invece impone.
+
+ 6. TRATTAMENTI A PAGAMENTO — art. 1.3
+    Prima: autorizzabili per iscritto, senza dire cosa comporta.
+    Adesso: l'autorizzazione include le condizioni economiche, e da quel
+    giorno il rapporto non e' piu' gratuito.
+
+ 7. CONFORMITA' — art. 1.1 e 1.4 (nuovo)
+    Fabbricante e marcatura in tabella; manuale e documentazione di
+    conformita' consegnati e spuntati nell'Allegato 2.
+
+ 8. DURATA — art. 3
+    Prima: "______ giorni", in bianco e senza massimo.
+    Adesso: data di consegna e data di riconsegna in tabella, e in
+    mancanza valgono 30 giorni.
+
+ 9. RISOLUZIONE AUTOMATICA — art. 3.4 (nuovo)
+    Cessazione attivita', procedure concorsuali, perdita dei titoli:
+    restituzione entro 10 giorni.
+
+10. PROPRIETA' DI TERZI — art. 2.1
+    Il vecchio "o al titolare della proprieta'" era un buco: adesso c'e'
+    la riga dove si scrive chi e', se non e' il Concedente.
+
+11. TARGHETTE E MARCHI — art. 2.3 (nuovo)
+    Non si rimuovono targhette e seriale, non si appongono marchi propri.
+
+12. LINGUA — art. 11.2 (nuovo)
+    Italiano e inglese, con il campo per la lingua prevalente, e la
+    traduzione giurata in albanese se si va in giudizio.
+
+13. NOMI — tutto il documento
+    Il Word usava PHD SYSTEM, NIPEC Estetica e PHD Albania come se
+    fossero tre soggetti. Adesso si definisce una volta in testa e si usa
+    sempre "il Concedente".
+
+14. SERIALE — art. 1.1
+    Era scritto a mano in tre punti. Adesso sta nella tabella
+    dell'apparecchiatura; gli allegati lo riportano come riferimento.
+
+15. PIE' DI PAGINA
+    Via la riga "Bozza da verificare — non sottoscrivere". Al suo posto,
+    prima delle firme, il riquadro con l'elenco dei campi da completare.
+
+16. ALLEGATI — da due a tre
+    All. 1 formazione e operatori (con certificato e firma del singolo)
+    All. 2 stato alla consegna (nuovo)
+    All. 3 conferma di restituzione (era l'All. 2)
+
+
+COSA RESTA DA DECIDERE O DA SCRIVERE
+
+  - VALORE DI SOSTITUZIONE dell'Afrodite: campo vuoto in art. 1.1.
+    In memoria il listino vendita e' 22.000 euro. Non l'ho scritto io:
+    il valore da mettere in un contratto lo decidi tu.
+  - FABBRICANTE e MARCATURA: due campi vuoti in art. 1.1.
+  - LINGUA PREVALENTE: art. 11.2.
+  - Rappresentanti, recapiti, date, centro, polizza.
+
+
+DUE COSE CHE NON HO POTUTO SISTEMARE
+
+  - NUMERO DI PAGINA su ogni foglio. Chromium in stampa non lo mette
+    senza scriverci sopra anche URL e data. Al suo posto, nel riquadro
+    prima delle firme, c'e' la riga "si sigla ogni pagina": su un
+    contratto in due originali e' quello che conta.
+  - LA LINGUA ALBANESE. Il contratto e' sotto legge albanese e le due
+    societa' sono albanesi. Italiano e inglese sono quello che mi hai
+    chiesto, ma davanti a un tribunale di Tirana serve l'albanese.
+    L'impianto e' pronto: e' una traduzione.
+
+
+NON E' UN PARERE LEGALE
+Ho sistemato coerenza interna, buchi probatori e allineamento con il
+resto della linea contrattuale NIPEC. Il testo va comunque letto da un
+avvocato in Albania prima di andare in produzione.

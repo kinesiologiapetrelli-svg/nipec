@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Free loan for use · Afrodite VS++ · NIPEC</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+
+/* ---------- aggiunte DEMETRA ---------- */
+.fab{font-size:7.6pt;color:#6B747C;font-style:italic}
+/* la casella da barrare: un quadrato vero, non un carattere che cambia da font a font */
+.cas{display:inline-block;width:10px;height:10px;border:1.2px solid var(--blu);
+     border-radius:2px;vertical-align:-1px;margin-right:4px}
+.caselle{list-style:none;padding:0;margin:0 0 6px}
+.caselle li{position:relative;padding-left:17px;margin-bottom:5px;line-height:1.4}
+.caselle li:before{content:"";position:absolute;left:0;top:3px;width:10px;height:10px;
+                   border:1.2px solid var(--blu);border-radius:2px}
+.riga-casella{margin:8px 0}
+.riga-note{margin:8px 0;color:var(--ink2)}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+
+/* ---------- aggiunte contratto ---------- */
+@page{size:A4;margin:14mm 15mm 14mm}
+body{font-size:9.2pt;line-height:1.45}
+/* i commi: il numero sporge a sinistra, il testo resta allineato */
+.co{margin:0 0 6px;padding-left:30px;text-indent:-30px}
+.co .n2{display:inline-block;width:30px;text-indent:0;font-weight:600;color:var(--navy)}
+.parti{border:1px solid var(--riga);border-radius:4px;padding:9px 12px;margin:0 0 9px}
+.parti .ruolo{font-family:"Archivo",sans-serif;font-size:7.6pt;font-weight:700;
+              letter-spacing:.12em;text-transform:uppercase;color:var(--blu);display:block;margin-bottom:3px}
+.parti p{margin:0}
+h2{font-size:11pt;margin:15px 0 6px}
+.nuovo{display:inline-block;background:var(--verde);color:#fff;font-family:"Archivo",sans-serif;
+       font-size:6.8pt;font-weight:700;letter-spacing:.1em;padding:1.5px 5px;border-radius:3px;
+       vertical-align:2px;margin-left:7px}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Loan-for-use agreement, free of charge<br>
+    Two originals of equal value<br>
+    Support +39 351 846 6025
+  </div>
+</div>
+
+<h1>Free loan for use of aesthetic equipment</h1>
+<p class="sotto">For protocol study, training and operational testing</p>
+<p class="riga-rev">Agreement no. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Date: ……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;Place: Tirana</p>
+
+<h2>The Parties</h2>
+
+<div class="parti">
+  <span class="ruolo">1 · Lender</span>
+  <p><b>PHD SYSTEM Sh.p.k.</b> — NIPT M27101203D — Rruga Donika Kastrioti 3, Kisha Apostolike
+  e Re, Entrance 2, Floor 1, Apt. 1, No. 1, Tirana.<br>
+  Represented by ……………………………………………………, in the capacity of ……………………………………………………<br>
+  <span class="fab">Hereinafter «the Lender». The <b>NIPEC</b> and <b>PHD</b> trade marks belong to the Lender or to
+  companies of the same group: every reference to NIPEC in this agreement is a reference to the Lender.</span></p>
+</div>
+
+<div class="parti">
+  <span class="ruolo">2 · Borrower</span>
+  <p><b>MEDICAL SPA GROUP AE</b> — limited liability company — NIPT/NUIS L81309070J —
+  Rruga Ymer Kurti, Olimpia Shopping Centre, Municipal Unit no. 5, Tirana.<br>
+  Represented by ……………………………………………………, in the capacity of ……………………………………………………<br>
+  <span class="fab">Hereinafter «the Borrower».</span></p>
+</div>
+
+<p>The Parties agree as follows.</p>
+
+<h2><span class="n">1</span>Subject matter, equipment and value</h2>
+
+<p class="co"><span class="n2">1.1</span>The Lender grants the Borrower the temporary and free use of the
+aesthetic equipment described in the table below (hereinafter «the Equipment»).</p>
+
+<table>
+  <tr><th style="width:34%">Item</th><th>Value</th></tr>
+  <tr><td>Model</td><td><b>Multishape Afrodite VS++</b></td></tr>
+  <tr><td>Serial number</td><td><b>YD400337</b></td></tr>
+  <tr><td>Accessories delivered</td><td>4 handpieces · power supply unit</td></tr>
+  <tr><td>Manufacturer</td><td>………………………………………………………………</td></tr>
+  <tr><td>Marking and conformity</td><td>………………………………………………………………</td></tr>
+  <tr><td><b>Replacement value</b><br><span class="fab">for the purposes of clauses 7 and 8 only</span></td><td><b>€ ……………………</b></td></tr>
+</table>
+
+<p class="co"><span class="n2">1.2</span>The Equipment is granted <b>free of charge</b>, solely for the study of
+working protocols, operational testing, technical demonstrations and internal professional
+training. This agreement <b>is neither a sale nor a lease</b>, transfers no ownership and creates
+no obligation to purchase.</p>
+
+<p class="co"><span class="n2">1.3</span>Use for <b>paid treatments</b> on clients is not permitted. The Parties
+may authorise it only by a separate written agreement setting out the professional, safety and
+liability conditions <b>and the financial terms</b>: from the date of that agreement the
+relationship ceases to be free of charge and the agreed terms apply.</p>
+
+<p class="co"><span class="n2">1.4</span>Together with the Equipment, the Lender delivers the manufacturer's
+<b>user manual</b> and <b>conformity documentation</b>. The Borrower acknowledges receipt in
+Annex 2.</p>
+
+<h2><span class="n">2</span>Ownership, location and identification</h2>
+
+<p class="co"><span class="n2">2.1</span>Ownership of the Equipment remains with the Lender. Where the
+Equipment belongs to a third party or is subject to leasing, the owner is:
+………………………………………………………… The Lender declares that it has the legal right to grant the
+Equipment for use. The Borrower may not sell, pledge, lease, sub-lend or transfer it to
+third parties.</p>
+
+<p class="co"><span class="n2">2.2</span>The Equipment is used exclusively at:
+centre …………………………………………………… — installation address ……………………………………………………………………
+Any relocation requires the Lender's prior written authorisation.</p>
+
+<p class="co"><span class="n2">2.3</span>The Borrower shall <b>not remove or alter</b> plates, markings, the serial
+number or identifying marks, and shall <b>not apply its own branding</b> to the Equipment.</p>
+
+<h2><span class="n">3</span>Term and termination</h2>
+
+<table>
+  <tr><td style="width:46%"><b>Delivery date</b></td><td>……… / ……… / …………</td></tr>
+  <tr><td><b>Scheduled return date</b></td><td>……… / ……… / …………</td></tr>
+  <tr><td>Term in calendar days</td><td>……………… days</td></tr>
+</table>
+
+<p class="co"><span class="n2">3.1</span>The loan runs for the term stated above. If no return date is stated,
+the term is <b>30 days</b> from delivery. Any extension requires the written agreement of both
+Parties.</p>
+
+<p class="co"><span class="n2">3.2</span>The Lender may request the return of the Equipment on at least
+<b>10 calendar days</b> written notice. The Borrower may withdraw on <b>5 calendar days</b>
+written notice, unless the Parties agree on an earlier return.</p>
+
+<p class="co"><span class="n2">3.3</span>In the event of serious safety risk, unauthorised use, infringement of
+ownership rights or material breach, the aggrieved Party may require the <b>immediate suspension
+of use</b>; the return is arranged without undue delay.</p>
+
+<p class="co"><span class="n2">3.4</span>The agreement terminates automatically if the Borrower ceases trading,
+becomes subject to insolvency or liquidation proceedings, or loses the authorisations required
+to operate. In that case the Equipment is returned within <b>10 days</b>.</p>
+
+<h2><span class="n">4</span>Delivery and initial condition<span class="nuovo">revised</span></h2>
+
+<p class="co"><span class="n2">4.1</span>By signing this agreement, and provided that physical delivery took
+place on the date stated in clause 3, the Borrower <b>confirms receipt</b> of the Equipment and
+the accessories listed in clause 1.1. If delivery takes place after signature, the Parties
+confirm the date and actual receipt in writing, including by e-mail.</p>
+
+<p class="co"><span class="n2">4.2</span><b>Condition at delivery.</b> On delivery the Parties complete
+<b>Annex 2</b> and take <b>dated photographs, jointly</b>, of the Equipment and of each
+handpiece. The photographs are attached to this agreement and constitute the reference
+condition for any subsequent claim.</p>
+
+<div class="box giallo">
+  <span class="eti">Why photographs at delivery</span>
+  <p>Clause 10 requires photographs on <b>return</b>. Without photographs at <b>delivery</b>
+  there is no basis for comparison, and neither Party can show whether damage is new or
+  pre-existing. The two sets of photographs protect both.</p>
+</div>
+
+<p class="co"><span class="n2">4.3</span>Borrower's reservations as to the condition observable at delivery:
+…………………………………………………………………………………………………………………………………… This confirmation does not exclude
+hidden or manufacturing defects that may be demonstrated later.</p>
+
+<h2><span class="n">5</span>Operators and certification<span class="nuovo">new</span></h2>
+
+<p class="co"><span class="n2">5.1</span>The Lender provides <b>initial training</b> for the operators and makes
+available the documentation required for safe use.</p>
+
+<p class="co"><span class="n2">5.2</span><b>Use of the Equipment is reserved to operators holding a valid NIPEC
+Operator Certificate</b>, named in Annex 1. The Borrower shall prevent use by anyone else.</p>
+
+<p class="co"><span class="n2">5.3</span>The <b>NIPEC Standard</b> for the Equipment — protocols, operating rules
+and conditions of compliant use — forms an integral part of this agreement and is delivered to
+the Borrower on the delivery date.</p>
+
+<p class="co"><span class="n2">5.4</span>Damage arising from use by an operator <b>without a valid
+Certificate</b> remains the Borrower's responsibility.</p>
+
+<h2><span class="n">6</span>Rules of use and safety</h2>
+
+<p class="co"><span class="n2">6.1</span>The Borrower shall comply with the manufacturer's manuals, indications,
+contraindications and protocols; maintain a suitable environment; and neither modify nor open
+the Equipment.</p>
+
+<p class="co"><span class="n2">6.2</span>The Borrower is responsible for informing any persons undergoing tests,
+obtaining the necessary consents, verifying contraindications and retaining the related
+documentation, in accordance with applicable law.</p>
+
+<p class="co"><span class="n2">6.3</span>Any incident, malfunction or suspected risk shall be reported to the
+Lender <b>immediately and in writing</b>; use is suspended until verification and documented
+instructions from an authorised technician.</p>
+
+<h2><span class="n">7</span>Maintenance, defects, damage and loss</h2>
+
+<p class="co"><span class="n2">7.1</span>The Borrower carries out cleaning and routine care in accordance with
+the manual. Technical work, calibration and repairs are carried out <b>solely by authorised
+service</b>, in coordination with the Lender.</p>
+
+<p class="co"><span class="n2">7.2</span>The Borrower is liable for proven damage caused by impact, unsuitable
+humidity, negligence, use contrary to the protocols, unauthorised work, loss or failure to
+safeguard, to the extent attributable to its acts or omissions.</p>
+
+<p class="co"><span class="n2">7.3</span><b>Theft, fire and events.</b> In the event of theft, robbery, fire or
+natural event, the Borrower shall <b>file a report with the authorities within 24 hours</b> and
+send a copy to the Lender within <b>48 hours</b>. In the event of total loss or irreparable
+damage not attributable to the Lender, the <b>replacement value</b> stated in clause 1.1 is due,
+less any amount paid by insurance.</p>
+
+<p class="co"><span class="n2">7.4</span>The Lender is liable, under applicable law, for pre-existing, hidden or
+manufacturing defects not caused by the Borrower, and for deficiencies in the documentation it
+is required to supply. <b>Fair wear and tear is not recoverable damage.</b></p>
+
+<p class="co"><span class="n2">7.5</span>In the event of a defect the Parties document the condition and, if the
+cause is disputed, obtain an assessment from an authorised technician or an independent expert
+accepted by both. Costs are borne by the Party responsible according to the established cause;
+failing such a finding, the Parties agree in writing before any work is carried out.</p>
+
+<h2><span class="n">8</span>Personal injury and insurance<span class="nuovo">revised</span></h2>
+
+<p class="co"><span class="n2">8.1</span>Each Party is liable for damage caused by its own breaches, under
+applicable law. The Borrower is responsible for the acts of its operators and for tests carried
+out on its premises where the damage arises from improper use or failure to follow the
+protocols. The Lender is not relieved of the liabilities imposed on it by law for defects or
+its own acts.</p>
+
+<div class="box rosso">
+  <span class="eti">8.2 · Condition precedent for tests on persons</span>
+  <p><b>No test may be carried out on a person in the absence of valid public and professional
+  liability insurance</b>, stated below, a copy of which is delivered to the Lender.</p>
+  <table style="margin:6px 0 0">
+    <tr><td style="width:34%">Policy no.</td><td>……………………………………………………</td></tr>
+    <tr><td>Insurer</td><td>……………………………………………………</td></tr>
+    <tr><td>Limit of indemnity</td><td>€ ……………………</td></tr>
+    <tr><td>Period of cover</td><td>from ……… / ……… / ………… to ……… / ……… / …………</td></tr>
+  </table>
+  <p style="margin-top:6px">Until these fields are completed, the Equipment may be used
+  <b>for technical testing without persons only</b>.</p>
+</div>
+
+<h2><span class="n">9</span>Intellectual property, confidentiality and data</h2>
+
+<p class="co"><span class="n2">9.1</span>Protocols, manuals, training materials and methodologies owned by the
+Lender or by their respective owners may not be copied, published, distributed or used to train
+third parties without the written authorisation of the rights holder.</p>
+
+<p class="co"><span class="n2">9.2</span>The Borrower shall grant access to its authorised employees only to the
+extent necessary for the purposes of this agreement. The Parties shall keep non-public
+information confidential and shall process personal data, including client data, in accordance
+with applicable law.</p>
+
+<h2><span class="n">10</span>Return of the Equipment</h2>
+
+<p class="co"><span class="n2">10.1</span>At the end of the period of use the Parties set the date and place of
+return and document it in <b>Annex 3</b>. The Equipment is returned complete with the
+accessories delivered, clean, switched off and in good working order, allowing for fair wear
+and tear.</p>
+
+<p class="co"><span class="n2">10.2</span>Initial transport at the expense of …………………………………; return transport
+at the expense of ………………………………… Dismantling, packing, transport and collection follow the
+safety instructions. Risk in transit lies with the Party arranging it, within the limits of its
+liability, unless otherwise agreed in writing.</p>
+
+<p class="co"><span class="n2">10.3</span>Discrepancies and disputed damage are documented in writing, with
+<b>photographs</b> and a description in Annex 3, <b>by comparison with the delivery photographs</b>
+under clause 4.2. Signature acknowledging physical receipt does not imply admission of
+liability for disputed damage.</p>
+
+<h2><span class="n">11</span>Notices, language, governing law and disputes<span class="nuovo">revised</span></h2>
+
+<table>
+  <tr><th style="width:24%"></th><th>E-mail</th><th>Telephone</th></tr>
+  <tr><td><b>Lender</b></td><td>………………………………………</td><td>………………………………</td></tr>
+  <tr><td><b>Borrower</b></td><td>………………………………………</td><td>………………………………</td></tr>
+</table>
+
+<p class="co"><span class="n2">11.1</span>Contractual notices are given in writing to the addresses stated above.
+Any change is notified without delay.</p>
+
+<p class="co"><span class="n2">11.2</span><b>Language.</b> This agreement is drawn up in Italian and in English.
+In the event of divergence <b>the ………………………… version prevails</b>. If produced in court
+proceedings in Albania, the Parties shall arrange a sworn translation into Albanian.</p>
+
+<p class="co"><span class="n2">11.3</span>This agreement is governed by the <b>law of the Republic of Albania</b>.
+The Parties shall attempt to settle disputes by negotiation within <b>15 days</b> of written
+notice; failing agreement, they shall refer the matter to the courts having jurisdiction by law.</p>
+
+<p class="co"><span class="n2">11.4</span>Any amendment shall be made in writing and signed by both Parties.
+<b>Annexes 1, 2 and 3</b> form an integral part of this agreement, together with the NIPEC
+Standard referred to in clause 5.3. This agreement is executed in two originals of equal value,
+one for each Party.</p>
+
+<div class="box">
+  <span class="eti">To be completed before signature</span>
+  <p>Representatives and capacities · manufacturer and marking (cl. 1.1) · <b>replacement
+  value</b> (cl. 1.1) · delivery and return dates (cl. 3) · centre and installation address
+  (cl. 2.2) · <b>insurance details</b> (cl. 8.2) · contact details (cl. 11) · <b>prevailing
+  language</b> (cl. 11.2) · Annexes 1 and 2 completed and photographs attached.</p>
+  <p style="margin-top:5px"><b>Each page is initialled</b>; the final signatures and the three Annexes are signed in full.</p>
+</div>
+
+<h2>Signatures</h2>
+
+<div class="due">
+  <div class="parti">
+    <span class="ruolo">For the Lender — PHD SYSTEM Sh.p.k.</span>
+    <p style="margin-top:8px">Name and surname ……………………………………………<br><br>
+    Capacity ……………………………………………<br><br>
+    Signature and stamp ……………………………………………</p>
+  </div>
+  <div class="parti">
+    <span class="ruolo">For the Borrower — MEDICAL SPA GROUP AE</span>
+    <p style="margin-top:8px">Name and surname ……………………………………………<br><br>
+    Capacity ……………………………………………<br><br>
+    Signature and stamp ……………………………………………</p>
+  </div>
+</div>
+
+<div class="box verde">
+  <span class="eti">Three annexes follow, forming an integral part of this agreement</span>
+  <table style="margin:4px 0 0">
+    <tr><td style="width:22%"><b>Annex 1</b></td><td>Training and operator register</td><td style="width:34%"><span class="fab">completed at the training session</span></td></tr>
+    <tr><td><b>Annex 2</b></td><td>Condition of the Equipment at delivery</td><td><span class="fab">completed on the delivery day, with the photographs</span></td></tr>
+    <tr><td><b>Annex 3</b></td><td>Return confirmation</td><td><span class="fab">completed on return, by comparison with Annex 2</span></td></tr>
+  </table>
+  <p style="margin-top:6px">The <b>NIPEC Standard</b> for the Equipment, referred to in clause 5.3, is added to these.</p>
+</div>
+
+<!-- =================== ANNEX 1 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h1 style="font-size:16pt">Annex 1 — Training and operator register</h1>
+<p class="riga-rev">Agreement no. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Equipment: Multishape Afrodite VS++ — s/n YD400337</p>
+
+<table>
+  <tr><td style="width:34%"><b>Date and duration of training</b></td><td>……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;……… hours</td></tr>
+  <tr><td><b>Trainer / organisation</b></td><td>……………………………………………………………………</td></tr>
+  <tr><td><b>Topics and protocols covered</b></td><td>……………………………………………………………………</td></tr>
+  <tr><td><b>Documentation delivered</b></td><td>……………………………………………………………………</td></tr>
+</table>
+
+<h3>Operators authorised to use the Equipment</h3>
+<p class="fab">Only the operators listed here, holding a valid Certificate, may use the Equipment (cl. 5.2).</p>
+
+<table>
+  <tr><th style="width:5%">#</th><th style="width:33%">Name and surname</th><th style="width:20%">Certificate no.</th><th style="width:16%">Expiry</th><th>Operator's signature</th></tr>
+  <tr><td class="c">1</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+  <tr><td class="c">2</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+  <tr><td class="c">3</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+  <tr><td class="c">4</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+</table>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Lender</span></div>
+  <div><div class="riga-firma"></div><span class="et">Borrower</span></div>
+</div>
+
+<!-- =================== ANNEX 2 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h1 style="font-size:16pt">Annex 2 — Condition of the Equipment at delivery</h1>
+<p class="sotto">Completed on the day of delivery, together with the photographs</p>
+<p class="riga-rev">Agreement no. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Date and place: ……… / ……… / …………&nbsp;&nbsp;—&nbsp;&nbsp;……………………………………………</p>
+
+<table>
+  <tr><th style="width:38%">Item</th><th style="width:18%">Present</th><th>Condition observed</th></tr>
+  <tr><td><b>Main unit</b> — s/n YD400337</td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Large handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Medium handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Small handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Cavitation handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Power supply unit</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>User manual</b> <span class="fab">cl. 1.4</span></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Conformity documentation</b> <span class="fab">cl. 1.4</span></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>NIPEC Standard</b> <span class="fab">cl. 5.3</span></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+</table>
+
+<p class="riga-casella"><span class="cas"></span> <b>Dated photographs taken jointly</b> — number of shots: ………&nbsp;&nbsp;·&nbsp;&nbsp;held by: ……………………………………</p>
+
+<p class="riga-note">Borrower's reservations: ……………………………………………………………………………………………………………………………</p>
+<p class="riga-note">………………………………………………………………………………………………………………………………………………………………………………………</p>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Lender</span></div>
+  <div><div class="riga-firma"></div><span class="et">Borrower</span></div>
+</div>
+
+<!-- =================== ANNEX 3 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h1 style="font-size:16pt">Annex 3 — Return confirmation</h1>
+<p class="sotto">Completed on the day of return, by comparison with Annex 2</p>
+<p class="riga-rev">Agreement no. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Date and place: ……… / ……… / …………&nbsp;&nbsp;—&nbsp;&nbsp;……………………………………………</p>
+
+<table>
+  <tr><th style="width:38%">Item</th><th style="width:18%">Returned</th><th>Condition on return</th></tr>
+  <tr><td><b>Main unit</b> — s/n YD400337</td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Large handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Medium handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Small handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Cavitation handpiece</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Power supply unit</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manual and documentation</b></td><td class="c"><span class="cas"></span> yes</td><td>&nbsp;</td></tr>
+</table>
+
+<p class="riga-casella"><span class="cas"></span> <b>Return photographs</b> — number of shots: ………&nbsp;&nbsp;·&nbsp;&nbsp;
+<span class="cas"></span> compared with the delivery photographs (Annex 2)</p>
+
+<p class="riga-note">Discrepancies found: …………………………………………………………………………………………………………………………………</p>
+<p class="riga-note">Observations and reservations of the Parties: ………………………………………………………………………………………</p>
+
+<div class="box giallo">
+  <span class="eti">Clause 10.3</span>
+  <p>Signature acknowledging physical receipt <b>does not imply admission of liability</b> for
+  disputed damage.</p>
+</div>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Lender</span></div>
+  <div><div class="riga-firma"></div><span class="et">Borrower</span></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Aesthetic Technologies — Free loan for use · Multishape Afrodite VS++ s/n YD400337</span>
+</div>
+
+
+</body>
+</html>
