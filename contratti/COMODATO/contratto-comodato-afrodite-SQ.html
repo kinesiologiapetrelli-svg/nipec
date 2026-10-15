@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<title>Huapërdorje pa shpërblim · Afrodite VS++ · NIPEC</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+
+/* ---------- aggiunte DEMETRA ---------- */
+.fab{font-size:7.6pt;color:#6B747C;font-style:italic}
+/* la casella da barrare: un quadrato vero, non un carattere che cambia da font a font */
+.cas{display:inline-block;width:10px;height:10px;border:1.2px solid var(--blu);
+     border-radius:2px;vertical-align:-1px;margin-right:4px}
+.caselle{list-style:none;padding:0;margin:0 0 6px}
+.caselle li{position:relative;padding-left:17px;margin-bottom:5px;line-height:1.4}
+.caselle li:before{content:"";position:absolute;left:0;top:3px;width:10px;height:10px;
+                   border:1.2px solid var(--blu);border-radius:2px}
+.riga-casella{margin:8px 0}
+.riga-note{margin:8px 0;color:var(--ink2)}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+
+/* ---------- aggiunte contratto ---------- */
+@page{size:A4;margin:14mm 15mm 14mm}
+body{font-size:9.2pt;line-height:1.45}
+/* i commi: il numero sporge a sinistra, il testo resta allineato */
+.co{margin:0 0 6px;padding-left:30px;text-indent:-30px}
+.co .n2{display:inline-block;width:30px;text-indent:0;font-weight:600;color:var(--navy)}
+.parti{border:1px solid var(--riga);border-radius:4px;padding:9px 12px;margin:0 0 9px}
+.parti .ruolo{font-family:"Archivo",sans-serif;font-size:7.6pt;font-weight:700;
+              letter-spacing:.12em;text-transform:uppercase;color:var(--blu);display:block;margin-bottom:3px}
+.parti p{margin:0}
+h2{font-size:11pt;margin:15px 0 6px}
+.nuovo{display:inline-block;background:var(--verde);color:#fff;font-family:"Archivo",sans-serif;
+       font-size:6.8pt;font-weight:700;letter-spacing:.1em;padding:1.5px 5px;border-radius:3px;
+       vertical-align:2px;margin-left:7px}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="76" width="202" height="1.6" fill="#1C6EA4"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TEKNOLOGJI ESTETIKE</text>
+  </svg>
+  <div class="dx">
+    Kontratë huapërdorjeje pa shpërblim<br>
+    Dy origjinale me vlerë të barabartë<br>
+    Asistenca ………………………
+  </div>
+</div>
+
+<h1>Huapërdorje pa shpërblim e pajisjes estetike</h1>
+<p class="sotto">Për studimin e protokolleve, trajnimin dhe provën operative</p>
+<p class="riga-rev">Kontrata nr. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Data: ……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;Vendi: Tiranë</p>
+
+<h2>Palët kontraktuese</h2>
+
+<div class="parti">
+  <span class="ruolo">1 · Dhënësi në huapërdorje</span>
+  <p><b>KREA Sh.p.k.</b> — NIPT ……………………………… — me seli në ………………………………………………………………………………,
+  Tiranë.<br>
+  Përfaqësuar nga ……………………………………………………, në cilësinë e ……………………………………………………<br>
+  <span class="fab">Në vijim «Dhënësi». Markat <b>NIPEC</b> dhe <b>KREA</b> i përkasin Dhënësit ose shoqërive të të
+  njëjtit grup: çdo referim ndaj NIPEC në këtë kontratë kuptohet si referim ndaj Dhënësit.</span></p>
+</div>
+
+<div class="parti">
+  <span class="ruolo">2 · Marrësi në huapërdorje</span>
+  <p><b>MEDICAL SPA GROUP AE</b> — shoqëri me përgjegjësi të kufizuar — NIPT/NUIS L81309070J —
+  Rruga Ymer Kurti, Qendra Tregtare Olimpia, Njësia Bashkiake nr. 5, Tiranë.<br>
+  Përfaqësuar nga ……………………………………………………, në cilësinë e ……………………………………………………<br>
+  <span class="fab">Në vijim «Marrësi».</span></p>
+</div>
+
+<p>Palët bien dakord si vijon.</p>
+
+<h2><span class="n">1</span>Objekti, pajisja dhe vlera</h2>
+
+<p class="co"><span class="n2">1.1</span>Dhënësi i jep Marrësit në përdorim të përkohshëm dhe pa shpërblim
+pajisjen estetike të përshkruar në tabelën e mëposhtme (në vijim «Pajisja»).</p>
+
+<table>
+  <tr><th style="width:34%">Të dhënat</th><th>Vlera</th></tr>
+  <tr><td>Modeli</td><td><b>Multishape Afrodite VS++</b></td></tr>
+  <tr><td>Numri serial</td><td><b>YD400337</b></td></tr>
+  <tr><td>Aksesorët e dorëzuar</td><td>4 manipola · njësia e ushqimit elektrik</td></tr>
+  <tr><td>Prodhuesi</td><td>………………………………………………………………</td></tr>
+  <tr><td>Markimi dhe konformiteti</td><td>………………………………………………………………</td></tr>
+  <tr><td><b>Vlera e zëvendësimit</b><br><span class="fab">vetëm për qëllimet e neneve 7 dhe 8</span></td><td><b>€ ……………………</b></td></tr>
+</table>
+
+<p class="co"><span class="n2">1.2</span>Pajisja jepet <b>pa shpërblim</b>, vetëm për studimin e protokolleve të
+punës, prova operative, demonstrime teknike dhe trajnim profesional të brendshëm. Kjo kontratë
+<b>nuk është shitje dhe nuk është qira</b>, nuk transferon pronësinë dhe nuk krijon asnjë
+detyrim për blerje.</p>
+
+<p class="co"><span class="n2">1.3</span>Përdorimi për <b>trajtime me pagesë</b> mbi klientë nuk lejohet. Palët
+mund ta autorizojnë vetëm me marrëveshje të veçantë me shkrim që përcakton kushtet
+profesionale, të sigurisë, përgjegjësitë <b>dhe kushtet ekonomike</b>: nga data e asaj
+marrëveshjeje marrëdhënia pushon së qeni pa shpërblim dhe zbatohen kushtet e rëna dakord.</p>
+
+<p class="co"><span class="n2">1.4</span>Së bashku me Pajisjen, Dhënësi dorëzon <b>manualin e përdorimit</b> dhe
+<b>dokumentacionin e konformitetit</b> të prodhuesit. Marrësi e vërteton marrjen në Shtojcën 2.</p>
+
+<h2><span class="n">2</span>Pronësia, vendndodhja dhe identifikimi</h2>
+
+<p class="co"><span class="n2">2.1</span>Pronësia e Pajisjes mbetet e Dhënësit. Nëse Pajisja i përket një të
+treti ose është objekt qiraje financiare, pronari është: …………………………………………………………
+Dhënësi deklaron se ka të drejtën ligjore ta japë Pajisjen në përdorim. Marrësi nuk mund ta
+shesë, ta lërë peng, ta japë me qira ose në nënhuapërdorje, as t'ua kalojë të tretëve.</p>
+
+<p class="co"><span class="n2">2.2</span>Pajisja përdoret vetëm në: qendra ……………………………………………………
+— adresa e instalimit …………………………………………………………………………… Çdo zhvendosje kërkon autorizim
+paraprak me shkrim të Dhënësit.</p>
+
+<p class="co"><span class="n2">2.3</span>Marrësi <b>nuk heq dhe nuk ndryshon</b> pllakat, markimet, numrin serial
+dhe shenjat identifikuese, dhe <b>nuk vendos marka të vetat</b> mbi Pajisjen.</p>
+
+<h2><span class="n">3</span>Afati dhe përfundimi</h2>
+
+<table>
+  <tr><td style="width:46%"><b>Data e dorëzimit</b></td><td>……… / ……… / …………</td></tr>
+  <tr><td><b>Data e parashikuar e kthimit</b></td><td>……… / ……… / …………</td></tr>
+  <tr><td>Kohëzgjatja në ditë kalendarike</td><td>……………… ditë</td></tr>
+</table>
+
+<p class="co"><span class="n2">3.1</span>Huapërdorja ka afatin e treguar më sipër. Në mungesë të datës së
+kthimit, afati është <b>30 ditë</b> nga dorëzimi. Çdo zgjatje kërkon marrëveshje me shkrim të
+të dyja Palëve.</p>
+
+<p class="co"><span class="n2">3.2</span>Dhënësi mund të kërkojë kthimin me njoftim me shkrim të paktën
+<b>10 ditë</b> kalendarike përpara. Marrësi mund të heqë dorë me njoftim me shkrim <b>5 ditë</b>
+përpara, përveç rastit kur Palët bien dakord për një kthim më të hershëm.</p>
+
+<p class="co"><span class="n2">3.3</span>Në rast rreziku të rëndë për sigurinë, përdorimi të paautorizuar,
+cenimi të së drejtës së pronësisë ose shkelje thelbësore të kontratës, Pala e dëmtuar mund të
+kërkojë <b>pezullimin e menjëhershëm të përdorimit</b>; kthimi organizohet pa vonesë të
+pajustifikuar.</p>
+
+<p class="co"><span class="n2">3.4</span>Kontrata zgjidhet automatikisht nëse Marrësi ndërpret veprimtarinë,
+i nënshtrohet procedurave të falimentit ose likuidimit, ose humbet lejet e nevojshme për
+ushtrimin e veprimtarisë. Në këtë rast Pajisja kthehet brenda <b>10 ditëve</b>.</p>
+
+<h2><span class="n">4</span>Dorëzimi dhe gjendja fillestare<span class="nuovo">i rishikuar</span></h2>
+
+<p class="co"><span class="n2">4.1</span>Me nënshkrimin e kësaj kontrate, dhe me kusht që dorëzimi fizik të
+ketë ndodhur në datën e treguar në nenin 3, Marrësi <b>vërteton se ka marrë</b> Pajisjen dhe
+aksesorët e nenit 1.1. Nëse dorëzimi ndodh pas nënshkrimit, Palët konfirmojnë me shkrim datën
+dhe marrjen efektive, edhe me e-mail.</p>
+
+<p class="co"><span class="n2">4.2</span><b>Gjendja në dorëzim.</b> Në dorëzim Palët plotësojnë <b>Shtojcën 2</b>
+dhe bëjnë <b>fotografi të datuara, në prani të të dyja Palëve</b>, të Pajisjes dhe të çdo
+manipoli. Fotografitë i bashkëlidhen kësaj kontrate dhe përbëjnë gjendjen e referencës për çdo
+pretendim të mëvonshëm.</p>
+
+<div class="box giallo">
+  <span class="eti">Pse fotografi në dorëzim</span>
+  <p>Neni 10 parashikon fotografi në <b>kthim</b>. Pa fotografi në <b>dorëzim</b> nuk ka term
+  krahasimi, dhe asnjëra nga Palët nuk mund të provojë nëse një dëm është i ri apo
+  ekzistues. Të dyja seritë e fotografive u shërbejnë të dyjave.</p>
+</div>
+
+<p class="co"><span class="n2">4.3</span>Rezervat e Marrësit për gjendjen e dukshme në dorëzim:
+…………………………………………………………………………………………………………………………………… Ky konfirmim nuk përjashton
+defekte të fshehura ose prodhimi që mund të provohen më vonë.</p>
+
+<h2><span class="n">5</span>Operatorët dhe certifikimi<span class="nuovo">i ri</span></h2>
+
+<p class="co"><span class="n2">5.1</span>Dhënësi organizon <b>trajnimin fillestar</b> të operatorëve dhe vë në
+dispozicion dokumentacionin për një përdorim të sigurt.</p>
+
+<p class="co"><span class="n2">5.2</span><b>Përdorimi i Pajisjes u rezervohet operatorëve që zotërojnë
+Certifikatë Operatori NIPEC në fuqi</b>, të emëruar në Shtojcën 1. Marrësi pengon përdorimin
+nga çdo person tjetër.</p>
+
+<p class="co"><span class="n2">5.3</span><b>Standardi NIPEC</b> për Pajisjen — protokollet, rregullat operative
+dhe kushtet e përdorimit konform — është pjesë përbërëse e kësaj kontrate dhe i dorëzohet
+Marrësit në datën e dorëzimit.</p>
+
+<p class="co"><span class="n2">5.4</span>Dëmet që rrjedhin nga përdorimi prej <b>operatori pa Certifikatë</b> në
+fuqi mbeten në ngarkim të Marrësit.</p>
+
+<h2><span class="n">6</span>Rregullat e përdorimit dhe siguria</h2>
+
+<p class="co"><span class="n2">6.1</span>Marrësi respekton manualet, indikacionet dhe kundërindikacionet si
+dhe protokollet e prodhuesit; mban një mjedis të përshtatshëm; nuk e modifikon dhe nuk e hap
+Pajisjen.</p>
+
+<p class="co"><span class="n2">6.2</span>Marrësi është përgjegjës për informimin e personave që i
+nënshtrohen provës, për marrjen e pëlqimeve të nevojshme, për verifikimin e kundërindikacioneve
+dhe për ruajtjen e dokumentacionit, në përputhje me legjislacionin e zbatueshëm.</p>
+
+<p class="co"><span class="n2">6.3</span>Çdo incident, keqfunksionim ose dyshim për rrezik i njoftohet
+Dhënësit <b>menjëherë dhe me shkrim</b>; përdorimi pezullohet deri në verifikimin dhe udhëzimet
+e dokumentuara të teknikut të autorizuar.</p>
+
+<h2><span class="n">7</span>Mirëmbajtja, defektet, dëmet dhe humbja</h2>
+
+<p class="co"><span class="n2">7.1</span>Marrësi kryen pastrimin dhe kujdesin e zakonshëm sipas manualit.
+Ndërhyrjet teknike, kalibrimi dhe riparimet kryhen <b>vetëm nga asistenca e autorizuar</b>, në
+bashkërendim me Dhënësin.</p>
+
+<p class="co"><span class="n2">7.2</span>Marrësi përgjigjet për dëmet e provuara nga goditjet, lagështira e
+papërshtatshme, pakujdesia, përdorimi në kundërshtim me protokollet, ndërhyrjet e
+paautorizuara, humbja ose mosruajtja, në masën që i atribuohen veprimeve ose mosveprimeve
+të tij.</p>
+
+<p class="co"><span class="n2">7.3</span><b>Vjedhja, zjarri dhe ngjarjet.</b> Në rast vjedhjeje, grabitjeje,
+zjarri ose ngjarjeje natyrore, Marrësi <b>bën kallëzim brenda 24 orëve</b> dhe i dërgon
+Dhënësit një kopje brenda <b>48 orëve</b>. Në rast humbjeje totale ose dëmi të pariparueshëm
+që nuk i atribuohet Dhënësit, detyrohet <b>vlera e zëvendësimit</b> e nenit 1.1, duke zbritur
+shumën e paguar nga sigurimi.</p>
+
+<p class="co"><span class="n2">7.4</span>Dhënësi përgjigjet, sipas legjislacionit të zbatueshëm, për defektet
+ekzistuese, të fshehura ose të prodhimit që nuk janë shkaktuar nga Marrësi, si dhe për
+mangësitë në dokumentacionin që është i detyruar të japë. <b>Konsumi normal nuk është dëm i
+rimbursueshëm.</b></p>
+
+<p class="co"><span class="n2">7.5</span>Në rast defekti Palët dokumentojnë gjendjen dhe, nëse shkaku është i
+kontestuar, kërkojnë vlerësimin e një tekniku të autorizuar ose të një eksperti të pavarur të
+pranuar nga të dyja. Shpenzimet i përballon Pala përgjegjëse sipas shkakut të konstatuar; në
+mungesë të këtij konstatimi, Palët bien dakord me shkrim para çdo ndërhyrjeje.</p>
+
+<h2><span class="n">8</span>Dëmet ndaj personave dhe sigurimi<span class="nuovo">i rishikuar</span></h2>
+
+<p class="co"><span class="n2">8.1</span>Secila Palë përgjigjet për dëmet e shkaktuara nga shkeljet e veta,
+sipas legjislacionit të zbatueshëm. Marrësi është përgjegjës për veprimet e operatorëve të vet
+dhe për provat e kryera në ambientet e veta kur dëmi rrjedh nga përdorimi i papërshtatshëm ose
+nga mosrespektimi i protokolleve. Dhënësi nuk përjashtohet nga përgjegjësitë që ligji i ngarkon
+për defekte ose për veprime të vetat.</p>
+
+<div class="box rosso">
+  <span class="eti">8.2 · Kusht për provat mbi persona</span>
+  <p><b>Asnjë provë mbi persona nuk mund të kryhet pa një policë sigurimi të përgjegjësisë
+  civile dhe profesionale në fuqi</b>, të treguar më poshtë dhe kopja e së cilës i dorëzohet
+  Dhënësit.</p>
+  <table style="margin:6px 0 0">
+    <tr><td style="width:34%">Polica nr.</td><td>……………………………………………………</td></tr>
+    <tr><td>Shoqëria e sigurimit</td><td>……………………………………………………</td></tr>
+    <tr><td>Masa e dëmshpërblimit</td><td>€ ……………………</td></tr>
+    <tr><td>Afati i mbulimit</td><td>nga ……… / ……… / ………… deri ……… / ……… / …………</td></tr>
+  </table>
+  <p style="margin-top:6px">Derisa këto fusha të mos jenë plotësuar, Pajisja mund të përdoret
+  <b>vetëm për prova teknike pa persona</b>.</p>
+</div>
+
+<h2><span class="n">9</span>Prona intelektuale, konfidencialiteti dhe të dhënat</h2>
+
+<p class="co"><span class="n2">9.1</span>Protokollet, manualet, materialet e trajnimit dhe metodologjitë në
+pronësi të Dhënësit ose të titullarëve përkatës nuk mund të kopjohen, publikohen, shpërndahen
+as të përdoren për trajnimin e të tretëve pa autorizim me shkrim të titullarit të së drejtës.</p>
+
+<p class="co"><span class="n2">9.2</span>Marrësi u lejon aksesin punonjësve të vet të autorizuar vetëm në
+masën e nevojshme për qëllimet e kontratës. Palët ruajnë konfidencialitetin e informacioneve
+jopublike dhe përpunojnë të dhënat personale, përfshirë ato të klientëve, në përputhje me
+legjislacionin e zbatueshëm.</p>
+
+<h2><span class="n">10</span>Kthimi i Pajisjes</h2>
+
+<p class="co"><span class="n2">10.1</span>Në përfundim të përdorimit Palët caktojnë datën dhe vendin e kthimit
+dhe e dokumentojnë sipas <b>Shtojcës 3</b>. Pajisja kthehet e plotë me aksesorët e dorëzuar,
+e pastër, e fikur dhe në gjendje të mirë pune, duke marrë parasysh konsumin normal.</p>
+
+<p class="co"><span class="n2">10.2</span>Transporti fillestar në ngarkim të …………………………………; transporti i
+kthimit në ngarkim të ………………………………… Çmontimi, paketimi, transporti dhe marrja në dorëzim
+kryhen sipas udhëzimeve të sigurisë. Rreziku gjatë transportit bie mbi Palën që e organizon,
+brenda kufijve të përgjegjësisë së saj, përveç marrëveshjes së ndryshme me shkrim.</p>
+
+<p class="co"><span class="n2">10.3</span>Mospërputhjet dhe dëmet e kontestuara dokumentohen me shkrim, me
+<b>fotografi</b> dhe përshkrim në Shtojcën 3, <b>në krahasim me fotografitë e dorëzimit</b> sipas
+nenit 4.2. Nënshkrimi për marrjen fizike nuk nënkupton pranim përgjegjësie për një dëm të
+kontestuar.</p>
+
+<h2><span class="n">11</span>Njoftimet, gjuha, ligji dhe mosmarrëveshjet<span class="nuovo">i rishikuar</span></h2>
+
+<table>
+  <tr><th style="width:24%"></th><th>E-mail</th><th>Telefon</th></tr>
+  <tr><td><b>Dhënësi</b></td><td>………………………………………</td><td>………………………………</td></tr>
+  <tr><td><b>Marrësi</b></td><td>………………………………………</td><td>………………………………</td></tr>
+</table>
+
+<p class="co"><span class="n2">11.1</span>Njoftimet kontraktore bëhen me shkrim në adresat e treguara më sipër.
+Çdo ndryshim njoftohet pa vonesë.</p>
+
+<p class="co"><span class="n2">11.2</span><b>Gjuha.</b> Kjo kontratë hartohet në gjuhën shqipe. Në rast se
+përgatitet edhe në italisht ose anglisht, <b>në rast mospërputhjeje mbizotëron versioni
+…………………………</b>.</p>
+
+<p class="co"><span class="n2">11.3</span>Kontrata rregullohet nga <b>legjislacioni i Republikës së Shqipërisë</b>.
+Palët përpiqen t'i zgjidhin mosmarrëveshjet me negociata brenda <b>15 ditëve</b> nga njoftimi me
+shkrim; në mungesë marrëveshjeje i drejtohen gjykatave kompetente sipas ligjit.</p>
+
+<p class="co"><span class="n2">11.4</span>Çdo ndryshim bëhet me shkrim dhe nënshkruhet nga të dyja Palët.
+<b>Shtojcat 1, 2 dhe 3</b> janë pjesë përbërëse e kontratës, së bashku me Standardin NIPEC të
+nenit 5.3. Kontrata hartohet në dy origjinale me vlerë të barabartë, një për secilën Palë.</p>
+
+<div class="box">
+  <span class="eti">Për t'u plotësuar para nënshkrimit</span>
+  <p><b>NIPT dhe selia e KREA Sh.p.k.</b> · përfaqësuesit dhe cilësitë · prodhuesi dhe markimi
+  (neni 1.1) · <b>vlera e zëvendësimit</b> (neni 1.1) · datat e dorëzimit dhe të kthimit
+  (neni 3) · qendra dhe adresa e instalimit (neni 2.2) · <b>të dhënat e policës</b> (neni 8.2) ·
+  kontaktet (neni 11) · <b>gjuha mbizotëruese</b> (neni 11.2) · Shtojcat 1 dhe 2 të plotësuara
+  dhe fotografitë të bashkëlidhura.</p>
+  <p style="margin-top:5px"><b>Çdo faqe sigllohet</b>; nënshkrimet përfundimtare dhe tri Shtojcat firmosen të plota.</p>
+</div>
+
+<div class="nuovo-foglio"></div>
+
+<h2>Nënshkrimet</h2>
+
+<div class="due">
+  <div class="parti">
+    <span class="ruolo">Për Dhënësin — KREA Sh.p.k.</span>
+    <p style="margin-top:8px">Emër dhe mbiemër ……………………………………………<br><br>
+    Cilësia ……………………………………………<br><br>
+    Firma dhe vula ……………………………………………</p>
+  </div>
+  <div class="parti">
+    <span class="ruolo">Për Marrësin — MEDICAL SPA GROUP AE</span>
+    <p style="margin-top:8px">Emër dhe mbiemër ……………………………………………<br><br>
+    Cilësia ……………………………………………<br><br>
+    Firma dhe vula ……………………………………………</p>
+  </div>
+</div>
+
+<div class="box verde">
+  <span class="eti">Vijojnë tri shtojca, pjesë përbërëse e kontratës</span>
+  <table style="margin:4px 0 0">
+    <tr><td style="width:22%"><b>Shtojca 1</b></td><td>Regjistri i trajnimit dhe i operatorëve</td><td style="width:34%"><span class="fab">plotësohet në trajnim</span></td></tr>
+    <tr><td><b>Shtojca 2</b></td><td>Gjendja e Pajisjes në dorëzim</td><td><span class="fab">plotësohet ditën e dorëzimit, me fotografitë</span></td></tr>
+    <tr><td><b>Shtojca 3</b></td><td>Konfirmimi i kthimit</td><td><span class="fab">plotësohet në kthim, në krahasim me Shtojcën 2</span></td></tr>
+  </table>
+  <p style="margin-top:6px">Këtyre u shtohet <b>Standardi NIPEC</b> i Pajisjes, i përmendur në nenin 5.3.</p>
+</div>
+
+<!-- =================== SHTOJCA 1 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h1 style="font-size:16pt">Shtojca 1 — Regjistri i trajnimit dhe i operatorëve</h1>
+<p class="riga-rev">Kontrata nr. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Pajisja: Multishape Afrodite VS++ — s/n YD400337</p>
+
+<table>
+  <tr><td style="width:34%"><b>Data dhe kohëzgjatja e trajnimit</b></td><td>……… / ……… / …………&nbsp;&nbsp;·&nbsp;&nbsp;……… orë</td></tr>
+  <tr><td><b>Trajnuesi / organizata</b></td><td>……………………………………………………………………</td></tr>
+  <tr><td><b>Temat dhe protokollet e trajtuara</b></td><td>……………………………………………………………………</td></tr>
+  <tr><td><b>Dokumentacioni i dorëzuar</b></td><td>……………………………………………………………………</td></tr>
+</table>
+
+<h3>Operatorët e autorizuar për përdorim</h3>
+<p class="fab">Vetëm operatorët e listuar këtu, me Certifikatë në fuqi, mund ta përdorin Pajisjen (neni 5.2).</p>
+
+<table>
+  <tr><th style="width:5%">#</th><th style="width:33%">Emër dhe mbiemër</th><th style="width:20%">Certifikata nr.</th><th style="width:16%">Skadenca</th><th>Firma e operatorit</th></tr>
+  <tr><td class="c">1</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+  <tr><td class="c">2</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+  <tr><td class="c">3</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+  <tr><td class="c">4</td><td>&nbsp;</td><td>&nbsp;</td><td>……/……/………</td><td>&nbsp;</td></tr>
+</table>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Dhënësi</span></div>
+  <div><div class="riga-firma"></div><span class="et">Marrësi</span></div>
+</div>
+
+<!-- =================== SHTOJCA 2 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h1 style="font-size:16pt">Shtojca 2 — Gjendja e Pajisjes në dorëzim</h1>
+<p class="sotto">Plotësohet ditën e dorëzimit, së bashku me fotografitë</p>
+<p class="riga-rev">Kontrata nr. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Data dhe vendi: ……… / ……… / …………&nbsp;&nbsp;—&nbsp;&nbsp;……………………………………………</p>
+
+<table>
+  <tr><th style="width:38%">Zëri</th><th style="width:18%">I pranishëm</th><th>Gjendja e vërejtur</th></tr>
+  <tr><td><b>Trupi i makinës</b> — s/n YD400337</td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i madh</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i mesëm</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i vogël</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i kavitacionit</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Njësia e ushqimit elektrik</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manuali i përdorimit</b> <span class="fab">neni 1.4</span></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Dokumentacioni i konformitetit</b> <span class="fab">neni 1.4</span></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Standardi NIPEC</b> <span class="fab">neni 5.3</span></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+</table>
+
+<p class="riga-casella"><span class="cas"></span> <b>Fotografi të datuara, në prani të të dyja Palëve</b> — numri i fotove: ………&nbsp;&nbsp;·&nbsp;&nbsp;ruajtur nga: ……………………………………</p>
+
+<p class="riga-note">Rezervat e Marrësit: ………………………………………………………………………………………………………………………………</p>
+<p class="riga-note">………………………………………………………………………………………………………………………………………………………………………………………</p>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Dhënësi</span></div>
+  <div><div class="riga-firma"></div><span class="et">Marrësi</span></div>
+</div>
+
+<!-- =================== SHTOJCA 3 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h1 style="font-size:16pt">Shtojca 3 — Konfirmimi i kthimit</h1>
+<p class="sotto">Plotësohet ditën e kthimit, në krahasim me Shtojcën 2</p>
+<p class="riga-rev">Kontrata nr. ………………&nbsp;&nbsp;·&nbsp;&nbsp;Data dhe vendi: ……… / ……… / …………&nbsp;&nbsp;—&nbsp;&nbsp;……………………………………………</p>
+
+<table>
+  <tr><th style="width:38%">Zëri</th><th style="width:18%">I kthyer</th><th>Gjendja në kthim</th></tr>
+  <tr><td><b>Trupi i makinës</b> — s/n YD400337</td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i madh</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i mesëm</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i vogël</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manipoli i kavitacionit</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Njësia e ushqimit elektrik</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+  <tr><td><b>Manuali dhe dokumentacioni</b></td><td class="c"><span class="cas"></span> po</td><td>&nbsp;</td></tr>
+</table>
+
+<p class="riga-casella"><span class="cas"></span> <b>Fotografi të kthimit</b> — numri i fotove: ………&nbsp;&nbsp;·&nbsp;&nbsp;
+<span class="cas"></span> krahasuar me fotografitë e dorëzimit (Shtojca 2)</p>
+
+<p class="riga-note">Mospërputhje të konstatuara: ……………………………………………………………………………………………………………</p>
+<p class="riga-note">Vërejtje dhe rezerva të Palëve: ………………………………………………………………………………………………………………</p>
+
+<div class="box giallo">
+  <span class="eti">Neni 10.3</span>
+  <p>Nënshkrimi për marrjen fizike <b>nuk nënkupton pranim përgjegjësie</b> për një dëm të
+  kontestuar.</p>
+</div>
+
+<div class="firme">
+  <div><div class="riga-firma"></div><span class="et">Dhënësi</span></div>
+  <div><div class="riga-firma"></div><span class="et">Marrësi</span></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Teknologji Estetike — Huapërdorje pa shpërblim · Multishape Afrodite VS++ s/n YD400337</span>
+</div>
+
+
+</body>
+</html>

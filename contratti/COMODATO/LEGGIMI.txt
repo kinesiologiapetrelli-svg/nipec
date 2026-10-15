@@ -4,12 +4,44 @@ Rifatto sul layout NIPEC dal file Word di partenza
 
 
 I FILE
-  CONTRATTO-COMODATO-AFRODITE-IT.pdf   8 pagine
-  CONTRATTO-COMODATO-AFRODITE-EN.pdf   8 pagine
-  i due sorgenti .html, da cui si ristampa
+  CONTRATTO-COMODATO-AFRODITE-IT.pdf      8 pagine · italiano
+  CONTRATTO-COMODATO-AFRODITE-EN.pdf      8 pagine · inglese
+  KONTRATE-HUAPERDORJE-AFRODITE-SQ.pdf    8 pagine · albanese
+  i tre sorgenti .html, da cui si ristampa
 
-Struttura identica nelle due lingue: 11 articoli, firme, tre allegati.
+Struttura identica nelle tre lingue: 11 articoli, firme, tre allegati.
 Stessa pagina, stesso numero di articolo. Si possono mettere affiancati.
+
+
+ATTENZIONE: L'ALBANESE NON E' UNA TRADUZIONE DELL'ITALIANO
+
+Nell'albanese il Concedente e' KREA Sh.p.k., nell'italiano e nell'inglese
+e' PHD SYSTEM Sh.p.k. Cambia la Parte, non la lingua.
+
+Vuol dire che non sono tre versioni dello stesso contratto: sono due
+contratti diversi. La clausola sulla lingua prevalente (art. 11.2) serve
+a risolvere le divergenze di traduzione, non a far coesistere due
+societa' diverse nello stesso accordo.
+
+Vanno bene cosi' solo se la scelta e' voluta: in Albania firma KREA, in
+Italia e all'estero firma PHD SYSTEM. In quel caso l'albanese e' il
+contratto vero per Tirana e gli altri due servono da testo di
+riferimento, non da originale.
+
+Se invece deve firmare sempre la stessa societa', dimmelo: cambiare il
+nome sugli altri due e' un minuto.
+
+Per questo nell'albanese l'art. 11.2 dice che la kontrata e' redatta in
+albanese, e lascia il campo per la lingua prevalente solo se se ne
+preparano anche altre: non puo' dichiararsi traduzione di un testo dove
+la controparte e' un'altra societa'.
+
+
+DI KREA MANCANO NIPT E SEDE
+Due campi a puntini in testa al contratto albanese. Di KREA non ho ne'
+il NIPT ne' l'indirizzo: non me li sono inventati. Mandameli e li scrivo.
+Il telefono in testata l'ho lasciato vuoto, come sulle altre schede
+albanesi.
 
 
 COSA E' CAMBIATO RISPETTO AL WORD
