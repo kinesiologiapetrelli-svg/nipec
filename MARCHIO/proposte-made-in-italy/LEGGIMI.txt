@@ -1,0 +1,51 @@
+TRE PROPOSTE MADE IN ITALY SUL MARCHIO NIPEC
+Da scegliere, non da sommare. Una sola entra nel marchio.
+
+
+I FILE
+  NIPEC-MADE-IN-ITALY-3-PROPOSTE.pdf   la scheda di confronto, 2 pagine
+  nipec-logo-A-filetto-tricolore.svg
+  nipec-logo-B-bandierina-in-coda.svg
+  nipec-logo-C-sigillo-staccato.svg
+  proposte-made-in-italy.html          il sorgente della scheda
+
+
+COSA NON E' CAMBIATO
+Geometria dell'emblema, colori NIPEC, carattere, parola NIPEC, coda
+TECNOLOGIE ESTETICHE. Cambia solo il modo di dire che e' italiana.
+
+
+LE TRE
+
+ A · IL FILETTO TRICOLORE
+   Il filetto blu sotto NIPEC si divide in tre. Da 1,6 a 3 px di spessore,
+   altrimenti sparisce.
+   La piu' elegante, la meno esplicita: il tricolore lo capisce chi
+   guarda, non chi scorre. Non allunga il marchio di un millimetro.
+
+ B · LA BANDIERINA IN CODA
+   Il filetto si allunga, e in fondo alla riga della coda arrivano la
+   bandiera e la scritta MADE IN ITALY.
+   Dice la cosa a chiare lettere e resta un logo solo. Ma allunga il
+   marchio di un terzo: dove lo spazio e' stretto diventa piu' piccolo.
+
+ C · IL SIGILLO STACCATO
+   Il marchio resta identico a oggi. Accanto, dopo un filo verticale, un
+   sigillo con bandiera e MADE IN ITALY.
+   Il sigillo vive anche da solo: targhetta della macchina, scatola,
+   timbro sui documenti, angolo delle schede. Ma sono due oggetti da
+   gestire invece di uno.
+
+
+LA BANDA BIANCA
+Su carta bianca la banda centrale del tricolore sparirebbe. In tutte e
+tre ha un orlo grigio chiarissimo (#C9D4DE, 0,4 px) che la tiene visibile
+senza farsi notare. Colori ufficiali: verde #008C45, bianco #F4F5F0,
+rosso #CD212A.
+
+
+QUANDO SI SCEGLIE
+La scelta tocca: logo orizzontale, verticale, compatto, emblema, le loro
+versioni in negativo, le testate di tutti i documenti gia' fatti
+(protocolli, schede laser, contratti) e le icone delle app.
+Appena mi dici quale, rifaccio tutta la famiglia e aggiorno le testate.
