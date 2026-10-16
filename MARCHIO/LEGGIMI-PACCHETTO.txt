@@ -1,0 +1,78 @@
+MARCHIO NIPEC — pacchetto completo, versione 2026 col filetto tricolore
+Tutto quello che serve per fare video, grafiche, stampe e social.
+
+
+SE HAI FRETTA
+Apri NIPEC-MARCHIO-istruzioni.pdf: una pagina con le quattro versioni,
+i colori, cosa si fa e cosa non si fa. Poi pesca il file che ti serve.
+
+
+QUALE CARTELLA
+
+ 1-SVG
+   Il vettoriale. E' da qui che si parte per qualunque lavoro serio:
+   si ingrandisce quanto vuoi senza perdere niente.
+   Il testo e' gia' trasformato in contorni, quindi si apre uguale su
+   qualunque computer, anche senza il carattere installato.
+   Dentro, testo-modificabile/ ha gli stessi file col testo ancora
+   testo: servono solo se qualcuno deve cambiare la scritta, e in quel
+   caso il carattere Archivo deve essere installato.
+
+ 2-PNG-trasparente
+   Fondo trasparente, tre misure: 500, 1000 e 2000 px di larghezza
+   (l'emblema 256, 512, 1024, perche' e' quadrato).
+   Per montaggi video, sovrimpressioni, titoli.
+
+ 3-PNG-con-fondo
+   Gli stessi loghi col fondo gia' dentro — bianco per le versioni
+   normali, blu NIPEC per quelle in negativo.
+   Per chi la trasparenza non la gestisce: Word, WhatsApp, alcuni
+   gestionali.
+
+ 4-PDF-vettoriale
+   Per la tipografia. Vettoriale, 120 mm di larghezza, si scala.
+   E' il file da mandare a chi stampa insegne, adesivi, brochure.
+
+ 5-ICONE-APP
+   Le icone quadrate gia' pronte: 192, 512, maskable e apple-touch.
+
+ 6-CARATTERI
+   I due caratteri del marchio in woff2: Archivo (marchio e titoli) e
+   Source Serif 4 (testo). Le famiglie complete si scaricano gratis da
+   Google Fonts, licenza SIL Open Font, uso commerciale incluso.
+
+
+QUALE VERSIONE DEL LOGO
+
+ orizzontale   la principale. Carta intestata, copertine, sito, video.
+ verticale     quando lo spazio e' alto e stretto: roll-up, vetrofanie.
+ compatto      emblema + NIPEC, senza coda. Sotto i 28 px di altezza la
+               coda non si legge: si usa questo.
+ emblema       solo il simbolo. Icone, timbri, favicon, spazi quadrati.
+
+ Ognuna ha la sua versione -negativo: quella si usa su fondo scuro o
+ sopra una fotografia. Non si prende il logo normale e si schiarisce.
+
+
+LA NOVITA' DI QUESTA VERSIONE
+Il filetto sotto la parola NIPEC non e' piu' blu: e' verde, bianco e
+rosso. Dice che la macchina e' italiana senza aggiungere una parola.
+
+Non si tocca: non si assottiglia, non si allarga, non si cambia colore.
+La banda bianca ha un orlo grigio chiarissimo che serve a non farla
+sparire su fondo bianco — sulle versioni in negativo quell'orlo non c'e'
+ed e' giusto cosi'.
+
+Compatto ed emblema non hanno il filetto: li' non esiste e non si
+aggiunge a mano.
+
+
+LE TRE COSE CHE FANNO PIU' DANNI
+ 1. Partire da un PNG per una stampa grande. Si parte dall'SVG o dal PDF.
+ 2. Usare il logo normale su fondo scuro. C'e' il negativo.
+ 3. Stirare il logo per farlo entrare in uno spazio. Si rimpicciolisce
+    tutto insieme, oppure si usa un'altra versione.
+
+
+DOMANDE
+Scrivi a Giorgio. Se un formato che ti serve qui non c'e', si fa.
