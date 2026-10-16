@@ -9,6 +9,6 @@
     <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#FFFFFF"/>
   </g>
   <text x="58" y="168" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#FFFFFF">NIPEC</text>
-  <rect x="58" y="182" width="202" height="1.6" fill="#5AA6D6"/>
+  <rect x="58" y="181" width="67.33" height="3" fill="#008C45"/><rect x="125.33" y="181" width="67.33" height="3" fill="#F4F5F0"/><rect x="192.67" y="181" width="67.33" height="3" fill="#CD212A"/>
   <text x="60" y="202" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#5AA6D6">TECNOLOGIE ESTETICHE</text>
 </svg>

@@ -26,6 +26,31 @@ Icone dell'app (PNG, emblema bianco su fondo blu): stanno in
 APP-ALERT-LASER/. Stessa geometria di questi file, stessi colori.
 
 
+IL FILETTO TRICOLORE — Made in Italy
+Il filetto sotto la parola NIPEC non e' piu' blu: si divide in tre, verde
+bianco rosso. Non aggiunge parole: dice che la macchina e' italiana a chi
+guarda il marchio, senza allungarlo di un millimetro.
+
+E' alto 3 px (prima 1,6) perche' a 1,6 il tricolore diventa una sbavatura
+grigia. La banda bianca ha un orlo #C9D4DE da 0,4 px: su carta bianca
+senza quell'orlo sparirebbe, e si vedrebbe verde-buco-rosso.
+
+Sulle versioni in negativo l'orlo non c'e': su fondo scuro il bianco si
+vede da solo.
+
+Ce l'hanno: orizzontale, verticale e i loro negativi — le versioni con
+la coda. Non ce l'hanno compatto ed emblema: li' il filetto non esiste e
+non si inventa.
+
+Verde  #008C45
+Bianco #F4F5F0
+Rosso  #CD212A
+Orlo   #C9D4DE   solo sulle versioni positive
+
+Le tre proposte da cui e' uscita questa stanno in
+proposte-made-in-italy/ — con la scheda di confronto.
+
+
 COLORI
 Blu NIPEC      #1C6EA4    l'anello, gli accenti
 Blu profondo   #123A63    il nodo, la parola NIPEC, i fondi scuri
