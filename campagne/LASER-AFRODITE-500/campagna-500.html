@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Campagna 500 · laser e Afrodite · NIPEC</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:22px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:20px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+
+/* ---------- aggiunte DEMETRA ---------- */
+.fab{font-size:7.6pt;color:#6B747C;font-style:italic}
+/* la casella da barrare: un quadrato vero, non un carattere che cambia da font a font */
+.cas{display:inline-block;width:10px;height:10px;border:1.2px solid var(--blu);
+     border-radius:2px;vertical-align:-1px;margin-right:4px}
+.caselle{list-style:none;padding:0;margin:0 0 6px}
+.caselle li{position:relative;padding-left:17px;margin-bottom:5px;line-height:1.4}
+.caselle li:before{content:"";position:absolute;left:0;top:3px;width:10px;height:10px;
+                   border:1.2px solid var(--blu);border-radius:2px}
+.riga-casella{margin:8px 0}
+.riga-note{margin:8px 0;color:var(--ink2)}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+
+/* ---------- aggiunte contratto ---------- */
+@page{size:A4;margin:14mm 15mm 14mm}
+body{font-size:9.2pt;line-height:1.45}
+/* i commi: il numero sporge a sinistra, il testo resta allineato */
+.co{margin:0 0 6px;padding-left:30px;text-indent:-30px}
+.co .n2{display:inline-block;width:30px;text-indent:0;font-weight:600;color:var(--navy)}
+.parti{border:1px solid var(--riga);border-radius:4px;padding:9px 12px;margin:0 0 9px}
+.parti .ruolo{font-family:"Archivo",sans-serif;font-size:7.6pt;font-weight:700;
+              letter-spacing:.12em;text-transform:uppercase;color:var(--blu);display:block;margin-bottom:3px}
+.parti p{margin:0}
+h2{font-size:11pt;margin:15px 0 6px}
+.nuovo{display:inline-block;background:var(--verde);color:#fff;font-family:"Archivo",sans-serif;
+       font-size:6.8pt;font-weight:700;letter-spacing:.1em;padding:1.5px 5px;border-radius:3px;
+       vertical-align:2px;margin-left:7px}
+
+/* ---------- aggiunte campagna ---------- */
+body{font-size:9.3pt}
+h2{font-size:11.5pt;margin:16px 0 6px}
+h3{font-size:9.8pt;color:var(--navy);margin:12px 0 4px}
+/* l'annuncio come lo legge chi scorre: riquadro, testo tale e quale */
+.annuncio{border:1px solid var(--riga);border-radius:6px;overflow:hidden;margin:0 0 10px;
+          page-break-inside:avoid}
+.annuncio .cima{background:var(--blu-velo);border-bottom:1px solid var(--riga);padding:6px 10px}
+.annuncio .ang{font-family:"Archivo",sans-serif;font-size:7pt;font-weight:700;letter-spacing:.14em;
+               text-transform:uppercase;color:var(--blu)}
+.annuncio .tit{font-family:"Archivo",sans-serif;font-size:9.6pt;font-weight:700;color:var(--navy);
+               margin:1px 0 0}
+.annuncio .corpo{padding:9px 11px}
+.copy{font-size:9.4pt;line-height:1.55;white-space:pre-line;margin:0}
+.annuncio .piede{border-top:1px solid var(--riga);padding:5px 11px;font-size:8pt;color:var(--ink2);
+                 display:flex;justify-content:space-between;background:#FBFDFE}
+.annuncio .piede b{color:var(--navy)}
+.scelta{border-left:4px solid var(--verde);background:var(--verde-velo);border:1px solid var(--riga);
+        padding:8px 11px;margin:8px 0;font-size:8.8pt}
+.scelta .eti{color:var(--verde)}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Documento di campagna — uso interno<br>
+    Non si consegna al cliente<br>
+    Rev. 1 · ottobre 2026
+  </div>
+</div>
+
+<h1>Campagna 500</h1>
+<p class="sotto">Laser e Afrodite a noleggio — Albania e Lazio</p>
+<p class="riga-rev">Per: Giorgio · Uarda · i ragazzi&nbsp;&nbsp;·&nbsp;&nbsp;Tre campagne, una sola offerta</p>
+
+<div class="box">
+  <span class="eti">Cosa fa questo documento</span>
+  <p>Non vende: <b>porta una titolare a scrivere</b>. Da lì in poi lavora il copione che
+  abbiamo già — Test 3 minuti, il conto, il ponte, la proposta.</p>
+  <p>L'inserzione che prova a fare il lavoro del copione fallisce due volte: non vende e
+  brucia il copione.</p>
+</div>
+
+<h2><span class="n">1</span>L'offerta, identica nelle tre campagne</h2>
+
+<table>
+  <tr><th style="width:34%">Voce</th><th>Cosa diciamo</th></tr>
+  <tr><td><b>Canone</b></td><td><b>500 € / mese</b> — in Albania <b>50.000 Lekë / mese</b></td></tr>
+  <tr><td><b>Quale macchina</b></td><td><b>Non si nomina il modello.</b> «Un laser di ultima generazione con intelligenza artificiale». Il modello si decide in trattativa</td></tr>
+  <tr><td><b>Afrodite</b></td><td>Stessa cifra</td></tr>
+  <tr><td><b>Vincolo</b></td><td>Nessuno. La ferma quando vuole</td></tr>
+  <tr><td><b>Anticipo</b></td><td>Zero</td></tr>
+  <tr><td><b>Cauzione</b></td><td>Zero</td></tr>
+  <tr><td><b>Quando si paga</b></td><td>Consegna il <b>1</b>, pagamento entro il <b>30</b></td></tr>
+  <tr><td><b>Vacanze</b></td><td>La restituisce e <b>quel mese non paga</b></td></tr>
+  <tr><td><b>Formazione</b></td><td><b>T0 compreso</b>, gratis. Formazione DEMETRA opzionale, 250 €</td></tr>
+  <tr><td><b>Assistenza</b></td><td>Sempre. <b>Muletto in 48 ore</b></td></tr>
+  <tr><td><b>Promo mensile</b></td><td>Ogni mese una campagna pronta, personalizzata col nome del centro</td></tr>
+</table>
+
+<div class="scelta">
+  <span class="eti">La cosa più forte di tutta l'offerta, e non è il prezzo</span>
+  <p><b>Consegni il 1 e incassi il 30.</b> La titolare lavora trenta giorni prima di pagare
+  il primo lek. Non è «costa poco»: è <b>«ti pago con i soldi che hai già fatto con la mia
+  macchina»</b>.</p>
+  <p style="margin-top:5px">Zero anticipo e zero cauzione tolgono la paura. I trenta giorni
+  la ribaltano: il rischio passa tutto dalla nostra parte, in modo verificabile. È l'unica
+  frase di questa campagna che un concorrente non può copiare senza rimetterci.</p>
+</div>
+
+<h2><span class="n">2</span>I quattro angoli da testare</h2>
+
+<p>L'offerta non si testa: è decisa. Si testa <b>quale frase mette in moto</b> una titolare
+che sta scorrendo il telefono.</p>
+
+<table>
+  <tr><th style="width:5%"></th><th style="width:22%">Angolo</th><th>La frase madre</th><th style="width:20%">Da dove viene</th></tr>
+  <tr><td class="c"><b>A</b></td><td><b>Trenta giorni prima</b></td><td>«La macchina arriva il 1. Paghi il 30. Un mese di lavoro prima del primo pagamento»</td><td>le condizioni nuove</td></tr>
+  <tr><td class="c"><b>B</b></td><td><b>Il rischio ribaltato</b></td><td>«Se si ferma, il muletto in 48 ore. Tu non chiudi un'ora»</td><td>copione · obiezione fornitore</td></tr>
+  <tr><td class="c"><b>C</b></td><td><b>La promo del mese</b></td><td>«Non ti do solo la macchina. Ogni mese ti do la campagna già fatta per riempirla»</td><td>Contatto dei 30 giorni</td></tr>
+  <tr><td class="c"><b>D</b></td><td><b>La cliente persa</b></td><td>«Le clienti che non vedi più da tre mesi — le conti mai?»</td><td>script cliente persa</td></tr>
+</table>
+
+<div class="box giallo">
+  <span class="eti">Perché quattro e non uno</span>
+  <p><b>D non parla di macchine</b> ed è quello che nel nostro materiale fa sussultare — ma
+  porta contatti più tiepidi. <b>A</b> è il più concreto e il più nuovo. <b>C</b> è l'unico
+  che nessun concorrente può dire. Quale tira non si decide a tavolino: si misura in sette
+  giorni con lo stesso budget su tutti e quattro.</p>
+</div>
+
+<h2><span class="n">3</span>Albania · Laser</h2>
+<p class="quando">Parte per prima — qui abbiamo già tutto</p>
+
+<table>
+  <tr><td style="width:30%"><b>Chi risponde</b></td><td>Uarda, da Tirana</td></tr>
+  <tr><td><b>Dove scrivono</b></td><td>WhatsApp · <b>+355 69 212 9786</b></td></tr>
+  <tr><td><b>Pagina</b></td><td>NIPEC</td></tr>
+  <tr><td><b>Lingua</b></td><td>Albanese</td></tr>
+  <tr><td><b>Dove</b></td><td>Tiranë · Durrës · Shkodër · Elbasan · Vlorë · Peshkopi <span class="fab">le città dove siamo già</span></td></tr>
+  <tr><td><b>Chi</b></td><td>Donne 28-55, interessi: estetikë, kozmetikë, salon bukurie, estetistë <span class="fab">+ titolari di attività</span></td></tr>
+  <tr><td><b>Budget S1</b></td><td>5 € al giorno per angolo — <b>20 € al giorno</b> in tutto</td></tr>
+</table>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">A · Tridhjetë ditë përpara</span>
+    <p class="tit">Lazer në kabinën tënde — 50.000 Lekë/muaj</p></div>
+  <div class="corpo"><p class="copy">Makina të vjen më 1 të muajit.
+Paguan më 30.
+
+Tridhjetë ditë punë përpara se të nxjerrësh lekun e parë.
+
+Pa kontratë. Pa paradhënie. Pa garanci.
+Dhe kur mbyll për pushime, e kthen — atë muaj nuk paguan.
+
+Lazer i brezit të fundit, me inteligjencë artificiale.
+Trajnimi brenda. Asistenca gjithmonë.
+
+Shkruaj «LAZER» dhe të tregoj si funksionon.</p></div>
+  <div class="piede"><span><b>Titolo:</b> 50.000 Lekë/muaj · pa kontratë</span><span><b>Pulsante:</b> Dërgo mesazh</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">B · Rreziku nuk është yti</span>
+    <p class="tit">Nëse ndalon, brenda 48 orëve ke një tjetër</p></div>
+  <div class="corpo"><p class="copy">Pyetja që duhet t'i bësh çdo furnitori:
+
+«Nëse makina ndalon, për sa kohë kam një tjetër në kabinë?»
+
+Te ne: 48 orë.
+Nuk mbyll asnjë orë. Nuk anulon asnjë klient.
+
+Një lazer i ndalur një javë janë dymbëdhjetë kliente që humbasin radhën — dhe shumica nuk kthehen më.
+
+50.000 Lekë në muaj. Pa kontratë, pa paradhënie.
+Rreziku nuk është yti. Është yni.
+
+Shkruaj «LAZER».</p></div>
+  <div class="piede"><span><b>Titolo:</b> Makinë zëvendësuese brenda 48 orëve</span><span><b>Pulsante:</b> Dërgo mesazh</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">C · Fushata e gatshme</span>
+    <p class="tit">Nuk të jap vetëm makinën</p></div>
+  <div class="corpo"><p class="copy">Çdo muaj të dërgoj fushatën e gatshme për ta mbushur agjendën — me emrin e qendrës tënde mbi të.
+
+Ti e publikon. Klientet marrin takim.
+
+Makina pa fushatë është një mobilie e shtrenjtë.
+Prandaj nuk e lëmë vetëm.
+
+Lazer + fushata e muajit + asistenca:
+50.000 Lekë në muaj, pa kontratë.
+
+Shkruaj «LAZER» dhe të dërgoj fushatën e këtij muaji për ta parë.</p></div>
+  <div class="piede"><span><b>Titolo:</b> Makina, dhe fushata për ta mbushur</span><span><b>Pulsante:</b> Dërgo mesazh</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">D · Klientja e humbur</span>
+    <p class="tit">Një pyetje e sikletshme, pastaj të lë rehat</p></div>
+  <div class="corpo"><p class="copy">Klientet që nuk i sheh më prej tre muajsh — i numëron ndonjëherë?
+
+Pothuajse asnjë qendër nuk e di. Dhe pikërisht aty janë paratë që dalin nga arka çdo vit — jo se punon keq, por se askush nuk i ka rimarrë në telefon.
+
+Tre minuta. Tetë pyetje. Në fund del me një numër në dorë që sot nuk e ke.
+
+Nuk të shes asgjë atë ditë.
+
+Shkruaj «TEST».</p></div>
+  <div class="piede"><span><b>Titolo:</b> Sa kliente ke humbur këtë vit?</span><span><b>Pulsante:</b> Dërgo mesazh</span></div>
+</div>
+
+<!-- =================== FOGLIO 3 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h2><span class="n">4</span>Albania · Afrodite</h2>
+<p class="quando">Parte a due settimane dal laser — prima servono i documenti Afrodite in albanese</p>
+
+<table>
+  <tr><td style="width:30%"><b>Differenza dal laser</b></td><td>Stessa offerta, stesso prezzo. Cambia il <b>dolore</b>: non il pelo, il corpo che non si rimodella</td></tr>
+  <tr><td><b>Chi</b></td><td>Stesso pubblico, più gli interessi <i>trajtime trupi · celulit · rimodelim</i></td></tr>
+  <tr><td><b>Budget S1</b></td><td><b>15 € al giorno</b> — tre angoli, D non si rifà</td></tr>
+</table>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">A · Tridhjetë ditë përpara</span>
+    <p class="tit">Afrodite në kabinën tënde — 50.000 Lekë/muaj</p></div>
+  <div class="corpo"><p class="copy">Kavitacion, radiofrekuencë, vakum dhe LED — në një makinë të vetme.
+
+Të vjen më 1 të muajit. Paguan më 30.
+Tridhjetë ditë punë përpara se të nxjerrësh lekun e parë.
+
+Pa kontratë. Pa paradhënie. Pa garanci.
+Kur mbyll për pushime, e kthen dhe atë muaj nuk paguan.
+
+Trajnimi brenda: protokollet, parametrat, gjithçka.
+
+Shkruaj «AFRODITE».</p></div>
+  <div class="piede"><span><b>Titolo:</b> Rimodelim trupi — 50.000 Lekë/muaj</span><span><b>Pulsante:</b> Dërgo mesazh</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">B · Nuk mjafton makina</span>
+    <p class="tit">Makina nuk mjafton. Duhet metoda</p></div>
+  <div class="corpo"><p class="copy">Shumë qendra blejnë makinën dhe pas tre muajsh e lënë në qoshe.
+
+Jo se makina nuk punon.
+Sepse askush nuk u ka dhënë protokollin: çfarë bëhet, me çfarë parametrash, në çfarë rendi, dhe sa seanca.
+
+Me ne vjen metoda DEMETRA: cikli 10-12 seanca, skeda e vlerësimit, protokolli faqe për faqe. Dhe asistenca gjithmonë.
+
+50.000 Lekë në muaj. Pa kontratë.
+
+Shkruaj «AFRODITE».</p></div>
+  <div class="piede"><span><b>Titolo:</b> Makina + metoda, jo vetëm makina</span><span><b>Pulsante:</b> Dërgo mesazh</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">C · Fushata e gatshme</span>
+    <p class="tit">Çdo muaj, fushata e gatshme</p></div>
+  <div class="corpo"><p class="copy">Të jap makinën për rimodelim trupi.
+Dhe çdo muaj fushatën e gatshme për ta mbushur, me emrin e qendrës tënde.
+
+Ti e publikon. Klientet marrin takim.
+
+Sepse një makinë pa kliente është vetëm një faturë në fund të muajit.
+
+50.000 Lekë në muaj, pa kontratë, pa paradhënie.
+
+Shkruaj «AFRODITE» dhe të dërgoj fushatën e këtij muaji.</p></div>
+  <div class="piede"><span><b>Titolo:</b> Makina, dhe klientet për ta</span><span><b>Pulsante:</b> Dërgo mesazh</span></div>
+</div>
+
+<h2><span class="n">5</span>Italia · Lazio · Laser</h2>
+<p class="quando">Parte per ultima: qui non abbiamo né video né un centro di riferimento locale</p>
+
+<table>
+  <tr><td style="width:30%"><b>Chi risponde</b></td><td>Giorgio · WhatsApp <b>351 846 6025</b></td></tr>
+  <tr><td><b>Dove</b></td><td>Roma + <b>40 km</b> <span class="fab">copre Pomezia, Guidonia, Fiumicino, Castelli, Civitavecchia resta fuori</span></td></tr>
+  <tr><td><b>Chi</b></td><td>Donne 30-55 · interessi: centro estetico, epilazione, estetica professionale · <b>titolari di piccole imprese</b></td></tr>
+  <tr><td><b>Budget S1</b></td><td>10 € al giorno per angolo — <b>40 € al giorno</b>. In Italia il contatto costa di più</td></tr>
+  <tr><td><b>Esclusioni</b></td><td>Chi è già cliente NIPEC</td></tr>
+</table>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">A · Trenta giorni prima</span>
+    <p class="tit">Il laser arriva il 1. Lo paghi il 30</p></div>
+  <div class="corpo"><p class="copy">Un mese intero di lavoro prima di tirare fuori il primo euro.
+
+Zero anticipo. Zero cauzione. Nessun vincolo.
+E se ad agosto chiudi, la restituisci: quel mese non paghi.
+
+500 € al mese. Laser di ultima generazione, con intelligenza artificiale.
+Formazione compresa. Assistenza sempre. Se si ferma, il muletto in 48 ore.
+
+Scrivimi «LASER» e ti spiego come funziona. Rispondo io.</p></div>
+  <div class="piede"><span><b>Titolo:</b> 500 € al mese, e paghi dopo trenta giorni</span><span><b>Pulsante:</b> Invia messaggio</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">B · Il rischio ribaltato</span>
+    <p class="tit">Se si ferma, non chiudi un'ora</p></div>
+  <div class="corpo"><p class="copy">La domanda da fare a chiunque ti noleggi una macchina:
+
+«Se si ferma, in quanto tempo ne ho un'altra in cabina?»
+
+Da noi: 48 ore.
+
+Un laser fermo una settimana sono dodici clienti che saltano il turno. E la maggior parte non rientra più nella finestra giusta.
+
+500 € al mese, nessun vincolo, zero anticipo.
+Il rischio non è tuo. È nostro.
+
+Scrivimi «LASER».</p></div>
+  <div class="piede"><span><b>Titolo:</b> Muletto in 48 ore, sempre</span><span><b>Pulsante:</b> Invia messaggio</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">C · La promo del mese</span>
+    <p class="tit">Non ti do solo la macchina</p></div>
+  <div class="corpo"><p class="copy">Ogni mese ti mando la campagna già pronta per riempirla — con il nome del tuo centro sopra.
+
+Tu la pubblichi. Le clienti prenotano.
+
+Perché una macchina senza clienti è solo una rata a fine mese. E lasciarti sola con la macchina è il modo più veloce per vedertela restituire.
+
+Laser + la promo del mese + assistenza: 500 € al mese, nessun vincolo.
+
+Scrivimi «LASER» e ti mando la promo di questo mese, così la vedi.</p></div>
+  <div class="piede"><span><b>Titolo:</b> La macchina, e le clienti per riempirla</span><span><b>Pulsante:</b> Invia messaggio</span></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">D · La cliente persa</span>
+    <p class="tit">Una domanda scomoda, poi ti lascio in pace</p></div>
+  <div class="corpo"><p class="copy">Le clienti che non vedi più da tre o quattro mesi — le conti mai?
+
+Quasi nessuna lo sa. Ed è lì che stanno i soldi che escono dalla cassa ogni anno: non perché lavori male, ma perché nessuno le ha richiamate.
+
+Tre minuti, otto domande, e alla fine hai in mano un numero che oggi non hai.
+
+Quel giorno non ti vendo niente.
+
+Scrivimi «TEST».</p></div>
+  <div class="piede"><span><b>Titolo:</b> Quante clienti hai perso quest'anno?</span><span><b>Pulsante:</b> Invia messaggio</span></div>
+</div>
+
+<!-- =================== FOGLIO 4 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h2><span class="n">6</span>La sequenza di test</h2>
+
+<table>
+  <tr><th style="width:9%"></th><th style="width:26%">Cosa si testa</th><th>Come</th><th style="width:24%">Si guarda</th></tr>
+  <tr><td class="c"><b>S0</b></td><td>niente — <b>si prepara</b></td><td>numero su WhatsApp Business, pagina NIPEC con almeno 6 post, account pubblicitario, chi risponde</td><td>—</td></tr>
+  <tr><td class="c"><b>S1</b></td><td><b>l'angolo</b></td><td>4 annunci. <b>Stessa immagine, stesso pubblico, stessa destinazione, stesso budget.</b> Cambia solo il testo</td><td>conversazioni avviate</td></tr>
+  <tr><td class="c"><b>S2</b></td><td><b>la creatività</b></td><td>l'angolo vincente × 3 formati: video parlato · foto della macchina in cabina · testo su fondo pieno</td><td>costo per conversazione</td></tr>
+  <tr><td class="c"><b>S3</b></td><td><b>il pubblico</b></td><td>la coppia vincente × 3 pubblici: interessi · titolari di attività · simile a chi ha già scritto</td><td>quante sono titolari vere</td></tr>
+  <tr><td class="c"><b>S4</b></td><td><b>si scala</b></td><td>si alza del 20% ogni due giorni, non di più</td><td>costo per appuntamento</td></tr>
+</table>
+
+<div class="box rosso">
+  <span class="eti">La regola che fa la differenza fra imparare e buttare</span>
+  <p>In S1 <b>cambia una cosa sola</b>. Se cambi angolo, immagine e pubblico insieme, a fine
+  settimana hai speso e non sai che cosa ha funzionato.</p>
+</div>
+
+<h3>Il numero che conta</h3>
+<p><b>Costo per conversazione utile</b> — quanto costa far scrivere <b>una titolare di
+centro</b>. Non un like, non un clic, non una cliente finale che cerca il trattamento.</p>
+
+<table>
+  <tr><th style="width:44%">Se succede questo</th><th>Si fa questo</th></tr>
+  <tr><td>Zero conversazioni in <b>3 giorni</b></td><td><b>Spegni.</b> Non aspettare la settimana</td></tr>
+  <tr><td>Costa più del <b>triplo</b> del migliore</td><td><b>Spegni</b></td></tr>
+  <tr><td>Regge <b>7 giorni</b></td><td>Passa alla fase dopo</td></tr>
+  <tr><td>Scrivono ma non sono titolari</td><td>Non è l'annuncio: è il <b>pubblico</b>. Vai a S3</td></tr>
+  <tr><td>Scrivono e spariscono</td><td>Non è l'annuncio: è <b>quanto ci metti a rispondere</b></td></tr>
+</table>
+
+<div class="box verde">
+  <span class="eti">Quanto puoi permetterti di pagare un contatto</span>
+  <p>Un noleggio sono <b>6.000 € l'anno</b>. Se su dieci conversazioni una diventa noleggio,
+  una conversazione può costarti fino a 50-60 € e sei ancora in forte guadagno. <b>Non
+  spegnere un annuncio perché «costa caro»: spegnilo perché non porta titolari.</b></p>
+</div>
+
+<h2><span class="n">7</span>Dopo il clic — qui si attacca quello che abbiamo già</h2>
+
+<table>
+  <tr><th style="width:20%">Quando</th><th>Cosa</th></tr>
+  <tr><td><b>Entro 15 minuti</b></td><td>Risposta <b>umana</b>, non automatica. È la variabile che pesa più di qualunque creatività</td></tr>
+  <tr><td><b>Primo messaggio</b></td><td><b>Mai il prezzo per primo.</b> Si porta al «ci stai?»</td></tr>
+  <tr><td><b>La chiamata</b></td><td><b>Test 3 minuti v2</b>, 11 domande. Il conto: D2 × D3</td></tr>
+  <tr><td><b>Poi</b></td><td><b>24 ore → 1 settimana → 30 giorni.</b> Richiami tu, sempre. Mai «quando vuole mi chiama»</td></tr>
+</table>
+
+<h3>Il primo messaggio, parola per parola</h3>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">Italia — risponde Giorgio</span></div>
+  <div class="corpo"><p class="copy">Ciao! Sono Giorgio di NIPEC.
+
+Ti parlo volentieri della macchina, ma fammi fare una cosa prima: dammi tre minuti al telefono e guardiamo insieme come sta girando l'istituto adesso. Otto domande, rispondi di pancia.
+
+Così non ti propongo una macchina a caso — ti dico quello che ti serve davvero.
+
+Ci stai? Quando ti chiamo, oggi pomeriggio o domani mattina?</p></div>
+</div>
+
+<div class="annuncio">
+  <div class="cima"><span class="ang">Albania — risponde Uarda</span></div>
+  <div class="corpo"><p class="copy">Përshëndetje! Jam Uarda nga NIPEC, në Tiranë.
+
+Për makinën të flas me kënaqësi, por më lër të bëj diçka para saj: më jep tre minuta në telefon dhe shohim bashkë si po ecën qendra jote tani. Tetë pyetje, përgjigju me instinkt.
+
+Kështu nuk të propozoj një makinë sa për të propozuar — të them çfarë të duhet vërtet.
+
+A je dakord? Kur të marr në telefon — sot pasdite apo nesër paradite?</p></div>
+</div>
+
+<div class="box giallo">
+  <span class="eti">Se insiste «dammi solo il prezzo»</span>
+  <p><i>«Te lo dico subito: 500 al mese, nessun vincolo. Ma un prezzo senza sapere quanto
+  stai perdendo adesso non ti dice niente. Tre minuti e poi te lo rileggo con il tuo numero
+  davanti.»</i></p>
+  <p style="margin-top:5px">Il prezzo si dà, non si nasconde. Si rimette solo in cornice.</p>
+</div>
+
+<!-- =================== FOGLIO 5 =================== -->
+<div class="nuovo-foglio"></div>
+
+<h2><span class="n">8</span>Le venti decisioni che ho preso io</h2>
+<p class="quando">Se una non ti torna, si cambia lì</p>
+
+<table>
+  <tr><th style="width:5%">#</th><th style="width:34%">Decisione</th><th>Perché</th></tr>
+  <tr><td class="c">1</td><td>Non si nomina il modello</td><td>Me l'hai detto tu: generico. In più non ci lega in trattativa</td></tr>
+  <tr><td class="c">2</td><td>Si parte dall'Albania</td><td>Lì abbiamo video, Egla, Uarda sul campo e il protocollo in lingua</td></tr>
+  <tr><td class="c">3</td><td>Afrodite dopo due settimane</td><td>I suoi documenti in albanese non ci sono ancora</td></tr>
+  <tr><td class="c">4</td><td>Destinazione WhatsApp, non landing</td><td>Il canale nativo delle 30-50enni è WhatsApp. Una landing in più è un passaggio in cui si perdono</td></tr>
+  <tr><td class="c">5</td><td>Parola chiave nel messaggio — LASER, AFRODITE, TEST</td><td>Dice da quale annuncio arriva, senza strumenti</td></tr>
+  <tr><td class="c">6</td><td>Niente modulo Meta</td><td>Riempie di contatti che non rispondono</td></tr>
+  <tr><td class="c">7</td><td>Immagini <b>verticali 1080×1350</b></td><td>È il formato che occupa più schermo nel feed e nelle storie</td></tr>
+  <tr><td class="c">8</td><td><b>Niente prima/dopo su pelle vera</b></td><td>È il motivo di rifiuto numero uno su Meta. Si mostra la macchina e la cabina</td></tr>
+  <tr><td class="c">9</td><td>Niente percentuali di risultato né tempi</td><td>Stessa ragione. «Fino a −4/8 cm» resta nel copione, non nell'inserzione</td></tr>
+  <tr><td class="c">10</td><td>Si parla al <b>tu</b></td><td>È come parli tu nel copione</td></tr>
+  <tr><td class="c">11</td><td>Mai attaccare il concorrente</td><td>Regola già tua. Si fa la domanda, non l'accusa</td></tr>
+  <tr><td class="c">12</td><td>Il prezzo c'è, in chiaro</td><td>Filtra chi non può permetterselo prima che ti scriva</td></tr>
+  <tr><td class="c">13</td><td>Le città albanesi dove siamo già</td><td>Dove c'è un cliente c'è un passaparola che aiuta</td></tr>
+  <tr><td class="c">14</td><td>Roma + 40 km</td><td>Oltre, l'assistenza costa più del noleggio</td></tr>
+  <tr><td class="c">15</td><td>Si escludono i clienti attuali</td><td>Non si paga per parlare a chi paga già</td></tr>
+  <tr><td class="c">16</td><td>Budget AL 20 €/giorno · IT 40 €/giorno</td><td>In Albania il contatto costa molto meno. Si parte piccoli e si alza su quello che regge</td></tr>
+  <tr><td class="c">17</td><td>Una settimana per fase, non tre giorni</td><td>Sotto i 7 giorni i numeri non dicono niente</td></tr>
+  <tr><td class="c">18</td><td>I video albanesi si riusano</td><td>Facce vere, posti veri. Valgono più di una grafica nuova</td></tr>
+  <tr><td class="c">19</td><td>D si testa solo sul laser</td><td>Se vince lì, si porta su Afrodite già imparato</td></tr>
+  <tr><td class="c">20</td><td>Si misurano le conversazioni, non i clic</td><td>Il clic non si siede al telefono</td></tr>
+</table>
+
+<h2><span class="n">9</span>Cosa manca prima di accendere</h2>
+
+<table class="semaforo">
+  <tr><th style="width:19%">Stato</th><th>Cosa</th></tr>
+  <tr><td><span class="pallino p-rosso"></span>BLOCCA</td><td><b>WhatsApp Business attivo</b> sul +355 69 212 9786, con il nome NIPEC e l'orario di risposta</td></tr>
+  <tr><td><span class="pallino p-rosso"></span>BLOCCA</td><td><b>La pagina NIPEC</b> deve avere almeno 6 pubblicazioni prima di sponsorizzare. Una pagina vuota che chiede soldi non riceve risposta</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>SERVE</td><td><b>Chi risponde quando Uarda dorme.</b> Un contatto che arriva alle 22 e trova risposta la mattina dopo è già freddo</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>SERVE</td><td><b>Le immagini.</b> Quattro verticali per campagna. Le facciamo noi partendo dalle foto delle macchine</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>SERVE</td><td><b>La promo del mese che mostri nell'angolo C.</b> Se l'annuncio la promette, il primo che scrive se la aspetta</td></tr>
+  <tr><td><span class="pallino p-verde"></span>PRONTO</td><td>Offerta, copioni, test 3 minuti, protocolli, contratti, marchio</td></tr>
+</table>
+
+<div class="box">
+  <span class="eti">Una cosa che va decisa prima e non dopo</span>
+  <p>L'angolo <b>C</b> promette una campagna pronta ogni mese. È il nostro pezzo più forte
+  <b>e il più facile da non mantenere</b>: se parte la pubblicità e la promo del mese non
+  esce davvero, nel giro di due mesi il fossato diventa un fosso.</p>
+  <p style="margin-top:5px">Prima di accendere C: chi la prepara, entro quale giorno del
+  mese, e chi la manda.</p>
+</div>
+
+<div class="note">
+  <span class="eti">Note e decisioni</span>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+  <div class="rig"></div><div class="rig"></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Tecnologie Estetiche — Campagna 500 · laser e Afrodite · Albania e Lazio · Rev. 1</span>
+</div>
+
+
+</body>
+</html>
