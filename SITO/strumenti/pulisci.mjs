@@ -84,7 +84,8 @@ for (let i=0;i<NOMI.length;i++){
         if (/CATALOG|KATALOG/i.test(h)) a.remove(); else a.replaceWith(sp);
         log.push('link morto: '+h); return;
       }
-      if (h==='tel:800141726' || h==='mailto:info@nipecestetica.com'){ a.remove(); log.push('contatto tolto: '+h); }
+      // il numero verde 800 141 726 e info@nipecestetica.com sono veri:
+      // stanno pubblicati su nipecestetica.com, pulsante click-to-call compreso. Si tengono.
     });
     return { html: document.documentElement.outerHTML, log };
   }, [TOGLI,SEZIONI,FOTO.map(([re,h])=>[[re.source,re.flags],h]),PAGINE]);

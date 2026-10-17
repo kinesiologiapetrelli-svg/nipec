@@ -38,31 +38,52 @@ visibili e il sito sembra finto, o sono finti e allora e' peggio.
    Mandami tre frasi vere con nome e centro, e il voto vero di
    Google, e la rimetto.
 
-2. IL NUMERO VERDE 800 141 726. Non esiste da nessuna parte nei
-   nostri documenti. Se non e' attivo, chi chiama non trova
-   nessuno o trova un altro. Tolto da tutte le pagine.
-   Se invece e' attivo davvero, dimmelo e lo rimetto.
-
-3. L'INDIRIZZO info@nipecestetica.com. Il dominio e'
-   nipecestetica.EU, non .com: la posta rimbalza e le richieste
-   si perdono senza che tu lo sappia. Tolto.
-   Crea info@nipecestetica.eu dal pannello dell'hosting e lo
-   rimetto in due minuti.
-
-4. I LINK AI PDF DEL CATALOGO (italiano, albanese, inglese) e
+2. I LINK AI PDF DEL CATALOGO (italiano, albanese, inglese) e
    il link al sito di Demetra: puntavano a "[LINK CATALOGO
    PDF]". Pulsanti tolti, il testo resta.
 
-5. LE FOTO CHE MANCAVANO: laser Q-Switch (sia il riquadro del
+3. LE FOTO CHE MANCAVANO: laser Q-Switch (sia il riquadro del
    menu sia la pagina) e la foto del fondatore in Chi siamo.
    Tolti i riquadri vuoti.
 
-6. LE SPECIFICHE NON CONFERMATE: una riga di Afrodite, una di
+4. LE SPECIFICHE NON CONFERMATE: una riga di Afrodite, una di
    Borea/Cryo, due del Q-Switch dicevano "[DA SCHEDA]".
    Righe tolte dalle tabelle.
 
-7. IL PROSSIMO WORKSHOP in Formazione: data, sede e
+5. IL PROSSIMO WORKSHOP in Formazione: data, sede e
    descrizione erano segnaposto. Sezione tolta.
+
+DUE COSE CHE AVEVO TOLTO E HO RIMESSO
+-------------------------------------
+Il numero verde 800 141 726 e l'indirizzo info@nipecestetica.com
+li avevo tolti, convinto che fossero inventati: il numero non
+compariva in nessuno dei nostri documenti e l'e-mail aveva il
+dominio .com mentre il sito nuovo sta sul .eu.
+Sbagliavo. Stanno tutti e due pubblicati su nipecestetica.com,
+che e' un nostro sito vivo: il numero verde ha perfino il
+pulsante che chiama. Rimessi dove stavano, su tutte le pagine,
+e l'e-mail e' anche nella privacy come recapito per i diritti.
+
+ATTENZIONE: I SITI NIPEC SONO TRE
+---------------------------------
+  nipecestetica.com   vivo, fatto con WordPress ed Elementor.
+                      Stessa frase in testa del sito nuovo
+                      («Non vendiamo macchine»), stessi
+                      recapiti, stessa P.IVA. Nelle schede
+                      prodotto ha ancora i recapiti finti del
+                      tema: «+1 (234) 567-879» e
+                      «info@example.com». Il blog dice «Posts
+                      not found». L'icona di Instagram punta a
+                      un indirizzo di YouTube.
+  nipecestetica.it    risponde, ma sta dietro Cloudflare e da
+                      qui non si apre.
+  nipecestetica.eu    questo, il 5.0.
+
+Tre siti con lo stesso contenuto si rubano le visite fra loro su
+Google e il cliente non sa quale sia quello vero. Va deciso
+quale resta e gli altri due vanno rimandati sopra (redirect
+301), non lasciati li'. Dimmi quale tieni.
+
 
 COSA HO AGGIUNTO
 ----------------
@@ -80,8 +101,8 @@ COSA HO AGGIUNTO
   (BS), P.IVA 04696530981. Dentro ci sono: quali dati, perche',
   per quanto, a chi, i tuoi diritti, i cookie, e le due
   autorita' (Garante in Italia, IDP in Albania).
-  Quando hai l'e-mail, va aggiunta li' come contatto per i
-  diritti.
+  Il recapito per i diritti e' info@nipecestetica.com, l'
+  indirizzo di Padenghe e il WhatsApp.
 
 - Il carattere Archivo adesso parte dal nostro dominio e non da
   Google: in Europa il carattere caricato da Google e' gia'

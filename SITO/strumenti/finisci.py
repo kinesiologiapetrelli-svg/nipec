@@ -26,7 +26,7 @@ PRIVACY = {
  "Testo legale da far redigere o verificare al consulente privacy (GDPR, Reg. UE 2016/679). Qui sotto c'è solo la struttura della pagina.":
    "In breve: questo sito non ti profila e non installa cookie di tracciamento. Se ci scrivi su WhatsApp o compili il modulo dei contatti, i tuoi dati li usiamo per risponderti.",
  'PHD System Srl, Via Rovetta 29, 25080 Padenghe sul Garda (BS), P.IVA 04696530981. Contatto: info@nipecestetica.com':
-   'PHD System S.r.l., Via Rovetta 29, 25080 Padenghe sul Garda (BS), P.IVA 04696530981. Per esercitare i tuoi diritti scrivi a quell’indirizzo oppure su WhatsApp al +39 351 846 6025.',
+   'PHD System S.r.l., Via Rovetta 29, 25080 Padenghe sul Garda (BS), P.IVA 04696530981. Per esercitare i tuoi diritti scrivi a info@nipecestetica.com, a quell’indirizzo postale, oppure su WhatsApp al +39 351 846 6025.',
  '[DATI DEL MODULO CONTATTI, DATI DI NAVIGAZIONE]':
    'Se compili il modulo dei contatti o ci scrivi su WhatsApp: nome, telefono, nome e città del centro, l’interesse che indichi e il testo del messaggio. Se navighi e basta: il server registra indirizzo IP, data, pagina e tipo di browser, come fa qualunque server web.',
  '[FINALITÀ E BASE GIURIDICA]':
@@ -79,9 +79,6 @@ for f in sorted(glob.glob(os.path.join(SRC,'*.html'))):
            '<meta name="theme-color" content="#123A63">\n'
            '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n%s\n' % (DESCR.get(nome,''),CARATTERE))
     t=t.replace('<meta charset="utf-8">','<meta charset="utf-8">\n'+testa,1)
-    # 4. numero verde che non esiste
-    t=re.sub(r'\s*<br>\s*Numero verde 800 141 726','',t)
-    t=t.replace('Numero verde 800 141 726','')
     # 5. privacy
     if nome=='privacy':
         for a,b in PRIVACY.items():
