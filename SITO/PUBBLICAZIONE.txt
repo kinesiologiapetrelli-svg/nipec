@@ -1,0 +1,68 @@
+COME SI PUBBLICA IL SITO — nipecestetica.eu
+
+
+I PARAMETRI DI COLLEGAMENTO
+  Host         premium151.web-hosting.com
+               (in alternativa ftp.nipecestetica.eu, ma solo senza
+               controllo del certificato — meglio il primo)
+  Porta        21
+  Protocollo   FTPS esplicito, TLS obbligatorio
+  Cartella     /  =  /home/keyoshwu/nipecestetica.eu
+               L'account vede solo quella: non puo' sbagliare posto.
+
+  Utente e password NON stanno qui dentro e non devono starci: questo
+  file e' su GitHub. Si prendono dal pannello dell'hosting.
+
+
+COSA SI CARICA
+Tutto il contenuto di questa cartella TRANNE:
+  PUBBLICAZIONE.txt      (questo file)
+  LEGGIMI.txt            (note interne)
+  costruisci-sito.py     (lo script che genera le pagine)
+Quei tre non servono al sito e non devono essere pubblici.
+
+Vanno caricate anche le cartelle caratteri/ e marchio/.
+Senza caratteri/ il sito esce con un carattere qualsiasi.
+Senza marchio/ sparisce il logo.
+
+
+TRE MODI, DAL PIU' SEMPLICE
+
+ 1. PANNELLO HOSTING — File Manager
+    Entra, apri la cartella del dominio, cancella il vecchio index.html,
+    carica i file. Zero programmi da installare.
+
+ 2. FILEZILLA
+    Host      premium151.web-hosting.com
+    Porta     21
+    Cifratura "Richiedi FTP esplicito su TLS"
+    Utente    quello del pannello
+    Poi si trascina il contenuto della cartella dentro /
+
+ 3. UNA RIGA SOLA, da terminale (serve lftp)
+    Dalla cartella del sito:
+
+      lftp -u 'UTENTE,PASSWORD' ftp://premium151.web-hosting.com -e \
+        "set ftp:ssl-force true; set ftp:ssl-protect-data true; \
+         mirror -R --verbose \
+           --exclude PUBBLICAZIONE.txt --exclude LEGGIMI.txt \
+           --exclude costruisci-sito.py \
+           ./ /; bye"
+
+    Il nostro index.html sovrascrive quello del "sito in costruzione".
+
+
+PERCHE' NON LO FA CLAUDE
+Dalla sessione cloud le porte 21 e 990 sono filtrate verso l'hosting:
+esce soltanto la 443. Verificato su tutti e due gli host.
+Non e' una questione di password: con qualunque credenziale il
+collegamento non parte proprio. Non c'e' nemmeno un "vault" da cui
+leggere utente e password — in questa sessione non esiste.
+
+
+DOPO IL CARICAMENTO, TRE CONTROLLI
+ 1. https://nipecestetica.eu si apre e si vede il logo col tricolore
+ 2. Il menu funziona su tutte e sei le pagine
+ 3. Dal telefono i pulsanti WhatsApp aprono la chat giusta
+
+E poi cambia la password FTP, visto che e' passata in chat.
