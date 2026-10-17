@@ -14,6 +14,33 @@ I PARAMETRI DI COLLEGAMENTO
   file e' su GitHub. Si prendono dal pannello dell'hosting.
 
 
+QUELLO CHE NELLA CARTELLA REMOTA NON SI TOCCA
+
+Nel docroot ci sono gia' dei file che NON vanno cancellati:
+
+  .htaccess     forza l'https. Se sparisce, il sito torna in http
+  .well-known   serve al rinnovo del certificato. Se sparisce, fra tre
+                mesi il sito mostra "connessione non sicura"
+  cgi-bin       si lascia dov'e'
+
+  index.html    QUESTO SI' — e' la pagina "sito in costruzione".
+                Il nostro index.html lo sostituisce.
+
+Quindi: NIENTE "svuota la cartella", niente mirror con --delete.
+Si copiano i file nuovi sopra, e si cancella solo il vecchio index.html
+(che comunque viene sovrascritto).
+I file che iniziano con il punto spesso sono nascosti: nel File Manager
+va attivata la voce "mostra file nascosti" prima di cancellare qualcosa,
+altrimenti si cancella senza vederli.
+
+
+ATTENZIONE ALL'ACCOUNT GIUSTO
+Il vecchio account nipec@keyok.eu NON apre questo sito: apre
+keyok.eu/nipec, che e' un'altra cosa. Caricando li' il sito sembra
+caricato e invece nipecestetica.eu resta com'era.
+L'account giusto e' quello di nipecestetica.eu.
+
+
 COSA SI CARICA
 Tutto il contenuto di questa cartella TRANNE:
   PUBBLICAZIONE.txt      (questo file)
@@ -53,11 +80,18 @@ TRE MODI, DAL PIU' SEMPLICE
 
 
 PERCHE' NON LO FA CLAUDE
-Dalla sessione cloud le porte 21 e 990 sono filtrate verso l'hosting:
-esce soltanto la 443. Verificato su tutti e due gli host.
-Non e' una questione di password: con qualunque credenziale il
-collegamento non parte proprio. Non c'e' nemmeno un "vault" da cui
-leggere utente e password — in questa sessione non esiste.
+Provate tutte le strade, con le credenziali vere:
+
+  porta 21 e 990, diretta          collegamento scaduto
+  porta 21 attraverso il proxy     il tunnel si apre, poi zero byte:
+                                   il server non risponde mai
+  porta 22 (SSH/SFTP)              filtrata
+  porte cPanel 2083/2087/2096      connessione azzerata
+
+Esce soltanto la 443 verso i siti normali. Non e' una questione di
+password — con qualunque credenziale il collegamento non arriva nemmeno
+al punto in cui si chiede l'utente. E il "vault" citato nelle istruzioni
+appartiene a un altro sistema: in questa sessione non esiste.
 
 
 DOPO IL CARICAMENTO, TRE CONTROLLI
@@ -65,4 +99,5 @@ DOPO IL CARICAMENTO, TRE CONTROLLI
  2. Il menu funziona su tutte e sei le pagine
  3. Dal telefono i pulsanti WhatsApp aprono la chat giusta
 
-E poi cambia la password FTP, visto che e' passata in chat.
+E poi cambia la password FTP: e' passata in chat due volte, e la chat
+resta registrata.
