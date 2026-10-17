@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Nove adv · Materiali, testi e copy · NIPEC</title>
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");font-weight:400 600;font-display:swap}
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --blu-velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#8E9295; --riga:#D9E2E9;
+  --rosso:#9C3A28; --rosso-velo:#FAEAE6;
+  --giallo:#8A6208; --giallo-velo:#F8EFDB;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+}
+@page{size:A4;margin:16mm 15mm 18mm}
+*{box-sizing:border-box}
+body{margin:0;font:400 9.6pt/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3,h4,.eti,th,.btn{font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- testata ---------- */
+.testata{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+         border-bottom:2.5px solid var(--blu);padding-bottom:10px;margin-bottom:18px}
+.testata svg{width:132px;height:auto;flex:none}
+.testata .dx{text-align:right;font-size:8pt;color:var(--grigio);line-height:1.45}
+h1{font-size:19pt;font-weight:700;margin:16px 0 2px;color:var(--navy);letter-spacing:-.01em;line-height:1.12}
+.sotto{font-family:"Archivo",sans-serif;font-size:9.5pt;font-weight:600;color:var(--blu);
+       margin:0 0 3px;letter-spacing:.01em}
+.riga-rev{font-size:8.5pt;color:var(--grigio);margin:0 0 16px}
+
+h2{font-size:12pt;font-weight:700;color:var(--navy);margin:20px 0 7px;
+   padding-bottom:4px;border-bottom:1px solid var(--riga);page-break-after:avoid}
+h2 .n{display:inline-block;background:var(--navy);color:#fff;font-size:8.5pt;
+      padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+h3{font-size:10pt;font-weight:700;color:var(--ink);margin:13px 0 5px;page-break-after:avoid}
+p{margin:0 0 7px}
+b,strong{font-weight:600;color:var(--navy)}
+ul,ol{margin:0 0 8px;padding-left:17px}
+li{margin-bottom:3px}
+.quando{font-family:"Archivo",sans-serif;font-size:8pt;font-weight:600;color:var(--blu);
+        text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}
+
+table{width:100%;border-collapse:collapse;font-size:8.8pt;margin:7px 0 11px;page-break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:7.8pt;
+   font-weight:600;text-transform:uppercase;letter-spacing:.07em;vertical-align:bottom}
+td{padding:5px 8px;border-bottom:1px solid var(--riga);vertical-align:top;line-height:1.42}
+tr:nth-child(even) td{background:#FAFCFD}
+td.c{text-align:center}
+.vuoto{display:inline-block;min-width:52px;border-bottom:1px dotted var(--grigio)}
+
+.box{border:1px solid var(--riga);border-left:4px solid var(--blu);background:#FBFDFE;
+     padding:9px 12px;margin:10px 0;font-size:9pt;page-break-inside:avoid}
+.box.rosso{border-left-color:var(--rosso);background:var(--rosso-velo)}
+.box.giallo{border-left-color:var(--giallo);background:var(--giallo-velo)}
+.box.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.box p:last-child{margin-bottom:0}
+.box .eti{font-size:7.8pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+          color:var(--blu);display:block;margin-bottom:3px}
+.box.rosso .eti{color:var(--rosso)}
+.box.giallo .eti{color:var(--giallo)}
+.box.verde .eti{color:var(--verde)}
+
+.dire{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy);
+      border-left:3px solid var(--blu-chiaro);padding-left:10px;margin:7px 0}
+
+.semaforo td:first-child{font-weight:700;width:74px;white-space:nowrap}
+.pallino{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.p-verde{background:var(--verde)} .p-giallo{background:#C8970F} .p-rosso{background:var(--rosso)}
+
+.due{display:flex;gap:14px}
+.due>*{flex:1}
+.nuovo-foglio{page-break-before:always}
+h2+p.quando{page-break-after:avoid}
+h3+table,h3+p,h3+ul,h3+.box{page-break-before:avoid}
+ul,ol{page-break-inside:avoid}
+.due{page-break-inside:avoid}
+/* niente piè di pagina fisso: in stampa Chromium lo appoggia sopra il testo.
+   La riga di chiusura sta in fondo al documento, una volta sola. */
+.chiusura{margin-top:14px;border-top:1px solid var(--riga);padding-top:7px;
+          font-family:"Archivo",sans-serif;font-size:7.6pt;color:var(--grigio);
+          display:flex;justify-content:space-between}
+.firma{margin-top:14px;font-size:8.5pt;color:var(--ink2)}
+/* lo spazio che avanza in fondo alla pagina non si butta: in cabina si scrive */
+.note{margin-top:12px;border:1px solid var(--riga);border-radius:4px;padding:10px 12px;page-break-inside:avoid}
+.note .eti{font-family:"Archivo",sans-serif;font-size:7.8pt;font-weight:700;letter-spacing:.12em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:9px}
+.note .rig{border-bottom:1px solid var(--riga);height:16px}
+
+/* ---------- aggiunte DEMETRA ---------- */
+.fab{font-size:7.6pt;color:#6B747C;font-style:italic}
+/* la casella da barrare: un quadrato vero, non un carattere che cambia da font a font */
+.cas{display:inline-block;width:10px;height:10px;border:1.2px solid var(--blu);
+     border-radius:2px;vertical-align:-1px;margin-right:4px}
+.caselle{list-style:none;padding:0;margin:0 0 6px}
+.caselle li{position:relative;padding-left:17px;margin-bottom:5px;line-height:1.4}
+.caselle li:before{content:"";position:absolute;left:0;top:3px;width:10px;height:10px;
+                   border:1.2px solid var(--blu);border-radius:2px}
+.riga-casella{margin:8px 0}
+.riga-note{margin:8px 0;color:var(--ink2)}
+.firme{display:flex;gap:16px;margin-top:16px;page-break-inside:avoid}
+.firme>div{flex:1}
+.firme .riga-firma{border-bottom:1px solid var(--grigio);height:22px}
+.firme .et{font-family:"Archivo",sans-serif;font-size:7.6pt;color:#6B747C;
+           letter-spacing:.08em;text-transform:uppercase;margin-top:4px;display:block}
+
+/* ---------- aggiunte contratto ---------- */
+@page{size:A4;margin:14mm 15mm 14mm}
+body{font-size:9.2pt;line-height:1.45}
+/* i commi: il numero sporge a sinistra, il testo resta allineato */
+.co{margin:0 0 6px;padding-left:30px;text-indent:-30px}
+.co .n2{display:inline-block;width:30px;text-indent:0;font-weight:600;color:var(--navy)}
+.parti{border:1px solid var(--riga);border-radius:4px;padding:9px 12px;margin:0 0 9px}
+.parti .ruolo{font-family:"Archivo",sans-serif;font-size:7.6pt;font-weight:700;
+              letter-spacing:.12em;text-transform:uppercase;color:var(--blu);display:block;margin-bottom:3px}
+.parti p{margin:0}
+h2{font-size:11pt;margin:15px 0 6px}
+.nuovo{display:inline-block;background:var(--verde);color:#fff;font-family:"Archivo",sans-serif;
+       font-size:6.8pt;font-weight:700;letter-spacing:.1em;padding:1.5px 5px;border-radius:3px;
+       vertical-align:2px;margin-left:7px}
+
+/* ---------- aggiunte campagna ---------- */
+body{font-size:9.3pt}
+h2{font-size:11.5pt;margin:16px 0 6px}
+h3{font-size:9.8pt;color:var(--navy);margin:12px 0 4px}
+/* l'annuncio come lo legge chi scorre: riquadro, testo tale e quale */
+.annuncio{border:1px solid var(--riga);border-radius:6px;overflow:hidden;margin:0 0 10px;
+          page-break-inside:avoid}
+.annuncio .cima{background:var(--blu-velo);border-bottom:1px solid var(--riga);padding:6px 10px}
+.annuncio .ang{font-family:"Archivo",sans-serif;font-size:7pt;font-weight:700;letter-spacing:.14em;
+               text-transform:uppercase;color:var(--blu)}
+.annuncio .tit{font-family:"Archivo",sans-serif;font-size:9.6pt;font-weight:700;color:var(--navy);
+               margin:1px 0 0}
+.annuncio .corpo{padding:9px 11px}
+.copy{font-size:9.4pt;line-height:1.55;white-space:pre-line;margin:0}
+.annuncio .piede{border-top:1px solid var(--riga);padding:5px 11px;font-size:8pt;color:var(--ink2);
+                 display:flex;justify-content:space-between;background:#FBFDFE}
+.annuncio .piede b{color:var(--navy)}
+.scelta{border-left:4px solid var(--verde);background:var(--verde-velo);border:1px solid var(--riga);
+        padding:8px 11px;margin:8px 0;font-size:8.8pt}
+.scelta .eti{color:var(--verde)}
+
+/* ---------- aggiunte reel ---------- */
+.reel{border:1px solid var(--riga);border-radius:6px;overflow:hidden;margin:0 0 11px;page-break-inside:avoid}
+.reel .cima{background:var(--navy);color:#fff;padding:6px 11px;display:flex;justify-content:space-between;align-items:baseline}
+.reel .cima .n3{font-family:"Archivo",sans-serif;font-size:7.4pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.reel .cima .tt{font-family:"Archivo",sans-serif;font-size:10pt;font-weight:700}
+.reel .corpo{padding:0}
+.reel table{margin:0;font-size:8.6pt}
+.reel td{border-bottom:1px solid var(--riga);vertical-align:top}
+.reel td.t{width:17%;font-family:"Archivo",sans-serif;font-size:7.2pt;font-weight:700;
+           letter-spacing:.1em;text-transform:uppercase;color:var(--blu);background:#FBFDFE}
+.reel .parla{white-space:pre-line;line-height:1.5}
+.schermo{display:inline-block;background:var(--navy);color:#fff;font-family:"Archivo",sans-serif;
+         font-size:8.4pt;font-weight:700;padding:2px 7px;border-radius:3px;margin:1px 0}
+.sec{font-family:"Archivo",sans-serif;font-size:7.6pt;font-weight:700;color:var(--blu)}
+</style><style>
+/* ---------- aggiunte adv ---------- */
+.liv{display:inline-block;font-family:"Archivo",sans-serif;font-size:6.8pt;font-weight:700;
+     letter-spacing:.1em;padding:1.5px 6px;border-radius:3px;vertical-align:2px;margin-left:7px;color:#fff}
+.l0{background:var(--verde)} .l1{background:#C8970F} .l2{background:var(--rosso)}
+.adv{border:1px solid var(--riga);border-radius:4px;padding:0;margin:11px 0 14px;page-break-inside:avoid}
+.adv .cap{background:var(--blu-velo);border-bottom:1px solid var(--riga);padding:6px 11px;
+          font-family:"Archivo",sans-serif;font-size:9.4pt;font-weight:700;color:var(--navy)}
+.adv .cap .cam{font-weight:500;color:var(--blu);font-size:7.8pt;letter-spacing:.1em;
+               text-transform:uppercase;display:block;margin-bottom:2px}
+.adv table{margin:0;font-size:8.4pt}
+.adv td{padding:4px 8px}
+.adv td:first-child{width:74px;font-family:"Archivo",sans-serif;font-size:7.4pt;font-weight:700;
+     letter-spacing:.07em;text-transform:uppercase;color:var(--blu);background:#FAFCFD;vertical-align:top}
+.adv tr:nth-child(even) td{background:#FAFCFD}
+.adv tr:last-child td{border-bottom:0}
+.schermo{display:inline-block;background:var(--navy);color:#fff;font-family:"Archivo",sans-serif;
+         font-size:7.6pt;font-weight:700;letter-spacing:.09em;padding:2px 7px;border-radius:2px;margin:2px 3px 2px 0}
+.voce{font-family:"Source Serif 4",serif;font-style:italic;color:var(--navy)}
+.copy{background:#FBFDFE;border-left:3px solid var(--blu-chiaro);padding:7px 10px;margin:4px 0 0}
+.copy .et{font-family:"Archivo",sans-serif;font-size:7pt;font-weight:700;letter-spacing:.1em;
+          text-transform:uppercase;color:var(--grigio);display:block;margin:0 0 2px}
+.copy p{margin:0 0 5px}
+.file{font-family:"Archivo",sans-serif;font-size:7.8pt;color:var(--ink2);background:#F3F7FA;
+      padding:1px 5px;border-radius:2px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="testata">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+    <g transform="translate(10,10)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+      <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+      <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+      <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+      <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+    </g>
+    <text x="140" y="62" font-family="Archivo, Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+    <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+    <text x="142" y="96" font-family="Archivo, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+  </svg>
+  <div class="dx">
+    Nove adv — materiali, testi e copy<br>
+    Uso interno<br>
+    Rev. 1 · ottobre 2026
+  </div>
+</div>
+<h1>Nove adv</h1>
+<p class="sotto">Materiali, testi e copy — solo quello che possiamo produrre davvero</p>
+<p class="riga-rev">Tre per campagna: Laser Italia · Laser Albania · Afrodite Albania. Rev. 1 — ottobre 2026</p>
+
+<div class="box">
+  <span class="eti">La differenza con il documento di ieri</span>
+  <p>Ieri abbiamo scritto nove reel partendo da cosa volevamo dire. Erano giusti, ma sette su nove
+  avevano bisogno di te davanti alla camera, di Uarda a Tirana, di un furgone che si apre o di una
+  macchina ancora imballata. Cioè: di una giornata da organizzare con tre persone.</p>
+  <p>Questo documento parte dall'altra parte. Prima ho contato <b>cosa c'è davvero su disco oggi</b>,
+  poi ho scritto le adv che si possono montare con quello. <b>Sette su nove si fanno senza aspettare
+  nessuno</b>, e due di quelle si fanno stasera senza accendere la telecamera.</p>
+</div>
+
+<h2><span class="n">1</span>Cosa abbiamo davvero in mano</h2>
+<p class="quando">Contato file per file, non a memoria</p>
+
+<h3>Le foto delle macchine: sono otto, ma ne reggono due</h3>
+<p>Questa è la cosa che va detta per prima, perché cambia metà del piano.</p>
+<table>
+  <thead><tr><th>Macchina</th><th>Misura</th><th>Regge un post 1080&times;1350?</th></tr></thead>
+  <tbody>
+  <tr><td>Afrodite VS++</td><td class="c">851&times;1100</td><td><span class="pallino p-verde"></span><b>Sì</b> — la migliore che abbiamo</td></tr>
+  <tr><td>Cryo 360° portatile</td><td class="c">900&times;900</td><td><span class="pallino p-verde"></span><b>Sì</b>, in formato quadrato</td></tr>
+  <tr><td>Laser ARES 2025</td><td class="c">780&times;680</td><td><span class="pallino p-giallo"></span>Solo piccola, in una scheda. Non a pieno schermo</td></tr>
+  <tr><td>Laser ARES 2026</td><td class="c">792&times;577</td><td><span class="pallino p-giallo"></span>Come sopra</td></tr>
+  <tr><td>Laser URIEL</td><td class="c">194&times;443</td><td><span class="pallino p-rosso"></span><b>No.</b> È una miniatura: su Instagram esce sgranata</td></tr>
+  <tr><td>Borea</td><td class="c">201&times;657</td><td><span class="pallino p-rosso"></span><b>No</b>, stessa cosa</td></tr>
+  </tbody>
+</table>
+<div class="box rosso">
+  <span class="eti">Conseguenza pratica</span>
+  <p>Della macchina che vendiamo più cara — la <b>URIEL</b> — non abbiamo una sola foto pubblicabile.
+  Nelle nove adv qui sotto <b>la URIEL non compare mai in foto</b>: compare nei numeri scritti.
+  Se mandi una foto grande della URIEL, riscrivo due adv in mezz'ora.</p>
+</div>
+
+<h3>Quello che invece abbiamo in abbondanza: la carta</h3>
+<p>Qui siamo ricchi, e non ce ne siamo accorti. Sul disco ci sono <b>trenta PDF</b> fatti bene:</p>
+<table>
+  <thead><tr><th>Cosa</th><th>Lingue</th><th>Cosa dimostra in un reel</th></tr></thead>
+  <tbody>
+  <tr><td>Scheda tecnica laser 808</td><td>IT · SQ, con e senza prezzi</td><td>I numeri veri: watt, diodi, bande, CE italiana, MDR</td></tr>
+  <tr><td>Protocollo laser epilazione corpo</td><td>IT · SQ</td><td>Che il lavoro è scritto, non improvvisato</td></tr>
+  <tr><td>Metodo DEMETRA — 4 documenti</td><td>IT</td><td>Protocollo, scheda di valutazione, scheda di cabina, formazione</td></tr>
+  <tr><td>Contratto di comodato Afrodite</td><td>IT · EN · <b>SQ</b></td><td>Che il contratto si legge prima, non dopo</td></tr>
+  <tr><td>Contratti e allegati, pagina per pagina</td><td>IT</td><td>57 immagini già pronte: si usano senza stampare niente</td></tr>
+  </tbody>
+</table>
+<div class="box verde">
+  <span class="eti">Questa è la nostra arma, non la foto della macchina</span>
+  <p>Una foto di laser la mette anche il concorrente: è la stessa, arriva dallo stesso fornitore.
+  <b>Un protocollo scritto in albanese e un contratto che mandi prima di parlare di prezzo,
+  quelli non ce li ha nessuno.</b> Cinque adv su nove sono costruite su questo.</p>
+</div>
+
+<h3>Il resto</h3>
+<ul>
+  <li><b>Il marchio in dodici file SVG</b> — si ingrandisce quanto si vuole e resta nitido. Le adv
+  tipografiche costano zero e sono perfette a qualunque misura.</li>
+  <li><b>Il sito nuovo, tredici pagine</b> — una registrazione dello schermo mentre si scorre è
+  b-roll gratis, e si vede che la macchina ha una scheda vera dietro.</li>
+  <li><b>La pagina Facebook</b> ha già un video del laser «totalmente a gestione digitale».
+  Si ritaglia e si rimonta: è materiale pagato una volta e usato una volta sola.</li>
+  <li><b>Nessun file video sul disco.</b> Zero. Tutto quello che si muove va girato o ripreso da Facebook.</li>
+</ul>
+
+<h2><span class="n">2</span>Tre livelli di produzione</h2>
+<p class="quando">Serve a sapere cosa parte oggi e cosa va in agenda</p>
+<table>
+  <thead><tr><th style="width:62px">Livello</th><th>Cosa serve</th><th>Quando è pronto</th></tr></thead>
+  <tbody>
+  <tr><td><span class="liv l0">LIV. 0</span></td><td>Niente che non sia già sul disco. Tipografia, documenti,
+      mani su un tavolo, registrazione dello schermo. Si monta al computer.</td><td><b>Stasera</b></td></tr>
+  <tr><td><span class="liv l1">LIV. 1</span></td><td>Un telefono, mezza giornata, il magazzino o una cabina.
+      Una persona sola. Niente troupe, niente luci.</td><td><b>Questa settimana</b></td></tr>
+  <tr><td><span class="liv l2">LIV. 2</span></td><td>Qualcosa che oggi non c'è: Uarda davanti alla camera, un
+      centro vero a Tirana, il furgone che si apre, una macchina ancora imballata.</td><td><b>Da fissare</b></td></tr>
+  </tbody>
+</table>
+<p>Delle nove adv: <b>sei sono livello 0</b>, una è livello 1, due sono livello 2.
+Cioè si può cominciare a spendere in pubblicità <b>prima</b> di organizzare la giornata di riprese,
+non dopo.</p>
+
+<h2><span class="n">3</span>I 5 secondi, legati al materiale</h2>
+<p>La regola resta quella: <b>nei primi 5 secondi si vede un vantaggio che l'estetista riconosce come
+suo.</b> Non la macchina, non il marchio, non il prezzo — un problema che ha davvero.</p>
+<p>La regola nuova, che viene da questo studio: <b>il gancio dei primi 5 secondi deve stare su
+materiale di livello 0 o 1.</b> Se il gancio ha bisogno del furgone che si apre, l'adv non parte: resta
+in agenda per settimane e intanto non gira niente.</p>
+<div class="box giallo">
+  <span class="eti">Come si riconosce un gancio che si può produrre</span>
+  <p>Se per i primi cinque secondi serve <b>una cosa sola</b> — un foglio, un numero, una mano, un
+  telo — si produce. Se ne servono tre che devono stare insieme nello stesso posto alla stessa ora,
+  è livello 2.</p>
+</div>
+
+<h2><span class="n">4</span>Laser Italia — tre adv</h2>
+<p class="quando">Lazio e Roma · 500 € al mese · parola chiave «LASER» · risponde Giorgio</p>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 1 · Laser Italia</span>Arriva il 1. La paghi il 30.<span class="liv l0">LIV. 0</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Fondo blu navy pieno. Un numero enorme al centro: <b>1</b>. Stacco secco: <b>30</b>.<br>
+    <span class="voce">«Te la porto il primo del mese. Me la paghi il trenta.»</span><br>
+    <span class="schermo">ARRIVA IL 1</span><span class="schermo">LA PAGHI IL 30</span></td></tr>
+  <tr><td>Sviluppo<br>5–16&Prime;</td><td>I numeri si incolonnano uno sotto l'altro, uno ogni due secondi.<br>
+    <span class="voce">«Trenta giorni di lavoro prima di tirare fuori il primo euro. Zero anticipo. Zero cauzione.
+    Nessun vincolo di durata. E se ad agosto chiudi, me la ridai: quel mese non paghi.»</span><br>
+    <span class="schermo">30 GIORNI PRIMA DI PAGARE</span><span class="schermo">ZERO ANTICIPO</span><span class="schermo">ZERO CAUZIONE</span><span class="schermo">AD AGOSTO SOSPESA</span></td></tr>
+  <tr><td>Chiusura<br>16–21&Prime;</td><td>Il marchio entra, sotto la cifra. Due secondi fermo.<br>
+    <span class="schermo">500 € AL MESE</span><span class="schermo">SCRIVI «LASER»</span></td></tr>
+  <tr><td>Si gira con</td><td><b>Niente.</b> Tipografia e marchio: <span class="file">MARCHIO/nipec-logo-orizzontale.svg</span>.
+    Si monta al computer in un'ora. Voce registrata col telefono, o anche solo testo e musica bassa.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>Te la porto il primo del mese. Me la paghi il trenta.</p>
+    <p>Trenta giorni per lavorarci prima di tirare fuori un euro. Zero anticipo, zero cauzione, nessun
+    vincolo. Se ad agosto chiudi, me la ridai e quel mese non paghi.</p>
+    <p>500 € al mese, formazione e assistenza comprese. Scrivi <b>LASER</b> e ti dico se ha senso per il tuo centro.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Arriva il 1, la paghi il 30</p></div>
+    <div class="copy"><span class="et">Perché funziona</span><p>È l'unica cosa che diciamo che il concorrente
+    non può copiare senza rimetterci: chi vende a rate incassa prima di consegnare.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 2 · Laser Italia</span>Chiedi i tre numeri<span class="liv l0">LIV. 0</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Mano che appoggia la scheda tecnica stampata sul tavolo. Inquadratura dall'alto.<br>
+    <span class="voce">«Prima di prendere un laser, chiedi tre numeri. Se non te li sanno dire, hai già la risposta.»</span><br>
+    <span class="schermo">CHIEDI TRE NUMERI</span></td></tr>
+  <tr><td>Sviluppo<br>5–18&Prime;</td><td>Il dito scende sulla scheda e si ferma su una riga per volta.<br>
+    <span class="voce">«Quanti watt. Quanti diodi. E chi l'ha certificata.<br>
+    La nostra: fino a 2000 watt, fino a 16 diodi, fino a tre bande sullo stesso manipolo.
+    Certificazione CE italiana e MDR già attivo — quello che da gennaio 2027 diventa obbligatorio per tutti.»</span><br>
+    <span class="schermo">FINO A 2000 W</span><span class="schermo">FINO A 16 DIODI</span><span class="schermo">CE ITALIANA · MDR ATTIVO</span></td></tr>
+  <tr><td>Chiusura<br>18–23&Prime;</td><td>Gira la scheda verso la camera.<br>
+    <span class="voce">«Scrivimi LASER e ti mando la scheda intera. Poi confronti.»</span><br>
+    <span class="schermo">SCRIVI «LASER»</span></td></tr>
+  <tr><td>Si gira con</td><td><span class="file">schede/LASER/SCHEDA-LASER-808-NIPEC-SENZA-PREZZI.pdf</span> stampata.
+    Un tavolo, luce dalla finestra, il telefono fermo su un libro. Dieci minuti.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>Tre domande da fare a chiunque ti proponga un laser: quanti watt, quanti diodi, chi l'ha certificato.</p>
+    <p>Le nostre risposte sono scritte sulla scheda: fino a 2000 W, fino a 16 diodi, fino a tre bande sullo
+    stesso manipolo. Certificazione CE italiana, MDR già attivo — obbligatorio per tutti da gennaio 2027.</p>
+    <p>Scrivi <b>LASER</b>: ti mando la scheda intera, così confronti con calma.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>I tre numeri che nessuno ti dice</p></div>
+    <div class="copy"><span class="et">Attenzione</span><p>«Fino a» va detto e scritto sempre: i due numeri
+    stanno su due macchine diverse. Senza «fino a», alla consegna di una ARES il cliente ha ragione lui.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 3 · Laser Italia</span>Il magazzino<span class="liv l1">LIV. 1</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Giorgio in mezzo alle macchine, in magazzino. Non parla subito: fa due passi, poi guarda in camera.<br>
+    <span class="voce">«Se la tua si ferma domani mattina, quante clienti disdici?»</span><br>
+    <span class="schermo">QUANTE CLIENTI DISDICI?</span></td></tr>
+  <tr><td>Sviluppo<br>5–17&Prime;</td><td>Cammina, la camera lo segue, le macchine scorrono dietro.<br>
+    <span class="voce">«Il muletto in 48 ore non è una promessa scritta in un contratto. È questo.
+    Le macchine ci sono, sono qui, e una è la tua se la tua si ferma.<br>
+    Un laser fermo una settimana sono dodici clienti che saltano il turno. E la maggior parte non rientra più.»</span><br>
+    <span class="schermo">MULETTO IN 48 ORE</span><span class="schermo">NON CHIUDI UN'ORA</span></td></tr>
+  <tr><td>Chiusura<br>17–22&Prime;</td><td>Si ferma, appoggia la mano su una macchina.<br>
+    <span class="voce">«500 al mese, senza firmare vincoli. Scrivimi LASER.»</span><br>
+    <span class="schermo">SCRIVI «LASER»</span></td></tr>
+  <tr><td>Si gira con</td><td>Il magazzino così com'è, con le macchine in vista. Telefono in mano a qualcuno che
+    cammina all'indietro. <b>Non serve ordinare il magazzino</b>: più è vero, più funziona.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>«E se si rompe?» È la domanda che fanno tutti, ed è giusta.</p>
+    <p>La risposta è un magazzino, non una clausola: se la tua si ferma, in 48 ore ne hai un'altra in cabina.
+    Non chiudi un'ora, non disdici nessuno. Un laser fermo una settimana sono dodici clienti che saltano
+    il turno, e la maggior parte non rientra.</p>
+    <p>Scrivi <b>LASER</b>.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Il muletto non è una promessa. È un magazzino.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<h2><span class="n">5</span>Laser Albania — tre adv</h2>
+<p class="quando">50.000 lekë al mese · parola chiave «LASER» · risponde Uarda da Tirana</p>
+<div class="box">
+  <span class="eti">Due su tre partono senza Uarda davanti alla camera</span>
+  <p>Finché la giornata di riprese a Tirana non è fissata, l'Albania resta ferma. Le prime due adv
+  risolvono il problema: <b>nessun volto</b>, voce fuori campo in albanese registrata col telefono,
+  sottotitoli. Si montano qui e si pubblicano subito.</p>
+</div>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 4 · Laser Albania</span>Vjen më 1. E paguan më 30.<span class="liv l0">LIV. 0</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Come l'adv 1, cifre in lekë. Fondo navy, <b>1</b>, stacco, <b>30</b>.<br>
+    <span class="voce">«Te la porto il primo del mese. Me la paghi il trenta.»</span><br>
+    <span class="schermo">VJEN MË 1</span><span class="schermo">E PAGUAN MË 30</span></td></tr>
+  <tr><td>Sviluppo<br>5–16&Prime;</td><td><span class="voce">«Trenta giorni di lavoro prima di tirare fuori il primo lek.
+    Senza anticipo, senza cauzione, senza firmare nessun vincolo. E quando chiudi per le ferie me la ridai:
+    quel mese non paghi.»</span><br>
+    <span class="schermo">PA PARADHËNIE</span><span class="schermo">PA GARANCI</span><span class="schermo">PA KONTRATË AFATI</span></td></tr>
+  <tr><td>Chiusura<br>16–21&Prime;</td><td><span class="schermo">50.000 LEKË / MUAJ</span><span class="schermo">SHKRUAJ «LASER»</span></td></tr>
+  <tr><td>Si gira con</td><td><b>Niente.</b> Stessa costruzione dell'adv 1: si cambia la lingua dei testi e la cifra.
+    Una volta montata la prima, questa costa venti minuti.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale (da tradurre sul testo approvato)</span>
+    <p>Te la porto il primo del mese. Me la paghi il trenta.</p>
+    <p>Trenta giorni per lavorarci prima di tirare fuori un lek. Senza anticipo, senza cauzione, senza
+    vincolo di durata. Quando chiudi per le ferie me la ridai e quel mese non paghi.</p>
+    <p>50.000 lekë al mese, formazione e assistenza comprese. Scrivi <b>LASER</b>.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Vjen më 1. E paguan më 30.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 5 · Laser Albania</span>Protokolli<span class="liv l0">LIV. 0</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Mani che aprono il protocollo laser in albanese sul tavolo. Dall'alto.<br>
+    <span class="voce">«Una macchina senza protocollo è un mobile che costa caro.»</span><br>
+    <span class="schermo">MAKINERI PA PROTOKOLL = MOBILJE</span></td></tr>
+  <tr><td>Sviluppo<br>5–18&Prime;</td><td>Si sfogliano le pagine, una ogni due secondi. Si vede che è scritto in albanese.<br>
+    <span class="voce">«Non è che la macchina non funziona. È che nessuno ti ha detto cosa fare da quando la
+    cliente entra a quando esce: con quali parametri, in che ordine, ogni quanto richiamarla.<br>
+    Con la nostra arriva scritto. In albanese. E la formazione è compresa.»</span><br>
+    <span class="schermo">PROTOKOLL I SHKRUAR</span><span class="schermo">NË SHQIP</span><span class="schermo">TRAJNIMI I PËRFSHIRË</span></td></tr>
+  <tr><td>Chiusura<br>18–23&Prime;</td><td>Chiude il fascicolo, lo appoggia.<br>
+    <span class="voce">«Scrivimi LASER e te lo mando da leggere prima di decidere.»</span><br>
+    <span class="schermo">SHKRUAJ «LASER»</span></td></tr>
+  <tr><td>Si gira con</td><td><span class="file">protocolli/LASER/PROTOKOLLI-LASER-NIPEC-epilim-trupi-SQ.pdf</span>
+    stampato. Un tavolo, due mani, dieci minuti. <b>Nessun volto, nessun luogo riconoscibile:</b> si gira in Italia.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>Quante macchine hai visto finire in un angolo dopo tre mesi?</p>
+    <p>Non è che non funzionano. È che nessuno ha dato alla titolare il protocollo: cosa si fa da quando la
+    cliente entra a quando esce, con quali parametri, ogni quanto si richiama. Il nostro arriva scritto, in
+    albanese, e la formazione è compresa.</p>
+    <p>Scrivi <b>LASER</b> e te lo mando da leggere prima di decidere qualunque cosa.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Il protocollo, scritto in albanese</p></div>
+    <div class="copy"><span class="et">Perché funziona</span><p>Mandare una cosa da leggere prima di parlare di
+    prezzo ribalta la conversazione: non stai vendendo, stai dando. E apre la chat, che è l'unico scopo dell'adv.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 6 · Laser Albania</span>Uarda, in un centro vero<span class="liv l2">LIV. 2</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Uarda, primo piano, in un centro vero. La macchina accesa dietro di lei.<br>
+    <span class="voce">«Fai una domanda a chiunque ti noleggi una macchina: se si ferma, in quanto tempo ne ho un'altra?»</span><br>
+    <span class="schermo">BËJE KËTË PYETJE</span></td></tr>
+  <tr><td>Sviluppo<br>5–17&Prime;</td><td><span class="voce">«Da noi: quarantotto ore. Non chiudi un'ora, non disdici una cliente.
+    Perché un laser fermo una settimana sono dodici clienti che saltano il turno — e la maggior parte non rientra più.»</span><br>
+    <span class="schermo">48 ORË</span></td></tr>
+  <tr><td>Chiusura<br>17–22&Prime;</td><td><span class="voce">«Il rischio non è tuo. È nostro.»</span><br>
+    <span class="schermo">RREZIKU NUK ËSHTË YT</span><span class="schermo">SHKRUAJ «LASER»</span></td></tr>
+  <tr><td>Si gira con</td><td>Uarda, un centro vero a Tirana, una macchina accesa. <b>Questa è l'unica che
+    richiede una trasferta.</b> Si gira insieme all'adv 9 nello stesso pomeriggio.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>Una domanda da fare a chiunque ti noleggi una macchina: se si ferma, in quanto tempo ne ho un'altra?</p>
+    <p>La nostra risposta è 48 ore. Non chiudi un'ora e non disdici nessuno. Il rischio della macchina ferma
+    non è tuo: è nostro.</p>
+    <p>50.000 lekë al mese. Scrivi <b>LASER</b>.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Rreziku nuk është yt</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<h2><span class="n">6</span>Afrodite Albania — tre adv</h2>
+<p class="quando">Parola chiave «AFRODITE» · startup e formazione T0 gratis, formazione avanzata 250 €</p>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 7 · Afrodite Albania</span>Il metodo, non la macchina<span class="liv l0">LIV. 0</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Tavolo visto dall'alto. Una mano appoggia quattro fascicoli, uno accanto all'altro,
+    uno al secondo.<br>
+    <span class="voce">«La macchina è l'ultima cosa che ti serve.»</span><br>
+    <span class="schermo">L'ULTIMA COSA CHE TI SERVE</span></td></tr>
+  <tr><td>Sviluppo<br>5–18&Prime;</td><td>Il dito tocca un fascicolo per volta, e il titolo appare a schermo.<br>
+    <span class="voce">«Il protocollo: cosa si fa, in che ordine, con quali parametri.<br>
+    La scheda di valutazione: da dove parte la cliente.<br>
+    La scheda di cabina: una pagina sola, quella che tieni accanto al lettino.<br>
+    La formazione della manualità: perché le mani si insegnano, non si improvvisano.»</span><br>
+    <span class="schermo">PROTOKOLLI</span><span class="schermo">SKEDA E VLERËSIMIT</span><span class="schermo">SKEDA E KABINËS</span><span class="schermo">TRAJNIMI</span></td></tr>
+  <tr><td>Chiusura<br>18–23&Prime;</td><td>La mano appoggia il quinto pezzo sopra gli altri: la macchina, in foto.<br>
+    <span class="voce">«Poi arriva la macchina. Scrivimi AFRODITE.»</span><br>
+    <span class="schermo">SHKRUAJ «AFRODITE»</span></td></tr>
+  <tr><td>Si gira con</td><td>I quattro documenti DEMETRA stampati:
+    <span class="file">PROTOCOLLO-DEMETRA-AFRODITE-BASE.pdf</span>
+    <span class="file">SCHEDA-VALUTAZIONE-DEMETRA.pdf</span>
+    <span class="file">SCHEDA-CABINA-AFRODITE.pdf</span>
+    <span class="file">FORMAZIONE-MANUALITA-DEMETRA.pdf</span><br>
+    Più la foto Afrodite (851&times;1100, l'unica grande che abbiamo). Un tavolo, quindici minuti.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>La macchina è l'ultima cosa che ti serve.</p>
+    <p>Prima vengono quattro cose: il protocollo pagina per pagina, la scheda di valutazione per sapere da dove
+    parte la cliente, la scheda di cabina da tenere accanto al lettino, e la formazione delle mani. Un ciclo
+    DEMETRA è di 10–12 sedute, ed è tutto scritto.</p>
+    <p>Poi arriva Afrodite. Scrivi <b>AFRODITE</b> e ti mando il protocollo da leggere.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Prima il metodo. Poi la macchina.</p></div>
+    <div class="copy"><span class="et">Perché funziona</span><p>Chi ha già comprato una macchina che non usa
+    riconosce sé stessa nei primi cinque secondi. E la frase la assolve: non è colpa sua, è che nessuno le ha
+    dato il metodo.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 8 · Afrodite Albania</span>Il contratto te lo mando prima<span class="liv l0">LIV. 0</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Mani che aprono il contratto in albanese e lo girano verso la camera.<br>
+    <span class="voce">«Il contratto te lo mando prima di parlare di soldi. Non dopo.»</span><br>
+    <span class="schermo">PRIMA. NON DOPO.</span></td></tr>
+  <tr><td>Sviluppo<br>5–19&Prime;</td><td>Il dito si ferma su tre punti, uno per volta, e il punto si illumina.<br>
+    <span class="voce">«Quanto dura. Cosa succede se si rompe. Come me la ridai quando hai finito.<br>
+    È scritto in albanese, ed è scritto prima che tu dica di sì. Se c'è una riga che non ti piace, la discutiamo
+    adesso — non quando è già in cabina.»</span><br>
+    <span class="schermo">SA ZGJAT</span><span class="schermo">NËSE PRISHET</span><span class="schermo">SI E KTHEN</span></td></tr>
+  <tr><td>Chiusura<br>19–24&Prime;</td><td>Posa il contratto.<br>
+    <span class="voce">«Scrivimi AFRODITE e te lo mando intero.»</span><br>
+    <span class="schermo">SHKRUAJ «AFRODITE»</span></td></tr>
+  <tr><td>Si gira con</td><td><span class="file">contratti/COMODATO/KONTRATE-HUAPERDORJE-AFRODITE-SQ.pdf</span>
+    stampato — otto pagine, già in albanese. Un tavolo e due mani.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>Il contratto te lo mando prima di parlare di soldi.</p>
+    <p>Quanto dura, cosa succede se si rompe, come me la ridai quando hai finito: scritto, in albanese, prima
+    che tu dica di sì. Se c'è una riga che non ti convince la discutiamo adesso, non quando la macchina è già
+    in cabina.</p>
+    <p>Scrivi <b>AFRODITE</b> e te lo mando intero.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Il contratto prima, non dopo</p></div>
+    <div class="copy"><span class="et">Perché funziona</span><p>Nessuno manda il contratto prima. Chi l'ha preso
+    in fretta una volta e se n'è pentito capisce in tre secondi di cosa stiamo parlando.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<div class="adv">
+  <div class="cap"><span class="cam">Adv 9 · Afrodite Albania</span>Quella sotto il telo<span class="liv l1">LIV. 1</span></div>
+  <table>
+  <tr><td>I 5 secondi</td><td>Un angolo, luce bassa. Una macchina coperta da un telo. Una mano entra e scosta il telo.<br>
+    <span class="voce">«Quante ne hai viste finire così, dopo tre mesi?»</span><br>
+    <span class="schermo">NON È CHE NON FUNZIONA</span></td></tr>
+  <tr><td>Sviluppo<br>5–18&Prime;</td><td>Il telo scende, la macchina si accende, il display si illumina. Sul tavolo
+    accanto compaiono il protocollo e la scheda di cabina.<br>
+    <span class="voce">«È che nessuno ha dato alla titolare il metodo. Con la nostra arriva DEMETRA: ciclo di
+    dieci-dodici sedute, scheda di valutazione, protocollo pagina per pagina. E l'assistenza sempre.»</span><br>
+    <span class="schermo">METODA DEMETRA</span><span class="schermo">10–12 SEANCA</span></td></tr>
+  <tr><td>Chiusura<br>18–23&Prime;</td><td>La macchina accesa, il telo per terra.<br>
+    <span class="voce">«Scrivimi AFRODITE.»</span><br>
+    <span class="schermo">SHKRUAJ «AFRODITE»</span></td></tr>
+  <tr><td>Si gira con</td><td>Un telo, un angolo con poca luce, una macchina. <b>Si gira in Italia:</b> l'angolo
+    non ha nazionalità. Si monta con audio e scritte albanesi.</td></tr>
+  <tr><td>Copy</td><td>
+    <div class="copy"><span class="et">Testo principale</span>
+    <p>Quante macchine hai visto finire sotto un telo, in un angolo, dopo tre mesi?</p>
+    <p>Non è che non funzionano. È che nessuno ha dato alla titolare il metodo: cosa si fa, in che ordine, per
+    quante sedute. Con Afrodite arriva DEMETRA — ciclo di 10–12 sedute, scheda di valutazione, protocollo
+    scritto — e l'assistenza non finisce alla consegna.</p>
+    <p>Scrivi <b>AFRODITE</b>.</p></div>
+    <div class="copy"><span class="et">Titolo</span><p>Non è che non funziona</p></div>
+    <div class="copy"><span class="et">Nota di ripresa</span><p>Il telo che scende è il piano più forte che abbiamo.
+    Girarlo due volte: una stretta sulla mano, una larga sull'angolo. Si usa in tutte e due le campagne.</p></div>
+  </td></tr>
+  </table>
+</div>
+
+<h2><span class="n">7</span>Cosa si gira, e quando</h2>
+<table class="semaforo">
+  <thead><tr><th>Adv</th><th>Campagna</th><th>Livello</th><th>Serve</th><th>Quando</th></tr></thead>
+  <tbody>
+  <tr><td>1</td><td>Laser Italia</td><td><span class="liv l0">LIV. 0</span></td><td>Solo tipografia e marchio</td><td><b>Stasera</b></td></tr>
+  <tr><td>4</td><td>Laser Albania</td><td><span class="liv l0">LIV. 0</span></td><td>Come la 1, in albanese e in lekë</td><td><b>Stasera</b></td></tr>
+  <tr><td>2</td><td>Laser Italia</td><td><span class="liv l0">LIV. 0</span></td><td>Scheda tecnica stampata, un tavolo</td><td>Domani, 10 minuti</td></tr>
+  <tr><td>5</td><td>Laser Albania</td><td><span class="liv l0">LIV. 0</span></td><td>Protocollo laser SQ stampato</td><td>Domani, 10 minuti</td></tr>
+  <tr><td>7</td><td>Afrodite</td><td><span class="liv l0">LIV. 0</span></td><td>I 4 documenti DEMETRA + foto Afrodite</td><td>Domani, 15 minuti</td></tr>
+  <tr><td>8</td><td>Afrodite</td><td><span class="liv l0">LIV. 0</span></td><td>Contratto comodato SQ stampato</td><td>Domani, 10 minuti</td></tr>
+  <tr><td>9</td><td>Afrodite</td><td><span class="liv l1">LIV. 1</span></td><td>Un telo, un angolo, una macchina</td><td>Questa settimana</td></tr>
+  <tr><td>3</td><td>Laser Italia</td><td><span class="liv l1">LIV. 1</span></td><td>Magazzino + Giorgio, mezz'ora</td><td>Questa settimana</td></tr>
+  <tr><td>6</td><td>Laser Albania</td><td><span class="liv l2">LIV. 2</span></td><td>Uarda + un centro vero a Tirana</td><td><b>Da fissare</b></td></tr>
+  </tbody>
+</table>
+<div class="box verde">
+  <span class="eti">Il punto di tutto questo documento</span>
+  <p>Se si stampano <b>cinque documenti</b> — scheda tecnica, protocollo laser SQ, i quattro DEMETRA, il
+  contratto SQ — e si tiene libero <b>un tavolo con la luce della finestra</b>, in un'ora si girano
+  <b>quattro adv su nove</b>. Più due che non richiedono nemmeno la telecamera.
+  La giornata di riprese serve per le ultime tre, non per cominciare.</p>
+</div>
+
+<h2><span class="n">8</span>Cosa non si dice, mai</h2>
+<table>
+  <thead><tr><th style="width:190px">Non si fa</th><th>Perché</th></tr></thead>
+  <tbody>
+  <tr><td>Pelle trattata, prima/dopo, percentuali di risultato, tempi di guarigione</td>
+      <td>È il motivo di rifiuto numero uno su Meta, e qui non serve: non vendiamo alla cliente finale,
+      vendiamo alla titolare del centro.</td></tr>
+  <tr><td>«2000 watt» o «16 diodi» senza il «fino a»</td>
+      <td>I due numeri stanno su due macchine diverse. Senza «fino a», alla consegna di una ARES
+      il cliente ha ragione lui e il contratto se ne va.</td></tr>
+  <tr><td>«Te la cambiamo ogni due anni»</td>
+      <td>Non è in nessun contratto. È potentissima e l'ho tenuta fuori da tutte e nove:
+      <b>decidi tu se entra</b>, ma una volta detta in un'inserzione non si ritira.</td></tr>
+  <tr><td>Promozioni che cambiano ogni mese</td>
+      <td>Già deciso: in pubblicità va solo quello che manteniamo senza sforzo.</td></tr>
+  <tr><td>Il numero di telefono dentro il video</td>
+      <td>La chat si apre dal pulsante, non da un numero che va trascritto. Il numero verde e il WhatsApp
+      stanno nel copy, non nelle scritte a schermo.</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">9</span>Prima di spendere un euro</h2>
+<table class="semaforo">
+  <tbody>
+  <tr><td><span class="pallino p-rosso"></span>BLOCCA</td><td><b>La pagina Instagram.</b> Da fuori non si legge:
+    Instagram ha chiuso i profili a chi non è connesso. Se è vuota o quasi, le inserzioni Meta vanno comunque
+    fatte partire dalla pagina Facebook — che ha già contenuti — con Instagram collegato, non al contrario.</td></tr>
+  <tr><td><span class="pallino p-rosso"></span>BLOCCA</td><td><b>Chi risponde quando Uarda dorme.</b> Un'adv che
+    gira la notte apre chat che restano senza risposta fino al mattino. Prima si decide chi tiene il telefono.</td></tr>
+  <tr><td><span class="pallino p-giallo"></span>SERVE</td><td><b>Una foto grande della URIEL.</b> Oggi ne abbiamo una
+    da 194 pixel: non si può pubblicare. È la macchina che vendiamo più cara e non ha un'immagine.</td></tr>
+  <tr><td><span class="pallino p-verde"></span>PRONTO</td><td>Il sito, i protocolli, le schede, i contratti in tre
+    lingue, il marchio in tutti i formati. La parte che di solito manca, qui c'è già.</td></tr>
+  </tbody>
+</table>
+
+<h2 class="nuovo-foglio"><span class="n">10</span>La lista da portarsi dietro</h2>
+<p class="quando">Si stampa questa pagina sola e si spunta mentre si fa</p>
+
+<h3>Da stampare, una volta sola</h3>
+<ul class="caselle">
+  <li><b>Scheda tecnica laser 808</b> senza prezzi, italiano &mdash; serve all'adv 2</li>
+  <li><b>Protocollo laser</b> in albanese &mdash; serve all'adv 5</li>
+  <li><b>I quattro documenti DEMETRA</b>: protocollo, scheda di valutazione, scheda di cabina, formazione della manualit&agrave; &mdash; adv 7</li>
+  <li><b>Contratto di comodato Afrodite</b> in albanese, otto pagine &mdash; adv 8</li>
+  <li><b>La foto di Afrodite</b> stampata grande, da appoggiare sopra gli altri &mdash; chiusura dell'adv 7</li>
+</ul>
+
+<h3>Da girare al tavolo, in un'ora, tutto di seguito</h3>
+<p>Stesso tavolo, stessa luce di finestra, telefono appoggiato su una pila di libri e mai in mano.
+Ogni ripresa due volte: una stretta sulle mani, una un po' pi&ugrave; larga.</p>
+<ul class="caselle">
+  <li>Mani che aprono la <b>scheda tecnica</b>, dito che scende su tre righe &mdash; adv 2</li>
+  <li>Mani che sfogliano il <b>protocollo albanese</b>, una pagina ogni due secondi &mdash; adv 5</li>
+  <li>Mano che appoggia i <b>quattro fascicoli DEMETRA</b> uno accanto all'altro, uno al secondo &mdash; adv 7</li>
+  <li>Mani che aprono il <b>contratto albanese</b> e lo girano verso la camera &mdash; adv 8</li>
+</ul>
+
+<h3>Da girare in piedi, mezz'ora</h3>
+<ul class="caselle">
+  <li><b>Il telo che scende</b> da una macchina in un angolo con poca luce &mdash; adv 9. Due volte: stretta e larga</li>
+  <li><b>Il magazzino</b>: Giorgio che cammina fra le macchine, la camera che lo segue all'indietro &mdash; adv 3</li>
+</ul>
+
+<h3>Da montare al computer, senza telecamera</h3>
+<ul class="caselle">
+  <li><b>Adv 1</b> &mdash; i numeri 1 e 30, italiano, 500 &euro;</li>
+  <li><b>Adv 4</b> &mdash; gli stessi numeri, albanese, 50.000 lek&euml;</li>
+</ul>
+
+<h3>Da fissare con Uarda</h3>
+<ul class="caselle">
+  <li><b>Adv 6</b> &mdash; Uarda in un centro vero di Tirana, una macchina accesa dietro. Mezzo pomeriggio</li>
+  <li>Nello stesso pomeriggio: <b>la foto grande della URIEL</b>, che oggi non abbiamo</li>
+</ul>
+
+<div class="note">
+  <span class="eti">Decisioni da prendere</span>
+  <div class="rig"></div><div class="rig"></div><div class="rig"></div>
+</div>
+
+<div class="chiusura">
+  <span>NIPEC · Tecnologie Estetiche — Nove adv · Materiali, testi e copy · Campagna 500</span>
+  <span>Rev. 1 · ottobre 2026</span>
+</div>
+</body>
+</html>
