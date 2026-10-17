@@ -1,88 +1,114 @@
-SITO NIPEC — nipecestetica.eu
-Sei pagine statiche. Niente database, niente WordPress, niente plugin:
-si carica e funziona.
+IL SITO NIPEC — versione 5.0, dal progetto Claude Design
+========================================================
+Questo file non va online. Online va solo la cartella pubblica/.
 
+DA DOVE VIENE
+-------------
+Dal file Sito_NIPEC_5.0.html esportato da Claude Design.
+Quel file NON e' un sito: e' una tavola di progetto con 23
+riquadri dentro iframe (13 pagine, 2 componenti, 8 mockup del
+telefono). Caricato cosi' com'e', il visitatore vede la tavola
+di progetto, non il sito.
 
-COME SI PUBBLICA
+Le 13 pagine dentro la tavola sono pero' vere. Gli strumenti in
+strumenti/ le tirano fuori una per una, le rendono statiche e
+ne fanno un sito che funziona da solo, senza React e senza il
+motore di Claude Design.
 
-Il dominio e' gia' puntato e l'HTTPS gia' attivo: oggi risponde con un
-"sito in costruzione" da sostituire.
+COSA C'E' ONLINE
+----------------
+13 pagine: index (home IT), sq, en, laser-ares, laser-uriel,
+afrodite, borea-cryo, q-switch, metodo, formazione, chi-siamo,
+contatti, privacy. Piu' il carattere Archivo servito dal nostro
+dominio, 5 foto, la scheda tecnica del laser 808 in PDF e
+l'icona. In tutto 1,9 MB.
 
- 1. Entra nel pannello dell'hosting (cPanel) → File Manager
- 2. Apri la cartella del dominio nipecestetica.eu
-    (di solito public_html/ oppure public_html/nipecestetica.eu/)
- 3. CANCELLA il vecchio index.html
- 4. Carica TUTTO il contenuto di questa cartella: i sei .html, stile.css,
-    e le due cartelle caratteri/ e marchio/
- 5. Apri https://nipecestetica.eu e controlla che si veda il logo col
-    filetto tricolore
+Provato a 1440 px e a 390 px: nessun errore, nessun link rotto,
+nessuna immagine rotta, niente che sborda sul telefono.
 
-Da FileZilla e' lo stesso: ci si collega con l'account FTP e si trascina
-dentro tutto il contenuto della cartella.
+COSA HO TOLTO, E PERCHE'
+------------------------
+Il progetto aveva dei segnaposto. Online non ci vanno: o sono
+visibili e il sito sembra finto, o sono finti e allora e' peggio.
 
-ATTENZIONE: vanno caricate anche le cartelle caratteri/ e marchio/.
-Senza caratteri/ il sito si vede con un carattere qualsiasi; senza
-marchio/ sparisce il logo.
+1. LE TESTIMONIANZE. Erano tre riquadri con scritto dentro
+   "[TESTIMONIANZA REALE DI UN CENTRO]" e "[Nome titolare]",
+   piu' "[VOTO] su Google - [NUMERO] recensioni".
+   Ho tolto l'intera sezione, su tutte e tre le lingue.
+   Mandami tre frasi vere con nome e centro, e il voto vero di
+   Google, e la rimetto.
 
+2. IL NUMERO VERDE 800 141 726. Non esiste da nessuna parte nei
+   nostri documenti. Se non e' attivo, chi chiama non trova
+   nessuno o trova un altro. Tolto da tutte le pagine.
+   Se invece e' attivo davvero, dimmelo e lo rimetto.
 
-COSA MANCA PRIMA CHE SIA FINITO
+3. L'INDIRIZZO info@nipecestetica.com. Il dominio e'
+   nipecestetica.EU, non .com: la posta rimbalza e le richieste
+   si perdono senza che tu lo sappia. Tolto.
+   Crea info@nipecestetica.eu dal pannello dell'hosting e lo
+   rimetto in due minuti.
 
-In contatti.html e in privacy.html ci sono quattro campi scritti in
-arancione: ragione sociale, sede, partita IVA e indirizzo e-mail.
-Si vedono apposta, cosi' non ce li dimentichiamo.
+4. I LINK AI PDF DEL CATALOGO (italiano, albanese, inglese) e
+   il link al sito di Demetra: puntavano a "[LINK CATALOGO
+   PDF]". Pulsanti tolti, il testo resta.
 
-NON SI FA PUBBLICITA' FINCHE' QUEI CAMPI SONO VUOTI. L'informativa
-privacy senza il titolare del trattamento non e' un'informativa, e Meta
-chiede una pagina privacy valida per approvare le inserzioni.
+5. LE FOTO CHE MANCAVANO: laser Q-Switch (sia il riquadro del
+   menu sia la pagina) e la foto del fondatore in Chi siamo.
+   Tolti i riquadri vuoti.
 
+6. LE SPECIFICHE NON CONFERMATE: una riga di Afrodite, una di
+   Borea/Cryo, due del Q-Switch dicevano "[DA SCHEDA]".
+   Righe tolte dalle tabelle.
 
-COSA C'E'
-  index.html      home — l'offerta, le tre prove, le condizioni
-  noleggio.html   le condizioni per intero + le domande che fanno sempre
-  macchine.html   laser 808 e Afrodite, con i dati tecnici
-  metodo.html     formazione, protocollo, assistenza, i tre minuti
-  contatti.html   i due numeri WhatsApp e i dati societari
-  privacy.html    informativa — serve anche per le inserzioni
-  stile.css       un foglio solo, niente librerie
-  caratteri/      Archivo e Source Serif, serviti dal nostro dominio
-  marchio/        logo orizzontale, negativo ed emblema (favicon)
+7. IL PROSSIMO WORKSHOP in Formazione: data, sede e
+   descrizione erano segnaposto. Sezione tolta.
 
+COSA HO AGGIUNTO
+----------------
+- IL MODULO DEI CONTATTI non andava da nessuna parte: nel
+  progetto il form non ha destinazione, quindi le richieste si
+  perdevano in silenzio. Adesso il pulsante apre WhatsApp con
+  il messaggio gia' scritto (nome, telefono, centro, citta',
+  interesse, messaggio) verso il +39 351 846 6025.
+  Senza server, senza database: arriva sul telefono.
 
-SCELTE FATTE, E PERCHE'
+- LA PRIVACY. Nel progetto era una traccia vuota: "testo legale
+  da far redigere al consulente". L'ho scritta davvero, con i
+  dati veri del titolare che stanno nei nostri contratti:
+  PHD System S.r.l., Via Rovetta 29, 25080 Padenghe sul Garda
+  (BS), P.IVA 04696530981. Dentro ci sono: quali dati, perche',
+  per quanto, a chi, i tuoi diritti, i cookie, e le due
+  autorita' (Garante in Italia, IDP in Albania).
+  Quando hai l'e-mail, va aggiunta li' come contatto per i
+  diritti.
 
- NIENTE MODULI DI CONTATTO
-   Tutti i pulsanti aprono WhatsApp — Giorgio per l'Italia, Uarda per
-   l'Albania. E' il canale dove le titolari rispondono davvero, e un
-   modulo in piu' e' un passaggio in cui si perdono.
+- Il carattere Archivo adesso parte dal nostro dominio e non da
+  Google: in Europa il carattere caricato da Google e' gia'
+  costato una causa a qualcuno, e noi la privacy la scriviamo
+  sul serio.
+- Viewport per il telefono, descrizione per Google, lingua
+  giusta su ogni pagina (it / sq / en), icona.
 
- NIENTE COOKIE, NIENTE STATISTICHE DI TERZE PARTI
-   Caratteri e immagini partono dal nostro dominio: mentre uno legge non
-   parte nessuna richiesta verso l'esterno. Per questo non serve la
-   fascia dei cookie, che fa scappare meta' delle persone.
+DA CONTROLLARE TU
+-----------------
+- Il logo del sito non e' quello che abbiamo chiuso insieme
+  (quello con la riga tricolore). Claude Design ne ha disegnato
+  uno suo: cerchio, arco e tre barre. Se vuoi quello ufficiale,
+  dimmelo.
+- Le foto delle macchine sono piccole (la piu' grande 851x1100,
+  la Uriel 198x443). Sul telefono moderno si vedono morbide.
+  Se hai gli originali, mandameli.
+- Ares: la home dice 1500 W e 10 diodi, Uriel 2000 W e 16
+  diodi. E' quello che mi avevi detto tu. Controlla che vada
+  bene anche in pubblico.
 
- IL PREZZO E' SCRITTO IN CHIARO
-   500 euro al mese, in prima pagina. Filtra chi non puo' permetterselo
-   prima che ti scriva, e toglie la sensazione del prezzo nascosto.
-
- IL MODELLO DELLE MACCHINE NON SI NOMINA
-   Come negli annunci: si dice cosa fa, non come si chiama. I dati sono
-   scritti con "fino a", che e' vero su tutte le configurazioni.
-
- SI PARTE DAL TELEFONO
-   Quasi tutti arriveranno da un'inserzione, sul telefono. Il menu
-   scorre di lato invece di andare a capo quattro volte, e i pulsanti
-   sono larghi quanto lo schermo.
-
-
-COME SI MODIFICA
-Le sei pagine escono da costruisci-sito.py, che sta qui accanto: testata,
-piede e menu sono scritti una volta sola. Si cambia il testo li' dentro e
-si rilancia
-
-    python3 costruisci-sito.py
-
-dalla cartella SITO. Poi si ricaricano gli .html cambiati.
-Lo script NON va caricato sul sito: serve solo a chi scrive.
-
-Oppure si aprono gli .html con un editor e si cambia a mano: sono file
-normali, senza niente di strano dentro.
+SE RIFAI IL PROGETTO IN CLAUDE DESIGN
+-------------------------------------
+Esporta di nuovo e rilancia, in ordine:
+   python3 estrai.py Sito_NIPEC_5.0.html sito5
+   node pulisci.mjs      (serve la tavola su 127.0.0.1:8741)
+   python3 finisci.py
+   node collauda.mjs
+Gli strumenti stanno in strumenti/. Rifanno tutto da capo,
+tolgono gli stessi segnaposto e riscrivono la privacy.

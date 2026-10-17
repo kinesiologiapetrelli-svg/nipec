@@ -42,15 +42,18 @@ L'account giusto e' quello di nipecestetica.eu.
 
 
 COSA SI CARICA
-Tutto il contenuto di questa cartella TRANNE:
-  PUBBLICAZIONE.txt      (questo file)
-  LEGGIMI.txt            (note interne)
-  costruisci-sito.py     (lo script che genera le pagine)
-Quei tre non servono al sito e non devono essere pubblici.
+Si carica il CONTENUTO della sottocartella  pubblica/  e basta:
+le 13 pagine .html, la scheda PDF, favicon.svg, piu' le cartelle
+caratteri/ e immagini/.
 
-Vanno caricate anche le cartelle caratteri/ e marchio/.
+Dentro pubblica/ non c'e' nient'altro: tutto cio' che non deve
+diventare pubblico (questo file, LEGGIMI.txt e gli strumenti che
+rigenerano il sito) sta FUORI da quella cartella, apposta.
+Non si carica la cartella pubblica/ come cartella: si carica
+quello che sta dentro, dritto nella radice del dominio.
+
 Senza caratteri/ il sito esce con un carattere qualsiasi.
-Senza marchio/ sparisce il logo.
+Senza immagini/ spariscono le foto delle macchine.
 
 
 TRE MODI, DAL PIU' SEMPLICE
@@ -71,10 +74,10 @@ TRE MODI, DAL PIU' SEMPLICE
 
       lftp -u 'UTENTE,PASSWORD' ftp://premium151.web-hosting.com -e \
         "set ftp:ssl-force true; set ftp:ssl-protect-data true; \
-         mirror -R --verbose \
-           --exclude PUBBLICAZIONE.txt --exclude LEGGIMI.txt \
-           --exclude costruisci-sito.py \
-           ./ /; bye"
+         mirror -R --verbose SITO/pubblica/ /; bye"
+
+    Si fa dalla radice del repository. mirror -R senza --delete:
+    copia sopra, non svuota niente.
 
     Il nostro index.html sovrascrive quello del "sito in costruzione".
 
@@ -94,10 +97,25 @@ al punto in cui si chiede l'utente. E il "vault" citato nelle istruzioni
 appartiene a un altro sistema: in questa sessione non esiste.
 
 
-DOPO IL CARICAMENTO, TRE CONTROLLI
- 1. https://nipecestetica.eu si apre e si vede il logo col tricolore
- 2. Il menu funziona su tutte e sei le pagine
- 3. Dal telefono i pulsanti WhatsApp aprono la chat giusta
+VECCHIE PAGINE DA TOGLIERE
+La versione precedente del sito aveva noleggio.html, macchine.html
+e stile.css. Nel sito 5.0 non esistono piu'. Se restano online
+rispondono ancora, con la grafica vecchia. Si cancellano a mano:
+  noleggio.html   macchine.html   stile.css
+Le altre (index, contatti, metodo, privacy) vengono sovrascritte
+da sole, perche' il nome e' lo stesso.
+
+
+DOPO IL CARICAMENTO, I CONTROLLI
+ 1. https://nipecestetica.eu si apre e si vedono le foto delle
+    macchine nei riquadri "Poche macchine, scelte bene"
+ 2. Il menu Tecnologie si apre e porta alle cinque schede
+ 3. IT / SQ / EN in alto a destra cambiano lingua
+ 4. Dal telefono i pulsanti WhatsApp aprono la chat giusta
+ 5. In Contatti, compilato il modulo, "Invia la richiesta" apre
+    WhatsApp col messaggio gia' scritto
+ 6. https://nipecestetica.eu/noleggio.html deve dare 404:
+    se si apre ancora, la pagina vecchia non e' stata cancellata
 
 E poi cambia la password FTP: e' passata in chat due volte, e la chat
 resta registrata.
