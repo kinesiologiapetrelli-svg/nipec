@@ -1,0 +1,148 @@
+/* NIPEC · nipecestetica.eu — un foglio di stile solo, niente librerie.
+   Si parte dal telefono: quasi tutti arrivano qui da un'inserzione. */
+
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");
+           font-weight:400 700;font-display:swap}
+@font-face{font-family:"Source Serif 4";src:url("caratteri/sourceserif.woff2") format("woff2");
+           font-weight:400 600;font-display:swap}
+
+:root{
+  --blu:#1C6EA4; --navy:#123A63; --blu-chiaro:#5AA6D6; --velo:#E8F0F7;
+  --ink:#17222E; --ink2:#44535F; --grigio:#6B747C; --riga:#D9E2E9;
+  --carta:#FFFFFF; --nebbia:#F7FAFC;
+  --verde:#1B6E52; --verde-velo:#E2F1EA;
+  --titoli:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --testo:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --largo:1060px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--carta);color:var(--ink);
+     font:400 17px/1.6 var(--testo);overflow-x:hidden}
+img,svg{max-width:100%;height:auto}
+a{color:var(--blu)}
+.dentro{max-width:var(--largo);margin:0 auto;padding:0 20px}
+
+/* ---------- testata ---------- */
+header{border-bottom:1px solid var(--riga);position:sticky;top:0;background:rgba(255,255,255,.96);
+       backdrop-filter:saturate(180%) blur(8px);z-index:20}
+.barra{display:flex;align-items:center;justify-content:space-between;gap:16px;
+       padding:12px 0;max-width:var(--largo);margin:0 auto;padding-left:20px;padding-right:20px}
+.barra .marchio{display:block;flex:none}
+.barra .marchio svg{width:150px;display:block}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-family:var(--titoli);font-size:14px;font-weight:600;letter-spacing:.01em;
+      color:var(--ink2);text-decoration:none;padding:7px 11px;border-radius:6px;white-space:nowrap}
+nav a:hover{background:var(--velo);color:var(--navy)}
+nav a[aria-current="page"]{color:var(--navy);background:var(--velo)}
+
+/* ---------- apertura ---------- */
+.apre{padding:46px 0 38px;border-bottom:1px solid var(--riga);
+      background:linear-gradient(180deg,var(--nebbia),var(--carta))}
+.apre h1{font-family:var(--titoli);font-size:clamp(30px,6vw,46px);line-height:1.1;
+         font-weight:700;letter-spacing:-.015em;color:var(--navy);margin:0 0 12px;max-width:17em}
+.apre .sotto{font-size:clamp(17px,2.6vw,20px);color:var(--ink2);margin:0 0 22px;max-width:30em;line-height:1.55}
+.occhiello{font-family:var(--titoli);font-size:12px;font-weight:700;letter-spacing:.16em;
+           text-transform:uppercase;color:var(--blu);margin:0 0 10px}
+
+/* ---------- pulsanti ---------- */
+.bottoni{display:flex;gap:11px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;font-family:var(--titoli);font-size:16px;font-weight:700;
+     text-decoration:none;padding:13px 22px;border-radius:8px;border:2px solid var(--navy);
+     background:var(--navy);color:#fff;line-height:1.2}
+.btn:hover{background:#0E2C4C;border-color:#0E2C4C}
+.btn.vuoto{background:transparent;color:var(--navy)}
+.btn.vuoto:hover{background:var(--velo)}
+.sotto-btn{font-size:14px;color:var(--grigio);margin:10px 0 0}
+
+/* ---------- sezioni ---------- */
+section{padding:40px 0}
+section + section{border-top:1px solid var(--riga)}
+h2{font-family:var(--titoli);font-size:clamp(22px,4vw,30px);line-height:1.2;font-weight:700;
+   color:var(--navy);letter-spacing:-.01em;margin:0 0 8px;max-width:20em}
+h3{font-family:var(--titoli);font-size:19px;font-weight:700;color:var(--navy);margin:22px 0 6px}
+p{margin:0 0 14px;max-width:38em}
+.guida{font-size:18px;color:var(--ink2);margin:0 0 22px;max-width:34em}
+
+/* ---------- griglie ---------- */
+.tre,.due{display:grid;gap:16px}
+.tre{grid-template-columns:1fr}
+.due{grid-template-columns:1fr}
+@media(min-width:760px){.tre{grid-template-columns:repeat(3,1fr)}.due{grid-template-columns:1fr 1fr}}
+
+.scheda{border:1px solid var(--riga);border-radius:10px;padding:20px;background:var(--carta)}
+.scheda h3{margin:0 0 6px;font-size:18px}
+.scheda p{font-size:16px;margin:0;color:var(--ink2)}
+.scheda .num{font-family:var(--titoli);font-size:12px;font-weight:700;letter-spacing:.14em;
+             text-transform:uppercase;color:var(--blu);display:block;margin-bottom:7px}
+
+/* ---------- elenco con spunta ---------- */
+.spunte{list-style:none;padding:0;margin:0 0 18px}
+/* la spunta sta fuori dal flusso: se la riga diventa una griglia il
+   grassetto finisce in una colonna sua e l'elenco si sfascia. */
+.spunte li{position:relative;padding-left:32px;margin-bottom:11px;line-height:1.5}
+.spunte li:before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;
+                  border-radius:50%;background:var(--velo);
+                  border:2px solid var(--blu)}
+.spunte li:after{content:"";position:absolute;left:6px;top:9px;width:8px;height:4px;
+                 border-left:2px solid var(--blu);border-bottom:2px solid var(--blu);
+                 transform:rotate(-45deg)}
+.spunte b{color:var(--navy)}
+
+/* ---------- tabella condizioni ---------- */
+table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:16px}
+th{font-family:var(--titoli);font-size:12px;font-weight:700;letter-spacing:.1em;
+   text-transform:uppercase;text-align:left;color:#fff;background:var(--navy);padding:9px 12px}
+td{padding:11px 12px;border-bottom:1px solid var(--riga);vertical-align:top}
+td:first-child{font-family:var(--titoli);font-weight:600;color:var(--navy);width:40%}
+tr:nth-child(even) td{background:var(--nebbia)}
+
+/* ---------- riquadri ---------- */
+.nota{border:1px solid var(--riga);border-left:5px solid var(--blu);background:var(--nebbia);
+      border-radius:0 8px 8px 0;padding:16px 20px;margin:0 0 20px}
+.nota.verde{border-left-color:var(--verde);background:var(--verde-velo)}
+.nota p:last-child{margin-bottom:0}
+.nota .eti{font-family:var(--titoli);font-size:12px;font-weight:700;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--blu);display:block;margin-bottom:6px}
+.nota.verde .eti{color:var(--verde)}
+
+/* ---------- fascia scura di chiusura ---------- */
+.chiamata{background:var(--navy);color:#fff;padding:44px 0}
+.chiamata h2{color:#fff}
+.chiamata p{color:#C9DDEE}
+.chiamata .btn{background:#fff;color:var(--navy);border-color:#fff}
+.chiamata .btn:hover{background:var(--velo);border-color:var(--velo)}
+.chiamata .btn.vuoto{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.chiamata .btn.vuoto:hover{background:rgba(255,255,255,.1)}
+
+/* ---------- piede ---------- */
+footer{background:#0E2C4C;color:#AFC8DD;padding:34px 0 26px;font-size:15px}
+footer svg{width:150px;margin-bottom:14px}
+footer a{color:#fff;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.piede-righe{display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:760px){.piede-righe{grid-template-columns:1.3fr 1fr 1fr}}
+footer h4{font-family:var(--titoli);font-size:12px;font-weight:700;letter-spacing:.14em;
+          text-transform:uppercase;color:#7FA9CC;margin:0 0 9px}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{margin-bottom:6px}
+.fine{border-top:1px solid rgba(255,255,255,.14);margin-top:24px;padding-top:16px;
+      font-size:13px;color:#7FA9CC;display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+
+/* ---------- sul telefono la barra si impila ----------
+   Prima il menu andava a capo quattro volte e spingeva il marchio in un
+   angolo: sotto i 760 px il marchio sta sopra e le voci scorrono di lato. */
+@media(max-width:759px){
+  header{position:static}
+  .barra{flex-direction:column;align-items:flex-start;gap:9px;padding:11px 20px 9px}
+  .barra .marchio svg{width:132px}
+  nav{width:100%;flex-wrap:nowrap;overflow-x:auto;gap:2px;
+      scrollbar-width:none;-ms-overflow-style:none}
+  nav::-webkit-scrollbar{display:none}
+  nav a{padding:6px 10px;font-size:13.5px}
+  .apre{padding:34px 0 30px}
+  section{padding:32px 0}
+  .btn{width:100%;text-align:center}
+  .bottoni{flex-direction:column;align-items:stretch}
+  td:first-child{width:46%}
+}

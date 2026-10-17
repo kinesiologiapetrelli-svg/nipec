@@ -1,0 +1,88 @@
+SITO NIPEC — nipecestetica.eu
+Sei pagine statiche. Niente database, niente WordPress, niente plugin:
+si carica e funziona.
+
+
+COME SI PUBBLICA
+
+Il dominio e' gia' puntato e l'HTTPS gia' attivo: oggi risponde con un
+"sito in costruzione" da sostituire.
+
+ 1. Entra nel pannello dell'hosting (cPanel) → File Manager
+ 2. Apri la cartella del dominio nipecestetica.eu
+    (di solito public_html/ oppure public_html/nipecestetica.eu/)
+ 3. CANCELLA il vecchio index.html
+ 4. Carica TUTTO il contenuto di questa cartella: i sei .html, stile.css,
+    e le due cartelle caratteri/ e marchio/
+ 5. Apri https://nipecestetica.eu e controlla che si veda il logo col
+    filetto tricolore
+
+Da FileZilla e' lo stesso: ci si collega con l'account FTP e si trascina
+dentro tutto il contenuto della cartella.
+
+ATTENZIONE: vanno caricate anche le cartelle caratteri/ e marchio/.
+Senza caratteri/ il sito si vede con un carattere qualsiasi; senza
+marchio/ sparisce il logo.
+
+
+COSA MANCA PRIMA CHE SIA FINITO
+
+In contatti.html e in privacy.html ci sono quattro campi scritti in
+arancione: ragione sociale, sede, partita IVA e indirizzo e-mail.
+Si vedono apposta, cosi' non ce li dimentichiamo.
+
+NON SI FA PUBBLICITA' FINCHE' QUEI CAMPI SONO VUOTI. L'informativa
+privacy senza il titolare del trattamento non e' un'informativa, e Meta
+chiede una pagina privacy valida per approvare le inserzioni.
+
+
+COSA C'E'
+  index.html      home — l'offerta, le tre prove, le condizioni
+  noleggio.html   le condizioni per intero + le domande che fanno sempre
+  macchine.html   laser 808 e Afrodite, con i dati tecnici
+  metodo.html     formazione, protocollo, assistenza, i tre minuti
+  contatti.html   i due numeri WhatsApp e i dati societari
+  privacy.html    informativa — serve anche per le inserzioni
+  stile.css       un foglio solo, niente librerie
+  caratteri/      Archivo e Source Serif, serviti dal nostro dominio
+  marchio/        logo orizzontale, negativo ed emblema (favicon)
+
+
+SCELTE FATTE, E PERCHE'
+
+ NIENTE MODULI DI CONTATTO
+   Tutti i pulsanti aprono WhatsApp — Giorgio per l'Italia, Uarda per
+   l'Albania. E' il canale dove le titolari rispondono davvero, e un
+   modulo in piu' e' un passaggio in cui si perdono.
+
+ NIENTE COOKIE, NIENTE STATISTICHE DI TERZE PARTI
+   Caratteri e immagini partono dal nostro dominio: mentre uno legge non
+   parte nessuna richiesta verso l'esterno. Per questo non serve la
+   fascia dei cookie, che fa scappare meta' delle persone.
+
+ IL PREZZO E' SCRITTO IN CHIARO
+   500 euro al mese, in prima pagina. Filtra chi non puo' permetterselo
+   prima che ti scriva, e toglie la sensazione del prezzo nascosto.
+
+ IL MODELLO DELLE MACCHINE NON SI NOMINA
+   Come negli annunci: si dice cosa fa, non come si chiama. I dati sono
+   scritti con "fino a", che e' vero su tutte le configurazioni.
+
+ SI PARTE DAL TELEFONO
+   Quasi tutti arriveranno da un'inserzione, sul telefono. Il menu
+   scorre di lato invece di andare a capo quattro volte, e i pulsanti
+   sono larghi quanto lo schermo.
+
+
+COME SI MODIFICA
+Le sei pagine escono da costruisci-sito.py, che sta qui accanto: testata,
+piede e menu sono scritti una volta sola. Si cambia il testo li' dentro e
+si rilancia
+
+    python3 costruisci-sito.py
+
+dalla cartella SITO. Poi si ricaricano gli .html cambiati.
+Lo script NON va caricato sul sito: serve solo a chi scrive.
+
+Oppure si aprono gli .html con un editor e si cambia a mano: sono file
+normali, senza niente di strano dentro.
