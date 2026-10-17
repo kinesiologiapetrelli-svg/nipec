@@ -1,0 +1,63 @@
+PROPOSTA VOGUE — versione firmabile a monitor
+=============================================
+
+IL FILE DA MANDARE AL CLIENTE
+  PROPOZIM-VOGUE-SHQIP-per-nenshkrim.pdf      3 pagine
+
+Le pagine 1 e 2 sono IDENTICHE all'originale: non ho toccato
+una virgola del contenuto ne' della grafica. Ho controllato che
+il testo estratto sia lo stesso, carattere per carattere.
+La pagina 3 e' nuova: e' la pagina della firma.
+
+
+COSA C'E' NELLA PAGINA 3
+  8 campi compilabili veri (AcroForm), dove si scrive da tastiera:
+      Subjekti / qendra      NIPT
+      Adresa                 E-mail
+      Perfaqesuesi ligjor    Telefon
+      Vendi                  Data
+  Un riquadro "CFARE NENSHKRUHET" che ripete i numeri che si
+  stanno firmando: 32.500, kaparo 5.000, qira 1.500/muaj,
+  24 muaj, consegna in 40 giorni. Serve perche' la firma resti
+  attaccata a cifre precise, non a "la proposta".
+  La dichiarazione di accettazione delle pagine 1 e 2.
+  Due caselle di firma grandi 7,8 x 3,4 cm: NIPEC e il cliente.
+
+
+COME SI FIRMA COL PENNINO, SUL MONITOR DELL
+
+  MICROSOFT EDGE (c'e' gia' su ogni Dell, e' il piu' comodo)
+    1. Tasto destro sul PDF > Apri con > Microsoft Edge
+    2. I campi bianchi si compilano cliccandoci dentro e scrivendo
+    3. In alto compare la barra: premi "Disegna" (Draw)
+    4. Scegli spessore e colore (nero o blu), poi firma col
+       pennino dentro la casella
+    5. Ctrl+S per salvare. La firma resta dentro il PDF
+
+  ADOBE ACROBAT READER (se preferisci)
+    1. Apri il PDF
+    2. Compila i campi
+    3. Strumenti > Compila e firma > Disegna
+    4. Firma col pennino, poi File > Salva
+
+  Se sbagli la firma: Ctrl+Z, oppure la gomma nella stessa barra.
+
+
+PERCHE' NON E' UNA "FIRMA DIGITALE"
+Quella con certificato e marca temporale e' un'altra cosa e
+serve un certificato di firma. Questa e' una firma grafica:
+vale come una firma su carta scansionata, che e' quello che si
+usa normalmente per accettare una proposta commerciale.
+Il contratto vero si firma poi con il contratto vero.
+
+
+SE SERVE LA STESSA PAGINA SU UN'ALTRA PROPOSTA
+  strumenti/aggiungi-pagina-firma.py
+Si lancia dalla cartella strumenti/ e prende in pasto un PDF
+qualsiasi, aggiungendo in coda la pagina della firma.
+Dentro si cambiano due cose:
+  - il nome del file in ingresso (riga con pymupdf.open)
+  - la lista "righe", che e' il riquadro CFARE NENSHKRUHET:
+    sono le cifre di quella proposta
+Tutto il resto (campi, caselle di firma, pie' di pagina) resta
+uguale.
