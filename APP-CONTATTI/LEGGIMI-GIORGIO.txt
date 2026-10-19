@@ -1,0 +1,134 @@
+CONTATTI NIPEC — il giro dei messaggi
+=====================================
+E' il Persefone tuo. Quello che hai dato ai centri dice alla titolare
+chi richiamare; questo dice a te a chi scrivere oggi, con quale
+messaggio gia' pronto, e tiene il conto di chi ha risposto.
+
+
+COSA FA DA SOLO
+  - prende i contatti come capita (incollati, da CSV, da file) e
+    riconosce da solo il numero in mezzo al resto della riga
+  - mette il prefisso giusto: 39 per l'Italia, 355 per l'Albania
+    (l'Italia lo zero lo tiene, l'Albania lo perde)
+  - scarta i doppioni
+  - decide ogni giorno CHI scrivere e CON QUALE dei tre messaggi
+  - scrive il messaggio con dentro il nome di quella persona
+  - apre WhatsApp col testo gia' pronto
+  - segna da solo che l'hai mandato, e la data
+  - fa partire il promemoria quando scadono i giorni di attesa
+  - smette da solo dopo il terzo messaggio
+  - ti fa il file della rubrica per il telefono
+
+QUELLO CHE RESTA A TE: premere invio. Un dito, una volta per contatto.
+Il perche' sta in fondo a questo foglio, al punto PERCHE' NON MANDA DA
+SOLO. Leggilo prima di chiedermi di toglierlo.
+
+
+PUBBLICARLA (una volta sola, due minuti)
+1. app.netlify.com -> Add new site -> Deploy manually
+2. Trascina LA CARTELLA "APP-CONTATTI", non i file singoli
+   (oppure il file APP-CONTATTI.zip)
+3. Site configuration -> Change site name -> es. contatti-nipec
+4. Apri il link, poi installa l'icona: su Android compare "Installa",
+   su iPhone Condividi -> Aggiungi alla schermata Home, su PC l'icona
+   nella barra degli indirizzi.
+
+Mettila sul PC. Mille contatti si lavorano meglio con la tastiera, e
+WhatsApp Web si apre nella stessa finestra.
+
+
+I CONTATTI: COME ME LI PASSI
+Non serve niente di preciso. Vanno bene tutti e tre:
+  - li incolli e basta, una riga per persona, nell'ordine che hai
+      Maria Rossi; Centro Bellezza; Roma; 333 1234567
+      Giulia Bianchi, Estetica Giulia, Milano, +39 347 9876543
+      Francesca Neri — Latina — 3391112233
+  - un file .csv o .txt esportato dalla piattaforma
+  - una colonna di soli numeri
+Separatore: virgola, punto e virgola, tab o trattino lungo. Il numero
+lo trovo io ovunque stia nella riga.
+
+Premi sempre prima "Guarda cosa ho capito": ti mostro i primi dieci.
+Se i nomi sono finiti nella colonna sbagliata, sistemi l'ordine e
+rifai. Non importi mille righe storte.
+
+ALBANIA: si importa a parte, scegliendo Albania nella tendina. I
+contatti albanesi ricevono i messaggi in albanese, da soli.
+
+
+IL RITMO — LA COSA PIU' IMPORTANTE
+Di serie: 25 al giorno. Mille contatti si finiscono in sei settimane.
+
+Non alzarlo per finire prima. WhatsApp non guarda se i messaggi li
+mandi a mano: guarda quanti ne partono dal tuo numero verso gente che
+non ti ha in rubrica, e quanto si somigliano fra loro. Sopra i
+quaranta al giorno il blocco arriva. E quando arriva non perdi una
+campagna: perdi il 351 846 6025, che e' il numero su cui ti chiamano i
+clienti, sta sul sito, nei contratti e in tutte le inserzioni.
+
+Sei settimane di pazienza contro il numero dell'azienda. Non e' una
+scelta difficile.
+
+Due cose che abbassano ancora il rischio, ed e' per questo che ci sono:
+  - la rubrica .vcf: un messaggio verso un contatto salvato pesa meno
+    di uno verso uno sconosciuto. Scaricala e aprila sul telefono
+    PRIMA di cominciare il giro.
+  - il secondo messaggio che dice "dimmelo e non ti scrivo piu'".
+    Chi risponde cosi' non ti segnala. Chi non ha via d'uscita, si'.
+
+
+I TRE MESSAGGI
+  1. Il primo chiede solo una risposta. Non vende.
+  2. Il promemoria parte dopo 5 giorni di silenzio e offre la via
+     d'uscita.
+  3. L'ultimo chiude e saluta. Dopo quello, quella persona non viene
+     piu' scritta mai.
+Li cambi tutti e sei (tre italiani, tre albanesi) nella scheda
+Messaggi. Dentro al testo {nome}, {centro} e {citta} si riempiono da
+soli.
+
+Quando uno risponde, premi "Ha risposto": esce dalla coda e non
+riceve piu' promemoria. E' l'unica cosa che devi ricordarti di fare.
+
+
+I DATI
+Stanno solo dentro il browser di quel dispositivo. Nessun account,
+nessuna password, nessun server: non escono da li'.
+Impostazioni -> Copia di sicurezza (.json), una volta a settimana.
+Se cambi PC o telefono, quella copia e' l'unico modo per portarteli.
+
+
+PERCHE' NON MANDA DA SOLO
+Me l'hai chiesto, e la risposta onesta e' che si puo' fare, ma non
+con questo numero e non gratis.
+
+  VIA A — questa, che hai in mano adesso.
+  Costa zero, parte oggi, usa il tuo numero. Tu premi invio.
+
+  VIA B — WhatsApp Business Platform, quella ufficiale di Meta.
+  Manda davvero da sola, nessuno preme niente. Pero':
+    - vuole un numero SEPARATO, dedicato solo a quello. Quel numero
+      non si usa piu' con WhatsApp normale sul telefono.
+    - ogni testo va approvato da Meta prima (24 ore circa) e non si
+      puo' cambiare di volta in volta.
+    - si paga a messaggio: qualche centesimo l'uno, cioe' dell'ordine
+      di 50-100 euro per un giro sui mille. Il prezzo preciso lo
+      verifichiamo quando decidi.
+    - serve il consenso registrato di chi riceve.
+  Non e' una cosa che si accende in un pomeriggio: e' un account
+  Business verificato, un numero nuovo e i testi approvati.
+
+  LE VIE C — i programmi che "automatizzano WhatsApp" pilotando
+  WhatsApp Web. Quelli fanno bannare, e basta. Non li tocchiamo.
+
+Se vuoi la via B dimmelo e la prepariamo: il lavoro e' tutto fuori da
+questa app, e l'app resta comunque utile per tenere il conto.
+Intanto la via A gira da stasera.
+
+
+AGGIORNARE L'APP
+Modifichi index.html, POI apri sw.js e cambi il numero di VERSIONE
+("contatti-nipec-1" -> "contatti-nipec-2"). Senza quel cambio i
+dispositivi gia' installati continuano a vedere la versione vecchia.
+
+Assistenza 351 846 6025
