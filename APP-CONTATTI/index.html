@@ -167,13 +167,13 @@ const OGGI = () => new Date().toISOString().slice(0,10);
 
 const MODELLI_INIZIALI = [
   { id:'it1', paese:'IT', passo:1, nome:'Primo messaggio',
-    testo:"Ciao {nome}, sono Giorgio di NIPEC.\n\nTi scrivo perché abbiamo cambiato il modo di dare le macchine: noleggio a 500 euro al mese, zero anticipo, zero cauzione, nessun vincolo di durata.\n\nTe la porto il primo del mese, me la paghi il trenta: trenta giorni per lavorarci prima di tirare fuori un euro.\n\nTi interessa che ti racconti come funziona?" },
+    testo:"Ciao {nome}, sono Giorgio di NIPEC.\n\nTi scrivo perché abbiamo ampliato il modo di dare le macchine con il *NOLEGGIO*.\n\n*LA FORMULA*\n• 500 euro al mese\n• zero anticipo\n• zero cauzione\n• nessun vincolo di durata\n\nTe la porto il primo del mese, me la paghi il trenta: trenta giorni per lavorarci prima di tirare fuori un euro.\n\n*VALIDO PER*\n• *LASER ARES* — 10 diodi, con IA\n• *AFRODITE SHAPE* — il multimanipolo per il dimagrimento\n\nVisita www.nipecestetica.eu\n\nTi interessa che ti racconti come funziona?" },
   { id:'it2', paese:'IT', passo:2, nome:'Promemoria',
     testo:"Ciao {nome}, ti avevo scritto per il noleggio a 500 al mese.\n\nNiente di urgente. Se in questo periodo non è il momento dimmelo pure e non ti scrivo più.\n\nSe invece vuoi capire, ti mando la scheda tecnica e il contratto: li leggi con calma, prima di parlare di soldi." },
   { id:'it3', paese:'IT', passo:3, nome:'Ultima',
     testo:"Ciao {nome}, ultima volta che ti disturbo.\n\nSe un domani ti serve una macchina — laser, corpo o viso — sai dove trovarmi: 351 846 6025.\n\nBuon lavoro." },
   { id:'al1', paese:'AL', passo:1, nome:'Mesazhi i parë',
-    testo:"Përshëndetje {nome}, jam nga NIPEC.\n\nTani pajisjet i japim me qira: 50.000 lekë në muaj, pa paradhënie, pa garanci, pa kontratë afati.\n\nTa sjell më 1 të muajit, ma paguan më 30: tridhjetë ditë punë para se të nxjerrësh një lek.\n\nTë intereson të ta tregoj si funksionon?" },
+    testo:"Përshëndetje {nome}, jam Giorgio nga NIPEC.\n\nTë shkruaj sepse kemi zgjeruar mënyrën si i japim pajisjet, me *QIRANË*.\n\n*FORMULA*\n• 50.000 lekë në muaj\n• pa paradhënie\n• pa garanci\n• pa kontratë afati\n\nTa sjell më 1 të muajit, ma paguan më 30: tridhjetë ditë punë para se të nxjerrësh një lek.\n\n*VLEN PËR*\n• *LASER ARES* — 10 dioda, me IA\n• *AFRODITE SHAPE* — multi-manipuli për hollim\n\nTë intereson të ta tregoj si funksionon?" },
   { id:'al2', paese:'AL', passo:2, nome:'Kujtesë',
     testo:"Përshëndetje {nome}, të kisha shkruar për qiranë 50.000 lekë në muaj.\n\nAsgjë urgjente. Nëse tani nuk është momenti, ma thuaj dhe nuk të shkruaj më.\n\nNëse do të kuptosh, të dërgoj skedën teknike dhe kontratën, në shqip: i lexon me qetësi, para se të flasim për para." },
   { id:'al3', paese:'AL', passo:3, nome:'E fundit',
@@ -454,7 +454,10 @@ function vMessaggi(){
         <label class="campo"><span>${m.passo} · ${esc(m.nome)}</span>
         <textarea class="inp" data-modello="${m.id}">${esc(m.testo)}</textarea></label>`).join('')}
     </div>`).join('') +
-  `<button class="btn primario" data-azione="salva-modelli">Salva i messaggi</button>`;
+  `<div class="fila"><button class="btn primario" data-azione="salva-modelli">Salva i messaggi</button>
+     <button class="btn" data-azione="rimetti-modelli">Rimetti quelli di serie</button></div>
+   <p class="tenue" style="margin-top:.5rem">«Rimetti quelli di serie» ributta dentro i sei messaggi aggiornati e
+     cancella le tue modifiche. Serve quando li cambiamo insieme e tu hai già l'app installata.</p>`;
 }
 
 /* ---------- IMPORTA ---------- */
@@ -632,6 +635,11 @@ document.addEventListener('click', e => {
   const a = t.dataset.azione;
   if(a === 'treno'){ S.cfg.treno = !S.cfg.treno; salva(); disegna(); return; }
   if(a && a.startsWith('salta|')){ SALTATI.add(a.split('|')[1]); disegna(); return; }
+  if(a === 'rimetti-modelli'){
+    if(!confirm('Rimettere i sei messaggi di serie? Quello che hai scritto tu viene sostituito.')) return;
+    S.modelli = JSON.parse(JSON.stringify(MODELLI_INIZIALI)); salva(); disegna(); brindisi('Messaggi rimessi');
+    return;
+  }
   if(a === 'salva-modelli'){
     document.querySelectorAll('[data-modello]').forEach(ta => {
       const m = S.modelli.find(x => x.id === ta.dataset.modello); if(m) m.testo = ta.value;
