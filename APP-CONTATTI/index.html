@@ -186,7 +186,7 @@ const CLASSE = {'nuovo':'s-nuovo','inviato':'s-inviato','risposto':'s-risposto',
 
 function statoIniziale(){
   return { contatti:[], modelli:JSON.parse(JSON.stringify(MODELLI_INIZIALI)),
-    cfg:{ alGiorno:25, attesa1:5, attesa2:7, scheda:'oggi', tema:'auto' },
+    cfg:{ alGiorno:25, attesa1:5, attesa2:7, scheda:'oggi', tema:'auto', apertura:'web', treno:false },
     registro:{} };
 }
 let S = carica();
@@ -221,6 +221,22 @@ function numeroBello(n){
   if(n.startsWith('355')) return '+355 ' + n.slice(3).replace(/(\d{2})(\d{3})(\d+)/,'$1 $2 $3');
   if(n.startsWith('39'))  return '+39 '  + n.slice(2).replace(/(\d{3})(\d{3})(\d+)/,'$1 $2 $3');
   return '+' + n;
+}
+
+/* Il collegamento a WhatsApp. Due strade:
+   'web' -> wa.me, che apre WhatsApp Web o l'app del telefono
+   'app' -> whatsapp://, che apre direttamente WhatsApp installato sul PC
+   In tutti e due i casi la finestra e' SEMPRE LA STESSA: si chiama 'nipec-wa'
+   e viene riusata, cosi' non si accumulano venticinque schede. */
+function linkWA(c, testo){
+  const t = encodeURIComponent(testo);
+  return S.cfg.apertura === 'app'
+    ? 'whatsapp://send?phone=' + c.numero + '&text=' + t
+    : 'https://wa.me/' + c.numero + '?text=' + t;
+}
+function apriWA(href){
+  if(S.cfg.apertura === 'app'){ location.href = href; return; }   // il protocollo lo gestisce il sistema
+  window.open(href, 'nipec-wa');                                   // niente noopener: serve a riusare la finestra
 }
 
 function componi(testo, c){
@@ -331,14 +347,32 @@ function vOggi(){
   if(!coda.length) return h + `<div class="vuoto"><b>Oggi non c'è nessuno da scrivere.</b>
     I promemoria partono da soli quando scadono i giorni di attesa.</div>`;
 
+  h += `<div class="fila" style="margin-bottom:.8rem">
+    <button class="btn ${S.cfg.treno?'primario':''}" data-azione="treno">
+      ${S.cfg.treno?'&#9632; Esci dal modo treno':'&#9654; Modo treno — uno alla volta, con la tastiera'}</button></div>`;
+
+  const liberi = coda.filter(({c}) => !SALTATI.has(c.id));
+  if(!liberi.length) return h + `<div class="vuoto"><b>Per oggi li hai passati tutti.</b>
+    Quelli che hai saltato tornano se ricarichi la pagina.</div>`;
+
+  if(S.cfg.treno){
+    const {c,m} = liberi[0];
+    h += `<div class="avviso verde" style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+      <b>Spazio</b> apre WhatsApp col messaggio pronto · <b>R</b> ha risposto ·
+      <b>N</b> non interessato · <b>S</b> salta · poi <b>Alt+Tab</b> per tornare qui.
+      <span style="margin-left:auto">ne restano ${liberi.length}</span></div>`;
+    h += schedaGiro(c, m, true);
+    return h;
+  }
   h += `<p class="tenue" style="margin-bottom:.7rem">Si apre, si rilegge, si manda. Il messaggio è già scritto:
      cambialo pure prima di premere invio, se quella persona merita una riga sua.</p>`;
-  h += coda.map(({c,m}) => schedaGiro(c,m)).join('');
+  h += liberi.map(({c,m}) => schedaGiro(c,m)).join('');
   return h;
 }
-function schedaGiro(c,m){
+const SALTATI = new Set();   // saltati per oggi, non si salvano: domani tornano
+function schedaGiro(c,m,grande){
   const testo = componi(m.testo, c);
-  const url = 'https://wa.me/' + c.numero + '?text=' + encodeURIComponent(testo);
+  const url = linkWA(c, testo);
   const quando = c.ultimoInvio ? `ultimo messaggio ${giorniDa(c.ultimoInvio)} giorni fa` : 'mai scritto';
   return `<div class="giro">
     <div class="capo">
@@ -353,9 +387,10 @@ function schedaGiro(c,m){
     </div>
     <div class="testo">${esc(testo)}</div>
     <div class="azioni">
-      <a class="btn wa" href="${url}" target="_blank" rel="noopener" data-manda="${c.id}">Apri WhatsApp e manda</a>
-      <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto</button>
-      <button class="btn piccolo" data-stato="non interessato|${c.id}">Non interessato</button>
+      <a class="btn wa" href="${url}" data-manda="${c.id}"${grande?' style="flex:1 1 100%;font-size:1.1rem;padding:.9rem"':''}>Apri in WhatsApp${grande?' &nbsp;<b style="opacity:.75;font-weight:600">spazio</b>':''}</a>
+      ${grande?`<button class="btn piccolo" data-azione="salta|${c.id}">Salta &nbsp;<b style="opacity:.6">s</b></button>`:''}
+      <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto${grande?' <b style="opacity:.6">r</b>':''}</button>
+      <button class="btn piccolo" data-stato="non interessato|${c.id}">Non interessato${grande?' <b style="opacity:.6">n</b>':''}</button>
       <button class="btn piccolo" data-stato="numero errato|${c.id}">Numero errato</button>
       <button class="btn piccolo pericolo" data-stato="non disturbare|${c.id}">Non scrivere più</button>
     </div></div>`;
@@ -482,7 +517,9 @@ function leggiGrezzo(testo, paese){
       const resto = pezzi[iNum].replace(/[\d+][\d\s().\-]{7,}/,'').replace(/[–—;,]+/g,' ').trim();
       if(resto) altri = [resto];
     }
-    fuori.push({ nome:altri[0]||'', centro:altri[1]||'', citta:altri[2]||'', numero:num, paese });
+    const locale = String(pezzi[iNum]||'').replace(/[^\d]/g,'');
+    const dubbio = paese === 'IT' && /^06[6-9]\d{7}$/.test(locale);
+    fuori.push({ nome:altri[0]||'', centro:altri[1]||'', citta:altri[2]||'', numero:num, paese, dubbio });
   });
   return fuori.filter(x => x.numero && x.numero.length >= 10);
 }
@@ -509,6 +546,14 @@ function vImpostazioni(){
     ${q>40?`<div class="avviso rosso"><b>${q} al giorno è troppo.</b> Sopra i quaranta verso numeri nuovi
       il blocco arriva, e quando arriva è il tuo numero di lavoro che si ferma. Venticinque è il passo giusto:
       mille contatti in sei settimane, senza rischiare niente.</div>`:''}
+    <label class="campo"><span>Come si apre WhatsApp</span>
+      <select class="inp" id="cfgApertura">
+        <option value="web" ${S.cfg.apertura!=='app'?'selected':''}>WhatsApp Web / app del telefono — va sempre</option>
+        <option value="app" ${S.cfg.apertura==='app'?'selected':''}>WhatsApp installato sul computer — più diretto</option>
+      </select></label>
+    <p class="tenue" style="margin:-.3rem 0 .8rem">Sul PC, se hai WhatsApp installato, la seconda scelta apre
+      direttamente il programma col messaggio già scritto, senza passare dal browser. Se non succede niente
+      quando premi, vuol dire che su quel computer WhatsApp non c'è: rimetti la prima.</p>
     <button class="btn primario" data-azione="salva-cfg">Salva</button>
   </div>
 
@@ -576,10 +621,17 @@ document.addEventListener('click', e => {
   const t = e.target.closest('[data-scheda],[data-manda],[data-stato],[data-azione],[data-apri]');
   if(!t) return;
   if(t.dataset.scheda){ S.cfg.scheda = t.dataset.scheda; salva(); disegna(); return; }
-  if(t.dataset.manda){ setTimeout(()=>segnaInviato(t.dataset.manda), 400); return; }   // il link parte lo stesso
+  if(t.dataset.manda){
+    e.preventDefault();
+    apriWA(t.getAttribute('href'));
+    segnaInviato(t.dataset.manda);     // segna, e la coda scorre da sola al prossimo
+    return;
+  }
   if(t.dataset.stato){ const [s,cid] = t.dataset.stato.split('|'); cambiaStato(cid,s); return; }
   if(t.dataset.apri){ apriContatto(t.dataset.apri); return; }
   const a = t.dataset.azione;
+  if(a === 'treno'){ S.cfg.treno = !S.cfg.treno; salva(); disegna(); return; }
+  if(a && a.startsWith('salta|')){ SALTATI.add(a.split('|')[1]); disegna(); return; }
   if(a === 'salva-modelli'){
     document.querySelectorAll('[data-modello]').forEach(ta => {
       const m = S.modelli.find(x => x.id === ta.dataset.modello); if(m) m.testo = ta.value;
@@ -591,6 +643,7 @@ document.addEventListener('click', e => {
     S.cfg.attesa1  = Math.max(2, parseInt(document.getElementById('cfgA1').value)||5);
     S.cfg.attesa2  = Math.max(2, parseInt(document.getElementById('cfgA2').value)||7);
     S.cfg.tema     = document.getElementById('cfgTema').value;
+    S.cfg.apertura = document.getElementById('cfgApertura').value;
     applicaTema(); salva(); disegna(); brindisi('Salvato'); return;
   }
   if(a === 'anteprima' || a === 'importa'){
@@ -599,10 +652,17 @@ document.addEventListener('click', e => {
       document.getElementById('anteprima').innerHTML = !righe.length
         ? `<div class="avviso rosso">Non ho trovato nessun numero. Serve almeno otto cifre per riga.</div>`
         : `<div class="avviso verde"><b>${righe.length} contatti riconosciuti.</b> Questi sono i primi dieci:
-            se i nomi sono finiti nella colonna sbagliata, sistema l'ordine e riprova.</div>
+            se i nomi sono finiti nella colonna sbagliata, sistema l'ordine e riprova.</div>` +
+          (righe.filter(r=>r.dubbio).length ? `<div class="avviso giallo"><b>Attenzione:
+            ${righe.filter(r=>r.dubbio).length === 1 ? 'un numero comincia' :
+              righe.filter(r=>r.dubbio).length + ' numeri cominciano'} per 06 e ${
+              righe.filter(r=>r.dubbio).length === 1 ? 'ha' : 'hanno'} dieci cifre.</b>
+            In Albania sono cellulari, in Italia sono fissi di Roma. Adesso la tendina dice Italia, quindi
+            diventano +39. Se quella lista è albanese, cambia la tendina e rifai il controllo.</div>` : '') +
+          `
           <table><thead><tr><th>Nome</th><th>Centro</th><th>Città</th><th>Numero</th></tr></thead><tbody>
           ${righe.slice(0,10).map(r=>`<tr><td>${esc(r.nome)}</td><td>${esc(r.centro)}</td>
-            <td>${esc(r.citta)}</td><td>${esc(numeroBello(r.numero))}</td></tr>`).join('')}</tbody></table>`;
+            <td>${esc(r.citta)}</td><td${r.dubbio?' style="color:var(--avviso);font-weight:700"':''}>${esc(numeroBello(r.numero))}${r.dubbio?' ?':''}</td></tr>`).join('')}</tbody></table>`;
       return;
     }
     importa(righe, document.getElementById('doppioni').value); return;
@@ -686,6 +746,25 @@ document.addEventListener('change', e => {
       }catch(err){ brindisi('Il file non è una copia valida'); } };
     l.readAsText(f, 'utf-8');
   }
+});
+
+/* La tastiera, solo nel modo treno: cosi' non si cerca mai un pulsante col mouse */
+document.addEventListener('keydown', e => {
+  if(!S.cfg.treno || S.cfg.scheda !== 'oggi') return;
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName||'')) || document.querySelector('dialog[open]')) return;
+  const prima = codaDiOggi().filter(({c}) => !SALTATI.has(c.id))[0];
+  if(!prima) return;
+  const k = e.key.toLowerCase();
+  if(e.key === ' ' || e.key === 'Enter'){
+    e.preventDefault();
+    const a = document.querySelector('.giro a.btn.wa');
+    if(a){ apriWA(a.getAttribute('href')); segnaInviato(prima.c.id); }
+    return;
+  }
+  if(k === 'r'){ e.preventDefault(); cambiaStato(prima.c.id, 'risposto'); return; }
+  if(k === 'n'){ e.preventDefault(); cambiaStato(prima.c.id, 'non interessato'); return; }
+  if(k === 's'){ e.preventDefault(); SALTATI.add(prima.c.id); disegna(); return; }
 });
 
 function applicaTema(){
