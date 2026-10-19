@@ -252,6 +252,23 @@ function apriWA(href){
   window.open(href, 'nipec-wa');                                   // niente noopener: serve a riusare la finestra
 }
 
+/* WhatsApp non ha nessun modo pubblico per dire «questo numero e' registrato».
+   Quello che si puo' fare — e che serve su una lista di mille — e' riconoscere i
+   numeri su cui WhatsApp NON puo' esserci: i fissi e quelli storti.
+   Cellulari: Italia 3xx + 7 o 8 cifre · Albania 6[6-9] + 7 cifre. */
+function sembraCellulare(n){
+  n = String(n||'');
+  if(n.startsWith('39'))  return /^393\d{8,9}$/.test(n);
+  if(n.startsWith('355')) return /^3556[6-9]\d{7}$/.test(n);
+  return n.length >= 11;   // altro paese: non so dire, lascio passare
+}
+function perche(n){
+  n = String(n||'');
+  if(n.startsWith('39')  && /^390/.test(n)) return 'fisso italiano';
+  if(n.startsWith('355') && /^3550?[2-5]/.test(n)) return 'fisso albanese';
+  return 'numero strano';
+}
+
 function componi(testo, c){
   const nome = (c.nome||'').trim().split(/\s+/)[0] || (c.centro||'').trim() || '';
   return String(testo||'')
@@ -392,6 +409,8 @@ function schedaGiro(c,m,grande){
       <div style="flex:1 1 14rem">
         <div class="nome">${esc(c.nome||c.centro||'')||'<span style=\'color:var(--avviso)\'>senza nome</span>'}</div>
         <div class="meta">${esc([c.centro&&c.centro!==c.nome?c.centro:'', c.citta, numeroBello(c.numero)].filter(Boolean).join(' · '))}</div>
+        ${sembraCellulare(c.numero)?'':`<div class="meta" style="color:var(--allerta);font-weight:700;margin-top:.15rem">
+          Su WhatsApp qui non c'è nessuno: è un ${perche(c.numero)}. Chiamalo, non scrivergli.</div>`}
       </div>
       <div style="text-align:right">
         <span class="stato ${CLASSE[c.stato]||'s-nuovo'}">${esc(c.stato||'nuovo')}</span>
@@ -443,7 +462,7 @@ function agganciaRubrica(){
       ${l.map(c=>`<tr>
         <td><b>${esc(c.nome||'—')}</b></td>
         <td class="tenue">${esc([c.centro,c.citta].filter(Boolean).join(' · ')||'—')}</td>
-        <td style="white-space:nowrap">${esc(numeroBello(c.numero))}</td>
+        <td style="white-space:nowrap"${sembraCellulare(c.numero)?'':' style="color:var(--allerta)"'}>${esc(numeroBello(c.numero))}${sembraCellulare(c.numero)?'':' <b title="non è un cellulare">✕</b>'}</td>
         <td><span class="stato ${CLASSE[c.stato]||'s-nuovo'}">${esc(c.stato||'nuovo')}</span></td>
         <td style="text-align:center">${c.invii||0}</td>
         <td style="text-align:right"><button class="btn piccolo" data-apri="${c.id}">apri</button></td>
@@ -679,6 +698,10 @@ document.addEventListener('click', e => {
         ? `<div class="avviso rosso">Non ho trovato nessun numero. Serve almeno otto cifre per riga.</div>`
         : `<div class="avviso verde"><b>${righe.length} contatti riconosciuti.</b> Questi sono i primi dieci:
             se i nomi sono finiti nella colonna sbagliata, sistema l'ordine e riprova.</div>` +
+          (righe.filter(r=>!sembraCellulare(r.numero)).length ? `<div class="avviso rosso"><b>${
+            righe.filter(r=>!sembraCellulare(r.numero)).length} non sono cellulari.</b>
+            Sono fissi o numeri storti: su WhatsApp non ci sarà nessuno. Li importo lo stesso e te li segno
+            in rosso nella coda, così quelli li chiami al telefono invece di sprecarci un messaggio.</div>` : '') +
           (righe.filter(r=>r.dubbio).length ? `<div class="avviso giallo"><b>Attenzione:
             ${righe.filter(r=>r.dubbio).length === 1 ? 'un numero comincia' :
               righe.filter(r=>r.dubbio).length + ' numeri cominciano'} per 06 e ${
