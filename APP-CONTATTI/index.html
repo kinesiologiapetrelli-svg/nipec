@@ -186,7 +186,7 @@ const CLASSE = {'nuovo':'s-nuovo','inviato':'s-inviato','risposto':'s-risposto',
 
 function statoIniziale(){
   return { contatti:[], modelli:JSON.parse(JSON.stringify(MODELLI_INIZIALI)),
-    cfg:{ alGiorno:25, attesa1:5, attesa2:7, scheda:'oggi', tema:'auto', apertura:'web', treno:false },
+    cfg:{ alGiorno:25, attesa1:5, attesa2:7, scheda:'oggi', tema:'auto', apertura:'auto', treno:false },
     registro:{} };
 }
 let S = carica();
@@ -223,19 +223,32 @@ function numeroBello(n){
   return '+' + n;
 }
 
-/* Il collegamento a WhatsApp. Due strade:
-   'web' -> wa.me, che apre WhatsApp Web o l'app del telefono
-   'app' -> whatsapp://, che apre direttamente WhatsApp installato sul PC
-   In tutti e due i casi la finestra e' SEMPRE LA STESSA: si chiama 'nipec-wa'
-   e viene riusata, cosi' non si accumulano venticinque schede. */
+/* Il collegamento a WhatsApp.
+   Attenzione a wa.me: sul COMPUTER non apre WhatsApp, apre una pagina di
+   passaggio di WhatsApp con il pulsante «Continua sulla chat». Sul telefono
+   invece va benissimo. Quindi:
+     'computer' -> whatsapp://  apre il programma WhatsApp installato sul PC
+     'web'      -> web.whatsapp.com/send  apre WhatsApp Web dritto nella chat
+     'telefono' -> wa.me  la strada universale, giusta sul telefono
+     'auto'     -> telefono se sei su un telefono, WhatsApp Web se sei su un PC
+   La finestra e' SEMPRE LA STESSA: si chiama 'nipec-wa' e viene riusata, cosi'
+   il tuo WhatsApp resta aperto e cambia solo la conversazione. */
+const SUL_TELEFONO = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '');
+function comeApro(){
+  const a = S.cfg.apertura || 'auto';
+  if(a !== 'auto') return a;
+  return SUL_TELEFONO ? 'telefono' : 'web';
+}
 function linkWA(c, testo){
-  const t = encodeURIComponent(testo);
-  return S.cfg.apertura === 'app'
-    ? 'whatsapp://send?phone=' + c.numero + '&text=' + t
-    : 'https://wa.me/' + c.numero + '?text=' + t;
+  const t = encodeURIComponent(testo), n = c.numero;
+  switch(comeApro()){
+    case 'computer': return 'whatsapp://send?phone=' + n + '&text=' + t;
+    case 'telefono': return 'https://wa.me/' + n + '?text=' + t;
+    default:         return 'https://web.whatsapp.com/send?phone=' + n + '&text=' + t;
+  }
 }
 function apriWA(href){
-  if(S.cfg.apertura === 'app'){ location.href = href; return; }   // il protocollo lo gestisce il sistema
+  if(comeApro() === 'computer'){ location.href = href; return; }  // il protocollo lo gestisce il sistema
   window.open(href, 'nipec-wa');                                   // niente noopener: serve a riusare la finestra
 }
 
@@ -549,14 +562,19 @@ function vImpostazioni(){
     ${q>40?`<div class="avviso rosso"><b>${q} al giorno è troppo.</b> Sopra i quaranta verso numeri nuovi
       il blocco arriva, e quando arriva è il tuo numero di lavoro che si ferma. Venticinque è il passo giusto:
       mille contatti in sei settimane, senza rischiare niente.</div>`:''}
-    <label class="campo"><span>Come si apre WhatsApp</span>
+    <label class="campo"><span>Dove si apre il messaggio</span>
       <select class="inp" id="cfgApertura">
-        <option value="web" ${S.cfg.apertura!=='app'?'selected':''}>WhatsApp Web / app del telefono — va sempre</option>
-        <option value="app" ${S.cfg.apertura==='app'?'selected':''}>WhatsApp installato sul computer — più diretto</option>
+        ${[['auto','Decidi tu (consigliato) — WhatsApp Web sul PC, l\'app sul telefono'],
+           ['computer','Il programma WhatsApp installato sul computer'],
+           ['web','WhatsApp Web, nel browser'],
+           ['telefono','wa.me — solo se sei sul telefono']]
+          .map(([v,e])=>`<option value="${v}" ${(S.cfg.apertura||'auto')===v?'selected':''}>${e}</option>`).join('')}
       </select></label>
-    <p class="tenue" style="margin:-.3rem 0 .8rem">Sul PC, se hai WhatsApp installato, la seconda scelta apre
-      direttamente il programma col messaggio già scritto, senza passare dal browser. Se non succede niente
-      quando premi, vuol dire che su quel computer WhatsApp non c'è: rimetti la prima.</p>
+    <div class="avviso giallo" style="margin:-.2rem 0 .8rem"><b>Se ti si apre una pagina con scritto
+      «Continua sulla chat», è wa.me.</b> Su computer wa.me non apre WhatsApp: apre una pagina di passaggio.
+      Scegli <b>il programma WhatsApp</b> se ce l'hai installato sul PC — è quello che ti fa vedere il messaggio
+      dentro il tuo WhatsApp, nella conversazione giusta. Se non ce l'hai, scegli <b>WhatsApp Web</b>: la prima
+      volta ti chiede il codice QR, poi resta aperto e cambia solo la chat.</div>
     <button class="btn primario" data-azione="salva-cfg">Salva</button>
   </div>
 
