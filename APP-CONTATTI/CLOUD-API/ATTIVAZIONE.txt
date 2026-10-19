@@ -1,0 +1,94 @@
+MANDARE DA SOLI — attivazione della Cloud API di Meta
+=====================================================
+Ordine delle cose. Non si salta avanti: il numero si tocca
+per ULTIMO, se no resta senza WhatsApp per giorni e basta.
+
+
+QUELLO CHE ABBIAMO GIA'
+  Societa' (Albania)  PHD SYSTEM
+  NIPT / NUIS         M27101203D        (attiva fino al 19/08/2032)
+  Sede                Rruga Donika Kastrioti 3, Kisha Apostolike e Re,
+                      Hyrja 2, Kati 1, Ap. 1, Nr. 1, Njesia Nr.5, Tirane
+  Certificato         Certifikate Regjistrimi, emesso 01/02/2023
+  Numero              +355 69 216 2138   (di Giorgio, oggi su WhatsApp)
+  Verifica            via SMS
+
+  Societa' (Italia)   PHD SYSTEM S.r.l.
+  P. IVA              04696530981
+  Sede                Via Rovetta 29, 25080 Padenghe sul Garda (BS)
+
+
+FASE 1 — META. Si fa per prima e non tocca il numero.
+  1.1  business.facebook.com, entra con l'account che possiede la
+       pagina «Nipec Estetica di Giorgio Petrelli».
+  1.2  Impostazioni azienda -> Informazioni sull'azienda.
+       Controlla che ci siano ragione sociale, indirizzo e NIPT.
+  1.3  Centro verifiche -> avvia la VERIFICA AZIENDALE.
+       Carica il Certifikate Regjistrimi. Nome e indirizzo sul
+       documento devono essere IDENTICI a quelli scritti in Meta:
+       se in Meta scrivi "PHD System Sh.p.k." e sul certificato c'e'
+       "PHD SYSTEM", allinea.
+       Tempi: da qualche ora a qualche giorno.
+  1.4  Crea un account WhatsApp Business dentro quell'azienda.
+
+  Finche' la 1.3 non e' approvata, NON si va avanti.
+
+
+FASE 2 — IL NUMERO. Solo a fase 1 finita.
+  2.1  PRIMA DI CANCELLARE: il canale.
+       Se su quel numero c'e' un canale WhatsApp e tu sei l'unico
+       amministratore, cancellando l'account il canale lo perdi con
+       tutti i follower. Aggiungi prima un altro amministratore da
+       un numero diverso (Uarda), e verifica che il canale resti.
+       Stessa cosa per i gruppi dove sei l'unico amministratore.
+  2.2  Salva quello che ti serve: le chat di quel numero spariscono.
+  2.3  Cancella l'account WhatsApp su quel numero:
+         WhatsApp -> Impostazioni -> Account -> Elimina il mio account
+         -> scrivi il numero col prefisso +355 -> motivo -> conferma
+       Disinstallare l'app NON basta: il numero resterebbe registrato
+       e Meta lo rifiuterebbe.
+  2.4  In WhatsApp Manager aggiungi il numero e verificalo via SMS.
+  2.5  Nome visualizzato: va scritto NIPEC. Meta lo controlla. Se
+       chiede di giustificarlo, il collegamento e' nei contratti:
+       NIPEC e' il marchio dei dispositivi di PHD SYSTEM.
+
+  Da qui in poi quel numero non torna piu' su WhatsApp normale.
+
+
+FASE 3 — I TESTI
+  3.1  I messaggi vanno approvati da Meta prima di poterli mandare,
+       categoria MARKETING, con il nome come variabile {{1}}.
+       Li preparo io nel formato giusto: sono gia' scritti.
+  3.2  Approvazione: di solito poche ore, al massimo un giorno.
+  3.3  Una volta approvato, il testo NON si cambia piu': per
+       cambiarlo si apre un testo nuovo e si fa riapprovare.
+
+
+FASE 4 — IL MOTORE
+  4.1  Giorgio mi passa: ID del numero, ID dell'account WhatsApp
+       Business e il token permanente.
+       QUESTI NON VANNO SCRITTI IN CHAT NE' NEL REPOSITORY: il
+       repository e' pubblico. Si mettono direttamente nelle
+       proprieta' dello script, che le tiene nascoste.
+  4.2  Scrivo il motore su Google Apps Script — la stessa tecnologia
+       del Cruscotto. Manda, riceve le risposte, segna lo stato.
+  4.3  L'app diventa il quadro di comando: lista, coda, chi ha
+       risposto, cosa ha scritto.
+
+
+I CONTI
+  Marketing verso l'Italia: circa 0,08 dollari a messaggio.
+  Un giro sui 1005: 70-80 euro.
+  Dal 1 ottobre 2026 si paga anche la conversazione, non solo il
+  primo messaggio: per un giro completo con le risposte, metti in
+  conto un centinaio di euro.
+  Il listino vero si controlla in Meta quando l'account e' aperto.
+
+
+LA COSA ANCORA DA DECIDERE
+  Un numero +355 che scrive a centri estetici italiani e' un numero
+  estero: molti bloccano senza leggere, e Meta conta i blocchi per
+  decidere quanto puoi mandare. Per l'Albania quel numero e'
+  perfetto. Per l'Italia servirebbe un numero italiano: una SIM
+  ricaricabile da dieci euro basta, serve solo a ricevere un SMS.
+  Sullo stesso account Meta i numeri possono stare in due.
