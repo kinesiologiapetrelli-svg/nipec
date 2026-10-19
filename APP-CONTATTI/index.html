@@ -446,8 +446,8 @@ Egla Hoxha, Studio Egla, Tiranë, 069 212 9786"></textarea></label>
         </select></label>
     </div>
     <div class="fila">
-      <button class="btn primario" data-azione="anteprima">Guarda cosa ho capito</button>
-      <button class="btn" data-azione="importa">Importa davvero</button>
+      <button class="btn primario" data-azione="anteprima">1 &middot; Controlla</button>
+      <button class="btn" data-azione="importa">2 &middot; Importa</button>
     </div>
     <div id="anteprima" style="margin-top:.9rem"></div>
   </div>
@@ -598,7 +598,7 @@ document.addEventListener('click', e => {
     if(a === 'anteprima'){
       document.getElementById('anteprima').innerHTML = !righe.length
         ? `<div class="avviso rosso">Non ho trovato nessun numero. Serve almeno otto cifre per riga.</div>`
-        : `<div class="avviso verde"><b>${righe.length} contatti riconosciuti.</b> Controlla i primi dieci:
+        : `<div class="avviso verde"><b>${righe.length} contatti riconosciuti.</b> Questi sono i primi dieci:
             se i nomi sono finiti nella colonna sbagliata, sistema l'ordine e riprova.</div>
           <table><thead><tr><th>Nome</th><th>Centro</th><th>Città</th><th>Numero</th></tr></thead><tbody>
           ${righe.slice(0,10).map(r=>`<tr><td>${esc(r.nome)}</td><td>${esc(r.centro)}</td>
@@ -673,7 +673,7 @@ document.addEventListener('change', e => {
     const f = e.target.files[0]; if(!f) return;
     const l = new FileReader();
     l.onload = () => { document.getElementById('grezzo').value = l.result;
-      brindisi('Letto. Ora premi «Guarda cosa ho capito»'); };
+      brindisi('Letto. Ora premi «1 · Controlla»'); };
     l.readAsText(f, 'utf-8'); return;
   }
   if(e.target.id === 'ripristino'){
