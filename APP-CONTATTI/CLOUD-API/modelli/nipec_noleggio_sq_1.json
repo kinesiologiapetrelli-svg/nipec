@@ -1,0 +1,31 @@
+{
+  "name": "nipec_noleggio_sq_1",
+  "language": "sq",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Përshëndetje {{1}}, jam Giorgio nga NIPEC.\n\nTë shkruaj sepse kemi zgjeruar mënyrën si i japim pajisjet, me *QIRANË*.\n\n*FORMULA*\n• 50.000 lekë në muaj\n• pa paradhënie\n• pa garanci\n• pa kontratë afati\n\nTa sjell më 1 të muajit, ma paguan më 30: tridhjetë ditë punë para se të nxjerrësh një lek.\n\n*VLEN PËR*\n• *LASER ARES* — 10 dioda, me IA\n• *AFRODITE SHAPE* — multi-manipuli për hollim\n\nVizito www.nipecestetica.eu\n\nTë intereson të ta tregoj si funksionon?",
+      "example": {
+        "body_text": [
+          [
+            "Egla"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "QUICK_REPLY",
+          "text": "Po, më trego"
+        },
+        {
+          "type": "QUICK_REPLY",
+          "text": "Jo tani"
+        }
+      ]
+    }
+  ]
+}

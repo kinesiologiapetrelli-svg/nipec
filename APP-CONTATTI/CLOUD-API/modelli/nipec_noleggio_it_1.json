@@ -1,0 +1,31 @@
+{
+  "name": "nipec_noleggio_it_1",
+  "language": "it",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Ciao {{1}}, sono Giorgio di NIPEC.\n\nTi scrivo perché abbiamo ampliato il modo di dare le macchine con il *NOLEGGIO*.\n\n*LA FORMULA*\n• 500 euro al mese\n• zero anticipo\n• zero cauzione\n• nessun vincolo di durata\n\nTe la porto il primo del mese, me la paghi il trenta: trenta giorni per lavorarci prima di tirare fuori un euro.\n\n*VALIDO PER*\n• *LASER ARES* — 10 diodi, con IA\n• *AFRODITE SHAPE* — il multimanipolo per il dimagrimento\n\nVisita www.nipecestetica.eu\n\nTi interessa che ti racconti come funziona?",
+      "example": {
+        "body_text": [
+          [
+            "Maria"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "QUICK_REPLY",
+          "text": "Sì, raccontami"
+        },
+        {
+          "type": "QUICK_REPLY",
+          "text": "Non ora"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "nipec_noleggio_it_2",
+  "language": "it",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Ciao {{1}}, ti avevo scritto per il noleggio a 500 euro al mese.\n\nNiente di urgente. Se in questo periodo non è il momento dimmelo pure e non ti scrivo più.\n\nSe invece vuoi capire, ti mando la scheda tecnica e il contratto: li leggi con calma, prima di parlare di soldi.",
+      "example": {
+        "body_text": [
+          [
+            "Maria"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "QUICK_REPLY",
+          "text": "Mandami la scheda"
+        },
+        {
+          "type": "QUICK_REPLY",
+          "text": "Non mi interessa"
+        }
+      ]
+    }
+  ]
+}

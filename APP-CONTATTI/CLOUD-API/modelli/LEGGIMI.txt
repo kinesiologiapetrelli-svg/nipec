@@ -1,0 +1,47 @@
+I SEI TESTI DA FAR APPROVARE A META
+===================================
+Prima di poter mandare qualsiasi cosa, Meta deve approvare i testi.
+Non si manda un messaggio scritto li' per li': si manda un modello
+approvato, con dentro il nome della persona al posto di {{1}}.
+
+  nipec_noleggio_it_1   primo messaggio, italiano
+  nipec_noleggio_it_2   promemoria dopo 5 giorni
+  nipec_noleggio_it_3   l'ultimo, saluta e chiude
+  nipec_noleggio_sq_1   primo messaggio, albanese
+  nipec_noleggio_sq_2   promemoria
+  nipec_noleggio_sq_3   l'ultimo
+
+Sono gli stessi testi che hai gia' approvato nell'app: stessa
+formula, stesse due macchine, stesso rimando al sito.
+
+
+COSA HO AGGIUNTO, E PUOI DIRMI DI NO
+Sotto il primo messaggio ci sono due bottoni:
+      [ Si', raccontami ]   [ Non ora ]
+Servono a due cose. La prima: chi riceve risponde con un dito invece
+di scrivere, e rispondono molti di piu'. La seconda, che conta di
+piu': chi puo' dire «non ora» con un tocco NON ti segnala come spam.
+E Meta conta le segnalazioni per decidere quanti messaggi al giorno
+ti lascia mandare.
+
+Quando qualcuno preme «Non ora», il motore lo segna da solo come non
+interessato e non gli scrive mai piu'.
+
+Sul secondo messaggio i bottoni sono [Mandami la scheda] e
+[Non mi interessa]. Il terzo non ha bottoni: saluta e basta.
+
+Se li vuoi togliere, si tolgono. Ma li consiglio.
+
+
+COME SI CARICANO
+Quando l'account e' aperto, in WhatsApp Manager -> Modelli di
+messaggio -> Crea modello. Categoria MARKETING. Lingua italiano
+(oppure albanese). Poi si incolla il corpo dal file .json.
+Oppure li carico io in un colpo solo dallo script, quando ho il
+token: e' piu' veloce e non si sbaglia a copiare.
+
+Approvazione: di solito poche ore.
+
+ATTENZIONE: una volta approvato, il testo non si cambia piu'. Per
+cambiarlo si crea un modello nuovo e si rifa' approvare. Quindi
+rileggili adesso, non dopo.

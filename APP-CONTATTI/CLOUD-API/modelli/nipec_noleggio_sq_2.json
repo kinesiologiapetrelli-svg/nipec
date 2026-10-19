@@ -1,0 +1,31 @@
+{
+  "name": "nipec_noleggio_sq_2",
+  "language": "sq",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Përshëndetje {{1}}, të kisha shkruar për qiranë 50.000 lekë në muaj.\n\nAsgjë urgjente. Nëse tani nuk është momenti, ma thuaj dhe nuk të shkruaj më.\n\nNëse do të kuptosh, të dërgoj skedën teknike dhe kontratën, në shqip: i lexon me qetësi, para se të flasim për para.",
+      "example": {
+        "body_text": [
+          [
+            "Egla"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "QUICK_REPLY",
+          "text": "Më dërgo skedën"
+        },
+        {
+          "type": "QUICK_REPLY",
+          "text": "Nuk më intereson"
+        }
+      ]
+    }
+  ]
+}

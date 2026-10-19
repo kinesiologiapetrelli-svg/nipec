@@ -1,0 +1,18 @@
+{
+  "name": "nipec_noleggio_sq_3",
+  "language": "sq",
+  "category": "MARKETING",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Përshëndetje {{1}}, hera e fundit që të shqetësoj.\n\nNëse nesër të duhet një pajisje — lazer, trup ose fytyrë — e di ku të më gjesh: +355 69 212 9786.\n\nPunë të mbarë.",
+      "example": {
+        "body_text": [
+          [
+            "Egla"
+          ]
+        ]
+      }
+    }
+  ]
+}
