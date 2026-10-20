@@ -1,0 +1,73 @@
+IL GESTIONALE — adesso sta in git
+=================================
+
+  sorgente/      il codice. Qui dentro si modifica.
+  pubblica.py    prepara la cartella da caricare
+  pubblica/      quello che si trascina su Netlify (non sta in git)
+  .segreto       l'indirizzo dello script Google (non sta in git)
+  NIPEC-GESTIONALE-punto.md   il documento tecnico, la mappa
+
+
+PERCHE' L'INDIRIZZO DELLO SCRIPT NON STA NEL SORGENTE
+Questo repository e' PUBBLICO. L'indirizzo dello script Google e' la
+porta di tutta la contabilita': dentro il sorgente online si legge
+gia', ma metterlo anche qui lo renderebbe cercabile da chiunque cerchi
+su GitHub, che e' molto peggio.
+Quindi nel sorgente c'e' __INDIRIZZO_SCRIPT__ e l'indirizzo vero sta
+in .segreto, che git ignora. pubblica.py li rimette insieme.
+
+Se .segreto si perde, l'indirizzo si rilegge dal sorgente online.
+
+
+COME SI PUBBLICA
+
+  1.  python3 GESTIONALE/pubblica.py
+  2.  Trascina la CARTELLA pubblica/ su Netlify
+  3.  Sul dispositivo: ricarica DUE volte
+      (la prima prende il guscio nuovo, la seconda la versione nuova)
+
+Prima di toccare qualsiasi cosa: apri l'app, Impostazioni -> Esporta
+backup. I dati non stanno nel file HTML, ma un errore li puo' rendere
+illeggibili.
+
+
+LE REGOLE CHE NON SI ROMPONO  (dal documento, §9)
+ 1. Un campo nuovo va aggiunto in defState() E in normalize().
+ 2. S.v resta 2 finche' il formato e' compatibile.
+ 3. src non si tocca: e' l'unica cosa che rende reversibile
+    «segna pagato» / «annulla».
+ 4. cliReset() dopo ogni modifica a S.clienti.
+ 5. renameCli deve coprire tutti i posti dove compare un nome.
+ 6. A OGNI modifica, alza C in sw.js. Senza, i telefoni gia'
+    installati continuano a vedere la versione vecchia e non c'e'
+    modo di accorgersene da fuori.
+ 7. Niente dipendenze esterne.
+ 8. I nomi dei clienti passano sempre da ensureCli() o canon().
+
+
+LE QUATTRO PROVE, DA RIFARE OGNI VOLTA  (§10.6)
+ 1. Registra un'entrata con un cliente nuovo -> compare in anagrafica
+ 2. Segna pagato un canone in Scadenze -> nasce il movimento con src
+ 3. Annulla lo stesso pagamento -> il movimento sparisce
+ 4. Ricarica -> i dati ci sono e la pastiglia dice Online
+
+
+COSA E' STATO FATTO IL 20 OTTOBRE
+  §11.2  il repository: questo.
+  §11.1  parola d'ordine minimo 12 sulle parole nuove, avviso se corta
+  §11.5  causali dei noleggi riconosciute meglio + elenco di quelle
+         che restano fuori, in Magazzino
+  §11.4  il riquadro «Ricevi i dati dal PC» si nasconde se il
+         pacchetto non c'e'
+  piu' le tre del 17 ottobre mai pubblicate (voci fuori periodo,
+  avviso dispositivo condiviso, «da registrare»)
+
+RESTANO APERTE
+  §11.3  la riconciliazione automatica puo' leggere come canone un
+         incasso che non lo e', e non c'e' modo di smentirla.
+         E' la piu' insidiosa: vuole una scelta tua su come
+         l'interfaccia deve permettere di dire «questo non c'entra».
+  §11.6  cose morte: S.gen mai usato, thrNum con un map che non fa
+         niente, le categorie rinominate che lasciano indietro i
+         movimenti vecchi, i canoni 500/400 scritti nel codice.
+         Nessuna fa danno adesso.
