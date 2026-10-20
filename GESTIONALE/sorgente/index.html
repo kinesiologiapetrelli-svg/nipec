@@ -433,7 +433,7 @@ tr.del td{opacity:.45;text-decoration:line-through}
   <button class="btn sm primary" id="saveBtn">Salva</button>
   <button class="btn sm" id="exportBtn">Esporta backup</button>
   <button class="btn sm" id="importBtn">Importa</button>
-  <span class="note">I dati restano su questo dispositivo. Esporta un backup ogni settimana.</span>
+  <span class="note">I dati stanno nel database online e su questo dispositivo. Esporta un backup ogni mese: &egrave; la tua copia, indipendente da Google.</span>
   <span class="saved" id="savedTag">✓ Salvato</span>
 </div></div>
 <div class="toast" id="toast"></div>
@@ -805,7 +805,11 @@ function rPanoramica(){
       <div class="card"><div class="card-h"><h2>Ricorrente</h2><span class="eyebrow">${MESI[today.getMonth()]}</span></div><div class="card-b">
         <div class="grid g2"><div><div class="thr">Canoni attivi / mese</div><div style="font-size:22px;font-weight:700" class="num">${eur0(mrr)}</div></div>
         <div><div class="thr">Costi fissi / mese</div><div style="font-size:22px;font-weight:700" class="num">${eur0(fix)}</div></div></div>
-        <div class="thr" style="margin-top:10px">Copertura costi fissi: <b class="${mrr>=fix?'pos':'neg'}">${fix?pct(mrr/fix):'—'}</b></div></div></div>
+        <div class="thr" style="margin-top:10px">Copertura costi fissi: <b class="${mrr>=fix?'pos':'neg'}">${fix?pct(mrr/fix):'—'}</b></div>
+        ${(()=>{const sc=fuoriPeriodo(curM);if(!sc.length)return '';
+          const tu=sc.filter(r=>r.t==='U').reduce((a,r)=>a+r.imp,0),te=sc.filter(r=>r.t==='E').reduce((a,r)=>a+r.imp,0);
+          const q=[tu?eur0(tu)+' di costi fissi':'',te?eur0(te)+' di canoni':''].filter(Boolean).join(' e ');
+          return `<div class="thr" style="margin-top:8px;color:var(--s-out)"><b>${sc.length} ${sc.length===1?'voce':'voci'} fuori periodo</b>: ${q} ${sc.length===1?'non entra':'non entrano'} in questo conto, la data di fine &egrave; gi&agrave; passata. <a href="#" data-go="ricorrenti">Controlla i ricorrenti →</a></div>`})()}</div></div>
       <div class="card"><div class="card-h"><h2>Concentrazione clienti</h2></div><div class="card-b">
         <div style="display:flex;align-items:center;gap:12px"><div style="font-size:22px;font-weight:700" class="num">${pct(conc)}</div>${conc!=null?`<span class="st ${concSt}"><span class="dot"></span>${concSt==='g'?'Sano':concSt==='y'?'Attenzione':'Rischio'}</span>`:''}</div>
         <div class="thr" style="margin-top:4px">Peso dei primi 3 clienti sulle entrate. verde &lt;30 · giallo 30-50 · rosso &gt;50.</div></div></div>
@@ -981,13 +985,14 @@ function refreshLists(){
 
 /* ================= RICORRENTI ================= */
 function activeIn(r,ym){return r.attivo!==false&&r.dal<=ym&&(!r.al||r.al>=ym)}
+function fuoriPeriodo(ym){return S.ric.filter(r=>r.attivo!==false&&r.al&&r.al<ym&&monthsBetween(r.al,ym)<=3&&(S.ui.country==='ALL'||r.p===S.ui.country))}
 function isGenerated(r,ym){return S.mov.some(m=>m.src===r.id+'@'+ym)}
 function genMonth(ym){
   const [y,mo]=ym.split('-').map(Number); const last=new Date(y,mo,0).getDate(); let n=0;
   S.ric.filter(r=>r.t==='U'&&activeIn(r,ym)&&(S.ui.country==='ALL'||r.p===S.ui.country)&&!isGenerated(r,ym)).forEach(r=>{
     const g=Math.min(Math.max(1,parseInt(r.g)||1),last);
     S.mov.push({id:uid(),d:`${ym}-${pad(g)}`,p:r.p,t:r.t,c:r.c,cl:r.cl,mac:r.mac||'',imp:r.imp,sp:r.t==='E'?(r.sp||0):0,n:'Ricorrente',src:r.id+'@'+ym});n++;});
-  save();render();toast(n?`${n} movimenti generati per ${MESI[mo-1]}`:'Niente da generare');
+  save();render();toast(n?`${n} costi fissi registrati in prima nota per ${MESI[mo-1]}`:`Niente da registrare: i costi fissi di ${MESI[mo-1]} ci sono già`);
 }
 function rRicorrenti(){
   const curM=`${today.getFullYear()}-${pad(today.getMonth()+1)}`; const gm=S.ui.genMonth||curM;
@@ -997,7 +1002,7 @@ function rRicorrenti(){
     return `<div class="card" style="margin-bottom:16px"><div class="card-h"><h2>${t==='E'?'Canoni e rate in entrata':'Costi fissi mensili'}</h2><span class="eyebrow num">${eur0(tot)} / mese attivi</span></div>
     ${l.length?MOB()?ricCards(l,t,gm):`<div class="tbl-wrap"><table><thead><tr><th></th><th>Categoria</th><th>${t==='E'?'Cliente':'Voce'}</th><th>Macchina</th><th class="r">€ / mese</th>${t==='E'?'<th class="r">Spese</th>':''}<th>Periodo</th><th>Stato ${MS[+gm.slice(5)-1]}</th><th class="r">Attivo</th></tr></thead><tbody>
     ${l.map(r=>`<tr class="click" data-rc="${r.id}"><td>${flag(r.p)}</td><td>${esc(r.c)}</td><td><b>${esc(r.cl)}</b></td><td class="muted">${esc(r.mac||'—')}</td><td class="r num"><b>${eur(r.imp)}</b></td>${t==='E'?`<td class="r num muted">${r.sp?eur(r.sp):'—'}</td>`:''}<td class="muted" style="white-space:nowrap">${fmtYM(r.dal)} → ${r.al?fmtYM(r.al):'∞'}</td>
-      <td>${!activeIn(r,gm)?'<span class="st">fuori periodo</span>':r.t==='E'?stChip(payStateOf(r.cl,gm)||'da pagare'):isGenerated(r,gm)?'<span class="st g"><span class="dot"></span>registrato</span>':'<span class="st y"><span class="dot"></span>da generare</span>'}</td>
+      <td>${!activeIn(r,gm)?'<span class="st">fuori periodo</span>':r.t==='E'?stChip(payStateOf(r.cl,gm)||'da pagare'):isGenerated(r,gm)?'<span class="st g"><span class="dot"></span>registrato</span>':'<span class="st y"><span class="dot"></span>da registrare</span>'}</td>
       <td class="r"><label class="switch" data-stop><input type="checkbox" data-toggle="${r.id}" ${r.attivo!==false?'checked':''}></label></td></tr>`).join('')}
     </tbody></table></div>`:`<div class="empty"><b>${t==='E'?'Nessun canone':'Nessun costo fisso'}</b>${t==='E'?'Club 500, Club 400, noleggi mensili, vendite a rate.':'Commercialista, auto, collaboratori, magazzino, ammortamento.'}</div>`}</div>`};
   app.innerHTML=`
@@ -1006,7 +1011,12 @@ function rRicorrenti(){
   <div class="card" style="margin-bottom:16px"><div class="card-b" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
     <label class="field" style="flex-direction:row;align-items:center;gap:10px"><span>Costi fissi del mese</span><input class="inp" type="month" id="genM" value="${gm}" style="width:auto"></label>
     <button class="btn primary" data-gen="${gm}">Registra costi di ${MESI[+gm.slice(5)-1]}</button>
-    <span class="thr">I costi fissi entrano in prima nota con un clic, senza doppioni. I canoni si incassano dallo <a href="#" data-go="scadenze">Scadenziario</a>.</span></div></div>
+    <span class="thr">I costi fissi entrano in prima nota con un clic, senza doppioni. <b>Da registrare</b> vuol dire che il costo di quel mese non &egrave; ancora in prima nota; <b>registrato</b> che c'&egrave; gi&agrave;. I canoni si incassano dallo <a href="#" data-go="scadenze">Scadenziario</a>.</span></div></div>
+  ${(()=>{const sc=fuoriPeriodo(gm);if(!sc.length)return '';
+    return `<div class="card" style="margin-bottom:16px;border-left:3px solid var(--s-out)"><div class="card-h"><h2>Voci fuori periodo</h2><span class="eyebrow">non entrano nei conti di ${MESI[+gm.slice(5)-1]}</span></div><div class="card-b stack">
+    <p class="thr">Queste voci sono finite negli ultimi tre mesi: restano scritte, ma non pesano pi&ugrave; sulla copertura dei costi fissi e non vengono registrate nel mese. Se il costo c'&egrave; ancora, togli la data di fine; se &egrave; finito davvero, lascia stare e fra tre mesi questo riquadro sparisce.</p>
+    ${sc.map(r=>`<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 0;border-top:1px solid var(--line)"><b>${esc(r.cl)}</b><span class="muted">${esc(r.c)} · ${eur(r.imp)} / mese · ${r.t==='U'?'costo fisso':'canone'} · finita ${fmtYM(r.al)}</span><button class="btn sm primary" data-rcfine="${esc(r.id)}" style="margin-left:auto">Togli la data di fine</button></div>`).join('')}
+    </div></div>`})()}
   ${sec('E')}${sec('U')}`;
   document.getElementById('genM').addEventListener('change',e=>{S.ui.genMonth=e.target.value;render()});
 }
@@ -1036,6 +1046,7 @@ rf.addEventListener('submit',e=>{e.preventDefault();const imp=num(rf.imp.value);
 function monthsBetween(a,b){const [y1,m1]=a.split('-').map(Number),[y2,m2]=b.split('-').map(Number);return (y2-y1)*12+(m2-m1)}
 app.addEventListener('click',e=>{
   if(e.target.closest('[data-stop]'))return;
+  const fz=e.target.closest('[data-rcfine]'); if(fz){const r=S.ric.find(x=>x.id===fz.dataset.rcfine);if(r){r.al='';save();render();toast(r.cl+': data di fine rimossa, torna nei conti')}return}
   const n=e.target.closest('[data-rc-new]'); if(n){openRc(null,n.dataset.rcNew);return}
   const r=e.target.closest('[data-rc]'); if(r){openRc(S.ric.find(x=>x.id===r.dataset.rc));}
 });
@@ -1133,11 +1144,13 @@ const EYE='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="c
 function syncCard(){
   return `<div class="card" id="syncCard" style="margin-bottom:16px"><div class="card-h"><h2>Dati condivisi · PC, telefono, tablet</h2><span class="eyebrow">database online</span></div><div class="card-b stack">
   <p>Tutti i dispositivi leggono e scrivono lo stesso database sul tuo Google Drive. Ogni modifica si salva da sola e compare sugli altri entro un minuto.</p>
+  <p class="thr"><b>Su questo dispositivo la parola d'ordine resta salvata.</b> Chi apre il gestionale da qui vede i dati dei clienti: nome, partita IVA, codice fiscale, indirizzo, telefono. Su un computer o un telefono che non &egrave; solo tuo premi <b>Esci da questo dispositivo</b> quando hai finito, e tieni il dispositivo bloccato con un codice.</p>
   <p class="thr" id="syncStatus">${esc(syncInfo.msg)}</p>
   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" data-sync="now">Sincronizza adesso</button><button class="btn danger" data-sync="off">Esci da questo dispositivo</button></div></div></div>
   <div class="card" style="margin-bottom:16px"><div class="card-h"><h2>Cambia parola d'ordine</h2><span class="eyebrow">vale per tutti i dispositivi</span></div><div class="card-b stack">
+  ${pwCorta()?`<div class="methodbox" style="margin:0 0 4px"><b>La parola d'ordine in uso &egrave; corta.</b> &Egrave; l'unica cosa che protegge i dati dei clienti: l'indirizzo del database sta dentro la pagina, quindi a chi arriva al gestionale resta solo da indovinare la parola. Cambiala qui sotto con almeno ${PW_MIN} caratteri: tre o quattro parole di seguito vanno benissimo e si ricordano.</div>`:''}
   <p class="muted">Dopo il cambio, gli altri dispositivi ti chiederanno la nuova parola d'ordine alla prossima apertura.</p>
-  <div class="grid g2"><label class="field"><span>Parola d'ordine attuale</span><div class="pw-wrap"><input class="inp" id="cpOld" type="password" autocomplete="current-password"><button type="button" class="pw-eye" data-pweye aria-label="Mostra parola d'ordine" title="Mostra / nascondi">${EYE}</button></div></label><div></div><label class="field"><span>Nuova parola d'ordine (almeno 6 caratteri)</span><div class="pw-wrap"><input class="inp" id="cpNew" type="password" autocomplete="new-password"><button type="button" class="pw-eye" data-pweye aria-label="Mostra parola d'ordine" title="Mostra / nascondi">${EYE}</button></div></label><label class="field"><span>Conferma nuova parola d'ordine</span><div class="pw-wrap"><input class="inp" id="cpNew2" type="password" autocomplete="new-password"><button type="button" class="pw-eye" data-pweye aria-label="Mostra parola d'ordine" title="Mostra / nascondi">${EYE}</button></div></label></div>
+  <div class="grid g2"><label class="field"><span>Parola d'ordine attuale</span><div class="pw-wrap"><input class="inp" id="cpOld" type="password" autocomplete="current-password"><button type="button" class="pw-eye" data-pweye aria-label="Mostra parola d'ordine" title="Mostra / nascondi">${EYE}</button></div></label><div></div><label class="field"><span>Nuova parola d'ordine (almeno ${PW_MIN} caratteri)</span><div class="pw-wrap"><input class="inp" id="cpNew" type="password" autocomplete="new-password"><button type="button" class="pw-eye" data-pweye aria-label="Mostra parola d'ordine" title="Mostra / nascondi">${EYE}</button></div></label><label class="field"><span>Conferma nuova parola d'ordine</span><div class="pw-wrap"><input class="inp" id="cpNew2" type="password" autocomplete="new-password"><button type="button" class="pw-eye" data-pweye aria-label="Mostra parola d'ordine" title="Mostra / nascondi">${EYE}</button></div></label></div>
   <div><button class="btn primary" data-sync="chpw">Cambia parola d'ordine</button></div></div></div>`}
 function rImpostazioni(){
   const y=S.anno;
@@ -1211,11 +1224,21 @@ function stock(){ // {artId:{sede:qta}}
   liveMov().forEach(m=>{const q=+m.qta||0;if(m.tipo==='entrata')add(m.articoloId,m.sede||m.sedeA,q);else if(m.tipo==='uscita')add(m.articoloId,m.sede||m.sedeDa,-q);else if(m.tipo==='spostamento'){add(m.articoloId,m.sedeDa||m.da,-q);add(m.articoloId,m.sedeA||m.a,q)}});
   return G}
 function clKey(s){return canon(s)}
+/* Prima bastava la parola «noleggio» scritta giusta: «NOL.» non veniva vista e la
+   macchina spariva dai noleggi attivi — cioe' dallo scadenziario, cioe' smetteva di
+   fatturare, senza nessun avviso. Adesso si riconoscono le forme che si usano
+   davvero, e quello che resta fuori si vede (causaliStrane). */
+const RE_NOLEGGIO = /nolegg|^nol\b|^nol\.|a noleggio|in noleggio|consegn/i;
+const RE_RIENTRO  = /rientr|^rit\b|ritir|restitu|reso\b|recuper/i;
+function causaliStrane(){
+  return liveMov().filter(m => m.tipo==='uscita' && clKey(m.destinazione)
+    && !RE_NOLEGGIO.test(m.causale||'') && !/vendit|omagg|scarto|reso/i.test(m.causale||''));
+}
 function noleggi(){ // attivi
   const R={};
   liveMov().forEach(m=>{const cl=clKey(m.destinazione);
-    if(m.tipo==='uscita'&&/noleggio/i.test(m.causale||'')){const k=m.articoloId+'|'+(cl||'—');const r=R[k]||(R[k]={art:m.articoloId,cl:cl||'',qta:0,sede:m.sede,data:m.data,nota:m.nota||''});r.qta+=+m.qta||0;if((m.data||'')>(r.data||'')){r.data=m.data;r.sede=m.sede;if(m.nota)r.nota=m.nota}}
-    else if(m.tipo==='entrata'&&/rientro/i.test(m.causale||'')&&cl){const k=m.articoloId+'|'+cl;if(R[k])R[k].qta-=+m.qta||0}});
+    if(m.tipo==='uscita'&&RE_NOLEGGIO.test(m.causale||'')){const k=m.articoloId+'|'+(cl||'—');const r=R[k]||(R[k]={art:m.articoloId,cl:cl||'',qta:0,sede:m.sede,data:m.data,nota:m.nota||''});r.qta+=+m.qta||0;if((m.data||'')>(r.data||'')){r.data=m.data;r.sede=m.sede;if(m.nota)r.nota=m.nota}}
+    else if(m.tipo==='entrata'&&RE_RIENTRO.test(m.causale||'')&&cl){const k=m.articoloId+'|'+cl;if(R[k])R[k].qta-=+m.qta||0}});
   return Object.values(R).filter(r=>r.qta>0).map(r=>Object.assign(r,{paese:sedePaese(r.sede)}));
 }
 function artById(id){return mag().articoli.find(a=>a.id===id)}
@@ -1236,6 +1259,18 @@ function rMagazzino(){
       <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" data-mg="import">Importa copia del Magazzino</button><button class="btn" data-mg="newart">Oppure parti da zero: nuovo articolo</button></div>
     </div></div>`;return}
   const G=stock(), N=noleggi().filter(r=>S.ui.country==='ALL'||r.paese===S.ui.country), sedi=sediVis();
+  const strane=causaliStrane().filter(m=>S.ui.country==='ALL'||sedePaese(m.sede)===S.ui.country);
+  const avvisoStrane = !strane.length ? '' :
+    '<div class="methodbox" style="margin-bottom:16px;border-left:4px solid var(--s-out)">'
+    + '<b>' + strane.length + (strane.length===1?' uscita non viene letta':' uscite non vengono lette')
+    + ' come noleggio.</b> Hanno un cliente ma la causale non dice ne\' noleggio ne\' vendita: '
+    + 'quelle macchine non risultano fuori e <b>non entrano nello scadenziario</b>, cioe\' non le stai fatturando.'
+    + strane.slice(0,6).map(m=>'<div class="thr" style="margin-top:4px">' + esc(artName(artById(m.articoloId)))
+        + ' &rarr; ' + esc(m.destinazione||'—') + ' &middot; causale scritta: <b>'
+        + esc(m.causale||'(vuota)') + '</b></div>').join('')
+    + (strane.length>6 ? '<div class="thr" style="margin-top:4px">e altre ' + (strane.length-6) + '.</div>' : '')
+    + '<div class="thr" style="margin-top:6px">Si correggono aprendo il movimento e scrivendo <b>noleggio</b> nella causale.</div>'
+    + '</div>';
   const arts=M.articoli; const mach=arts.filter(a=>(a.kind||guessKind(a))==='macchina'), parts=arts.filter(a=>(a.kind||guessKind(a))!=='macchina');
   const inSede=(a,s)=>(G[a.id]||{})[s.nome]||0;
   const machIn=sedi.reduce((t,s)=>t+mach.reduce((x,a)=>x+Math.max(0,inSede(a,s)),0),0);
@@ -1244,6 +1279,7 @@ function rMagazzino(){
   const low=parts.filter(a=>{const q=sedi.reduce((t,s)=>t+inSede(a,s),0);return scortaSt(a,q)}).length;
   const head=`<div class="page-head"><div><div class="eyebrow">Magazzino · ${countryLabel()}</div><h1>Dove sono le <em>macchine</em></h1><p class="lead">Ogni macchina è in una sede o presso un cliente. Qui le vedi tutte.</p></div>
     <div class="actions"><button class="btn primary hide-m" data-mg="mov" data-op="prelievo">+ Noleggio / prelievo</button><button class="btn" data-mg="mov" data-op="carico">Carico</button><button class="btn" data-mg="mov" data-op="sposta">Sposta</button></div></div>
+  ${avvisoStrane}
     <div class="toolbar"><div class="seg" id="magSeg">${[['mappa','Mappa'],['articoli','Articoli'],['storico','Movimenti']].map(([k,l])=>`<button data-magview="${k}" aria-pressed="${k===v}">${l}</button>`).join('')}</div></div>`;
   let body='';
   if(v==='mappa'){
@@ -1285,7 +1321,7 @@ function rMagazzino(){
     const vis=list.filter(m=>{if(S.ui.country==='ALL')return true;const s=m.tipo==='spostamento'?(m.sedeA||m.sedeDa):m.sede;return sedePaese(s)===S.ui.country});
     body=`<div class="toolbar"><label class="switch"><input type="checkbox" id="magDelT" ${all?'checked':''}> Mostra anche gli annullati (cestino)</label></div>
     <div class="card">${MOB()?mvCards(vis):`<div class="tbl-wrap"><table><thead><tr><th></th><th>Data</th><th>Articolo</th><th class="r">Pz</th><th>Sede</th><th>Cliente / fornitore</th><th>Causale</th><th>Nota</th><th></th></tr></thead><tbody>
-    ${vis.map(m=>{const a=artById(m.articoloId);const rt=m.tipo==='entrata'&&/rientro/i.test(m.causale||'');const ic=m.tipo==='entrata'?(rt?['rt','↩']:['in','+']):m.tipo==='uscita'?['out','−']:['mv','⇄'];
+    ${vis.map(m=>{const a=artById(m.articoloId);const rt=m.tipo==='entrata'&&RE_RIENTRO.test(m.causale||'');const ic=m.tipo==='entrata'?(rt?['rt','↩']:['in','+']):m.tipo==='uscita'?['out','−']:['mv','⇄'];
       const sede=m.tipo==='spostamento'?`${esc(m.sedeDa||m.da||'—')} → ${esc(m.sedeA||m.a||'—')}`:esc(m.sede||'—');
       return `<tr class="${m.eliminato?'del':''}"><td><span class="mvtype ${ic[0]}">${ic[1]}</span></td><td class="muted" style="white-space:nowrap">${m.data?fmtD(m.data):'—'}</td><td><b>${esc(artName(a))}</b></td><td class="r num">${m.qta}</td><td>${sede}</td><td>${esc(m.destinazione||m.fornitore||'')}</td><td class="muted">${esc(m.causale||(m.tipo==='entrata'?'Carico':''))}</td><td class="muted">${esc(fmtNota(m.nota))}</td><td class="r"><button class="btn sm ghost" data-mg="toggle" data-id="${esc(m.id)}">${m.eliminato?'Ripristina':'Annulla'}</button></td></tr>`}).join('')}
     </tbody></table></div>`}</div>`;
@@ -1605,7 +1641,7 @@ function partCards(rows,sedi){return `<div class="mlist">${rows.map(({a,per,t})=
 function artCards(list,sedi,inSede){const N=noleggi();return `<div class="mlist">${list.map(a=>{const out=N.filter(r=>r.art===a.id).reduce((t,r)=>t+r.qta,0);const per=sedi.map(s=>[s.nome,inSede(a,s)]).filter(x=>x[1]);
   return `<div class="mcard" data-art="${a.id}"><div class="mc-top">${thumb(a)}<div class="grow"><b>${esc(artName(a))}</b><div class="sb">${esc([a.attribuzione,a.codice].filter(Boolean).join(' · '))}</div></div><div class="mc-q num">${per.reduce((t,x)=>t+x[1],0)}</div></div>
   <div class="mc-meta"><span class="chip">${(a.kind||guessKind(a))==='macchina'?'Macchina':'Ricambio'}</span>${per.map(x=>`<span class="chip">${esc(x[0])} ${x[1]}</span>`).join('')}${out?`<span class="chip">a noleggio ${out}</span>`:''}</div></div>`}).join('')}</div>`}
-function mvCards(vis){return `<div class="mlist">${vis.map(m=>{const a=artById(m.articoloId);const rt=m.tipo==='entrata'&&/rientro/i.test(m.causale||'');const ic=m.tipo==='entrata'?(rt?['rt','↩']:['in','+']):m.tipo==='uscita'?['out','−']:['mv','⇄'];
+function mvCards(vis){return `<div class="mlist">${vis.map(m=>{const a=artById(m.articoloId);const rt=m.tipo==='entrata'&&RE_RIENTRO.test(m.causale||'');const ic=m.tipo==='entrata'?(rt?['rt','↩']:['in','+']):m.tipo==='uscita'?['out','−']:['mv','⇄'];
   const sede=m.tipo==='spostamento'?`${esc(m.sedeDa||m.da||'—')} → ${esc(m.sedeA||m.a||'—')}`:esc(m.sede||'—');
   return `<div class="mcard ${m.eliminato?'del':''}"><div class="mc-top"><span class="mvtype ${ic[0]}">${ic[1]}</span><div class="grow"><b>${esc(artName(a))}</b><div class="sb">${m.data?fmtD(m.data):'—'} · ${sede}${m.destinazione||m.fornitore?' · '+esc(m.destinazione||m.fornitore):''}${m.causale?' · '+esc(m.causale):''}</div></div><div class="mc-q num">${m.qta}</div></div>
   <div class="mc-meta">${m.nota?`<span class="chip">${esc(fmtNota(m.nota))}</span>`:''}<button class="btn sm ghost" style="margin-left:auto" data-mg="toggle" data-id="${esc(m.id)}">${m.eliminato?'Ripristina':'Annulla'}</button></div></div>`}).join('')}</div>`}
@@ -1614,6 +1650,8 @@ function ricCards(l,t,gm){return `<div class="mlist">${l.map(r=>`<div class="mca
 
 /* ================= SALVATAGGIO ONLINE (Google Drive via Apps Script) ================= */
 const SYNC_KEY='nipec_sync_cfg';
+const PW_MIN=12;
+function pwCorta(){const c=syncCfg();return !!(c&&String(c.pw||'').length<PW_MIN)}
 const SYNC_URL='__INDIRIZZO_SCRIPT__';
 const DEVICE=/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?'telefono':'computer';
 function syncCfg(){try{return JSON.parse(localStorage.getItem(SYNC_KEY))||null}catch(e){return null}}
@@ -1665,12 +1703,12 @@ function showLogin(msg,err){let el=document.getElementById('login');
       <input type="text" name="username" value="nipec" autocomplete="username" hidden>
       <label class="field"><span>Parola d'ordine</span><div class="pw-wrap"><input class="inp" id="lgPw" type="password" autocomplete="current-password" required><button type="button" class="pw-eye" data-pweye aria-label="Mostra parola d'ordine" title="Mostra / nascondi">${EYE}</button></div></label>
       <button class="btn primary" id="lgBtn" type="submit">Entra</button><div class="lg-msg" id="lgMsg"></div>
-      <p class="thr" style="text-align:center">La stessa parola d'ordine su PC, telefono e tablet. Si inserisce una volta per dispositivo.</p></form>`;
+      <p class="thr" style="text-align:center">La stessa parola d'ordine su PC, telefono e tablet. Si inserisce una volta per dispositivo.<br>Non inserirla su un dispositivo che non &egrave; tuo: qui dentro ci sono i dati dei clienti.</p></form>`;
     el.querySelector('#lgForm').addEventListener('submit',ev=>{ev.preventDefault();doLogin(document.getElementById('lgPw').value)});}
   const m=document.getElementById('lgMsg');m.textContent=msg||'';m.className='lg-msg'+(err?' err':'');
   setTimeout(()=>{const i=document.getElementById('lgPw');i&&i.focus()},50)}
 async function changePw(){const c=syncCfg();const o=document.getElementById('cpOld').value,n=document.getElementById('cpNew').value,n2=document.getElementById('cpNew2').value;
-  if(!c){toast('Prima accedi');return}if(n.length<6){toast("La nuova parola d'ordine deve avere almeno 6 caratteri");return}if(n!==n2){toast('Le due nuove parole d\'ordine non coincidono');return}
+  if(!c){toast('Prima accedi');return}if(n.length<PW_MIN){toast("La nuova parola d'ordine deve avere almeno "+PW_MIN+" caratteri");return}if(n===o){toast("La nuova parola d'ordine e uguale a quella attuale");return}if(n!==n2){toast('Le due nuove parole d\'ordine non coincidono');return}
   const ok=await askConfirm("Cambiare la parola d'ordine?","Su telefono, tablet e altri PC dovrai inserire quella nuova.",'Cambia');if(!ok)return;
   try{const r=await fetch(c.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({op:'chpw',pw:o,npw:n})}).then(r=>r.json());
     if(r.ok){setSyncCfg({url:c.url,pw:n});['cpOld','cpNew','cpNew2'].forEach(i=>document.getElementById(i).value='');toast("Parola d'ordine cambiata")}
@@ -1703,6 +1741,19 @@ async function receiveFromPC(code){code=String(code||'').trim().toLowerCase();if
     const o=JSON.parse(txt);const th=S.ui.theme;S=normalize(o);S._rev=((readBest()||{})._rev||0);S.ui=Object.assign(defState().ui,{theme:th,tab:'panoramica'});save();syncCountry();applyTheme();render();
     toast(`Dati ricevuti: ${S.mov.length} movimenti, ${S.clienti.length} clienti, ${S.mag.articoli.length} articoli`)}
   catch(err){toast('Trasferimento non riuscito: '+err.message)}}
+/* Il pacchetto dati-telefono.enc non e' pubblicato: la funzione c'e' ma fallisce
+   sempre. Invece di toglierla la nascondo quando il pacchetto davvero non c'e',
+   cosi' non promette una cosa che non succede. Se torna, riappare da sola. */
+function cercaPacchetto(){
+  fetch('dati-telefono.enc?t='+Date.now(),{method:'HEAD',cache:'no-store'})
+    .then(r=>{ if(!r.ok) nascondiRicevi(); }).catch(()=>nascondiRicevi());
+}
+function nascondiRicevi(){
+  const c=document.getElementById('recvCard'); if(c) c.remove();
+  document.querySelectorAll('[data-go="impostazioni"]').forEach(a=>{
+    if(/Ricevi i dati dal PC/i.test(a.textContent)) a.textContent='Impostazioni';
+  });
+}
 function receiveCard(){return `<div class="card" id="recvCard" style="margin-bottom:16px"><div class="card-h"><h2>Ricevi i dati dal PC</h2><span class="eyebrow">trasferimento cifrato</span></div><div class="card-b stack">
   <p>Scrivi il codice che ti ho dato e premi <b>Ricevi</b>: questo dispositivo carica la copia dei dati preparata dal PC.</p>
   <label class="field"><span>Codice</span><input class="inp" id="recvCode" autocomplete="off" autocapitalize="none" placeholder="parola-parola-parola-numero"></label>
@@ -1730,7 +1781,7 @@ document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-sel
 setSyncInfo(syncCfg()?'busy':'off',syncCfg()?'Controllo dati online…':'Non collegato: i dati sono solo su questo dispositivo');
 if(/^#ricevi/.test(location.hash)){S.ui.tab='impostazioni';S.ui.showRecv=1;history.replaceState(null,'',location.pathname)}
 if(/^#(sync|ricevi)/.test(location.hash)){history.replaceState(null,'',location.pathname)}
-render(); if(syncCfg()){setSyncInfo('busy','Controllo dati online…');syncPull()} else showLogin(); if(S._migrated){delete S._migrated;save(true);toast('Dati del vecchio gestionale importati')}
+render(); cercaPacchetto(); if(syncCfg()){setSyncInfo('busy','Controllo dati online…');syncPull()} else showLogin(); if(S._migrated){delete S._migrated;save(true);toast('Dati del vecchio gestionale importati')}
 })();
 </script>
 </body>
