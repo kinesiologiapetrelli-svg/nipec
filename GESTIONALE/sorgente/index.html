@@ -637,7 +637,7 @@ const DEF_CATS={
 /* ================= stato ================= */
 const today=new Date(); const todayISO=iso(today);
 function defState(){return {v:2,anno:today.getFullYear(),cats:JSON.parse(JSON.stringify(DEF_CATS)),mov:[],ric:[],gen:{},
-  cru:{inputs:{},snaps:[]},storico:{},mag:normMag(null),scadCan:{},clienti:[],ui:{tab:'panoramica',view:'mese',cursor:todayISO,country:'ALL',closed:{}}};}
+  cru:{inputs:{},snaps:[]},storico:{},mag:normMag(null),scadCan:{},scadEscl:{},clienti:[],ui:{tab:'panoramica',view:'mese',cursor:todayISO,country:'ALL',closed:{}}};}
 let S=load();
 function readBest(){let a=null,b=null;try{const r=localStorage.getItem(KEY);if(r)a=JSON.parse(r)}catch(e){}try{const r=localStorage.getItem(SAFE);if(r)b=JSON.parse(r)}catch(e){}
   if(a&&b)return (b._rev||0)>=(a._rev||0)?b:a; return b||a}
@@ -653,7 +653,7 @@ function normalize(o){
   s.cats=s.cats||d.cats; for(const p of ['IT','AL']){s.cats[p]=s.cats[p]||d.cats[p]; for(const t of ['E','U']) if(!Array.isArray(s.cats[p][t])) s.cats[p][t]=d.cats[p][t].slice();}
   s.mov=Array.isArray(s.mov)?s.mov:[]; s.ric=Array.isArray(s.ric)?s.ric:[]; s.gen=s.gen||{};
   s.cru=s.cru||{inputs:{},snaps:[]}; s.cru.inputs=s.cru.inputs||{}; s.cru.snaps=s.cru.snaps||[];
-  s.storico=s.storico||{}; s.ui=Object.assign(defState().ui,s.ui||{}); s.mag=normMag(s.mag); s.scadCan=s.scadCan||{}; s.clienti=Array.isArray(s.clienti)?s.clienti:[]; s.scadStart=s.scadStart||''; if(!s.cityGuess){s.cityGuess=1;s.clienti.forEach(guessCity)}
+  s.storico=s.storico||{}; s.ui=Object.assign(defState().ui,s.ui||{}); s.mag=normMag(s.mag); s.scadCan=s.scadCan||{}; s.scadEscl=s.scadEscl||{}; s.clienti=Array.isArray(s.clienti)?s.clienti:[]; s.scadStart=s.scadStart||''; if(!s.cityGuess){s.cityGuess=1;s.clienti.forEach(guessCity)}
   return s;
 }
 /* importa il formato del vecchio gestionale (Cruscotto / Flusso / Valutazioni / Impostazioni) */
@@ -1501,7 +1501,7 @@ function scadClients(ym){
   const lines=scadLines(ym);const used=new Set();
   lines.forEach(l=>{l.pay=S.mov.find(m=>m.t==='E'&&(m.src==='scad:'+l.key+'@'+ym||(l.ric&&m.src===l.ric.id+'@'+ym)));if(l.pay)used.add(l.pay.id)});
   // riconciliazione automatica con incassi già in contabilità (stesso cliente, stesso mese)
-  lines.filter(l=>!l.pay&&l.imp>0).forEach(l=>{const m=S.mov.find(m=>m.t==='E'&&!used.has(m.id)&&m.d.startsWith(ym)&&m.c===l.c&&!String(m.src||'').startsWith('scad:')&&sameCl(m.cl,l.cl));if(m){l.pay=m;l.auto=true;used.add(m.id)}});
+  lines.filter(l=>!l.pay&&l.imp>0).forEach(l=>{const m=S.mov.find(m=>m.t==='E'&&!used.has(m.id)&&m.d.startsWith(ym)&&m.c===l.c&&!String(m.src||'').startsWith('scad:')&&!S.scadEscl[m.id]&&sameCl(m.cl,l.cl));if(m){l.pay=m;l.auto=true;used.add(m.id)}});
   const C={};lines.forEach(l=>{const k=clKey(l.cl);const c=C[k]||(C[k]={cl:l.cl,p:l.p,lines:[]});c.lines.push(l)});
   return Object.values(C).map(c=>{const rl=c.lines.find(l=>l.ric&&l.ric.g);const due=dueISO(ym,rl?rl.ric.g:GIORNO_SCAD);c.tot=c.lines.reduce((a,l)=>a+l.imp,0);c.paid=c.lines.filter(l=>l.pay).reduce((a,l)=>a+(l.pay.imp||0),0);
     const open=c.lines.filter(l=>!l.pay&&l.imp>0);c.noCan=c.lines.some(l=>l.noCan&&!l.pay);
@@ -1527,7 +1527,7 @@ function rScadenze(){
     return `<div class="scad ${paid?'paid':''} ${sel?'sel':''}">
       <label class="selbox" title="Seleziona per operazioni multiple"><input type="checkbox" data-scadsel="${esc(k)}" ${sel?'checked':''} aria-label="Seleziona ${esc(c.cl)}"></label>
       <div class="grow" data-scadopen="${esc(clKey(c.cl))}" data-ym="${ymx}"><div class="t"><a href="#" class="cl-link" data-clname="${esc(c.cl)}">${esc(c.cl)}</a> ${flag(c.p)}</div><div class="sb">${c.lines.map(l=>esc(l.mac||l.c)+(l.noCan&&!l.pay?' · <b class="neg">canone da indicare</b>':'')).join(' · ')}</div>
-      <div class="mc-meta" style="margin-top:6px">${stChip(c.st)}<span class="chip">scade ${fmtD(c.due)}</span>${paid?`<span class="chip">pagato il ${c.lines.filter(l=>l.pay).map(l=>fmtD(l.pay.d)).filter((x,i,a)=>a.indexOf(x)===i).join(', ')}${c.auto?' · da contabilità':''}</span>`:''}</div></div>
+      <div class="mc-meta" style="margin-top:6px">${stChip(c.st)}<span class="chip">scade ${fmtD(c.due)}</span>${paid?`<span class="chip">pagato il ${c.lines.filter(l=>l.pay).map(l=>fmtD(l.pay.d)).filter((x,i,a)=>a.indexOf(x)===i).join(', ')}${c.auto?' · da contabilità':''}</span>`:''}${c.auto?`<button class="btn sm ghost" data-scadnot="${esc(clKey(c.cl))}" data-ym="${ymx}" title="Questo incasso è in Prima nota ma non è il canone di questa scadenza">Non è il canone</button>`:''}</div></div>
       <div class="scad-act"><div class="amt num">${eur(paid?c.paid:c.tot)}${c.paid&&!paid?`<small>pagati ${eur(c.paid)}</small>`:''}</div>
       ${paid?(c.lines.every(l=>l.auto)?'<span class="thr">in Prima nota</span>':`<button class="btn sm ghost" data-scadunpay="${esc(clKey(c.cl))}" data-ym="${ymx}">Annulla pagamento</button>`):(c.tot-c.paid>0?`<button class="btn sm paybtn" data-scadpay="${esc(clKey(c.cl))}" data-ym="${ymx}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>Segna pagato</button>`:`<button class="btn sm primary" data-scadedit="${esc(clKey(c.cl))}" data-ym="${ymx}">Indica canone</button>`)}
       <button class="btn sm ghost" data-scadedit="${esc(clKey(c.cl))}" data-ym="${ymx}">Modifica scadenza</button></div></div>`};
@@ -1549,6 +1549,8 @@ function rScadenze(){
   <div class="card"><div class="card-h"><label class="selbox" title="Seleziona tutti"><input type="checkbox" id="scadAll" ${vis.length&&vis.every(c=>scadSel.has(selKey(c,ym)))?'checked':''}></label><h2>${MESI[mo-1]} ${y}</h2><span class="eyebrow">${vis.length} clienti</span></div>
     <div class="card-b" style="padding-bottom:0"><div class="searchbar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="inp" id="scadQ" placeholder="Cerca cliente o macchina" value="${esc(S.ui.scadQ||'')}"></div></div>
     <div class="scad-list" style="margin-top:12px">${vis.length?vis.map(c=>row(c,ym)).join(''):`<div class="empty"><b>${flt==='pagati'?'Nessun pagamento segnato':'Tutto incassato'}</b>${cs.length?'':'Aggiungi i canoni in Ricorrenti o registra un noleggio in Magazzino.'}</div>`}</div></div>
+  ${(()=>{const es=S.mov.filter(m=>S.scadEscl[m.id]&&m.t==='E'&&String(m.d).startsWith(ym));
+    return es.length?`<div class="methodbox" style="margin-top:12px"><b>${es.length} ${es.length===1?'incasso escluso':'incassi esclusi'} dal conto dei canoni.</b> Sono in Prima nota, ma non contano come pagamento di nessuna scadenza.${es.map(m=>`<div class="thr" style="margin-top:6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">${esc(m.cl||'—')} · ${eur(m.imp)} · ${fmtD(m.d)} <button class="btn sm ghost" data-scadrimetti="${esc(m.id)}">Rimetti come canone</button></div>`).join('')}</div>`:''})()}
   <div class="methodbox" style="margin-top:12px"><b>Come si usa.</b> Vedi il bonifico in banca → premi <b>Segna pagato</b> sul cliente → controlla data e importo → <b>Conferma</b>. Per cambiare importo, giorno o categoria premi <b>Modifica scadenza</b> e salva. L'incasso entra in Prima nota. Per più clienti insieme spunta la casella a sinistra (o “seleziona tutti”) e usa la barra in basso.</div>
   ${scadSel.size?bulkBar():''}`;
   const qi=document.getElementById('scadQ');qi.addEventListener('input',()=>{S.ui.scadQ=qi.value;const pos=qi.selectionStart;rScadenze();const n=document.getElementById('scadQ');n.focus();n.setSelectionRange(pos,pos)});
@@ -1562,6 +1564,10 @@ app.addEventListener('click',e=>{
   const se=e.target.closest('[data-scadedit]');if(se){const c=findScad(se.dataset.scadedit,se.dataset.ym);if(c)openEdScad(c,se.dataset.ym);return}
   const sp=e.target.closest('[data-scadpay]');if(sp){const c=findScad(sp.dataset.scadpay,sp.dataset.ym);if(c)openScad(c,sp.dataset.ym);return}
   const su=e.target.closest('[data-scadunpay]');if(su){const c=findScad(su.dataset.scadunpay,su.dataset.ym);if(!c)return;askConfirm('Annullare il pagamento?',`${c.cl} · ${eur(c.paid)}. L'incasso viene tolto dalla Prima nota e la scadenza torna “da pagare”.`,'Annulla pagamento',true).then(ok=>{if(!ok)return;unPaid(c,su.dataset.ym);save();rScadenze();toast('Pagamento annullato')});return}
+  const sn=e.target.closest('[data-scadnot]');if(sn){const c=findScad(sn.dataset.scadnot,sn.dataset.ym);if(!c)return;
+    const hit=c.lines.filter(l=>l.auto&&l.pay);if(!hit.length)return;
+    askConfirm('Questo incasso non è il canone?',`${c.cl} · ${eur(hit.reduce((a,l)=>a+(l.pay.imp||0),0))}. Resta in Prima nota, ma non conta più come pagamento di questa scadenza: la scadenza torna “da pagare”. Lo puoi rimettere quando vuoi.`,'Non è il canone',true).then(ok=>{if(!ok)return;hit.forEach(l=>{S.scadEscl[l.pay.id]=1});save();rScadenze();toast('Incasso escluso: la scadenza torna da pagare')});return}
+  const sr=e.target.closest('[data-scadrimetti]');if(sr){delete S.scadEscl[sr.dataset.scadrimetti];save();rScadenze();toast('Rimesso: può contare di nuovo come canone');return}
   const bk=e.target.closest('[data-bulk]');if(bk){bulkAction(bk.dataset.bulk);return}
   if(e.target.closest('.selbox')||e.target.closest('.cl-link'))return;
   const r=e.target.closest('[data-scadopen]');if(r){const c=findScad(r.dataset.scadopen,r.dataset.ym);if(c)openScad(c,r.dataset.ym)}

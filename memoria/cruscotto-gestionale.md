@@ -65,3 +65,18 @@ Codice fiscale, partita IVA, indirizzo e telefono dei clienti stanno
 dietro **una sola parola d'ordine condivisa**, con l'indirizzo
 dell'endpoint visibile nel sorgente della pagina. Regge per due
 persone. Se entra qualcun altro serve un accesso per persona.
+
+## Aggiornamento del 20 ottobre 2026
+
+Il gestionale ora sta in git (`GESTIONALE/`), col sorgente senza l'indirizzo
+dello script: quello sta in `GESTIONALE/.segreto`, ignorato da git, e
+`pubblica.py` lo rimette dentro prima di scrivere la cartella per Netlify.
+
+Dal documento tecnico di Giorgio sono state chiuse §11.1 (minimo 12 sulle
+parole nuove), §11.2 (il repository), §11.3 (incassi esclusi dalla
+riconciliazione, campo `S.scadEscl`), §11.4 (riquadro PC→telefono nascosto
+se il pacchetto manca) e §11.5 (causali dei noleggi). Il guscio offline è
+`nipec-gestionale-v19`. Restano solo le cose morte di §11.6.
+
+Regola emersa lavorandoci: il codice è chiuso in un IIFE, quindi le prove si
+fanno dall'interfaccia, non toccando `S` da fuori.

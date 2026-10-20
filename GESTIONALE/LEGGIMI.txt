@@ -59,15 +59,23 @@ COSA E' STATO FATTO IL 20 OTTOBRE
          che restano fuori, in Magazzino
   §11.4  il riquadro «Ricevi i dati dal PC» si nasconde se il
          pacchetto non c'e'
+  §11.3  la riconciliazione automatica: sulla riga compare «Non e'
+         il canone». L'incasso resta in Prima nota ma smette di
+         contare come pagamento di quella scadenza, che torna
+         «da pagare». In fondo alla pagina c'e' l'elenco degli
+         incassi esclusi, con «Rimetti come canone»: reversibile.
+         Nuovo campo nello stato: S.scadEscl = { idMovimento: 1 }.
+         Sta in defState() e in normalize() (regola 1) e viaggia con
+         la sincronizzazione. I backup vecchi, che non ce l'hanno,
+         si caricano lo stesso: provato.
   piu' le tre del 17 ottobre mai pubblicate (voci fuori periodo,
   avviso dispositivo condiviso, «da registrare»)
 
 RESTANO APERTE
-  §11.3  la riconciliazione automatica puo' leggere come canone un
-         incasso che non lo e', e non c'e' modo di smentirla.
-         E' la piu' insidiosa: vuole una scelta tua su come
-         l'interfaccia deve permettere di dire «questo non c'entra».
   §11.6  cose morte: S.gen mai usato, thrNum con un map che non fa
          niente, le categorie rinominate che lasciano indietro i
          movimenti vecchi, i canoni 500/400 scritti nel codice.
          Nessuna fa danno adesso.
+  (e la parola d'ordine: resta l'unica difesa. Il minimo di 12 vale
+   per le parole nuove; quella in uso, se e' corta, va cambiata a
+   mano da Impostazioni.)
