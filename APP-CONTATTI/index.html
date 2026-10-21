@@ -709,7 +709,15 @@ function vOggi(){
     h += `<div class="avviso verde"><b>Per oggi hai finito.</b> ${fatti} messaggi mandati.
       Il resto della coda (${resto}) torna domani. Non alzare la quota per finire prima:
       è esattamente così che WhatsApp blocca un numero.</div>`;
-    return h + strisciaMandati();
+    const pross = codaProssima(quota);
+    h += testaCoda(pross, true);
+    h += strisciaMandati();
+    if(pross.length){
+      h += `<p class="tenue" style="margin-bottom:.7rem">Le prossime ${pross.length}, nell'ordine in cui
+        te le servirò domani. Da qui puoi già spuntarle o toglierle dalla coda.</p>`;
+      h += pross.map(({c,m}) => schedaGiro(c, m, true)).join('');
+    }
+    return h;
   }
   if(!coda.length) return h + strisciaMandati() + `<div class="vuoto"><b>Oggi non c'è nessuno da scrivere.</b>
     I promemoria partono da soli quando scadono i giorni di attesa.</div>`;
@@ -734,22 +742,47 @@ function vOggi(){
     </div>` + schedaGiro(c, m);
   }
 
-  const nScelti = coda.filter(({c}) => scelto(c.id)).length;
-  h += `<div class="riquadro" style="margin-bottom:.9rem">
-    <div class="fila" style="align-items:center;flex-wrap:wrap">
-      <div style="flex:1 1 11rem">
-        <b>${coda.length} da mandare oggi</b>
-        <div class="tenue">${nScelti ? nScelti + ' spuntate' : 'nessuna spuntata: parte tutta la coda'}</div>
-      </div>
-      <button class="btn" data-azione="${nScelti === coda.length ? 'deseleziona' : 'tutte-oggi'}">
-        ${nScelti === coda.length ? 'Togli le spunte' : 'Seleziona tutte'}</button>
-      <button class="btn primario" data-azione="raffica">
-        Manda ${nScelti || coda.length} una dopo l'altra</button>
-    </div></div>`;
+  h += testaCoda(coda, false);
   h += `<p class="tenue" style="margin-bottom:.7rem">Si apre, si rilegge, si manda. Il messaggio è già scritto:
      cambialo pure prima di premere invio, se quella persona merita una riga sua.</p>`;
   h += coda.map(({c,m}) => schedaGiro(c,m)).join('');
   return h;
+}
+
+/* La testa della coda: quante sono, spuntale tutte, mandale una dopo l'altra.
+   Compare SEMPRE che ci sia una coda — anche a quota finita, perche' e'
+   proprio allora che uno la va a cercare. Se il tetto e' pieno i tasti
+   restano, ma dicono che si riprende domani. */
+function testaCoda(coda, bloccata){
+  if(!coda.length) return '';
+  const nScelti = coda.filter(({c}) => scelto(c.id)).length;
+  const tutte = nScelti === coda.length;
+  return `<div class="riquadro" style="margin-bottom:.9rem">
+    <div class="fila" style="align-items:center;flex-wrap:wrap">
+      <div style="flex:1 1 11rem">
+        <b>${coda.length} ${bloccata ? 'pronte per domani' : 'da mandare oggi'}</b>
+        <div class="tenue">${nScelti ? nScelti + ' spuntate' : 'nessuna spuntata: vale tutta la coda'}</div>
+      </div>
+      <button class="btn" data-azione="${tutte ? 'deseleziona' : 'tutte-oggi'}">
+        ${tutte ? 'Togli le spunte' : 'Seleziona tutte'}</button>
+      ${bloccata
+        ? `<button class="btn" data-azione="raffica-piena">Manda una dopo l'altra</button>`
+        : `<button class="btn primario" data-azione="raffica">Manda ${nScelti || coda.length} una dopo l'altra</button>`}
+    </div>
+    ${bloccata ? `<p class="tenue" style="margin-top:.6rem">Oggi hai finito il tetto che ti sei dato.
+      Le spunte restano: domani mattina apri e premi <b>Manda una dopo l'altra</b>.
+      Se davvero ti serve andare oltre, il tetto si alza in
+      <a href="#" data-scheda="impostazioni">Impostazioni</a> — ma pensaci: è la cosa
+      che fa bloccare i numeri.</p>` : ''}
+  </div>`;
+}
+
+/* Chi toccherebbe adesso se il tetto non fosse finito: serve a far vedere
+   la coda anche quando per oggi e' chiusa. */
+function codaProssima(n){
+  const m = codaManuale();
+  const gia = new Set(m.map(x => x.c.id));
+  return m.concat(codaCompleta().filter(x => !gia.has(x.c.id))).slice(0, n || 25);
 }
 
 /* Chi ha detto sì aspetta il materiale. Questa coda sta in cima a tutto,
@@ -789,7 +822,7 @@ function strisciaMandati(){
     </div>`).join('')}
   </div>`;
 }
-function schedaGiro(c,m){
+function schedaGiro(c, m, inAttesa){
   const testo = testoDaMandare(m, c);
   const L = locDi(m.id);
   const url = 'https://wa.me/' + c.numero + '?text=' + encodeURIComponent(testo);
@@ -813,7 +846,9 @@ function schedaGiro(c,m){
       <img src="${L.dato}" alt="" style="width:2.6rem;height:2.6rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--riga)">
       <span class="tenue">parte anche la locandina · ${esc(L.nome||'')} ${pesoBello(L.peso)}</span></div>` : ''}
     <div class="azioni">
-      <a class="btn wa" href="${url}" target="_blank" rel="noopener" data-manda="${c.id}">Apri WhatsApp e manda</a>
+      ${inAttesa
+        ? `<button class="btn" disabled title="Domani">Domani</button>`
+        : `<a class="btn wa" href="${url}" target="_blank" rel="noopener" data-manda="${c.id}">Apri WhatsApp e manda</a>`}
       ${L && L.dato ? `<button class="btn" data-loca="${c.id}|${m.id}" title="Immagine + testo insieme">+ Locandina</button>` : ''}
       <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto</button>
       <button class="btn piccolo" data-stato="non interessato|${c.id}">Non interessato</button>
@@ -1545,7 +1580,9 @@ document.addEventListener('click', e => {
   if(a === 'prefissi'){ correggiPrefissi(); return; }
   if(a === 'deseleziona'){ svuotaScelti(); salva(); disegna(); return; }
   if(a === 'tutte-oggi'){
-    S.scelti = codaOggi().map(x => x.c.id); salva(); disegna(); return;
+    // a quota finita la coda di oggi e' vuota: allora spunta quella di domani
+    const l = codaOggi().length ? codaOggi() : codaProssima(S.cfg.alGiorno);
+    S.scelti = l.map(x => x.c.id); salva(); disegna(); return;
   }
   if(a === 'raffica'){
     const coda = codaOggi();
@@ -1564,6 +1601,15 @@ document.addEventListener('click', e => {
     return;
   }
   if(a === 'esci-raffica'){ S.cfg.raffica = false; salva(); disegna(); return; }
+  if(a === 'raffica-piena'){
+    const ok = confirm(
+      'Per oggi hai gia mandato ' + inviatiOggi() + ' messaggi, cioe il tetto che ti sei dato.\n\n' +
+      'La coda e pronta: domani mattina apri e parte.\n\n' +
+      'Se vuoi alzare il tetto lo cambi in Impostazioni — ma e esattamente la cosa ' +
+      'che fa bloccare un numero da WhatsApp.\n\nVuoi andare in Impostazioni?');
+    if(ok){ S.cfg.scheda = 'impostazioni'; salva(); disegna(); }
+    return;
+  }
   if(a === 'scarica-prima'){
     let g = null; try{ g = localStorage.getItem(CHIAVE_PRIMA); }catch(e){}
     if(!g) return brindisi('Non c\'è nessuna copia da scaricare');

@@ -590,6 +590,33 @@ console.log('\n== 24. il tetto dei 25 vale anche per quelli scelti a mano ==');
   await p.context().close();
 }
 
+console.log('\n== 25. a quota finita i tasti NON spariscono ==');
+{ const p = await nuova();
+  await p.evaluate(() => {
+    S.contatti = Array.from({length:40}, (_,i) => ({
+      id:'f'+i, nome:'C'+i, numero:'3933344'+String(i).padStart(4,'0'),
+      paese:'IT', stato:'nuovo', invii:0, ultimoInvio:'', wa:'', storia:[] }));
+    S.cfg.alGiorno = 25; S.registro[OGGI()] = 25;      // oggi ho finito
+    salva(); S.cfg.scheda='oggi'; disegna();
+  });
+  await p.waitForTimeout(600);
+  const t = await p.locator('#app').innerText();
+  ok(/Per oggi hai finito/.test(t), 'dice che per oggi hai finito');
+  ok(/pronte per domani/.test(t), 'MA fa vedere la coda di domani: '
+     + (t.match(/\d+ pronte per domani/)||[''])[0]);
+  ok(await p.locator('[data-azione="tutte-oggi"]').count() === 1, '«Seleziona tutte» c\'e\' lo stesso');
+  ok(await p.locator('[data-azione="raffica-piena"]').count() === 1, 'e anche «Manda una dopo l\'altra»');
+  ok((await p.locator('.giro').count()) > 0, 'e si vedono le schede di chi tocca domani');
+  ok((await p.locator('.giro .btn.wa').count()) === 0, 'senza il tasto verde: domani, non adesso');
+  // seleziona tutte deve funzionare lo stesso
+  await p.locator('[data-azione="tutte-oggi"]').click(); await p.waitForTimeout(500);
+  const n = await p.evaluate(()=>S.scelti.length);
+  ok(n === 25, `spunta le 25 di domani (${n})`);
+  const t2 = await p.locator('#app').innerText();
+  ok(/25 spuntate/.test(t2), 'e lo dice');
+  await p.context().close();
+}
+
 console.log('\n== errori in pagina ==');
 console.log(errori.length ? errori.join('\n') : '  nessuno');
 console.log(`\n=== ${passate} prove passate, ${fallite} fallite ===`);
