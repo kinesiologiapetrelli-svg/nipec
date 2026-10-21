@@ -106,6 +106,13 @@ textarea.inp{min-height:7rem;resize:vertical;line-height:1.5}
 .s-interessato{background:var(--ok-fondo);color:var(--ok)}
 .s-no{background:var(--fondo);color:var(--tenue)}
 .s-info{background:var(--blu-tenue);color:var(--navy);font-weight:700}
+/* La barra di chi hai spuntato resta attaccata in basso allo schermo:
+   con cinquecento righe, in fondo alla pagina non la troveresti mai. */
+.barra-giu{position:fixed;left:0;right:0;bottom:0;z-index:30;border-radius:0;
+  border-top:3px solid var(--blu);box-shadow:0 -8px 28px rgba(18,58,99,.16);
+  max-height:62vh;overflow:auto;margin:0}
+.barra-giu .occhiello{margin-bottom:.1rem}
+body.con-barra{padding-bottom:15rem}
 .s-errato{background:var(--allerta-fondo);color:var(--allerta)}
 .s-stop{background:var(--allerta-fondo);color:var(--allerta)}
 
@@ -202,8 +209,8 @@ const CLASSE = {'nuovo':'s-nuovo','inviato':'s-inviato','risposto':'s-risposto',
 
 function statoIniziale(){
   return { contatti:[], scarti:[], modelli:JSON.parse(JSON.stringify(MODELLI_INIZIALI)),
-    cfg:{ alGiorno:25, attesa1:5, attesa2:7, scheda:'oggi', tema:'auto' },
-    registro:{} };
+    cfg:{ alGiorno:25, attesa1:5, attesa2:7, scheda:'oggi', tema:'auto', raffica:false },
+    scelti:[], manuale:[], registro:{} };
 }
 let S = carica();
 function carica(){
@@ -248,6 +255,8 @@ function carica(){
 function risistema(st){
   st.contatti = Array.isArray(st.contatti) ? st.contatti : [];
   st.scarti   = Array.isArray(st.scarti)   ? st.scarti   : [];
+  st.scelti   = Array.isArray(st.scelti)   ? st.scelti   : [];
+  st.manuale  = Array.isArray(st.manuale)  ? st.manuale  : [];
   st.modelli  = Array.isArray(st.modelli) && st.modelli.length ? st.modelli
               : JSON.parse(JSON.stringify(MODELLI_INIZIALI));
   // chi aveva già l'app non ha il quarto messaggio: glielo aggiungo senza
@@ -505,6 +514,61 @@ function codaDiOggi(){
   return codaCompleta().slice(0, resto);
 }
 
+/* ---------- quello che scegli tu ----------
+   La coda automatica decide lei chi e quale messaggio. Questa no: qui dentro
+   finisce chi hai spuntato in Rubrica, con il messaggio che hai scelto tu.
+   Sta davanti alla coda automatica, ma dentro lo stesso tetto giornaliero:
+   il limite dei messaggi al giorno non e' una regola mia, e' quello che
+   tiene il numero vivo. */
+function codaManuale(){
+  return (S.manuale || [])
+    .map(x => ({ c: S.contatti.find(k => k.id === x.c), m: S.modelli.find(k => k.id === x.m) }))
+    .filter(x => x.c && x.m && x.c.numero);
+}
+function restoDiOggi(){ return Math.max(0, S.cfg.alGiorno - inviatiOggi()); }
+
+/* Tutto quello che oggi si puo' mandare: prima quello che hai scelto tu,
+   poi chi ha detto si', poi la coda automatica. Tagliato al tetto. */
+function codaOggi(){
+  const m = codaManuale();
+  const gia = new Set(m.map(x => x.c.id));
+  const a = codaDiOggi().filter(x => !gia.has(x.c.id));
+  return m.concat(a).slice(0, restoDiOggi());
+}
+
+function scelto(id){ return (S.scelti || []).includes(id); }
+function cambiaScelto(id, si){
+  S.scelti = (S.scelti || []).filter(x => x !== id);
+  if(si) S.scelti.push(id);
+  salva(true); 
+}
+function svuotaScelti(){ S.scelti = []; }
+
+/* Mette in coda le persone spuntate, col messaggio scelto. */
+function mettiInCoda(passo){
+  const ids = (S.scelti || []).slice();
+  if(!ids.length) return brindisi('Non hai spuntato nessuno');
+  let aggiunti = 0, saltati = 0;
+  ids.forEach(id => {
+    const c = S.contatti.find(k => k.id === id);
+    if(!c || !c.numero){ saltati++; return; }
+    const m = modelloPer(c, passo);
+    if(!m){ saltati++; return; }
+    S.manuale = (S.manuale || []).filter(x => x.c !== id);
+    S.manuale.push({ c:id, m:m.id });
+    aggiunti++;
+  });
+  svuotaScelti();
+  S.cfg.scheda = 'oggi'; salva(); disegna();
+  const oltre = Math.max(0, aggiunti - restoDiOggi());
+  brindisi(`${aggiunti} in coda` + (saltati ? ` · ${saltati} saltati` : '')
+    + (oltre ? ` · ${oltre} oltre il tetto di oggi: domani` : ''));
+}
+function togliDallaCoda(id){
+  S.manuale = (S.manuale || []).filter(x => x.c !== id);
+  salva(); disegna();
+}
+
 function segnaInviato(cid){
   const c = S.contatti.find(x => x.id === cid); if(!c) return;
   c.invii = (c.invii||0) + 1;
@@ -513,6 +577,7 @@ function segnaInviato(cid){
   if(DA_SEGUIRE.includes(c.stato)) c.stato = 'informazioni mandate';
   else if(!FERMI.includes(c.stato)) c.stato = 'inviato';
   (c.storia = c.storia || []).push({ d:OGGI(), t:c.stato === 'informazioni mandate' ? 'informazioni' : 'inviato', p:c.invii });
+  S.manuale = (S.manuale || []).filter(x => x.c !== cid);   // fatto: esce dalla coda scelta a mano
   S.registro[OGGI()] = inviatiOggi() + 1;
   salva(); disegna();
 }
@@ -618,6 +683,7 @@ function disegna(){
   }
   app.innerHTML = avviso + ({oggi:vOggi, stato:vStato, rubrica:vRubrica, messaggi:vMessaggi,
                     importa:vImporta, impostazioni:vImpostazioni}[S.cfg.scheda] || vOggi)();
+  if(S.cfg.scheda !== 'rubrica') document.body.classList.remove('con-barra');
   if(S.cfg.scheda === 'rubrica') agganciaRubrica();
   if(S.cfg.scheda === 'stato')   agganciaStato();
 }
@@ -626,7 +692,8 @@ function disegna(){
 function vOggi(){
   if(!S.contatti.length) return `<div class="vuoto"><b>Non c'è ancora nessuno in rubrica.</b>
     Vai su <b>Importa</b> e incolla i contatti: nomi e numeri, come capita.</div>`;
-  const coda = codaDiOggi();
+  const coda = codaOggi();
+  if(S.cfg.raffica && !coda.length) S.cfg.raffica = false;   // finita: si spegne da sola
   const fatti = inviatiOggi(), quota = S.cfg.alGiorno, resto = codaCompleta().length;
   const n = contaStati();
   let h = `<div class="numeri" style="margin-bottom:.9rem">
@@ -648,6 +715,37 @@ function vOggi(){
     I promemoria partono da soli quando scadono i giorni di attesa.</div>`;
 
   h += strisciaMandati();
+
+  /* Raffica: una scheda per volta, col contatore. WhatsApp non si fa mandare
+     venticinque messaggi in un colpo — ogni messaggio vuole il suo invio, e
+     non c'e' modo di aggirarlo. Ma almeno l'app ti serve la prossima da sola,
+     senza tornare alla lista: due tocchi a testa invece di quattro. */
+  if(S.cfg.raffica && coda.length){
+    const r = S.raffica || { tot: coda.length, inizio: fatti };
+    const fatte = Math.max(0, fatti - r.inizio);
+    const {c, m} = coda[0];
+    return h + `<div class="riquadro" style="margin-bottom:.9rem;border-left:3px solid var(--verde-wa)">
+      <div class="occhiello">Raffica</div>
+      <h2>${fatte + 1} di ${r.tot}</h2>
+      <p class="tenue" style="margin:.3rem 0 .8rem">Apri, manda, torna qui: ti servo la prossima da sola.
+        Ne restano ${coda.length}. <b>Non c'è modo di mandarle tutte in un colpo</b> — WhatsApp vuole
+        il tuo invio su ognuna, e non si aggira.</p>
+      <div class="fila"><button class="btn" data-azione="esci-raffica">Esci dalla raffica</button></div>
+    </div>` + schedaGiro(c, m);
+  }
+
+  const nScelti = coda.filter(({c}) => scelto(c.id)).length;
+  h += `<div class="riquadro" style="margin-bottom:.9rem">
+    <div class="fila" style="align-items:center;flex-wrap:wrap">
+      <div style="flex:1 1 11rem">
+        <b>${coda.length} da mandare oggi</b>
+        <div class="tenue">${nScelti ? nScelti + ' spuntate' : 'nessuna spuntata: parte tutta la coda'}</div>
+      </div>
+      <button class="btn" data-azione="${nScelti === coda.length ? 'deseleziona' : 'tutte-oggi'}">
+        ${nScelti === coda.length ? 'Togli le spunte' : 'Seleziona tutte'}</button>
+      <button class="btn primario" data-azione="raffica">
+        Manda ${nScelti || coda.length} una dopo l'altra</button>
+    </div></div>`;
   h += `<p class="tenue" style="margin-bottom:.7rem">Si apre, si rilegge, si manda. Il messaggio è già scritto:
      cambialo pure prima di premere invio, se quella persona merita una riga sua.</p>`;
   h += coda.map(({c,m}) => schedaGiro(c,m)).join('');
@@ -698,10 +796,13 @@ function schedaGiro(c,m){
   const quando = c.ultimoInvio ? `ultimo messaggio ${giorniDa(c.ultimoInvio)} giorni fa` : 'mai scritto';
   return `<div class="giro">
     <div class="capo">
-      <div style="flex:1 1 14rem">
-        <div class="nome">${esc(c.nome||c.centro||'')||'<span style=\'color:var(--avviso)\'>senza nome</span>'}</div>
+      <div style="flex:1 1 14rem;display:flex;align-items:flex-start;gap:.6rem">
+        <input type="checkbox" data-spunta="${c.id}" ${scelto(c.id)?'checked':''}
+          style="margin-top:.35rem;flex:none" title="spunta per la raffica">
+        <div><div class="nome">${esc(c.nome||c.centro||'')||'<span style=\'color:var(--avviso)\'>senza nome</span>'}</div>
         <div class="meta">${esc([c.centro&&c.centro!==c.nome?c.centro:'', c.citta, numeroBello(c.numero)].filter(Boolean).join(' · '))}</div>
-      </div>
+        ${(S.manuale||[]).some(x=>x.c===c.id) ? `<div class="meta" style="color:var(--blu)">scelto da te · ${esc(m.nome)} <button class="btn piccolo" data-togli-coda="${c.id}" style="padding:.1rem .4rem;font-size:.72rem">togli</button></div>` : ''}
+      </div></div>
       <div style="text-align:right">
         <span class="stato ${CLASSE[c.stato]||'s-nuovo'}">${esc(c.stato||'nuovo')}</span>
         <div class="meta" style="margin-top:.2rem">${esc(m.nome)} · ${quando}</div>
@@ -950,7 +1051,8 @@ function vRubrica(){
       </select>
     </div>
     <div id="tabella"></div>
-  </div>`;
+  </div>
+  <div id="barraScelti"></div>`;
 }
 function agganciaRubrica(){
   const dipingi = () => {
@@ -960,11 +1062,17 @@ function agganciaRubrica(){
       (!f || (c.stato||'nuovo')===f) &&
       (!q || [c.nome,c.centro,c.citta,c.numero].join(' ').toLowerCase().includes(q)));
     const tot = l.length; l = l.slice(0,300);
+    visibili = l.map(c => c.id);
+    const tuttiSpuntati = l.length && l.every(c => scelto(c.id));
     document.getElementById('tabella').innerHTML = !tot
       ? `<div class="vuoto">Nessuno con questi filtri.</div>`
       : `<p class="tenue" style="margin-bottom:.4rem">${tot} contatti${tot>300?' — ne mostro i primi 300':''}</p>
-      <table><thead><tr><th>Nome</th><th>Centro · città</th><th>Numero</th><th>Stato</th><th>Invii</th><th></th></tr></thead><tbody>
-      ${l.map(c=>`<tr>
+      <table><thead><tr>
+        <th style="width:2.2rem"><input type="checkbox" id="tuttiRub" ${tuttiSpuntati?'checked':''}
+          title="spunta tutti quelli che vedi"></th>
+        <th>Nome</th><th>Centro · città</th><th>Numero</th><th>Stato</th><th>Invii</th><th></th></tr></thead><tbody>
+      ${l.map(c=>`<tr${scelto(c.id)?' style="background:var(--blu-tenue)"':''}>
+        <td><input type="checkbox" data-spunta="${c.id}" ${scelto(c.id)?'checked':''}></td>
         <td><b>${esc(c.nome||'—')}</b></td>
         <td class="tenue">${esc([c.centro,c.citta].filter(Boolean).join(' · ')||'—')}</td>
         <td style="white-space:nowrap">${esc(numeroBello(c.numero))}</td>
@@ -972,7 +1080,45 @@ function agganciaRubrica(){
         <td style="text-align:center">${c.invii||0}</td>
         <td style="text-align:right"><button class="btn piccolo" data-apri="${c.id}">apri</button></td>
       </tr>`).join('')}</tbody></table>`;
+    const t = document.getElementById('tuttiRub');
+    if(t) t.addEventListener('change', () => {
+      visibili.forEach(id => cambiaScelto(id, t.checked));
+      dipingi(); barra();
+    });
+    barra();
   };
+
+  /* La barra compare solo quando hai spuntato qualcuno. */
+  const barra = () => {
+    const n = (S.scelti || []).length;
+    const el = document.getElementById('barraScelti');
+    if(!el) return;
+    document.body.classList.toggle('con-barra', !!n);
+    if(!n){ el.innerHTML = ''; return; }
+    const resto = restoDiOggi();
+    // chi riceverebbe il 2 o il 3 senza aver mai ricevuto il primo
+    const mai = (S.scelti || []).map(id => S.contatti.find(c => c.id === id))
+                 .filter(c => c && !(c.invii || 0)).length;
+    el.innerHTML = `<div class="riquadro barra-giu">
+      <div class="occhiello">Scelti da te</div>
+      <h2>${n} ${n === 1 ? 'contatto spuntato' : 'contatti spuntati'}</h2>
+      <p class="tenue" style="margin:.3rem 0 .8rem">Scegli quale messaggio mandare. Finiscono in cima a
+        <b>Oggi</b>, prima della coda automatica.${
+        n > resto ? ` <b>Oggi ne puoi mandare ancora ${resto}</b>: gli altri ${n - resto} restano in coda per domani.` : ''}</p>
+      <div class="fila" style="flex-wrap:wrap">
+        ${[1,2,3,4].map(k => {
+          const nomi = { 1:'1 · Primo messaggio', 2:'2 · Promemoria', 3:'3 · Ultima', 4:'4 · Le informazioni' };
+          return `<button class="btn${k===1?' primario':''}" data-coda="${k}">${nomi[k]}</button>`;
+        }).join('')}
+        <button class="btn" data-azione="deseleziona" style="margin-left:auto">Togli le spunte</button>
+      </div>
+      ${mai ? `<p class="tenue" style="margin-top:.6rem"><b>Nota:</b> ${mai} ${mai===1?'non ha':'non hanno'}
+        mai ricevuto il primo messaggio. Se mandi il 2 o il 3 parte lo stesso — ma parla di
+        «ti avevo scritto», e a chi non hai mai scritto suona falso.</p>` : ''}
+    </div>`;
+  };
+
+  let visibili = [];
   document.getElementById('cerca').addEventListener('input', dipingi);
   document.getElementById('filtro').addEventListener('change', dipingi);
   dipingi();
@@ -1358,13 +1504,15 @@ function csv(){
 
 /* ---------- i clic ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-scheda],[data-manda],[data-stato],[data-wa],[data-loca],[data-locvia],[data-scarto],[data-azione],[data-apri]');
+  const t = e.target.closest('[data-scheda],[data-manda],[data-stato],[data-wa],[data-loca],[data-locvia],[data-coda],[data-togli-coda],[data-scarto],[data-azione],[data-apri]');
   if(!t) return;
   if(t.dataset.scheda){ S.cfg.scheda = t.dataset.scheda; salva(); disegna(); return; }
   if(t.dataset.manda){ setTimeout(()=>segnaInviato(t.dataset.manda), 400); return; }   // il link parte lo stesso
   if(t.dataset.stato){ const [s,cid] = t.dataset.stato.split('|'); cambiaStato(cid,s); return; }
   if(t.dataset.wa){ const [v,cid] = t.dataset.wa.split('|'); segnaWA(cid,v); return; }
   if(t.dataset.loca){ const [cid,mid] = t.dataset.loca.split('|'); mandaConLocandina(cid,mid); return; }
+  if(t.dataset.coda){ mettiInCoda(parseInt(t.dataset.coda)); return; }
+  if(t.dataset.togliCoda){ togliDallaCoda(t.dataset.togliCoda); return; }
   if(t.dataset.locvia){ const mid = t.dataset.locvia;
     if(confirm('Togliere la locandina da questo messaggio?')){ delete LOC[mid]; salvaLoc(); disegna(); } return; }
   if(t.dataset.scarto){ const [az,sid] = t.dataset.scarto.split('|'); gestisciScarto(az,sid); return; }
@@ -1395,6 +1543,27 @@ document.addEventListener('click', e => {
     importa(ris, document.getElementById('doppioni').value); return;
   }
   if(a === 'prefissi'){ correggiPrefissi(); return; }
+  if(a === 'deseleziona'){ svuotaScelti(); salva(); disegna(); return; }
+  if(a === 'tutte-oggi'){
+    S.scelti = codaOggi().map(x => x.c.id); salva(); disegna(); return;
+  }
+  if(a === 'raffica'){
+    const coda = codaOggi();
+    const scelte = coda.filter(x => scelto(x.c.id));
+    const batch = scelte.length ? scelte : coda;
+    if(!batch.length) return brindisi('Non c\'è niente da mandare');
+    // se hai spuntato qualcuno, la raffica manda solo quelli: gli altri tornano in fondo
+    if(scelte.length){
+      S.manuale = (S.manuale || []).filter(x => batch.some(b => b.c.id === x.c));
+      batch.forEach(({c, m}) => {
+        if(!(S.manuale || []).some(x => x.c === c.id)) S.manuale.push({ c:c.id, m:m.id });
+      });
+    }
+    S.raffica = { tot: batch.length, inizio: inviatiOggi() };
+    S.cfg.raffica = true; svuotaScelti(); salva(); disegna();
+    return;
+  }
+  if(a === 'esci-raffica'){ S.cfg.raffica = false; salva(); disegna(); return; }
   if(a === 'scarica-prima'){
     let g = null; try{ g = localStorage.getItem(CHIAVE_PRIMA); }catch(e){}
     if(!g) return brindisi('Non c\'è nessuna copia da scaricare');
@@ -1567,6 +1736,11 @@ function apriContatto(cid){
 
 /* file in ingresso */
 document.addEventListener('change', e => {
+  if(e.target.dataset && e.target.dataset.spunta){
+    cambiaScelto(e.target.dataset.spunta, e.target.checked);
+    disegna();
+    return;
+  }
   if(e.target.id === 'file'){
     const f = e.target.files[0]; if(!f) return;
     const l = new FileReader();

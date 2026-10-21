@@ -476,6 +476,120 @@ console.log('\n== 20. il controllo sul testo del messaggio ==');
   await p.context().close();
 }
 
+console.log('\n== 21. scegliere dalla Rubrica chi e quale messaggio ==');
+{ const p = await nuova();
+  await p.evaluate(() => {
+    S.contatti = [
+      {id:'r1',nome:'Prima',centro:'',citta:'Roma',numero:'393331111111',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]},
+      {id:'r2',nome:'Seconda',centro:'',citta:'Tirane',numero:'355692129786',paese:'AL',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]},
+      {id:'r3',nome:'Terza',centro:'',citta:'Bari',numero:'393333333333',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}
+    ];
+    salva(); S.cfg.scheda='rubrica'; disegna();
+  });
+  await p.waitForTimeout(500);
+  ok(await p.locator('[data-spunta]').count() === 3, 'ogni riga ha la sua spunta');
+  ok(await p.locator('#tuttiRub').count() === 1, "c'e' la spunta «tutti»");
+  // ne spunto due
+  await p.locator('[data-spunta="r1"]').check(); await p.waitForTimeout(350);
+  await p.locator('[data-spunta="r2"]').check(); await p.waitForTimeout(350);
+  const t = await p.locator('#app').innerText();
+  ok(/2 contatti spuntati/.test(t), 'la barra dice quanti sono: ' + (t.match(/\d+ contatti? spuntat\w+/)||[''])[0]);
+  const pos = await p.locator('#barraScelti .barra-giu').evaluate(e => getComputedStyle(e).position);
+  ok(pos === 'fixed', 'e resta attaccata in basso allo schermo, non in fondo alla pagina');
+  ok(await p.evaluate(()=>document.body.classList.contains('con-barra')),
+     'con spazio sotto, per non coprire le ultime righe');
+  ok(/Primo messaggio/.test(t) && /Le informazioni/.test(t), 'e offre tutti e quattro i messaggi');
+  // li metto in coda col messaggio 1
+  await p.locator('[data-coda="1"]').click(); await p.waitForTimeout(700);
+  const S2 = await p.evaluate(()=>JSON.parse(JSON.stringify(S)));
+  ok(S2.manuale.length === 2, `in coda ce ne sono 2 (${S2.manuale.length})`);
+  ok(S2.scelti.length === 0, 'le spunte si svuotano dopo');
+  ok(S2.cfg.scheda === 'oggi', 'e ti porta su Oggi');
+  const lingue = await p.evaluate(()=>codaManuale().map(x=>({n:x.c.nome, l:x.m.paese, passo:x.m.passo})));
+  ok(lingue.every(x=>x.passo===1), 'tutti col messaggio 1');
+  ok(lingue.find(x=>x.n==='Seconda').l === 'AL', "e all'albanese tocca quello albanese");
+  ok(lingue.find(x=>x.n==='Prima').l === 'IT', "all'italiana quello italiano");
+  // la terza NON e' in coda manuale
+  ok(!S2.manuale.some(x=>x.c==='r3'), 'chi non hai spuntato non ci finisce');
+  await p.context().close();
+}
+
+console.log('\n== 22. il messaggio 2 a chi non ha mai ricevuto il primo ==');
+{ const p = await nuova();
+  await p.evaluate(() => {
+    S.contatti = [{id:'z',nome:'Mai scritta',numero:'393331111111',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}];
+    S.scelti = ['z']; salva(); S.cfg.scheda='rubrica'; disegna();
+  });
+  await p.waitForTimeout(500);
+  const t = await p.locator('#app').innerText();
+  ok(/mai ricevuto il primo messaggio/i.test(t), 'avvisa che non ha mai ricevuto il primo');
+  await p.locator('[data-coda="2"]').click(); await p.waitForTimeout(600);
+  const q = await p.evaluate(()=>codaManuale().map(x=>x.m.passo));
+  ok(q[0] === 2, 'ma lo manda lo stesso: comandi tu');
+  await p.context().close();
+}
+
+console.log('\n== 23. la raffica da Oggi ==');
+{ const p = await nuova();
+  await p.evaluate(() => {
+    S.contatti = Array.from({length:5}, (_,i) => ({
+      id:'g'+i, nome:'Cliente '+i, centro:'', citta:'Roma', numero:'39333111111'+i,
+      paese:'IT', stato:'nuovo', invii:0, ultimoInvio:'', wa:'', storia:[] }));
+    salva(); S.cfg.scheda='oggi'; disegna();
+  });
+  await p.waitForTimeout(500);
+  let t = await p.locator('#app').innerText();
+  ok(/5 da mandare oggi/.test(t), 'la testa dice quante sono');
+  ok(/Seleziona tutte/.test(t), "c'e' «Seleziona tutte»");
+  ok(/una dopo l'altra/.test(t), "e il tasto per mandarle una dopo l'altra");
+  // seleziona tutte
+  await p.locator('[data-azione="tutte-oggi"]').click(); await p.waitForTimeout(500);
+  ok((await p.evaluate(()=>S.scelti.length)) === 5, 'le spunta tutte e 5');
+  t = await p.locator('#app').innerText();
+  ok(/5 spuntate/.test(t), 'e lo dice');
+  // parte la raffica
+  await p.locator('[data-azione="raffica"]').click(); await p.waitForTimeout(600);
+  t = await p.locator('#app').innerText();
+  ok(/raffica/i.test(t), 'entra in raffica');
+  ok(/1 di 5/.test(t), 'col contatore: ' + (t.match(/\d+ di \d+/)||[''])[0]);
+  ok(/modo di mandarle tutte in un colpo/i.test(t), 'e dice la verita su WhatsApp');
+  const schede = await p.locator('.giro').count();
+  ok(schede === 1, `mostra una scheda per volta (${schede})`);
+  // mando la prima
+  const id1 = await p.evaluate(()=>document.querySelector('[data-manda]').dataset.manda);
+  await p.evaluate(i=>segnaInviato(i), id1); await p.waitForTimeout(500);
+  t = await p.locator('#app').innerText();
+  ok(/2 di 5/.test(t), 'avanza da sola alla seconda: ' + (t.match(/\d+ di \d+/)||[''])[0]);
+  ok((await p.locator('.giro').count()) === 1, 'sempre una per volta');
+  // esco
+  await p.locator('[data-azione="esci-raffica"]').click(); await p.waitForTimeout(500);
+  ok((await p.evaluate(()=>S.cfg.raffica)) === false, 'si esce quando vuoi');
+  ok((await p.locator('.giro').count()) > 1, 'e tornano tutte le schede');
+  await p.context().close();
+}
+
+console.log('\n== 24. il tetto dei 25 vale anche per quelli scelti a mano ==');
+{ const p = await nuova();
+  const r = await p.evaluate(() => {
+    S.contatti = Array.from({length:40}, (_,i) => ({
+      id:'q'+i, nome:'C'+i, numero:'3933322'+String(i).padStart(4,'0'),
+      paese:'IT', stato:'nuovo', invii:0, ultimoInvio:'', wa:'', storia:[] }));
+    S.cfg.alGiorno = 25; S.registro[OGGI()] = 20;   // ne ho gia mandati 20
+    S.scelti = S.contatti.slice(0,30).map(c=>c.id);
+    salva();
+    return { resto: restoDiOggi() };
+  });
+  ok(r.resto === 5, `restano 5 da mandare oggi (${r.resto})`);
+  await p.evaluate(()=>{ S.cfg.scheda='rubrica'; disegna(); }); await p.waitForTimeout(500);
+  const t = await p.locator('#app').innerText();
+  ok(/ne puoi mandare ancora 5/.test(t), 'la barra avvisa che oggi ne restano 5');
+  await p.locator('[data-coda="1"]').click(); await p.waitForTimeout(700);
+  const n = await p.evaluate(()=>({ coda: codaManuale().length, oggi: codaOggi().length }));
+  ok(n.coda === 30, `in coda ce ne sono 30 (${n.coda})`);
+  ok(n.oggi === 5, `ma oggi ne mostra 5 (${n.oggi}) — gli altri domani`);
+  await p.context().close();
+}
+
 console.log('\n== errori in pagina ==');
 console.log(errori.length ? errori.join('\n') : '  nessuno');
 console.log(`\n=== ${passate} prove passate, ${fallite} fallite ===`);
