@@ -979,6 +979,25 @@ function agganciaRubrica(){
 }
 
 /* ---------- MESSAGGI ---------- */
+/* Il controllo sul testo. Serve a una cosa sola: se manca {nome}, il messaggio
+   parte con «Ciao, sono Giorgio» — e si vede subito che e' un messaggio uguale
+   per tutti. E' la differenza fra una che risponde e una che blocca. */
+function guardiaTesto(m){
+  const t = String(m.testo || '');
+  const problemi = [];
+  if(!/\{nome\}/.test(t))
+    problemi.push('<b>Manca {nome}:</b> il messaggio parte con «Ciao, sono Giorgio», senza il nome di chi lo riceve. Scrivi <b>{nome}</b> dopo «Ciao».');
+  if(/\]\(/.test(t))
+    problemi.push('<b>C\'è un link fra parentesi quadre:</b> WhatsApp non lo trasforma, lo scrive com\'è. Lascia solo l\'indirizzo.');
+  if(/^\*[^\s*]/m.test(t) === false && /^\*\s/m.test(t))
+    problemi.push('Gli asterischi a inizio riga WhatsApp li scrive così come sono. Vanno benissimo come elenco — ma se volevi il <b>grassetto</b>, si scrive *senza spazio* attaccato alla parola.');
+  if(t.length > 700)
+    problemi.push('<b>È lungo:</b> ' + t.length + ' caratteri. Su WhatsApp si legge in piedi, fra una cliente e l\'altra.');
+  if(!problemi.length) return '';
+  return `<div class="avviso giallo" style="margin:-.4rem 0 .9rem">
+    ${problemi.map(x => '<div style="margin:.15rem 0">' + x + '</div>').join('')}</div>`;
+}
+
 /* Sotto ogni messaggio: la locandina. Due caselle, perché WhatsApp non accetta
    allegati da un link e questo non si può aggirare. */
 function bloccoLocandina(m){
@@ -1030,6 +1049,7 @@ function vMessaggi(){
       ${S.modelli.filter(m=>m.paese===p).sort((a,b)=>a.passo-b.passo).map(m=>`
         <label class="campo"><span>${m.passo} · ${esc(m.nome)}</span>
         <textarea class="inp" data-modello="${m.id}" style="min-height:9.5rem">${esc(m.testo)}</textarea></label>
+        ${guardiaTesto(m)}
         ${bloccoLocandina(m)}`).join('')}
     </div>`).join('') +
   `<button class="btn primario" data-azione="salva-modelli">Salva i messaggi e i link</button>`;

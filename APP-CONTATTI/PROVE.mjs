@@ -446,6 +446,36 @@ console.log('\n== 19. un contatto rotto non porta via la rubrica ==');
   await ctx.close();
 }
 
+console.log('\n== 20. il controllo sul testo del messaggio ==');
+{ const p = await nuova();
+  // il testo che Giorgio aveva davvero nell'app: senza {nome}
+  await p.evaluate(() => {
+    S.modelli.find(m=>m.id==='it1').testo =
+      "Ciao, sono Giorgio di NIPEC.\n\nLA FORMULA\n* 500 euro al mese\n* zero anticipo";
+    salva(); S.cfg.scheda='messaggi'; disegna();
+  });
+  await p.waitForTimeout(500);
+  const t = await p.locator('#app').innerText();
+  ok(/manca \{nome\}/i.test(t), 'avvisa che manca {nome}');
+  ok(/Ciao, sono Giorgio/.test(t), 'e spiega come arriva il messaggio');
+  // con {nome} l'avviso sparisce
+  await p.evaluate(() => {
+    S.modelli.find(m=>m.id==='it1').testo = "Ciao {nome}, sono Giorgio di NIPEC.";
+    salva(); disegna();
+  });
+  await p.waitForTimeout(400);
+  const t2 = await p.locator('#app').innerText();
+  ok(!/manca \{nome\}/i.test(t2), 'con {nome} dentro, l\'avviso sparisce');
+  // il link markdown
+  await p.evaluate(() => {
+    S.modelli.find(m=>m.id==='it1').testo = "Ciao {nome}, guarda [qui](https://x.it)";
+    salva(); disegna();
+  });
+  await p.waitForTimeout(400);
+  ok(/parentesi quadre/i.test(await p.locator('#app').innerText()), 'e avvisa anche sui link fra parentesi quadre');
+  await p.context().close();
+}
+
 console.log('\n== errori in pagina ==');
 console.log(errori.length ? errori.join('\n') : '  nessuno');
 console.log(`\n=== ${passate} prove passate, ${fallite} fallite ===`);
