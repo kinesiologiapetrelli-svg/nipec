@@ -1,10 +1,22 @@
-# Netlify pubblica SOLO questa cartella, non la radice del repository.
+# Questo file vale SOLO se su Netlify la "Base directory" del sito è
+# impostata a APP-CONTATTI. In quel caso Netlify legge questo netlify.toml
+# e ignora quello nella radice del repository (che è dell'app laser).
+#
+# publish = "." vuol dire: pubblica questa cartella, quella della base.
+# Se scrivessi "APP-CONTATTI" cercherebbe APP-CONTATTI/APP-CONTATTI.
 [build]
-  publish = "APP-CONTATTI"
+  publish = "."
   command = ""
 
-# Il guscio offline e il manifest non vanno mai messi in cache dal CDN:
-# altrimenti una versione nuova non arriva ai telefoni già installati.
+# L'app è una pagina sola: qualunque indirizzo sbagliato torna a casa.
+# I file veri (sw.js, icone, manifest) vengono serviti prima.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Il guscio offline e il manifest non vanno mai messi in cache dai server
+# intermedi: altrimenti una versione nuova non arriva ai telefoni installati.
 [[headers]]
   for = "/sw.js"
   [headers.values]
