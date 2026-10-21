@@ -245,8 +245,43 @@ function numeroWA(grezzo, paese){
    Il menu serve solo ai numeri scritti in locale, senza prefisso. */
 function paeseDi(num, ripiego){
   if(/^355/.test(num)) return 'AL';
+  if(/^383/.test(num)) return 'AL';   // Kosovo: si parla albanese, il messaggio è quello
   if(/^39/.test(num))  return 'IT';
   return ripiego || 'IT';
+}
+
+/* Il codice che Giorgio scrive davanti al nome dice già il paese:
+     A0323TR  AL0125DR  KOS0425GJ  N0324  IT0424RO
+   prefisso + mese/anno + sigla della città. È la fonte più sicura che
+   abbiamo, più del menu a tendina: lo legge da lì. */
+const PAESE_CODICE = { A:'AL', AL:'AL', KOS:'AL', KS:'AL', N:'IT', IT:'IT' };
+function paeseDaNome(nome){
+  const m = String(nome || '').match(/^(AL|A|KOS|KS|IT|N)[\s]?[\dO]{4}/i);
+  if(!m) return '';
+  return PAESE_CODICE[m[1].toUpperCase()] || '';
+}
+
+/* Un numero scritto in locale, senza prefisso. 3xx xxx xxxx è un cellulare
+   italiano. 06x xxx xxxx è un cellulare albanese — in Italia quel 06 è il
+   fisso di Roma, ma su WhatsApp un fisso non serve a niente, quindi davanti
+   a 06 + otto cifre la risposta giusta è Albania. */
+function paeseDalNumeroLocale(grezzo){
+  const d = String(grezzo || '').replace(/\D/g, '');
+  if(/^3\d{8,9}$/.test(d))  return 'IT';
+  if(/^06\d{8}$/.test(d))   return 'AL';
+  return '';
+}
+
+/* Tutto quello che sappiamo, dal più attendibile al meno. L'ultimo è il
+   menu a tendina: serve solo quando non c'è nessun altro indizio. */
+function decidiPaese(grezzo, nome, colonnaPaese, tendina){
+  const num = String(grezzo || '').replace(/[^\d+]/g, '');
+  if(/^\+?355/.test(num) || /^00355/.test(num)) return 'AL';
+  if(/^\+?39\d/.test(num) && !/^\+?390[67]\d{8}$/.test(num)) return 'IT';
+  if(colonnaPaese) return colonnaPaese;
+  const dn = paeseDaNome(nome);        if(dn) return dn;
+  const dl = paeseDalNumeroLocale(num); if(dl) return dl;
+  return tendina || 'IT';
 }
 /* Un numero buono per WhatsApp. Albania: 355 + 6x + 8 cifre.
    Italia: 39 + 3xx + 8 o 9 cifre, oppure un fisso 390…
@@ -254,7 +289,8 @@ function paeseDi(num, ripiego){
    non lo importo: finisce negli scarti con scritto perche'. */
 function numeroBuono(n){
   if(/^355/.test(n)) return /^3556\d{8}$/.test(n);
-  if(/^39/.test(n))  return /^393\d{8,9}$/.test(n) || /^390\d{7,10}$/.test(n);
+  // in Italia WhatsApp sta sui cellulari: 3xx. Un fisso non riceve.
+  if(/^39/.test(n))  return /^393\d{8,9}$/.test(n);
   return /^\d{10,15}$/.test(n);
 }
 function perche(n){
@@ -262,6 +298,7 @@ function perche(n){
   if(n.length < 10) return 'troppo corto: ' + numeroBello(n);
   if(n.length > 15) return 'due numeri nella stessa casella: ' + n;
   if(/^355/.test(n)) return 'non e\' un cellulare albanese: ' + numeroBello(n);
+  if(/^390/.test(n)) return 'sembra un fisso italiano: su WhatsApp non arriva';
   if(/^39/.test(n))  return 'non e\' un cellulare italiano: ' + numeroBello(n);
   return 'numero fuori formato: ' + n;
 }
@@ -385,7 +422,8 @@ const SCHEDE = [
 function disegna(){
   // barra delle schede
   const coda = codaDiOggi().length;
-  const daSegnare = scrittiIl(ieri()).filter(c => c.stato === 'inviato').length + S.scarti.length;
+  const daSegnare = scrittiIl(ieri()).filter(c => c.stato === 'inviato').length
+                  + S.scarti.length + prefissiStorti().length;
   document.getElementById('schede').innerHTML = SCHEDE.map(([k,t]) =>
     `<button data-scheda="${k}" aria-current="${S.cfg.scheda===k}">${t}${
       k==='oggi'  && coda       ? `<span class="pallina">${coda}</span>` :
@@ -485,6 +523,46 @@ function contaStati(){
   return n;
 }
 
+/* ---------- riparazione dei prefissi sbagliati ----------
+   Chi ha importato con il menu su «Italia» si ritrova i cellulari albanesi
+   con il +39 davanti: il messaggio non arriva, e per di più parte in italiano
+   a un centro di Tirana. Qui li trovo e li raddrizzo, uno per uno, dicendo
+   prima quanti sono. Non tocco niente senza dirlo. */
+function prefissiStorti(){
+  return S.contatti.filter(c => {
+    const n = String(c.numero || '');
+    // 39 + 0 + 6x + otto cifre: è un cellulare albanese travestito da fisso di Roma
+    if(/^390[67]\d{8}$/.test(n)) return true;
+    // il numero dice una cosa e il campo paese ne dice un'altra
+    if(/^355/.test(n) && c.paese !== 'AL') return true;
+    if(/^393/.test(n) && c.paese !== 'IT') return true;
+    return false;
+  });
+}
+function nuovoNumero(c){
+  const n = String(c.numero || '');
+  if(/^390[67]\d{8}$/.test(n)) return '355' + n.slice(3).replace(/^0/, '');
+  return n;
+}
+async function correggiPrefissi(){
+  const storti = prefissiStorti();
+  if(!storti.length) return brindisi('Nessun prefisso da correggere');
+  const cambiaNumero = storti.filter(c => nuovoNumero(c) !== c.numero);
+  const esistenti = new Set(S.contatti.map(c => c.numero));
+  let fatti = 0, doppi = 0;
+  storti.forEach(c => {
+    const nn = nuovoNumero(c);
+    if(nn !== c.numero){
+      if(esistenti.has(nn)){ doppi++; return; }   // c'è già: non creo un gemello
+      esistenti.delete(c.numero); esistenti.add(nn); c.numero = nn;
+    }
+    c.paese = paeseDi(c.numero, c.paese);
+    fatti++;
+  });
+  salva(); disegna();
+  brindisi(`${fatti} contatti raddrizzati` + (doppi ? ` · ${doppi} erano doppioni, lasciati stare` : ''));
+}
+
 /* ---------- STATO: chi ho scritto, quando, e che cosa ne è uscito ----------
    Quello che un'app nel telefono NON può sapere da sola:
      · se un numero è registrato su WhatsApp,
@@ -535,6 +613,25 @@ function vStato(){
     <div class="numero"><div class="v" style="color:var(--ok)">${risposte.length}</div><div class="e">hanno risposto</div></div>
     <div class="numero"><div class="v" style="color:var(--avviso)">${morti.length}</div><div class="e">non su WhatsApp</div></div>
   </div>`;
+
+  /* prima di tutto il resto: i numeri con il prefisso sbagliato.
+     Finché ci sono, ogni messaggio che parte da lì è buttato. */
+  const storti = prefissiStorti();
+  if(storti.length){
+    const esempi = storti.slice(0,3).map(c =>
+      `${esc(c.nome || c.centro || '—')} <span class="tenue">${esc(numeroBello(c.numero))} → ${esc(numeroBello(nuovoNumero(c)))}</span>`).join('<br>');
+    h += `<div class="riquadro" style="margin-bottom:.9rem">
+      <div class="occhiello">Da raddrizzare</div>
+      <h2>${storti.length} contatti hanno il prefisso sbagliato</h2>
+      <p class="tenue" style="margin:.3rem 0 .6rem">Sono cellulari albanesi importati con il
+        <b>+39</b> davanti: il messaggio non arriva, e partirebbe pure in italiano a un centro
+        di Tirana. Succede quando si importa con il menu del paese su «Italia».</p>
+      <p style="margin-bottom:.7rem;line-height:1.6">${esempi}${storti.length>3?`<br><span class="tenue">…e altri ${storti.length-3}</span>`:''}</p>
+      <button class="btn primario" data-azione="prefissi">Raddrizza tutti e ${storti.length}</button>
+      <p class="tenue" style="margin-top:.5rem">Cambio solo il prefisso e il paese. Nomi, città,
+        storico e messaggi già mandati restano come sono.</p>
+    </div>`;
+  }
 
   /* il richiamo di ogni giorno: il lavoro di ieri, da chiudere in dieci tocchi */
   if(daIeri.length){
@@ -835,17 +932,15 @@ function perColonne(righe, sep, m, paese, intest){
   righe.forEach((riga, k) => {
     const pz = spezza(riga, sep);
     const dai = campo => m[campo] === undefined ? '' : (pz[m[campo]] || '').trim();
-    const pa  = paeseScritto(dai('paese'), paese);
+    const nomeRiga = [dai('nome'), dai('cognome')].filter(Boolean).join(' ').trim();
     // la prima colonna di telefono che ha davvero qualcosa dentro
     let grezzo = '';
     for(const i of m.numeri){ const v = primoNumero(pz[i] || ''); if(v){ grezzo = v; break; } }
+    const pa  = decidiPaese(grezzo, nomeRiga, paeseScritto(dai('paese'), ''), paese);
     const num = numeroWA(grezzo, pa);
     if(!num) return;                       // riga davvero senza telefono: non è uno scarto
-    const r = {
-      nome:   [dai('nome'), dai('cognome')].filter(Boolean).join(' ').trim(),
-      centro: dai('centro'), citta: dai('citta'), note: dai('note'),
-      numero: num, paese: paeseDi(num, pa)
-    };
+    const r = { nome: nomeRiga, centro: dai('centro'), citta: dai('citta'),
+                note: dai('note'), numero: num, paese: paeseDi(num, pa) };
     if(numeroBuono(num)) buoni.push(r);
     else scarti.push(Object.assign(r, { riga:k + 2, perche: perche(num) }));
   });
@@ -868,16 +963,17 @@ function colNaso(righe, paese){
       const resto = riga.replace(t[0], '').replace(/[;,\t]+/g, ' ').trim();
       altri = resto ? [resto] : [];
     } else {
-      num = numeroWA(primoNumero(pezzi[iNum]), paese);
       altri = pezzi.filter((_, i) => i !== iNum).filter(Boolean);
       if(!altri.length){
         const resto = pezzi[iNum].replace(/[\d+][\d\s().\-]{7,}/, '').replace(/[–—;,]+/g, ' ').trim();
         if(resto) altri = [resto];
       }
+      num = numeroWA(primoNumero(pezzi[iNum]), decidiPaese(pezzi[iNum], altri[0] || '', '', paese));
     }
     if(!num) return;
     const r = { nome:altri[0] || '', centro:altri[1] || '', citta:altri[2] || '',
-                note:'', numero:num, paese:paeseDi(num, paese) };
+                note:'', numero:num,
+                paese:paeseDi(num, decidiPaese(num, altri[0] || '', '', paese)) };
     if(numeroBuono(num)) buoni.push(r);
     else scarti.push(Object.assign(r, { riga:k + 1, perche: perche(num) }));
   });
@@ -1002,6 +1098,7 @@ document.addEventListener('click', e => {
     if(a === 'anteprima'){ document.getElementById('anteprima').innerHTML = anteprimaHTML(ris); return; }
     importa(ris, document.getElementById('doppioni').value); return;
   }
+  if(a === 'prefissi'){ correggiPrefissi(); return; }
   if(a === 'vcf'){ if(!S.contatti.length) return brindisi('Rubrica vuota');
     scarica('rubrica-nipec.vcf', vcard(), 'text/vcard;charset=utf-8'); brindisi('Aprilo sul telefono'); return; }
   if(a === 'csv'){ scarica('contatti-nipec-'+OGGI()+'.csv', csv(), 'text/csv;charset=utf-8'); return; }

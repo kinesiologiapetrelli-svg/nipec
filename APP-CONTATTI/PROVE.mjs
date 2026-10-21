@@ -181,6 +181,63 @@ console.log('\n== 8. il nome dentro il messaggio ==');
   await p.context().close();
 }
 
+console.log('\n== 9. il paese: il menu dice Italia ma i contatti sono albanesi ==');
+{ const p = await nuova();
+  await p.vai(/^Importa$/);
+  await p.setInputFiles('#file', SCR+'/uarda-in/contacts.csv');
+  await p.waitForTimeout(800);
+  await p.selectOption('#paeseImp','IT');          // il menu SBAGLIATO, come e' successo davvero
+  await p.vai(/Importa davvero/); await p.waitForTimeout(1300);
+  const S = await p.stato();
+  const c = S.contatti.find(x => /Ador Sallon/.test(x.nome||''));
+  ok(!!c, 'trova «Ador Sallon Tirane»');
+  if(c){
+    ok(c.numero === '355692999600', `numero: ${c.numero} (prima era 390692999600)`);
+    ok(c.paese === 'AL', `paese: ${c.paese} — letto dal codice A0323TR, non dal menu`);
+  }
+  const storti = S.contatti.filter(x => /^390[67]/.test(x.numero));
+  ok(storti.length === 0, `nessun cellulare albanese col +39 (trovati: ${storti.length})`);
+  const assurdi = S.contatti.filter(x => /^393/.test(x.numero) && x.paese !== 'IT');
+  ok(assurdi.length === 0, 'nessun cellulare italiano marcato albanese');
+  await p.context().close();
+}
+
+console.log('\n== 10. il messaggio esce nella lingua giusta ==');
+{ const p = await nuova();
+  const r = await p.evaluate(() => {
+    S.contatti = [{id:'t1',nome:'A0323TR Ador Sallon Tirane',centro:'',citta:'Tirane',
+                   numero:'355692999600',paese:'AL',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}];
+    const m = prossimoModello(S.contatti[0]);
+    return { lingua: m && m.paese, testo: componi(m.testo, S.contatti[0]).slice(0,30) };
+  });
+  ok(r.lingua === 'AL', `modello scelto: ${r.lingua}`);
+  ok(/rsh/.test(r.testo), `in albanese: «${r.testo}...»`);
+  await p.context().close();
+}
+
+console.log('\n== 11. raddrizzare i contatti gia importati storti ==');
+{ const p = await nuova();
+  await p.evaluate(() => {
+    S.contatti = [
+      {id:'a',nome:'Ador',numero:'390692999600',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]},
+      {id:'b',nome:'Alba',numero:'390676754139',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]},
+      {id:'c',nome:'Giusto',numero:'393451201055',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}
+    ];
+    salva(); S.cfg.scheda='stato'; disegna();
+  });
+  await p.waitForTimeout(500);
+  const t = await p.locator('#app').innerText();
+  ok(/2 contatti hanno il prefisso sbagliato/.test(t),
+     'il riquadro dice quanti sono: ' + (t.match(/\d+ contatti hanno il prefisso sbagliato/)||[''])[0]);
+  await p.locator('[data-azione="prefissi"]').click(); await p.waitForTimeout(700);
+  const S2 = await p.stato();
+  ok(S2.contatti.find(x=>x.id==='a').numero === '355692999600', 'Ador raddrizzato');
+  ok(S2.contatti.find(x=>x.id==='a').paese === 'AL', 'e messo in Albania');
+  ok(S2.contatti.find(x=>x.id==='c').numero === '393451201055', 'il numero italiano vero non e stato toccato');
+  ok(S2.contatti.find(x=>x.id==='c').paese === 'IT', 'ed e rimasto in Italia');
+  await p.context().close();
+}
+
 console.log('\n== errori in pagina ==');
 console.log(errori.length ? errori.join('\n') : '  nessuno');
 console.log(`\n=== ${passate} prove passate, ${fallite} fallite ===`);
