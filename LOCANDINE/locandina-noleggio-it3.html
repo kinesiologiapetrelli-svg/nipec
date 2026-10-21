@@ -1,0 +1,100 @@
+<!doctype html><html lang="it"><meta charset="utf-8">
+<style>
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1080px;height:1350px}
+  body{font-family:Archivo,Arial,sans-serif;color:#123A63;background:#fff;
+       display:flex;flex-direction:column;overflow:hidden}
+  :root{--navy:#123A63;--blu:#1C6EA4;--oro:#B08A3E;--oro-chiaro:#E6D3AC;--grigio:#5A6B80}
+
+  header{padding:38px 58px 0;display:flex;align-items:center;gap:16px}
+  header .m{width:58px;height:58px;flex:none}
+  header .n{font-size:30px;font-weight:700;letter-spacing:.26em;line-height:1}
+  header .s{font-size:11px;font-weight:600;letter-spacing:.3em;color:#5A6B80;margin-top:5px}
+  header .occ{margin-left:auto;background:#123A63;color:#fff;padding:12px 26px;border-radius:999px;
+    font-size:20px;font-weight:700;letter-spacing:.14em;white-space:nowrap}
+
+  h1{padding:22px 58px 0;font-size:56px;font-weight:700;line-height:1.02;letter-spacing:-.015em}
+  h1 em{font-style:normal;color:#B08A3E}
+  .occhio{padding:14px 58px 0;font-size:26px;color:#5A6B80;line-height:1.3;font-weight:500}
+  .filetto{margin:18px 58px 0;width:120px;height:4px;background:#B08A3E;border-radius:2px}
+
+  .tre{padding:16px 44px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;align-items:stretch}
+  .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+  .foto{height:425px;display:flex;align-items:flex-end;justify-content:center;position:relative;width:100%}
+  .foto img{display:block;filter:drop-shadow(0 14px 18px rgba(18,58,99,.20))}
+  .base{position:absolute;bottom:-6px;left:12%;right:12%;height:26px;border-radius:50%;
+    background:radial-gradient(ellipse at 50% 50%, rgba(18,58,99,.16), rgba(18,58,99,0) 70%)}
+  .scheda{background:#F7FAFD;border:1px solid #E6EFF7;border-radius:12px;
+    padding:16px 12px 14px;width:100%;text-align:center;margin-top:14px;
+    /* tutte e tre alte uguali: cosi' partono dalla stessa riga, comunque
+       vadano a capo le scritte dentro */
+    min-height:198px;display:flex;flex-direction:column}
+  .scheda b{display:block;font-size:26px;font-weight:700;letter-spacing:-.01em}
+  .scheda span{display:block;font-size:17px;color:#5A6B80;margin-top:3px;line-height:1.25;min-height:2.4em}
+  .pill{display:flex;align-items:center;justify-content:center;margin:10px auto 0;
+    background:#F0E2C4;color:#6E5520;border-radius:999px;padding:8px 10px;font-size:15px;
+    font-weight:700;letter-spacing:.05em;line-height:1.25;min-height:3.1em;text-align:center;margin-top:auto}
+  .dove{display:block;margin-top:9px;font-size:15px;color:#5A6B80;font-weight:600}
+
+  .prezzo{margin:20px 58px 0;display:flex;align-items:center;gap:26px}
+  .prezzo .cifra{flex:0 0 auto}
+  .prezzo .v{font-size:74px;font-weight:700;line-height:.9;letter-spacing:-.03em;color:#123A63}
+  .prezzo .v i{font-style:normal;font-size:42px;color:#B08A3E;margin-left:6px}
+  .prezzo .sub{font-size:21px;font-weight:700;color:#5A6B80;letter-spacing:.04em;margin-top:6px}
+  .punti{flex:1 1 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border-left:1px solid #E6EFF7}
+  .punti div{text-align:center;padding:0 8px;border-right:1px solid #E6EFF7}
+  .punti div:last-child{border-right:0}
+  .punti svg{width:34px;height:34px;color:#B08A3E;margin-bottom:7px}
+  .punti b{display:block;font-size:15px;font-weight:700;letter-spacing:.04em;line-height:1.2}
+  .punti span{display:block;font-size:14px;color:#5A6B80;margin-top:2px;line-height:1.2}
+
+  .patto{margin:20px 58px 0;background:#123A63;color:#fff;border-radius:12px;padding:24px 30px;
+    display:flex;align-items:center;gap:22px}
+  .patto .num{flex:none;display:flex;align-items:baseline;gap:4px;color:#E6D3AC;
+    font-weight:700;letter-spacing:-.02em}
+  .patto .num b{font-size:52px;line-height:1}
+  .patto .num span{font-size:19px;font-weight:600;letter-spacing:.06em}
+  .patto .txt p{font-size:25px;font-weight:600;line-height:1.25}
+  .patto .txt small{display:block;margin-top:5px;font-size:18px;color:#C9DCEC;font-weight:500}
+
+  footer{margin-top:auto;flex:none;background:#123A63;color:#fff;padding:24px 58px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px}
+  footer .t{font-size:14px;font-weight:700;letter-spacing:.26em;color:#9CCBE8}
+  footer .tel{font-size:38px;font-weight:700;line-height:1.05}
+  footer .sito{font-size:21px;font-weight:600;color:#D5E6F2;text-align:right}
+</style>
+<header><div class="m"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+  <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+  <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+  <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+  <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+  <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+</svg></div>
+  <div><div class="n">NIPEC</div><div class="s">TECNOLOGIE ESTETICHE</div></div>
+  <div class="occ">NOLEGGIO FLESSIBILE</div></header>
+
+<h1>DISPOSITIVI PROFESSIONALI<br>PER IL TUO CENTRO <em>ESTETICO</em></h1>
+<div class="occhio">Amplia i servizi che offri senza comprare il macchinario.</div>
+<div class="filetto"></div>
+
+<div class="tre"><div class="col"><div class="foto"><div class="base"></div><img src="foto/ares2025-pulita.png" style="height:312px"></div><div class="scheda"><b>ARES 2024</b><span>laser epilazione</span><span class="pill">NOLEGGIO GIORNALIERO / SETTIMANALE</span><span class="dove">Roma e provincia</span></div></div><div class="col"><div class="foto"><div class="base"></div><img src="foto/ares-pulita.png" style="height:326px"></div><div class="scheda"><b>ARES 2026</b><span>laser epilazione con IA integrata</span><span class="pill">NOLEGGIO MENSILE</span><span class="dove">in tutta Italia</span></div></div><div class="col"><div class="foto"><div class="base"></div><img src="foto/afrodite-pulita.png" style="height:406px"></div><div class="scheda"><b>AFRODITE SHAPE</b><span>rimodellamento del corpo</span><span class="pill">NOLEGGIO MENSILE</span><span class="dove">in tutta Italia</span></div></div></div>
+
+<div class="prezzo">
+  <div class="cifra">
+    <div class="v">500<i>€</i></div>
+    <div class="sub">+ IVA / MESE PER MACCHINA</div>
+  </div>
+  <div class="punti"><div><svg viewBox="0 0 24 24" fill="none"><path d="M7 2h7l5 5v15H7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 2v5h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 12h8M10 16h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><b>SENZA CONTRATTI</b><span>a lungo termine</span></div><div><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 8l8 8M16 8l-8 8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg><b>SENZA ANTICIPO</b><span>e senza cauzione</span></div><div><svg viewBox="0 0 24 24" fill="none"><path d="M4 14v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="2.2" y="13.4" width="4.4" height="6.4" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="17.4" y="13.4" width="4.4" height="6.4" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M19.6 19.8v.6a2.6 2.6 0 0 1-2.6 2.6h-2.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><b>ASSISTENZA</b><span>tecnica inclusa</span></div><div><svg viewBox="0 0 24 24" fill="none"><path d="M4 20h17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M7 20v-6M12 20V8M17 20v-9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M5 9l5-4 4 3 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><b>SUPPORTO</b><span>marketing</span></div></div>
+</div>
+
+<div class="patto">
+  <div class="num"><b>30</b><span>GIORNI</span></div>
+  <div class="txt"><p>Te la portiamo il primo del mese,<br>la paghi alla fine del mese.</p>
+    <small>Un mese intero di lavoro prima di tirare fuori un euro.</small></div>
+</div>
+
+<footer><div><div class="t">PER INFO</div><div class="tel">+39 351 846 6025</div></div>
+  <div class="sito">www.nipecestetica.eu</div></footer>
+</html>

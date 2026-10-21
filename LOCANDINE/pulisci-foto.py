@@ -90,5 +90,5 @@ def ritaglia(entrata, uscita, soglia=232, sfuma=2):
           % (os.path.basename(uscita), w, h, im.size[0], im.size[1], tolti))
     return im.size
 
-for nome in ('afrodite', 'ares'):
+for nome in ('afrodite', 'ares', 'ares2025'):
     ritaglia('foto/%s.png' % nome, 'foto/%s-pulita.png' % nome)
