@@ -1,0 +1,16 @@
+# Netlify pubblica SOLO questa cartella, non la radice del repository.
+[build]
+  publish = "APP-CONTATTI"
+  command = ""
+
+# Il guscio offline e il manifest non vanno mai messi in cache dal CDN:
+# altrimenti una versione nuova non arriva ai telefoni già installati.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "no-cache"

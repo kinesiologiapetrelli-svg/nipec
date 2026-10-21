@@ -1,0 +1,33 @@
+CONTATTI NIPEC — l'app del giro dei messaggi
+============================================
+In rete: https://perselope.netlify.app/
+
+COS'È
+  Una pagina sola, senza impalcature: niente build, niente npm, niente server.
+  I contatti stanno nel telefono (localStorage, chiave nipec_contatti_v1) e non
+  escono da lì. Nessun account, nessuna password.
+
+I FILE
+  index.html              l'applicazione intera
+  sw.js                   il guscio offline — VERSIONE: contatti-nipec-2
+  manifest.webmanifest     nome e icone per l'installazione sulla Home
+  netlify.toml            dice a Netlify di pubblicare questa cartella
+  caratteri/archivo.woff2  il carattere
+  icona-*.png              le icone
+  PROVE.mjs               48 prove automatiche
+
+LE DUE REGOLE
+  1. Dopo OGNI modifica a index.html, alza VERSIONE in sw.js
+     (contatti-nipec-2 -> contatti-nipec-3). Senza, i telefoni con l'app già
+     installata restano sulla versione vecchia e da fuori non si vede.
+  2. Se le prove non passano, non si pubblica.
+
+COME SI PROVA
+  python3 -m http.server 8732     (dentro questa cartella)
+  node PROVE.mjs                  (serve playwright-core)
+
+COSA NON PUÒ FARE, E PERCHÉ
+  Sapere se un numero è su WhatsApp, o se qualcuno ha risposto. WhatsApp non
+  lo dice a nessuno e non esiste un modo di chiederglielo da una pagina web.
+  Per questo l'app non lo indovina: lo chiede una volta sola, nel momento in
+  cui chi manda ha la chat davanti, e poi se lo ricorda per sempre.

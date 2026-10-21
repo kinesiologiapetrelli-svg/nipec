@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CONTATTI NIPEC</title>
+<meta name="theme-color" content="#123a63">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+@font-face{font-family:"Archivo";src:url("caratteri/archivo.woff2") format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --carta:#ffffff; --fondo:#f1f4f7; --riga:#d9e2e9; --riga-forte:#b9c8d4;
+  --inchiostro:#16222e; --tenue:#5a6b79; --blu:#1c6ea4; --navy:#123a63; --blu-tenue:#e6eff7;
+  --allerta:#a3432e; --allerta-fondo:#faeae6; --avviso:#8a6208; --avviso-fondo:#f8efdb;
+  --ok:#1b6e52; --ok-fondo:#e2f1ea; --verde-wa:#1f8a4c;
+  --ombra:0 1px 2px rgba(18,58,99,.05), 0 8px 24px rgba(18,58,99,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-tema="chiaro"]){
+  --carta:#16212c; --fondo:#0d151d; --riga:#26333f; --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6; --tenue:#9aaab8; --blu:#5aa6d6; --navy:#8ec8ea; --blu-tenue:#152b3a;
+  --allerta:#e0917a; --allerta-fondo:#2a1b17; --avviso:#dcb264; --avviso-fondo:#2a2211;
+  --ok:#63c19d; --ok-fondo:#122a22; --verde-wa:#3dbf78;
+  --ombra:0 1px 2px rgba(0,0,0,.35), 0 8px 26px rgba(0,0,0,.3); color-scheme:dark}}
+:root[data-tema="scuro"]{
+  --carta:#16212c; --fondo:#0d151d; --riga:#26333f; --riga-forte:#3a4b59;
+  --inchiostro:#e9f0f6; --tenue:#9aaab8; --blu:#5aa6d6; --navy:#8ec8ea; --blu-tenue:#152b3a;
+  --allerta:#e0917a; --allerta-fondo:#2a1b17; --avviso:#dcb264; --avviso-fondo:#2a2211;
+  --ok:#63c19d; --ok-fondo:#122a22; --verde-wa:#3dbf78; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--inchiostro);
+  font-family:"Archivo",ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+.foglio{max-width:60rem;margin:0 auto;padding:0 1rem 7rem}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--blu)}
+
+/* testata */
+.testata{margin:0 -1rem 1rem;padding:1.5rem 1.5rem 1.25rem;background:var(--navy);color:#fff;
+  border-radius:0 0 1rem 1rem}
+.testata .marchio{display:flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.3em;
+  font-weight:600;opacity:.85;text-transform:uppercase;margin-bottom:.9rem}
+.testata h1{font-size:1.6rem;line-height:1.1}
+.testata .sotto{font-size:.9rem;color:#cfe2f1;margin-top:.3rem}
+
+/* barra schede */
+.schede{position:sticky;top:0;z-index:30;display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none;
+  margin:0 -1rem 1.1rem;padding:.45rem 1rem;background:color-mix(in srgb,var(--fondo) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--riga)}
+.schede::-webkit-scrollbar{display:none}
+.schede button{background:none;border:0;cursor:pointer;white-space:nowrap;border-radius:.45rem;
+  padding:.42rem .7rem;font-size:.85rem;font-weight:600;color:var(--tenue)}
+.schede button[aria-current="true"]{background:var(--blu-tenue);color:var(--blu)}
+.schede .pallina{display:inline-block;min-width:1.2rem;padding:0 .3rem;margin-left:.35rem;border-radius:1rem;
+  background:var(--blu);color:#fff;font-size:.7rem;line-height:1.2rem;text-align:center;font-weight:700}
+
+.riquadro{background:var(--carta);border:1px solid var(--riga);border-radius:.8rem;
+  box-shadow:var(--ombra);padding:1rem 1.1rem;margin-bottom:.9rem}
+.riquadro h2{font-size:1.05rem;margin-bottom:.15rem}
+.riquadro .occhiello{font-size:.68rem;letter-spacing:.17em;text-transform:uppercase;font-weight:700;
+  color:var(--blu);margin-bottom:.35rem}
+.tenue{color:var(--tenue);font-size:.88rem}
+
+/* bottoni */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border:1px solid var(--riga-forte);
+  background:var(--carta);border-radius:.55rem;padding:.5rem .85rem;font-size:.88rem;font-weight:600;
+  cursor:pointer;text-decoration:none;color:var(--inchiostro)}
+.btn:hover{border-color:var(--blu)}
+.btn.primario{background:var(--blu);border-color:var(--blu);color:#fff}
+.btn.wa{background:var(--verde-wa);border-color:var(--verde-wa);color:#fff;font-size:1rem;padding:.7rem 1.1rem}
+.btn.pericolo{color:var(--allerta);border-color:var(--allerta)}
+.btn.piccolo{padding:.3rem .55rem;font-size:.78rem}
+.btn:disabled{opacity:.45;cursor:default}
+.fila{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+
+/* campi */
+label.campo{display:block;margin-bottom:.7rem}
+label.campo span{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;color:var(--tenue);margin-bottom:.25rem}
+.inp{width:100%;background:var(--fondo);border:1px solid var(--riga);border-radius:.5rem;
+  padding:.5rem .65rem;font-size:.95rem}
+.inp:focus{outline:none;border-color:var(--blu);box-shadow:0 0 0 3px color-mix(in srgb,var(--blu) 18%,transparent)}
+textarea.inp{min-height:7rem;resize:vertical;line-height:1.5}
+.due{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media(max-width:620px){.due{grid-template-columns:1fr}}
+
+/* la scheda del contatto di oggi */
+.giro{background:var(--carta);border:1px solid var(--riga);border-left:4px solid var(--blu);
+  border-radius:.7rem;padding:.85rem .95rem;margin-bottom:.7rem;box-shadow:var(--ombra)}
+.giro .capo{display:flex;align-items:flex-start;gap:.6rem;flex-wrap:wrap}
+.giro .nome{font-weight:700;font-size:1.02rem}
+.meta{font-size:.82rem;color:var(--tenue)}
+.giro .testo{background:var(--fondo);border:1px solid var(--riga);border-radius:.5rem;
+  padding:.6rem .7rem;margin:.6rem 0;font-size:.88rem;white-space:pre-wrap;line-height:1.5}
+.giro .azioni{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center}
+
+/* stati */
+.stato{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;font-weight:700;
+  padding:.17rem .5rem;border-radius:1rem;text-transform:uppercase;letter-spacing:.05em}
+.s-nuovo{background:var(--blu-tenue);color:var(--blu)}
+.s-inviato{background:var(--avviso-fondo);color:var(--avviso)}
+.s-risposto{background:var(--ok-fondo);color:var(--ok)}
+.s-interessato{background:var(--ok-fondo);color:var(--ok)}
+.s-no{background:var(--fondo);color:var(--tenue)}
+.s-errato{background:var(--allerta-fondo);color:var(--allerta)}
+.s-stop{background:var(--allerta-fondo);color:var(--allerta)}
+
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue);
+  padding:.4rem .5rem;border-bottom:1px solid var(--riga)}
+td{padding:.45rem .5rem;border-bottom:1px solid var(--riga);vertical-align:middle}
+tr:hover td{background:var(--fondo)}
+
+.numeri{display:grid;grid-template-columns:repeat(auto-fit,minmax(7rem,1fr));gap:.6rem}
+.numero{background:var(--carta);border:1px solid var(--riga);border-radius:.6rem;padding:.7rem .8rem}
+.numero .v{font-size:1.45rem;font-weight:700;line-height:1.1}
+.numero .e{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue);font-weight:700}
+
+.avviso{border-radius:.6rem;padding:.7rem .85rem;font-size:.86rem;margin-bottom:.8rem;line-height:1.5}
+.avviso.giallo{background:var(--avviso-fondo);color:var(--avviso);border:1px solid color-mix(in srgb,var(--avviso) 30%,transparent)}
+.avviso.rosso{background:var(--allerta-fondo);color:var(--allerta);border:1px solid color-mix(in srgb,var(--allerta) 30%,transparent)}
+.avviso.verde{background:var(--ok-fondo);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 30%,transparent)}
+.avviso b{font-weight:700}
+
+.vuoto{text-align:center;padding:2.5rem 1rem;color:var(--tenue)}
+.vuoto b{display:block;font-size:1.05rem;color:var(--inchiostro);margin-bottom:.3rem}
+.nascosto{display:none !important}
+
+.brindisi{position:fixed;left:50%;bottom:1.2rem;transform:translateX(-50%) translateY(1rem);
+  background:var(--navy);color:#fff;padding:.65rem 1.1rem;border-radius:.6rem;font-size:.88rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transition:.2s;z-index:90;pointer-events:none;max-width:90vw}
+.brindisi.si{opacity:1;transform:translateX(-50%)}
+</style>
+</head>
+<body>
+<div class="foglio">
+
+  <div class="testata">
+    <div class="marchio">
+      <svg width="22" height="22" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/>
+        <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#9fcbe8" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="30" cy="15.36" r="5.4" fill="#fff"/>
+      </svg>
+      <span>NIPEC</span>
+    </div>
+    <h1>Il giro dei contatti</h1>
+    <p class="sotto" id="sottotitolo">Nessun contatto ancora. Si comincia da «Importa».</p>
+  </div>
+
+  <nav class="schede" id="schede"></nav>
+  <main id="app"></main>
+</div>
+<div class="brindisi" id="brindisi"></div>
+<script>
+/* =====================================================================
+   CONTATTI NIPEC — il giro dei messaggi
+   Tutto in questa pagina. I dati stanno nel browser di questo
+   dispositivo: nessun account, nessun server, niente esce da qui.
+   ===================================================================== */
+
+const CHIAVE = 'nipec_contatti_v1';
+const OGGI = () => new Date().toISOString().slice(0,10);
+
+const MODELLI_INIZIALI = [
+  { id:'it1', paese:'IT', passo:1, nome:'Primo messaggio',
+    testo:"Ciao {nome}, sono Giorgio di NIPEC.\n\nTi scrivo perché abbiamo cambiato il modo di dare le macchine: noleggio a 500 euro al mese, zero anticipo, zero cauzione, nessun vincolo di durata.\n\nTe la porto il primo del mese, me la paghi il trenta: trenta giorni per lavorarci prima di tirare fuori un euro.\n\nTi interessa che ti racconti come funziona?" },
+  { id:'it2', paese:'IT', passo:2, nome:'Promemoria',
+    testo:"Ciao {nome}, ti avevo scritto per il noleggio a 500 al mese.\n\nNiente di urgente. Se in questo periodo non è il momento dimmelo pure e non ti scrivo più.\n\nSe invece vuoi capire, ti mando la scheda tecnica e il contratto: li leggi con calma, prima di parlare di soldi." },
+  { id:'it3', paese:'IT', passo:3, nome:'Ultima',
+    testo:"Ciao {nome}, ultima volta che ti disturbo.\n\nSe un domani ti serve una macchina — laser, corpo o viso — sai dove trovarmi: 351 846 6025.\n\nBuon lavoro." },
+  { id:'al1', paese:'AL', passo:1, nome:'Mesazhi i parë',
+    testo:"Përshëndetje {nome}, jam nga NIPEC.\n\nTani pajisjet i japim me qira: 50.000 lekë në muaj, pa paradhënie, pa garanci, pa kontratë afati.\n\nTa sjell më 1 të muajit, ma paguan më 30: tridhjetë ditë punë para se të nxjerrësh një lek.\n\nTë intereson të ta tregoj si funksionon?" },
+  { id:'al2', paese:'AL', passo:2, nome:'Kujtesë',
+    testo:"Përshëndetje {nome}, të kisha shkruar për qiranë 50.000 lekë në muaj.\n\nAsgjë urgjente. Nëse tani nuk është momenti, ma thuaj dhe nuk të shkruaj më.\n\nNëse do të kuptosh, të dërgoj skedën teknike dhe kontratën, në shqip: i lexon me qetësi, para se të flasim për para." },
+  { id:'al3', paese:'AL', passo:3, nome:'E fundit',
+    testo:"Përshëndetje {nome}, hera e fundit që të shqetësoj.\n\nNëse nesër të duhet një pajisje — lazer, trup ose fytyrë — e di ku të më gjesh: +355 69 212 9786.\n\nPunë të mbarë." },
+];
+
+const STATI = ['nuovo','inviato','risposto','interessato','non interessato','numero errato','non disturbare'];
+const CLASSE = {'nuovo':'s-nuovo','inviato':'s-inviato','risposto':'s-risposto','interessato':'s-interessato',
+  'non interessato':'s-no','numero errato':'s-errato','non disturbare':'s-stop'};
+
+function statoIniziale(){
+  return { contatti:[], scarti:[], modelli:JSON.parse(JSON.stringify(MODELLI_INIZIALI)),
+    cfg:{ alGiorno:25, attesa1:5, attesa2:7, scheda:'oggi', tema:'auto' },
+    registro:{} };
+}
+let S = carica();
+function carica(){
+  try{ const g=localStorage.getItem(CHIAVE); if(g){ const o=JSON.parse(g); const d=statoIniziale();
+        return risistema(Object.assign(d,o,{cfg:Object.assign(d.cfg,o.cfg||{})})); } }catch(e){}
+  return statoIniziale();
+}
+/* I contatti salvati prima non hanno i campi nuovi. Glieli ricostruisco qui,
+   una volta sola, senza perdere niente di quello che c'era. */
+function risistema(st){
+  st.contatti = Array.isArray(st.contatti) ? st.contatti : [];
+  st.scarti   = Array.isArray(st.scarti)   ? st.scarti   : [];
+  st.contatti.forEach(c => {
+    if(c.wa === undefined) c.wa = '';            // '' non si sa · 'si' · 'no'
+    if(!Array.isArray(c.storia)){
+      c.storia = [];
+      // quel poco che sapevamo prima: l'ultimo invio
+      if(c.ultimoInvio) c.storia.push({ d:c.ultimoInvio, t:'inviato', p:c.invii||1 });
+      if(c.stato && c.stato!=='nuovo' && c.stato!=='inviato')
+        c.storia.push({ d:c.ultimoInvio||'', t:c.stato });
+    }
+    if(c.stato==='numero errato' && c.wa==='') c.wa = 'no';
+    if(['risposto','interessato'].includes(c.stato) && c.wa==='') c.wa = 'si';
+  });
+  return st;
+}
+function salva(){ try{ localStorage.setItem(CHIAVE, JSON.stringify(S)); }
+  catch(e){ brindisi('Spazio pieno: esporta una copia'); } }
+
+/* ---------- utilità ---------- */
+const esc = s => String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const id = () => Math.random().toString(36).slice(2,10);
+function brindisi(t){ const e=document.getElementById('brindisi'); e.textContent=t; e.classList.add('si');
+  clearTimeout(brindisi.t); brindisi.t=setTimeout(()=>e.classList.remove('si'),2600); }
+function giorniDa(data){ if(!data) return 9999;
+  return Math.floor((new Date(OGGI()) - new Date(data)) / 86400000); }
+
+/* Il numero come lo vuole WhatsApp: prefisso del paese, niente + e niente spazi.
+   L'Italia il suo zero lo tiene (02…, 06…), l'Albania lo perde (069… -> 35569…). */
+function numeroWA(grezzo, paese){
+  let s = String(grezzo||'').replace(/[^\d+]/g,'');
+  if(!s) return '';
+  /* Se il numero era già scritto con il + davanti, o con lo 00, il prefisso
+     del paese ce l'ha già: non glielo metto una seconda volta. Vale per il
+     Kosovo (+383), la Germania, l'Inghilterra — tutti quelli che non sono
+     né Italia né Albania e che prima finivano storpiati. */
+  const giaInternazionale = /^\+/.test(s) || /^00/.test(s);
+  s = s.replace(/^\++/,'').replace(/^00/,'');
+  if(/^39\d{8,}$/.test(s) || /^355\d{7,}$/.test(s)) return s;
+  if(giaInternazionale) return s;
+  if(paese === 'AL'){ return '355' + s.replace(/^0+/,''); }
+  return '39' + s;
+}
+/* Il paese non lo decide il menu a tendina: lo dice il numero stesso.
+   Il menu serve solo ai numeri scritti in locale, senza prefisso. */
+function paeseDi(num, ripiego){
+  if(/^355/.test(num)) return 'AL';
+  if(/^39/.test(num))  return 'IT';
+  return ripiego || 'IT';
+}
+/* Un numero buono per WhatsApp. Albania: 355 + 6x + 8 cifre.
+   Italia: 39 + 3xx + 8 o 9 cifre, oppure un fisso 390…
+   Gli altri paesi li accetto se la lunghezza e' plausibile. Il resto
+   non lo importo: finisce negli scarti con scritto perche'. */
+function numeroBuono(n){
+  if(/^355/.test(n)) return /^3556\d{8}$/.test(n);
+  if(/^39/.test(n))  return /^393\d{8,9}$/.test(n) || /^390\d{7,10}$/.test(n);
+  return /^\d{10,15}$/.test(n);
+}
+function perche(n){
+  if(!n) return 'nessun numero nella riga';
+  if(n.length < 10) return 'troppo corto: ' + numeroBello(n);
+  if(n.length > 15) return 'due numeri nella stessa casella: ' + n;
+  if(/^355/.test(n)) return 'non e\' un cellulare albanese: ' + numeroBello(n);
+  if(/^39/.test(n))  return 'non e\' un cellulare italiano: ' + numeroBello(n);
+  return 'numero fuori formato: ' + n;
+}
+
+function numeroBello(n){
+  if(!n) return '—';
+  if(n.startsWith('355')) return '+355 ' + n.slice(3).replace(/(\d{2})(\d{3})(\d+)/,'$1 $2 $3');
+  if(n.startsWith('39'))  return '+39 '  + n.slice(2).replace(/(\d{3})(\d{3})(\d+)/,'$1 $2 $3');
+  return '+' + n;
+}
+
+/* Il nome come si scrive dentro un messaggio. I nomi copiati da WhatsApp
+   arrivano con la tilde davanti (~Kejsi) e a volte con un'emoji attaccata:
+   «Përshëndetje ~Kejsi» si legge male. Qui tolgo quella roba, e se del nome
+   non resta niente di scrivibile lascio il saluto senza nome. */
+function nomeDaScrivere(c){
+  let t = String(c.nome || '').replace(/^[~•*\-\s]+/, '');
+  t = t.replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{27BF}\u{FE0F}\u{2066}-\u{2069}]/gu, '');
+  t = t.replace(/\s+/g, ' ').trim();
+  const primo = t.split(' ')[0] || '';
+  // un pezzo come «A0323TR» o «N0124» non è un nome: è il codice del giro
+  if(/^[A-Za-z]{1,3}\d{3,4}/.test(primo)) return (t.split(' ')[1] || '').trim();
+  if(primo.length < 2) return (c.centro || '').trim();
+  return primo;
+}
+function componi(testo, c){
+  const nome = nomeDaScrivere(c) || (c.centro||'').trim() || '';
+  return String(testo||'')
+    .replace(/\{nome\}/g,  nome)
+    .replace(/\{centro\}/g, c.centro||'')
+    .replace(/\{citta\}/g,  c.citta||'')
+    .replace(/\{città\}/g,  c.citta||'')
+    // senza nome resterebbe «Ciao , sono Giorgio»: si ricuce la frase
+    .replace(/[ \t]+([,.!?])/g, '$1')
+    .replace(/[ \t]{2,}/g, ' ');
+}
+
+/* ---------- il motore: chi scrivere oggi, e cosa ---------- */
+const senzaNome = c => (!(c.nome||'').trim() && !(c.centro||'').trim()) ? 1 : 0;
+const FERMI = ['risposto','interessato','non interessato','numero errato','non disturbare'];
+
+function modelloPer(c, passo){
+  const p = c.paese==='AL' ? 'AL' : 'IT';
+  return S.modelli.find(m => m.paese===p && m.passo===passo)
+      || S.modelli.find(m => m.passo===passo) || null;
+}
+function prossimoModello(c){
+  if(!c.numero) return null;
+  if(FERMI.includes(c.stato)) return null;
+  const n = c.invii || 0;
+  if(n === 0) return modelloPer(c,1);
+  const g = giorniDa(c.ultimoInvio);
+  if(n === 1 && g >= S.cfg.attesa1) return modelloPer(c,2);
+  if(n === 2 && g >= S.cfg.attesa2) return modelloPer(c,3);
+  return null;
+}
+function inviatiOggi(){ return (S.registro[OGGI()]||0); }
+function codaCompleta(){
+  return S.contatti
+    .map(c => ({ c, m: prossimoModello(c) }))
+    .filter(x => x.m)
+    .sort((a,b) => (a.c.invii||0) - (b.c.invii||0)
+                || String(a.c.ultimoInvio||'').localeCompare(String(b.c.ultimoInvio||''))
+                || (senzaNome(a.c) - senzaNome(b.c))
+                || String(a.c.nome||'').localeCompare(String(b.c.nome||'')));
+}
+function codaDiOggi(){
+  const resto = Math.max(0, S.cfg.alGiorno - inviatiOggi());
+  return codaCompleta().slice(0, resto);
+}
+
+function segnaInviato(cid){
+  const c = S.contatti.find(x => x.id === cid); if(!c) return;
+  c.invii = (c.invii||0) + 1;
+  c.ultimoInvio = OGGI();
+  if(!FERMI.includes(c.stato)) c.stato = 'inviato';
+  (c.storia = c.storia || []).push({ d:OGGI(), t:'inviato', p:c.invii });
+  S.registro[OGGI()] = inviatiOggi() + 1;
+  salva(); disegna();
+}
+function cambiaStato(cid, stato){
+  const c = S.contatti.find(x => x.id === cid); if(!c) return;
+  c.stato = stato;
+  (c.storia = c.storia || []).push({ d:OGGI(), t:stato });
+  // quello che lo stato dice da solo sul numero, senza chiederglielo due volte
+  if(stato === 'numero errato') c.wa = 'no';
+  if(['risposto','interessato','non interessato'].includes(stato)) c.wa = 'si';
+  salva(); disegna();
+  brindisi(c.nome || c.centro || 'Contatto');
+}
+/* Il numero è su WhatsApp o no. Non si può sapere da qui: lo dice chi ha
+   appena aperto la chat, con un tocco. */
+function segnaWA(cid, v){
+  const c = S.contatti.find(x => x.id === cid); if(!c) return;
+  c.wa = v;
+  (c.storia = c.storia || []).push({ d:OGGI(), t: v === 'no' ? 'wa-no' : 'wa-si' });
+  if(v === 'no' && !FERMI.includes(c.stato)) c.stato = 'numero errato';
+  salva(); disegna();
+  brindisi(v === 'no' ? 'Segnato: non è su WhatsApp' : 'Segnato: è su WhatsApp');
+}
+/* Chi ho scritto e sto ancora aspettando: serve al richiamo di ogni giorno. */
+function inAttesaDiRisposta(){
+  return S.contatti.filter(c => (c.invii||0) > 0 && c.stato === 'inviato');
+}
+function scrittiIl(giorno){
+  return S.contatti.filter(c => (c.storia||[]).some(e => e.t === 'inviato' && e.d === giorno));
+}
+function ieri(){
+  const d = new Date(OGGI()); d.setDate(d.getDate() - 1);
+  return d.toISOString().slice(0,10);
+}
+</script>
+<script>
+/* =====================  LE SCHERMATE  ===================== */
+const app = document.getElementById('app');
+const SCHEDE = [
+  ['oggi','Oggi'], ['stato','Stato'], ['rubrica','Rubrica'], ['messaggi','Messaggi'],
+  ['importa','Importa'], ['impostazioni','Impostazioni']
+];
+
+function disegna(){
+  // barra delle schede
+  const coda = codaDiOggi().length;
+  const daSegnare = scrittiIl(ieri()).filter(c => c.stato === 'inviato').length + S.scarti.length;
+  document.getElementById('schede').innerHTML = SCHEDE.map(([k,t]) =>
+    `<button data-scheda="${k}" aria-current="${S.cfg.scheda===k}">${t}${
+      k==='oggi'  && coda       ? `<span class="pallina">${coda}</span>` :
+      k==='stato' && daSegnare  ? `<span class="pallina">${daSegnare}</span>` : ''}</button>`).join('');
+  // sottotitolo
+  const tot = S.contatti.length;
+  const st = document.getElementById('sottotitolo');
+  st.textContent = tot
+    ? `${tot} contatti · ${inviatiOggi()} messaggi mandati oggi · ${codaCompleta().length} in attesa`
+    : 'Nessun contatto ancora. Si comincia da «Importa».';
+  app.innerHTML = ({oggi:vOggi, stato:vStato, rubrica:vRubrica, messaggi:vMessaggi,
+                    importa:vImporta, impostazioni:vImpostazioni}[S.cfg.scheda] || vOggi)();
+  if(S.cfg.scheda === 'rubrica') agganciaRubrica();
+  if(S.cfg.scheda === 'stato')   agganciaStato();
+}
+
+/* ---------- OGGI ---------- */
+function vOggi(){
+  if(!S.contatti.length) return `<div class="vuoto"><b>Non c'è ancora nessuno in rubrica.</b>
+    Vai su <b>Importa</b> e incolla i contatti: nomi e numeri, come capita.</div>`;
+  const coda = codaDiOggi();
+  const fatti = inviatiOggi(), quota = S.cfg.alGiorno, resto = codaCompleta().length;
+  const n = contaStati();
+  let h = `<div class="numeri" style="margin-bottom:.9rem">
+    <div class="numero"><div class="v">${fatti}<span style="font-size:.9rem;color:var(--tenue)">/${quota}</span></div><div class="e">mandati oggi</div></div>
+    <div class="numero"><div class="v">${resto}</div><div class="e">in attesa</div></div>
+    <div class="numero"><div class="v" style="color:var(--ok)">${n['risposto']+n['interessato']}</div><div class="e">hanno risposto</div></div>
+    <div class="numero"><div class="v">${S.contatti.length}</div><div class="e">in rubrica</div></div>
+  </div>`;
+
+  if(fatti >= quota){
+    h += `<div class="avviso verde"><b>Per oggi hai finito.</b> ${fatti} messaggi mandati.
+      Il resto della coda (${resto}) torna domani. Non alzare la quota per finire prima:
+      è esattamente così che WhatsApp blocca un numero.</div>`;
+    return h + strisciaMandati();
+  }
+  if(!coda.length) return h + `<div class="vuoto"><b>Oggi non c'è nessuno da scrivere.</b>
+    I promemoria partono da soli quando scadono i giorni di attesa.</div>`;
+
+  h += strisciaMandati();
+  h += `<p class="tenue" style="margin-bottom:.7rem">Si apre, si rilegge, si manda. Il messaggio è già scritto:
+     cambialo pure prima di premere invio, se quella persona merita una riga sua.</p>`;
+  h += coda.map(({c,m}) => schedaGiro(c,m)).join('');
+  return h;
+}
+
+/* Appena mandato, il contatto esce dalla coda: il messaggio dopo tocca fra
+   giorni. Ma è proprio quello il momento in cui si sa se il numero era su
+   WhatsApp — la chat è ancora aperta. Quindi i mandati di oggi restano qui,
+   con due tasti, finché non si risponde. Poi spariscono da soli. */
+function strisciaMandati(){
+  const oggi = scrittiIl(OGGI()).filter(c => c.wa === '');
+  if(!oggi.length) return '';
+  return `<div class="riquadro" style="margin-bottom:.9rem">
+    <div class="occhiello">Appena mandati</div>
+    <h2>Il numero c'era su WhatsApp?</h2>
+    <p class="tenue" style="margin:.3rem 0 .8rem">Un tocco a testa, mentre ce l'hai davanti.
+      Chi non c'è lo tolgo dal giro: inutile riscrivergli altre due volte.</p>
+    ${oggi.map(c => `<div class="fila" style="border-top:1px solid var(--riga);padding:.5rem 0;align-items:center">
+      <div style="flex:1 1 10rem;min-width:0">
+        <b>${esc(c.nome || c.centro || 'senza nome')}</b>
+        <div class="meta">${esc(numeroBello(c.numero))}</div>
+      </div>
+      <button class="btn piccolo" data-wa="si|${c.id}">C'era</button>
+      <button class="btn piccolo pericolo" data-wa="no|${c.id}">Non c'era</button>
+    </div>`).join('')}
+  </div>`;
+}
+function schedaGiro(c,m){
+  const testo = componi(m.testo, c);
+  const url = 'https://wa.me/' + c.numero + '?text=' + encodeURIComponent(testo);
+  const quando = c.ultimoInvio ? `ultimo messaggio ${giorniDa(c.ultimoInvio)} giorni fa` : 'mai scritto';
+  return `<div class="giro">
+    <div class="capo">
+      <div style="flex:1 1 14rem">
+        <div class="nome">${esc(c.nome||c.centro||'')||'<span style=\'color:var(--avviso)\'>senza nome</span>'}</div>
+        <div class="meta">${esc([c.centro&&c.centro!==c.nome?c.centro:'', c.citta, numeroBello(c.numero)].filter(Boolean).join(' · '))}</div>
+      </div>
+      <div style="text-align:right">
+        <span class="stato ${CLASSE[c.stato]||'s-nuovo'}">${esc(c.stato||'nuovo')}</span>
+        <div class="meta" style="margin-top:.2rem">${esc(m.nome)} · ${quando}</div>
+      </div>
+    </div>
+    <div class="testo">${esc(testo)}</div>
+    <div class="azioni">
+      <a class="btn wa" href="${url}" target="_blank" rel="noopener" data-manda="${c.id}">Apri WhatsApp e manda</a>
+      <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto</button>
+      <button class="btn piccolo" data-stato="non interessato|${c.id}">Non interessato</button>
+      <button class="btn piccolo" data-wa="no|${c.id}">Non è su WhatsApp</button>
+      <button class="btn piccolo pericolo" data-stato="non disturbare|${c.id}">Non scrivere più</button>
+    </div>
+    </div>`;
+}
+function contaStati(){
+  const n = {}; STATI.forEach(s => n[s]=0);
+  S.contatti.forEach(c => n[c.stato||'nuovo'] = (n[c.stato||'nuovo']||0)+1);
+  return n;
+}
+
+/* ---------- STATO: chi ho scritto, quando, e che cosa ne è uscito ----------
+   Quello che un'app nel telefono NON può sapere da sola:
+     · se un numero è registrato su WhatsApp,
+     · se la persona ha risposto.
+   WhatsApp non lo dice a nessuno, e non esiste un modo di chiederglielo.
+   Quindi non lo indovino: lo chiedo, una volta, nel momento in cui chi manda
+   ha la chat davanti agli occhi. Un tocco, e non lo chiedo mai più. */
+
+function ultimoDi(c, tipi){
+  const e = (c.storia || []).filter(x => tipi.includes(x.t)).slice(-1)[0];
+  return e ? e.d : '';
+}
+function primoInvio(c){
+  const e = (c.storia || []).find(x => x.t === 'inviato');
+  return e ? e.d : (c.ultimoInvio || '');
+}
+function quandoScritto(c){
+  if(!(c.invii || 0)) return '<span class="tenue">mai scritta</span>';
+  const g = giorniDa(c.ultimoInvio);
+  const q = g === 0 ? 'oggi' : g === 1 ? 'ieri' : g + ' giorni fa';
+  return esc(dataBella(c.ultimoInvio)) + ' <span class="tenue">· ' + q +
+         (c.invii > 1 ? ' · ' + c.invii + ' volte' : '') + '</span>';
+}
+function dataBella(d){
+  if(!d) return '—';
+  const [a,m,g] = d.split('-');
+  return g + '/' + m;
+}
+const SEGNO_WA = { si:'<span class="stato s-risposto">sì</span>',
+                   no:'<span class="stato s-errato">no</span>',
+                   '':'<span class="stato s-nuovo">non si sa</span>' };
+const RISPOSTE = ['risposto','interessato','non interessato'];
+
+function vStato(){
+  if(!S.contatti.length && !S.scarti.length)
+    return `<div class="vuoto"><b>Ancora niente da raccontare.</b>
+      Importa i contatti e comincia il giro: qui dentro resta tutto quello che succede.</div>`;
+
+  const scritti  = S.contatti.filter(c => (c.invii||0) > 0);
+  const attesa   = inAttesaDiRisposta();
+  const risposte = S.contatti.filter(c => RISPOSTE.includes(c.stato));
+  const morti    = S.contatti.filter(c => c.wa === 'no');
+  const daIeri   = scrittiIl(ieri()).filter(c => c.stato === 'inviato');
+
+  let h = `<div class="numeri" style="margin-bottom:.9rem">
+    <div class="numero"><div class="v">${scritti.length}</div><div class="e">scritte finora</div></div>
+    <div class="numero"><div class="v">${attesa.length}</div><div class="e">aspetto risposta</div></div>
+    <div class="numero"><div class="v" style="color:var(--ok)">${risposte.length}</div><div class="e">hanno risposto</div></div>
+    <div class="numero"><div class="v" style="color:var(--avviso)">${morti.length}</div><div class="e">non su WhatsApp</div></div>
+  </div>`;
+
+  /* il richiamo di ogni giorno: il lavoro di ieri, da chiudere in dieci tocchi */
+  if(daIeri.length){
+    h += `<div class="riquadro" style="margin-bottom:.9rem">
+      <div class="occhiello">Il richiamo di stamattina</div>
+      <h2>Ieri hai scritto a ${daIeri.length}. Qualcuna ha risposto?</h2>
+      <p class="tenue" style="margin:.3rem 0 .8rem">Un tocco a testa e il quadro resta vero.
+        Quelle che lasci stare restano «aspetto risposta» e te le richiedo domani.</p>
+      ${daIeri.slice(0,12).map(c => `<div class="fila" style="border-top:1px solid var(--riga);padding:.5rem 0;align-items:center">
+        <div style="flex:1 1 10rem;min-width:0">
+          <b>${esc(c.nome || c.centro || 'senza nome')}</b>
+          <div class="meta tenue">${esc([c.citta, numeroBello(c.numero)].filter(Boolean).join(' · '))}</div>
+        </div>
+        <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto</button>
+        <button class="btn piccolo" data-stato="non interessato|${c.id}">Ha detto no</button>
+        <button class="btn piccolo" data-wa="no|${c.id}">Non è su WhatsApp</button>
+      </div>`).join('')}
+      ${daIeri.length > 12 ? `<p class="tenue" style="margin-top:.5rem">…e altre ${daIeri.length - 12}: compaiono man mano che chiudi queste.</p>` : ''}
+    </div>`;
+  }
+
+  /* i numeri che l'importazione ha messo da parte */
+  if(S.scarti.length){
+    h += `<div class="riquadro" style="margin-bottom:.9rem">
+      <div class="occhiello">Numeri da sistemare</div>
+      <h2>${S.scarti.length} righe non sono entrate</h2>
+      <p class="tenue" style="margin:.3rem 0 .8rem">Il numero non torna, quindi non le ho importate:
+        meglio fermarle qui che mandare un messaggio a un numero sbagliato.
+        Correggile a mano, oppure buttale.</p>
+      <table><thead><tr><th>Nome</th><th>Numero com'era</th><th>Perché</th><th></th></tr></thead><tbody>
+      ${S.scarti.slice(0,30).map(r => `<tr>
+        <td><b>${esc(r.nome || '—')}</b></td>
+        <td style="white-space:nowrap">${esc(r.numero || '—')}</td>
+        <td class="tenue">${esc(r.perche || '')}</td>
+        <td style="text-align:right;white-space:nowrap">
+          <button class="btn piccolo" data-scarto="correggi|${r.id}">Correggi</button>
+          <button class="btn piccolo pericolo" data-scarto="butta|${r.id}">Butta</button></td>
+      </tr>`).join('')}</tbody></table>
+      ${S.scarti.length > 30 ? `<p class="tenue" style="margin-top:.5rem">Ne mostro 30 su ${S.scarti.length}.</p>` : ''}
+    </div>`;
+  }
+
+  h += `<div class="riquadro">
+    <div class="occhiello">Lo storico</div>
+    <h2>Chi, quando, com'è andata</h2>
+    <div class="fila" style="margin:.7rem 0">
+      <input class="inp" id="cercaSt" placeholder="Cerca nome, centro, città o numero" style="flex:1 1 14rem">
+      <select class="inp" id="filtroSt" style="flex:0 0 13rem">
+        <option value="scritti">le ho scritto (${scritti.length})</option>
+        <option value="attesa">aspetto risposta (${attesa.length})</option>
+        <option value="risposto">hanno risposto (${risposte.length})</option>
+        <option value="muti">scritte e mai risposto</option>
+        <option value="nowa">non su WhatsApp (${morti.length})</option>
+        <option value="mai">non le ho mai scritto</option>
+        <option value="tutti">tutti</option>
+      </select>
+    </div>
+    <div id="tabellaSt"></div></div>`;
+  return h;
+}
+
+function agganciaStato(){
+  const cerca  = document.getElementById('cercaSt');
+  const filtro = document.getElementById('filtroSt');
+  if(!cerca || !filtro) return;
+  const dipingi = () => {
+    const q = (cerca.value || '').toLowerCase().trim();
+    const f = filtro.value;
+    const regola = {
+      scritti:  c => (c.invii||0) > 0,
+      attesa:   c => c.stato === 'inviato' && (c.invii||0) > 0,
+      risposto: c => RISPOSTE.includes(c.stato),
+      muti:     c => (c.invii||0) > 0 && !RISPOSTE.includes(c.stato) && c.wa !== 'no',
+      nowa:     c => c.wa === 'no',
+      mai:      c => !(c.invii||0),
+      tutti:    () => true
+    }[f] || (() => true);
+    let l = S.contatti.filter(c => regola(c) &&
+      (!q || [c.nome, c.centro, c.citta, c.numero].join(' ').toLowerCase().includes(q)));
+    l.sort((a,b) => String(b.ultimoInvio||'').localeCompare(String(a.ultimoInvio||'')));
+    const tot = l.length; l = l.slice(0, 300);
+    document.getElementById('tabellaSt').innerHTML = !tot
+      ? `<div class="vuoto">Nessuno con questi filtri.</div>`
+      : `<p class="tenue" style="margin-bottom:.4rem">${tot} contatti${tot>300?' — ne mostro i primi 300':''}</p>
+        <table><thead><tr><th>Nome</th><th>Scritta il</th><th>WhatsApp</th>
+          <th>Stato</th><th>Risposta</th><th></th></tr></thead><tbody>
+        ${l.map(c => `<tr>
+          <td><b>${esc(c.nome || '—')}</b>
+            <div class="meta tenue">${esc([c.centro, c.citta].filter(Boolean).join(' · '))}</div></td>
+          <td style="white-space:nowrap">${quandoScritto(c)}</td>
+          <td>${SEGNO_WA[c.wa || '']}</td>
+          <td><span class="stato ${CLASSE[c.stato]||'s-nuovo'}">${esc(c.stato||'nuovo')}</span></td>
+          <td class="tenue" style="white-space:nowrap">${
+            RISPOSTE.includes(c.stato) ? esc(dataBella(ultimoDi(c, RISPOSTE))) : '—'}</td>
+          <td style="text-align:right"><button class="btn piccolo" data-apri="${c.id}">apri</button></td>
+        </tr>`).join('')}</tbody></table>`;
+  };
+  cerca.addEventListener('input', dipingi);
+  filtro.addEventListener('change', dipingi);
+  dipingi();
+}
+
+/* ---------- RUBRICA ---------- */
+function vRubrica(){
+  const n = contaStati();
+  return `<div class="riquadro">
+    <div class="fila" style="margin-bottom:.7rem">
+      <input class="inp" id="cerca" placeholder="Cerca nome, centro, città o numero" style="flex:1 1 14rem">
+      <select class="inp" id="filtro" style="flex:0 0 11rem">
+        <option value="">tutti gli stati</option>
+        ${STATI.map(s=>`<option value="${s}">${s} (${n[s]||0})</option>`).join('')}
+      </select>
+    </div>
+    <div id="tabella"></div>
+  </div>`;
+}
+function agganciaRubrica(){
+  const dipingi = () => {
+    const q = (document.getElementById('cerca').value||'').toLowerCase().trim();
+    const f = document.getElementById('filtro').value;
+    let l = S.contatti.filter(c =>
+      (!f || (c.stato||'nuovo')===f) &&
+      (!q || [c.nome,c.centro,c.citta,c.numero].join(' ').toLowerCase().includes(q)));
+    const tot = l.length; l = l.slice(0,300);
+    document.getElementById('tabella').innerHTML = !tot
+      ? `<div class="vuoto">Nessuno con questi filtri.</div>`
+      : `<p class="tenue" style="margin-bottom:.4rem">${tot} contatti${tot>300?' — ne mostro i primi 300':''}</p>
+      <table><thead><tr><th>Nome</th><th>Centro · città</th><th>Numero</th><th>Stato</th><th>Invii</th><th></th></tr></thead><tbody>
+      ${l.map(c=>`<tr>
+        <td><b>${esc(c.nome||'—')}</b></td>
+        <td class="tenue">${esc([c.centro,c.citta].filter(Boolean).join(' · ')||'—')}</td>
+        <td style="white-space:nowrap">${esc(numeroBello(c.numero))}</td>
+        <td><span class="stato ${CLASSE[c.stato]||'s-nuovo'}">${esc(c.stato||'nuovo')}</span></td>
+        <td style="text-align:center">${c.invii||0}</td>
+        <td style="text-align:right"><button class="btn piccolo" data-apri="${c.id}">apri</button></td>
+      </tr>`).join('')}</tbody></table>`;
+  };
+  document.getElementById('cerca').addEventListener('input', dipingi);
+  document.getElementById('filtro').addEventListener('change', dipingi);
+  dipingi();
+}
+
+/* ---------- MESSAGGI ---------- */
+function vMessaggi(){
+  return `<div class="avviso giallo"><b>Tre messaggi, non uno.</b> Il primo chiede solo una risposta.
+    Il secondo arriva dopo ${S.cfg.attesa1} giorni di silenzio e offre una via d'uscita — è quella che
+    tiene il numero pulito. Il terzo chiude e saluta. Dopo il terzo, quella persona non viene più scritta.</div>
+  <p class="tenue" style="margin-bottom:.8rem">Dentro al testo puoi usare <b>{nome}</b>, <b>{centro}</b> e <b>{citta}</b>:
+    si riempiono da soli con i dati di quella persona.</p>` +
+  ['IT','AL'].map(p => `<div class="riquadro">
+      <div class="occhiello">${p==='IT'?'Italia · in italiano':'Albania · in albanese'}</div>
+      ${S.modelli.filter(m=>m.paese===p).sort((a,b)=>a.passo-b.passo).map(m=>`
+        <label class="campo"><span>${m.passo} · ${esc(m.nome)}</span>
+        <textarea class="inp" data-modello="${m.id}">${esc(m.testo)}</textarea></label>`).join('')}
+    </div>`).join('') +
+  `<button class="btn primario" data-azione="salva-modelli">Salva i messaggi</button>`;
+}
+
+/* ---------- IMPORTA ---------- */
+function vImporta(){
+  return `<div class="riquadro">
+    <div class="occhiello">Incolla e basta</div>
+    <h2>I contatti, come capita</h2>
+    <p class="tenue" style="margin:.3rem 0 .8rem">Da Excel, da un CSV, dall'export di Google Contatti,
+      da un elenco scritto a mano. <b>Se la prima riga sono le intestazioni</b> — Nome, Telefono, Città —
+      leggo le colonne per nome e l'ordine non conta. Se intestazioni non ce ne sono, vado a naso:
+      il numero è il pezzo con più cifre. Virgola, punto e virgola e tab vanno bene tutti e tre.</p>
+    <label class="campo"><span>Incolla qui</span>
+      <textarea class="inp" id="grezzo" style="min-height:11rem" placeholder="Maria Rossi; Centro Bellezza; Roma; 333 1234567
+Egla Hoxha, Studio Egla, Tiranë, 069 212 9786"></textarea></label>
+    <div class="due">
+      <label class="campo"><span>Che paese sono</span>
+        <select class="inp" id="paeseImp">
+          <option value="IT">Italia — prefisso 39</option>
+          <option value="AL">Albania — prefisso 355</option>
+        </select></label>
+      <label class="campo"><span>Se un numero c'è già</span>
+        <select class="inp" id="doppioni">
+          <option value="salta">lo salto, tengo quello vecchio</option>
+          <option value="aggiorna">aggiorno nome e centro</option>
+        </select></label>
+    </div>
+    <div class="fila">
+      <button class="btn primario" data-azione="anteprima">Guarda cosa ho capito</button>
+      <button class="btn" data-azione="importa">Importa davvero</button>
+    </div>
+    <div id="anteprima" style="margin-top:.9rem"></div>
+  </div>
+  <div class="riquadro">
+    <div class="occhiello">Oppure un file</div>
+    <p class="tenue" style="margin-bottom:.6rem">Un .csv o un .txt, anche con le intestazioni
+      e con cinquanta colonne: prendo quelle che mi servono e ignoro il resto.
+      Lo leggo qui dentro, sul telefono: non viene caricato da nessuna parte.</p>
+    <input type="file" id="file" accept=".csv,.txt,.tsv,text/csv,text/plain" class="inp">
+    <p class="tenue" style="margin-top:.5rem">Caricato il file, premi <b>Guarda cosa ho capito</b>:
+      ti mostro le prime dieci righe come le ho lette, e quante righe metto da parte perché
+      il numero non torna. Solo dopo premi <b>Importa davvero</b>.</p>
+  </div>`;
+}
+/* ---------- leggere quello che arriva ----------
+   Prima strada: se la prima riga sono intestazioni (Nome, Telefono, Città…)
+   leggo le colonne per nome, come farebbe una persona guardando il foglio.
+   Così funziona l'export di Google Contatti e qualunque CSV fatto in casa,
+   senza bisogno di rimettere le colonne nell'ordine giusto.
+   Seconda strada, se intestazioni non ce ne sono: il naso di prima, cioè
+   il numero è il pezzo con più cifre e il resto è nome, centro, città. */
+
+const SEP = [';', '\t', ','];
+
+/* Spezza una riga rispettando le virgolette: «"Rossi, Maria";333…»
+   resta un pezzo solo, non due. */
+function spezza(riga, sep){
+  const out = []; let cur = '', dentro = false;
+  for(let i = 0; i < riga.length; i++){
+    const ch = riga[i];
+    if(ch === '"'){
+      if(dentro && riga[i+1] === '"'){ cur += '"'; i++; } else dentro = !dentro;
+      continue;
+    }
+    if(ch === sep && !dentro){ out.push(cur); cur = ''; continue; }
+    cur += ch;
+  }
+  out.push(cur);
+  return out.map(x => x.replace(/^\s+|\s+$/g, ''));
+}
+
+/* Che separatore usa questo file: quello che spezza tutte le righe nello
+   stesso numero di pezzi, e in più di uno. */
+function separatoreDi(righe){
+  let scelto = null, punti = 0;
+  SEP.forEach(sep => {
+    const conti = righe.slice(0, 30).map(r => spezza(r, sep).length);
+    const n = conti[0] || 0;
+    if(n < 2) return;
+    const p = conti.filter(c => c === n).length * 100 + n;
+    if(p > punti){ punti = p; scelto = sep; }
+  });
+  return scelto;
+}
+
+/* Come si chiamano le colonne che mi servono: in italiano, in inglese e come
+   le scrive Google. Dentro ogni lista l'ordine è l'ordine di preferenza —
+   se c'è una colonna «WhatsApp» vince su «Telefono». */
+const COLONNE = {
+  numero:  [/^whatsapp$/i, /^(telefono|numero|cellulare|mobile|tel)\b/i, /^phone\b.*value$/i],
+  nome:    [/^nome$/i, /^(first ?name|given ?name)$/i, /^(contatto|cliente|titolare|referente)$/i, /^name$/i],
+  cognome: [/^cognome$/i, /^(last ?name|family ?name|surname)$/i],
+  centro:  [/^(centro|studio|salone|azienda|attivit)/i, /^organi[zs]ation ?name$/i, /^organi[zs]ation$/i],
+  citta:   [/^citt/i, /^(city|comune|localit)/i, /city$/i],
+  paese:   [/^(paese|nazione|country)$/i],
+  note:    [/^(note|nota|notes)$/i]
+};
+function mappaColonne(intest){
+  const m = {}; const presi = [];
+  /* Del telefono prendo TUTTE le colonne che lo somigliano, in ordine di
+     preferenza: WhatsApp, poi Telefono, poi Phone 2. Se la prima è vuota
+     provo la seconda — altrimenti il contatto sparirebbe in silenzio. */
+  m.numeri = [];
+  COLONNE.numero.forEach(re => intest.forEach((h, k) => {
+    if(re.test(h) && !m.numeri.includes(k)) m.numeri.push(k);
+  }));
+  presi.push(...m.numeri);
+  for(const campo of Object.keys(COLONNE)){
+    if(campo === 'numero') continue;
+    for(const re of COLONNE[campo]){
+      const i = intest.findIndex((h, k) => re.test(h) && !presi.includes(k));
+      if(i >= 0){ m[campo] = i; presi.push(i); break; }
+    }
+  }
+  return m;
+}
+
+function paeseScritto(v, ripiego){
+  const t = String(v || '').trim().toLowerCase();
+  if(/^(al|alb|albania|shqip)/.test(t)) return 'AL';
+  if(/^(it|ita|italia|italy)/.test(t))  return 'IT';
+  return ripiego;
+}
+/* Google a volte mette due numeri nella stessa casella, separati da ':::'.
+   Tengo il primo. */
+function primoNumero(v){ return String(v || '').split(':::')[0].trim(); }
+
+function leggiGrezzo(testo, paese){
+  const righe = String(testo || '').replace(/^﻿/, '').split(/\r?\n/).filter(r => r.trim());
+  if(!righe.length) return { buoni:[], scarti:[], modo:'niente', intest:[] };
+  const sep = separatoreDi(righe);
+  if(sep){
+    const intest = spezza(righe[0], sep);
+    const m = mappaColonne(intest);
+    if(m.numeri.length && (m.nome !== undefined || m.centro !== undefined))
+      return perColonne(righe.slice(1), sep, m, paese, intest);
+  }
+  return colNaso(righe, paese);
+}
+
+function perColonne(righe, sep, m, paese, intest){
+  const buoni = [], scarti = [];
+  righe.forEach((riga, k) => {
+    const pz = spezza(riga, sep);
+    const dai = campo => m[campo] === undefined ? '' : (pz[m[campo]] || '').trim();
+    const pa  = paeseScritto(dai('paese'), paese);
+    // la prima colonna di telefono che ha davvero qualcosa dentro
+    let grezzo = '';
+    for(const i of m.numeri){ const v = primoNumero(pz[i] || ''); if(v){ grezzo = v; break; } }
+    const num = numeroWA(grezzo, pa);
+    if(!num) return;                       // riga davvero senza telefono: non è uno scarto
+    const r = {
+      nome:   [dai('nome'), dai('cognome')].filter(Boolean).join(' ').trim(),
+      centro: dai('centro'), citta: dai('citta'), note: dai('note'),
+      numero: num, paese: paeseDi(num, pa)
+    };
+    if(numeroBuono(num)) buoni.push(r);
+    else scarti.push(Object.assign(r, { riga:k + 2, perche: perche(num) }));
+  });
+  return { buoni, scarti, modo:'colonne', intest };
+}
+
+/* Nessuna intestazione: si va a naso, riga per riga. */
+function colNaso(righe, paese){
+  const buoni = [], scarti = [];
+  righe.forEach((riga, k) => {
+    const pezzi = riga.split(/\t|;|\s+[–—]\s+|\s{3,}|,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
+                      .map(x => x.replace(/^["\s]+|["\s]+$/g, ''));
+    let iNum = -1, piu = 0;
+    pezzi.forEach((x, i) => { const c = (x.match(/\d/g) || []).length; if(c >= 8 && c > piu){ piu = c; iNum = i; } });
+    let num = '', altri = [];
+    if(iNum < 0){
+      const t = riga.match(/[\d+][\d\s().\-]{7,}/);
+      if(!t) return;
+      num = numeroWA(t[0], paese);
+      const resto = riga.replace(t[0], '').replace(/[;,\t]+/g, ' ').trim();
+      altri = resto ? [resto] : [];
+    } else {
+      num = numeroWA(primoNumero(pezzi[iNum]), paese);
+      altri = pezzi.filter((_, i) => i !== iNum).filter(Boolean);
+      if(!altri.length){
+        const resto = pezzi[iNum].replace(/[\d+][\d\s().\-]{7,}/, '').replace(/[–—;,]+/g, ' ').trim();
+        if(resto) altri = [resto];
+      }
+    }
+    if(!num) return;
+    const r = { nome:altri[0] || '', centro:altri[1] || '', citta:altri[2] || '',
+                note:'', numero:num, paese:paeseDi(num, paese) };
+    if(numeroBuono(num)) buoni.push(r);
+    else scarti.push(Object.assign(r, { riga:k + 1, perche: perche(num) }));
+  });
+  return { buoni, scarti, modo:'naso', intest:[] };
+}
+</script>
+<script>
+/* ---------- IMPOSTAZIONI ---------- */
+function vImpostazioni(){
+  const q = S.cfg.alGiorno;
+  return `<div class="riquadro">
+    <div class="occhiello">Il ritmo</div>
+    <h2>Quanti messaggi al giorno</h2>
+    <p class="tenue" style="margin:.3rem 0 .8rem">È l'impostazione che decide se questo sistema funziona
+      o se ti fa perdere il numero. WhatsApp non guarda se i messaggi li mandi a mano: guarda quanti ne partono
+      verso gente che non ti ha in rubrica, e quanto si somigliano.</p>
+    <div class="due">
+      <label class="campo"><span>Al giorno</span>
+        <input class="inp" type="number" min="5" max="80" id="cfgGiorno" value="${q}"></label>
+      <div></div>
+      <label class="campo"><span>Giorni prima del promemoria</span>
+        <input class="inp" type="number" min="2" max="30" id="cfgA1" value="${S.cfg.attesa1}"></label>
+      <label class="campo"><span>Giorni prima dell'ultimo</span>
+        <input class="inp" type="number" min="2" max="60" id="cfgA2" value="${S.cfg.attesa2}"></label>
+    </div>
+    ${q>40?`<div class="avviso rosso"><b>${q} al giorno è troppo.</b> Sopra i quaranta verso numeri nuovi
+      il blocco arriva, e quando arriva è il tuo numero di lavoro che si ferma. Venticinque è il passo giusto:
+      mille contatti in sei settimane, senza rischiare niente.</div>`:''}
+    <button class="btn primario" data-azione="salva-cfg">Salva</button>
+  </div>
+
+  <div class="riquadro">
+    <div class="occhiello">La rubrica del telefono</div>
+    <h2>Salvarli davvero in rubrica</h2>
+    <p class="tenue" style="margin:.3rem 0 .8rem">Scarica il file e aprilo sul telefono: entrano tutti nei
+      contatti in un colpo solo. Serve a due cose — su WhatsApp vedi i nomi invece dei numeri, e un messaggio
+      che parte verso un contatto salvato pesa meno di uno che parte verso uno sconosciuto.</p>
+    <div class="fila">
+      <button class="btn primario" data-azione="vcf">Scarica la rubrica (.vcf)</button>
+      <button class="btn" data-azione="csv">Esporta tutto (.csv)</button>
+      <button class="btn" data-azione="json">Copia di sicurezza (.json)</button>
+    </div>
+  </div>
+
+  <div class="riquadro">
+    <div class="occhiello">Il quaderno</div>
+    <h2>Ripristino e pulizia</h2>
+    <p class="tenue" style="margin:.3rem 0 .8rem">I dati stanno solo dentro il browser di questo dispositivo.
+      Nessun account, nessun server, niente esce da qui. Se cambi telefono, la copia .json è l'unico modo
+      per portarteli dietro: falla ogni settimana.</p>
+    <div class="fila">
+      <input type="file" id="ripristino" accept=".json" class="inp" style="flex:1 1 12rem">
+      <button class="btn pericolo" data-azione="azzera">Azzera tutto</button>
+    </div>
+    <label class="campo" style="margin-top:.8rem"><span>Aspetto</span>
+      <select class="inp" id="cfgTema">
+        ${[['auto','come il telefono'],['chiaro','sempre chiaro'],['scuro','sempre scuro']]
+          .map(([v,t])=>`<option value="${v}" ${S.cfg.tema===v?'selected':''}>${t}</option>`).join('')}
+      </select></label>
+  </div>`;
+}
+
+/* ---------- uscite ---------- */
+function scarica(nome, testo, tipo){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([testo], {type:tipo||'text/plain;charset=utf-8'}));
+  a.download = nome; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+}
+function vcard(){
+  const r = [];
+  S.contatti.forEach(c => {
+    if(!c.numero) return;
+    const fn = (c.nome || c.centro || 'Contatto').trim();
+    r.push('BEGIN:VCARD','VERSION:3.0','FN:'+fn,'N:;'+fn+';;;');
+    if(c.centro) r.push('ORG:'+c.centro);
+    r.push('TEL;TYPE=CELL:+'+c.numero);
+    if(c.citta) r.push('ADR;TYPE=WORK:;;;'+c.citta+';;;');
+    r.push('NOTE:NIPEC','END:VCARD');
+  });
+  return r.join('\r\n');
+}
+function csv(){
+  const righe = [['nome','centro','citta','telefono','paese','stato','whatsapp',
+                  'invii','primo invio','ultimo invio','risposta del','note']];
+  S.contatti.forEach(c => righe.push([c.nome,c.centro,c.citta,"'"+c.numero,c.paese,c.stato,
+    c.wa === 'si' ? 'si' : c.wa === 'no' ? 'no' : '',
+    c.invii||0, primoInvio(c), c.ultimoInvio||'',
+    RISPOSTE.includes(c.stato) ? ultimoDi(c, RISPOSTE) : '', c.note||'']));
+  return '﻿' + righe.map(r => r.map(v => {
+    v = String(v??''); return /[;"\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v;
+  }).join(';')).join('\r\n');
+}
+
+/* ---------- i clic ---------- */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-scheda],[data-manda],[data-stato],[data-wa],[data-scarto],[data-azione],[data-apri]');
+  if(!t) return;
+  if(t.dataset.scheda){ S.cfg.scheda = t.dataset.scheda; salva(); disegna(); return; }
+  if(t.dataset.manda){ setTimeout(()=>segnaInviato(t.dataset.manda), 400); return; }   // il link parte lo stesso
+  if(t.dataset.stato){ const [s,cid] = t.dataset.stato.split('|'); cambiaStato(cid,s); return; }
+  if(t.dataset.wa){ const [v,cid] = t.dataset.wa.split('|'); segnaWA(cid,v); return; }
+  if(t.dataset.scarto){ const [az,sid] = t.dataset.scarto.split('|'); gestisciScarto(az,sid); return; }
+  if(t.dataset.apri){ apriContatto(t.dataset.apri); return; }
+  const a = t.dataset.azione;
+  if(a === 'salva-modelli'){
+    document.querySelectorAll('[data-modello]').forEach(ta => {
+      const m = S.modelli.find(x => x.id === ta.dataset.modello); if(m) m.testo = ta.value;
+    });
+    salva(); brindisi('Messaggi salvati'); return;
+  }
+  if(a === 'salva-cfg'){
+    S.cfg.alGiorno = Math.max(5, Math.min(80, parseInt(document.getElementById('cfgGiorno').value)||25));
+    S.cfg.attesa1  = Math.max(2, parseInt(document.getElementById('cfgA1').value)||5);
+    S.cfg.attesa2  = Math.max(2, parseInt(document.getElementById('cfgA2').value)||7);
+    S.cfg.tema     = document.getElementById('cfgTema').value;
+    applicaTema(); salva(); disegna(); brindisi('Salvato'); return;
+  }
+  if(a === 'anteprima' || a === 'importa'){
+    const ris = leggiGrezzo(document.getElementById('grezzo').value,
+                            document.getElementById('paeseImp').value);
+    if(a === 'anteprima'){ document.getElementById('anteprima').innerHTML = anteprimaHTML(ris); return; }
+    importa(ris, document.getElementById('doppioni').value); return;
+  }
+  if(a === 'vcf'){ if(!S.contatti.length) return brindisi('Rubrica vuota');
+    scarica('rubrica-nipec.vcf', vcard(), 'text/vcard;charset=utf-8'); brindisi('Aprilo sul telefono'); return; }
+  if(a === 'csv'){ scarica('contatti-nipec-'+OGGI()+'.csv', csv(), 'text/csv;charset=utf-8'); return; }
+  if(a === 'json'){ scarica('copia-contatti-'+OGGI()+'.json', JSON.stringify(S,null,1), 'application/json'); return; }
+  if(a === 'azzera'){
+    if(confirm('Cancellare tutti i contatti e lo storico? Esporta prima una copia.') &&
+       confirm('Sicuro? Non si torna indietro.')){ S = statoIniziale(); salva(); disegna(); }
+    return;
+  }
+});
+
+/* Che cosa ho capito del file, prima di importarlo davvero. */
+function anteprimaHTML(ris){
+  const { buoni, scarti, modo, intest } = ris;
+  if(!buoni.length && !scarti.length)
+    return `<div class="avviso rosso"><b>Non ho trovato nessun numero.</b>
+      Serve una riga per persona, con almeno otto cifre di telefono.</div>`;
+
+  const come = modo === 'colonne'
+    ? `<div class="avviso verde"><b>Ho riconosciuto le intestazioni.</b>
+         Le colonne le leggo per nome, quindi l'ordine non conta:
+         ${esc(intest.filter(Boolean).slice(0,8).join(' · '))}${intest.length>8?' …':''}</div>`
+    : `<div class="avviso giallo"><b>Intestazioni non ne ho trovate: vado a naso.</b>
+         Il numero è il pezzo con più cifre, il resto lo prendo come nome, centro e città.
+         Se finisce nella colonna sbagliata, metti una prima riga con scritto
+         <b>Nome;Centro;Città;Telefono</b> e ricarica.</div>`;
+
+  const tab = l => `<table><thead><tr><th>Nome</th><th>Centro</th><th>Città</th>
+      <th>Numero</th><th>Paese</th></tr></thead><tbody>
+    ${l.map(r => `<tr><td>${esc(r.nome)||'<span class="tenue">—</span>'}</td>
+      <td class="tenue">${esc(r.centro)}</td><td class="tenue">${esc(r.citta)}</td>
+      <td style="white-space:nowrap">${esc(numeroBello(r.numero))}</td>
+      <td>${r.paese}</td></tr>`).join('')}</tbody></table>`;
+
+  let h = come + `<p class="tenue" style="margin:.6rem 0 .3rem"><b>${buoni.length} contatti buoni.</b>
+    Controlla i primi dieci: devono essere nomi nella colonna dei nomi e numeri in quella dei numeri.</p>`
+    + tab(buoni.slice(0,10));
+
+  if(scarti.length) h += `<div class="avviso giallo" style="margin-top:.8rem">
+      <b>${scarti.length} righe non le importo</b>, perché il numero non torna. Le tengo da parte:
+      le trovi in <b>Stato → numeri da sistemare</b> e le puoi correggere a mano.</div>
+    <table><thead><tr><th>Riga</th><th>Nome</th><th>Perché</th></tr></thead><tbody>
+    ${scarti.slice(0,8).map(r => `<tr><td class="tenue">${r.riga}</td>
+      <td>${esc(r.nome)||'<span class="tenue">—</span>'}</td>
+      <td class="tenue">${esc(r.perche)}</td></tr>`).join('')}</tbody></table>`;
+  return h;
+}
+
+function importa(ris, doppioni){
+  const righe = ris.buoni || [];
+  if(!righe.length && !(ris.scarti||[]).length) return brindisi('Niente da importare');
+  const esistenti = new Map(S.contatti.map(c => [c.numero, c]));
+  let nuovi = 0, aggiornati = 0, saltati = 0;
+  righe.forEach(r => {
+    const g = esistenti.get(r.numero);
+    if(g){
+      if(doppioni === 'aggiorna'){
+        g.nome = r.nome || g.nome; g.centro = r.centro || g.centro;
+        g.citta = r.citta || g.citta; g.note = r.note || g.note;
+        g.paese = r.paese || g.paese; aggiornati++;
+      } else saltati++;
+      return;
+    }
+    const c = { id:id(), nome:r.nome, centro:r.centro, citta:r.citta, note:r.note||'',
+                numero:r.numero, paese:r.paese, stato:'nuovo', invii:0, ultimoInvio:'',
+                wa:'', storia:[] };
+    S.contatti.push(c); esistenti.set(c.numero, c); nuovi++;
+  });
+  // gli scarti non li butto: restano da sistemare a mano
+  (ris.scarti || []).forEach(r => S.scarti.push(Object.assign({ id:id() }, r)));
+  salva(); S.cfg.scheda = (ris.scarti||[]).length ? 'stato' : 'oggi'; salva(); disegna();
+  brindisi(`${nuovi} nuovi · ${aggiornati} aggiornati · ${saltati} già c'erano`
+    + ((ris.scarti||[]).length ? ` · ${ris.scarti.length} da sistemare` : ''));
+}
+
+/* I numeri messi da parte dall'importazione: si correggono o si buttano. */
+function gestisciScarto(azione, sid){
+  const r = S.scarti.find(x => x.id === sid); if(!r) return;
+  if(azione === 'butta'){
+    S.scarti = S.scarti.filter(x => x.id !== sid);
+    salva(); disegna(); brindisi('Buttato'); return;
+  }
+  const d = document.createElement('dialog');
+  d.style.cssText = 'border:0;border-radius:.8rem;padding:1.1rem;max-width:min(26rem,92vw);background:var(--carta);color:var(--inchiostro)';
+  d.innerHTML = `<h2 style="margin-bottom:.4rem">${esc(r.nome || 'Numero da sistemare')}</h2>
+    <p class="tenue" style="margin-bottom:.7rem">${esc(r.perche || '')}</p>
+    <label class="campo"><span>Nome</span><input class="inp" id="sNome" value="${esc(r.nome||'')}"></label>
+    <label class="campo"><span>Centro</span><input class="inp" id="sCentro" value="${esc(r.centro||'')}"></label>
+    <label class="campo"><span>Città</span><input class="inp" id="sCitta" value="${esc(r.citta||'')}"></label>
+    <label class="campo"><span>Numero</span><input class="inp" id="sNum" value="${esc(r.numero||'')}"
+      inputmode="tel" placeholder="+355 69 123 4567"></label>
+    <label class="campo"><span>Paese</span><select class="inp" id="sPaese">
+      <option value="AL" ${r.paese==='AL'?'selected':''}>Albania</option>
+      <option value="IT" ${r.paese!=='AL'?'selected':''}>Italia</option></select></label>
+    <div class="avviso giallo" id="sAvviso" style="display:none"></div>
+    <div class="fila" style="margin-top:.6rem"><button class="btn primario" id="sOk">Salva in rubrica</button>
+      <button class="btn" id="sNo">Chiudi</button></div>`;
+  document.body.appendChild(d); d.showModal();
+  d.querySelector('#sNo').onclick = () => { d.close(); d.remove(); };
+  d.querySelector('#sOk').onclick = () => {
+    const pa  = d.querySelector('#sPaese').value;
+    const num = numeroWA(d.querySelector('#sNum').value, pa);
+    const av  = d.querySelector('#sAvviso');
+    if(!numeroBuono(num)){
+      av.style.display = 'block';
+      av.innerHTML = '<b>Il numero ancora non torna.</b> ' + esc(perche(num));
+      return;
+    }
+    if(S.contatti.some(c => c.numero === num)){
+      av.style.display = 'block';
+      av.innerHTML = '<b>Questo numero è già in rubrica.</b> Se è un doppione, buttalo.';
+      return;
+    }
+    S.contatti.push({ id:id(), nome:d.querySelector('#sNome').value.trim(),
+      centro:d.querySelector('#sCentro').value.trim(), citta:d.querySelector('#sCitta').value.trim(),
+      note:r.note || '', numero:num, paese:paeseDi(num, pa),
+      stato:'nuovo', invii:0, ultimoInvio:'', wa:'', storia:[] });
+    S.scarti = S.scarti.filter(x => x.id !== sid);
+    salva(); d.close(); d.remove(); disegna(); brindisi('Sistemato e messo in rubrica');
+  };
+}
+
+function apriContatto(cid){
+  const c = S.contatti.find(x => x.id === cid); if(!c) return;
+  const d = document.createElement('dialog');
+  d.style.cssText = 'border:0;border-radius:.8rem;padding:1.1rem;max-width:min(26rem,92vw);background:var(--carta);color:var(--inchiostro)';
+  d.innerHTML = `<h2 style="margin-bottom:.6rem">${esc(c.nome||c.centro||'Contatto')}</h2>
+    <label class="campo"><span>Nome</span><input class="inp" id="eNome" value="${esc(c.nome||'')}"></label>
+    <label class="campo"><span>Centro</span><input class="inp" id="eCentro" value="${esc(c.centro||'')}"></label>
+    <label class="campo"><span>Città</span><input class="inp" id="eCitta" value="${esc(c.citta||'')}"></label>
+    <label class="campo"><span>Numero (come lo usa WhatsApp)</span><input class="inp" id="eNum" value="${esc(c.numero||'')}"></label>
+    <label class="campo"><span>Stato</span><select class="inp" id="eStato">
+      ${STATI.map(s=>`<option ${s===(c.stato||'nuovo')?'selected':''}>${s}</option>`).join('')}</select></label>
+    <label class="campo"><span>Note</span><textarea class="inp" id="eNote" style="min-height:4rem">${esc(c.note||'')}</textarea></label>
+    <div class="fila"><button class="btn primario" id="eOk">Salva</button>
+      <button class="btn" id="eNo">Chiudi</button>
+      <button class="btn pericolo" id="eDel" style="margin-left:auto">Elimina</button></div>`;
+  document.body.appendChild(d); d.showModal();
+  d.querySelector('#eNo').onclick = () => { d.close(); d.remove(); };
+  d.querySelector('#eOk').onclick = () => {
+    c.nome = d.querySelector('#eNome').value; c.centro = d.querySelector('#eCentro').value;
+    c.citta = d.querySelector('#eCitta').value; c.note = d.querySelector('#eNote').value;
+    c.numero = numeroWA(d.querySelector('#eNum').value, c.paese); c.stato = d.querySelector('#eStato').value;
+    salva(); d.close(); d.remove(); disegna(); brindisi('Salvato');
+  };
+  d.querySelector('#eDel').onclick = () => {
+    if(!confirm('Eliminare questo contatto?')) return;
+    S.contatti = S.contatti.filter(x => x.id !== cid);
+    salva(); d.close(); d.remove(); disegna();
+  };
+}
+
+/* file in ingresso */
+document.addEventListener('change', e => {
+  if(e.target.id === 'file'){
+    const f = e.target.files[0]; if(!f) return;
+    const l = new FileReader();
+    l.onload = () => { document.getElementById('grezzo').value = l.result;
+      brindisi('Letto. Ora premi «Guarda cosa ho capito»'); };
+    l.readAsText(f, 'utf-8'); return;
+  }
+  if(e.target.id === 'ripristino'){
+    const f = e.target.files[0]; if(!f) return;
+    const l = new FileReader();
+    l.onload = () => { try{ const o = JSON.parse(l.result);
+        if(!o.contatti) throw 0;
+        if(!confirm('Sostituire quello che c\'è adesso con questa copia?')) return;
+        S = Object.assign(statoIniziale(), o); salva(); disegna(); brindisi('Copia ripristinata');
+      }catch(err){ brindisi('Il file non è una copia valida'); } };
+    l.readAsText(f, 'utf-8');
+  }
+});
+
+function applicaTema(){
+  document.documentElement.setAttribute('data-tema', S.cfg.tema === 'auto' ? '' : S.cfg.tema);
+}
+applicaTema(); disegna();
+if('serviceWorker' in navigator && /^https?:/.test(location.protocol))
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
