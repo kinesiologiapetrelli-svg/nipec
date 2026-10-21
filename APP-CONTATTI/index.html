@@ -172,13 +172,13 @@ const OGGI = () => new Date().toISOString().slice(0,10);
 
 const MODELLI_INIZIALI = [
   { id:'it1', paese:'IT', passo:1, nome:'Primo messaggio',
-    testo:"Ciao {nome}, sono Giorgio di NIPEC.\n\nTi scrivo perché abbiamo cambiato il modo di dare le macchine: noleggio a 500 euro al mese, zero anticipo, zero cauzione, nessun vincolo di durata.\n\nTe la porto il primo del mese, me la paghi il trenta: trenta giorni per lavorarci prima di tirare fuori un euro.\n\nTi interessa che ti racconti come funziona?" },
+    testo:"Ciao {nome}, sono Giorgio di NIPEC.\n\nTi scrivo perché adesso i macchinari li diamo anche a noleggio: *500 € al mese*, zero anticipo, zero cauzione, nessun vincolo di durata.\n\nTe la porto il primo del mese e me la paghi il trenta: trenta giorni per lavorarci prima di tirare fuori un euro.\n\nNella locandina ci sono tutte e due le macchine — *Afrodite Multishape* per il corpo e il viso, *Laser Ares* per l'epilazione definitiva. Assistenza tecnica e supporto marketing sono inclusi.\n\nTi interessa che ti spieghi come funziona?" },
   { id:'it2', paese:'IT', passo:2, nome:'Promemoria',
     testo:"Ciao {nome}, ti avevo scritto per il noleggio a 500 al mese.\n\nNiente di urgente. Se in questo periodo non è il momento dimmelo pure e non ti scrivo più.\n\nSe invece vuoi capire, ti mando la scheda tecnica e il contratto: li leggi con calma, prima di parlare di soldi." },
   { id:'it3', paese:'IT', passo:3, nome:'Ultima',
     testo:"Ciao {nome}, ultima volta che ti disturbo.\n\nSe un domani ti serve una macchina — laser, corpo o viso — sai dove trovarmi: 351 846 6025.\n\nBuon lavoro." },
   { id:'al1', paese:'AL', passo:1, nome:'Mesazhi i parë',
-    testo:"Përshëndetje {nome}, jam nga NIPEC.\n\nTani pajisjet i japim me qira: 50.000 lekë në muaj, pa paradhënie, pa garanci, pa kontratë afati.\n\nTa sjell më 1 të muajit, ma paguan më 30: tridhjetë ditë punë para se të nxjerrësh një lek.\n\nTë intereson të ta tregoj si funksionon?" },
+    testo:"Përshëndetje {nome}, jam Giorgio nga NIPEC.\n\nPo të shkruaj sepse tani pajisjet i japim edhe me qira: *50.000 lekë në muaj*, pa paradhënie, pa garanci, pa kontratë afati.\n\nTa sjell më 1 të muajit dhe ma paguan më 30: tridhjetë ditë punë para se të nxjerrësh një lek.\n\nNë fletëpalosje i ke të dyja pajisjet — *Afrodite Multishape* për trupin dhe fytyrën, *Laser Ares* për epilimin përfundimtar. Asistenca teknike dhe mbështetja e marketingut janë të përfshira.\n\nTë intereson të ta tregoj si funksionon?" },
   { id:'al2', paese:'AL', passo:2, nome:'Kujtesë',
     testo:"Përshëndetje {nome}, të kisha shkruar për qiranë 50.000 lekë në muaj.\n\nAsgjë urgjente. Nëse tani nuk është momenti, ma thuaj dhe nuk të shkruaj më.\n\nNëse do të kuptosh, të dërgoj skedën teknike dhe kontratën, në shqip: i lexon me qetësi, para se të flasim për para." },
   { id:'al3', paese:'AL', passo:3, nome:'E fundit',
@@ -216,6 +216,17 @@ function risistema(st){
   // chi aveva già l'app non ha il quarto messaggio: glielo aggiungo senza
   // toccare i tre che ha scritto lui
   MODELLI_INIZIALI.forEach(m => { if(!st.modelli.some(x => x.id === m.id)) st.modelli.push(m); });
+  /* Il primo messaggio e' cambiato. A chi ce l'ha ancora com'era — cioe' non
+     l'ha mai riscritto — lo aggiorno. A chi se l'e' scritto da solo non tocco
+     niente: il suo testo vale piu' del mio. */
+  const VECCHI = {
+    it1: "Ciao {nome}, sono Giorgio di NIPEC.\n\nTi scrivo perché abbiamo cambiato il modo di dare le macchine: noleggio a 500 euro al mese, zero anticipo, zero cauzione, nessun vincolo di durata.\n\nTe la porto il primo del mese, me la paghi il trenta: trenta giorni per lavorarci prima di tirare fuori un euro.\n\nTi interessa che ti racconti come funziona?",
+    al1: "Përshëndetje {nome}, jam nga NIPEC.\n\nTani pajisjet i japim me qira: 50.000 lekë në muaj, pa paradhënie, pa garanci, pa kontratë afati.\n\nTa sjell më 1 të muajit, ma paguan më 30: tridhjetë ditë punë para se të nxjerrësh një lek.\n\nTë intereson të ta tregoj si funksionon?"
+  };
+  st.modelli.forEach(m => {
+    const nuovo = MODELLI_INIZIALI.find(x => x.id === m.id);
+    if(nuovo && VECCHI[m.id] && m.testo === VECCHI[m.id]) m.testo = nuovo.testo;
+  });
   st.contatti.forEach(c => {
     if(c.wa === undefined) c.wa = '';            // '' non si sa · 'si' · 'no'
     if(!Array.isArray(c.storia)){
@@ -235,7 +246,22 @@ function salva(){ try{ localStorage.setItem(CHIAVE, JSON.stringify(S)); }
 
 /* ---------- le locandine ---------- */
 let LOC = caricaLoc();
-function caricaLoc(){ try{ return JSON.parse(localStorage.getItem(CHIAVE_LOC)) || {}; }catch(e){ return {}; } }
+/* Le locandine stanno anche sul sito, accanto all'app: cosi' il link c'e' gia'
+   e non serve caricare niente a mano. Chi vuole la sua, la sostituisce. */
+function indirizzoLoc(f){
+  try{ return new URL('locandine/' + f, location.href).href; }
+  catch(e){ return 'locandine/' + f; }
+}
+function locPronte(){
+  return {
+    it1: { dato:'', nome:'noleggio-it.jpg', peso:0, url: indirizzoLoc('noleggio-it.jpg') },
+    al1: { dato:'', nome:'noleggio-al.jpg', peso:0, url: indirizzoLoc('noleggio-al.jpg') }
+  };
+}
+function caricaLoc(){
+  try{ const g = localStorage.getItem(CHIAVE_LOC); if(g) return JSON.parse(g) || {}; }catch(e){}
+  return locPronte();
+}
 function salvaLoc(){
   try{ localStorage.setItem(CHIAVE_LOC, JSON.stringify(LOC)); return true; }
   catch(e){ brindisi('La locandina non ci sta: scegline una più leggera'); return false; }

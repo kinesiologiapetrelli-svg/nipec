@@ -343,6 +343,32 @@ console.log('\n== 16. chi non risponde riceve il promemoria da solo ==');
   await p.context().close();
 }
 
+console.log('\n== 17. la locandina del sito e il copy nuovo ==');
+{ const p = await nuova();
+  const r = await p.evaluate(() => {
+    const L = caricaLoc();
+    const it1 = S.modelli.find(m => m.id === 'it1');
+    const al1 = S.modelli.find(m => m.id === 'al1');
+    S.contatti = [{id:'q1',nome:'Maria Rossi',centro:'',citta:'Roma',numero:'393331234567',
+                   paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}];
+    return { urlIt: (L.it1||{}).url || '', urlAl: (L.al1||{}).url || '',
+             it: it1.testo, al: al1.testo,
+             mandato: testoDaMandare(it1, S.contatti[0]) };
+  });
+  ok(/locandine\/noleggio-it\.jpg$/.test(r.urlIt), `la locandina italiana e gia agganciata: ${r.urlIt.slice(-28)}`);
+  ok(/locandine\/noleggio-al\.jpg$/.test(r.urlAl), 'e anche quella albanese');
+  ok(/500 . al mese/.test(r.it), 'il copy italiano dice il prezzo in grassetto');
+  ok(/Afrodite Multishape/.test(r.it) && /Laser Ares/.test(r.it), 'e nomina tutte e due le macchine');
+  ok(!/\[.*\]\(.*\)/.test(r.it), 'niente link in parentesi quadre: su WhatsApp si vedrebbero');
+  ok(/50\.000 lek. n. muaj/.test(r.al), 'il copy albanese e in lekë');
+  ok(/Maria/.test(r.mandato) && /noleggio-it\.jpg$/.test(r.mandato),
+     'nel messaggio c\'e il nome e in fondo il link della locandina');
+  const risp = await p.request.get(r.urlIt);
+  ok(risp.status() === 200, `la locandina risponde davvero: HTTP ${risp.status()}`);
+  ok(Number(risp.headers()['content-length']) > 50000, 'ed e un\'immagine vera');
+  await p.context().close();
+}
+
 console.log('\n== errori in pagina ==');
 console.log(errori.length ? errori.join('\n') : '  nessuno');
 console.log(`\n=== ${passate} prove passate, ${fallite} fallite ===`);
