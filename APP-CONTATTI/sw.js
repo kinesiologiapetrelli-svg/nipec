@@ -1,7 +1,7 @@
 /* CONTATTI NIPEC — il guscio offline.
    Cambia VERSIONE a ogni pubblicazione: è l'unico modo perché i telefoni
    già installati vedano la versione nuova. */
-const VERSIONE = 'contatti-nipec-4';
+const VERSIONE = 'contatti-nipec-6';
 const ROBA = ['./','./index.html','./manifest.webmanifest','./caratteri/archivo.woff2',
               './icona-192.png','./icona-512.png','./apple-touch-icon.png'];
 self.addEventListener('install', e => { self.skipWaiting();

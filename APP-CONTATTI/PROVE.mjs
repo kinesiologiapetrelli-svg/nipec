@@ -238,6 +238,111 @@ console.log('\n== 11. raddrizzare i contatti gia importati storti ==');
   await p.context().close();
 }
 
+console.log('\n== 12. allegare la locandina a un messaggio ==');
+{ const p = await nuova();
+  await p.vai(/^Messaggi$/); await p.waitForTimeout(400);
+  ok(await p.locator('[data-locfile="it1"]').count() === 1, 'c\'e\' la casella per allegare sotto il messaggio 1');
+  ok(await p.locator('[data-locfile="it4"]').count() === 1, 'e anche sotto il quarto');
+  ok(await p.locator('[data-locurl="it1"]').count() === 1, 'c\'e\' la casella dell\'indirizzo in rete');
+  await p.setInputFiles('[data-locfile="it1"]', 'locandina-prova.png');
+  await p.waitForTimeout(1500);
+  const L = await p.evaluate(() => JSON.parse(localStorage.getItem('nipec_contatti_locandine_v1')||'{}'));
+  ok(!!(L.it1 && L.it1.dato), 'la locandina e\' salvata');
+  if(L.it1){
+    ok(L.it1.larghezza <= 1280 && L.it1.altezza <= 1280, `rimpicciolita a ${L.it1.larghezza}x${L.it1.altezza}`);
+    ok(/^data:image\/jpeg/.test(L.it1.dato), 'convertita in JPEG');
+    ok(L.it1.peso < 400000, `pesa ${Math.round(L.it1.peso/1024)} KB`);
+  }
+  const chiavi = await p.evaluate(() => Object.keys(localStorage));
+  ok(chiavi.includes('nipec_contatti_locandine_v1') && chiavi.includes('nipec_contatti_v1'),
+     'sta in una chiave sua, separata dalla rubrica');
+  await p.context().close();
+}
+
+console.log('\n== 13. la locandina compare nel giro ==');
+{ const p = await nuova();
+  await p.vai(/^Messaggi$/); await p.waitForTimeout(400);
+  await p.setInputFiles('[data-locfile="it1"]', 'locandina-prova.png');
+  await p.waitForTimeout(1500);
+  await p.evaluate(() => {
+    S.contatti = [{id:'z1',nome:'Maria Rossi',centro:'',citta:'Roma',numero:'393331234567',
+                   paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}];
+    salva(); S.cfg.scheda='oggi'; disegna();
+  });
+  await p.waitForTimeout(500);
+  const t = await p.locator('#app').innerText();
+  ok(/parte anche la locandina/.test(t), 'la scheda dice che parte anche la locandina');
+  ok(await p.locator('[data-loca]').count() > 0, 'c\'e\' il tasto «+ Locandina»');
+  await p.context().close();
+}
+
+console.log('\n== 14. l\'indirizzo in rete finisce nel testo ==');
+{ const p = await nuova();
+  await p.vai(/^Messaggi$/); await p.waitForTimeout(400);
+  await p.fill('[data-locurl="it1"]', 'https://nipec.it/locandina-laser.jpg');
+  await p.vai(/Salva i messaggi/); await p.waitForTimeout(600);
+  const r = await p.evaluate(() => {
+    S.contatti=[{id:'z2',nome:'Maria',centro:'',citta:'',numero:'393331234567',paese:'IT',
+                 stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}];
+    const m = S.modelli.find(x=>x.id==='it1');
+    return { testo: testoDaMandare(m, S.contatti[0]) };
+  });
+  ok(/nipec\.it\/locandina-laser\.jpg$/.test(r.testo), 'il link e\' in fondo al messaggio');
+  await p.context().close();
+}
+
+console.log('\n== 15. chi ha detto si\' entra nella coda delle informazioni ==');
+{ const p = await nuova();
+  await p.evaluate(() => {
+    S.contatti = [
+      {id:'i1',nome:'Interessata',centro:'',citta:'Tirane',numero:'355692999600',paese:'AL',
+       stato:'interessato',invii:1,ultimoInvio:'2026-10-18',wa:'si',storia:[]},
+      {id:'n1',nome:'Non interessata',centro:'',citta:'Roma',numero:'393331234567',paese:'IT',
+       stato:'non interessato',invii:1,ultimoInvio:'2026-10-18',wa:'si',storia:[]}
+    ];
+    salva(); S.cfg.scheda='oggi'; disegna();
+  });
+  await p.waitForTimeout(500);
+  const t = await p.locator('#app').innerText();
+  ok(/hanno detto s/i.test(t), 'c\'e\' il riquadro «Hanno detto sì»');
+  ok(/aspetta le informazioni/i.test(t), 'dice che aspetta le informazioni');
+  ok(/Interessata/.test(t), 'c\'e\' chi ha detto si');
+  ok(!/Non interessata/.test(t), 'chi ha detto no NON compare');
+  const q = await p.evaluate(() => codaDaSeguire().map(x => ({n:x.c.nome, passo:x.m.passo, lingua:x.m.paese})));
+  ok(q.length === 1 && q[0].passo === 4, `in coda c'e' solo lei, col quarto messaggio: ${JSON.stringify(q)}`);
+  ok(q[0].lingua === 'AL', 'e in albanese, perche e di Tirana');
+  // mando le informazioni
+  await p.evaluate(() => segnaInviato('i1')); await p.waitForTimeout(500);
+  const S2 = await p.evaluate(()=>JSON.parse(localStorage.getItem('nipec_contatti_v1')));
+  const c = S2.contatti.find(x=>x.id==='i1');
+  ok(c.stato === 'informazioni mandate', `stato dopo l'invio: ${c.stato}`);
+  ok((c.storia||[]).some(e=>e.t==='informazioni'), 'la storia registra le informazioni');
+  const q2 = await p.evaluate(() => codaDaSeguire().length);
+  ok(q2 === 0, 'ed esce dalla coda');
+  await p.context().close();
+}
+
+console.log('\n== 16. chi non risponde riceve il promemoria da solo ==');
+{ const p = await nuova();
+  const r = await p.evaluate(() => {
+    const g = n => { const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString().slice(0,10); };
+    S.contatti = [
+      {id:'a1',nome:'Scritta ieri',numero:'393331111111',paese:'IT',stato:'inviato',invii:1,ultimoInvio:g(1),wa:'',storia:[]},
+      {id:'a2',nome:'Muta da 6 giorni',numero:'393332222222',paese:'IT',stato:'inviato',invii:1,ultimoInvio:g(6),wa:'',storia:[]},
+      {id:'a3',nome:'Muta da 20 giorni',numero:'393333333333',paese:'IT',stato:'inviato',invii:2,ultimoInvio:g(20),wa:'',storia:[]},
+      {id:'a4',nome:'Ha detto no',numero:'393334444444',paese:'IT',stato:'non interessato',invii:1,ultimoInvio:g(20),wa:'',storia:[]}
+    ];
+    salva();
+    return S.contatti.map(c => { const m = prossimoModello(c); return {n:c.nome, passo:m?m.passo:null}; });
+  });
+  const trova = n => (r.find(x=>x.n===n)||{}).passo;
+  ok(trova('Scritta ieri') === null, 'a chi ha scritto ieri non scrive niente (attesa 5 giorni)');
+  ok(trova('Muta da 6 giorni') === 2, 'dopo 6 giorni di silenzio parte il promemoria');
+  ok(trova('Muta da 20 giorni') === 3, 'dopo il secondo silenzio parte l\'ultima');
+  ok(trova('Ha detto no') === null, 'a chi ha detto no non si scrive mai piu');
+  await p.context().close();
+}
+
 console.log('\n== errori in pagina ==');
 console.log(errori.length ? errori.join('\n') : '  nessuno');
 console.log(`\n=== ${passate} prove passate, ${fallite} fallite ===`);

@@ -105,6 +105,7 @@ textarea.inp{min-height:7rem;resize:vertical;line-height:1.5}
 .s-risposto{background:var(--ok-fondo);color:var(--ok)}
 .s-interessato{background:var(--ok-fondo);color:var(--ok)}
 .s-no{background:var(--fondo);color:var(--tenue)}
+.s-info{background:var(--blu-tenue);color:var(--navy);font-weight:700}
 .s-errato{background:var(--allerta-fondo);color:var(--allerta)}
 .s-stop{background:var(--allerta-fondo);color:var(--allerta)}
 
@@ -163,6 +164,10 @@ tr:hover td{background:var(--fondo)}
    ===================================================================== */
 
 const CHIAVE = 'nipec_contatti_v1';
+/* Le locandine stanno in una chiave separata, non dentro S. Un'immagine pesa
+   mille volte un contatto: se il telefono si riempie, a fallire dev'essere il
+   salvataggio di una locandina, mai quello della rubrica. */
+const CHIAVE_LOC = 'nipec_contatti_locandine_v1';
 const OGGI = () => new Date().toISOString().slice(0,10);
 
 const MODELLI_INIZIALI = [
@@ -178,10 +183,16 @@ const MODELLI_INIZIALI = [
     testo:"Përshëndetje {nome}, të kisha shkruar për qiranë 50.000 lekë në muaj.\n\nAsgjë urgjente. Nëse tani nuk është momenti, ma thuaj dhe nuk të shkruaj më.\n\nNëse do të kuptosh, të dërgoj skedën teknike dhe kontratën, në shqip: i lexon me qetësi, para se të flasim për para." },
   { id:'al3', paese:'AL', passo:3, nome:'E fundit',
     testo:"Përshëndetje {nome}, hera e fundit që të shqetësoj.\n\nNëse nesër të duhet një pajisje — lazer, trup ose fytyrë — e di ku të më gjesh: +355 69 212 9786.\n\nPunë të mbarë." },
+  { id:'it4', paese:'IT', passo:4, nome:'Le informazioni (per chi ha detto sì)',
+    testo:"Perfetto {nome}, allora ti mando tutto.\n\nQui sotto trovi la locandina con le macchine e i prezzi. Il noleggio è 500 euro al mese: zero anticipo, zero cauzione, nessun vincolo di durata.\n\nDimmi solo quale ti interessa e che giorni sei in centro, così ti chiamo e ci mettiamo d'accordo." },
+  { id:'al4', paese:'AL', passo:4, nome:'Informacionet (për ato që thanë po)',
+    testo:"Shumë mirë {nome}, po të dërgoj gjithçka.\n\nKëtu poshtë e ke fletëpalosjen me pajisjet dhe çmimet. Qiraja është 50.000 lekë në muaj: pa paradhënie, pa garanci, pa kontratë afati.\n\nMë thuaj vetëm cila të intereson dhe cilat ditë je në qendër, që të të marr në telefon." },
 ];
 
-const STATI = ['nuovo','inviato','risposto','interessato','non interessato','numero errato','non disturbare'];
+const STATI = ['nuovo','inviato','risposto','interessato','informazioni mandate',
+               'non interessato','numero errato','non disturbare'];
 const CLASSE = {'nuovo':'s-nuovo','inviato':'s-inviato','risposto':'s-risposto','interessato':'s-interessato',
+  'informazioni mandate':'s-info',
   'non interessato':'s-no','numero errato':'s-errato','non disturbare':'s-stop'};
 
 function statoIniziale(){
@@ -200,6 +211,11 @@ function carica(){
 function risistema(st){
   st.contatti = Array.isArray(st.contatti) ? st.contatti : [];
   st.scarti   = Array.isArray(st.scarti)   ? st.scarti   : [];
+  st.modelli  = Array.isArray(st.modelli) && st.modelli.length ? st.modelli
+              : JSON.parse(JSON.stringify(MODELLI_INIZIALI));
+  // chi aveva già l'app non ha il quarto messaggio: glielo aggiungo senza
+  // toccare i tre che ha scritto lui
+  MODELLI_INIZIALI.forEach(m => { if(!st.modelli.some(x => x.id === m.id)) st.modelli.push(m); });
   st.contatti.forEach(c => {
     if(c.wa === undefined) c.wa = '';            // '' non si sa · 'si' · 'no'
     if(!Array.isArray(c.storia)){
@@ -216,6 +232,58 @@ function risistema(st){
 }
 function salva(){ try{ localStorage.setItem(CHIAVE, JSON.stringify(S)); }
   catch(e){ brindisi('Spazio pieno: esporta una copia'); } }
+
+/* ---------- le locandine ---------- */
+let LOC = caricaLoc();
+function caricaLoc(){ try{ return JSON.parse(localStorage.getItem(CHIAVE_LOC)) || {}; }catch(e){ return {}; } }
+function salvaLoc(){
+  try{ localStorage.setItem(CHIAVE_LOC, JSON.stringify(LOC)); return true; }
+  catch(e){ brindisi('La locandina non ci sta: scegline una più leggera'); return false; }
+}
+function locDi(idModello){ return LOC[idModello] || null; }
+function pesoBello(b){ b = +b || 0; return b > 999999 ? (b/1048576).toFixed(1)+' MB' : Math.round(b/1024)+' KB'; }
+
+/* Rimpicciolisco e comprimo prima di salvare: una foto da telefono pesa 4 MB
+   e il magazzino del browser ne regge sì e no cinque. A 1280 pixel una
+   locandina si legge benissimo su WhatsApp. */
+function comprimi(file, lato, qualita){
+  return new Promise((ok, no) => {
+    const fr = new FileReader();
+    fr.onerror = () => no(new Error('file illeggibile'));
+    fr.onload = () => {
+      const im = new Image();
+      im.onerror = () => no(new Error('non è un\'immagine'));
+      im.onload = () => {
+        let w = im.width, h = im.height;
+        const s = Math.min(1, lato / Math.max(w, h));
+        w = Math.max(1, Math.round(w * s)); h = Math.max(1, Math.round(h * s));
+        const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(im, 0, 0, w, h);
+        ok({ dato: cv.toDataURL('image/jpeg', qualita), larghezza: w, altezza: h });
+      };
+      im.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+
+/* Da immagine salvata a File vero, senza await: navigator.share vuole essere
+   chiamato dentro al tocco, e un await in mezzo in certi telefoni lo annulla. */
+function aFile(dato, nome){
+  const [capo, b64] = String(dato || '').split(',');
+  const tipo = (String(capo).match(/data:([^;]+)/) || [, 'image/jpeg'])[1];
+  const bin = atob(b64 || ''); const n = bin.length; const arr = new Uint8Array(n);
+  for(let i = 0; i < n; i++) arr[i] = bin.charCodeAt(i);
+  return new File([arr], nome || 'locandina.jpg', { type: tipo });
+}
+
+/* Il testo come parte davvero: se la locandina ha anche un indirizzo in rete,
+   il link va in fondo e WhatsApp ci disegna sopra l'anteprima. */
+function testoDaMandare(m, c){
+  const t = componi(m.testo, c);
+  const L = locDi(m.id);
+  return (L && L.url) ? t + '\n\n' + L.url : t;
+}
 
 /* ---------- utilità ---------- */
 const esc = s => String(s??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -338,7 +406,13 @@ function componi(testo, c){
 
 /* ---------- il motore: chi scrivere oggi, e cosa ---------- */
 const senzaNome = c => (!(c.nome||'').trim() && !(c.centro||'').trim()) ? 1 : 0;
-const FERMI = ['risposto','interessato','non interessato','numero errato','non disturbare'];
+/* Stati che fermano la sequenza dei tre messaggi a freddo. «interessato» sta
+   qui dentro — non deve ricevere il promemoria — ma NON è un vicolo cieco:
+   finisce nella coda di chi va seguito (il quarto messaggio, le informazioni). */
+const FERMI = ['risposto','interessato','informazioni mandate','non interessato',
+               'numero errato','non disturbare'];
+/* Chi ha detto sì e aspetta ancora il materiale. */
+const DA_SEGUIRE = ['interessato'];
 
 function modelloPer(c, passo){
   const p = c.paese==='AL' ? 'AL' : 'IT';
@@ -356,6 +430,17 @@ function prossimoModello(c){
   return null;
 }
 function inviatiOggi(){ return (S.registro[OGGI()]||0); }
+
+/* Chi ha detto sì e aspetta ancora le informazioni. Questa coda NON ha il
+   tetto dei messaggi al giorno: rispondere a chi ti ha scritto non è
+   contattare uno sconosciuto, e WhatsApp quello non lo conta contro di te. */
+function codaDaSeguire(){
+  return S.contatti
+    .filter(c => DA_SEGUIRE.includes(c.stato) && c.numero)
+    .map(c => ({ c, m: modelloPer(c, 4) }))
+    .filter(x => x.m)
+    .sort((a,b) => String(a.c.ultimoInvio||'').localeCompare(String(b.c.ultimoInvio||'')));
+}
 function codaCompleta(){
   return S.contatti
     .map(c => ({ c, m: prossimoModello(c) }))
@@ -374,11 +459,50 @@ function segnaInviato(cid){
   const c = S.contatti.find(x => x.id === cid); if(!c) return;
   c.invii = (c.invii||0) + 1;
   c.ultimoInvio = OGGI();
-  if(!FERMI.includes(c.stato)) c.stato = 'inviato';
-  (c.storia = c.storia || []).push({ d:OGGI(), t:'inviato', p:c.invii });
+  // se aspettava le informazioni, adesso le ha: esce dalla coda di chi va seguito
+  if(DA_SEGUIRE.includes(c.stato)) c.stato = 'informazioni mandate';
+  else if(!FERMI.includes(c.stato)) c.stato = 'inviato';
+  (c.storia = c.storia || []).push({ d:OGGI(), t:c.stato === 'informazioni mandate' ? 'informazioni' : 'inviato', p:c.invii });
   S.registro[OGGI()] = inviatiOggi() + 1;
   salva(); disegna();
 }
+/* WhatsApp non si fa dare un allegato da un link: wa.me porta solo il testo.
+   Quindi due strade, tutte e due vere:
+     · la locandina caricata qui dentro parte col foglio di condivisione del
+       telefono (immagine + testo insieme, poi scegli WhatsApp e la persona);
+     · se la locandina ha anche un indirizzo in rete, il link va in fondo al
+       testo e WhatsApp ci disegna sopra l'anteprima: un tocco solo, e la
+       persona giusta è già scelta.
+   La seconda è più comoda, la prima manda il file vero. */
+async function mandaConLocandina(cid, mid){
+  const c = S.contatti.find(x => x.id === cid);
+  const m = S.modelli.find(x => x.id === mid);
+  const L = locDi(mid);
+  if(!c || !m || !L || !L.dato) return;
+  const testo = testoDaMandare(m, c);
+  let f = null;
+  try{ f = aFile(L.dato, L.nome); }catch(e){ f = null; }
+  if(f && navigator.canShare && navigator.canShare({ files:[f] })){
+    try{
+      await navigator.share({ files:[f], text: testo });
+      segnaInviato(cid);
+      return;
+    }catch(e){
+      if(e && e.name === 'AbortError') return;   // ha chiuso lui il foglio
+    }
+  }
+  // ripiego: scarico la locandina e copio il testo, poi apro WhatsApp
+  try{
+    const a = document.createElement('a');
+    a.href = L.dato; a.download = L.nome || 'locandina.jpg';
+    document.body.appendChild(a); a.click(); a.remove();
+    if(navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(testo);
+    brindisi('Locandina salvata e testo copiato: aprila da WhatsApp e allegala');
+  }catch(e){
+    brindisi('Questo telefono non sa allegare da solo: usa il link in rete');
+  }
+}
+
 function cambiaStato(cid, stato){
   const c = S.contatti.find(x => x.id === cid); if(!c) return;
   c.stato = stato;
@@ -421,7 +545,7 @@ const SCHEDE = [
 
 function disegna(){
   // barra delle schede
-  const coda = codaDiOggi().length;
+  const coda = codaDiOggi().length + codaDaSeguire().length;
   const daSegnare = scrittiIl(ieri()).filter(c => c.stato === 'inviato').length
                   + S.scarti.length + prefissiStorti().length;
   document.getElementById('schede').innerHTML = SCHEDE.map(([k,t]) =>
@@ -454,13 +578,15 @@ function vOggi(){
     <div class="numero"><div class="v">${S.contatti.length}</div><div class="e">in rubrica</div></div>
   </div>`;
 
+  h += bloccoDaSeguire();   // prima di tutto, e anche quando la quota è finita
+
   if(fatti >= quota){
     h += `<div class="avviso verde"><b>Per oggi hai finito.</b> ${fatti} messaggi mandati.
       Il resto della coda (${resto}) torna domani. Non alzare la quota per finire prima:
       è esattamente così che WhatsApp blocca un numero.</div>`;
     return h + strisciaMandati();
   }
-  if(!coda.length) return h + `<div class="vuoto"><b>Oggi non c'è nessuno da scrivere.</b>
+  if(!coda.length) return h + strisciaMandati() + `<div class="vuoto"><b>Oggi non c'è nessuno da scrivere.</b>
     I promemoria partono da soli quando scadono i giorni di attesa.</div>`;
 
   h += strisciaMandati();
@@ -468,6 +594,21 @@ function vOggi(){
      cambialo pure prima di premere invio, se quella persona merita una riga sua.</p>`;
   h += coda.map(({c,m}) => schedaGiro(c,m)).join('');
   return h;
+}
+
+/* Chi ha detto sì aspetta il materiale. Questa coda sta in cima a tutto,
+   prima dei messaggi a freddo: una che ha risposto vale venti che non hanno
+   ancora letto, e se la fai aspettare tre giorni si raffredda. */
+function bloccoDaSeguire(){
+  const coda = codaDaSeguire();
+  if(!coda.length) return '';
+  return `<div class="riquadro" style="margin-bottom:.9rem;border-left:3px solid var(--ok)">
+    <div class="occhiello">Hanno detto sì</div>
+    <h2>${coda.length === 1 ? 'Una aspetta le informazioni' : coda.length + ' aspettano le informazioni'}</h2>
+    <p class="tenue" style="margin:.3rem 0 .8rem">Queste non contano nel tetto dei ${S.cfg.alGiorno} al giorno:
+      rispondere a chi ti ha scritto non è scrivere a uno sconosciuto. Falle subito.</p>
+    ${coda.map(({c,m}) => schedaGiro(c,m)).join('')}
+  </div>`;
 }
 
 /* Appena mandato, il contatto esce dalla coda: il messaggio dopo tocca fra
@@ -493,7 +634,8 @@ function strisciaMandati(){
   </div>`;
 }
 function schedaGiro(c,m){
-  const testo = componi(m.testo, c);
+  const testo = testoDaMandare(m, c);
+  const L = locDi(m.id);
   const url = 'https://wa.me/' + c.numero + '?text=' + encodeURIComponent(testo);
   const quando = c.ultimoInvio ? `ultimo messaggio ${giorniDa(c.ultimoInvio)} giorni fa` : 'mai scritto';
   return `<div class="giro">
@@ -508,8 +650,12 @@ function schedaGiro(c,m){
       </div>
     </div>
     <div class="testo">${esc(testo)}</div>
+    ${L && L.dato ? `<div class="fila" style="align-items:center;gap:.5rem;margin:.1rem 0 .4rem">
+      <img src="${L.dato}" alt="" style="width:2.6rem;height:2.6rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--riga)">
+      <span class="tenue">parte anche la locandina · ${esc(L.nome||'')} ${pesoBello(L.peso)}</span></div>` : ''}
     <div class="azioni">
       <a class="btn wa" href="${url}" target="_blank" rel="noopener" data-manda="${c.id}">Apri WhatsApp e manda</a>
+      ${L && L.dato ? `<button class="btn" data-loca="${c.id}|${m.id}" title="Immagine + testo insieme">+ Locandina</button>` : ''}
       <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto</button>
       <button class="btn piccolo" data-stato="non interessato|${c.id}">Non interessato</button>
       <button class="btn piccolo" data-wa="no|${c.id}">Non è su WhatsApp</button>
@@ -775,19 +921,60 @@ function agganciaRubrica(){
 }
 
 /* ---------- MESSAGGI ---------- */
+/* Sotto ogni messaggio: la locandina. Due caselle, perché WhatsApp non accetta
+   allegati da un link e questo non si può aggirare. */
+function bloccoLocandina(m){
+  const L = locDi(m.id) || {};
+  return `<div style="border:1px dashed var(--riga);border-radius:.5rem;padding:.6rem .7rem;margin:-.3rem 0 .9rem">
+    <div class="fila" style="align-items:center;gap:.6rem;flex-wrap:wrap">
+      ${L.dato
+        ? `<img src="${L.dato}" alt="" style="width:3.2rem;height:3.2rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--riga)">
+           <div style="flex:1 1 9rem;min-width:0">
+             <b style="font-size:.9rem">${esc(L.nome || 'locandina')}</b>
+             <div class="tenue">${pesoBello(L.peso)}${L.larghezza ? ` · ${L.larghezza}×${L.altezza}` : ''}</div>
+           </div>
+           <button class="btn piccolo pericolo" data-locvia="${m.id}">Togli</button>`
+        : `<div style="flex:1 1 12rem"><b style="font-size:.9rem">Nessuna locandina</b>
+             <div class="tenue">Allegane una e parte insieme al testo.</div></div>`}
+      <label class="btn piccolo" style="cursor:pointer;margin:0">
+        ${L.dato ? 'Cambia' : 'Allega locandina'}
+        <input type="file" accept="image/*" data-locfile="${m.id}" style="display:none">
+      </label>
+    </div>
+    <label class="campo" style="margin:.55rem 0 0"><span>Indirizzo della locandina in rete</span>
+      <input class="inp" data-locurl="${m.id}" inputmode="url" placeholder="https://…" value="${esc(L.url || '')}"></label>
+  </div>`;
+}
+
 function vMessaggi(){
   return `<div class="avviso giallo"><b>Tre messaggi, non uno.</b> Il primo chiede solo una risposta.
     Il secondo arriva dopo ${S.cfg.attesa1} giorni di silenzio e offre una via d'uscita — è quella che
     tiene il numero pulito. Il terzo chiude e saluta. Dopo il terzo, quella persona non viene più scritta.</div>
   <p class="tenue" style="margin-bottom:.8rem">Dentro al testo puoi usare <b>{nome}</b>, <b>{centro}</b> e <b>{citta}</b>:
-    si riempiono da soli con i dati di quella persona.</p>` +
+    si riempiono da soli con i dati di quella persona.</p>
+  <div class="riquadro" style="margin-bottom:.9rem">
+    <div class="occhiello">Le locandine</div>
+    <h2>Come si allega, e perché in due modi</h2>
+    <p class="tenue" style="margin:.3rem 0 0">WhatsApp <b>non si fa dare un allegato da un link</b>, e questo
+      non si può aggirare. Quindi sotto ogni messaggio ci sono due caselle:</p>
+    <ul class="tenue" style="margin:.5rem 0 0;padding-left:1.1rem;line-height:1.7">
+      <li><b>Indirizzo in rete</b> — il link va in fondo al messaggio e WhatsApp ci disegna sopra l'anteprima.
+        <b>Un tocco solo e la persona giusta è già scelta</b>: è il modo che consiglio per il giro di ogni giorno.</li>
+      <li><b>File allegato</b> — parte l'immagine vera, ma il telefono ti fa scegliere a mano WhatsApp e il contatto.
+        Ottimo per le poche, scomodo per venticinque.</li>
+    </ul>
+    <p class="tenue" style="margin:.5rem 0 0">Puoi metterle tutte e due: nel giro compare il tasto
+      <b>+ Locandina</b> accanto a quello verde. Le immagini le rimpicciolisco a 1280 pixel e le
+      comprimo, altrimenti riempiono la memoria del telefono.</p>
+  </div>` +
   ['IT','AL'].map(p => `<div class="riquadro">
       <div class="occhiello">${p==='IT'?'Italia · in italiano':'Albania · in albanese'}</div>
       ${S.modelli.filter(m=>m.paese===p).sort((a,b)=>a.passo-b.passo).map(m=>`
         <label class="campo"><span>${m.passo} · ${esc(m.nome)}</span>
-        <textarea class="inp" data-modello="${m.id}">${esc(m.testo)}</textarea></label>`).join('')}
+        <textarea class="inp" data-modello="${m.id}" style="min-height:9.5rem">${esc(m.testo)}</textarea></label>
+        ${bloccoLocandina(m)}`).join('')}
     </div>`).join('') +
-  `<button class="btn primario" data-azione="salva-modelli">Salva i messaggi</button>`;
+  `<button class="btn primario" data-azione="salva-modelli">Salva i messaggi e i link</button>`;
 }
 
 /* ---------- IMPORTA ---------- */
@@ -1070,12 +1257,15 @@ function csv(){
 
 /* ---------- i clic ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-scheda],[data-manda],[data-stato],[data-wa],[data-scarto],[data-azione],[data-apri]');
+  const t = e.target.closest('[data-scheda],[data-manda],[data-stato],[data-wa],[data-loca],[data-locvia],[data-scarto],[data-azione],[data-apri]');
   if(!t) return;
   if(t.dataset.scheda){ S.cfg.scheda = t.dataset.scheda; salva(); disegna(); return; }
   if(t.dataset.manda){ setTimeout(()=>segnaInviato(t.dataset.manda), 400); return; }   // il link parte lo stesso
   if(t.dataset.stato){ const [s,cid] = t.dataset.stato.split('|'); cambiaStato(cid,s); return; }
   if(t.dataset.wa){ const [v,cid] = t.dataset.wa.split('|'); segnaWA(cid,v); return; }
+  if(t.dataset.loca){ const [cid,mid] = t.dataset.loca.split('|'); mandaConLocandina(cid,mid); return; }
+  if(t.dataset.locvia){ const mid = t.dataset.locvia;
+    if(confirm('Togliere la locandina da questo messaggio?')){ delete LOC[mid]; salvaLoc(); disegna(); } return; }
   if(t.dataset.scarto){ const [az,sid] = t.dataset.scarto.split('|'); gestisciScarto(az,sid); return; }
   if(t.dataset.apri){ apriContatto(t.dataset.apri); return; }
   const a = t.dataset.azione;
@@ -1083,7 +1273,12 @@ document.addEventListener('click', e => {
     document.querySelectorAll('[data-modello]').forEach(ta => {
       const m = S.modelli.find(x => x.id === ta.dataset.modello); if(m) m.testo = ta.value;
     });
-    salva(); brindisi('Messaggi salvati'); return;
+    document.querySelectorAll('[data-locurl]').forEach(inp => {
+      const mid = inp.dataset.locurl, u = inp.value.trim();
+      if(u){ LOC[mid] = Object.assign({ dato:'', nome:'', peso:0 }, LOC[mid], { url:u }); }
+      else if(LOC[mid]){ LOC[mid].url = ''; if(!LOC[mid].dato) delete LOC[mid]; }
+    });
+    salvaLoc(); salva(); disegna(); brindisi('Messaggi e link salvati'); return;
   }
   if(a === 'salva-cfg'){
     S.cfg.alGiorno = Math.max(5, Math.min(80, parseInt(document.getElementById('cfgGiorno').value)||25));
@@ -1102,7 +1297,8 @@ document.addEventListener('click', e => {
   if(a === 'vcf'){ if(!S.contatti.length) return brindisi('Rubrica vuota');
     scarica('rubrica-nipec.vcf', vcard(), 'text/vcard;charset=utf-8'); brindisi('Aprilo sul telefono'); return; }
   if(a === 'csv'){ scarica('contatti-nipec-'+OGGI()+'.csv', csv(), 'text/csv;charset=utf-8'); return; }
-  if(a === 'json'){ scarica('copia-contatti-'+OGGI()+'.json', JSON.stringify(S,null,1), 'application/json'); return; }
+  if(a === 'json'){ scarica('copia-contatti-'+OGGI()+'.json',
+      JSON.stringify(Object.assign({}, S, { locandine: LOC }), null, 1), 'application/json'); return; }
   if(a === 'azzera'){
     if(confirm('Cancellare tutti i contatti e lo storico? Esporta prima una copia.') &&
        confirm('Sicuro? Non si torna indietro.')){ S = statoIniziale(); salva(); disegna(); }
@@ -1260,13 +1456,32 @@ document.addEventListener('change', e => {
       brindisi('Letto. Ora premi «Guarda cosa ho capito»'); };
     l.readAsText(f, 'utf-8'); return;
   }
+  if(e.target.dataset && e.target.dataset.locfile){
+    const mid = e.target.dataset.locfile;
+    const f = e.target.files[0]; e.target.value = '';
+    if(!f) return;
+    if(!/^image\//.test(f.type)){ brindisi('Serve un\'immagine: JPG o PNG, non un PDF'); return; }
+    brindisi('Preparo la locandina…');
+    comprimi(f, 1280, .78).then(r => {
+      const peso = Math.round((r.dato.length - r.dato.indexOf(',') - 1) * 3 / 4);
+      const prima = LOC[mid];
+      LOC[mid] = { dato:r.dato, nome:f.name, peso, larghezza:r.larghezza, altezza:r.altezza,
+                   url:(prima && prima.url) || '' };
+      if(salvaLoc()) brindisi(`Locandina pronta · ${pesoBello(peso)}`);
+      else { if(prima) LOC[mid] = prima; else delete LOC[mid]; }
+      disegna();
+    }).catch(err => brindisi('Non riesco a leggere questa immagine'));
+    return;
+  }
   if(e.target.id === 'ripristino'){
     const f = e.target.files[0]; if(!f) return;
     const l = new FileReader();
     l.onload = () => { try{ const o = JSON.parse(l.result);
         if(!o.contatti) throw 0;
         if(!confirm('Sostituire quello che c\'è adesso con questa copia?')) return;
-        S = Object.assign(statoIniziale(), o); salva(); disegna(); brindisi('Copia ripristinata');
+        if(o.locandine && typeof o.locandine === 'object'){ LOC = o.locandine; salvaLoc(); }
+        delete o.locandine;
+        S = risistema(Object.assign(statoIniziale(), o)); salva(); disegna(); brindisi('Copia ripristinata');
       }catch(err){ brindisi('Il file non è una copia valida'); } };
     l.readAsText(f, 'utf-8');
   }
