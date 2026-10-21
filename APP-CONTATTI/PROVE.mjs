@@ -343,30 +343,107 @@ console.log('\n== 16. chi non risponde riceve il promemoria da solo ==');
   await p.context().close();
 }
 
-console.log('\n== 17. la locandina del sito e il copy nuovo ==');
+console.log('\n== 17. le caselle della locandina ci sono ma partono vuote ==');
 { const p = await nuova();
   const r = await p.evaluate(() => {
     const L = caricaLoc();
     const it1 = S.modelli.find(m => m.id === 'it1');
-    const al1 = S.modelli.find(m => m.id === 'al1');
     S.contatti = [{id:'q1',nome:'Maria Rossi',centro:'',citta:'Roma',numero:'393331234567',
                    paese:'IT',stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}];
-    return { urlIt: (L.it1||{}).url || '', urlAl: (L.al1||{}).url || '',
-             it: it1.testo, al: al1.testo,
+    return { vuote: Object.keys(L).length, it: it1.testo,
              mandato: testoDaMandare(it1, S.contatti[0]) };
   });
-  ok(/locandine\/noleggio-it\.jpg$/.test(r.urlIt), `la locandina italiana e gia agganciata: ${r.urlIt.slice(-28)}`);
-  ok(/locandine\/noleggio-al\.jpg$/.test(r.urlAl), 'e anche quella albanese');
-  ok(/500 . al mese/.test(r.it), 'il copy italiano dice il prezzo in grassetto');
-  ok(/Afrodite Multishape/.test(r.it) && /Laser Ares/.test(r.it), 'e nomina tutte e due le macchine');
-  ok(!/\[.*\]\(.*\)/.test(r.it), 'niente link in parentesi quadre: su WhatsApp si vedrebbero');
-  ok(/50\.000 lek. n. muaj/.test(r.al), 'il copy albanese e in lekë');
-  ok(/Maria/.test(r.mandato) && /noleggio-it\.jpg$/.test(r.mandato),
-     'nel messaggio c\'e il nome e in fondo il link della locandina');
-  const risp = await p.request.get(r.urlIt);
-  ok(risp.status() === 200, `la locandina risponde davvero: HTTP ${risp.status()}`);
-  ok(Number(risp.headers()['content-length']) > 50000, 'ed e un\'immagine vera');
+  ok(r.vuote === 0, 'nessuna locandina preimpostata: le metti tu');
+  await p.vai(/^Messaggi$/); await p.waitForTimeout(400);
+  ok(await p.locator('[data-locfile="it1"]').count() === 1, 'la casella per allegare c\'e\'');
+  ok(await p.locator('[data-locurl="it1"]').count() === 1, 'e anche quella del link');
+  ok(/500 . al mese/.test(r.it), 'il copy nuovo dice il prezzo in grassetto');
+  ok(!/\[.*\]\(.*\)/.test(r.it), 'niente link in parentesi quadre');
+  ok(!/\n\nhttp/.test(r.mandato), 'senza locandina non attacca nessun link');
   await p.context().close();
+}
+
+console.log('\n== 18. AGGIORNARE SENZA PERDERE LA RUBRICA ==');
+{ const ctx = await b.newContext(); const p = await ctx.newPage();
+  p.on('pageerror', e => errori.push('migrazione: ' + e.message));
+  // metto nel telefono dei dati nel formato VECCHIO, prima della scheda Stato
+  await p.goto(B, { waitUntil:'networkidle' });
+  await p.evaluate(() => {
+    localStorage.clear();
+    localStorage.setItem('nipec_contatti_v1', JSON.stringify({
+      contatti: [
+        {id:'v1',nome:'Egla Hoxha',centro:'Studio Egla',citta:'Tiranë',
+         numero:'355692129786',paese:'AL',stato:'inviato',invii:1,ultimoInvio:'2026-10-19'},
+        {id:'v2',nome:'Maria Rossi',centro:'',citta:'Roma',
+         numero:'393331234567',paese:'IT',stato:'interessato',invii:2,ultimoInvio:'2026-10-18'},
+        {id:'v3',nome:'Numero Storto',centro:'',citta:'',
+         numero:'390692999600',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:''}
+      ],
+      modelli: [{id:'it1',paese:'IT',passo:1,nome:'Primo messaggio',testo:'Un testo che ho scritto io'}],
+      cfg: { alGiorno: 30, attesa1: 5, attesa2: 7, scheda:'oggi', tema:'auto' },
+      registro: { '2026-10-19': 1 }
+    }));
+  });
+  await p.reload({ waitUntil:'networkidle' });
+  await p.waitForTimeout(700);
+  // lo stato VERO e' quello in memoria: su disco la migrazione finisce al primo salvataggio
+  const S = await p.evaluate(()=>JSON.parse(JSON.stringify(S)));
+  ok(S.contatti.length === 3, `i 3 contatti ci sono ancora (ne vedo ${S.contatti.length})`);
+  ok(S.contatti.every(c => c.wa !== undefined), "a tutti e' stato aggiunto il campo WhatsApp");
+  ok(S.contatti.every(c => Array.isArray(c.storia)), 'e la storia');
+  const egla = S.contatti.find(c=>c.id==='v1');
+  ok(egla.nome === 'Egla Hoxha' && egla.numero === '355692129786', "nome e numero intatti");
+  ok(egla.storia.some(e=>e.t==='inviato' && e.d==='2026-10-19'), "l'invio di ieri e stato ricostruito");
+  ok(S.cfg.alGiorno === 30, "le impostazioni sue (30 al giorno) non sono state sovrascritte");
+  const it1 = S.modelli.find(m=>m.id==='it1');
+  ok(it1.testo === 'Un testo che ho scritto io', "il messaggio che aveva scritto LUI non e stato toccato");
+  ok(S.modelli.some(m=>m.id==='it4'), "il quarto messaggio e stato aggiunto");
+  ok(S.modelli.some(m=>m.id==='al1'), "e anche quelli albanesi che mancavano");
+  // la copia di sicurezza
+  const copia = await p.evaluate(()=>localStorage.getItem('nipec_contatti_prima_aggiornamento'));
+  ok(!!copia, "e stata messa da parte la copia di prima");
+  const vecchio = JSON.parse(copia);
+  ok(vecchio.contatti.length === 3 && vecchio.contatti[0].wa === undefined,
+     "la copia e esattamente com'erano i dati prima");
+  // chi era interessato entra nella coda nuova
+  const coda = await p.evaluate(()=>codaDaSeguire().map(x=>x.c.nome));
+  ok(coda.includes('Maria Rossi'), "chi aveva detto si entra nella coda delle informazioni");
+  // il numero storto viene segnalato
+  const storti = await p.evaluate(()=>prefissiStorti().length);
+  ok(storti === 1, `il numero col prefisso sbagliato viene trovato (${storti})`);
+  // e quando si salva, la migrazione finisce anche su disco
+  await p.evaluate(()=>salva()); await p.waitForTimeout(300);
+  const D = await p.evaluate(()=>JSON.parse(localStorage.getItem('nipec_contatti_v1')));
+  ok(D.contatti.length === 3, 'dopo il salvataggio su disco ci sono sempre 3 contatti');
+  ok(D.contatti.every(c => c.wa !== undefined && Array.isArray(c.storia)),
+     'e i campi nuovi sono scritti anche su disco');
+  // e il tasto «torna a com'era» c'e'
+  await p.evaluate(()=>{ S.cfg.scheda='impostazioni'; disegna(); }); await p.waitForTimeout(400);
+  const t = await p.locator('#app').innerText();
+  ok(/rete di sicurezza/i.test(t), 'in Impostazioni c\'e\' il riquadro della rete di sicurezza');
+  ok(/3 contatti/.test(t), "e dice quanti contatti tiene da parte");
+  ok(!/non e. filato liscio/i.test(t), "nessun avviso di errore: la migrazione e andata pulita");
+  await ctx.close();
+}
+
+console.log('\n== 19. un contatto rotto non porta via la rubrica ==');
+{ const ctx = await b.newContext(); const p = await ctx.newPage();
+  await p.goto(B, { waitUntil:'networkidle' });
+  await p.evaluate(() => {
+    localStorage.clear();
+    localStorage.setItem('nipec_contatti_v1', JSON.stringify({
+      contatti: [ {id:'a',nome:'Buona',numero:'393331234567',paese:'IT',stato:'nuovo',invii:0,ultimoInvio:''},
+                  null,
+                  {id:'c',nome:'Anche buona',numero:'355692129786',paese:'AL',stato:'nuovo',invii:0,ultimoInvio:''} ]
+    }));
+  });
+  await p.reload({ waitUntil:'networkidle' });
+  await p.waitForTimeout(600);
+  const n = await p.evaluate(()=>S.contatti.length);
+  ok(n === 3, `la rubrica non e sparita per colpa della riga rotta (${n} righe)`);
+  const nomi = await p.evaluate(()=>S.contatti.filter(Boolean).map(c=>c.nome));
+  ok(nomi.includes('Buona') && nomi.includes('Anche buona'), "i contatti buoni ci sono tutti");
+  await ctx.close();
 }
 
 console.log('\n== errori in pagina ==');

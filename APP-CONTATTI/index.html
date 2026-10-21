@@ -168,6 +168,11 @@ const CHIAVE = 'nipec_contatti_v1';
    mille volte un contatto: se il telefono si riempie, a fallire dev'essere il
    salvataggio di una locandina, mai quello della rubrica. */
 const CHIAVE_LOC = 'nipec_contatti_locandine_v1';
+/* Dove metto la copia dei dati com'erano prima di un aggiornamento.
+   Dichiarata qui in cima: carica() la usa prima ancora che il file finisca
+   di leggersi, e una costante dichiarata piu' sotto a quel punto non esiste
+   ancora — l'errore sarebbe silenzioso. */
+const CHIAVE_PRIMA = 'nipec_contatti_prima_aggiornamento';
 const OGGI = () => new Date().toISOString().slice(0,10);
 
 const MODELLI_INIZIALI = [
@@ -202,9 +207,41 @@ function statoIniziale(){
 }
 let S = carica();
 function carica(){
-  try{ const g=localStorage.getItem(CHIAVE); if(g){ const o=JSON.parse(g); const d=statoIniziale();
-        return risistema(Object.assign(d,o,{cfg:Object.assign(d.cfg,o.cfg||{})})); } }catch(e){}
-  return statoIniziale();
+  let grezzo = null;
+  try{ grezzo = localStorage.getItem(CHIAVE); }catch(e){}
+  if(!grezzo) return statoIniziale();
+
+  /* Prima di toccare qualsiasi cosa, metto da parte una copia di come stavano
+     i dati. Una volta sola, e non la sovrascrivo mai piu': serve proprio nel
+     caso in cui un aggiornamento mio faccia danni. Si recupera da
+     Impostazioni, e nel peggiore dei casi dalla console del browser. */
+  try{
+    if(!localStorage.getItem(CHIAVE_PRIMA)) localStorage.setItem(CHIAVE_PRIMA, grezzo);
+  }catch(e){}
+
+  try{
+    const o = JSON.parse(grezzo); const d = statoIniziale();
+    const st = risistema(Object.assign(d, o, { cfg:Object.assign(d.cfg, o.cfg||{}) }));
+    /* Se dopo la risistemazione i contatti sono spariti ma nel file ce n'erano,
+       qualcosa e' andato storto: NON vado avanti con la rubrica vuota, perche'
+       il primo salvataggio cancellerebbe tutto. Tengo i contatti come stavano. */
+    const prima = Array.isArray(o.contatti) ? o.contatti.length : 0;
+    if(prima && (!st.contatti || !st.contatti.length)){
+      st.contatti = o.contatti;
+      st._recuperati = prima;
+    }
+    return st;
+  }catch(e){
+    /* La risistemazione e' andata in errore. Salvo il meno possibile: tengo i
+       contatti grezzi e segnalo, invece di presentarmi con la rubrica vuota. */
+    try{
+      const o = JSON.parse(grezzo); const d = statoIniziale();
+      d.contatti = Array.isArray(o.contatti) ? o.contatti : [];
+      d.modelli  = Array.isArray(o.modelli) && o.modelli.length ? o.modelli : d.modelli;
+      d._errore  = String(e && e.message || e);
+      return d;
+    }catch(e2){ return statoIniziale(); }
+  }
 }
 /* I contatti salvati prima non hanno i campi nuovi. Glieli ricostruisco qui,
    una volta sola, senza perdere niente di quello che c'era. */
@@ -227,7 +264,7 @@ function risistema(st){
     const nuovo = MODELLI_INIZIALI.find(x => x.id === m.id);
     if(nuovo && VECCHI[m.id] && m.testo === VECCHI[m.id]) m.testo = nuovo.testo;
   });
-  st.contatti.forEach(c => {
+  st.contatti.forEach(c => { try{
     if(c.wa === undefined) c.wa = '';            // '' non si sa · 'si' · 'no'
     if(!Array.isArray(c.storia)){
       c.storia = [];
@@ -238,7 +275,7 @@ function risistema(st){
     }
     if(c.stato==='numero errato' && c.wa==='') c.wa = 'no';
     if(['risposto','interessato'].includes(c.stato) && c.wa==='') c.wa = 'si';
-  });
+  }catch(e){ /* un contatto strano non deve far saltare tutta la rubrica */ } });
   return st;
 }
 function salva(){ try{ localStorage.setItem(CHIAVE, JSON.stringify(S)); }
@@ -246,21 +283,8 @@ function salva(){ try{ localStorage.setItem(CHIAVE, JSON.stringify(S)); }
 
 /* ---------- le locandine ---------- */
 let LOC = caricaLoc();
-/* Le locandine stanno anche sul sito, accanto all'app: cosi' il link c'e' gia'
-   e non serve caricare niente a mano. Chi vuole la sua, la sostituisce. */
-function indirizzoLoc(f){
-  try{ return new URL('locandine/' + f, location.href).href; }
-  catch(e){ return 'locandine/' + f; }
-}
-function locPronte(){
-  return {
-    it1: { dato:'', nome:'noleggio-it.jpg', peso:0, url: indirizzoLoc('noleggio-it.jpg') },
-    al1: { dato:'', nome:'noleggio-al.jpg', peso:0, url: indirizzoLoc('noleggio-al.jpg') }
-  };
-}
 function caricaLoc(){
-  try{ const g = localStorage.getItem(CHIAVE_LOC); if(g) return JSON.parse(g) || {}; }catch(e){}
-  return locPronte();
+  try{ return JSON.parse(localStorage.getItem(CHIAVE_LOC)) || {}; }catch(e){ return {}; }
 }
 function salvaLoc(){
   try{ localStorage.setItem(CHIAVE_LOC, JSON.stringify(LOC)); return true; }
@@ -584,7 +608,15 @@ function disegna(){
   st.textContent = tot
     ? `${tot} contatti · ${inviatiOggi()} messaggi mandati oggi · ${codaCompleta().length} in attesa`
     : 'Nessun contatto ancora. Si comincia da «Importa».';
-  app.innerHTML = ({oggi:vOggi, stato:vStato, rubrica:vRubrica, messaggi:vMessaggi,
+  let avviso = '';
+  if(S._errore || S._recuperati){
+    avviso = `<div class="avviso rosso"><b>Attenzione: l'aggiornamento non è filato liscio.</b>
+      I tuoi ${S.contatti.length} contatti sono qui e non ho salvato niente sopra.
+      ${S._errore ? 'Errore: ' + esc(S._errore) + '. ' : ''}
+      Vai in <b>Impostazioni</b>, scarica la copia di sicurezza e mandamela:
+      <b>non azzerare niente</b>.</div>`;
+  }
+  app.innerHTML = avviso + ({oggi:vOggi, stato:vStato, rubrica:vRubrica, messaggi:vMessaggi,
                     importa:vImporta, impostazioni:vImpostazioni}[S.cfg.scheda] || vOggi)();
   if(S.cfg.scheda === 'rubrica') agganciaRubrica();
   if(S.cfg.scheda === 'stato')   agganciaStato();
@@ -1195,6 +1227,27 @@ function colNaso(righe, paese){
 </script>
 <script>
 /* ---------- IMPOSTAZIONI ---------- */
+/* La copia messa da parte all'ultimo aggiornamento. Compare solo se c'e',
+   e serve a una cosa sola: tornare indietro se un aggiornamento ha fatto danni. */
+function bloccoPrima(){
+  let g = null;
+  try{ g = localStorage.getItem(CHIAVE_PRIMA); }catch(e){}
+  if(!g) return '';
+  let n = 0, quando = '';
+  try{ const o = JSON.parse(g); n = (o.contatti||[]).length; }catch(e){}
+  return `<div class="riquadro">
+    <div class="occhiello">Rete di sicurezza</div>
+    <h2>La rubrica com'era prima dell'aggiornamento</h2>
+    <p class="tenue" style="margin:.3rem 0 .8rem">Quando ho aggiornato l'app ho messo da parte una copia
+      dei tuoi dati, <b>${n} contatti</b>, e non l'ho più toccata. Se dopo l'aggiornamento qualcosa non
+      torna, da qui si torna indietro. Se è tutto a posto puoi anche lasciarla dov'è: non dà fastidio.</p>
+    <div class="fila">
+      <button class="btn" data-azione="scarica-prima">Scarica quella copia (.json)</button>
+      <button class="btn pericolo" data-azione="torna-prima">Torna a com'era</button>
+    </div>
+  </div>`;
+}
+
 function vImpostazioni(){
   const q = S.cfg.alGiorno;
   return `<div class="riquadro">
@@ -1230,6 +1283,8 @@ function vImpostazioni(){
       <button class="btn" data-azione="json">Copia di sicurezza (.json)</button>
     </div>
   </div>
+
+  ${bloccoPrima()}
 
   <div class="riquadro">
     <div class="occhiello">Il quaderno</div>
@@ -1320,6 +1375,23 @@ document.addEventListener('click', e => {
     importa(ris, document.getElementById('doppioni').value); return;
   }
   if(a === 'prefissi'){ correggiPrefissi(); return; }
+  if(a === 'scarica-prima'){
+    let g = null; try{ g = localStorage.getItem(CHIAVE_PRIMA); }catch(e){}
+    if(!g) return brindisi('Non c\'è nessuna copia da scaricare');
+    scarica('contatti-prima-aggiornamento-' + OGGI() + '.json', g, 'application/json');
+    return;
+  }
+  if(a === 'torna-prima'){
+    let g = null; try{ g = localStorage.getItem(CHIAVE_PRIMA); }catch(e){}
+    if(!g) return brindisi('Non c\'è nessuna copia');
+    if(!confirm('Tornare alla rubrica com\'era prima dell\'aggiornamento? Quello che hai fatto dopo si perde.')) return;
+    try{
+      const o = JSON.parse(g);
+      S = risistema(Object.assign(statoIniziale(), o, { cfg:Object.assign(statoIniziale().cfg, o.cfg||{}) }));
+      salva(); disegna(); brindisi('Rubrica riportata a com\'era');
+    }catch(e){ brindisi('La copia non si legge: scaricala e mandamela'); }
+    return;
+  }
   if(a === 'vcf'){ if(!S.contatti.length) return brindisi('Rubrica vuota');
     scarica('rubrica-nipec.vcf', vcard(), 'text/vcard;charset=utf-8'); brindisi('Aprilo sul telefono'); return; }
   if(a === 'csv'){ scarica('contatti-nipec-'+OGGI()+'.csv', csv(), 'text/csv;charset=utf-8'); return; }

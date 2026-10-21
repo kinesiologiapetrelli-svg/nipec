@@ -1,8 +1,8 @@
 /* CONTATTI NIPEC — il guscio offline.
    Cambia VERSIONE a ogni pubblicazione: è l'unico modo perché i telefoni
    già installati vedano la versione nuova. */
-const VERSIONE = 'contatti-nipec-7';
-const ROBA = ['./','./index.html','./locandine/noleggio-it.jpg','./locandine/noleggio-al.jpg','./manifest.webmanifest','./caratteri/archivo.woff2',
+const VERSIONE = 'contatti-nipec-8';
+const ROBA = ['./','./index.html','./manifest.webmanifest','./caratteri/archivo.woff2',
               './icona-192.png','./icona-512.png','./apple-touch-icon.png'];
 self.addEventListener('install', e => { self.skipWaiting();
   e.waitUntil(caches.open(VERSIONE).then(c => c.addAll(ROBA)).catch(()=>{})); });
