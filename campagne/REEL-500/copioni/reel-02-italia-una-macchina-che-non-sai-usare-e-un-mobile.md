@@ -6,9 +6,12 @@ paese: Italia
 chi_parla: Giorgio
 lingua_parlata: italiano
 formato: "verticale 9:16, 1080x1920"
-fine_copione_secondi: 21
+numero_stacchi: 8
+stacco_piu_lungo_secondi: 4.0
+gancio_finisce_a_secondi: 5.0
+fine_copione_secondi: 25.5
 scheda_finale_secondi: 2
-durata_totale_secondi: 23
+durata_totale_secondi: 27.5
 parola_chiave: LASER
 scheda_finale: "schede-finali/scheda-finale-LASER-italia.png"
 ---
@@ -17,31 +20,33 @@ scheda_finale: "schede-finali/scheda-finale-LASER-italia.png"
 
 **Chi parla:** Giorgio (in italiano, faccia vera in camera, non voce fuori campo).  
 **Parola chiave di chiusura:** LASER.  
-**Durata:** il copione finisce a 21 secondi; poi la scheda finale, ferma 2 secondi: 23 secondi in tutto.
+**Durata:** il copione finisce a 25,5 secondi; poi la scheda finale, ferma 2 secondi: 27,5 secondi in tutto.
 
-## Sequenza
+> **La regola dei 5 secondi.** (1) I primi 5 secondi contengono il vantaggio intero. (2) **Nessuno stacco dura più di 5 secondi:** dopo, si cambia stacco **e inquadratura**. Mai due inquadrature uguali di fila. Il reel resta dinamico, e ogni pezzo è semplice da girare: un gesto, una frase breve.
 
-### 1 · I primi 5 secondi · 0-5″
+## Sequenza, stacco per stacco
 
-- **Si vede:** Mano che sfila un telo da una macchina ferma in un angolo.
-- **Si dice:** «Quante macchine hai visto prendere polvere in un angolo?»
-- **Scritta a schermo:** `NON È LA MACCHINA.` / `È CHE NESSUNO TI HA DETTO COME SI USA`  (righe separate)
+| # | Tempo | Inquadratura | Si vede | Si dice | Scritta a schermo |
+|---|---|---|---|---|---|
+| 1 | 0–2 s | Dettaglio | Una mano sfila un telo da una macchina ferma in un angolo. | «Quante macchine hai visto» | — |
+| 2 | 2–5 s | Primo piano | Giorgio, in camera. | «prendere polvere in un angolo?» | `NON È LA MACCHINA.` / `È CHE NESSUNO TI HA DETTO COME SI USA` |
+| | | | **— fine dei primi 5 secondi: il gancio è tutto qui —** | | |
+| 3 | 5–7,5 s | Mezzo busto | Al tavolo, il protocollo laser davanti. | «Non è che la macchina non funziona.» | — |
+| 4 | 7,5–10,5 s | Dettaglio | La mano sfoglia il protocollo, pagina per pagina. | «È che nessuno ti ha dato il protocollo:» | — |
+| 5 | 10,5–14,5 s | Primo piano | Giorgio, in camera. | «cosa fai da quando la cliente entra a quando esce,» | — |
+| 6 | 14,5–17,5 s | Dettaglio | Le pagine del protocollo scorrono. | «con quali parametri, e ogni quanto la richiami.» | — |
+| 7 | 17,5–21,5 s | Mezzo busto | Giorgio con il protocollo in mano. | «Con la nostra arriva scritto. E la formazione è compresa.» | `PROTOCOLLO SCRITTO` / `FORMAZIONE COMPRESA` |
+| 8 | 21,5–25,5 s | Primo piano | Chiude il fascicolo, lo appoggia, guarda in camera. | «Scrivimi LASER e te lo faccio vedere prima di decidere.» | `SCRIVI «LASER»` |
+| 9 | 25,5–27,5 s | Scheda finale | `schede-finali/scheda-finale-LASER-italia.png` a tutto schermo, ferma. Niente altro sopra. | — | — |
 
-### 2 · Sviluppo · 5-16″
+Le scritte a schermo **entrano insieme alla parola** che dicono, non prima.
 
-- **Si vede:** Si sfoglia il protocollo laser sul tavolo, pagina per pagina.
-- **Si dice:** «Non è che la macchina non funziona. È che nessuno ti ha dato il protocollo: cosa fai da quando la cliente entra a quando esce, con quali parametri, e ogni quanto la richiami. Con la nostra arriva scritto. E la formazione è compresa.»
-- **Scritta a schermo:** `PROTOCOLLO SCRITTO` / `FORMAZIONE COMPRESA`  (righe separate)
+## Come si gira, semplice
 
-### 3 · Chiusura · 16-21″
-
-- **Si vede:** Chiude il fascicolo, lo appoggia.
-- **Si dice:** «Scrivimi LASER e te lo faccio vedere prima di decidere.»
-- **Scritta a schermo:** `SCRIVI «LASER»`
-
-### 4 · Scheda finale · dopo l'ultima parola, 2 secondi
-
-- **Si vede:** `schede-finali/scheda-finale-LASER-italia.png` a tutto schermo, ferma. Niente altro sopra.
+- **Un pezzo alla volta.** Ogni stacco è un gesto e una frase: si gira a pezzi, una o due riprese ciascuno. Non serve girare il reel tutto di fila.
+- **Le quattro inquadrature:** primo piano (il viso, riempie lo schermo), mezzo busto (dalla vita in su), dettaglio (mani o oggetto, da vicino), campo largo (la persona e la macchina nell'ambiente).
+- **Per cambiare inquadratura senza spostare la camera**, in montaggio si ingrandisce la stessa ripresa (zoom): conta come stacco nuovo. Così una frase detta di seguito si divide in due stacchi, uno largo e uno stretto.
+- **Se una frase non ci sta in 5 secondi**, si divide in due stacchi. Non si accelera.
 
 ## Per l'inserzione
 
@@ -54,12 +59,16 @@ scheda_finale: "schede-finali/scheda-finale-LASER-italia.png"
 - **Pulsante:** Invia messaggio (WhatsApp)
 - **Messaggio già scritto nella chat:** `LASER`
 - **Il numero WhatsApp:** +39 351 846 6025 (Giorgio)
-- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, «A cosa servono»). Il video è questo reel, montato, senza cambiare niente.
 - **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
 
 ## Cosa serve per girarlo
 
-Il protocollo laser stampato. Ce l'abbiamo già — 6 pagine, IT
+Il protocollo laser stampato (ce l'abbiamo già: 6 pagine, IT) e un telo per coprire una macchina
+
+## Attenzione
+
+- Con le parole come sono dura 25,5 secondi. Togliere «Non è che la macchina non funziona.» (lo dice già la scritta dello stacco 2) lo porta a 23.
 
 ## Cosa non si mostra
 

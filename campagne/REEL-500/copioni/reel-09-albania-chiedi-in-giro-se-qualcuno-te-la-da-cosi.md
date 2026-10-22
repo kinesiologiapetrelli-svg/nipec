@@ -6,9 +6,12 @@ paese: Albania
 chi_parla: Uarda
 lingua_parlata: albanese
 formato: "verticale 9:16, 1080x1920"
-fine_copione_secondi: 22
+numero_stacchi: 7
+stacco_piu_lungo_secondi: 5.0
+gancio_finisce_a_secondi: 5.0
+fine_copione_secondi: 21.5
 scheda_finale_secondi: 2
-durata_totale_secondi: 24
+durata_totale_secondi: 23.5
 parola_chiave: AFRODITE
 scheda_finale: "schede-finali/scheda-finale-AFRODITE-albania.png"
 ---
@@ -17,32 +20,34 @@ scheda_finale: "schede-finali/scheda-finale-AFRODITE-albania.png"
 
 **Chi parla:** Uarda (in albanese, faccia vera in camera, non voce fuori campo).  
 **Parola chiave di chiusura:** AFRODITE.  
-**Durata:** il copione finisce a 22 secondi; poi la scheda finale, ferma 2 secondi: 24 secondi in tutto.
+**Durata:** il copione finisce a 21,5 secondi; poi la scheda finale, ferma 2 secondi: 23,5 secondi in tutto.
 
-> **Lingua.** Il copione qui sotto è scritto in italiano. Le parole dette sono in albanese, e un testo albanese approvato non esiste ancora. I sottotitoli devono riportare **quello che si sente davvero**, non una traduzione fatta a tavolino. Le scritte a schermo sono già in albanese: quelle valgono così come sono.
+> **La regola dei 5 secondi.** (1) I primi 5 secondi contengono il vantaggio intero. (2) **Nessuno stacco dura più di 5 secondi:** dopo, si cambia stacco **e inquadratura**. Mai due inquadrature uguali di fila. Il reel resta dinamico, e ogni pezzo è semplice da girare: un gesto, una frase breve.
 
-## Sequenza
+> **Lingua.** Il copione è scritto in italiano. Le parole dette sono in albanese, e un testo albanese approvato non esiste ancora. I tempi qui sotto sono calcolati sulle parole italiane: **in albanese le frasi sono di solito un po' più lunghe**. Uno stacco non deve comunque superare i 5 secondi: se una frase non ci sta, si divide in due stacchi cambiando inquadratura. I sottotitoli riportano **quello che si sente davvero**. Le scritte a schermo in albanese valgono così come sono.
 
-### 1 · I primi 5 secondi · 0-5″
+## Sequenza, stacco per stacco
 
-- **Si vede:** Uarda con un foglio di contratto in mano. Lo gira: è bianco.
-- **Si dice:** «Senza firmare nessun vincolo. Chiedi in giro se qualcuno te la dà così.»
-- **Scritta a schermo:** `PA KONTRATË`
+| # | Tempo | Inquadratura | Si vede | Si dice | Scritta a schermo |
+|---|---|---|---|---|---|
+| 1 | 0–2 s | Dettaglio | Uarda tiene un foglio di contratto. Lo gira: è bianco. | «Senza firmare nessun vincolo.» | `PA KONTRATË` |
+| 2 | 2–5 s | Primo piano | Uarda, in camera. | «Chiedi in giro se qualcuno te la dà così.» | — |
+| | | | **— fine dei primi 5 secondi: il gancio è tutto qui —** | | |
+| 3 | 5–7,5 s | Mezzo busto | Uarda, in camera. | «Nessun anticipo. Nessuna cauzione. Nessun vincolo.» | `0 PARADHËNIE · 0 GARANCI` / `0 KONTRATË` |
+| 4 | 7,5–10 s | Dettaglio | Il foglio bianco, posato sul tavolo. | «La paghi dopo trenta giorni di lavoro.» | — |
+| 5 | 10–14 s | Primo piano | Uarda, in camera. | «Se si ferma, in 48 ore ne hai un'altra. Formazione compresa.» | `48 ORË` |
+| 6 | 14–19 s | Mezzo busto | Uarda, in camera. | «E quando chiudi per le ferie, me la ridai e quel mese non paghi.» | — |
+| 7 | 19–21,5 s | Primo piano | Uarda, in camera. | «50.000 lekë al mese. Scrivimi AFRODITE.» | `SHKRUAJ «AFRODITE»` |
+| 8 | 21,5–23,5 s | Scheda finale | `schede-finali/scheda-finale-AFRODITE-albania.png` a tutto schermo, ferma. Niente altro sopra. | — | — |
 
-### 2 · Sviluppo · 5-17″
+Le scritte a schermo **entrano insieme alla parola** che dicono, non prima.
 
-- **Si vede:** Elenco a schermo, una voce alla volta, mentre lei le dice.
-- **Si dice:** «Nessun anticipo. Nessuna cauzione. Nessun vincolo. La paghi dopo trenta giorni di lavoro. Se si ferma, in 48 ore ne hai un'altra. Formazione compresa. E quando chiudi per le ferie, me la ridai e quel mese non paghi.»
-- **Scritta a schermo:** `0 PARADHËNIE · 0 GARANCI` / `0 KONTRATË · 48 ORË`  (righe separate)
+## Come si gira, semplice
 
-### 3 · Chiusura · 17-22″
-
-- **Si dice:** «50.000 lekë al mese. Scrivimi AFRODITE.»
-- **Scritta a schermo:** `SHKRUAJ «AFRODITE»`
-
-### 4 · Scheda finale · dopo l'ultima parola, 2 secondi
-
-- **Si vede:** `schede-finali/scheda-finale-AFRODITE-albania.png` a tutto schermo, ferma. Niente altro sopra.
+- **Un pezzo alla volta.** Ogni stacco è un gesto e una frase: si gira a pezzi, una o due riprese ciascuno. Non serve girare il reel tutto di fila.
+- **Le quattro inquadrature:** primo piano (il viso, riempie lo schermo), mezzo busto (dalla vita in su), dettaglio (mani o oggetto, da vicino), campo largo (la persona e la macchina nell'ambiente).
+- **Per cambiare inquadratura senza spostare la camera**, in montaggio si ingrandisce la stessa ripresa (zoom): conta come stacco nuovo. Così una frase detta di seguito si divide in due stacchi, uno largo e uno stretto.
+- **Se una frase non ci sta in 5 secondi**, si divide in due stacchi. Non si accelera.
 
 ## Per l'inserzione
 
@@ -57,7 +62,7 @@ scheda_finale: "schede-finali/scheda-finale-AFRODITE-albania.png"
 - **Pulsante:** Invia messaggio (WhatsApp)
 - **Messaggio già scritto nella chat:** `AFRODITE`
 - **Il numero WhatsApp:** +355 69 212 9786 (Uarda)
-- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, «A cosa servono»). Il video è questo reel, montato, senza cambiare niente.
 - **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
 
 ## Cosa serve per girarlo

@@ -1,67 +1,52 @@
-NOVE REEL — campagna 500 · Rev. 2 (22 ottobre 2026)
+NOVE REEL — campagna 500 · Rev. 3 (22 ottobre 2026)
 Tre per campagna: Laser Italia, Laser Albania, Afrodite Albania.
+Servono per le adv (pubblicita') del noleggio laser.
 
 
 I FILE
-  NOVE-REEL-campagna-500-REV2.pdf   il documento, 7 pagine (sostituisce la Rev. 1)
-  nove-reel.html                    il sorgente
+  NOVE-REEL-campagna-500-REV3.pdf   il documento per chi gira, 9 pagine, stacco per stacco
+  nove-reel.html                    il sorgente del documento
+  copioni/                          i nove copioni, uno per file, scritti perche' li legga anche un altro Claude
+  copioni/INSERZIONI.md             i testi delle nove inserzioni, da copiare in Meta
+  FLUSSO-TELEGRAM.md                come si lavora: il canale di Eros, chi fa cosa, regole di montaggio, domande aperte
   schede-finali/                    tre PNG 1080 x 1920, due secondi in coda ai reel
-  fai-schede-finali.py              le rigenera
+  reel_dati.py                      LA FONTE: i nove reel stacco per stacco. Da qui nascono copioni e documento
+  fai-copioni.py                    rifa copioni/ e INSERZIONI.md
+  fai-documento.py                  rifa le tabelle di nove-reel.html e il PDF
+  fai-schede-finali.py              rifa le tre schede finali
+  fai-pacchetto.py                  fa lo zip da dare al Claude che monta (tutto dentro)
+
+Per cambiare qualcosa: si cambia reel_dati.py, poi si rilanciano fai-copioni.py e fai-documento.py.
+reel_dati.py controlla da solo la regola dei 5 secondi e si rifiuta di andare avanti se non e' rispettata.
 
 
-COSA E' CAMBIATO DALLA REV. 1 (16 ottobre)
-  1. Niente numeri sul laser. Via "fino a 16 diodi, fino a 2000 watt".
-     Nei reel il modello non si nomina: "un laser di ultima generazione con
-     intelligenza artificiale", come dice la Campagna 500. Ai contatti, nel
-     messaggio uno a uno, si scrive "Laser Ares, 10 diodi, con IA".
-  2. Via "te la cambiamo ogni due anni": non era in nessun documento e
-     l'offerta dice "nessun vincolo di durata". Il reel 6 parla di telecamera
-     e IA.
-  3. Afrodite senza "quattro tecnologie" e senza LED: la scheda del costruttore
-     e il sito nuovo non dicono la stessa cosa. Restano le tre comuni:
-     cavitazione, radiofrequenza, vacuum. Reel 8 riscritto.
-  4. Via "tutto compreso" (reel 6 e 8): il corso DEMETRA da 250 euro e'
-     opzionale; compresa e' la consegna in cabina.
-  5. Testi a schermo e scheda finale col marchio nuovo (libro del marchio).
-  6. Nuova sezione 6, "Per cominciare": ordine di uscita e schede finali.
+LA REGOLA DEI 5 SECONDI, IN DUE META'
+  1. I primi 5 secondi contengono il vantaggio intero.
+  2. Nessuno stacco dura piu' di 5 secondi: dopo, si cambia stacco E inquadratura.
+     Mai due inquadrature uguali di fila. Cosi' il reel e' dinamico e ogni pezzo e' semplice da girare.
+  Le inquadrature: primo piano, mezzo busto, dettaglio, campo largo.
 
 
-DUE COSE DA DECIDERE PRIMA DI GIRARE
-  - Il prossimo "primo del mese" e' domenica 1 novembre: come si risponde a
-    chi firma adesso (consegna lunedi 2?). Nei reel non cambia nulla.
-  - "Afrodite Shape" (offerta ai contatti) o "Afrodite VS++" (sito): nei reel
-    resta "Afrodite".
+COME SI LAVORA
+Eros ha creato un canale Telegram: ci sono Giorgio, Eros e il Claude Code di Eros, amministratore.
+Il Claude di Eros monta. Il Claude di NIPEC (questo repository) prepara il materiale che Giorgio gli porta.
+Il documento FLUSSO-TELEGRAM.md ha, in cima, la parte da leggere per prima per chi monta.
 
 
-PRIMA SI PUBBLICA, POI SI SPONSORIZZA
-La Campagna 500 mette tra le cose che bloccano l'accensione una pagina con
-meno di sei pubblicazioni. I sei reel del laser (1-6) sono quelle pubblicazioni:
-tre giorni, due per giorno (Albania e Italia). Si parte da 4 e 3, che dicono
-l'offerta intera nei primi cinque secondi. Afrodite (7, 8, 9) dopo circa due
-settimane, come dice la Campagna 500.
+COSA E' CAMBIATO DALLA REV. 2
+  - Regola dei 5 secondi: ogni reel e' scritto stacco per stacco.
+  - L'Italia parte per prima (deciso da Giorgio): i suoi reel ci sono.
+  - Afrodite: "ultrasuono focalizzato direzionale" al posto di "cavitazione", "low laser"
+    al posto di "LED" (come sul sito: DA CONFERMARE). Sono quattro tecnologie. Reel 8 riscritto.
+  - L'ordine di uscita mette Afrodite dopo i sei reel del laser, come la Campagna 500.
 
 
-I REEL SERVONO PER LE ADV DEL NOLEGGIO LASER
-Il passaggio su Telegram e' per vederli e approvarli. Il flusso completo, chi fa
-cosa e le domande aperte stanno in FLUSSO-TELEGRAM.md. I copioni, uno per file,
-stanno in copioni/.
-
-
-LE SCHEDE FINALI
-  scheda-finale-LASER-italia.png        reel 1, 2, 3
-  scheda-finale-LASER-albania.png       reel 4, 5, 6
-  scheda-finale-AFRODITE-albania.png    reel 7, 8, 9
-Il contenuto sta nella fascia centrale: i primi 250 e gli ultimi 340 pixel li
-copre l'interfaccia di Instagram.
-
+DA SAPERE
+  - Reel 2 (25,5 s) e reel 7 (24 s) sono oltre l'obiettivo di 22 s: nei copioni c'e' un taglio proposto.
+  - In albanese le frasi sono di solito piu' lunghe: uno stacco non supera comunque i 5 secondi.
+  - Il testo albanese approvato non esiste ancora: i sottotitoli riportano quello che si sente.
+  - Contratti e protocolli DEMETRA dicono ancora "Cavitazione U.F.D.": non toccati.
 
 COSA NON SI MOSTRA
-Pelle trattata, prima/dopo, percentuali di risultato, tempi. E' il motivo di
-rifiuto numero uno su Meta e non serve: qui si vende alla titolare, non alla
-cliente finale.
-
-
-L'ALBANESE
-I copioni dei sei reel albanesi sono scritti in italiano. Si traducono sul
-testo approvato. Le scritte a schermo in albanese sono gia' dentro: si vedono
-nel montaggio, non si dicono.
+Pelle trattata, prima/dopo, percentuali di risultato, tempi. E' il motivo di rifiuto numero uno su
+Meta e non serve: qui si vende alla titolare, non alla cliente finale.

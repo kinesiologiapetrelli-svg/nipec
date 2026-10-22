@@ -15,7 +15,7 @@ Per chi carica in Gestione inserzioni di Meta: i testi da copiare, uno per reel.
 | 5 | Albania | B · Il rischio non è tuo | Macchina sostitutiva entro 48 ore | 33 | `LASER` |
 | 6 | Albania | Nuovo · Ultima generazione | Laser di ultima generazione, con IA | 35 | `LASER` |
 | 7 | Albania | C · Il metodo compreso | La macchina e il metodo per usarla | 34 | `AFRODITE` |
-| 8 | Albania | Nuovo · Più tecnologie in una macchina | Rimodellamento corpo — 50.000 Lekë/mese | 39 | `AFRODITE` |
+| 8 | Albania | Nuovo · Quattro tecnologie in una macchina | Rimodellamento corpo — 50.000 Lekë/mese | 39 | `AFRODITE` |
 | 9 | Albania | A · Trenta giorni prima | Arriva il 1, la paghi il 30 | 27 | `AFRODITE` |
 
 ## Reel 1 · Italia — Se si ferma, non lavori
@@ -124,19 +124,19 @@ Per chi carica in Gestione inserzioni di Meta: i testi da copiare, uno per reel.
 > Con noi arriva il metodo DEMETRA: ciclo di 10-12 sedute, scheda di valutazione, protocollo pagina per pagina.  
 > 50.000 lekë al mese, nessun vincolo. Scrivi «AFRODITE».  
 
-## Reel 8 · Albania — Più tecnologie, una macchina sola
+## Reel 8 · Albania — Quattro tecnologie, una macchina sola
 
 *Testo in italiano, da approvare; poi si traduce in albanese.*
 
-**Angolo:** Nuovo · Più tecnologie in una macchina (Afrodite)  
-**Video:** il reel 8, montato. Copione: `reel-08-albania-piu-tecnologie-una-macchina-sola.md`  
+**Angolo:** Nuovo · Quattro tecnologie in una macchina (Afrodite)  
+**Video:** il reel 8, montato. Copione: `reel-08-albania-quattro-tecnologie-una-macchina-sola.md`  
 **Titolo:** Rimodellamento corpo — 50.000 Lekë/mese  
 **Messaggio nella chat:** `AFRODITE`  
 **WhatsApp:** +355 69 212 9786 (Uarda)
 
 **Testo principale:**
 
-> Cavitazione, radiofrequenza, vacuum. Una macchina sola, una rata sola.  
+> Ultrasuono focalizzato direzionale, radiofrequenza, vacuum e low laser. Una macchina sola, una rata sola.  
 > Ti arriva il 1, la paghi il 30. Nessun vincolo, nessun anticipo.  
 > 50.000 lekë al mese. Scrivi «AFRODITE».  
 
