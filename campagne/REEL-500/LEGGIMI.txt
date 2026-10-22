@@ -1,64 +1,60 @@
-NOVE REEL — campagna 500
+NOVE REEL — campagna 500 · Rev. 2 (22 ottobre 2026)
 Tre per campagna: Laser Italia, Laser Albania, Afrodite Albania.
 
 
 I FILE
-  NOVE-REEL-campagna-500.pdf   il documento, 6 pagine
-  nove-reel.html               il sorgente
+  NOVE-REEL-campagna-500-REV2.pdf   il documento, 7 pagine (sostituisce la Rev. 1)
+  nove-reel.html                    il sorgente
+  schede-finali/                    tre PNG 1080 x 1920, due secondi in coda ai reel
+  fai-schede-finali.py              le rigenera
 
 
-COSA C'E' PER OGNI REEL
-  i 5 secondi      cosa si vede, cosa si dice, cosa appare scritto
-  lo sviluppo      secondi 5-17
-  la chiusura      sempre la parola chiave
-  serve            cosa bisogna avere davanti per girarlo
+COSA E' CAMBIATO DALLA REV. 1 (16 ottobre)
+  1. Niente numeri sul laser. Via "fino a 16 diodi, fino a 2000 watt".
+     Nei reel il modello non si nomina: "un laser di ultima generazione con
+     intelligenza artificiale", come dice la Campagna 500. Ai contatti, nel
+     messaggio uno a uno, si scrive "Laser Ares, 10 diodi, con IA".
+  2. Via "te la cambiamo ogni due anni": non era in nessun documento e
+     l'offerta dice "nessun vincolo di durata". Il reel 6 parla di telecamera
+     e IA.
+  3. Afrodite senza "quattro tecnologie" e senza LED: la scheda del costruttore
+     e il sito nuovo non dicono la stessa cosa. Restano le tre comuni:
+     cavitazione, radiofrequenza, vacuum. Reel 8 riscritto.
+  4. Via "tutto compreso" (reel 6 e 8): il corso DEMETRA da 250 euro e'
+     opzionale; compresa e' la consegna in cabina.
+  5. Testi a schermo e scheda finale col marchio nuovo (libro del marchio).
+  6. Nuova sezione 6, "Per cominciare": ordine di uscita e schede finali.
 
 
-LA REGOLA DEI 5 SECONDI, DETTA BENE
-Non e' "un gancio nei primi 5 secondi". E': nei primi 5 secondi si vede
-un vantaggio che l'estetista riconosce come suo. Non la macchina, non il
-marchio, non il prezzo — un problema che ha davvero, detto con le sue
-parole.
-Per questo ogni reel apre con una domanda o una frase scomoda, mai con
-"siamo NIPEC e noleggiamo laser".
+DUE COSE DA DECIDERE PRIMA DI GIRARE
+  - Il prossimo "primo del mese" e' domenica 1 novembre: come si risponde a
+    chi firma adesso (consegna lunedi 2?). Nei reel non cambia nulla.
+  - "Afrodite Shape" (offerta ai contatti) o "Afrodite VS++" (sito): nei reel
+    resta "Afrodite".
 
 
-DUE COSE DA CONFERMARE PRIMA DI GIRARE
-
- 1. I WATT
-    Giorgio ha detto "dieci diodi da 2000 watt". Nelle schede i due
-    numeri stanno su due macchine diverse: 10 diodi e 1500 W sull'ARES,
-    fino a 16 diodi e 2000 W sulla URIEL.
-    Siccome il modello non si nomina, nei copioni ho scritto
-    "fino a 16 diodi, fino a 2000 watt" — e' il linguaggio della scheda
-    tecnica, e' vero su tutte e due, non si puo' contestare.
-    Se un reel dicesse 2000 watt e poi si consegna un ARES, torna
-    indietro alla consegna.
-
- 2. "TE LA CAMBIAMO OGNI DUE ANNI"
-    Non era in nessun documento prima. E' potentissima — toglie la paura
-    di restare con una macchina vecchia in mano — ma una volta detta in
-    un reel non si ritira.
+PRIMA SI PUBBLICA, POI SI SPONSORIZZA
+La Campagna 500 mette tra le cose che bloccano l'accensione una pagina con
+meno di sei pubblicazioni. I nove reel sono quelle pubblicazioni: tre giorni,
+due per giorno (Italia e Albania), poi uno al giorno. Si parte da 3 e 4, che
+dicono l'offerta intera nei primi cinque secondi.
 
 
-SI GIRA TUTTO IN MEZZA GIORNATA
-I nove reel usano la stessa manciata di inquadrature: dieci in tutto,
-elencate in fondo al documento. Si gira una volta e si monta nove volte.
-
-Le tre che valgono piu' di tutte le parole:
-  il furgone che si apre        = il muletto, senza spiegarlo
-  la pellicola che si stacca    = "nuova", senza dirlo
-  il telo sulla macchina ferma  = la paura che ha gia', senza accusarla
-Se si gira una cosa sola, si girano queste tre.
-
-
-L'ALBANESE
-I copioni dei sei reel albanesi sono scritti in italiano. Si traducono
-sul testo approvato. Le scritte a schermo in albanese sono gia' dentro:
-quelle le ho messe perche' si vedono nel montaggio, non si dicono.
+LE SCHEDE FINALI
+  scheda-finale-LASER-italia.png        reel 1, 2, 3
+  scheda-finale-LASER-albania.png       reel 4, 5, 6
+  scheda-finale-AFRODITE-albania.png    reel 7, 8, 9
+Il contenuto sta nella fascia centrale: i primi 250 e gli ultimi 340 pixel li
+copre l'interfaccia di Instagram.
 
 
 COSA NON SI MOSTRA
-Pelle trattata, prima/dopo, percentuali di risultato, tempi. E' il
-motivo di rifiuto numero uno su Meta e non serve: qui si vende alla
-titolare, non alla cliente finale.
+Pelle trattata, prima/dopo, percentuali di risultato, tempi. E' il motivo di
+rifiuto numero uno su Meta e non serve: qui si vende alla titolare, non alla
+cliente finale.
+
+
+L'ALBANESE
+I copioni dei sei reel albanesi sono scritti in italiano. Si traducono sul
+testo approvato. Le scritte a schermo in albanese sono gia' dentro: si vedono
+nel montaggio, non si dicono.
