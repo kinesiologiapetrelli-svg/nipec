@@ -271,8 +271,16 @@ console.log('\n== 13. la locandina compare nel giro ==');
   });
   await p.waitForTimeout(500);
   const t = await p.locator('#app').innerText();
-  ok(/parte anche la locandina/.test(t), 'la scheda dice che parte anche la locandina');
-  ok(await p.locator('[data-loca]').count() > 0, 'c\'e\' il tasto «+ Locandina»');
+  // su un browser da computer il file non puo' partire: la scheda deve dirlo,
+  // e il tasto «+ Locandina» non deve nemmeno comparire
+  const sa = await p.evaluate(()=>saAllegare());
+  if(sa){
+    ok(/parte anche l'immagine/.test(t), 'la scheda dice che parte anche la locandina');
+    ok(await p.locator('[data-loca]').count() > 0, 'c\'e\' il tasto «+ Locandina»');
+  } else {
+    ok(/su questo dispositivo non parte/i.test(t), 'la scheda avvisa che qui il file non parte');
+    ok(await p.locator('[data-loca]').count() === 0, 'e il tasto «+ Locandina» non c\'e\'');
+  }
   await p.context().close();
 }
 
@@ -614,6 +622,38 @@ console.log('\n== 25. a quota finita i tasti NON spariscono ==');
   ok(n === 25, `spunta le 25 di domani (${n})`);
   const t2 = await p.locator('#app').innerText();
   ok(/25 spuntate/.test(t2), 'e lo dice');
+  await p.context().close();
+}
+
+console.log('\n== 26. l\'allegato: l\'app dice la verita su questo dispositivo ==');
+{ const p = await nuova();
+  const sa = await p.evaluate(()=>saAllegare());
+  ok(sa === false, 'su un browser da computer sa che NON puo allegare un file');
+  await p.evaluate(() => {
+    LOC.it1 = { dato:'data:image/jpeg;base64,/9j/4AAQSkZJRg==', nome:'loc.jpg', peso:1000, url:'' };
+    salvaLoc();
+    S.contatti = [{id:'w1',nome:'Prova',numero:'393331234567',paese:'IT',
+                   stato:'nuovo',invii:0,ultimoInvio:'',wa:'',storia:[]}];
+    salva(); S.cfg.scheda='oggi'; disegna();
+  });
+  await p.waitForTimeout(600);
+  ok(await p.locator('[data-loca]').count() === 0, 'e NON mostra il tasto «+ Locandina»');
+  const t = await p.locator('#app').innerText();
+  ok(/su questo dispositivo non parte/i.test(t), 'anzi lo scrive nella scheda');
+  await p.vai(/^Messaggi$/); await p.waitForTimeout(500);
+  const m = await p.locator('#app').innerText();
+  ok(/non.*modo di passare un file a WhatsApp/i.test(m), 'e lo spiega anche in Messaggi');
+  ok(/indirizzo in rete/i.test(m), 'indicando la strada che funziona');
+  await p.context().close();
+}
+
+console.log('\n== 27. le locandine pubblicate accanto all\'app ==');
+{ const p = await nuova();
+  for(const f of ['locandine/noleggio-it.jpg','locandine/noleggio-al.jpg']){
+    const r = await p.request.get(B + f);
+    ok(r.status() === 200, `${f} risponde (HTTP ${r.status()})`);
+    ok(Number(r.headers()['content-length']) > 100000, `  ed e l'immagine nuova (${Math.round(Number(r.headers()['content-length'])/1024)} KB)`);
+  }
   await p.context().close();
 }
 

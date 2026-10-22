@@ -326,6 +326,22 @@ function comprimi(file, lato, qualita){
   });
 }
 
+/* Il telefono sa passare un file a WhatsApp? Sul computer la risposta e' NO,
+   sempre: navigator.share non esiste proprio nei browser da scrivania. Non e'
+   una cosa che si aggira — il browser non ha nessun modo di consegnare un file
+   a un'altra applicazione. Meglio saperlo e dirlo, che mostrare un tasto che
+   poi fa un'altra cosa. */
+let _saAllegare = null;
+function saAllegare(){
+  if(_saAllegare !== null) return _saAllegare;
+  try{
+    if(!navigator.canShare) return (_saAllegare = false);
+    const f = new File([new Uint8Array([255,216,255])], 'p.jpg', { type:'image/jpeg' });
+    _saAllegare = !!navigator.canShare({ files:[f] });
+  }catch(e){ _saAllegare = false; }
+  return _saAllegare;
+}
+
 /* Da immagine salvata a File vero, senza await: navigator.share vuole essere
    chiamato dentro al tocco, e un await in mezzo in certi telefoni lo annulla. */
 function aFile(dato, nome){
@@ -844,12 +860,14 @@ function schedaGiro(c, m, inAttesa){
     <div class="testo">${esc(testo)}</div>
     ${L && L.dato ? `<div class="fila" style="align-items:center;gap:.5rem;margin:.1rem 0 .4rem">
       <img src="${L.dato}" alt="" style="width:2.6rem;height:2.6rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--riga)">
-      <span class="tenue">parte anche la locandina · ${esc(L.nome||'')} ${pesoBello(L.peso)}</span></div>` : ''}
+      <span class="tenue">${saAllegare()
+        ? 'con «+ Locandina» parte anche l\'immagine · ' + esc(L.nome||'') + ' ' + pesoBello(L.peso)
+        : 'la locandina allegata <b>su questo dispositivo non parte</b>: usa l\'indirizzo in rete'}</span></div>` : ''}
     <div class="azioni">
       ${inAttesa
         ? `<button class="btn" disabled title="Domani">Domani</button>`
         : `<a class="btn wa" href="${url}" target="_blank" rel="noopener" data-manda="${c.id}">Apri WhatsApp e manda</a>`}
-      ${L && L.dato ? `<button class="btn" data-loca="${c.id}|${m.id}" title="Immagine + testo insieme">+ Locandina</button>` : ''}
+      ${L && L.dato && saAllegare() ? `<button class="btn" data-loca="${c.id}|${m.id}" title="Immagine + testo insieme">+ Locandina</button>` : ''}
       <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto</button>
       <button class="btn piccolo" data-stato="non interessato|${c.id}">Non interessato</button>
       <button class="btn piccolo" data-wa="no|${c.id}">Non è su WhatsApp</button>
@@ -1201,6 +1219,11 @@ function bloccoLocandina(m){
     </div>
     <label class="campo" style="margin:.55rem 0 0"><span>Indirizzo della locandina in rete</span>
       <input class="inp" data-locurl="${m.id}" inputmode="url" placeholder="https://…" value="${esc(L.url || '')}"></label>
+    ${saAllegare() ? '' : `<div class="avviso giallo" style="margin:.6rem 0 0">
+      <b>Su questo dispositivo il file allegato non può partire.</b> I browser da computer
+      non hanno nessun modo di passare un file a WhatsApp — non è una cosa che si aggira.
+      Qui funziona solo l'<b>indirizzo in rete</b>: il link va in fondo al messaggio e
+      WhatsApp ci disegna sopra l'anteprima. Dal telefono invece il file parte.</div>`}
   </div>`;
 }
 
