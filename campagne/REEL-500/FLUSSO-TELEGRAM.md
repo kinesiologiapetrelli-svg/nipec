@@ -31,7 +31,7 @@ Chi monta non deve decidere niente di questo, ma deve sapere perché i reel sono
 | **Dove** | Albania: Tiranë, Durrës, Shkodër, Elbasan, Vlorë, Peshkopi. Italia: Roma e 40 km intorno. |
 | **Budget** | Albania 20 € al giorno, Italia 40 € al giorno. |
 | **Cosa si misura** | Le conversazioni iniziate da una titolare vera, non i clic. |
-| **Chi parte per prima** | **L'Albania, laser.** **Afrodite** circa due settimane dopo. Per l'Italia (Lazio) la Campagna 500 non dice quando: **(da confermare)**. |
+| **Chi parte per prima** | **L'Albania, laser.** **Afrodite** circa due settimane dopo. L'Italia (Lazio) nella Campagna 500 parte **per ultima**, perché «non abbiamo né video né un centro di riferimento locale». I video di Giorgio ora ci sono: **(da decidere se l'Italia può partire prima)**. |
 | **Nome del laser** | Nelle inserzioni **non si nomina il modello**: «un laser di ultima generazione con intelligenza artificiale». Niente diodi, niente watt. |
 
 **Cosa non va in un'inserzione** (è il motivo di rifiuto numero uno su Meta): pelle trattata, prima/dopo, percentuali di risultato, tempi.
@@ -71,6 +71,7 @@ Se manca qualcosa, **non si inventa: si chiede.**
 | I nove copioni | `copioni/reel-01-….md` … `reel-09-….md`, indice in `copioni/00-LEGGIMI.md` |
 | Le tre schede finali, PNG 1080 × 1920 | `schede-finali/` |
 | Tutto il contesto della campagna (offerta, perché i reel dicono quello che dicono) | `NOVE-REEL-campagna-500-REV2.pdf` |
+| I testi delle inserzioni, uno per reel, da copiare in Meta | `copioni/INSERZIONI.md` (gli stessi sono in fondo a ogni copione) |
 | Il logo e le regole del marchio | `../../MARCHIO/` e `../../MARCHIO/LIBRO-DEL-MARCHIO/NIPEC-libro-del-marchio.pdf` |
 | Il carattere dei testi a schermo | `caratteri/archivo.woff2` (Archivo, licenza libera) |
 
@@ -147,8 +148,10 @@ Il calendario con le date vere si scrive quando i video sono girati e si sa quan
 9. **Come entrano nella sequenza di test della Campagna 500.** Lì si prova prima l'angolo con quattro inserzioni uguali (fase S1), e il video parlato
    entra dopo, sull'angolo che ha vinto (fase S2). I reel sono: angolo «trenta giorni» = 3 e 4; «muletto» = 1 e 5; «metodo» = 2.
    Si usano tutti insieme fin dall'inizio, o secondo la sequenza?
-10. **Dove si carica l'inserzione e chi lo fa:** Gestione inserzioni di Meta, caricata da Giorgio? Cosa deve avere il file (formato, nome)? Posso
-    preparare, per ogni reel, il testo dell'inserzione (testo principale, titolo, messaggio precompilato su WhatsApp).
+10. **Dove si carica l'inserzione e chi lo fa:** Gestione inserzioni di Meta, caricata da Giorgio? Cosa deve avere il file (formato, nome)?
+    *I testi sono pronti: `copioni/INSERZIONI.md`.*
+11. **Il testo delle inserzioni di Afrodite nella Campagna 500** dice ancora «cavitazione, radiofrequenza, vacuum e LED». I reel hanno tolto il LED perché la scheda del
+    costruttore e il sito non concordano. Va allineata anche la Campagna 500, prima che parta Afrodite.
 
 ## 10. Registro di quello che ha detto Giorgio
 
@@ -162,3 +165,4 @@ Il calendario con le date vere si scrive quando i video sono girati e si sa quan
 - Nel canale Telegram c'è anche un altro Claude, quello di Eros, che cura un programma. Giorgio gli prepara tutto il materiale, lui fa le modifiche,
   e il Claude di NIPEC aiuta a prepararlo nel modo più comprensibile per lui.
 - I reel servono per fare pubblicità (adv) per il noleggio del laser.
+- Sì: Claude prepara per ogni reel il testo dell'inserzione (testo principale, titolo, messaggio precompilato su WhatsApp).
