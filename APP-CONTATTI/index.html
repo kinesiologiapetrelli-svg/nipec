@@ -628,7 +628,7 @@ async function mandaConLocandina(cid, mid){
     a.href = L.dato; a.download = L.nome || 'locandina.jpg';
     document.body.appendChild(a); a.click(); a.remove();
     if(navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(testo);
-    brindisi('Locandina salvata e testo copiato: aprila da WhatsApp e allegala');
+    brindisi('Locandina scaricata e testo copiato: apri WhatsApp e allegala alla chat');
   }catch(e){
     brindisi('Questo telefono non sa allegare da solo: usa il link in rete');
   }
@@ -860,14 +860,17 @@ function schedaGiro(c, m, inAttesa){
     <div class="testo">${esc(testo)}</div>
     ${L && L.dato ? `<div class="fila" style="align-items:center;gap:.5rem;margin:.1rem 0 .4rem">
       <img src="${L.dato}" alt="" style="width:2.6rem;height:2.6rem;object-fit:cover;border-radius:.4rem;border:1px solid var(--riga)">
-      <span class="tenue">${saAllegare()
-        ? 'con «+ Locandina» parte anche l\'immagine · ' + esc(L.nome||'') + ' ' + pesoBello(L.peso)
-        : 'la locandina allegata <b>su questo dispositivo non parte</b>: usa l\'indirizzo in rete'}</span></div>` : ''}
+      <span class="tenue">${esc(L.nome||'')} ${pesoBello(L.peso)} · ${saAllegare()
+        ? 'con «+ Locandina» parte insieme al testo'
+        : 'qui si scarica e la alleghi tu: per il giro usa l\'indirizzo in rete'}</span></div>` : ''}
     <div class="azioni">
       ${inAttesa
         ? `<button class="btn" disabled title="Domani">Domani</button>`
         : `<a class="btn wa" href="${url}" target="_blank" rel="noopener" data-manda="${c.id}">Apri WhatsApp e manda</a>`}
-      ${L && L.dato && saAllegare() ? `<button class="btn" data-loca="${c.id}|${m.id}" title="Immagine + testo insieme">+ Locandina</button>` : ''}
+      ${L && L.dato ? `<button class="btn" data-loca="${c.id}|${m.id}" title="${saAllegare()
+        ? 'Immagine e testo insieme, con il foglio di condivisione'
+        : 'Scarica la locandina e copia il testo: poi la alleghi tu in WhatsApp'}">${saAllegare()
+        ? '+ Locandina' : 'Scarica locandina'}</button>` : ''}
       <button class="btn piccolo" data-stato="risposto|${c.id}">Ha risposto</button>
       <button class="btn piccolo" data-stato="non interessato|${c.id}">Non interessato</button>
       <button class="btn piccolo" data-wa="no|${c.id}">Non è su WhatsApp</button>
@@ -1220,10 +1223,12 @@ function bloccoLocandina(m){
     <label class="campo" style="margin:.55rem 0 0"><span>Indirizzo della locandina in rete</span>
       <input class="inp" data-locurl="${m.id}" inputmode="url" placeholder="https://…" value="${esc(L.url || '')}"></label>
     ${saAllegare() ? '' : `<div class="avviso giallo" style="margin:.6rem 0 0">
-      <b>Su questo dispositivo il file allegato non può partire.</b> I browser da computer
-      non hanno nessun modo di passare un file a WhatsApp — non è una cosa che si aggira.
-      Qui funziona solo l'<b>indirizzo in rete</b>: il link va in fondo al messaggio e
-      WhatsApp ci disegna sopra l'anteprima. Dal telefono invece il file parte.</div>`}
+      <b>Sei su un computer.</b> Qui il browser non può passare un file a WhatsApp — non è
+      una cosa che si aggira. Il tasto nel giro diventa <b>Scarica locandina</b>: ti scarica
+      l'immagine e ti copia il testo, poi la alleghi tu nella chat.
+      Per mandarne venticinque di fila conviene l'<b>indirizzo in rete</b>: il link va in
+      fondo al messaggio e WhatsApp ci disegna sopra l'anteprima, in un tocco solo.
+      <b>Dal telefono</b> invece il file parte davvero, col foglio di condivisione.</div>`}
   </div>`;
 }
 

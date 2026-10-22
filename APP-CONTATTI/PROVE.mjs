@@ -274,13 +274,11 @@ console.log('\n== 13. la locandina compare nel giro ==');
   // su un browser da computer il file non puo' partire: la scheda deve dirlo,
   // e il tasto «+ Locandina» non deve nemmeno comparire
   const sa = await p.evaluate(()=>saAllegare());
-  if(sa){
-    ok(/parte anche l'immagine/.test(t), 'la scheda dice che parte anche la locandina');
-    ok(await p.locator('[data-loca]').count() > 0, 'c\'e\' il tasto «+ Locandina»');
-  } else {
-    ok(/su questo dispositivo non parte/i.test(t), 'la scheda avvisa che qui il file non parte');
-    ok(await p.locator('[data-loca]').count() === 0, 'e il tasto «+ Locandina» non c\'e\'');
-  }
+  ok(await p.locator('[data-loca]').count() > 0, 'il tasto della locandina c\'e\' sempre');
+  const etichetta = (await p.locator('[data-loca]').first().innerText()).trim();
+  ok(sa ? etichetta === '+ Locandina' : etichetta === 'Scarica locandina',
+     `col nome di quello che fa davvero: «${etichetta}»`);
+  ok(/locandina/i.test(t), 'e la scheda la nomina');
   await p.context().close();
 }
 
@@ -637,13 +635,14 @@ console.log('\n== 26. l\'allegato: l\'app dice la verita su questo dispositivo =
     salva(); S.cfg.scheda='oggi'; disegna();
   });
   await p.waitForTimeout(600);
-  ok(await p.locator('[data-loca]').count() === 0, 'e NON mostra il tasto «+ Locandina»');
-  const t = await p.locator('#app').innerText();
-  ok(/su questo dispositivo non parte/i.test(t), 'anzi lo scrive nella scheda');
+  ok(await p.locator('[data-loca]').count() === 1, 'il tasto c\'e\' lo stesso: non tolgo comandi');
+  const et = (await p.locator('[data-loca]').first().innerText()).trim();
+  ok(et === 'Scarica locandina', `ma si chiama «${et}», non «+ Locandina»`);
   await p.vai(/^Messaggi$/); await p.waitForTimeout(500);
   const m = await p.locator('#app').innerText();
-  ok(/non.*modo di passare un file a WhatsApp/i.test(m), 'e lo spiega anche in Messaggi');
-  ok(/indirizzo in rete/i.test(m), 'indicando la strada che funziona');
+  ok(/non pu. passare un file a WhatsApp/i.test(m), 'e in Messaggi spiega perche');
+  ok(/indirizzo in rete/i.test(m), 'indicando la strada buona per il giro');
+  ok(/dal telefono/i.test(m), 'e dice che dal telefono il file parte davvero');
   await p.context().close();
 }
 
