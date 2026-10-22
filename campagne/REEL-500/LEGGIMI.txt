@@ -35,9 +35,16 @@ DUE COSE DA DECIDERE PRIMA DI GIRARE
 
 PRIMA SI PUBBLICA, POI SI SPONSORIZZA
 La Campagna 500 mette tra le cose che bloccano l'accensione una pagina con
-meno di sei pubblicazioni. I nove reel sono quelle pubblicazioni: tre giorni,
-due per giorno (Italia e Albania), poi uno al giorno. Si parte da 3 e 4, che
-dicono l'offerta intera nei primi cinque secondi.
+meno di sei pubblicazioni. I sei reel del laser (1-6) sono quelle pubblicazioni:
+tre giorni, due per giorno (Albania e Italia). Si parte da 4 e 3, che dicono
+l'offerta intera nei primi cinque secondi. Afrodite (7, 8, 9) dopo circa due
+settimane, come dice la Campagna 500.
+
+
+I REEL SERVONO PER LE ADV DEL NOLEGGIO LASER
+Il passaggio su Telegram e' per vederli e approvarli. Il flusso completo, chi fa
+cosa e le domande aperte stanno in FLUSSO-TELEGRAM.md. I copioni, uno per file,
+stanno in copioni/.
 
 
 LE SCHEDE FINALI

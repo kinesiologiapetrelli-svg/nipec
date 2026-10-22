@@ -6,7 +6,10 @@ Chi lo legge: Giorgio, Uarda e il Claude di Eros che monta i video. È scritto p
 anche un'intelligenza artificiale che non ha visto nessuna delle conversazioni precedenti: **tutto quello che serve
 sta in questa cartella, niente sta "nella chat"**.
 
-> Quello che Giorgio ha detto sta in sezione 9. Quello che ho dedotto io è segnato **(da confermare)**.
+> Quello che Giorgio ha detto sta in sezione 10. Quello che ho dedotto io è segnato **(da confermare)**.
+
+**A cosa servono i reel:** a fare **pubblicità (adv) per il noleggio del laser**. Telegram è il passaggio in cui si vedono e si
+approvano; la pubblicità vera si carica dopo. Dettagli in sezione 2.
 
 ---
 
@@ -15,7 +18,29 @@ sta in questa cartella, niente sta "nella chat"**.
 Giorgio e Uarda girano nove reel seguendo i copioni, li mettono nel canale Telegram di NIPEC, e il Claude di Eros li monta
 secondo il copione e li pubblica. Per ora la pubblicazione è **solo su Telegram, nel canale NIPEC**.
 
-## 2. Chi fa cosa
+## 2. A cosa servono: adv per il noleggio laser
+
+Tutto quello che segue viene dal documento della Campagna 500 (`../LASER-AFRODITE-500/CAMPAGNA-500-laser-e-afrodite.pdf`).
+Chi monta non deve decidere niente di questo, ma deve sapere perché i reel sono fatti così.
+
+| | |
+|---|---|
+| **L'offerta** | 500 € al mese (in Albania 50.000 lekë), nessun vincolo, zero anticipo, zero cauzione. La macchina arriva il 1, si paga entro il 30. |
+| **Dove porta l'inserzione** | Su **WhatsApp**, non su una pagina web. Il pulsante è «Invia messaggio»; nel messaggio c'è la **parola chiave** (`LASER`) che dice da quale reel arriva. |
+| **Chi risponde** | Italia: Giorgio, 351 846 6025. Albania: Uarda, +355 69 212 9786. Entro quindici minuti. |
+| **Dove** | Albania: Tiranë, Durrës, Shkodër, Elbasan, Vlorë, Peshkopi. Italia: Roma e 40 km intorno. |
+| **Budget** | Albania 20 € al giorno, Italia 40 € al giorno. |
+| **Cosa si misura** | Le conversazioni iniziate da una titolare vera, non i clic. |
+| **Chi parte per prima** | **L'Albania, laser.** **Afrodite** circa due settimane dopo. Per l'Italia (Lazio) la Campagna 500 non dice quando: **(da confermare)**. |
+| **Nome del laser** | Nelle inserzioni **non si nomina il modello**: «un laser di ultima generazione con intelligenza artificiale». Niente diodi, niente watt. |
+
+**Cosa non va in un'inserzione** (è il motivo di rifiuto numero uno su Meta): pelle trattata, prima/dopo, percentuali di risultato, tempi.
+In pubblicità va solo quello che si mantiene senza sforzo.
+
+**Una cosa che blocca l'accensione:** la pagina NIPEC deve avere almeno sei pubblicazioni prima di sponsorizzare. Pubblicare solo su Telegram non
+basta a sbloccarla: serve la pagina Instagram/Facebook. **(da chiarire con Giorgio: come si risolve)**
+
+## 3. Chi fa cosa
 
 | Chi | Cosa fa |
 |---|---|
@@ -27,19 +52,19 @@ secondo il copione e li pubblica. Per ora la pubblicazione è **solo su Telegram
 Regola per chi monta: **il copione è la fonte.** Nessuna parola, nessun prezzo, nessuna scritta si cambia senza chiedere a Giorgio.
 Se manca qualcosa, **non si inventa: si chiede.**
 
-## 3. Il flusso, passo per passo
+## 4. Il flusso, passo per passo
 
 | # | Passo | Stato |
 |---|---|---|
 | 1 | I nove copioni stanno nella cartella `copioni/`, uno per file | **fatto** |
 | 2 | Si gira **nell'ordine dei copioni**: reel 1, poi 2, poi 3… fino al 9 | da fare |
-| 3 | Ogni video girato si mette nel canale Telegram di NIPEC, con la didascalia `REEL n` (sezione 7) | da fare |
+| 3 | Ogni video girato si mette nel canale Telegram di NIPEC, con la didascalia `REEL n` (sezione 8) | da fare |
 | 4 | I video vanno nella cartella assegnata per foto e video. **(da chiarire: quale cartella, e chi li sposta dal canale)** | da chiarire |
-| 5 | Si decide insieme il calendario delle uscite, **dopo** aver girato (proposta in sezione 6) | da fare |
+| 5 | Si decide insieme il calendario delle uscite, **dopo** aver girato (proposta in sezione 7) | da fare |
 | 6 | Nel giorno di uscita: si prende il video e il suo copione, si monta (sequenza giusta, scritte, scheda finale), si pubblica | da fare |
-| 7 | Per ora la pubblicazione è solo nel canale Telegram NIPEC | stabilito |
+| 7 | Per ora la pubblicazione è solo nel canale Telegram NIPEC: serve a vedere e approvare. **(da confermare: poi lo stesso file, senza cambiare niente, si carica come inserzione?)** | stabilito |
 
-## 4. Il pacchetto che riceve chi monta
+## 5. Il pacchetto che riceve chi monta
 
 | Cosa | Dove sta |
 |---|---|
@@ -52,7 +77,7 @@ Se manca qualcosa, **non si inventa: si chiede.**
 Ogni copione ha in testa i campi fissi (chi parla, lingua, durata, parola chiave, quale scheda finale) e poi la sequenza
 **secondo per secondo**: cosa si vede, cosa si dice, cosa appare scritto.
 
-## 5. Regole di montaggio, uguali per i nove
+## 6. Regole di montaggio, uguali per i nove
 
 **Formato e durata**
 - Verticale **9:16, 1080 × 1920**.
@@ -85,26 +110,28 @@ Ogni copione ha in testa i campi fissi (chi parla, lingua, durata, parola chiave
 
 **Non si mostra mai:** pelle trattata, prima/dopo, percentuali di risultato, tempi di risultato.
 
-## 6. Ordine di uscita (proposta, da decidere insieme dopo le riprese)
+## 7. Ordine di uscita (proposta, da decidere insieme dopo le riprese)
 
-| Giorno | Italia | Albania |
+| Giorno | Albania · laser | Italia · laser |
 |---|---|---|
-| 1 | Reel 3 · Arriva il 1. La paghi il 30 | Reel 4 · Arriva il 1. La paghi il 30 |
-| 2 | Reel 1 · Se si ferma, non lavori | Reel 5 · Se si ferma, in 48 ore ne hai un'altra |
-| 3 | Reel 2 · Una macchina che non sai usare è un mobile | Reel 7 · Dopo tre mesi finisce in un angolo |
-| poi | Reel 6, 8 e 9, uno al giorno | |
+| 1 | Reel 4 · Arriva il 1. La paghi il 30 | Reel 3 · Arriva il 1. La paghi il 30 |
+| 2 | Reel 5 · Se si ferma, in 48 ore ne hai un'altra | Reel 1 · Se si ferma, non lavori |
+| 3 | Reel 6 · Un laser di quattro anni fa non è lo stesso laser | Reel 2 · Una macchina che non sai usare è un mobile |
+| dopo circa due settimane | Reel 7, 8 e 9 · **Afrodite** | |
 
-Si parte dai due che dicono l'offerta intera nei primi cinque secondi (3 e 4). **Si gira in ordine, si esce in questo ordine:** non sono la stessa cosa.
+I reel sul laser sono **i primi sei** (1–6). Afrodite (7–9) viene dopo, come dice la Campagna 500. L'Albania parte per prima;
+**(da confermare: l'Italia parte negli stessi giorni o dopo?)**
+Si parte dai due che dicono l'offerta intera nei primi cinque secondi (4 e 3). **Si gira in ordine, si esce in questo ordine:** non sono la stessa cosa.
 Il calendario con le date vere si scrive quando i video sono girati e si sa quanti sono.
 
-## 7. Come si mettono i video su Telegram (proposta)
+## 8. Come si mettono i video su Telegram (proposta)
 
 - **Didascalia:** `REEL 3`. Se c'è più di una ripresa dello stesso reel: `REEL 3 · ripresa 2`. Se è un'inquadratura
   di dettaglio da inserire (il calendario, il furgone, il foglio bianco): `REEL 3 · dettaglio`.
 - Inviare **come video**, in verticale.
 - Una didascalia sola per messaggio, scritta come sopra, senza altro: chi monta la legge per sapere a quale copione appartiene.
 
-## 8. Da chiarire
+## 9. Da chiarire
 
 1. **Cosa fa il Claude di Eros:** monta da solo i video (con quali strumenti?) o prepara istruzioni per un montatore? Di che programma si occupa?
    *Il modo migliore per sapere cosa gli serve: chiederglielo e incollarmi la risposta. Poi adatto questo materiale a quello.*
@@ -116,8 +143,14 @@ Il calendario con le date vere si scrive quando i video sono girati e si sa quan
 5. **Il testo albanese.** Chi lo approva, e quando? Intanto i sottotitoli riportano quello che si sente.
 6. **La scheda finale** viene dopo l'ultima parola e dura 2 secondi, quindi il reel dura 22–24 secondi. Va bene?
 7. **Il calendario:** quando lo decidiamo, e chi lo tiene.
+8. **I reel di Afrodite (7–9):** si girano adesso o dopo? Hai detto che i reel servono per il noleggio laser.
+9. **Come entrano nella sequenza di test della Campagna 500.** Lì si prova prima l'angolo con quattro inserzioni uguali (fase S1), e il video parlato
+   entra dopo, sull'angolo che ha vinto (fase S2). I reel sono: angolo «trenta giorni» = 3 e 4; «muletto» = 1 e 5; «metodo» = 2.
+   Si usano tutti insieme fin dall'inizio, o secondo la sequenza?
+10. **Dove si carica l'inserzione e chi lo fa:** Gestione inserzioni di Meta, caricata da Giorgio? Cosa deve avere il file (formato, nome)? Posso
+    preparare, per ogni reel, il testo dell'inserzione (testo principale, titolo, messaggio precompilato su WhatsApp).
 
-## 9. Registro di quello che ha detto Giorgio
+## 10. Registro di quello che ha detto Giorgio
 
 **22 ottobre 2026**
 - Si crea una cartella per i copioni. Il Claude di NIPEC li mette lì.
@@ -128,3 +161,4 @@ Il calendario con le date vere si scrive quando i video sono girati e si sa quan
 - Per ora si pubblica solo su Telegram, nel canale NIPEC.
 - Nel canale Telegram c'è anche un altro Claude, quello di Eros, che cura un programma. Giorgio gli prepara tutto il materiale, lui fa le modifiche,
   e il Claude di NIPEC aiuta a prepararlo nel modo più comprensibile per lui.
+- I reel servono per fare pubblicità (adv) per il noleggio del laser.
