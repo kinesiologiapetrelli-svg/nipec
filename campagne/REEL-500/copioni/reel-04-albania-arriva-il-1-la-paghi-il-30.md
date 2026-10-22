@@ -45,6 +45,22 @@ scheda_finale: "schede-finali/scheda-finale-LASER-albania.png"
 
 - **Si vede:** `schede-finali/scheda-finale-LASER-albania.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+> Testo scritto in italiano, da approvare. La traduzione in albanese si fa sul testo approvato, non prima.
+
+- **Angolo:** A · Trenta giorni prima
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > La macchina ti arriva il 1 del mese. Paghi il 30.  
+  > Trenta giorni di lavoro prima di tirare fuori il primo lek. Nessun vincolo, nessun anticipo, nessuna cauzione.  
+  > 50.000 lekë al mese. Scrivi «LASER».  
+- **Titolo:** 50.000 Lekë/mese · nessun vincolo  (33 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `LASER`
+- **Il numero WhatsApp:** +355 69 212 9786 (Uarda)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Un centro vero, non il magazzino. Meglio se con una cliente sul lettino, vestita

@@ -43,6 +43,20 @@ scheda_finale: "schede-finali/scheda-finale-LASER-italia.png"
 
 - **Si vede:** `schede-finali/scheda-finale-LASER-italia.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+- **Angolo:** A · Trenta giorni prima
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > Il laser arriva il 1. Lo paghi il 30.  
+  > Un mese intero di lavoro prima di tirare fuori il primo euro. Zero anticipo, zero cauzione, nessun vincolo.  
+  > 500 € al mese. Scrivimi «LASER».  
+- **Titolo:** 500 € al mese. Paghi dopo 30 giorni  (35 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `LASER`
+- **Il numero WhatsApp:** +39 351 846 6025 (Giorgio)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Un calendario da muro grande, senza mese e senza anno stampati: il reel regge tutti i mesi. Niente macchina: qui conta la faccia

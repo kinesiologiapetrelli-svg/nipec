@@ -43,6 +43,20 @@ scheda_finale: "schede-finali/scheda-finale-LASER-italia.png"
 
 - **Si vede:** `schede-finali/scheda-finale-LASER-italia.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+- **Angolo:** B · Il rischio ribaltato
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > Se la tua macchina si ferma domani mattina, quante clienti disdici?  
+  > Da noi, in 48 ore ne hai un'altra in cabina.  
+  > 500 € al mese, nessun vincolo. Scrivimi «LASER».  
+- **Titolo:** Muletto in 48 ore, sempre  (25 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `LASER`
+- **Il numero WhatsApp:** +39 351 846 6025 (Giorgio)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Due macchine nella stessa inquadratura, o una macchina e un furgone aperto

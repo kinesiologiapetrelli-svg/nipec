@@ -44,6 +44,22 @@ scheda_finale: "schede-finali/scheda-finale-LASER-albania.png"
 
 - **Si vede:** `schede-finali/scheda-finale-LASER-albania.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+> Testo scritto in italiano, da approvare. La traduzione in albanese si fa sul testo approvato, non prima.
+
+- **Angolo:** Nuovo · Ultima generazione (non è uno dei quattro angoli della Campagna 500)
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > Un laser di quattro anni fa non è lo stesso laser.  
+  > La telecamera guarda la pelle e l'intelligenza artificiale ti propone i parametri: decidi sempre tu. Certificata in Italia, MDR attivo.  
+  > 50.000 lekë al mese, nessun vincolo. Scrivi «LASER».  
+- **Titolo:** Laser di ultima generazione, con IA  (35 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `LASER`
+- **Il numero WhatsApp:** +355 69 212 9786 (Uarda)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Una macchina nuova, ancora imballata. La pellicola che si stacca è il piano più forte del reel

@@ -43,6 +43,20 @@ scheda_finale: "schede-finali/scheda-finale-LASER-italia.png"
 
 - **Si vede:** `schede-finali/scheda-finale-LASER-italia.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+- **Angolo:** C · Il metodo compreso
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > Quante macchine hai visto prendere polvere in un angolo?  
+  > Non è la macchina: è che nessuno ti ha dato il protocollo.  
+  > Con la nostra arriva scritto, con la formazione. 500 € al mese, nessun vincolo. Scrivimi «LASER» e te lo faccio vedere.  
+- **Titolo:** La macchina, e il protocollo per usarla  (39 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `LASER`
+- **Il numero WhatsApp:** +39 351 846 6025 (Giorgio)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Il protocollo laser stampato. Ce l'abbiamo già — 6 pagine, IT

@@ -44,6 +44,22 @@ scheda_finale: "schede-finali/scheda-finale-AFRODITE-albania.png"
 
 - **Si vede:** `schede-finali/scheda-finale-AFRODITE-albania.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+> Testo scritto in italiano, da approvare. La traduzione in albanese si fa sul testo approvato, non prima.
+
+- **Angolo:** A · Trenta giorni prima (Afrodite)
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > Nessun anticipo. Nessuna cauzione. Nessun vincolo.  
+  > La paghi dopo trenta giorni di lavoro. Se si ferma, in 48 ore ne hai un'altra.  
+  > 50.000 lekë al mese. Scrivi «AFRODITE».  
+- **Titolo:** Arriva il 1, la paghi il 30  (27 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `AFRODITE`
+- **Il numero WhatsApp:** +355 69 212 9786 (Uarda)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Un foglio bianco. Non un contratto vero: l'immagine è «non firmi niente»

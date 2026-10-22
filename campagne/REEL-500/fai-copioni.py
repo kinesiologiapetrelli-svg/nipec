@@ -37,6 +37,41 @@ META = {
 }
 ETI = {'I 5 secondi': 'I primi 5 secondi', 'Sviluppo': 'Sviluppo', 'Chiusura': 'Chiusura'}
 
+
+# ---- le inserzioni: il testo che accompagna il reel quando diventa pubblicita'
+# Testi presi dalla Campagna 500 (campagne/LASER-AFRODITE-500) e accorciati: nel video il messaggio e' gia' detto,
+# il testo lo ripete in poche righe e dice cosa fare. Per l'Albania sono scritti in italiano, da approvare e poi tradurre.
+NUM = {'Italia': '+39 351 846 6025 (Giorgio)', 'Albania': '+355 69 212 9786 (Uarda)'}
+AD = {
+    1: ('B · Il rischio ribaltato',
+        "Se la tua macchina si ferma domani mattina, quante clienti disdici?\nDa noi, in 48 ore ne hai un'altra in cabina.\n500 € al mese, nessun vincolo. Scrivimi «LASER».",
+        'Muletto in 48 ore, sempre'),
+    2: ('C · Il metodo compreso',
+        "Quante macchine hai visto prendere polvere in un angolo?\nNon è la macchina: è che nessuno ti ha dato il protocollo.\nCon la nostra arriva scritto, con la formazione. 500 € al mese, nessun vincolo. Scrivimi «LASER» e te lo faccio vedere.",
+        'La macchina, e il protocollo per usarla'),
+    3: ('A · Trenta giorni prima',
+        "Il laser arriva il 1. Lo paghi il 30.\nUn mese intero di lavoro prima di tirare fuori il primo euro. Zero anticipo, zero cauzione, nessun vincolo.\n500 € al mese. Scrivimi «LASER».",
+        '500 € al mese. Paghi dopo 30 giorni'),
+    4: ('A · Trenta giorni prima',
+        "La macchina ti arriva il 1 del mese. Paghi il 30.\nTrenta giorni di lavoro prima di tirare fuori il primo lek. Nessun vincolo, nessun anticipo, nessuna cauzione.\n50.000 lekë al mese. Scrivi «LASER».",
+        '50.000 Lekë/mese · nessun vincolo'),
+    5: ('B · Il rischio non è tuo',
+        "La domanda da fare a qualunque fornitore: «Se la macchina si ferma, in quanto tempo ne ho un'altra in cabina?»\nDa noi: 48 ore. Il rischio non è tuo, è nostro.\n50.000 lekë al mese, nessun vincolo. Scrivi «LASER».",
+        'Macchina sostitutiva entro 48 ore'),
+    6: ('Nuovo · Ultima generazione (non è uno dei quattro angoli della Campagna 500)',
+        "Un laser di quattro anni fa non è lo stesso laser.\nLa telecamera guarda la pelle e l'intelligenza artificiale ti propone i parametri: decidi sempre tu. Certificata in Italia, MDR attivo.\n50.000 lekë al mese, nessun vincolo. Scrivi «LASER».",
+        'Laser di ultima generazione, con IA'),
+    7: ('C · Il metodo compreso (Afrodite)',
+        "Tanti centri comprano la macchina e dopo tre mesi la lasciano in un angolo. Non perché non funzioni: perché nessuno ha dato loro il protocollo.\nCon noi arriva il metodo DEMETRA: ciclo di 10-12 sedute, scheda di valutazione, protocollo pagina per pagina.\n50.000 lekë al mese, nessun vincolo. Scrivi «AFRODITE».",
+        'La macchina e il metodo per usarla'),
+    8: ('Nuovo · Più tecnologie in una macchina (Afrodite)',
+        "Cavitazione, radiofrequenza, vacuum. Una macchina sola, una rata sola.\nTi arriva il 1, la paghi il 30. Nessun vincolo, nessun anticipo.\n50.000 lekë al mese. Scrivi «AFRODITE».",
+        'Rimodellamento corpo — 50.000 Lekë/mese'),
+    9: ('A · Trenta giorni prima (Afrodite)',
+        "Nessun anticipo. Nessuna cauzione. Nessun vincolo.\nLa paghi dopo trenta giorni di lavoro. Se si ferma, in 48 ore ne hai un'altra.\n50.000 lekë al mese. Scrivi «AFRODITE».",
+        'Arriva il 1, la paghi il 30'),
+}
+
 reel = []
 for blocco in src.split('<div class="reel">')[1:]:
     n = int(re.search(r'Reel (\d)', blocco).group(1))
@@ -102,6 +137,19 @@ for n, titolo, seg, serve in reel:
         L.append('')
     L.append(f'### {len(seg) + 1} · Scheda finale · dopo l\'ultima parola, 2 secondi\n')
     L.append(f'- **Si vede:** `schede-finali/{scheda}` a tutto schermo, ferma. Niente altro sopra.\n')
+    ang, testo_ad, tit_ad = AD[n]
+    L.append('## Per l\'inserzione\n')
+    if lingua == 'albanese':
+        L.append('> Testo scritto in italiano, da approvare. La traduzione in albanese si fa sul testo approvato, non prima.\n')
+    L.append(f'- **Angolo:** {ang}')
+    L.append('- **Testo principale** (le righe vanno a capo come qui sotto):')
+    for r in testo_ad.split('\n'): L.append(f'  > {r}  ')
+    L.append(f'- **Titolo:** {tit_ad}  ({len(tit_ad)} caratteri)')
+    L.append('- **Pulsante:** Invia messaggio (WhatsApp)')
+    L.append(f'- **Messaggio già scritto nella chat:** `{parola}`')
+    L.append(f'- **Il numero WhatsApp:** {NUM[paese]}')
+    L.append('- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.')
+    L.append('- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.\n')
     L.append('## Cosa serve per girarlo\n')
     L.append(serve + '\n')
     L.append('## Cosa non si mostra\n')
@@ -117,6 +165,31 @@ for n, nome, titolo, paese, camp, chi, parola, durata in indice:
     I.append(f'| {n} | `{nome}` | {titolo} | {paese} | {camp} | {chi} | {parola} | {durata}″ |')
 I.append('')
 I.append('Ogni file ha: i campi fissi in testa, la sequenza (cosa si vede, cosa si dice, cosa appare scritto, secondo per secondo), '
-         'e cosa serve per girarlo. La grafica dei testi a schermo e le regole di montaggio sono in `../FLUSSO-TELEGRAM.md`.\n')
+         'il testo dell\'inserzione e cosa serve per girarlo. La grafica dei testi a schermo e le regole di montaggio sono in `../FLUSSO-TELEGRAM.md`. '
+         'Tutti i testi delle inserzioni, da copiare in Meta, stanno insieme in `INSERZIONI.md`.\n')
 open(os.path.join(OUT, '00-LEGGIMI.md'), 'w', encoding='utf8').write('\n'.join(I))
+
+A = ['# Le nove inserzioni, tutte insieme\n',
+     'Per chi carica in Gestione inserzioni di Meta: i testi da copiare, uno per reel. Sono gli stessi che stanno in fondo a ogni copione.\n',
+     '**Per tutte:** pulsante **Invia messaggio** (WhatsApp); destinazione WhatsApp, non una pagina web; il messaggio già scritto nella chat è la parola chiave. '
+     'Pubblico, zone e budget sono quelli della Campagna 500. **Il modello del laser non si nomina.**\n',
+     '| # | Paese | Angolo | Titolo | Caratteri titolo | Parola nella chat |', '|---|---|---|---|---|---|']
+A.insert(3, '**Titoli:** tutti sotto i 40 caratteri, così Meta non li taglia.\n')
+for n, nome, titolo, paese, camp, chi, parola, durata in indice:
+    ang, testo_ad, tit_ad = AD[n]
+    A.append(f'| {n} | {paese} | {ang.split(" (")[0]} | {tit_ad} | {len(tit_ad)} | `{parola}` |')
+A.append('')
+for n, nome, titolo, paese, camp, chi, parola, durata in indice:
+    ang, testo_ad, tit_ad = AD[n]
+    A.append(f'## Reel {n} · {paese} — {titolo}\n')
+    if paese == 'Albania': A.append('*Testo in italiano, da approvare; poi si traduce in albanese.*\n')
+    A.append(f'**Angolo:** {ang}  ')
+    A.append(f'**Video:** il reel {n}, montato. Copione: `{nome}`  ')
+    A.append(f'**Titolo:** {tit_ad}  ')
+    A.append(f'**Messaggio nella chat:** `{parola}`  ')
+    A.append(f'**WhatsApp:** {NUM[paese]}\n')
+    A.append('**Testo principale:**\n')
+    for r in testo_ad.split('\n'): A.append(f'> {r}  ')
+    A.append('')
+open(os.path.join(OUT, 'INSERZIONI.md'), 'w', encoding='utf8').write('\n'.join(A))
 print(len(indice), 'copioni scritti in', OUT)

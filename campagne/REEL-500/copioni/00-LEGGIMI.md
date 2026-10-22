@@ -14,4 +14,4 @@ Rev. 2 · 22 ottobre 2026. Uno per file. Si gira **nell'ordine dei numeri**. Il 
 | 8 | `reel-08-albania-piu-tecnologie-una-macchina-sola.md` | Più tecnologie, una macchina sola | Albania | Afrodite | Uarda | AFRODITE | 21″ |
 | 9 | `reel-09-albania-chiedi-in-giro-se-qualcuno-te-la-da-cosi.md` | Chiedi in giro se qualcuno te la dà così | Albania | Afrodite | Uarda | AFRODITE | 22″ |
 
-Ogni file ha: i campi fissi in testa, la sequenza (cosa si vede, cosa si dice, cosa appare scritto, secondo per secondo), e cosa serve per girarlo. La grafica dei testi a schermo e le regole di montaggio sono in `../FLUSSO-TELEGRAM.md`.
+Ogni file ha: i campi fissi in testa, la sequenza (cosa si vede, cosa si dice, cosa appare scritto, secondo per secondo), il testo dell'inserzione e cosa serve per girarlo. La grafica dei testi a schermo e le regole di montaggio sono in `../FLUSSO-TELEGRAM.md`. Tutti i testi delle inserzioni, da copiare in Meta, stanno insieme in `INSERZIONI.md`.

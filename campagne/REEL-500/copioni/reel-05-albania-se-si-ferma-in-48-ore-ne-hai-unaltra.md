@@ -44,6 +44,22 @@ scheda_finale: "schede-finali/scheda-finale-LASER-albania.png"
 
 - **Si vede:** `schede-finali/scheda-finale-LASER-albania.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+> Testo scritto in italiano, da approvare. La traduzione in albanese si fa sul testo approvato, non prima.
+
+- **Angolo:** B · Il rischio non è tuo
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > La domanda da fare a qualunque fornitore: «Se la macchina si ferma, in quanto tempo ne ho un'altra in cabina?»  
+  > Da noi: 48 ore. Il rischio non è tuo, è nostro.  
+  > 50.000 lekë al mese, nessun vincolo. Scrivi «LASER».  
+- **Titolo:** Macchina sostitutiva entro 48 ore  (33 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `LASER`
+- **Il numero WhatsApp:** +355 69 212 9786 (Uarda)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Il furgone. È l'immagine che vale più di mille parole

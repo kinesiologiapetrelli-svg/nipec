@@ -44,6 +44,22 @@ scheda_finale: "schede-finali/scheda-finale-AFRODITE-albania.png"
 
 - **Si vede:** `schede-finali/scheda-finale-AFRODITE-albania.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+> Testo scritto in italiano, da approvare. La traduzione in albanese si fa sul testo approvato, non prima.
+
+- **Angolo:** C · Il metodo compreso (Afrodite)
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > Tanti centri comprano la macchina e dopo tre mesi la lasciano in un angolo. Non perché non funzioni: perché nessuno ha dato loro il protocollo.  
+  > Con noi arriva il metodo DEMETRA: ciclo di 10-12 sedute, scheda di valutazione, protocollo pagina per pagina.  
+  > 50.000 lekë al mese, nessun vincolo. Scrivi «AFRODITE».  
+- **Titolo:** La macchina e il metodo per usarla  (34 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `AFRODITE`
+- **Il numero WhatsApp:** +355 69 212 9786 (Uarda)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 Il protocollo Afrodite e la scheda di cabina stampati. Ce li abbiamo

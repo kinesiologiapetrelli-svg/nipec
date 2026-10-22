@@ -44,6 +44,22 @@ scheda_finale: "schede-finali/scheda-finale-AFRODITE-albania.png"
 
 - **Si vede:** `schede-finali/scheda-finale-AFRODITE-albania.png` a tutto schermo, ferma. Niente altro sopra.
 
+## Per l'inserzione
+
+> Testo scritto in italiano, da approvare. La traduzione in albanese si fa sul testo approvato, non prima.
+
+- **Angolo:** Nuovo · Più tecnologie in una macchina (Afrodite)
+- **Testo principale** (le righe vanno a capo come qui sotto):
+  > Cavitazione, radiofrequenza, vacuum. Una macchina sola, una rata sola.  
+  > Ti arriva il 1, la paghi il 30. Nessun vincolo, nessun anticipo.  
+  > 50.000 lekë al mese. Scrivi «AFRODITE».  
+- **Titolo:** Rimodellamento corpo — 50.000 Lekë/mese  (39 caratteri)
+- **Pulsante:** Invia messaggio (WhatsApp)
+- **Messaggio già scritto nella chat:** `AFRODITE`
+- **Il numero WhatsApp:** +355 69 212 9786 (Uarda)
+- **Pubblico, zone e budget:** quelli della Campagna 500 (vedi `../FLUSSO-TELEGRAM.md`, sezione 2). Il video è questo reel, montato, senza cambiare niente.
+- **Non si scrive:** il modello del laser, diodi o watt, risultati sulla pelle, percentuali, tempi, confronti con un concorrente.
+
 ## Cosa serve per girarlo
 
 I manipoli, luce radente. Niente pelle: solo i manipoli
