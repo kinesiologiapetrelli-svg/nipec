@@ -12,6 +12,7 @@ il foglio già fatto e l'app che la titolare si mette sul telefono.
 | **`APP-ALERT-LASER/`** | **L'app dei centri.** Ogni mattina dice chi richiamare e in che ordine. Si installa sulla schermata Home e funziona offline. Parte vuota. | Si trascina su Netlify **la cartella intera**: senza `manifest`, `sw.js` e le icone non si installa. |
 | **`APP-ALERT-LASER-DEMO/`** | **La copia dimostrativa.** Stessa app, già piena di quattordici clienti finte che accendono tutti e otto gli avvisi. Serve a far vedere il sistema in trenta secondi. | Generata da `APP-ALERT-LASER/_genera-demo.py`: non si modifica a mano. |
 | **`MARCHIO/`** | Il marchio NIPEC 5.0: orizzontale, verticale, compatto ed emblema, in positivo e negativo. | `LEGGIMI.txt` dice quale file va dove. |
+| **`MARCHIO/LIBRO-DEL-MARCHIO/`** | **L'identità di marca**: chi siamo, la voce, colori, caratteri, regole d'uso del logo, immagini, due paesi e tre lingue, esempi di stampa e digitale. Più il kit: carta intestata Italia e Albania, biglietto da visita, firma e-mail. | `NIPEC-libro-del-marchio.pdf` si legge. `LEGGIMI.txt` dice cosa controllare prima di stampare. |
 
 ## Online
 

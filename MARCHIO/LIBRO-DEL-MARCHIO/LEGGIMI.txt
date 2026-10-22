@@ -1,0 +1,47 @@
+LIBRO DEL MARCHIO NIPEC — identita' di marca, versione 1.0 (ottobre 2026)
+=========================================================================
+
+NIPEC-libro-del-marchio.pdf     19 pagine A4 orizzontali. Quello da leggere,
+                                da girare a chi disegna, stampa o scrive per noi.
+NIPEC-libro-del-marchio.html    il sorgente, uguale al PDF.
+fai-il-libro.py                 lo script che li rigenera (e rigenera il kit).
+KIT-CARTOLERIA/                 i file pronti, vedi sotto.
+
+COSA C'E' DENTRO
+  Chi siamo, il sistema (5 pilastri, 4 fasi), a chi parliamo, la voce,
+  il marchio e come si usa (zona di rispetto, misure, fondi, 8 errori),
+  colore (valori, proporzioni, contrasto misurato), tipografia, linguaggio
+  grafico (orbita, barre, icone, riquadri), immagini, i due paesi e le tre
+  lingue, esempi di stampa e digitale, e la lista da controllare prima di
+  mandare fuori qualunque cosa.
+
+DA DOVE VIENE
+  Non e' un marchio nuovo. Il logo e' quello di MARCHIO/ (versione 5.0 col
+  filetto tricolore): non e' stato toccato. Il libro mette in ordine quello
+  che gia' c'era sparso: il sito, le regole di scrittura (REGOLE/), le
+  campagne, la pagina d'istruzioni del logo. I testi di esempio sono quelli
+  veri del sito; i numeri di contatto sono quelli pubblicati sul sito.
+
+IL KIT (KIT-CARTOLERIA/)
+  carta-intestata-ITALIA.pdf        A4, PHD System S.r.l. — per la tipografia
+  carta-intestata-ALBANIA.pdf       A4, PHD SYSTEM (NIPT) — per la tipografia
+  biglietto-da-visita-tipografia.pdf  85 x 55 mm con 3 mm di abbondanza
+                                    (pagina 1 fronte, pagina 2 retro).
+                                    Nome e ruolo: Giorgio Petrelli, Fondatore.
+  firma-email.html                  si apre nel browser, si copia, si incolla
+                                    nelle impostazioni di Gmail. Solo testo.
+
+COSA CONTROLLARE PRIMA DI STAMPARE
+  - L'indirizzo web scritto e' www.nipecestetica.eu (quello dei messaggi di
+    noleggio e della proposta RTSH); l'e-mail e' info@nipecestetica.com (quella
+    del sito). Se il sito principale e' un altro, si cambia in fai-il-libro.py
+    (WEB e MAIL, in cima alla sezione "applicazioni") e si rilancia.
+  - Il numero albanese e' +355 69 212 9786, quello pubblicato sul sito.
+  - I valori CMYK sono conversioni standard, non Pantone: prova colore prima
+    di una tiratura grande.
+  - Il biglietto ha il nome di Giorgio. Per altre persone si cambia la
+    funzione biglietto_retro() e si rilancia.
+
+Per rigenerare:   python3 fai-il-libro.py
+(serve Chromium per il PDF e Pillow per le foto; i caratteri e i loghi sono
+presi da MARCHIO/.)
