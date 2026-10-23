@@ -51,7 +51,7 @@ NOTE = {
     2: ["Con le parole come sono dura 25,5 secondi. Togliere «Non è che la macchina non funziona.» (lo dice già la scritta dello stacco 2) lo porta a 23."],
     7: ["Con le parole come sono dura 24 secondi. Togliere «cosa si fa, con quali parametri, in che ordine, e quante sedute.» lo porta a 20: il metodo DEMETRA lo ripete subito dopo."],
     4: ["La scritta dello stacco 1 e 2 è ancora in italiano nel copione approvato: per il pubblico albanese va tradotta."],
-    8: ["Parole decise da Giorgio il 22 ottobre: «ultrasuono focalizzato direzionale» al posto di «cavitazione», e al posto di «LED» ho scritto «low laser» come sul sito: da confermare con Giorgio.",
+    8: ["Parole decise da Giorgio: «ultrasuono focalizzato direzionale» al posto di «cavitazione», «low laser» al posto di «LED» (confermato il 23 ottobre).",
         "In albanese la scritta è «ULTRATINGULL I FOKUSUAR», senza «direzionale»: da far controllare a Uarda.",
         "Il sito conta anche il Micropulse; qui sono quattro tecnologie perché il Micropulse è una vibrazione che rende il massaggio confortevole, non una tecnologia a sé. Da allineare."],
     5: ["Il gancio ha 18 parole in 5 secondi: va detto svelto. Se non regge, si toglie «una domanda a» e resta «Chiedi a chiunque ti noleggi una macchina»."],

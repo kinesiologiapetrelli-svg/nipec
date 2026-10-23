@@ -183,8 +183,8 @@ I reel sul laser sono **i primi sei** (1–6). Afrodite (7–9) viene dopo, come
 9. **Come entrano nella sequenza di test della Campagna 500.** Lì si prova prima l'angolo con quattro inserzioni uguali (fase S1), e il video parlato entra dopo, sull'angolo che ha vinto (fase S2).
    I reel: angolo «trenta giorni» = 3 e 4; «muletto» = 1 e 5; «metodo» = 2. Si usano tutti insieme fin dall'inizio, o secondo la sequenza?
 10. **Dove si carica l'inserzione e chi lo fa:** Gestione inserzioni di Meta, caricata da Giorgio? *I testi sono pronti: `copioni/INSERZIONI.md`.*
-11. **Le parole di Afrodite.** Giorgio ha deciso «ultrasuono focalizzato direzionale» al posto di «cavitazione», e di cambiare «LED»: ho scritto **«low laser»**, come sul sito.
-    **Da confermare.** In albanese la scritta è «ULTRATINGULL I FOKUSUAR», senza «direzionale»: la controlla Uarda. Sono «quattro tecnologie»; il sito conta anche il Micropulse.
+11. **Le parole di Afrodite.** Decise da Giorgio: «ultrasuono focalizzato direzionale» al posto di «cavitazione», e **«low laser»** al posto di «LED» (**confermato il 23 ottobre**).
+    Resta da fare: in albanese la scritta è «ULTRATINGULL I FOKUSUAR», senza «direzionale», e la controlla Uarda. Sono «quattro tecnologie»; il sito conta anche il Micropulse.
 12. **Parole rimaste vecchie:** i contratti (`contratti/`) e i protocolli DEMETRA (`protocolli/DEMETRA/`) dicono ancora «Cavitazione U.F.D.». Non li ho toccati.
 
 ## 11. Registro di quello che ha detto Giorgio
@@ -202,3 +202,6 @@ I reel sul laser sono **i primi sei** (1–6). Afrodite (7–9) viene dopo, come
 - I reel si montano con la **regola dei 5 secondi**: nessuno stacco più di 5 secondi, poi si cambia stacco e inquadratura, per renderlo dinamico alla vista e semplice da girare.
 - **L'Italia parte per prima.**
 - «Cavitazione» diventa **«ultrasuono focalizzato direzionale»**. La parola **«LED»** va cambiata. E si allinea tutto.
+
+**23 ottobre 2026**
+- Confermato: **«low laser»** al posto di «LED».

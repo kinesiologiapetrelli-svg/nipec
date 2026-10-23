@@ -74,7 +74,7 @@ I manipoli, luce radente. Niente pelle: solo i manipoli
 
 ## Attenzione
 
-- Parole decise da Giorgio il 22 ottobre: «ultrasuono focalizzato direzionale» al posto di «cavitazione», e al posto di «LED» ho scritto «low laser» come sul sito: da confermare con Giorgio.
+- Parole decise da Giorgio: «ultrasuono focalizzato direzionale» al posto di «cavitazione», «low laser» al posto di «LED» (confermato il 23 ottobre).
 - In albanese la scritta è «ULTRATINGULL I FOKUSUAR», senza «direzionale»: da far controllare a Uarda.
 - Il sito conta anche il Micropulse; qui sono quattro tecnologie perché il Micropulse è una vibrazione che rende il massaggio confortevole, non una tecnologia a sé. Da allineare.
 
