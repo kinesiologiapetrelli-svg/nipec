@@ -1,0 +1,24 @@
+REEL FORMAZIONE — NIPEC x DEMETRA (workshop del 26 ottobre 2026)
+=================================================================
+Un reel di 24 secondi, verticale 1080 x 1920, per Instagram. Fa vedere la formazione: in cabina e in diretta.
+
+I FILE
+  fai-reel.py             monta il reel (ffmpeg): stacchi, zoom lento sulle foto, scritte, bollino, scheda finale
+  sovrapposizioni.mjs     disegna le scritte, il bollino dei due logo e la scheda finale (PNG, Playwright)
+
+FOTO E VIDEO NON STANNO QUI
+Sono persone e clienti vere: non vanno in un repository pubblico. Si passano a mano a fai-reel.py
+(vedi l'inizio del file per i parametri).
+
+LA REGOLA DEI 5 SECONDI
+Nessuno stacco oltre 5 secondi (il piu' lungo e' di 3,5), mai due inquadrature uguali di fila.
+Il logo non compare nei primi 5 secondi: arriva dopo, nel bollino, e poi nella scheda finale.
+
+COSA E' STATO LASCIATO FUORI, E PERCHE'
+  - lo schermo Zoom con nomi e volti delle partecipanti: nessun consenso
+  - il video del viso con la maschera: la cliente e' riconoscibile
+  - l'audio originale: non si sa cosa dice chi parla. Si aggiunge la musica da Instagram
+
+ATTENZIONE
+E' un reel organico. Se un giorno diventa un'inserzione su Meta vanno tolti gli stacchi con la gamba in vista
+(pelle trattata): e' il motivo di rifiuto numero uno.
