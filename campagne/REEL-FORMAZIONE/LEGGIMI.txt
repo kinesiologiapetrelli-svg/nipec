@@ -1,9 +1,10 @@
 REEL FORMAZIONE — NIPEC x DEMETRA (workshop del 26 ottobre 2026)
 =================================================================
-Un reel di 24 secondi, verticale 1080 x 1920, per Instagram. Fa vedere la formazione: in cabina e in diretta.
+Un reel di 26,7 secondi, verticale 1080 x 1920, per Instagram. Fa vedere la formazione: in cabina e in diretta.
 
 I FILE
   fai-reel.py             monta il reel (ffmpeg): stacchi, zoom lento sulle foto, scritte, bollino, scheda finale
+  musica.py               scrive la base musicale (originale, generata da zero: nessun diritto di terzi)
   sovrapposizioni.mjs     disegna le scritte, il bollino dei due logo e la scheda finale (PNG, Playwright)
 
 FOTO E VIDEO NON STANNO QUI
@@ -11,13 +12,21 @@ Sono persone e clienti vere: non vanno in un repository pubblico. Si passano a m
 (vedi l'inizio del file per i parametri).
 
 LA REGOLA DEI 5 SECONDI
-Nessuno stacco oltre 5 secondi (il piu' lungo e' di 3,5), mai due inquadrature uguali di fila.
+Nessuno stacco oltre 5 secondi (il piu' lungo e' di 4,5: la scheda finale), mai due inquadrature uguali di fila.
 Il logo non compare nei primi 5 secondi: arriva dopo, nel bollino, e poi nella scheda finale.
 
 COSA E' STATO LASCIATO FUORI, E PERCHE'
   - lo schermo Zoom con nomi e volti delle partecipanti: nessun consenso
   - il video del viso con la maschera: la cliente e' riconoscibile
-  - l'audio originale: non si sa cosa dice chi parla. Si aggiunge la musica da Instagram
+  - l'audio originale: non si sa cosa dice chi parla. Sotto c'e' la base musicale di musica.py
+
+LA VOCE DEL LETTORE
+Il finale e' rallentato (gli ultimi stacchi piu' lunghi, scheda finale di 4,5 secondi) per lasciare spazio alla voce.
+Si passa la registrazione come quinto parametro di fai-reel.py (sesto: secondi di attacco, di solito 0,4):
+la voce viene portata a un livello uniforme e la musica si abbassa da sola quando parla.
+
+LE PAROLE
+Si dice «dispositivo», non «macchina». Sotto DEMETRA si scrive «Synergia» (con la Y), non «360° Transformation».
 
 ATTENZIONE
 E' un reel organico. Se un giorno diventa un'inserzione su Meta vanno tolti gli stacchi con la gamba in vista

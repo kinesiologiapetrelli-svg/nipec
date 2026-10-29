@@ -28,14 +28,14 @@ body{position:relative;font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
 
 // Le scritte: fascia blu profondo, bianco, Archivo grassetto. Nella fascia sicura (niente nei primi 250 px e negli ultimi 340).
 const TESTI = {
-  t1: { y: 1010, size: 70, righe: ['Chi ti insegna a usare', 'la macchina…'] },
-  t2: { y: 1010, size: 70, righe: ['…dopo che l’hai presa?'] },
-  t3: { y: 1330, size: 56, righe: ['Noi. In cabina,', 'con la macchina in mano.'] },
+  t1: { y: 1010, size: 70, righe: ['Chi ti insegna a usare', 'il dispositivo…'] },
+  t2: { y: 1010, size: 70, righe: ['…dopo che l’hai preso?'] },
+  t3: { y: 1330, size: 56, righe: ['Noi. In cabina,', 'con il dispositivo in mano.'] },
   t4: { y: 1330, size: 56, righe: ['E davanti a una telecamera,', 'in diretta.'] },
   t5: { y: 1330, size: 56, righe: ['Workshop DEMETRA,', '26 ottobre.'] },
   t6: { y: 1330, size: 56, righe: ['Gesto per gesto.'] },
   t7: { y: 1330, size: 56, righe: ['Formazione a tappe.', 'Esame finale. Certificato.'] },
-  t8: { y: 1330, size: 56, righe: ['Non vendiamo macchine.', 'Costruiamo sistemi di lavoro.'] },
+  t8: { y: 1330, size: 56, righe: ['Non vendiamo dispositivi.', 'Costruiamo sistemi di lavoro.'] },
 };
 
 const browser = await chromium.launch({ args: ['--no-sandbox'] });
@@ -80,9 +80,9 @@ await salva(`<style>${BASE}
 <div class="c">
  <div class="nipec">${LOGO_NEG}</div>
  <div class="x">×</div>
- <div class="dem"><img src="${DEMETRA_EMBL}"><b>DEMETRA</b><s>360° TRANSFORMATION</s></div>
+ <div class="dem"><img src="${DEMETRA_EMBL}"><b>DEMETRA</b><s>SYNERGIA</s></div>
  <div class="f"></div>
- <div class="inv">Vuoi vederla dal vivo?<br>Scrivici.</div>
+ <div class="inv">Vuoi vederlo dal vivo?<br>Scrivici.</div>
  <div class="con">WhatsApp 351 846 6025<br>www.nipecestetica.eu</div>
 </div>`, 'fine', false);
 
