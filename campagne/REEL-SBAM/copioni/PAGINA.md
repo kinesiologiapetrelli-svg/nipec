@@ -1,6 +1,6 @@
-# Le sei didascalie della pagina
+# Le dodici didascalie della pagina
 
-Per i reel della serie B. Non sono inserzioni: nessun prezzo, nessuna parola chiave. Ordine consigliato: P1, P5, P2, P3, P4, P6.
+Per i reel della serie B. Non sono inserzioni: nessuna parola chiave. Nell'ordine di uscita consigliato (i primi sei sono le sei pubblicazioni che sbloccano la sponsorizzazione).
 
 ## P1 · Fermo. Non firmare.
 
@@ -8,7 +8,7 @@ Per i reel della serie B. Non sono inserzioni: nessun prezzo, nessuna parola chi
 
 **Didascalia:**
 
-> Prima di comprare un laser, fatti tre domande: chi ti insegna a usarlo, cosa succede se si ferma, quanto ti costa uscirne. Salva questo reel per il giorno in cui scegli.
+> Prima di comprare un laser, fatti tre domande: chi ti insegna a usarlo, cosa succede se si ferma, quanto costa uscirne. Salva questo reel per il giorno in cui scegli.
 
 ## P5 · Falso
 
@@ -16,7 +16,7 @@ Per i reel della serie B. Non sono inserzioni: nessun prezzo, nessuna parola chi
 
 **Didascalia:**
 
-> Due falsi miti sul laser, due timbri. Il dispositivo è metà del lavoro: l'altra metà è chi te lo insegna. Salvalo e mandalo a una collega.
+> Due falsi miti sul laser, due timbri. Il dispositivo è metà del lavoro: l'altra metà è chi ti insegna. Salvalo e mandalo a una collega.
 
 ## P2 · Sotto il telo
 
@@ -40,7 +40,7 @@ Per i reel della serie B. Non sono inserzioni: nessun prezzo, nessuna parola chi
 
 **Didascalia:**
 
-> Cosa arriva insieme a un dispositivo NIPEC: il protocollo, la scheda di cabina, la formazione. E un numero di telefono, quello di Giorgio. Scrivici su WhatsApp: +39 351 846 6025.
+> Cosa arriva insieme a un dispositivo NIPEC: il protocollo, la scheda di cabina, la formazione. E un numero di telefono, quello di Giorgio. Chiama o scrivi su WhatsApp: +39 351 846 6025.
 
 ## P6 · Cinque secondi
 
@@ -49,3 +49,51 @@ Per i reel della serie B. Non sono inserzioni: nessun prezzo, nessuna parola chi
 **Didascalia:**
 
 > Cinque secondi per fermare un dito, cinque secondi per ogni stacco. La nostra regola per i reel: provala sul prossimo. Salvalo.
+
+## P12 · Tre cose che non ti diremo
+
+**Video:** il reel P12, montato. Copione: `p12-pagina-tre-cose-che-non-ti-diremo.md`
+
+**Didascalia:**
+
+> Tre cose che non ti diremo: quanto guadagnerai, che il dispositivo fa tutto da solo, che devi firmare un vincolo. Il resto te lo diciamo volentieri.
+
+## P9 · Cinque risposte
+
+**Video:** il reel P9, montato. Copione: `p9-pagina-cinque-risposte.md`
+
+**Didascalia:**
+
+> Cinque domande da fare prima di scegliere un laser, cinque risposte da un respiro: chi ti insegna, se si ferma, chi risponde, i vincoli, il protocollo. Altre domande? Chiedile nei commenti.
+
+## P7 · Rispondo io
+
+**Video:** il reel P7, montato. Copione: `p7-pagina-rispondo-io.md`
+
+**Didascalia:**
+
+> Quando scrivi a NIPEC risponde una persona: Giorgio per l'Italia, Uarda per l'Albania. Chiama o scrivi su WhatsApp: +39 351 846 6025.
+
+## P8 · Cosa manca?
+
+**Video:** il reel P8, montato. Copione: `p8-pagina-cosa-manca.md`
+
+**Didascalia:**
+
+> Cosa manca in questa cabina? Il dispositivo c'è, ma senza metodo resta un dispositivo. Dimmi nei commenti cosa manca nella tua.
+
+## P10 · Il rumore
+
+**Video:** il reel P10, montato. Copione: `p10-pagina-il-rumore.md`
+
+**Didascalia:**
+
+> Un laser fermo non fa rumore. Un laser che lavora sì: ci piace sentirlo. Se si ferma, da noi in 48 ore ne hai un altro. Mandalo a chi ha un laser fermo.
+
+## P11 · La polvere
+
+**Video:** il reel P11, montato. Copione: `p11-pagina-la-polvere.md`
+
+**Didascalia:**
+
+> Quanti dispositivi hai visto finire in un angolo? Non perché non funzionano: perché nessuno ha scritto il metodo. Noi lo portiamo con il protocollo. Mandalo a chi ha un angolo così.

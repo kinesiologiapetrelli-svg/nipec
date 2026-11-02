@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stampa DODICI-REEL-SBAM.pdf dagli stessi dati dei copioni (reel_sbam_dati.py): i due non possono dire cose diverse.
+"""Stampa VENTIQUATTRO-REEL-SBAM.pdf dagli stessi dati dei copioni (reel_sbam_dati.py): i due non possono dire cose diverse.
 
 Uso:  python3 fai-documento.py
 """
@@ -7,8 +7,8 @@ import html, os, subprocess
 import reel_sbam_dati as D
 
 QUI = os.path.dirname(os.path.abspath(__file__))
-H = os.path.join(QUI, 'dodici-reel-sbam.html')
-PDF = os.path.join(QUI, 'DODICI-REEL-SBAM.pdf')
+H = os.path.join(QUI, 'ventiquattro-reel-sbam.html')
+PDF = os.path.join(QUI, 'VENTIQUATTRO-REEL-SBAM.pdf')
 CHROME = next(p for p in ('/opt/pw-browsers/chromium-1243/chrome-linux64/chrome', '/opt/pw-browsers/chromium-1194/chrome-linux/chrome') if os.path.exists(p))
 FONT = os.path.join(QUI, '..', 'REEL-500', 'caratteri', 'archivo.woff2')
 
@@ -39,18 +39,26 @@ def reel(c):
                      + '<br>'.join(e(x) for x in testo.split('\n')) + '</td></tr>')
     else:
         righe.append(f'<tr><td class="ad" colspan="7"><b>Didascalia.</b> {e(r["didascalia"])}</td></tr>')
+    righe.append(f'<tr><td class="cb" colspan="7"><b>Cosa è cambiato.</b> {e(r["cambi"])}</td></tr>')
+    alb = ''
+    if r['serie'] == 'A':
+        rr = ''.join(f'<tr><td class="c">{k}</td><td>{e(p) if p else "<span class=fab>(në heshtje)</span>"}</td><td>{("<span class=schermo>" + e(sc) + "</span>") if sc else "<span class=fab>—</span>"}</td></tr>'
+                     for k, (p, sc) in enumerate(r['albanese'], 1))
+        alb = (f'<table class="alb"><tr><th style="width:3%">#</th><th>Versione albanese (bozza, da far controllare a Uarda)</th><th style="width:38%">Scritta</th></tr>{rr}</table>')
     return (f'<div class="reel">\n  <div class="cima"><span class="n3">{c} · {"adv " + r["campagna"] if r["serie"] == "A" else "pagina"} · {D.fmt(fine)}″ + 2″</span>'
-            f'<span class="tt">{e(r["titolo"])}</span></div>\n  <p class="conc"><b>Il colpo.</b> {e(r["concetto"])} <span class="chi">Parla: {e(r["chi"])}.</span></p>\n'
-            f'  <table class="stacchi">\n    ' + '\n    '.join(righe) + '\n  </table>\n</div>\n')
+            f'<span class="tt">{e(r["titolo"])}</span></div>\n  <p class="conc"><b>Il colpo.</b> {e(r["concetto"])} <span class="chi">Parla: {e(r["chi"])}. Copertina: {e(r["copertina"])}</span></p>\n'
+            f'  <table class="stacchi">\n    ' + '\n    '.join(righe) + f'\n  </table>\n  {alb}\n</div>\n')
 
-indice = ''.join(f'<tr><td class="c"><b>{c}</b></td><td>{"adv · " + D.R[c]["campagna"] if D.R[c]["serie"] == "A" else "pagina"}</td><td><b>{e(D.R[c]["titolo"])}</b></td>'
-                 f'<td>{e(D.COLPO[c])}</td><td class="c">{D.fmt(D.fine(c))}″</td></tr>' for c in D.CODICI)
-sbam = ''.join(f'<li><b>{e(k)}.</b> {e(v)}</li>' for k, v in D.SBAM)
-ordine = ''.join(f'<li><b>{e(k)}.</b> {e(v)}</li>' for k, v in D.ORDINE)
-albania = ''.join(f'<li><b>{e(k)}.</b> {e(v)}</li>' for k, v in D.ALBANIA)
+def sezione(codici): return ''.join(reel(c) for c in codici)
+def tab(codici):
+    return ''.join(f'<tr><td class="c"><b>{c}</b></td><td><b>{e(D.R[c]["titolo"])}</b></td><td>{e(D.COLPO[c])}</td><td class="c">{D.fmt(D.fine(c))}″</td></tr>' for c in codici)
+def lista(v): return ''.join(f'<li><b>{e(k)}.</b> {e(t)}</li>' for k, t in v)
+
+regole = ''.join(f'<li>{e(x)}</li>' for x in D.REGOLE)
+decisioni = ''.join(f'<li><b>{e(d)}.</b> {e(x)}</li>' for d, x in D.DECISIONI)
 
 doc = f'''<!doctype html>
-<html lang="it"><head><meta charset="utf-8"><title>Dodici reel SBAM · NIPEC</title>
+<html lang="it"><head><meta charset="utf-8"><title>Ventiquattro reel SBAM · NIPEC</title>
 <style>
 @font-face{{font-family:"Archivo";src:url("{FONT}") format("woff2");font-weight:400 700}}
 :root{{--blu:#1C6EA4;--navy:#123A63;--velo:#E8F0F7;--ink:#17222E;--ink2:#44535F;--grigio:#8E9295;--riga:#D9E2E9;--rosso:#9C3A28;--rosso-velo:#FAEAE6;--giallo-velo:#F8EFDB;--giallo:#6B4A05;--verde:#1B6E52;--verde-velo:#E2F1EA}}
@@ -70,47 +78,56 @@ td.c{{text-align:center}}
 .box.rosso{{border-left-color:var(--rosso);background:var(--rosso-velo)}}
 .box .eti{{font-size:7.6pt;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blu);display:block;margin-bottom:3px}}
 .box.rosso .eti{{color:var(--rosso)}} .box ul{{margin:0}} .box li:last-child{{margin-bottom:0}}
-.reel{{page-break-inside:avoid;margin:0 0 14px;border:1px solid var(--riga);border-radius:3px}}
+.reel{{margin:0;page-break-after:always;border:1px solid var(--riga);border-radius:3px}}
 .cima{{display:flex;align-items:baseline;gap:12px;background:var(--velo);padding:6px 10px;border-bottom:1px solid var(--riga)}}
 .n3{{font-size:7.6pt;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blu);white-space:nowrap}}
 .tt{{font-size:12pt;font-weight:700;color:var(--navy)}}
-.conc{{padding:6px 10px 0;margin:0;font-size:8.8pt}} .chi{{color:var(--grigio)}}
-.reel table{{margin:4px 0 0;font-size:9.2pt}} .reel td{{padding:6px 7px}} .reel th{{background:#EAF2FA;color:var(--navy)}}
-.reel{{page-break-after:always;margin:0}} .reel .conc{{font-size:9.6pt;padding:9px 12px 4px}}
+.conc{{padding:7px 12px 3px;margin:0;font-size:9pt}} .chi{{color:var(--grigio)}}
+.reel table{{margin:4px 0 0;font-size:8.2pt}} .reel td{{padding:3.5px 6px}} .reel th{{background:#EAF2FA;color:var(--navy)}}
 .stacchi td.c{{font-weight:700;color:var(--navy)}}
 .sec{{font-weight:700;color:var(--navy);white-space:nowrap}} .fab{{color:var(--grigio)}}
 .parla{{font-weight:600}}
-.schermo{{display:inline-block;margin:1px 0;font-size:7.8pt;font-weight:700;background:var(--navy);color:#fff;padding:2px 5px;border-radius:2px}}
+.schermo{{display:inline-block;margin:1px 0;font-size:7.6pt;font-weight:700;background:var(--navy);color:#fff;padding:2px 5px;border-radius:2px}}
 .sbam{{color:var(--rosso);font-weight:700}}
 .stacchi tr.gancio td{{background:var(--verde-velo);color:var(--verde);font-size:7.2pt;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;text-align:center}}
 .stacchi td.ser{{background:#FBFDFE;color:var(--ink2)}} .stacchi td.att{{background:var(--giallo-velo);color:var(--giallo)}} .stacchi td.ad{{background:var(--velo);color:var(--ink)}}
+.stacchi td.cb{{background:#F4F6F8;color:var(--ink2);font-size:8.2pt}}
+table.alb{{margin:5px 0 6px;page-break-inside:avoid}} table.alb td{{font-size:7.8pt;padding:2px 6px}} table.alb th{{padding:3px 6px}}
 </style></head><body>
-<h1>Dodici reel SBAM</h1>
-<p class="sotto">Sei per le inserzioni (laser e Afrodite), sei per la pagina · stacco per stacco · regola dei 5 secondi</p>
-<p class="rev">NIPEC · 2 novembre 2026 · Giorgio Petrelli</p>
+<h1>Ventiquattro reel SBAM</h1>
+<p class="sotto">Dodici per le inserzioni (laser e Afrodite), dodici per la pagina · stacco per stacco · regola dei 5 secondi</p>
+<p class="rev">NIPEC · 2 novembre 2026 · seconda stesura · Giorgio Petrelli</p>
 
 <div class="box"><span class="eti">La regola dei 5 secondi, e la terza cosa</span>
 <ul><li><b>1. I primi 5 secondi</b> contengono il vantaggio intero.</li>
 <li><b>2. Nessuno stacco dura più di 5 secondi.</b> Dopo, si cambia stacco <b>e</b> inquadratura. Mai due inquadrature uguali di fila.</li>
 <li><b>3. SBAM.</b> In ogni reel c'è un colpo o una sorpresa entro i primi 3 secondi: è quello che ferma il dito.</li></ul></div>
 
-<h2>I dodici reel</h2>
-<table><tr><th style="width:5%">Codice</th><th style="width:15%">Serie</th><th style="width:26%">Titolo</th><th>Il colpo</th><th style="width:7%">Dura</th></tr>{indice}</table>
-
-<div class="box rosso"><span class="eti">Parole che non si usano</span>
-«Macchina» (si dice <b>dispositivo</b>), «LED» (<b>low laser</b>), «cavitazione» (<b>ultrasuono focalizzato direzionale</b>), percentuali, prima/dopo, il modello del laser, diodi, watt. Nessun volto senza consenso.</div>
-
-<h2>Come si fa lo SBAM</h2><ul>{sbam}</ul>
-<h2>Ordine di uscita (proposta)</h2><ul>{ordine}</ul>
-<h2>Per l'Albania</h2><ul>{albania}</ul>
+<h2>Le regole applicate a tutti e ventiquattro</h2><ul>{regole}</ul>
+<h2>Cosa ha deciso Giorgio</h2><ul>{decisioni}</ul>
 
 <h2>Serie A · adv · laser</h2>
-{''.join(reel(c) for c in ('L1', 'L2', 'L3'))}
+<table><tr><th style="width:5%">Codice</th><th style="width:27%">Titolo</th><th>Il colpo</th><th style="width:7%">Dura</th></tr>{tab(D.LASER)}</table>
+<h2>Serie A · adv · Afrodite (Italia e Albania)</h2>
+<table><tr><th style="width:5%">Codice</th><th style="width:27%">Titolo</th><th>Il colpo</th><th style="width:7%">Dura</th></tr>{tab(D.AFRO)}</table>
+<h2>Serie B · la pagina, nell'ordine di uscita</h2>
+<table><tr><th style="width:5%">Codice</th><th style="width:27%">Titolo</th><th>Il colpo</th><th style="width:7%">Dura</th></tr>{tab(D.PAGINA)}</table>
+
+<div class="box rosso"><span class="eti">Parole che non si usano</span>
+«Macchina» (si dice <b>dispositivo</b>), «LED» (<b>low laser</b>), «cavitazione» (<b>ultrasuono focalizzato direzionale</b>), percentuali, prima/dopo, il modello del laser, diodi, watt, imperativi in -ci. Nessun volto senza consenso.</div>
+
+<h2>Come si fa lo SBAM</h2><ul>{lista(D.SBAM)}</ul>
+<h2>Ordine di uscita (proposta)</h2><ul>{lista(D.ORDINE)}</ul>
+<h2>Per l'Albania</h2><ul>{lista(D.ALBANIA)}</ul>
+<div style="page-break-after:always"></div>
+
+<h2>Serie A · adv · laser</h2>
+{sezione(D.LASER)}
 <h2>Serie A · adv · Afrodite</h2>
-{''.join(reel(c) for c in ('F1', 'F2', 'F3'))}
+{sezione(D.AFRO)}
 <h2>Serie B · la pagina</h2>
-<p>Non sono inserzioni: nessun prezzo, nessuna parola chiave. Servono a far fermare il dito e a far ricordare chi siamo. Sei reel sono le sei pubblicazioni che la pagina deve avere prima di poter sponsorizzare.</p>
-{''.join(reel(c) for c in ('P1', 'P5', 'P2', 'P3', 'P4', 'P6'))}
+<p>Non sono inserzioni: nessuna parola chiave. Servono a far fermare il dito e a far ricordare chi siamo. I primi sei sono le sei pubblicazioni che la pagina deve avere prima di poter sponsorizzare.</p>
+{sezione(D.PAGINA)}
 </body></html>
 '''
 open(H, 'w', encoding='utf8').write(doc)
