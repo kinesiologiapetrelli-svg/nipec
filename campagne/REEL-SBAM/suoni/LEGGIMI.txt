@@ -1,0 +1,20 @@
+SUONI DEI REEL SBAM — scritti da zero, senza diritti di nessuno
+===============================================================
+Li genera fai-suoni.py (non c'e' nessun brano o campione di altri). Si possono usare ovunque, anche nelle inserzioni.
+
+  sbam.wav          0,9 s   il colpo pieno. Quando il suono vero non si sente bene, o per rinforzarlo.
+  sbam-leggero.wav  0,5 s   il colpo piccolo: il «secondo SBAM leggero» di P4 e P6.
+  colpo.wav         0,3 s   un colpo secco e breve, per le serie a ritmo: F2 (x4, uno ogni 0,7 s), L6 (x3, uno ogni 0,8 s), F5 (x10, accelerando).
+  tic.wav           0,15 s  il tic dell'orologio: il «tic, tic, tic» del conto alla rovescia di P2.
+  battito.wav       1,0 s   il battito basso («lub-dub») dell'apertura di P2.
+
+COME SI USANO
+- Il colpo entra sul fotogramma esatto in cui la mano batte, il timbro cala, il telo vola via. Se il suono vero c'e', si mette sotto questo, non al posto.
+- Dopo il colpo: mezzo secondo di silenzio, poi la voce. La musica si ferma 0,2 s prima del colpo e riparte subito dopo.
+- Livello: il colpo pieno, circa 3 dB sopra il picco della voce. Il colpo leggero, circa 3 dB sotto quello pieno.
+- Si sentono anche da un telefono: hanno un «toc» nelle frequenze medie, non solo il tonfo grave che l'altoparlante non riproduce.
+- Per le serie (colpo.wav): ogni colpo si ripete sullo stesso fotogramma dell'appoggio; se suona troppo uguale, si abbassa di 1-2 dB ogni due.
+
+ATTENZIONE
+Sono scritti al computer e controllati con misure (picco, livello, frequenze), ma chi li ha scritti non li ha ascoltati: la prima volta si ascoltano
+con le cuffie e con l'altoparlante del telefono, e se non vanno bene si dice, si cambia il carattere e si rifanno (fai-suoni.py).
