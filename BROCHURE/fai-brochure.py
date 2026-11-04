@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
-"""Le brochure NIPEC: Uriel, Ares, Afrodite, Hermes. A4, quattro pagine ciascuna, nello stile del sito www.nipecestetica.eu.
+"""Le brochure NIPEC: Uriel, Ares, Afrodite, Hermes, in quattro lingue (IT, SQ, EN, ES). A4, quattro pagine ciascuna, nello stile del sito www.nipecestetica.eu.
 
-I testi vengono dal sito (SITO/pubblica: laser-ares, laser-uriel, afrodite, metodo, formazione) e, per Hermes, dal depliant e dal manuale d'uso
-del produttore (ERMES Slim, Drive). Niente prezzi. Si dice «dispositivo», non «macchina».
+I testi stanno tutti in testi.py (una struttura sola, quattro lingue: controlla() si ferma se una lingua ha una riga in meno).
+Vengono dal sito (SITO/pubblica: laser-ares, laser-uriel, afrodite, metodo, formazione) e, per Hermes, dal depliant e dal manuale d'uso
+del produttore (ERMES Slim, Drive). Niente prezzi. Si dice «dispositivo», non «macchina». L'albanese e' una bozza: la controlla Uarda.
 
-Uso:  python3 fai-brochure.py
+Uso:  python3 fai-brochure.py            # tutte e 16
+      python3 fai-brochure.py EN ES      # solo alcune lingue
+Esce:  BROCHURE-<DISPOSITIVO>-<LINGUA>.pdf  e, in sorgenti/, l'HTML da cui nasce.
 """
-import html, os, re, subprocess
+import html, os, re, subprocess, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import testi
 
 QUI = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(QUI)
@@ -14,7 +19,8 @@ CHROME = next(p for p in ('/opt/pw-browsers/chromium-1243/chrome-linux64/chrome'
 FONT = os.path.join(REPO, 'SITO', 'pubblica', 'caratteri', 'archivo.woff2')
 IMG = os.path.join(REPO, 'SITO', 'pubblica', 'immagini')
 FOTO = os.path.join(REPO, 'schede', 'LASER', 'foto')
-EDIZIONE = 'novembre 2026'
+SORG = os.path.join(QUI, 'sorgenti')
+os.makedirs(SORG, exist_ok=True)
 
 def esc(t): return html.escape(t, quote=False)
 
@@ -91,7 +97,7 @@ tr:nth-child(even) td{background:#FAFCFE}
 .contatti .eyebrow{margin-bottom:1.5mm}
 .contatti p{margin-bottom:1mm;color:var(--testo)}
 .contatti b{color:var(--ink);font-weight:600}
-.firma{position:absolute;left:0;right:0;bottom:0;background:var(--scuro);color:#9FB4CB;padding:5mm 15mm 7mm;font-size:7.6pt;display:flex;justify-content:space-between;gap:6mm}
+.firma{position:absolute;left:0;right:0;bottom:0;background:var(--scuro);color:#9FB4CB;padding:4.5mm 15mm 6mm;font-size:7.6pt;display:flex;justify-content:space-between;gap:6mm}
 .firma .logo{height:8mm;width:auto}
 .nota{font-size:7.8pt;color:#7B8A9A}
 .tappe{display:grid;grid-template-columns:repeat(5,1fr);gap:4mm;margin-top:8mm}
@@ -102,236 +108,191 @@ tr:nth-child(even) td{background:#FAFCFE}
 .chip{display:inline-block;background:var(--velo2);color:var(--navy);border-radius:20px;padding:1.5mm 4mm;margin:0 1.5mm 2mm 0;font-size:8.8pt;font-weight:500}
 .grande{font-size:26pt;font-weight:700;color:var(--blu);letter-spacing:-.02em;line-height:1}
 .red{border-color:#E7C7C0;background:#FBF1EF}
+.ult{display:flex;flex-direction:column}
+.ult .p4{flex:1;display:flex;flex-direction:column;margin-bottom:21mm}
+.p4 .passi{gap:5mm 7mm}
+.p4 .passo p{font-size:8.6pt;line-height:1.5;margin-bottom:1.3mm}
+.p4 .passo li{font-size:8.2pt}
+.p4 .tappa p{font-size:8pt;line-height:1.42}
+.p4 .cta{padding:6mm 8mm}
+.p4 .cta h2{font-size:15.5pt}
+.p4 .contatti{margin-top:auto}
 '''
 
-CONTATTI = '''<div class="contatti">
-<div><div class="eyebrow">Scrivici</div><p><b>WhatsApp +39 351 846 6025</b></p><p>Numero verde 800 141 726</p><p>info@nipecestetica.com</p></div>
-<div><div class="eyebrow">Dove siamo</div><p>Via Rovetta 29, 25080 Padenghe sul Garda (BS)</p><p>Rruga Donika Kastrioti 3, Tiranë · +355 69 212 9786</p></div>
-<div><div class="eyebrow">Online</div><p><b>www.nipecestetica.eu</b></p><p>Il metodo · La formazione · Il catalogo</p></div>
-</div>'''
+def foto_rel(percorso_repo):
+    """Percorso dell'immagine visto dalla cartella sorgenti/ (dove sta l'HTML)."""
+    return os.path.relpath(os.path.join(REPO, percorso_repo), SORG)
 
-PASSI = [
-    ('Analisi', "Prima di parlare di dispositivi guardiamo il tuo centro: chi sono le clienti, quante cabine hai, quanto costa un'ora di lavoro, cosa vendi già.",
-     ['Questionario e visita (o videochiamata)', 'Lettura di listino e agenda', 'Dove sta il margine che oggi perdi']),
-    ('Progettazione', "Scegliamo insieme la tecnologia giusta e costruiamo il trattamento intorno: prezzi, pacchetti, durata delle sedute, formula di acquisto.",
-     ['Dispositivo e configurazione', 'Listino trattamenti e pacchetti', 'Vendita o noleggio, con i numeri sul tavolo']),
-    ('Formazione', "Consegna pratica in cabina e un percorso a tappe che finisce con un esame. L'operatrice esce con un certificato valido 12 mesi.",
-     ['Giorno 0 in cabina, +7 richiamo, +21 online', 'Esame a +45 giorni', 'Protocolli e card delle regole, in italiano e albanese']),
-    ('Supporto continuo', "Dopo la consegna restiamo. Un referente unico per il tuo centro, assistenza diretta e un controllo mensile per prevenire il fermo del dispositivo.",
-     ['Videochiamata mensile di 10 minuti', 'Sostituzione pezzi e logistica', 'Campagna marketing di avvio']),
-]
+# ---- i dispositivi: quello che non cambia con la lingua (foto, misure, nomi brevi, nome del file) ----
+DISP = dict(
+    ares=dict(breve='Ares', file='ARES', foto='SITO/pubblica/immagini/e493bbb796de.jpg', altezza=124, img_h=112),
+    uriel=dict(breve='Uriel', file='URIEL', foto='schede/LASER/foto/uriel-2026.jpg', altezza=124, img_h=112),
+    afrodite=dict(breve='Afrodite', file='AFRODITE', foto='SITO/pubblica/immagini/741b069dc662.jpg', altezza=124, img_h=118, img_w=100),
+    hermes=dict(breve='Hermes', file='HERMES', altezza=124),
+)
 
-def testa(nome): return f'<div class="testa">{LOGO}<span class="et">Brochure · {nome} · edizione {EDIZIONE}</span></div>'
-def piede(nome, n): return f'<div class="piede"><span>NIPEC · Tecnologie Estetiche — www.nipecestetica.eu</span><span>{nome} · {n}/4</span></div>'
+def contatti(u):
+    c = u['contatti']
+    return (f'<div class="contatti">'
+            f'<div><div class="eyebrow">{esc(c["c1"])}</div><p><b>{esc(u["wa"])}</b></p><p>{esc(c["verde"])}</p><p>info@nipecestetica.com</p></div>'
+            f'<div><div class="eyebrow">{esc(c["c2"])}</div><p>Via Rovetta 29, 25080 Padenghe sul Garda (BS)</p><p>Rruga Donika Kastrioti 3, Tiranë · <span style="white-space:nowrap">+355 69 212 9786</span></p></div>'
+            f'<div><div class="eyebrow">{esc(c["c3"])}</div><p><b>www.nipecestetica.eu</b></p><p>{esc(c["sito2"])}</p></div></div>')
 
-def pagina(nome, n, corpo, intesta=True, con_piede=True):
-    return f'<section class="page">{testa(nome) if intesta else ""}{corpo}{piede(nome, n) if con_piede else ""}</section>'
+def testa(u, nome): return f'<div class="testa">{LOGO}<span class="et">{esc(u["testa"].format(nome=nome))}</span></div>'
+def piede(u, nome, n): return f'<div class="piede"><span>NIPEC · {esc(u["marchio"])} — www.nipecestetica.eu</span><span>{nome} · {n}/4</span></div>'
+
+def pagina(u, nome, n, corpo, intesta=True, con_piede=True, classe=''):
+    return f'<section class="page{classe}">{testa(u, nome) if intesta else ""}{corpo}{piede(u, nome, n) if con_piede else ""}</section>'
 
 def pill(lista): return '<div class="pills">' + ''.join(f'<span class="pill">{esc(x)}</span>' for x in lista) + '</div>'
 
-def copertina(d):
-    foto = d.get('foto')
-    cornice = (f'<div class="foto" style="height:{d.get("altezza", 108)}mm;margin-top:7mm"><img src="{foto}" style="max-height:{d.get("img_h", 92)}mm;max-width:{d.get("img_w", 120)}mm"></div>'
-               if foto else f'<div class="foto" style="height:{d.get("altezza", 108)}mm;margin-top:7mm;background:var(--navy)">{d["grafica"]}</div>')
-    sotto = f'<small>{esc(d["sotto"])}</small>' if d.get('sotto') else ''
-    corpo = (f'<div class="eyebrow">{esc(d["eyebrow"])}</div><h1>{esc(d["nome"])}{sotto}</h1>'
-             f'<div class="lead">{d["lead"]}</div><p style="max-width:165mm;font-size:10.4pt;line-height:1.6">{esc(d["intro"])}</p>{pill(d["pill"])}{cornice}'
-             f'<div class="banda"><div class="frase">Non vendiamo dispositivi.<br>Costruiamo sistemi di lavoro.</div>'
-             f'<div class="sito"><b>www.nipecestetica.eu</b><br>WhatsApp +39 351 846 6025</div></div>')
-    return corpo
+def copertina(u, t, dp, grafica=None):
+    if 'foto' in dp:
+        cornice = (f'<div class="foto" style="height:{dp["altezza"]}mm;margin-top:7mm"><img src="{foto_rel(dp["foto"])}" '
+                   f'style="max-height:{dp["img_h"]}mm;max-width:{dp.get("img_w", 120)}mm"></div>')
+    else:
+        cornice = f'<div class="foto" style="height:{dp["altezza"]}mm;margin-top:7mm;background:var(--navy)">{grafica}</div>'
+    sotto = f'<small>{esc(t["sotto"])}</small>' if t.get('sotto') else ''
+    return (f'<div class="eyebrow">{esc(t["eyebrow"])}</div><h1>{esc(t["nome"])}{sotto}</h1>'
+            f'<div class="lead">{t["lead"]}</div><p style="max-width:165mm;font-size:10.4pt;line-height:1.6">{esc(t["intro"])}</p>{pill(t["pill"])}{cornice}'
+            f'<div class="banda"><div class="frase">{"<br>".join(esc(x) for x in u["banda"])}</div>'
+            f'<div class="sito"><b>www.nipecestetica.eu</b><br>{esc(u["wa"])}</div></div>')
 
 def tabella(righe, intestazioni):
     th = ''.join(f'<th>{esc(h)}</th>' for h in intestazioni)
     tr = ''.join('<tr>' + ''.join(f'<td>{c if i else esc(c)}</td>' for i, c in enumerate(r)) + '</tr>' for r in righe)
     return f'<table><tr>{th}</tr>{tr}</table>'
 
-def passi():
+def passi(u):
     return ('<div class="passi">' + ''.join(
         f'<div class="passo"><div class="n">{i:02d}</div><div><h3>{esc(t)}</h3><p>{esc(p)}</p><ul>' + ''.join(f'<li>{esc(b)}</li>' for b in bl) + '</ul></div></div>'
-        for i, (t, p, bl) in enumerate(PASSI, 1)) + '</div>')
+        for i, (t, p, bl) in enumerate(u['passi'], 1)) + '</div>')
 
-TAPPE = [('Giorno 0', 'Consegna pratica', 'In cabina, sul dispositivo del centro, con clienti vere.'), ('+7', 'Richiamo', 'Si correggono le abitudini sbagliate della prima settimana.'),
-         ('+21', 'Online', 'Protocolli avanzati e casi reali portati dalle operatrici.'), ('+45', 'Esame', 'Prova pratica e test scritto di 20 domande.'),
-         ('12 mesi', 'Certificato', 'Attestato nominale da esporre in centro. Si rinnova ogni anno.')]
-def percorso():
-    return ('<div class="eyebrow" style="margin-top:9mm">Il percorso di certificazione</div><div class="tappe" style="margin-top:3mm">' +
-            ''.join(f'<div class="tappa"><div class="q">{esc(q)}</div><h3>{esc(t)}</h3><p>{esc(x)}</p></div>' for q, t, x in TAPPE) + '</div>')
+def percorso(u):
+    return (f'<div class="eyebrow" style="margin-top:8mm">{esc(u["percorso_eyebrow"])}</div><div class="tappe" style="margin-top:3mm">' +
+            ''.join(f'<div class="tappa"><div class="q">{esc(q)}</div><h3>{esc(t)}</h3><p>{esc(x)}</p></div>' for q, t, x in u['tappe']) + '</div>')
 
-def ultima(d, n=4):
-    cta = (f'<div class="cta"><div><h2>{esc(d["cta_t"])}</h2><p>{esc(d["cta_p"])}</p></div><div class="bottone">{esc(d["cta_b"])}</div></div>')
-    corpo = (f'<div class="eyebrow">Il metodo NIPEC</div><h2>Un processo che non si ferma alla consegna.</h2>'
-             f'<p style="max-width:150mm;margin-bottom:7mm">Il dispositivo è l\'inizio. Quello che fa lavorare un centro è quello che viene dopo: i protocolli, l\'operatrice formata, qualcuno che risponde. Per questo lavoriamo in quattro tappe.</p>'
-             f'{passi()}{percorso()}<div style="margin-top:9mm">{cta}</div>{CONTATTI}'
-             f'<div class="firma">{LOGO_NEG}<span>© 2026 NIPEC · Tecnologie Estetiche — PHD System Srl · P. IVA 04696530981<br>Il dispositivo è venduto o noleggiato dopo l\'analisi del centro. Le caratteristiche possono variare con gli aggiornamenti.</span></div>')
-    return pagina(d['nome_breve'], n, corpo, con_piede=False)
+def ultima(u, t, dp, n=4):
+    ct, cp, cb = t['cta']
+    cta = f'<div class="cta"><div><h2>{esc(ct)}</h2><p>{esc(cp)}</p></div><div class="bottone">{esc(cb)}</div></div>'
+    corpo = (f'<div class="p4"><div class="eyebrow">{esc(u["metodo_eyebrow"])}</div><h2>{esc(u["metodo_h2"])}</h2>'
+             f'<p style="max-width:150mm;margin-bottom:7mm">{esc(u["metodo_p"])}</p>'
+             f'{passi(u)}{percorso(u)}<div style="margin-top:8mm;margin-bottom:6mm">{cta}</div>{contatti(u)}</div>'
+             f'<div class="firma">{LOGO_NEG}<span>© 2026 NIPEC · {esc(u["marchio"])} — PHD System Srl · {esc(u["piva"])} 04696530981<br>{esc(u["firma"])}</span></div>')
+    return pagina(u, dp['breve'], n, corpo, con_piede=False, classe=' ult')
+
+def box_certificazione(t):
+    (e1, h1, p1), (e2, h2, p2) = t['c1'], t['c2']
+    return ('<div class="due">'
+            f'<div class="card" style="background:var(--velo2)"><div class="eyebrow">{esc(e1)}</div><h3 style="font-size:13pt">{esc(h1)}</h3><p style="font-size:9pt;margin:0">{esc(p1)}</p></div>'
+            f'<div class="card" style="background:var(--velo2)"><div class="eyebrow">{esc(e2)}</div><h3 style="font-size:13pt">{esc(h2)}</h3><p style="font-size:9pt;margin:0">{esc(p2)}</p></div></div>')
+
+def colonne(voci, classe='col'):
+    return ''.join(f'<div class="{classe}"><h3>{esc(a)}</h3><p>{esc(b)}</p></div>' for a, b in voci)
 
 # =============================== ARES ===============================
-ARES = dict(
-    nome='Laser Ares', nome_breve='Ares', file='ARES', eyebrow='Epilazione laser · Diodo 808 nm',
-    lead='Il laser non ti porta la cliente una volta. <span class="acc">Te la porta dodici.</span>',
-    intro="Ma solo se il dispositivo non si ferma e i parametri sono giusti. Ares è il diodo 808 su cui lavorano già molti centri: 10 diodi, 1500 W, testina in titanio. Nella versione 2026 la telecamera e il software IA ti propongono i parametri, e tu controlli.",
-    pill=['808 nm', '1500 W · 10 diodi', 'CE italiana · MDR', 'Vendita o noleggio'],
-    foto='../SITO/pubblica/immagini/e493bbb796de.jpg', altezza=124, img_h=112,
-    cta_t='Hai già una Ares 2025?', cta_p='Non hai un dispositivo inferiore: hai lo stesso dispositivo con meno aiuti. Valutiamo la permuta verso la 2026.', cta_b='Chiedi una valutazione',
-)
-def ares_pagine():
-    d = ARES; nome = d['nome_breve']
-    p1 = pagina(nome, 1, copertina(d), con_piede=False)
-    p2 = pagina(nome, 2,
-        '<div class="sez"><div class="eyebrow">Due versioni</div><h2>Stesso dispositivo.<br>Cambia chi fa i conti.</h2>'
-        '<p style="max-width:150mm;margin-bottom:5mm">Le due Ares hanno lo stesso motore: stessi diodi, stessi watt, stessa testina. Sulla 2025 imposti tu Joule, millisecondi e Hertz. Sulla 2026 li calcola il software. Chi sa lavorare sulla 2025 impara la 2026 in mezza giornata.</p>'
-        '<div class="due"><div class="card bianca"><div class="eyebrow">Quella che molti hanno già</div><h3 style="font-size:15pt">Ares 2025</h3>'
-        '<div class="foto" style="height:38mm;margin:3mm 0;background:#fff"><img src="../schede/LASER/foto/ares-2025.jpg" style="max-height:36mm"></div>'
-        '<p style="font-size:9pt">Diodo 808, lavoro pieno, comandi a mano. Pannello manuale: Joule, millisecondi, Hertz.</p><ul><li>10 diodi da 100 W · 1500 W</li><li>Niente telecamera, niente IA</li><li>Valutata anche in permuta</li></ul></div>'
-        '<div class="card navy"><div class="eyebrow">Il passo avanti</div><h3 style="font-size:15pt">Ares 2026 · IA</h3>'
-        '<div class="foto" style="height:38mm;margin:3mm 0;background:#fff"><img src="../schede/LASER/foto/ares-2026.jpg" style="max-height:36mm"></div>'
-        '<p style="font-size:9pt;color:#DDE9F5">La telecamera guarda pelle e pelo, il software propone griglia, kJ target e fluenza. Il dispositivo non parte da solo: decidi sempre tu.</p><ul><li>Telecamera integrata e software IA</li><li>Modalità HR / SHR / SHR Stack</li><li>Gestione e alimentazione digitali</li></ul></div></div></div>'
-        '<div class="sez"><div class="eyebrow">In cabina</div><h2>Cosa cambia per te, in pratica.</h2><div class="tre">'
-        '<div class="col"><h3>Il colpo cento è uguale al primo</h3><p>L\'elettronica tiene ferma la corrente ai diodi anche se la rete del negozio balla. La cliente non ti dice più «oggi l\'ho sentito di più».</p></div>'
-        '<div class="col"><h3>L\'operatrice nuova lavora bene dal primo giorno</h3><p>Sulla 2026 il software propone i parametri a partire da quello che vede la telecamera. Tu non devi stare dietro a ogni impostazione.</p></div>'
-        '<div class="col"><h3>La testina non si consuma</h3><p>Il titanio non si opacizza come le altre testine: è il pezzo che di solito si cambia e si paga.</p></div></div></div>')
-    righe = [('Tipo', 'Laser a diodo', 'Laser a diodo'), ('Lunghezza d\'onda', '808 nm', '808 nm'), ('Diodi', '10 da 100 W', '10 da 100 W'), ('Potenza', '1500 W', '1500 W'),
-             ('Emissione', '1–400 ms · macro canale', '1–400 ms · macro canale'), ('Raffreddamento', 'TECH cool con micro chip', 'TECH cool con micro chip'),
-             ('Interfaccia', 'Pannello manuale: J · ms · Hz', 'Display touch digitale'), ('Telecamera e IA', 'No', 'Sì · HR / SHR / SHR Stack'), ('Testina', 'Titanio', 'Titanio'),
-             ('Rete elettrica', 'AC 220 V / 110 V', 'AC 220 V / 110 V'), ('Sicurezza', 'Classe 4 · interlock', 'Classe 4 · interlock'),
-             ('Certificazione', 'CE italiana · MDR', 'CE italiana · MDR'), ('Formato', 'Da banco', 'Da banco')]
-    p3 = pagina(nome, 3,
-        '<div class="sez"><div class="eyebrow">Scheda tecnica</div><h2>I dati ufficiali.</h2>' + tabella(righe, ['Caratteristica', 'Ares 2025', 'Ares 2026 · IA']) + '</div>'
-        '<div class="due"><div class="card" style="background:var(--velo2)"><div class="eyebrow">Certificata in Italia</div><h3 style="font-size:13pt">CE italiana e MDR attivo.</h3>'
-        '<p style="font-size:9pt;margin:0">Non è un dispositivo importato e rimarchiato. Fascicolo tecnico, dichiarazione di conformità e numero di serie sono rintracciabili: se arriva un controllo, c\'è una carta da mostrare con un nome e un indirizzo dietro.</p></div>'
-        '<div class="card" style="background:var(--velo2)"><div class="eyebrow">Laser di classe 4</div><h3 style="font-size:13pt">Un laser vero, trattato come tale.</h3>'
-        '<p style="font-size:9pt;margin:0">Occhiali sempre, chiave e interlock che spegne il dispositivo se qualcosa non è a posto. Lo insegniamo alla consegna e lo verifichiamo all\'esame.</p></div></div>')
-    return [p1, p2, p3, ultima(d)]
+def ares_pagine(u, t):
+    dp = DISP['ares']; nome = dp['breve']; h25, h26 = t['tab_heads'][1], t['tab_heads'][2]
+    p1 = pagina(u, nome, 1, copertina(u, t, dp), con_piede=False)
+    p2 = pagina(u, nome, 2,
+        f'<div class="sez"><div class="eyebrow">{esc(t["due_eyebrow"])}</div><h2>{t["due_h2"]}</h2>'
+        f'<p style="max-width:150mm;margin-bottom:5mm">{esc(t["due_p"])}</p>'
+        f'<div class="due"><div class="card bianca"><div class="eyebrow">{esc(t["v25_eyebrow"])}</div><h3 style="font-size:15pt">{esc(h25)}</h3>'
+        f'<div class="foto" style="height:38mm;margin:3mm 0;background:#fff"><img src="{foto_rel("schede/LASER/foto/ares-2025.jpg")}" style="max-height:36mm"></div>'
+        f'<p style="font-size:9pt">{esc(t["v25_p"])}</p><ul>' + ''.join(f'<li>{esc(x)}</li>' for x in t['v25_ul']) + '</ul></div>'
+        f'<div class="card navy"><div class="eyebrow">{esc(t["v26_eyebrow"])}</div><h3 style="font-size:15pt">{esc(h26)}</h3>'
+        f'<div class="foto" style="height:38mm;margin:3mm 0;background:#fff"><img src="{foto_rel("schede/LASER/foto/ares-2026.jpg")}" style="max-height:36mm"></div>'
+        f'<p style="font-size:9pt;color:#DDE9F5">{esc(t["v26_p"])}</p><ul>' + ''.join(f'<li>{esc(x)}</li>' for x in t['v26_ul']) + '</ul></div></div></div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["cab_eyebrow"])}</div><h2>{esc(t["cab_h2"])}</h2><div class="tre">{colonne(t["cab"])}</div></div>')
+    p3 = pagina(u, nome, 3,
+        f'<div class="sez"><div class="eyebrow">{esc(t["tec_eyebrow"])}</div><h2>{esc(t["tec_h2"])}</h2>' + tabella(t['tab_rows'], t['tab_heads']) + '</div>' + box_certificazione(t))
+    return [p1, p2, p3, ultima(u, t, dp)]
 
 # =============================== URIEL ===============================
-URIEL = dict(
-    nome='Laser Uriel', sotto='2026 · IA', nome_breve='Uriel', file='URIEL', eyebrow='Epilazione laser · Top di gamma',
-    lead='Non dici più di no a nessuno. <span class="acc">E quello che prima rifiutavi, lo fatturi.</span>',
-    intro="Tre lunghezze d'onda sullo stesso manipolo: 755, 808 e 1064 nm. Pelle scura e pelo chiaro, i due casi che di solito si mandano via, qui si lavorano. Fino a 2000 W per fare le zone grandi in meno passaggi.",
-    pill=['755 / 808 / 1064 nm', 'Fino a 2000 W · 16 diodi', 'Telecamera + IA', 'CE italiana · MDR'],
-    foto='../schede/LASER/foto/uriel-2026.jpg', altezza=124, img_h=112,
-    cta_t='Parti con i diodi che ti servono oggi.', cta_p='I diodi si aggiungono quando il centro cresce, senza cambiare dispositivo. Progettiamo la configurazione insieme.', cta_b='Progettiamo la configurazione',
-)
-def uriel_pagine():
-    d = URIEL; nome = d['nome_breve']
-    p1 = pagina(nome, 1, copertina(d), con_piede=False)
-    p2 = pagina(nome, 2,
-        '<div class="sez"><div class="eyebrow">Tre bande, tre clienti</div><h2>Un solo manipolo<br>per ogni pelle.</h2><div class="tre">'
-        '<div class="card"><div class="grande">755 nm</div><h3 style="margin-top:3mm">Pelo sottile e chiaro</h3><p style="font-size:9pt;margin:0">Prende il pelo che gli altri dispositivi lasciano lì.</p></div>'
-        '<div class="card" style="background:var(--navy);color:#DDE9F5"><div class="grande" style="color:#9CCBE8">808 nm</div><h3 style="margin-top:3mm;color:#fff">Il cavallo di battaglia</h3><p style="font-size:9pt;margin:0">La banda che lavora la maggior parte delle clienti, tutti i giorni.</p></div>'
-        '<div class="card"><div class="grande">1064 nm</div><h3 style="margin-top:3mm">Pelli scure</h3><p style="font-size:9pt;margin:0">Scende più in profondità e lavora in sicurezza sui fototipi alti.</p></div></div></div>'
-        '<div class="sez"><div class="eyebrow">In cabina</div><h2>Cosa cambia per te, in pratica.</h2><div class="tre">'
-        '<div class="col"><h3>Più clienti nella stessa giornata</h3><p>500 W in più della Ares: gambe intere, schiena e addome in meno passaggi, a parità di risultato.</p></div>'
-        '<div class="col"><h3>Si ferma meno a raffreddare</h3><p>Radiatore, aria e TEC cool insieme. Più diodi vuol dire meno fatica per il dispositivo.</p></div>'
-        '<div class="col"><h3>Parametri proposti, decisione tua</h3><p>Telecamera e software IA leggono pelle e pelo e propongono l\'impostazione. Tu confermi.</p></div></div></div>'
-        '<div class="sez"><div class="eyebrow">Uriel e Ares, in breve</div>'
-        + tabella([('Lunghezze d\'onda', '755 / 808 / 1064 nm', '808 nm'), ('Diodi', 'Fino a 16 da 100 W', '10 da 100 W'), ('Potenza', '2000 W', '1500 W'), ('Formato', 'Carrellata', 'Da banco')], ['', 'Uriel 2026 · IA', 'Ares']) + '</div>')
-    righe = [('Tipo', 'Laser a diodo tri-onda'), ('Lunghezze d\'onda', '755 / 808 / 1064 nm, fino a 3 bande sullo stesso manipolo'), ('Diodi', 'Fino a 16 da 100 W'), ('Potenza', '2000 W'),
-             ('Frequenza', '1–10 Hz'), ('Emissione', '1–400 ms · macro canale'), ('Raffreddamento', 'Radiatore + aria + TEC cool'), ('Interfaccia', 'Touch LCD 15"'),
-             ('Telecamera e IA', 'Sì'), ('Testina', 'Titanio'), ('Rete elettrica', 'AC 220 V / 110 V'), ('Sicurezza', 'Classe 4 · interlock'), ('Certificazione', 'CE italiana · MDR'), ('Formato', 'Carrellata')]
-    p3 = pagina(nome, 3,
-        '<div class="sez"><div class="eyebrow">Scheda tecnica</div><h2>I dati ufficiali.</h2>' + tabella(righe, ['Caratteristica', 'Uriel 2026 · IA']) + '</div>'
-        '<div class="due"><div class="card" style="background:var(--velo2)"><div class="eyebrow">Certificato in Italia</div><h3 style="font-size:13pt">CE italiana e MDR attivo.</h3>'
-        '<p style="font-size:9pt;margin:0">Non è un dispositivo importato e rimarchiato. Fascicolo tecnico, dichiarazione di conformità e numero di serie sono rintracciabili: se arriva un controllo, c\'è una carta da mostrare con un nome e un indirizzo dietro.</p></div>'
-        '<div class="card" style="background:var(--velo2)"><div class="eyebrow">Laser di classe 4</div><h3 style="font-size:13pt">Un laser vero, trattato come tale.</h3>'
-        '<p style="font-size:9pt;margin:0">Occhiali sempre, chiave e interlock che spegne il dispositivo se qualcosa non è a posto. Lo insegniamo alla consegna e lo verifichiamo all\'esame.</p></div></div>')
-    return [p1, p2, p3, ultima(d)]
+def uriel_pagine(u, t):
+    dp = DISP['uriel']; nome = dp['breve']
+    (b1, b2, b3) = t['bande']
+    p1 = pagina(u, nome, 1, copertina(u, t, dp), con_piede=False)
+    p2 = pagina(u, nome, 2,
+        f'<div class="sez"><div class="eyebrow">{esc(t["bande_eyebrow"])}</div><h2>{t["bande_h2"]}</h2><div class="tre">'
+        f'<div class="card"><div class="grande">{esc(b1[0])}</div><h3 style="margin-top:3mm">{esc(b1[1])}</h3><p style="font-size:9pt;margin:0">{esc(b1[2])}</p></div>'
+        f'<div class="card" style="background:var(--navy);color:#DDE9F5"><div class="grande" style="color:#9CCBE8">{esc(b2[0])}</div><h3 style="margin-top:3mm;color:#fff">{esc(b2[1])}</h3><p style="font-size:9pt;margin:0">{esc(b2[2])}</p></div>'
+        f'<div class="card"><div class="grande">{esc(b3[0])}</div><h3 style="margin-top:3mm">{esc(b3[1])}</h3><p style="font-size:9pt;margin:0">{esc(b3[2])}</p></div></div></div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["cab_eyebrow"])}</div><h2>{esc(t["cab_h2"])}</h2><div class="tre">{colonne(t["cab"])}</div></div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["conf_eyebrow"])}</div>' + tabella(t['conf_rows'], t['conf_heads']) + '</div>')
+    p3 = pagina(u, nome, 3,
+        f'<div class="sez"><div class="eyebrow">{esc(t["tec_eyebrow"])}</div><h2>{esc(t["tec_h2"])}</h2>' + tabella(t['tab_rows'], t['tab_heads']) + '</div>' + box_certificazione(t))
+    return [p1, p2, p3, ultima(u, t, dp)]
 
 # =============================== AFRODITE ===============================
-AFRODITE = dict(
-    nome='Afrodite VS++', nome_breve='Afrodite', file='AFRODITE', eyebrow='Corpo e dimagrimento · Viso',
-    lead='Non ti serve un dispositivo. <span class="acc">Ti serve un progetto che vince.</span>',
-    intro="Una colonna professionale con display touch da 10\" e manipoli per corpo e viso. Le tecnologie lavorano insieme su adipe, cellulite, tono e contorno. Con Afrodite arrivano i protocolli pronti e il percorso per lanciare il trattamento corpo nel tuo centro, anche se parti da zero.",
-    pill=['Viso + corpo', 'Display touch 10"', 'Certificato CE', 'Protocolli IT · SQ'],
-    foto='../SITO/pubblica/immagini/741b069dc662.jpg', altezza=124, img_h=118, img_w=100,
-    cta_t='Vuoi lanciare il corpo nel tuo centro?', cta_p='Vendita o noleggio. Ti mostriamo i numeri prima di firmare.', cta_b='Prenota una consulenza',
-)
-def afrodite_pagine():
-    d = AFRODITE; nome = d['nome_breve']
-    p1 = pagina(nome, 1, copertina(d), con_piede=False)
-    tec = [('Ultrasuono focalizzato direzionale', "Agisce sull'adipe sottocutaneo, dove si accumula il grasso localizzato."), ('Radiofrequenza', 'Scalda i tessuti in profondità: sostiene il collagene e il tono della pelle.'),
-           ('Vacuum', 'Aspirazione e rilascio: drenaggio, circolazione, contorno di corpo e viso.'), ('Micropulse', 'Vibrazione a impulsi che rende il massaggio profondo ma confortevole.'), ('Low laser', '')]
-    cards = ''.join(f'<div class="col"><h3>{esc(t)}</h3><p>{esc(x)}</p></div>' for t, x in tec[:3])
-    cards2 = ''.join(f'<div class="col"><h3>{esc(t)}</h3><p>{esc(x)}</p></div>' for t, x in tec[3:]) + '<div></div>'
-    chips = ''.join(f'<span class="chip">{esc(x)}</span>' for x in ["Riduzione dell'adipe localizzato", 'Cellulite', 'Rassodamento della pelle', 'Rimodellamento del corpo', 'Drenaggio', 'Trattamenti viso'])
-    p2 = pagina(nome, 2,
-        '<div class="sez"><div class="eyebrow">Le tecnologie</div><h2>Ognuna fa una cosa.<br>Insieme fanno il trattamento.</h2>'
-        f'<div class="tre" style="row-gap:7mm">{cards}{cards2}</div></div>'
-        '<div class="sez"><div class="eyebrow">Cosa offri alle clienti</div><h2>Un listino corpo completo,<br>da un\'unica colonna.</h2>' + chips + '</div>'
-        '<div class="card navy"><div class="eyebrow">Il progetto</div><h3 style="font-size:15pt">Un dispositivo, da solo, non riempie l\'agenda.</h3>'
-        '<p style="margin:2mm 0 0;font-size:9.6pt;color:#DDE9F5">Quello che fa la differenza è il progetto: dispositivo giusto, protocolli pronti, un gestionale per fidelizzare e qualcuno accanto a te. Questo ti portiamo.</p></div>')
-    scheda = [('Tipo', 'Colonna professionale per corpo e viso'), ('Display', 'Touch, 10"'), ('Tecnologie', 'Ultrasuono focalizzato direzionale · radiofrequenza · vacuum · Micropulse · low laser'),
-              ('Manipoli', 'Corpo e viso'), ('Certificazione', 'CE'), ('Protocolli', 'In italiano e in albanese'), ('Formula', 'Vendita o noleggio')]
-    p3 = pagina(nome, 3,
-        '<div class="sez"><div class="eyebrow">Scheda</div><h2>In breve.</h2>' + tabella(scheda, ['Caratteristica', 'Afrodite VS++']) + '</div>'
-        '<div class="sez"><div class="eyebrow">Il metodo DEMETRA</div><h2>Arriva con i compiti già fatti.</h2><div class="tre">'
-        '<div class="col"><h3>Protocollo scritto</h3><p>Cosa fai, con quali parametri, in che ordine: pagina per pagina.</p></div>'
-        '<div class="col"><h3>Scheda di valutazione</h3><p>Per seguire la cliente seduta dopo seduta e tenere il conto del percorso.</p></div>'
-        '<div class="col"><h3>Ciclo di 10–12 sedute</h3><p>Il trattamento è un percorso, non una seduta sola. La scheda di cabina lo accompagna.</p></div></div></div>'
-        '<div class="sez"><div class="eyebrow">Uso conforme</div><h2>Sei regole.<br>Il dispositivo dura il doppio.</h2>'
-        '<p style="max-width:150mm;margin-bottom:5mm">La maggior parte dei guasti nasce dall\'uso, non dal dispositivo. Per questo ogni operatrice esce dalla formazione con la card delle 6 regole e un certificato da rinnovare ogni anno.</p>'
-        '<div class="tre"><div class="card"><h3>Consegna in cabina</h3><p style="font-size:9pt;margin:0">Installazione, prime sedute guidate e verbale di consegna firmato.</p></div>'
-        '<div class="card"><h3>Operatrice certificata</h3><p style="font-size:9pt;margin:0">Esame dopo 45 giorni, certificato valido 12 mesi.</p></div>'
-        '<div class="card"><h3>Controllo mensile</h3><p style="font-size:9pt;margin:0">Dieci minuti in videochiamata per intercettare i problemi prima del fermo.</p></div></div></div>')
-    return [p1, p2, p3, ultima(d)]
+def afrodite_pagine(u, t):
+    dp = DISP['afrodite']; nome = dp['breve']
+    tec = t['tec']
+    cards = colonne(tec[:3]); cards2 = colonne(tec[3:]) + '<div></div>'
+    chips = ''.join(f'<span class="chip">{esc(x)}</span>' for x in t['chips'])
+    pe, ph, pp = t['prog']
+    p1 = pagina(u, nome, 1, copertina(u, t, dp), con_piede=False)
+    p2 = pagina(u, nome, 2,
+        f'<div class="sez"><div class="eyebrow">{esc(t["tec_eyebrow"])}</div><h2>{t["tec_h2"]}</h2><div class="tre" style="row-gap:7mm">{cards}{cards2}</div></div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["off_eyebrow"])}</div><h2>{t["off_h2"]}</h2>{chips}</div>'
+        f'<div class="card navy"><div class="eyebrow">{esc(pe)}</div><h3 style="font-size:15pt">{esc(ph)}</h3><p style="margin:2mm 0 0;font-size:9.6pt;color:#DDE9F5">{esc(pp)}</p></div>')
+    uso = ''.join(f'<div class="card"><h3>{esc(a)}</h3><p style="font-size:9pt;margin:0">{esc(b)}</p></div>' for a, b in t['uso'])
+    p3 = pagina(u, nome, 3,
+        f'<div class="sez"><div class="eyebrow">{esc(t["sch_eyebrow"])}</div><h2>{esc(t["sch_h2"])}</h2>' + tabella(t['sch_rows'], t['sch_heads']) + '</div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["dem_eyebrow"])}</div><h2>{esc(t["dem_h2"])}</h2><div class="tre">{colonne(t["dem"])}</div></div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["uso_eyebrow"])}</div><h2>{t["uso_h2"]}</h2>'
+        f'<p style="max-width:150mm;margin-bottom:5mm">{esc(t["uso_p"])}</p><div class="tre">{uso}</div></div>')
+    return [p1, p2, p3, ultima(u, t, dp)]
 
 # =============================== HERMES ===============================
-GRAFICA_HERMES = '''<svg viewBox="0 0 400 300" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+def grafica_hermes(testo):
+    return f"""<svg viewBox="0 0 400 300" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
 <defs><radialGradient id="g" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#1C6EA4" stop-opacity=".55"/><stop offset="1" stop-color="#123A63" stop-opacity="0"/></radialGradient></defs>
 <rect width="400" height="300" fill="#123A63"/><circle cx="200" cy="150" r="170" fill="url(#g)"/>
 <g fill="none" stroke="#9CCBE8" stroke-width="1.3">
 <ellipse cx="200" cy="150" rx="26" ry="14" stroke-width="2.2" stroke="#fff"/><ellipse cx="200" cy="150" rx="54" ry="30" opacity=".95"/><ellipse cx="200" cy="150" rx="86" ry="48" opacity=".8"/>
 <ellipse cx="200" cy="150" rx="122" ry="68" opacity=".6"/><ellipse cx="200" cy="150" rx="162" ry="90" opacity=".42"/><ellipse cx="200" cy="150" rx="206" ry="114" opacity=".26"/></g>
-<g fill="#fff"><text x="200" y="262" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="13" letter-spacing="5" font-weight="600" fill="#BFD7EC">CAMPO ELETTROMAGNETICO FOCALIZZATO</text></g></svg>'''
-HERMES = dict(
-    nome='Hermes Slim', nome_breve='Hermes', file='HERMES', eyebrow='Corpo · Rimodellamento · Tecnologia HI-EMT',
-    lead='Fa lavorare il muscolo in profondità. <span class="acc">Senza elettrodi, senza contatto elettrico.</span>',
-    intro="Hermes Slim usa un campo elettromagnetico focalizzato (HI-EMT, detto anche HIFEM) che raggiunge i muscoli fino a 8 cm di profondità e li fa contrarre oltre quello che si ottiene con l'attività fisica normale. Non è un'elettrostimolazione. La seduta standard dura 30 minuti.",
-    pill=['HI-EMT', 'Fino a 8 cm', 'Seduta da 30 minuti', 'Uno o due manipoli', 'Certificato CE'],
-    grafica=GRAFICA_HERMES, altezza=124,
-    cta_t='Vuoi portare Hermes nel tuo centro?', cta_p='Vendita o noleggio. Partiamo dall\'analisi del tuo centro e ti mostriamo i numeri prima di firmare.', cta_b='Chiedi la proposta',
-)
-def hermes_pagine():
-    d = HERMES; nome = d['nome_breve']
-    p1 = pagina(nome, 1, copertina(d), con_piede=False)
-    conf = [('Come arriva l\'energia', 'Corrente attraverso elettrodi sulla pelle', 'Campo elettromagnetico focalizzato: <b>nessun elettrodo</b>'),
-            ('Sensazione', 'Può dare pizzicore o bruciore', '<b>Nessun pizzicore o bruciore</b>'), ('Profondità', 'Strati superficiali', '<b>In profondità, fino a 8 cm</b>'),
-            ('Fibre muscolari attivate', 'Meno fibre', '<b>Molte più fibre</b>'), ('Contrazione', 'Convenzionale', '<b>Supermassimale</b>'), ('L\'intensità è limitata da', 'Tolleranza della pelle', 'Tolleranza del muscolo')]
-    chips1 = ''.join(f'<span class="chip">{x}</span>' for x in ['Addome', 'Glutei', 'Cosce', 'Interno coscia', 'Schiena'])
-    chips2 = ''.join(f'<span class="chip" style="background:#fff;border:1px solid var(--riga)">{x}</span>' for x in ['Braccia', 'Spalle', 'Polpacci'])
-    p2 = pagina(nome, 2,
-        '<div class="sez"><div class="eyebrow">Come funziona</div><h2>Non è un\'elettrostimolazione.</h2>'
-        '<p style="max-width:152mm;margin-bottom:5mm">Il campo elettromagnetico focalizzato attraversa la cute e il tessuto adiposo e stimola direttamente i neuroni motori profondi: il muscolo si contrae in modo supermassimale, a un ritmo che l\'esercizio normale non raggiunge. '
-        'Il dispositivo è non ionizzante, atermico e agisce solo sui neuroni motori, non su quelli sensoriali.</p>'
-        + tabella(conf, ['', 'EMS con elettrodi', 'HI-EMT · Hermes Slim']) + '</div>'
-        '<div class="sez"><div class="eyebrow">Le zone</div><h2>Dove lavora.</h2>'
-        '<p style="margin-bottom:3mm"><b style="color:var(--ink)">Zone principali</b></p>' + chips1 +
-        '<p style="margin:3mm 0"><b style="color:var(--ink)">Trattabili con sedute più numerose</b></p>' + chips2 + '</div>'
-        '<div class="card" style="background:var(--velo2)"><div class="eyebrow">Doppia azione</div><h3 style="font-size:13pt">Muscolo e tessuto adiposo.</h3>'
-        '<p style="font-size:9pt;margin:0">Il produttore descrive Hermes Slim come una tecnologia che lavora insieme sul rinforzo del muscolo e sul grasso localizzato nella stessa seduta. Per ogni trattamento, i parametri e il numero di sedute si decidono in cabina, dopo la valutazione della cliente.</p></div>')
-    spec = [('Tecnologia', 'HI-EMT (HIFEM), non invasiva'), ('Profondità', 'Fino a 8 cm, con due grandi piastre'), ('Manipoli', 'Versione con uno o con due manipoli'),
-            ('Interfaccia', 'Schermo LCD touch · modalità Auto e Manuale'), ('Impulso', '4 livelli: continuo, impulso 1, impulso 2, automatico'),
-            ('Frequenze', 'F1 · F2 · F3 da 1 a 150 Hz nel protocollo manuale'), ('Raffreddamento', 'TEC continuo (−10 °C ~ 40 °C)'), ('Consumo massimo', '900 W'),
-            ('Alimentazione', 'AC 220 V / 50 Hz oppure 110 V / 60 Hz'), ('Natura', 'Dispositivo per uso estetico, certificato CE. Non è un dispositivo medico')]
-    p3 = pagina(nome, 3,
-        '<div class="sez"><div class="eyebrow">Scheda tecnica</div><h2>I dati dal manuale d\'uso.</h2>' + tabella(spec, ['Caratteristica', 'Hermes Slim']) + '</div>'
-        '<div class="sez"><div class="eyebrow">Le sedute</div><h2>Quanto dura, ogni quanto.</h2><div class="tre">'
-        '<div class="col"><h3>30 · 45 · 60 minuti</h3><p>Seduta standard, intensiva, massimale. Al massimo due trattamenti al giorno: parte alta e parte bassa del corpo.</p></div>'
-        '<div class="col"><h3>2 a settimana, per un mese</h3><p>È il protocollo ottimale indicato dal manuale. Poi, una seduta al mese di mantenimento.</p></div>'
-        '<div class="col"><h3>5 modalità per zona</h3><p>HIIT, forza, sviluppo muscolare, modellamento corpo, brucia grassi: potenza e frequenze già impostate per braccia, polpacci, cosce, glutei e addome.</p></div></div></div>'
-        '<div class="card red" style="border:1px solid #E7C7C0;background:#FBF1EF"><div class="eyebrow" style="color:#9C3A28">Quando non si usa</div><h3 style="font-size:12pt">Controindicazioni assolute.</h3>'
-        '<p style="font-size:8.8pt;margin:0">Pacemaker, defibrillatore e altri impianti elettronici attivi, neurostimolatori e impianto cocleare · gravidanza · tumore attivo · epilessia · infezioni attive e febbre alta · trombosi venosa profonda · emorragia attiva · gravi malattie cardiache · ictus o infarto recente. '
-        'Altre condizioni richiedono una valutazione caso per caso: l\'elenco completo è nel manuale d\'uso, che consegniamo con il dispositivo.</p></div>')
-    return [p1, p2, p3, ultima(d)]
+<g fill="#fff"><text x="200" y="262" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="600" fill="#BFD7EC" textLength="{min(340, len(testo) * 10)}" lengthAdjust="spacing">{esc(testo)}</text></g></svg>"""
+
+def hermes_pagine(u, t):
+    dp = DISP['hermes']; nome = dp['breve']
+    chips1 = ''.join(f'<span class="chip">{esc(x)}</span>' for x in t['zone1'])
+    chips2 = ''.join(f'<span class="chip" style="background:#fff;border:1px solid var(--riga)">{esc(x)}</span>' for x in t['zone2'])
+    de, dh, dpp = t['dop']; ce, ch, cp = t['ctr']
+    p1 = pagina(u, nome, 1, copertina(u, t, dp, grafica=grafica_hermes(t['grafica'])), con_piede=False)
+    p2 = pagina(u, nome, 2,
+        f'<div class="sez"><div class="eyebrow">{esc(t["come_eyebrow"])}</div><h2>{esc(t["come_h2"])}</h2>'
+        f'<p style="max-width:152mm;margin-bottom:5mm">{esc(t["come_p"])}</p>' + tabella(t['conf_rows'], t['conf_heads']) + '</div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["zone_eyebrow"])}</div><h2>{esc(t["zone_h2"])}</h2>'
+        f'<p style="margin-bottom:3mm"><b style="color:var(--ink)">{esc(t["zone1_label"])}</b></p>{chips1}'
+        f'<p style="margin:3mm 0"><b style="color:var(--ink)">{esc(t["zone2_label"])}</b></p>{chips2}</div>'
+        f'<div class="card" style="background:var(--velo2)"><div class="eyebrow">{esc(de)}</div><h3 style="font-size:13pt">{esc(dh)}</h3><p style="font-size:9pt;margin:0">{esc(dpp)}</p></div>')
+    p3 = pagina(u, nome, 3,
+        f'<div class="sez"><div class="eyebrow">{esc(t["tec_eyebrow"])}</div><h2>{esc(t["tec_h2"])}</h2>' + tabella(t['tab_rows'], t['tab_heads']) + '</div>'
+        f'<div class="sez"><div class="eyebrow">{esc(t["sed_eyebrow"])}</div><h2>{esc(t["sed_h2"])}</h2><div class="tre">{colonne(t["sed"])}</div></div>'
+        f'<div class="card red" style="border:1px solid #E7C7C0;background:#FBF1EF"><div class="eyebrow" style="color:#9C3A28">{esc(ce)}</div><h3 style="font-size:12pt">{esc(ch)}</h3>'
+        f'<p style="font-size:8.8pt;margin:0">{esc(cp)}</p></div>')
+    return [p1, p2, p3, ultima(u, t, dp)]
 
 # =============================== stampa ===============================
-def stampa(d, pagine):
-    doc = f'<!doctype html><html lang="it"><head><meta charset="utf-8"><title>{esc(d["nome"])} · NIPEC</title><style>{CSS.replace("%(font)s", FONT)}</style></head><body>{"".join(pagine)}</body></html>'
-    h = os.path.join(QUI, f'brochure-{d["file"].lower()}.html'); pdf = os.path.join(QUI, f'BROCHURE-{d["file"]}.pdf')
+PAGINE = (('uriel', uriel_pagine), ('ares', ares_pagine), ('afrodite', afrodite_pagine), ('hermes', hermes_pagine))
+
+def stampa(chiave, codice, L, fn):
+    u, t = L['ui'], L[chiave]; dp = DISP[chiave]
+    doc = (f'<!doctype html><html lang="{u["lang"]}"><head><meta charset="utf-8"><title>{esc(t["nome"])} · NIPEC</title>'
+           f'<style>{CSS.replace("%(font)s", FONT)}</style></head><body>{"".join(fn(u, t))}</body></html>')
+    base = f'{dp["file"]}-{codice}'
+    h = os.path.join(SORG, f'brochure-{base.lower()}.html'); pdf = os.path.join(QUI, f'BROCHURE-{base}.pdf')
     open(h, 'w', encoding='utf8').write(doc)
     subprocess.run([CHROME, '--headless=new', '--no-sandbox', '--disable-gpu', '--no-pdf-header-footer', '--allow-file-access-from-files',
                     f'--print-to-pdf={pdf}', '--virtual-time-budget=8000', 'file://' + h], check=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
-    print(pdf)
+    pagine = int(re.search(r'Pages:\s+(\d+)', subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout).group(1))
+    assert pagine == 4, f'{pdf}: {pagine} pagine invece di 4 (una pagina e\' strabordata)'
+    print(os.path.basename(pdf), pagine, 'pagine')
 
-for d, f in ((URIEL, uriel_pagine), (ARES, ares_pagine), (AFRODITE, afrodite_pagine), (HERMES, hermes_pagine)):
-    stampa(d, f())
+if __name__ == '__main__':
+    testi.controlla()
+    scelte = [a.upper() for a in sys.argv[1:]] or [c for c, _ in testi.LINGUE]
+    for codice, L in testi.LINGUE:
+        if codice in scelte:
+            for chiave, fn in PAGINE: stampa(chiave, codice, L, fn)

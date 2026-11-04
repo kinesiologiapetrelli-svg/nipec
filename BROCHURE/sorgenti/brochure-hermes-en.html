@@ -1,0 +1,163 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Hermes Slim · NIPEC</title><style>
+@font-face{font-family:"Archivo";src:url("/home/user/nipec/SITO/pubblica/caratteri/archivo.woff2") format("woff2");font-weight:100 900}
+:root{--navy:#123A63;--blu:#1C6EA4;--chiaro:#5AA6D6;--testo:#4A5B6E;--ink:#0F2B4A;--velo:#EEF3F8;--velo2:#E6EFF8;--riga:#DCE4EC;--scuro:#0B2545}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;color:var(--testo);font-size:9.6pt;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;padding:13mm 15mm 0}
+.testa{display:flex;justify-content:space-between;align-items:center;padding-bottom:5mm;border-bottom:1px solid var(--riga);margin-bottom:8mm}
+.testa .logo{height:11mm;width:auto}
+.testa .et{font-size:7.2pt;letter-spacing:.14em;text-transform:uppercase;color:var(--blu);font-weight:600}
+.piede{position:absolute;left:15mm;right:15mm;bottom:8mm;display:flex;justify-content:space-between;font-size:7.4pt;color:#7B8A9A;border-top:1px solid var(--riga);padding-top:3mm}
+.eyebrow{font-size:7.4pt;letter-spacing:.17em;text-transform:uppercase;color:var(--blu);font-weight:600;margin-bottom:3mm}
+h1{font-size:52pt;line-height:1.02;font-weight:700;color:var(--navy);letter-spacing:-.025em}
+h1 small{display:block;font-size:17pt;font-weight:500;letter-spacing:-.005em;color:var(--blu);margin-top:2mm}
+h2{font-size:21pt;line-height:1.12;font-weight:700;color:var(--navy);letter-spacing:-.015em;margin-bottom:4mm}
+h3{font-size:11.5pt;line-height:1.25;font-weight:700;color:var(--navy);margin-bottom:1.5mm}
+.lead{font-size:17pt;line-height:1.28;color:var(--navy);margin:6mm 0 5mm;font-weight:500}
+.lead .acc{color:var(--blu)}
+p{margin-bottom:3mm}
+.pills{display:flex;flex-wrap:wrap;gap:2mm;margin:4mm 0 0}
+.pill{border:1px solid var(--navy);color:var(--navy);border-radius:20px;padding:1.2mm 3.4mm;font-size:8pt;font-weight:500}
+.foto{background:var(--velo);border-radius:5mm;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.foto img{mix-blend-mode:multiply;display:block}
+.banda{position:absolute;left:0;right:0;bottom:0;height:34mm;background:var(--navy);color:#fff;padding:0 15mm;display:flex;align-items:center;justify-content:space-between;gap:10mm}
+.banda .frase{font-size:15pt;line-height:1.25;font-weight:600;max-width:105mm}
+.banda .sito{font-size:9pt;letter-spacing:.05em;color:#BFD7EC;text-align:right;line-height:1.7}
+.banda .sito b{color:#fff;font-weight:600;font-size:10.5pt}
+.sez{margin-bottom:9mm}
+.due{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.tre{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5mm}
+.card{background:var(--velo);border-radius:4mm;padding:5mm 5.5mm}
+.card.bianca{background:#fff;border:1px solid var(--riga)}
+.card.navy{background:var(--navy);color:#DDE9F5}
+.card.navy h3{color:#fff}
+.card.navy .eyebrow{color:#9CCBE8}
+.card .eyebrow{margin-bottom:2mm}
+.card ul,.col ul{list-style:none;margin-top:2mm}
+.card li,.col li{position:relative;padding-left:4mm;margin-bottom:1.2mm;font-size:9pt}
+.card li:before,.col li:before{content:"";position:absolute;left:0;top:2.1mm;width:1.4mm;height:1.4mm;border-radius:50%;background:var(--blu)}
+.card.navy li:before{background:#9CCBE8}
+.col{border-top:2px solid var(--blu);padding-top:3.5mm}
+.col h3{font-size:10.5pt}
+.col p{font-size:9pt;margin:0}
+table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--riga);border-radius:3mm;overflow:hidden;font-size:9pt}
+th{background:var(--navy);color:#fff;text-align:left;font-weight:600;padding:2.6mm 4mm;font-size:8.6pt}
+td{padding:2.3mm 4mm;border-top:1px solid var(--riga);vertical-align:top}
+td:first-child{color:#6B7C8F;width:30%}
+td b{color:var(--ink);font-weight:600}
+tr:nth-child(even) td{background:#FAFCFE}
+.passi{display:grid;grid-template-columns:1fr 1fr;gap:5mm 7mm}
+.passo{display:flex;gap:4mm}
+.passo .n{flex:none;width:9mm;height:9mm;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:9pt;display:flex;align-items:center;justify-content:center;margin-top:.5mm}
+.passo h3{margin-bottom:1mm}
+.passo p{font-size:8.8pt;margin-bottom:1.5mm}
+.passo ul{list-style:none}
+.passo li{font-size:8.5pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
+.passo li:before{content:"";position:absolute;left:0;top:1.9mm;width:1.2mm;height:1.2mm;border-radius:50%;background:var(--blu)}
+.cta{background:var(--navy);color:#DDE9F5;border-radius:5mm;padding:7mm 8mm;display:flex;justify-content:space-between;align-items:center;gap:8mm}
+.cta h2{color:#fff;font-size:17pt;margin-bottom:2mm}
+.cta p{margin:0;font-size:9.4pt}
+.cta .bottone{flex:none;background:#fff;color:var(--navy);border-radius:20px;padding:3mm 6mm;font-weight:600;font-size:9.4pt;text-align:center}
+.contatti{display:grid;grid-template-columns:1.1fr 1.1fr 1fr;gap:6mm;margin-top:8mm;font-size:8.6pt}
+.contatti .eyebrow{margin-bottom:1.5mm}
+.contatti p{margin-bottom:1mm;color:var(--testo)}
+.contatti b{color:var(--ink);font-weight:600}
+.firma{position:absolute;left:0;right:0;bottom:0;background:var(--scuro);color:#9FB4CB;padding:4.5mm 15mm 6mm;font-size:7.6pt;display:flex;justify-content:space-between;gap:6mm}
+.firma .logo{height:8mm;width:auto}
+.nota{font-size:7.8pt;color:#7B8A9A}
+.tappe{display:grid;grid-template-columns:repeat(5,1fr);gap:4mm;margin-top:8mm}
+.tappa{border-top:2px solid var(--blu);padding-top:3mm}
+.tappa .q{font-size:15pt;font-weight:700;color:var(--navy);letter-spacing:-.01em;line-height:1.1}
+.tappa h3{font-size:9.6pt;margin:1.5mm 0 1mm}
+.tappa p{font-size:8.2pt;line-height:1.45;margin:0}
+.chip{display:inline-block;background:var(--velo2);color:var(--navy);border-radius:20px;padding:1.5mm 4mm;margin:0 1.5mm 2mm 0;font-size:8.8pt;font-weight:500}
+.grande{font-size:26pt;font-weight:700;color:var(--blu);letter-spacing:-.02em;line-height:1}
+.red{border-color:#E7C7C0;background:#FBF1EF}
+.ult{display:flex;flex-direction:column}
+.ult .p4{flex:1;display:flex;flex-direction:column;margin-bottom:21mm}
+.p4 .passi{gap:5mm 7mm}
+.p4 .passo p{font-size:8.6pt;line-height:1.5;margin-bottom:1.3mm}
+.p4 .passo li{font-size:8.2pt}
+.p4 .tappa p{font-size:8pt;line-height:1.42}
+.p4 .cta{padding:6mm 8mm}
+.p4 .cta h2{font-size:15.5pt}
+.p4 .contatti{margin-top:auto}
+</style></head><body><section class="page"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Hermes · November 2026 edition</span></div><div class="eyebrow">Body · Reshaping · HI-EMT technology</div><h1>Hermes Slim</h1><div class="lead">It makes the muscle work in depth. <span class="acc">No electrodes, no electrical contact.</span></div><p style="max-width:165mm;font-size:10.4pt;line-height:1.6">Hermes Slim uses a focused electromagnetic field (HI-EMT, also called HIFEM) that reaches muscles up to 8 cm deep and makes them contract beyond what normal physical activity achieves. It isn't electrostimulation. The standard session lasts 30 minutes.</p><div class="pills"><span class="pill">HI-EMT</span><span class="pill">Up to 8 cm</span><span class="pill">30-minute session</span><span class="pill">One or two handpieces</span><span class="pill">CE certified</span></div><div class="foto" style="height:124mm;margin-top:7mm;background:var(--navy)"><svg viewBox="0 0 400 300" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="g" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#1C6EA4" stop-opacity=".55"/><stop offset="1" stop-color="#123A63" stop-opacity="0"/></radialGradient></defs>
+<rect width="400" height="300" fill="#123A63"/><circle cx="200" cy="150" r="170" fill="url(#g)"/>
+<g fill="none" stroke="#9CCBE8" stroke-width="1.3">
+<ellipse cx="200" cy="150" rx="26" ry="14" stroke-width="2.2" stroke="#fff"/><ellipse cx="200" cy="150" rx="54" ry="30" opacity=".95"/><ellipse cx="200" cy="150" rx="86" ry="48" opacity=".8"/>
+<ellipse cx="200" cy="150" rx="122" ry="68" opacity=".6"/><ellipse cx="200" cy="150" rx="162" ry="90" opacity=".42"/><ellipse cx="200" cy="150" rx="206" ry="114" opacity=".26"/></g>
+<g fill="#fff"><text x="200" y="262" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="600" fill="#BFD7EC" textLength="290" lengthAdjust="spacing">FOCUSED ELECTROMAGNETIC FIELD</text></g></svg></div><div class="banda"><div class="frase">We don't sell devices.<br>We build working systems.</div><div class="sito"><b>www.nipecestetica.eu</b><br>WhatsApp +39 351 846 6025</div></div></section><section class="page"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Hermes · November 2026 edition</span></div><div class="sez"><div class="eyebrow">How it works</div><h2>It isn't electrostimulation.</h2><p style="max-width:152mm;margin-bottom:5mm">The focused electromagnetic field passes through the skin and fatty tissue and directly stimulates the deep motor neurons: the muscle contracts supramaximally, at a rate normal exercise cannot reach. The device is non-ionising, athermal and acts only on motor neurons, not on sensory ones.</p><table><tr><th></th><th>EMS with electrodes</th><th>HI-EMT · Hermes Slim</th></tr><tr><td>How the energy arrives</td><td>Current through electrodes on the skin</td><td>Focused electromagnetic field: <b>no electrodes</b></td></tr><tr><td>Sensation</td><td>May cause tingling or burning</td><td><b>No tingling or burning</b></td></tr><tr><td>Depth</td><td>Superficial layers</td><td><b>Deep, up to 8 cm</b></td></tr><tr><td>Muscle fibres activated</td><td>Fewer fibres</td><td><b>Many more fibres</b></td></tr><tr><td>Contraction</td><td>Conventional</td><td><b>Supramaximal</b></td></tr><tr><td>Intensity is limited by</td><td>Skin tolerance</td><td>Muscle tolerance</td></tr></table></div><div class="sez"><div class="eyebrow">The areas</div><h2>Where it works.</h2><p style="margin-bottom:3mm"><b style="color:var(--ink)">Main areas</b></p><span class="chip">Abdomen</span><span class="chip">Glutes</span><span class="chip">Thighs</span><span class="chip">Inner thigh</span><span class="chip">Back</span><p style="margin:3mm 0"><b style="color:var(--ink)">Treatable with a higher number of sessions</b></p><span class="chip" style="background:#fff;border:1px solid var(--riga)">Arms</span><span class="chip" style="background:#fff;border:1px solid var(--riga)">Shoulders</span><span class="chip" style="background:#fff;border:1px solid var(--riga)">Calves</span></div><div class="card" style="background:var(--velo2)"><div class="eyebrow">Dual action</div><h3 style="font-size:13pt">Muscle and fatty tissue.</h3><p style="font-size:9pt;margin:0">The manufacturer describes Hermes Slim as a technology that works on muscle strengthening and localised fat in the same session. For each treatment, parameters and number of sessions are decided in the treatment room, after assessing the client.</p></div><div class="piede"><span>NIPEC · Aesthetic Technologies — www.nipecestetica.eu</span><span>Hermes · 2/4</span></div></section><section class="page"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Hermes · November 2026 edition</span></div><div class="sez"><div class="eyebrow">Technical sheet</div><h2>The data from the user manual.</h2><table><tr><th>Feature</th><th>Hermes Slim</th></tr><tr><td>Technology</td><td>HI-EMT (HIFEM), non-invasive</td></tr><tr><td>Depth</td><td>Up to 8 cm, with two large plates</td></tr><tr><td>Handpieces</td><td>Version with one or two handpieces</td></tr><tr><td>Interface</td><td>LCD touch screen · Auto and Manual modes</td></tr><tr><td>Pulse</td><td>4 levels: continuous, pulse 1, pulse 2, automatic</td></tr><tr><td>Frequencies</td><td>F1 · F2 · F3 from 1 to 150 Hz in the manual protocol</td></tr><tr><td>Cooling</td><td>Continuous TEC (−10 °C ~ 40 °C)</td></tr><tr><td>Maximum consumption</td><td>900 W</td></tr><tr><td>Power supply</td><td>AC 220 V / 50 Hz or 110 V / 60 Hz</td></tr><tr><td>Nature</td><td>Device for aesthetic use, CE certified. Not a medical device</td></tr></table></div><div class="sez"><div class="eyebrow">The sessions</div><h2>How long, how often.</h2><div class="tre"><div class="col"><h3>30 · 45 · 60 minutes</h3><p>Standard, intensive, maximal session. At most two treatments a day: upper and lower body.</p></div><div class="col"><h3>2 a week, for a month</h3><p>This is the optimal protocol given in the manual. Then one maintenance session a month.</p></div><div class="col"><h3>5 modes per area</h3><p>HIIT, strength, muscle development, body shaping, fat burning: power and frequencies already set for arms, calves, thighs, glutes and abdomen.</p></div></div></div><div class="card red" style="border:1px solid #E7C7C0;background:#FBF1EF"><div class="eyebrow" style="color:#9C3A28">When not to use it</div><h3 style="font-size:12pt">Absolute contraindications.</h3><p style="font-size:8.8pt;margin:0">Pacemaker, defibrillator and other active electronic implants, neurostimulators and cochlear implant · pregnancy · active cancer · epilepsy · active infections and high fever · deep vein thrombosis · active bleeding · serious heart disease · recent stroke or heart attack. Other conditions need a case-by-case assessment: the full list is in the user manual, which we deliver with the device.</p></div><div class="piede"><span>NIPEC · Aesthetic Technologies — www.nipecestetica.eu</span><span>Hermes · 3/4</span></div></section><section class="page ult"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Hermes · November 2026 edition</span></div><div class="p4"><div class="eyebrow">The NIPEC method</div><h2>A process that doesn't stop at delivery.</h2><p style="max-width:150mm;margin-bottom:7mm">The device is just the beginning. What keeps a centre working is what comes after: the protocols, a trained operator, someone who picks up the phone. That's why we work in four stages.</p><div class="passi"><div class="passo"><div class="n">01</div><div><h3>Analysis</h3><p>Before talking about devices, we look at your centre: who your clients are, how many treatment rooms you have, what an hour of work costs, what you already sell.</p><ul><li>Questionnaire and visit (or video call)</li><li>Review of your price list and diary</li><li>Where the margin you lose today sits</li></ul></div></div><div class="passo"><div class="n">02</div><div><h3>Design</h3><p>Together we choose the right technology and build the treatment around it: prices, packages, session length, purchase formula.</p><ul><li>Device and configuration</li><li>Treatment price list and packages</li><li>Purchase or rental, with the numbers on the table</li></ul></div></div><div class="passo"><div class="n">03</div><div><h3>Training</h3><p>Hands-on delivery in the treatment room and a staged path that ends with an exam. The operator leaves with a certificate valid for 12 months.</p><ul><li>Day 0 in the room, +7 follow-up, +21 online</li><li>Exam at +45 days</li><li>Protocols and rule cards, in Italian and Albanian</li></ul></div></div><div class="passo"><div class="n">04</div><div><h3>Ongoing support</h3><p>After delivery we stay. A single contact for your centre, direct assistance and a monthly check to prevent device downtime.</p><ul><li>10-minute monthly video call</li><li>Parts replacement and logistics</li><li>Launch marketing campaign</li></ul></div></div></div><div class="eyebrow" style="margin-top:8mm">The certification path</div><div class="tappe" style="margin-top:3mm"><div class="tappa"><div class="q">Day 0</div><h3>Hands-on delivery</h3><p>In the treatment room, on the centre's own device, with real clients.</p></div><div class="tappa"><div class="q">+7</div><h3>Follow-up</h3><p>We correct the bad habits of the first week.</p></div><div class="tappa"><div class="q">+21</div><h3>Online</h3><p>Advanced protocols and real cases brought by the operators.</p></div><div class="tappa"><div class="q">+45</div><h3>Exam</h3><p>Practical test and a 20-question written test.</p></div><div class="tappa"><div class="q">12 months</div><h3>Certificate</h3><p>Personal certificate to display in the centre. Renewed every year.</p></div></div><div style="margin-top:8mm;margin-bottom:6mm"><div class="cta"><div><h2>Want to bring Hermes to your centre?</h2><p>Purchase or rental. We start from an analysis of your centre and show you the numbers before you sign.</p></div><div class="bottone">Ask for the proposal</div></div></div><div class="contatti"><div><div class="eyebrow">Write to us</div><p><b>WhatsApp +39 351 846 6025</b></p><p>Toll-free number 800 141 726 (Italy)</p><p>info@nipecestetica.com</p></div><div><div class="eyebrow">Where we are</div><p>Via Rovetta 29, 25080 Padenghe sul Garda (BS)</p><p>Rruga Donika Kastrioti 3, Tiranë · <span style="white-space:nowrap">+355 69 212 9786</span></p></div><div><div class="eyebrow">Online</div><p><b>www.nipecestetica.eu</b></p><p>The method · Training · The catalogue</p></div></div></div><div class="firma"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#5AA6D6"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#9CCBE8"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#FFFFFF"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#FFFFFF">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#5AA6D6">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span>© 2026 NIPEC · Aesthetic Technologies — PHD System Srl · VAT no. 04696530981<br>The device is sold or rented after an analysis of the centre. Features may vary with updates.</span></div></section></body></html>

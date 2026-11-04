@@ -1,0 +1,157 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Afrodite VS++ · NIPEC</title><style>
+@font-face{font-family:"Archivo";src:url("/home/user/nipec/SITO/pubblica/caratteri/archivo.woff2") format("woff2");font-weight:100 900}
+:root{--navy:#123A63;--blu:#1C6EA4;--chiaro:#5AA6D6;--testo:#4A5B6E;--ink:#0F2B4A;--velo:#EEF3F8;--velo2:#E6EFF8;--riga:#DCE4EC;--scuro:#0B2545}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;color:var(--testo);font-size:9.6pt;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;padding:13mm 15mm 0}
+.testa{display:flex;justify-content:space-between;align-items:center;padding-bottom:5mm;border-bottom:1px solid var(--riga);margin-bottom:8mm}
+.testa .logo{height:11mm;width:auto}
+.testa .et{font-size:7.2pt;letter-spacing:.14em;text-transform:uppercase;color:var(--blu);font-weight:600}
+.piede{position:absolute;left:15mm;right:15mm;bottom:8mm;display:flex;justify-content:space-between;font-size:7.4pt;color:#7B8A9A;border-top:1px solid var(--riga);padding-top:3mm}
+.eyebrow{font-size:7.4pt;letter-spacing:.17em;text-transform:uppercase;color:var(--blu);font-weight:600;margin-bottom:3mm}
+h1{font-size:52pt;line-height:1.02;font-weight:700;color:var(--navy);letter-spacing:-.025em}
+h1 small{display:block;font-size:17pt;font-weight:500;letter-spacing:-.005em;color:var(--blu);margin-top:2mm}
+h2{font-size:21pt;line-height:1.12;font-weight:700;color:var(--navy);letter-spacing:-.015em;margin-bottom:4mm}
+h3{font-size:11.5pt;line-height:1.25;font-weight:700;color:var(--navy);margin-bottom:1.5mm}
+.lead{font-size:17pt;line-height:1.28;color:var(--navy);margin:6mm 0 5mm;font-weight:500}
+.lead .acc{color:var(--blu)}
+p{margin-bottom:3mm}
+.pills{display:flex;flex-wrap:wrap;gap:2mm;margin:4mm 0 0}
+.pill{border:1px solid var(--navy);color:var(--navy);border-radius:20px;padding:1.2mm 3.4mm;font-size:8pt;font-weight:500}
+.foto{background:var(--velo);border-radius:5mm;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.foto img{mix-blend-mode:multiply;display:block}
+.banda{position:absolute;left:0;right:0;bottom:0;height:34mm;background:var(--navy);color:#fff;padding:0 15mm;display:flex;align-items:center;justify-content:space-between;gap:10mm}
+.banda .frase{font-size:15pt;line-height:1.25;font-weight:600;max-width:105mm}
+.banda .sito{font-size:9pt;letter-spacing:.05em;color:#BFD7EC;text-align:right;line-height:1.7}
+.banda .sito b{color:#fff;font-weight:600;font-size:10.5pt}
+.sez{margin-bottom:9mm}
+.due{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.tre{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5mm}
+.card{background:var(--velo);border-radius:4mm;padding:5mm 5.5mm}
+.card.bianca{background:#fff;border:1px solid var(--riga)}
+.card.navy{background:var(--navy);color:#DDE9F5}
+.card.navy h3{color:#fff}
+.card.navy .eyebrow{color:#9CCBE8}
+.card .eyebrow{margin-bottom:2mm}
+.card ul,.col ul{list-style:none;margin-top:2mm}
+.card li,.col li{position:relative;padding-left:4mm;margin-bottom:1.2mm;font-size:9pt}
+.card li:before,.col li:before{content:"";position:absolute;left:0;top:2.1mm;width:1.4mm;height:1.4mm;border-radius:50%;background:var(--blu)}
+.card.navy li:before{background:#9CCBE8}
+.col{border-top:2px solid var(--blu);padding-top:3.5mm}
+.col h3{font-size:10.5pt}
+.col p{font-size:9pt;margin:0}
+table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--riga);border-radius:3mm;overflow:hidden;font-size:9pt}
+th{background:var(--navy);color:#fff;text-align:left;font-weight:600;padding:2.6mm 4mm;font-size:8.6pt}
+td{padding:2.3mm 4mm;border-top:1px solid var(--riga);vertical-align:top}
+td:first-child{color:#6B7C8F;width:30%}
+td b{color:var(--ink);font-weight:600}
+tr:nth-child(even) td{background:#FAFCFE}
+.passi{display:grid;grid-template-columns:1fr 1fr;gap:5mm 7mm}
+.passo{display:flex;gap:4mm}
+.passo .n{flex:none;width:9mm;height:9mm;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:9pt;display:flex;align-items:center;justify-content:center;margin-top:.5mm}
+.passo h3{margin-bottom:1mm}
+.passo p{font-size:8.8pt;margin-bottom:1.5mm}
+.passo ul{list-style:none}
+.passo li{font-size:8.5pt;padding-left:3.5mm;position:relative;margin-bottom:.6mm}
+.passo li:before{content:"";position:absolute;left:0;top:1.9mm;width:1.2mm;height:1.2mm;border-radius:50%;background:var(--blu)}
+.cta{background:var(--navy);color:#DDE9F5;border-radius:5mm;padding:7mm 8mm;display:flex;justify-content:space-between;align-items:center;gap:8mm}
+.cta h2{color:#fff;font-size:17pt;margin-bottom:2mm}
+.cta p{margin:0;font-size:9.4pt}
+.cta .bottone{flex:none;background:#fff;color:var(--navy);border-radius:20px;padding:3mm 6mm;font-weight:600;font-size:9.4pt;text-align:center}
+.contatti{display:grid;grid-template-columns:1.1fr 1.1fr 1fr;gap:6mm;margin-top:8mm;font-size:8.6pt}
+.contatti .eyebrow{margin-bottom:1.5mm}
+.contatti p{margin-bottom:1mm;color:var(--testo)}
+.contatti b{color:var(--ink);font-weight:600}
+.firma{position:absolute;left:0;right:0;bottom:0;background:var(--scuro);color:#9FB4CB;padding:4.5mm 15mm 6mm;font-size:7.6pt;display:flex;justify-content:space-between;gap:6mm}
+.firma .logo{height:8mm;width:auto}
+.nota{font-size:7.8pt;color:#7B8A9A}
+.tappe{display:grid;grid-template-columns:repeat(5,1fr);gap:4mm;margin-top:8mm}
+.tappa{border-top:2px solid var(--blu);padding-top:3mm}
+.tappa .q{font-size:15pt;font-weight:700;color:var(--navy);letter-spacing:-.01em;line-height:1.1}
+.tappa h3{font-size:9.6pt;margin:1.5mm 0 1mm}
+.tappa p{font-size:8.2pt;line-height:1.45;margin:0}
+.chip{display:inline-block;background:var(--velo2);color:var(--navy);border-radius:20px;padding:1.5mm 4mm;margin:0 1.5mm 2mm 0;font-size:8.8pt;font-weight:500}
+.grande{font-size:26pt;font-weight:700;color:var(--blu);letter-spacing:-.02em;line-height:1}
+.red{border-color:#E7C7C0;background:#FBF1EF}
+.ult{display:flex;flex-direction:column}
+.ult .p4{flex:1;display:flex;flex-direction:column;margin-bottom:21mm}
+.p4 .passi{gap:5mm 7mm}
+.p4 .passo p{font-size:8.6pt;line-height:1.5;margin-bottom:1.3mm}
+.p4 .passo li{font-size:8.2pt}
+.p4 .tappa p{font-size:8pt;line-height:1.42}
+.p4 .cta{padding:6mm 8mm}
+.p4 .cta h2{font-size:15.5pt}
+.p4 .contatti{margin-top:auto}
+</style></head><body><section class="page"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Afrodite · November 2026 edition</span></div><div class="eyebrow">Body slimming · Face</div><h1>Afrodite VS++</h1><div class="lead">You don't need a device. <span class="acc">You need a project that wins.</span></div><p style="max-width:165mm;font-size:10.4pt;line-height:1.6">A professional column with a 10" touch display and handpieces for body and face. The technologies work together on fat, cellulite, tone and contour. With Afrodite come ready-made protocols and the path to launch the body treatment in your centre, even if you're starting from zero.</p><div class="pills"><span class="pill">Face + body</span><span class="pill">10" touch display</span><span class="pill">CE certified</span><span class="pill">Protocols IT · SQ</span></div><div class="foto" style="height:124mm;margin-top:7mm"><img src="../../SITO/pubblica/immagini/741b069dc662.jpg" style="max-height:118mm;max-width:100mm"></div><div class="banda"><div class="frase">We don't sell devices.<br>We build working systems.</div><div class="sito"><b>www.nipecestetica.eu</b><br>WhatsApp +39 351 846 6025</div></div></section><section class="page"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Afrodite · November 2026 edition</span></div><div class="sez"><div class="eyebrow">The technologies</div><h2>Each does one thing.<br>Together they make the treatment.</h2><div class="tre" style="row-gap:7mm"><div class="col"><h3>Directional focused ultrasound</h3><p>Acts on subcutaneous fat, where localised fat builds up.</p></div><div class="col"><h3>Radiofrequency</h3><p>Heats tissue in depth: supports collagen and skin tone.</p></div><div class="col"><h3>Vacuum</h3><p>Suction and release: drainage, circulation, body and face contour.</p></div><div class="col"><h3>Micropulse</h3><p>Pulsed vibration that makes the massage deep yet comfortable.</p></div><div class="col"><h3>Low laser</h3><p></p></div><div></div></div></div><div class="sez"><div class="eyebrow">What you offer your clients</div><h2>A complete body menu,<br>from a single column.</h2><span class="chip">Reduction of localised fat</span><span class="chip">Cellulite</span><span class="chip">Skin tightening</span><span class="chip">Body reshaping</span><span class="chip">Drainage</span><span class="chip">Facial treatments</span></div><div class="card navy"><div class="eyebrow">The project</div><h3 style="font-size:15pt">A device on its own doesn't fill the diary.</h3><p style="margin:2mm 0 0;font-size:9.6pt;color:#DDE9F5">What makes the difference is the project: the right device, ready-made protocols, a management system to retain clients and someone at your side. That's what we bring you.</p></div><div class="piede"><span>NIPEC · Aesthetic Technologies — www.nipecestetica.eu</span><span>Afrodite · 2/4</span></div></section><section class="page"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Afrodite · November 2026 edition</span></div><div class="sez"><div class="eyebrow">Sheet</div><h2>In brief.</h2><table><tr><th>Feature</th><th>Afrodite VS++</th></tr><tr><td>Type</td><td>Professional column for body and face</td></tr><tr><td>Display</td><td>Touch, 10"</td></tr><tr><td>Technologies</td><td>Directional focused ultrasound · radiofrequency · vacuum · Micropulse · low laser</td></tr><tr><td>Handpieces</td><td>Body and face</td></tr><tr><td>Certification</td><td>CE</td></tr><tr><td>Protocols</td><td>In Italian and Albanian</td></tr><tr><td>Formula</td><td>Purchase or rental</td></tr></table></div><div class="sez"><div class="eyebrow">The DEMETRA method</div><h2>It arrives with the homework done.</h2><div class="tre"><div class="col"><h3>Written protocol</h3><p>What you do, with which parameters, in what order: page by page.</p></div><div class="col"><h3>Assessment sheet</h3><p>To follow the client session after session and keep track of the programme.</p></div><div class="col"><h3>10–12 session cycle</h3><p>The treatment is a programme, not a single session. The treatment-room card accompanies it.</p></div></div></div><div class="sez"><div class="eyebrow">Correct use</div><h2>Six rules.<br>The device lasts twice as long.</h2><p style="max-width:150mm;margin-bottom:5mm">Most breakdowns come from use, not from the device. That's why every operator leaves training with the 6-rule card and a certificate to renew every year.</p><div class="tre"><div class="card"><h3>Delivery in the room</h3><p style="font-size:9pt;margin:0">Installation, first guided sessions and a signed handover report.</p></div><div class="card"><h3>Certified operator</h3><p style="font-size:9pt;margin:0">Exam after 45 days, certificate valid for 12 months.</p></div><div class="card"><h3>Monthly check</h3><p style="font-size:9pt;margin:0">Ten minutes on a video call to catch problems before downtime.</p></div></div></div><div class="piede"><span>NIPEC · Aesthetic Technologies — www.nipecestetica.eu</span><span>Afrodite · 3/4</span></div></section><section class="page ult"><div class="testa"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#DBE7F3" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#1C6EA4" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#123A63"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#1C6EA4"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#123A63"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#123A63">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0" stroke="#C9D4DE" stroke-width="0.4"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#1C6EA4">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span class="et">Brochure · Afrodite · November 2026 edition</span></div><div class="p4"><div class="eyebrow">The NIPEC method</div><h2>A process that doesn't stop at delivery.</h2><p style="max-width:150mm;margin-bottom:7mm">The device is just the beginning. What keeps a centre working is what comes after: the protocols, a trained operator, someone who picks up the phone. That's why we work in four stages.</p><div class="passi"><div class="passo"><div class="n">01</div><div><h3>Analysis</h3><p>Before talking about devices, we look at your centre: who your clients are, how many treatment rooms you have, what an hour of work costs, what you already sell.</p><ul><li>Questionnaire and visit (or video call)</li><li>Review of your price list and diary</li><li>Where the margin you lose today sits</li></ul></div></div><div class="passo"><div class="n">02</div><div><h3>Design</h3><p>Together we choose the right technology and build the treatment around it: prices, packages, session length, purchase formula.</p><ul><li>Device and configuration</li><li>Treatment price list and packages</li><li>Purchase or rental, with the numbers on the table</li></ul></div></div><div class="passo"><div class="n">03</div><div><h3>Training</h3><p>Hands-on delivery in the treatment room and a staged path that ends with an exam. The operator leaves with a certificate valid for 12 months.</p><ul><li>Day 0 in the room, +7 follow-up, +21 online</li><li>Exam at +45 days</li><li>Protocols and rule cards, in Italian and Albanian</li></ul></div></div><div class="passo"><div class="n">04</div><div><h3>Ongoing support</h3><p>After delivery we stay. A single contact for your centre, direct assistance and a monthly check to prevent device downtime.</p><ul><li>10-minute monthly video call</li><li>Parts replacement and logistics</li><li>Launch marketing campaign</li></ul></div></div></div><div class="eyebrow" style="margin-top:8mm">The certification path</div><div class="tappe" style="margin-top:3mm"><div class="tappa"><div class="q">Day 0</div><h3>Hands-on delivery</h3><p>In the treatment room, on the centre's own device, with real clients.</p></div><div class="tappa"><div class="q">+7</div><h3>Follow-up</h3><p>We correct the bad habits of the first week.</p></div><div class="tappa"><div class="q">+21</div><h3>Online</h3><p>Advanced protocols and real cases brought by the operators.</p></div><div class="tappa"><div class="q">+45</div><h3>Exam</h3><p>Practical test and a 20-question written test.</p></div><div class="tappa"><div class="q">12 months</div><h3>Certificate</h3><p>Personal certificate to display in the centre. Renewed every year.</p></div></div><div style="margin-top:8mm;margin-bottom:6mm"><div class="cta"><div><h2>Want to launch body treatments in your centre?</h2><p>Purchase or rental. We show you the numbers before you sign.</p></div><div class="bottone">Book a consultation</div></div></div><div class="contatti"><div><div class="eyebrow">Write to us</div><p><b>WhatsApp +39 351 846 6025</b></p><p>Toll-free number 800 141 726 (Italy)</p><p>info@nipecestetica.com</p></div><div><div class="eyebrow">Where we are</div><p>Via Rovetta 29, 25080 Padenghe sul Garda (BS)</p><p>Rruga Donika Kastrioti 3, Tiranë · <span style="white-space:nowrap">+355 69 212 9786</span></p></div><div><div class="eyebrow">Online</div><p><b>www.nipecestetica.eu</b></p><p>The method · Training · The catalogue</p></div></div></div><div class="firma"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 120" role="img" aria-label="NIPEC · Tecnologie Estetiche">
+  
+  <g transform="translate(10,10)">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.6"/>
+    <path d="M50 10 A40 40 0 1 1 30 15.36" fill="none" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="round"/>
+    <circle cx="30" cy="15.36" r="5.4" fill="#5AA6D6"/>
+    <rect x="33.5" y="52" width="7" height="15" rx="3.5" fill="#5AA6D6"/>
+    <rect x="46.5" y="44" width="7" height="23" rx="3.5" fill="#9CCBE8"/>
+    <rect x="59.5" y="36" width="7" height="31" rx="3.5" fill="#FFFFFF"/>
+  </g>
+  <text x="140" y="62" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="600" letter-spacing="10.5" fill="#FFFFFF">NIPEC</text>
+  <rect x="140" y="75" width="67.33" height="3" fill="#008C45"/><rect x="207.33" y="75" width="67.33" height="3" fill="#F4F5F0"/><rect x="274.67" y="75" width="67.33" height="3" fill="#CD212A"/>
+  <text x="142" y="96" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="3.6" fill="#5AA6D6">TECNOLOGIE ESTETICHE</text>
+</svg>
+<span>© 2026 NIPEC · Aesthetic Technologies — PHD System Srl · VAT no. 04696530981<br>The device is sold or rented after an analysis of the centre. Features may vary with updates.</span></div></section></body></html>
