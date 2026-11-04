@@ -1,0 +1,38 @@
+BROCHURE NIPEC — URIEL, ARES, AFRODITE, HERMES  (4 novembre 2026)
+=================================================================
+Rifatte sullo stile del sito www.nipecestetica.eu: stessi colori (blu profondo, blu NIPEC), stesso carattere (Archivo), stessi riquadri, pillole, tabella con la testata blu.
+A4 verticale, quattro pagine ciascuna, in italiano, SENZA prezzi.
+
+  BROCHURE-URIEL.pdf       copertina · tre bande e «in cabina» · scheda tecnica · il metodo
+  BROCHURE-ARES.pdf        copertina · le due versioni e «in cabina» · scheda tecnica · il metodo
+  BROCHURE-AFRODITE.pdf    copertina · le tecnologie · scheda e metodo DEMETRA · il metodo
+  BROCHURE-HERMES.pdf      copertina · come funziona e zone · scheda tecnica e sedute · il metodo
+  brochure-*.html          i sorgenti, da cui si ristampa
+  fai-brochure.py          genera tutto: python3 fai-brochure.py
+
+DA DOVE VENGONO I TESTI
+  Uriel, Ares, Afrodite: dalle pagine del sito (SITO/pubblica: laser-uriel, laser-ares, afrodite, metodo, formazione) e dalla scheda laser 808 (schede/LASER).
+  Hermes: il sito non ha una pagina. Dal depliant «ERMES Slim» e dal manuale d'uso del produttore (Drive, cartella HERMES SLIM).
+  Le vecchie brochure su Drive (nome «DigiLight Power», fino a 2400 W) NON sono state usate: i dati sono quelli del sito, piu' recenti (Uriel fino a 2000 W).
+
+PAROLE
+  Si dice «dispositivo», non «macchina» (regola di Giorgio, 29 ottobre). Nel sito c'e' ancora «macchina»: nelle brochure e' cambiato.
+  Low laser (non LED), ultrasuono focalizzato direzionale (non cavitazione).
+
+DA SISTEMARE PRIMA DI STAMPARE O MANDARE
+  1. HERMES NON HA UNA FOTO. In repository non c'e'; su Drive c'e' HERMES.png ma non si puo' copiare da qui. La copertina ha una grafica del campo
+     elettromagnetico. Mandami la foto e la metto.
+  2. HERMES: tutti i dati vengono dal manuale d'uso del produttore e vanno confermati (fino a 8 cm, 900 W, TEC -10/40 °C, protocollo 2 sedute a settimana per un mese, ecc.).
+     Il nome nei manuali e' ERMES: nelle brochure e' Hermes, come nelle cartelle di Drive.
+     Lasciati fuori di proposito: la «Classe 3b» (sul manuale e' accanto a «tipo BF», non torna), «unica procedura non invasiva», «fino a 30.000 contrazioni».
+     La frase «Doppia azione» e' attribuita al produttore, non a NIPEC. Il manuale dice che NON e' un dispositivo medico: e' scritto nella scheda.
+  3. URIEL: la foto e' piccola (194 x 443 px). Sta bene a video, in stampa e' morbida. Meglio una foto piu' grande.
+  4. AFRODITE: «Low laser» non ha la descrizione sul sito: nella brochure c'e' solo il nome. Da scrivere.
+  5. AFFERMAZIONI FORTI RIPRESE DAL SITO, da confermare con il costruttore: «non e' un dispositivo importato e rimarchiato», «la testina in titanio non si consuma»,
+     «pelle scura e pelo chiaro si lavorano», «500 W in piu': meno passaggi a parita' di risultato». Nelle brochure si leggono come promesse.
+  6. CONTATTI come sul sito: numero verde 800 141 726 e info@nipecestetica.com (la mail e' .com, il sito .eu). Controllare che siano giusti.
+  7. Ares dice «Classe 4» (come sul sito). Il comodato del K12 diceva «Classe 3»: sono due dispositivi diversi, ma conviene verificare.
+
+LA FORMAZIONE E L'ESAME
+  Il percorso (giorno 0, +7, +21, esame a +45 giorni, certificato valido 12 mesi) e' sul sito: pagina Formazione. Il dubbio sul reel P3 («esame finale», «certificato»)
+  e' quindi risolto: e' scritto sul sito. Resta da confermare con DEMETRA che valga anche per i loro corsi.
