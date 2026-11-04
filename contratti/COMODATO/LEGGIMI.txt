@@ -153,24 +153,29 @@ avvocato in Albania prima di andare in produzione.
 
 
 ---------------------------------------------------------------------
-COMODATO D'USO DEL LASER K12 · PHD SYSTEM S.R.L. e MARVILLA ELIANA · 2027  (4 novembre 2026)
+COMODATO D'USO GRATUITO DEL LASER K12 · PHD SYSTEM S.R.L. e MARVILLA ELIANA · 2027  (4 novembre 2026)
 ---------------------------------------------------------------------
-  CONTRATTO-COMODATO-LASER-K12-MARVILLA-2027.pdf    2 pagine · italiano
-  contratto-comodato-laser-k12-marvilla-2027.html   il sorgente, da cui si ristampa
+  CONTRATTO-COMODATO-GRATUITO-LASER-K12-MARVILLA-2027.pdf    2 pagine · italiano
+  contratto-comodato-gratuito-laser-k12-marvilla-2027.html   il sorgente, da cui si ristampa
 
-Rifatto sul layout NIPEC dal foglio firmato nel 2026 (laser diodo 808 LED, modello K12 2025, Classe 3, canone mensile EUR 150).
+Rifatto sul layout NIPEC dal foglio firmato nel 2026 (laser diodo 808 LED, modello K12 2025, Classe 3).
 Il contenuto e' lo stesso del foglio. Cambiano: le Parti (PHD SYSTEM S.R.L. come Comodante/Fornitore, Marvilla Eliana come Comodataria/Ricevente),
-la durata (da gennaio a dicembre 2027), e il formato.
+la durata (da gennaio a dicembre 2027), il formato, e il canone: il foglio diceva EUR 150 al mese, qui il comodato e' GRATUITO (deciso il 4 novembre).
+Con il canone non era un comodato (art. 1803 c.c.): cosi' lo e'.
 
 Cose cambiate nel testo, volutamente:
   - «trasferisce le proprieta'» diventa «concede in comodato d'uso ... la proprieta' resta del Comodante». Nel comodato la proprieta' non passa.
+  - art. 1.2: il comodato e' d'uso gratuito, nessun canone.
   - aggiunto il campo «numero di matricola», vuoto. Il foglio non identificava il pezzo.
 Lasciato come sul foglio, da verificare:
   - «Classe 3 / 4 Certificata»: il bene e' di Classe 3. Chi lo ha scritto intendeva la 3 o la 4?
   - «Laser diodo 808 LED»: identifica il bene, quindi non si cambia nel contratto.
-Non scritto sul foglio, quindi non l'ho scritto io: IVA sul canone, quando e come si paga, assicurazione, cosa succede alla riconsegna.
+Non scritto sul foglio, quindi non l'ho scritto io: assicurazione, cosa succede alla riconsegna, chi risponde dei danni.
 Il testo completo che le prevede e' il comodato Afrodite di questa cartella.
 
-ATTENZIONE: il canone mensile rende il rapporto oneroso. Per il codice civile il comodato e' gratuito (art. 1803): con un canone e' di fatto
-una locazione o un noleggio. Da far vedere al commercialista e all'avvocato: come intitolarlo e come fatturarlo.
-Da completare: rappresentante di PHD SYSTEM S.R.L., numero e data del contratto, matricola, luogo. Le firme non sono apposte.
+IL TIMBRO E LA FIRMA
+Sul riquadro di PHD SYSTEM S.R.L. c'e' il timbro della societa' (blu, con ragione sociale, sede e partita IVA), disegnato qui su richiesta di Giorgio Petrelli:
+e' una riproduzione grafica, non il timbro ufficiale. La FIRMA non e' apposta: la mette a mano o in digitale chi rappresenta PHD SYSTEM.
+La riga «Rappresentata da» e il nome sotto la firma restano da compilare. Lo spazio di Marvilla Eliana e' vuoto.
+
+Da completare: rappresentante di PHD SYSTEM S.R.L., numero e data del contratto, matricola, luogo.
