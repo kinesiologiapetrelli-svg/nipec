@@ -150,3 +150,27 @@ NON E' UN PARERE LEGALE
 Ho sistemato coerenza interna, buchi probatori e allineamento con il
 resto della linea contrattuale NIPEC. Il testo va comunque letto da un
 avvocato in Albania prima di andare in produzione.
+
+
+---------------------------------------------------------------------
+COMODATO D'USO DEL LASER K12 · PHD SYSTEM S.R.L. e MARVILLA ELIANA · 2027  (4 novembre 2026)
+---------------------------------------------------------------------
+  CONTRATTO-COMODATO-LASER-K12-MARVILLA-2027.pdf    2 pagine · italiano
+  contratto-comodato-laser-k12-marvilla-2027.html   il sorgente, da cui si ristampa
+
+Rifatto sul layout NIPEC dal foglio firmato nel 2026 (laser diodo 808 LED, modello K12 2025, Classe 3, canone mensile EUR 150).
+Il contenuto e' lo stesso del foglio. Cambiano: le Parti (PHD SYSTEM S.R.L. come Comodante/Fornitore, Marvilla Eliana come Comodataria/Ricevente),
+la durata (da gennaio a dicembre 2027), e il formato.
+
+Cose cambiate nel testo, volutamente:
+  - «trasferisce le proprieta'» diventa «concede in comodato d'uso ... la proprieta' resta del Comodante». Nel comodato la proprieta' non passa.
+  - aggiunto il campo «numero di matricola», vuoto. Il foglio non identificava il pezzo.
+Lasciato come sul foglio, da verificare:
+  - «Classe 3 / 4 Certificata»: il bene e' di Classe 3. Chi lo ha scritto intendeva la 3 o la 4?
+  - «Laser diodo 808 LED»: identifica il bene, quindi non si cambia nel contratto.
+Non scritto sul foglio, quindi non l'ho scritto io: IVA sul canone, quando e come si paga, assicurazione, cosa succede alla riconsegna.
+Il testo completo che le prevede e' il comodato Afrodite di questa cartella.
+
+ATTENZIONE: il canone mensile rende il rapporto oneroso. Per il codice civile il comodato e' gratuito (art. 1803): con un canone e' di fatto
+una locazione o un noleggio. Da far vedere al commercialista e all'avvocato: come intitolarlo e come fatturarlo.
+Da completare: rappresentante di PHD SYSTEM S.R.L., numero e data del contratto, matricola, luogo. Le firme non sono apposte.
