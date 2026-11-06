@@ -1,0 +1,41 @@
+RIGHE DA AGGIUNGERE AL .htaccess DEL DOCROOT
+=============================================
+
+ATTENZIONE: NON sostituire il .htaccess che c'e' gia'.
+Quello esistente forza l'https e serve al rinnovo del certificato.
+Queste righe vanno AGGIUNTE IN FONDO a quello che c'e'.
+
+Dal File Manager del pannello: attiva "mostra file nascosti",
+apri .htaccess con "Edit", vai in fondo, incolla, salva.
+
+Nessuna di queste righe e' indispensabile: il sito funziona anche
+senza. Servono a togliere tre difetti minori.
+
+
+-------------------- da qui in giu' --------------------
+
+# 1. www.nipecestetica.eu e nipecestetica.eu sono lo stesso sito.
+#    Senza questa regola Google li vede come due siti gemelli e
+#    deve indovinare quale premiare.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.nipecestetica\.eu$ [NC]
+  RewriteRule ^(.*)$ https://nipecestetica.eu/$1 [R=301,L]
+</IfModule>
+
+# 2. Chiude l'elenco dei file delle cartelle.
+#    Oggi /immagini/ e /caratteri/ mostrano l'elenco a chiunque.
+Options -Indexes
+
+# 3. Dice al browser di tenere in memoria immagini e caratteri,
+#    cosi' chi torna sul sito lo vede aprirsi subito.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg            "access plus 1 year"
+  ExpiresByType image/svg+xml         "access plus 1 year"
+  ExpiresByType font/woff2            "access plus 1 year"
+  ExpiresByType application/pdf       "access plus 1 month"
+  ExpiresByType text/html             "access plus 1 hour"
+</IfModule>
+
+-------------------- fin qui --------------------

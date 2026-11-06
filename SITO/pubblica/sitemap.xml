@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://nipecestetica.eu/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://nipecestetica.eu/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://nipecestetica.eu/sq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nipecestetica.eu/en.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://nipecestetica.eu/es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nipecestetica.eu/"/>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/sq.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://nipecestetica.eu/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://nipecestetica.eu/sq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nipecestetica.eu/en.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://nipecestetica.eu/es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nipecestetica.eu/"/>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/en.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://nipecestetica.eu/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://nipecestetica.eu/sq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nipecestetica.eu/en.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://nipecestetica.eu/es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nipecestetica.eu/"/>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/es.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://nipecestetica.eu/"/>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://nipecestetica.eu/sq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nipecestetica.eu/en.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://nipecestetica.eu/es.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nipecestetica.eu/"/>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/laser-ares.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/laser-uriel.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/afrodite.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/borea-cryo.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/q-switch.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/metodo.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/formazione.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/chi-siamo.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/contatti.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nipecestetica.eu/privacy.html</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+</urlset>

@@ -1,0 +1,8 @@
+# nipecestetica.eu
+User-agent: *
+Allow: /
+
+# niente di utile per i motori qui dentro
+Disallow: /cgi-bin/
+
+Sitemap: https://nipecestetica.eu/sitemap.xml
