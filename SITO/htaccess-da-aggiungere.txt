@@ -39,3 +39,21 @@ Options -Indexes
 </IfModule>
 
 -------------------- fin qui --------------------
+
+
+# 4. FACOLTATIVA — serve le foto in WebP, che pesano il 60% in meno,
+#    ma solo ai browser che lo capiscono. Gli altri ricevono il JPEG
+#    come sempre. Le pagine non cambiano di una virgola: e' il server
+#    che decide. Richiede che i file .webp siano caricati accanto ai
+#    .jpg (ci sono gia' nel pacchetto, dentro immagini/).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+  RewriteRule ^(.+)\.jpg$ $1.webp [T=image/webp,L]
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpg|webp)$">
+    Header append Vary Accept
+  </FilesMatch>
+</IfModule>
