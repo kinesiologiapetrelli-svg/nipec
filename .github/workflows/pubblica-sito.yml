@@ -1,0 +1,87 @@
+# Pubblica SITO/pubblica/ su nipecestetica.eu via FTPS.
+#
+# PERCHE' ESISTE
+# Dal contenitore di Claude escono solo le connessioni sulla porta 443:
+# la 21, la 990 e la 22 sono rifiutate. I runner di GitHub invece non
+# hanno quel limite, quindi il caricamento parte da li'.
+#
+# PRIMA DI USARLO, UNA VOLTA SOLA
+# Su GitHub: Settings > Secrets and variables > Actions > New repository secret
+#   FTP_UTENTE   l'utente FTP di nipecestetica.eu  (NON nipec@keyok.eu)
+#   FTP_PASSWORD la sua password
+# I secret non si vedono nel repository, nemmeno dai log: restano cifrati.
+#
+# COME SI LANCIA
+# GitHub > Actions > "Pubblica il sito" > Run workflow.
+# Si avvia a mano apposta: nessun push pubblica da solo.
+
+name: Pubblica il sito
+
+on:
+  workflow_dispatch:
+    inputs:
+      prova:
+        description: "Prova senza caricare niente (dry-run)"
+        type: boolean
+        default: true
+
+jobs:
+  pubblica:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+
+      - name: Installa lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Controlla che i file ci siano
+        run: |
+          test -f SITO/pubblica/index.html
+          test -f SITO/pubblica/robots.txt
+          test -f SITO/pubblica/invia.php
+          echo "file da caricare: $(find SITO/pubblica -type f | wc -l)"
+
+      - name: Carica via FTPS
+        env:
+          UTENTE:   ${{ secrets.FTP_UTENTE }}
+          PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          PROVA:    ${{ inputs.prova }}
+        run: |
+          if [ -z "$UTENTE" ] || [ -z "$PASSWORD" ]; then
+            echo "::error::Mancano i secret FTP_UTENTE e FTP_PASSWORD."
+            exit 1
+          fi
+          [ "$PROVA" = "true" ] && DRY="--dry-run" || DRY=""
+          # mirror -R SENZA --delete: copia sopra, non svuota.
+          # .htaccess, .well-known e cgi-bin restano dove sono.
+          lftp -c "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate true;
+            set net:max-retries 3;
+            set net:timeout 20;
+            open -u '$UTENTE','$PASSWORD' ftp://premium151.web-hosting.com;
+            mirror -R --verbose $DRY \
+                   --exclude-glob dati/*.csv \
+                   --exclude-glob dati/*.json \
+                   SITO/pubblica/ /;
+            bye
+          "
+
+      - name: Verifica che il sito risponda
+        if: ${{ inputs.prova == false }}
+        run: |
+          esito=0
+          for p in / /noleggio.html /es.html /robots.txt /llms.txt /sitemap.xml; do
+            c=$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 "https://nipecestetica.eu$p")
+            printf '%-18s %s\n' "$p" "$c"
+            [ "$c" = "200" ] || esito=1
+          done
+          echo "--- pagine vecchie, devono dare 404 ---"
+          for p in /macchine.html /stile.css; do
+            c=$(curl -s -o /dev/null -w '%{http_code}' --max-time 25 "https://nipecestetica.eu$p")
+            printf '%-18s %s\n' "$p" "$c"
+            [ "$c" = "404" ] || echo "::warning::$p risponde ancora $c: va cancellata a mano dal File Manager"
+          done
+          exit $esito
