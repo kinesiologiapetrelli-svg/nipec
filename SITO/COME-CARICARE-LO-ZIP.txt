@@ -1,0 +1,153 @@
+COME CARICARE IL SITO CON LO ZIP
+=================================
+Dal pannello dell'hosting, senza programmi da installare.
+Ci vogliono cinque minuti.
+
+
+PRIMA DI COMINCIARE
+-------------------
+Tieni a portata di mano il file  sito-5.0-pronto.zip  (49 file).
+Non aprirlo e non scompattarlo sul computer: va caricato cosi' com'e'.
+
+
+PASSO 1 — ENTRA NEL PANNELLO
+-----------------------------
+Vai su namecheap.com, entra nel tuo account, poi:
+   Account  >  Dashboard  >  (il tuo hosting)  >  GO TO CPANEL
+
+Se preferisci la via diretta:
+   https://premium151.web-hosting.com:2083
+   con utente e password del pannello (NON quelli dell'FTP).
+
+
+PASSO 2 — APRI IL GESTORE FILE
+-------------------------------
+Dentro cPanel cerca il riquadro  "Files"  e clicca  "File Manager".
+Si apre una finestra con l'elenco delle cartelle.
+
+
+PASSO 3 — FAI VEDERE I FILE NASCOSTI   << IMPORTANTE
+-----------------------------------------------------
+In alto a destra clicca  "Settings"  (ingranaggio).
+Metti la spunta su  "Show Hidden Files (dotfiles)"  e dai Save.
+
+Serve perche' alcuni file importanti iniziano con un punto e
+altrimenti non li vedi: rischieresti di cancellarli senza accorgertene.
+
+
+PASSO 4 — ENTRA NELLA CARTELLA GIUSTA   << QUI SI SBAGLIA
+----------------------------------------------------------
+Nella colonna di sinistra apri, con un doppio clic:
+
+      nipecestetica.eu
+
+E' questa, non public_html. Il percorso completo e':
+      /home/keyoshwu/nipecestetica.eu
+
+Come capisci di essere nel posto giusto: dentro ci trovi gia'
+index.html, contatti.html, metodo.html, privacy.html e anche
+.htaccess (quello col punto, visibile solo dopo il PASSO 3).
+
+Se non vedi questi file, SEI NEL POSTO SBAGLIATO: torna indietro.
+
+
+PASSO 5 — CARICA LO ZIP
+------------------------
+In alto clicca  "Upload".
+Si apre una pagina nuova: trascina dentro  sito-5.0-pronto.zip
+oppure clicca "Select File" e scegli il file.
+
+Aspetta che la barra arrivi al 100% (sono 2,7 MB, pochi secondi).
+Poi, in basso, clicca  "Go Back to ..."  per tornare all'elenco.
+
+
+PASSO 6 — SCOMPATTALO
+----------------------
+Nell'elenco ora c'e'  sito-5.0-pronto.zip .
+Clicca una volta sopra per selezionarlo, poi in alto  "Extract".
+
+Si apre una finestrella con scritto il percorso di destinazione.
+DEVE essere   /nipecestetica.eu   (cioe' la cartella dove sei ora).
+Non cambiarlo. Clicca  "Extract File(s)".
+
+Quando chiede se sovrascrivere, rispondi di si': e' giusto cosi',
+i file nuovi devono prendere il posto dei vecchi.
+
+Alla fine chiudi il riquadro dei risultati.
+
+
+PASSO 7 — CANCELLA LO ZIP
+--------------------------
+Il file  sito-5.0-pronto.zip  ha finito il suo lavoro.
+Selezionalo e clicca  "Delete".
+Se lo lasci li', chiunque puo' scaricarselo.
+
+
+PASSO 8 — CANCELLA LE DUE PAGINE VECCHIE
+-----------------------------------------
+Nella stessa cartella cerca e cancella SOLO questi due:
+
+      macchine.html
+      stile.css
+
+Sono della versione vecchia e nel sito nuovo non esistono piu'.
+Se restano, rispondono ancora con la grafica vecchia.
+
+NON CANCELLARE, per nessun motivo:
+      .htaccess        se sparisce il sito torna in http
+      .well-known      se sparisce, fra tre mesi il sito risulta
+                       "non sicuro"
+      cgi-bin          si lascia dov'e'
+      dati             e' la cartella dove arrivano le richieste
+
+
+PASSO 9 — CONTROLLA DUE COSE NELLA CARTELLA "dati"
+---------------------------------------------------
+Entra nella cartella  dati  e verifica che dentro ci sia  .htaccess
+(visibile solo col PASSO 3 fatto). E' quello che impedisce a
+chiunque di leggere dal web le richieste dei clienti.
+
+Poi torna indietro di una cartella, clicca una volta su  dati  per
+selezionarla e guarda in alto  "Permissions".
+Deve essere  0755 . Se e' un altro numero, mettilo a 755 e salva.
+
+Se questo passo ti sembra complicato, saltalo e dimmelo: si vede
+subito dalla prova del PASSO 10 se funziona.
+
+
+PASSO 10 — LA PROVA
+--------------------
+Apri queste pagine nel browser. Devono aprirsi tutte:
+
+      https://nipecestetica.eu
+      https://nipecestetica.eu/noleggio.html
+      https://nipecestetica.eu/es.html
+      https://nipecestetica.eu/robots.txt
+      https://nipecestetica.eu/llms.txt
+
+Queste due invece devono dare "non trovata" (404):
+
+      https://nipecestetica.eu/macchine.html
+      https://nipecestetica.eu/stile.css
+
+E questa NON deve aprirsi, deve dare errore 403 o "proibito":
+
+      https://nipecestetica.eu/dati/richieste.csv
+
+Poi guarda la home: nei riquadri delle macchine devono esserci le
+foto, e da nessuna parte deve comparire scritto [FOTO] o [VOTO] o
+[TESTIMONIANZA]. Se compaiono, lo zip non si e' scompattato nel
+posto giusto.
+
+Ultima prova, quella che conta: vai in Contatti, compila il modulo
+e invia. Deve aprirsi WhatsApp col messaggio gia' scritto, e in
+cPanel, dentro  dati , deve essere comparso il file  richieste.csv
+con la tua prova dentro.
+
+
+SE QUALCOSA NON TORNA
+---------------------
+Non cancellare niente per rimediare: scrivimi cosa vedi e da quale
+passo, e ti dico io cosa fare. Il sito vecchio resta online e
+funzionante finche' non si sovrascrive, quindi non c'e' fretta e
+non si rompe niente.
