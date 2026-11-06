@@ -1,0 +1,48 @@
+# NIPEC — tecnologie estetiche professionali
+
+> NIPEC e' il marchio di PHD System S.r.l. (P.IVA 04696530981). Vende e
+> noleggia tecnologie estetiche professionali a centri estetici e studi
+> medici in Italia, Albania e Spagna: laser a diodo per epilazione,
+> sistemi per corpo e viso, criolipolisi, laser Q-Switch. Ogni
+> dispositivo arriva con protocolli scritti, formazione certificata con
+> esame e assistenza diretta.
+
+Fatti verificabili sul sito:
+
+- Noleggio operativo da 500 EUR al mese oltre IVA (Afrodite VS++),
+  canone fisso per i primi 12 mesi, poi indicizzato ISTAT.
+- Formula Full Kasko inclusa nel canone: manutenzione ordinaria e
+  straordinaria, ricambi e manodopera, danni accidentali, trasferte e
+  dispositivo sostitutivo in caso di fermo macchina.
+- Non inclusi: materiali di consumo e parti a usura (manipolo 300 EUR,
+  tubo manipolo 200 EUR), furto e incendio.
+- Laser con marcatura CE italiana, conformi al regolamento europeo MDR.
+- Formazione a tappe: giorno 0 in presenza, +7, +21, esame a +45.
+  Certificato operatore valido 12 mesi.
+- Sedi: Padenghe sul Garda (BS, Italia), Tirana (Albania),
+  Barcellona (Spagna).
+- Contatti: WhatsApp +39 351 846 6025, numero verde 800 141 726,
+  info@nipecestetica.com
+
+## Pagine
+
+- [Home](https://nipecestetica.eu/): cosa fa NIPEC, le cinque cose che accompagnano ogni dispositivo, le tecnologie disponibili e cinque domande frequenti.
+- [Noleggio operativo](https://nipecestetica.eu/noleggio.html): canone da 500 EUR/mese oltre IVA, cosa comprende il Full Kasko e cosa resta escluso, confronto fra comprare e noleggiare, sette domande sul contratto.
+- [Laser Ares](https://nipecestetica.eu/laser-ares.html): laser a diodo 808 nm fino a 2000 W, gestione digitale, telecamera integrata, CE italiana e MDR.
+- [Laser Uriel](https://nipecestetica.eu/laser-uriel.html): laser a diodo tri-onda 755/808/1064 nm con gestione software, per pelli scure e peli chiari.
+- [Afrodite VS++](https://nipecestetica.eu/afrodite.html): colonna multifunzione corpo e viso: ultrasuoni, radiofrequenza, vacuum, micropulse e low laser.
+- [Borea e Cryo 360°](https://nipecestetica.eu/borea-cryo.html): criolipolisi a 360 gradi ed elettrostimolazione per grasso localizzato e tono.
+- [Laser Q-Switch](https://nipecestetica.eu/q-switch.html): rimozione di tatuaggi e pigmenti, destinato a studi medici.
+- [Formazione e certificazione](https://nipecestetica.eu/formazione.html): percorso a tappe con esame finale e certificato operatore valido 12 mesi.
+- [Il metodo NIPEC](https://nipecestetica.eu/metodo.html): le quattro fasi: analisi del centro, progetto, formazione, assistenza continua.
+- [Chi siamo](https://nipecestetica.eu/chi-siamo.html): PHD System S.r.l., le sedi e il modo di lavorare.
+- [Contatti](https://nipecestetica.eu/contatti.html): modulo di richiesta, WhatsApp, numero verde e indirizzi delle tre sedi.
+- [Privacy e cookie](https://nipecestetica.eu/privacy.html): quali dati raccoglie il sito, perche', per quanto tempo e con chi.
+
+## Altro
+
+- [Testo completo del sito](https://nipecestetica.eu/llms-full.txt): tutte le pagine in testo semplice.
+- [Mappa XML](https://nipecestetica.eu/sitemap.xml): gli indirizzi con le versioni di lingua.
+
+Il sito esiste in italiano, albanese (/sq.html), inglese (/en.html) e
+spagnolo (/es.html). Le schede delle macchine sono in italiano.

@@ -1,8 +1,54 @@
-# nipecestetica.eu
+# nipecestetica.eu — NIPEC, tecnologie estetiche professionali
+# PHD System S.r.l. — Italia, Albania, Spagna
+
 User-agent: *
 Allow: /
-
-# niente di utile per i motori qui dentro
 Disallow: /cgi-bin/
+Disallow: /invia.php
+
+# I motori di risposta e gli assistenti sono i benvenuti: vogliamo
+# essere citati quando qualcuno chiede dove noleggiare un laser a
+# diodo professionale. La riga "User-agent: *" qui sopra li
+# ammetterebbe comunque; sono elencati perche' resti una scelta
+# dichiarata e non un effetto collaterale.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: CCBot
+Allow: /
 
 Sitemap: https://nipecestetica.eu/sitemap.xml
