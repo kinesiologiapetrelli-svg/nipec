@@ -1,0 +1,229 @@
+================================================================
+PUBBLICAZIONE SITO NIPEC — nipecestetica.eu
+Consegna tecnica. Tutto quello che serve e' qui dentro.
+================================================================
+
+ALLEGATO:  sito-5.0-pronto.zip   (46 file, 2,7 MB)
+           Contiene il CONTENUTO della radice del dominio, non una
+           cartella da aprire: index.html sta al primo livello.
+
+
+----------------------------------------------------------------
+1. DOVE
+----------------------------------------------------------------
+Host        premium151.web-hosting.com
+            (in alternativa ftp.nipecestetica.eu, ma solo senza
+            controllo del certificato: meglio il primo)
+Porta       21
+Protocollo  FTPS esplicito, TLS obbligatorio
+Radice      /  =  /home/keyoshwu/nipecestetica.eu
+            Da cPanel: la cartella si chiama nipecestetica.eu,
+            NON public_html.
+
+ACCOUNT: quello di nipecestetica.eu.
+Il vecchio  nipec@keyok.eu  NON apre questo sito: apre
+keyok.eu/nipec, che e' un'altra cosa. Caricando li' sembra fatto
+e invece nipecestetica.eu resta com'era. E' gia' successo.
+
+
+----------------------------------------------------------------
+2. COSA NON SI TOCCA
+----------------------------------------------------------------
+Nel docroot ci sono gia' file che NON vanno cancellati:
+
+  .htaccess     forza l'https. Se sparisce il sito torna in http
+  .well-known   serve al rinnovo del certificato. Se sparisce,
+                fra tre mesi il sito risulta "non sicuro"
+  cgi-bin       si lascia dov'e'
+
+Quindi: NIENTE "svuota la cartella", NIENTE mirror con --delete.
+Si copia sopra.
+
+I file che iniziano col punto sono nascosti: nel File Manager va
+attivato "Show Hidden Files (dotfiles)" prima di cancellare
+qualcosa.
+
+
+----------------------------------------------------------------
+3. COME — due strade, scegli tu
+----------------------------------------------------------------
+
+STRADA A — da terminale, con lftp
+
+  Scompatta lo zip in una cartella locale, poi dalla cartella che
+  contiene i file (quella dove sta index.html):
+
+    lftp -u 'UTENTE,PASSWORD' ftp://premium151.web-hosting.com -e \
+      "set ftp:ssl-force true; \
+       set ftp:ssl-protect-data true; \
+       mirror -R --verbose ./ /; \
+       bye"
+
+  mirror -R SENZA --delete: copia sopra, non svuota niente.
+  Per provare prima senza scrivere, aggiungi --dry-run.
+
+STRADA B — dal File Manager di cPanel
+
+  1. cPanel > Files > File Manager
+  2. Settings > spunta "Show Hidden Files (dotfiles)" > Save
+  3. entra in  nipecestetica.eu
+  4. Upload > carica  sito-5.0-pronto.zip
+  5. selezionalo > Extract > destinazione  /nipecestetica.eu
+     > sovrascrivi quando chiede
+  6. cancella lo zip dal server quando ha finito
+
+
+----------------------------------------------------------------
+4. DA CANCELLARE A MANO, DOPO IL CARICAMENTO
+----------------------------------------------------------------
+Erano nella versione vecchia, nella 5.0 non esistono piu'. Se
+restano rispondono ancora, con la grafica vecchia:
+
+  macchine.html
+  stile.css
+
+Facoltativi, non fanno danno se restano:
+  caratteri/sourceserif.woff2
+  cartella marchio/
+  le immagini vecchie in immagini/ con nomi lunghi tipo
+  0bd4f49b25d49c5f3308feec272e34fb.jpg (sono 5, i nomi nuovi sono
+  parlanti: laser-diodo-ares-808.jpg e simili)
+
+index.html, contatti.html, metodo.html e privacy.html si
+sovrascrivono da sole: stesso nome.
+
+
+----------------------------------------------------------------
+5. DUE COSE NUOVE CHE RICHIEDONO ATTENZIONE
+----------------------------------------------------------------
+
+5a. invia.php  +  cartella dati/
+
+Il modulo dei contatti adesso salva la richiesta sul server e
+manda una email, oltre ad aprire WhatsApp come prima.
+
+  - serve PHP 8 (va bene quello di default del pannello)
+  - serve che mail() funzioni; manda a info@nipecestetica.com
+    con mittente sito@nipecestetica.eu
+  - la cartella  dati/  deve essere SCRIVIBILE dall'utente web:
+    permessi 0755 (se non basta, 0775)
+  - dentro  dati/  c'e' un .htaccess che nega l'accesso dal web:
+    DEVE restare, altrimenti le richieste dei clienti diventano
+    scaricabili da chiunque
+  - dati/ conterra' richieste.csv ed eventi.csv: NON sovrascriverli
+    ai caricamenti successivi (il mirror non li tocca perche' in
+    locale non esistono, ma se usi --delete li cancelli)
+
+Prova: compila il modulo su /contatti.html e verifica che in
+dati/ compaia richieste.csv e che l'email arrivi.
+
+5b. Righe da AGGIUNGERE al .htaccess esistente
+
+NON sostituire il .htaccess che c'e'. Queste righe vanno in fondo
+a quello attuale. Nessuna e' indispensabile.
+
+# --- www e senza www sono lo stesso sito -----------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.nipecestetica\.eu$ [NC]
+  RewriteRule ^(.*)$ https://nipecestetica.eu/$1 [R=301,L]
+</IfModule>
+
+# --- chiude l'elenco dei file delle cartelle -------------------
+# oggi /immagini/ e /caratteri/ mostrano l'elenco a chiunque
+Options -Indexes
+
+# --- cache di immagini e caratteri -----------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg      "access plus 1 year"
+  ExpiresByType image/webp      "access plus 1 year"
+  ExpiresByType image/svg+xml   "access plus 1 year"
+  ExpiresByType font/woff2      "access plus 1 year"
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType text/html       "access plus 1 hour"
+</IfModule>
+
+# --- FACOLTATIVA: serve le foto in WebP a chi le capisce --------
+# pesano il 60% in meno; gli altri browser ricevono il JPEG.
+# I file .webp sono gia' dentro immagini/, accanto ai .jpg.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+  RewriteRule ^(.+)\.jpg$ $1.webp [T=image/webp,L]
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpg|webp)$">
+    Header append Vary Accept
+  </FilesMatch>
+</IfModule>
+
+
+----------------------------------------------------------------
+6. VERIFICA — devono rispondere 200
+----------------------------------------------------------------
+  /                      /noleggio.html        /es.html
+  /sq.html               /en.html              /laser-ares.html
+  /laser-uriel.html      /afrodite.html        /borea-cryo.html
+  /q-switch.html         /metodo.html          /formazione.html
+  /chi-siamo.html        /contatti.html        /privacy.html
+  /robots.txt            /sitemap.xml          /llms.txt
+  /llms-full.txt         /favicon.svg          /scheda-laser-808.pdf
+  /caratteri/archivo.woff2
+  /immagini/laser-diodo-ares-808.jpg
+
+Devono dare 404:
+  /macchine.html         /stile.css
+
+Deve dare 403 (o comunque NON essere leggibile):
+  /dati/richieste.csv
+
+In una riga sola:
+
+  for p in / /noleggio.html /es.html /robots.txt /llms.txt \
+           /sitemap.xml /macchine.html /stile.css \
+           /dati/richieste.csv; do
+    printf '%-26s %s\n' "$p" \
+      "$(curl -s -o /dev/null -w '%{http_code}' https://nipecestetica.eu$p)"
+  done
+
+A occhio, sulla home: le foto delle macchine devono vedersi, e da
+nessuna parte deve comparire scritto [FOTO], [VOTO] o
+[TESTIMONIANZA]. Se compaiono, lo zip e' finito nella cartella
+sbagliata e il sito online e' ancora la build vecchia.
+
+
+----------------------------------------------------------------
+7. PER LE VOLTE SUCCESSIVE
+----------------------------------------------------------------
+Nel repository c'e' gia' un workflow che fa tutto da solo:
+
+  .github/workflows/pubblica-sito.yml
+
+Si lancia da GitHub > Actions > "Pubblica il sito" > Run workflow.
+Parte in modalita' prova (non scrive niente) finche' non togli la
+spunta. Usa mirror -R senza --delete ed esclude dati/*.csv.
+
+Perche' funzioni servono due secret nel repository
+(Settings > Secrets and variables > Actions):
+
+  FTP_UTENTE
+  FTP_PASSWORD
+
+Sono cifrati, non si vedono nel codice e vengono oscurati nei log.
+Il repository e' pubblico, quindi le credenziali NON vanno scritte
+da nessun'altra parte.
+
+
+----------------------------------------------------------------
+8. UNA RACCOMANDAZIONE
+----------------------------------------------------------------
+La password FTP di questo account e' gia' passata in chat in
+passato. Dopo la pubblicazione conviene cambiarla dal pannello.
+
+================================================================
+Repository:  github.com/kinesiologiapetrelli-svg/nipec
+Ramo:        claude/import-md-google-drive-dzqktc
+Sorgente:    SITO/pubblica/   (e' esattamente il contenuto dello zip)
+================================================================
