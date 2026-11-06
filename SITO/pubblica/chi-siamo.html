@@ -384,4 +384,22 @@ footer a{transition:color .2s ease}
 
 
 
+<script>
+/* Registra i clic su WhatsApp: e' l'azione che porta i contatti.
+   Nessun cookie, nessun servizio esterno, nessun dato personale:
+   al server arrivano solo la pagina e l'ora. */
+(function(){
+  if(!navigator.sendBeacon) return;
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');
+    if(!a) return;
+    try{
+      var d=new FormData();
+      d.append('evento','whatsapp');
+      d.append('pagina',location.pathname);
+      navigator.sendBeacon('invia.php',d);
+    }catch(err){}
+  },true);
+})();
+</script>
 </body></html>

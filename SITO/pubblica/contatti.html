@@ -313,13 +313,16 @@ footer a{transition:color .2s ease}
         </div>
 
         
-        <form data-dc-tpl="30" style="flex: 999 1 520px; min-width: 0px; background: rgb(241, 245, 249); border-radius: 24px; padding: 40px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; align-content: start;">
+        <form data-dc-tpl="30" action="invia.php" method="post" style="flex: 999 1 520px; min-width: 0px; background: rgb(241, 245, 249); border-radius: 24px; padding: 40px; box-sizing: border-box; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; align-content: start;">
           <h2 data-dc-tpl="31" style="grid-column: 1 / -1; margin: 0px; font-size: 26px; font-weight: 700; color: rgb(18, 58, 99);">Prenota la consulenza gratuita</h2>
           <label data-dc-tpl="32" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: rgb(18, 58, 99);">Nome e cognome
             <input data-dc-tpl="33" type="text" name="nome" autocomplete="name" required="" style="min-height: 48px; padding: 0px 14px; border: 1px solid rgb(195, 207, 219); border-radius: 6px; background: rgb(255, 255, 255); font-size: 16px; color: rgb(15, 30, 48);">
           </label>
           <label data-dc-tpl="34" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: rgb(18, 58, 99);">Telefono / WhatsApp
             <input data-dc-tpl="35" type="tel" name="telefono" autocomplete="tel" inputmode="tel" required="" style="min-height: 48px; padding: 0px 14px; border: 1px solid rgb(195, 207, 219); border-radius: 6px; background: rgb(255, 255, 255); font-size: 16px; color: rgb(15, 30, 48);">
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: rgb(18, 58, 99);">Email (facoltativa)
+            <input type="email" name="email" autocomplete="email" inputmode="email" style="min-height: 48px; padding: 0px 14px; border: 1px solid rgb(195, 207, 219); border-radius: 6px; background: rgb(255, 255, 255); font-size: 16px; color: rgb(15, 30, 48);">
           </label>
           <label data-dc-tpl="36" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 600; color: rgb(18, 58, 99);">Nome del centro
             <input data-dc-tpl="37" type="text" name="centro" style="min-height: 48px; padding: 0px 14px; border: 1px solid rgb(195, 207, 219); border-radius: 6px; background: rgb(255, 255, 255); font-size: 16px; color: rgb(15, 30, 48);">
@@ -345,6 +348,12 @@ footer a{transition:color .2s ease}
             <span data-dc-tpl="52">Ho letto l'<a data-dc-tpl="53" href="privacy.html">informativa privacy</a> e acconsento a essere ricontattato.</span>
           </label>
           <button data-dc-tpl="54" type="submit" style="grid-column: 1 / -1; justify-self: start; min-height: 52px; padding: 0px 32px; border: 0px; border-radius: 999px; background: rgb(18, 58, 99); color: rgb(255, 255, 255); font-size: 16px; font-weight: 600; cursor: pointer;">Invia la richiesta</button>
+        
+          <input type="text" name="azienda_extra" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
+          <input type="hidden" name="t" value="0">
+          <input type="hidden" name="pagina" value="">
+          <input type="hidden" name="lingua" value="it">
+          <input type="hidden" name="ajax" value="1">
         </form>
         
         
@@ -407,18 +416,80 @@ footer a{transition:color .2s ease}
 (function(){
   var f=document.querySelector('main form'); if(!f) return;
   var NUM='393518466025';
+
+  // il momento in cui la pagina e' stata aperta: serve a riconoscere i robot
+  var t=f.querySelector('[name=t]');      if(t) t.value=Math.floor(Date.now()/1000);
+  var pg=f.querySelector('[name=pagina]');if(pg) pg.value=location.pathname;
+
+  function etichetta(c){
+    var l=c.labels&&c.labels[0]?c.labels[0].innerText:(c.placeholder||c.name||'');
+    return l.replace(/\s+/g,' ').trim();
+  }
+
+  function avviso(testo, ok){
+    var d=f.querySelector('.esito')||document.createElement('p');
+    d.className='esito';
+    d.setAttribute('role','status');
+    d.style.cssText='grid-column:1/-1;margin:0;padding:14px 16px;border-radius:8px;'+
+      'font-size:15px;line-height:1.5;'+(ok
+        ?'background:rgb(226,242,233);color:rgb(21,87,53);'
+        :'background:rgb(253,232,232);color:rgb(140,26,26);');
+    d.textContent=testo;
+    if(!d.parentNode) f.appendChild(d);
+  }
+
   f.addEventListener('submit',function(ev){
+    if(!f.checkValidity()) return;          // lascia fare al browser
     ev.preventDefault();
+    if(t) t.value=t.value||Math.floor(Date.now()/1000);
+
+    // 1. il messaggio per WhatsApp, come prima
     var righe=[];
     Array.prototype.forEach.call(f.querySelectorAll('input,select,textarea'),function(c){
+      if(c.type==='hidden'||c.name==='azienda_extra') return;
       if(c.type==='checkbox'){ if(c.checked) righe.push('Consenso privacy: si'); return; }
       if(!c.value||!c.value.trim()) return;
-      var et=(c.labels&&c.labels[0]?c.labels[0].innerText:(c.placeholder||c.name||'')).replace(/\s+/g,' ').trim();
+      var et=etichetta(c);
       righe.push((et?et+': ':'')+c.value.trim());
     });
     var testo='Richiesta dal sito NIPEC\n'+righe.join('\n');
-    window.open('https://wa.me/'+NUM+'?text='+encodeURIComponent(testo),'_blank','noopener');
+
+    // 2. WhatsApp si apre SUBITO: dopo una attesa il browser lo bloccherebbe
+    var w=window.open('https://wa.me/'+NUM+'?text='+encodeURIComponent(testo),
+                      '_blank','noopener');
+
+    // 3. e solo dopo si salva la richiesta sul nostro server
+    var dati=new FormData(f);
+    var inviato=false;
+    try{ inviato=navigator.sendBeacon&&navigator.sendBeacon('invia.php',dati); }catch(e){}
+    if(!inviato){
+      try{ fetch('invia.php',{method:'POST',body:dati,keepalive:true}); }
+      catch(e){ f.removeEventListener; f.submit(); return; }
+    }
+
+    avviso(w ? 'Richiesta registrata. Ti abbiamo aperto WhatsApp: premi invio per mandarci il messaggio.'
+             : 'Richiesta registrata, ti ricontattiamo presto. Puoi anche scriverci su WhatsApp al +39 351 846 6025.',
+           true);
+    f.querySelector('button[type=submit]').disabled=true;
   });
+})();
+</script>
+<script>
+/* Registra i clic su WhatsApp: e' l'azione che porta i contatti.
+   Nessun cookie, nessun servizio esterno, nessun dato personale:
+   al server arrivano solo la pagina e l'ora. */
+(function(){
+  if(!navigator.sendBeacon) return;
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');
+    if(!a) return;
+    try{
+      var d=new FormData();
+      d.append('evento','whatsapp');
+      d.append('pagina',location.pathname);
+      navigator.sendBeacon('invia.php',d);
+    }catch(err){}
+  },true);
 })();
 </script>
 </body></html>

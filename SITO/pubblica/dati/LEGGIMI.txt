@@ -1,0 +1,23 @@
+QUI DENTRO FINISCONO LE RICHIESTE DAL SITO
+===========================================
+
+richieste.csv   ogni riga e' una richiesta arrivata dal modulo dei
+                contatti: data, nome, telefono, email, centro, citta',
+                interesse, messaggio, consenso privacy, pagina, lingua.
+                Si apre con Excel o Fogli Google: doppio clic e basta.
+
+eventi.csv      ogni riga e' un clic su un bottone WhatsApp: data,
+                pagina, e un'impronta del visitatore che cambia ogni
+                giorno e non permette di risalire alla persona.
+                Serve a sapere QUALI PAGINE portano i contatti.
+
+limite.json     servizio interno: tiene il conto per bloccare chi
+                invia decine di richieste di fila. Si puo' cancellare.
+
+NON CANCELLARE il file .htaccess che sta in questa cartella: e'
+quello che impedisce a chiunque di leggere questi file dal web.
+Nel File Manager va attivata la voce "mostra file nascosti" per
+vederlo.
+
+Scaricali ogni tanto e tienili da parte: sono la tua lista di
+contatti, e valgono piu' del sito.
